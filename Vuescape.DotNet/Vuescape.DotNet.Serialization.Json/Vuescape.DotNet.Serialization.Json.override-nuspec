@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <description>JSON Serialization Configuration for types in Vuescape.DotNet.</description>
+    <tags>json serialization configuration DotNet</tags>
+  </metadata>
+</package>

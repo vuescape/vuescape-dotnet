@@ -1,0 +1,10 @@
+﻿{
+  "settings": {
+    "documentationRules": {
+      "companyName": "Vuescape",
+      "copyrightText": "   Copyright (c) {companyName} 2021. All rights reserved.",
+      "variables": {
+      }
+    }
+  }
+}

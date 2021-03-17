@@ -4,6 +4,11 @@ Write-Host $env:APPVEYOR_JOB_ID
 Write-Host $env:APPVEYOR_API_URL
 
 #######################################################################
+###  In this situation the repo folder is not the solution folder   ###
+#######################################################################
+cd Vuescape.DotNet
+
+#######################################################################
 ###     Setup variables from Appveyor                               ###
 #######################################################################
 $repoPath = Resolve-Path .

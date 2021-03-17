@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0"?>
 <package>
   <metadata>
+    <authors>Vuescape</authors>
+    <copyright>Copyright (c) 2021 Vuescape</copyright>
+    <iconUrl>https://avatars.githubusercontent.com/u/48575436</iconUrl>
+    <projectUrl>https://github.com/vuescape/</projectUrl>
+    <licenseUrl>https://github.com/vuescape/</licenseUrl>
     <description>Shared types (models and utilities) for DotNet</description>
     <tags>models modelobject utilities DotNet</tags>
   </metadata>

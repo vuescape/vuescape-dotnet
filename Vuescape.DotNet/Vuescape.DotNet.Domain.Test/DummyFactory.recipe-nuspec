@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
+    <authors>Vuescape</authors>
+    <copyright>Copyright (c) 2021 Vuescape</copyright>
+    <iconUrl>https://avatars.githubusercontent.com/u/48575436</iconUrl>
+    <projectUrl>https://github.com/vuescape/</projectUrl>
+    <licenseUrl>https://github.com/vuescape/</licenseUrl>
     <id>Vuescape.DotNet.Recipes.DummyFactory</id>
     <description>A Dummy Factory for types in Vuescape.DotNet.Domain</description>
     <tags>dummyfactory dummy factory fakeiteasy autofixture snippet codeinclude utility shared recipe DotNet</tags>

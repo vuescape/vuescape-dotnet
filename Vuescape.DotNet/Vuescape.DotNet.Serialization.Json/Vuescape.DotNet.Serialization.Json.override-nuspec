@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0"?>
 <package>
   <metadata>
+    <authors>Vuescape</authors>
+    <copyright>Copyright (c) 2021 Vuescape</copyright>
+    <iconUrl>https://avatars.githubusercontent.com/u/48575436</iconUrl>
+    <projectUrl>https://github.com/vuescape/</projectUrl>
+    <licenseUrl>https://github.com/vuescape/</licenseUrl>
     <description>JSON Serialization Configuration for types in Vuescape.DotNet.</description>
     <tags>json serialization configuration DotNet</tags>
   </metadata>

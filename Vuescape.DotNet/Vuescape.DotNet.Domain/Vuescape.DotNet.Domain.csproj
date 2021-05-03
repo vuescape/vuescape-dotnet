@@ -90,14 +90,83 @@
     <Compile Include=".recipes\OBeautifulCode.Type\ToStringReadableOptions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\ToStringXmlDocOptions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
-    <Compile Include="Class1.designer.cs">
-      <DependentUpon>Class1.cs</DependentUpon>
+    <Compile Include="ClientBehaviors\AdjustTreeTableColumnSizeClientBehavior.designer.cs">
+      <DependentUpon>AdjustTreeTableColumnSizeClientBehavior.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientBehaviors\SortTreeTableClientBehavior.cs" />
+    <Compile Include="ClientBehaviors\ClientBehaviorBase.designer.cs">
+      <DependentUpon>ClientBehaviorBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientBehaviors\ConstrainTreeTableHeightClientBehavior.designer.cs">
+      <DependentUpon>ConstrainTreeTableHeightClientBehavior.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientBehaviors\GeneratePdfClientBehavior.designer.cs">
+      <DependentUpon>GeneratePdfClientBehavior.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientBehaviors\HandleLinkClickClientBehavior.cs" />
+    <Compile Include="ClientBehaviors\HandleLinkClickClientBehavior.designer.cs">
+      <DependentUpon>HandleLinkClickClientBehavior.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientBehaviors\SortTreeTableClientBehavior.designer.cs">
+      <DependentUpon>SortTreeTableClientBehavior.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientBehaviors\ToggleTreeTableChildRowExpansionClientBehavior.designer.cs">
+      <DependentUpon>ToggleTreeTableChildRowExpansionClientBehavior.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientBehaviors\ToggleTreeTableChildRowExpansionClientBehavior.cs" />
+    <Compile Include="ClientBehaviors\GeneratePdfClientBehavior.cs" />
+    <Compile Include="ClientBehaviors\ConstrainTreeTableHeightClientBehavior.cs" />
+    <Compile Include="ClientBehaviors\AdjustTreeTableColumnSizeClientBehavior.cs" />
+    <Compile Include="ClientBehaviors\ClientBehaviorBase.cs" />
+    <Compile Include="Link.cs" />
+    <Compile Include="Link.designer.cs">
+      <DependentUpon>Link.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LinkName.cs" />
+    <Compile Include="LinkTargetKind.cs" />
+    <Compile Include="TreeTable\CellRenderer.cs" />
+    <Compile Include="TreeTable\ColumnSorter.cs" />
+    <Compile Include="TreeTable\ColumnSorter.designer.cs">
+      <DependentUpon>ColumnSorter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTable\NullValueObject.cs" />
+    <Compile Include="TreeTable\Hover.cs" />
+    <Compile Include="TreeTable\Hover.designer.cs">
+      <DependentUpon>Hover.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\GlobalSuppressions.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\ProjectInfo.cs" />
     <AdditionalFiles Include=".analyzers\stylecop.json" />
+    <Compile Include="TreeTable\NullValueObject.designer.cs">
+      <DependentUpon>NullValueObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTable\RowRenderer.cs" />
+    <Compile Include="TreeTable\SortDirection.cs" />
+    <Compile Include="TreeTable\TreeTable.cs" />
+    <Compile Include="TreeTable\TreeTable.designer.cs">
+      <DependentUpon>TreeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTable\TreeTableCell.designer.cs">
+      <DependentUpon>TreeTableCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTable\TreeTableHeaderCell.cs" />
+    <Compile Include="TreeTable\TreeTableHeaderCell.designer.cs">
+      <DependentUpon>TreeTableHeaderCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTable\TreeTableHeaderRow.cs" />
+    <Compile Include="TreeTable\TreeTableCell.cs" />
+    <Compile Include="TreeTable\TreeTableHeaderRow.designer.cs">
+      <DependentUpon>TreeTableHeaderRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTable\TreeTableRow.designer.cs">
+      <DependentUpon>TreeTableRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTable\TreeTableRowDependency.cs" />
+    <Compile Include="TreeTable\TreeTableRow.cs" />
+    <Compile Include="TreeTable\TreeTableRowDependency.designer.cs">
+      <DependentUpon>TreeTableRowDependency.cs</DependentUpon>
+    </Compile>
     <None Include=".analyzers\release.ruleset" />
     <None Include="packages.config" />
     <None Include="Vuescape.DotNet.Domain.override-nuspec" />
@@ -109,6 +178,7 @@
   <ItemGroup>
     <Content Include=".analyzers\dictionary.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Naos.Build.Analyzers.targets" Condition="Exists('..\Naos.Build.Analyzers.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

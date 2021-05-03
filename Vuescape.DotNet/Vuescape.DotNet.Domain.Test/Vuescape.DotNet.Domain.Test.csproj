@@ -247,25 +247,89 @@
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.designer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
-    <Compile Include="Class1Test.designer.cs">
-      <DependentUpon>Class1Test.cs</DependentUpon>
+    <Compile Include="AdjustTreeTableColumnSizeClientBehaviorTest.cs" />
+    <Compile Include="AdjustTreeTableColumnSizeClientBehaviorTest.designer.cs">
+      <DependentUpon>AdjustTreeTableColumnSizeClientBehaviorTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientBehaviorBaseTest.cs" />
+    <Compile Include="ClientBehaviorBaseTest.designer.cs">
+      <DependentUpon>ClientBehaviorBaseTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ColumnSorterTest.cs" />
+    <Compile Include="ColumnSorterTest.designer.cs">
+      <DependentUpon>ColumnSorterTest.cs</DependentUpon>
     </Compile>
     <Compile Include="ConsoleAbstraction.cs" />
-    <Compile Include="DotNetDummyFactoryTest.designer.cs">
-      <DependentUpon>DotNetDummyFactoryTest.cs</DependentUpon>
+    <Compile Include="ConstrainTreeTableHeightClientBehaviorTest.cs" />
+    <Compile Include="ConstrainTreeTableHeightClientBehaviorTest.designer.cs">
+      <DependentUpon>ConstrainTreeTableHeightClientBehaviorTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\GlobalSuppressions.cs" />
-    <Compile Include="Class1Test.cs" />
-    <Compile Include="Properties\ProjectInfo.cs" />
-    <Compile Include="SerializationConfigurationTypes.cs" />
     <Compile Include="DotNetDummyFactory.cs" />
     <Compile Include="DotNetDummyFactory.designer.cs">
       <DependentUpon>DotNetDummyFactory.cs</DependentUpon>
     </Compile>
     <Compile Include="DotNetDummyFactoryTest.cs" />
+    <Compile Include="DotNetDummyFactoryTest.designer.cs">
+      <DependentUpon>DotNetDummyFactoryTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratePdfClientBehaviorTest.cs" />
+    <Compile Include="GeneratePdfClientBehaviorTest.designer.cs">
+      <DependentUpon>GeneratePdfClientBehaviorTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HandleLinkClickClientBehaviorTest.cs" />
+    <Compile Include="HandleLinkClickClientBehaviorTest.designer.cs">
+      <DependentUpon>HandleLinkClickClientBehaviorTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HoverTest.cs" />
+    <Compile Include="HoverTest.designer.cs">
+      <DependentUpon>HoverTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LinkTest.cs" />
+    <Compile Include="LinkTest.designer.cs">
+      <DependentUpon>LinkTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NullValueObjectTest.cs" />
+    <Compile Include="NullValueObjectTest.designer.cs">
+      <DependentUpon>NullValueObjectTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\GlobalSuppressions.cs" />
+    <Compile Include="Properties\ProjectInfo.cs" />
+    <Compile Include="SerializationConfigurationTypes.cs" />
     <AdditionalFiles Include=".analyzers\stylecop.json" />
+    <Compile Include="SortTreeTableClientBehaviorTest.cs" />
+    <Compile Include="SortTreeTableClientBehaviorTest.designer.cs">
+      <DependentUpon>SortTreeTableClientBehaviorTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToggleTreeTableChildRowExpansionClientBehaviorTest.cs" />
+    <Compile Include="ToggleTreeTableChildRowExpansionClientBehaviorTest.designer.cs">
+      <DependentUpon>ToggleTreeTableChildRowExpansionClientBehaviorTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTableCellTest.cs" />
+    <Compile Include="TreeTableCellTest.designer.cs">
+      <DependentUpon>TreeTableCellTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTableHeaderCellTest.cs" />
+    <Compile Include="TreeTableHeaderCellTest.designer.cs">
+      <DependentUpon>TreeTableHeaderCellTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTableHeaderRowTest.cs" />
+    <Compile Include="TreeTableHeaderRowTest.designer.cs">
+      <DependentUpon>TreeTableHeaderRowTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTableRowDependencyTest.cs" />
+    <Compile Include="TreeTableRowDependencyTest.designer.cs">
+      <DependentUpon>TreeTableRowDependencyTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTableRowTest.cs" />
+    <Compile Include="TreeTableRowTest.designer.cs">
+      <DependentUpon>TreeTableRowTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTableTest.cs" />
+    <Compile Include="TreeTableTest.designer.cs">
+      <DependentUpon>TreeTableTest.cs</DependentUpon>
+    </Compile>
     <None Include=".analyzers\test.ruleset" />
     <None Include="DummyFactory.recipe-nuspec" />
     <None Include="packages.config" />
@@ -276,11 +340,11 @@
       <Name>Vuescape.DotNet.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Vuescape.DotNet.Serialization.Bson\Vuescape.DotNet.Serialization.Bson.csproj">
-      <Project>{B6464EBC-F5F2-4D79-872C-1C50C7EC27D4}</Project>
+      <Project>{b6464ebc-f5f2-4d79-872c-1c50c7ec27d4}</Project>
       <Name>Vuescape.DotNet.Serialization.Bson</Name>
     </ProjectReference>
     <ProjectReference Include="..\Vuescape.DotNet.Serialization.Json\Vuescape.DotNet.Serialization.Json.csproj">
-      <Project>{E87964C7-7721-4FA5-878D-86BFA5A20211}</Project>
+      <Project>{e87964c7-7721-4fa5-878d-86bfa5a20211}</Project>
       <Name>Vuescape.DotNet.Serialization.Json</Name>
     </ProjectReference>
   </ItemGroup>

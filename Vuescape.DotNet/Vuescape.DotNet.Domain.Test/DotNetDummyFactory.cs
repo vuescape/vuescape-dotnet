@@ -7,6 +7,11 @@
 // </auto-generated>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
+using OBeautifulCode.Math.Recipes;
+using OBeautifulCode.Type;
+
 namespace Vuescape.DotNet.Domain.Test
 {
     using System;
@@ -30,6 +35,96 @@ namespace Vuescape.DotNet.Domain.Test
         public DotNetDummyFactory()
         {
             /* Add any overriding or custom registrations here. */
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var numberOfChildren = ThreadSafeRandom.Next(0, 4);
+                    var children = new List<TreeTableRow>();
+                    for (int x = 0; x < numberOfChildren; x++)
+                    {
+                        if (ThreadSafeRandom.Next(0, 2) == 0)
+                        {
+                            children.Add(new TreeTableRow(
+                                A.Dummy<string>(),
+                                A.Dummy<string>(),
+                                A.Dummy<string>(),
+                                A.Dummy<int>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool?>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<IReadOnlyList<TreeTableCell>>(),
+                                A.Dummy<string>(),
+                                A.Dummy<IObject>(),
+                                null,
+                                A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>(),
+                                A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>()));
+                        }
+                        else
+                        {
+                            var numberOfGrandchildren = ThreadSafeRandom.Next(0, 3);
+                            var grandChildren = new List<TreeTableRow>();
+
+                            for (int y = 0; y < numberOfGrandchildren; y++)
+                            {
+                                grandChildren.Add(new TreeTableRow(
+                                    A.Dummy<string>(),
+                                    A.Dummy<string>(),
+                                    A.Dummy<string>(),
+                                    A.Dummy<int>(),
+                                    A.Dummy<bool>(),
+                                    A.Dummy<bool>(),
+                                    A.Dummy<bool?>(),
+                                    A.Dummy<bool>(),
+                                    A.Dummy<bool>(),
+                                    A.Dummy<IReadOnlyList<TreeTableCell>>(),
+                                    A.Dummy<string>(),
+                                    A.Dummy<IObject>(),
+                                    null,
+                                    A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>(),
+                                    A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>()));
+                            }
+
+                            children.Add(new TreeTableRow(
+                                A.Dummy<string>(),
+                                A.Dummy<string>(),
+                                A.Dummy<string>(),
+                                A.Dummy<int>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool?>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<IReadOnlyList<TreeTableCell>>(),
+                                A.Dummy<string>(),
+                                A.Dummy<IObject>(),
+                                grandChildren,
+                                A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>(),
+                                A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>()));
+                        }
+                    }
+
+                    return new TreeTableRow(
+                       A.Dummy<string>(),
+                       A.Dummy<string>(),
+                       A.Dummy<string>(),
+                       A.Dummy<int>(),
+                       A.Dummy<bool>(),
+                       A.Dummy<bool>(),
+                       A.Dummy<bool?>(),
+                       A.Dummy<bool>(),
+                       A.Dummy<bool>(),
+                       A.Dummy<IReadOnlyList<TreeTableCell>>(),
+                       A.Dummy<string>(),
+                       A.Dummy<IObject>(),
+                       children,
+                       A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>(),
+                       A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>());
+                });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator<IObject>(() => new NullValueObject(A.Dummy<string>()));
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(LinkTargetKind.None);
         }
     }
 }

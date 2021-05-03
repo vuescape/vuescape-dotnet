@@ -22,15 +22,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class Class1 : IModel<Class1>
+    public partial class GeneratePdfClientBehavior : IModel<GeneratePdfClientBehavior>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="Class1"/> are equal.
+        /// Determines whether two objects of type <see cref="GeneratePdfClientBehavior"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(Class1 left, Class1 right)
+        public static bool operator ==(GeneratePdfClientBehavior left, GeneratePdfClientBehavior right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -48,15 +48,15 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="Class1"/> are not equal.
+        /// Determines whether two objects of type <see cref="GeneratePdfClientBehavior"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(Class1 left, Class1 right) => !(left == right);
+        public static bool operator !=(GeneratePdfClientBehavior left, GeneratePdfClientBehavior right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(Class1 other)
+        public bool Equals(GeneratePdfClientBehavior other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -68,36 +68,23 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = this.IsCodeGen.IsEqualTo(other.IsCodeGen);
+            var result = this.Name.IsEqualTo(other.Name, StringComparer.Ordinal);
 
             return result;
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as Class1);
+        public override bool Equals(object obj) => this == (obj as GeneratePdfClientBehavior);
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
-            .Hash(this.IsCodeGen)
+            .Hash(this.Name)
             .Value;
 
         /// <inheritdoc />
-        public object Clone() => this.DeepClone();
+        public new GeneratePdfClientBehavior DeepClone() => (GeneratePdfClientBehavior)this.DeepCloneInternal();
 
         /// <inheritdoc />
-        public Class1 DeepClone()
-        {
-            var result = new Class1(
-                                 this.IsCodeGen);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="IsCodeGen" />.
-        /// </summary>
-        /// <param name="isCodeGen">The new <see cref="IsCodeGen" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="Class1" /> using the specified <paramref name="isCodeGen" /> for <see cref="IsCodeGen" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -115,10 +102,24 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Class1 DeepCloneWithIsCodeGen(bool isCodeGen)
+        public override ClientBehaviorBase DeepCloneWithName(string name)
         {
-            var result = new Class1(
-                                 isCodeGen);
+            var result = new GeneratePdfClientBehavior
+                             {
+                                 Name = name,
+                             };
+
+            return result;
+        }
+
+        /// <inheritdoc />
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        protected override ClientBehaviorBase DeepCloneInternal()
+        {
+            var result = new GeneratePdfClientBehavior
+                             {
+                                 Name = this.Name?.DeepClone(),
+                             };
 
             return result;
         }
@@ -127,7 +128,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.Class1: IsCodeGen = {this.IsCodeGen.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.GeneratePdfClientBehavior: Name = {this.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

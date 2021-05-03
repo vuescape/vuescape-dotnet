@@ -17,6 +17,9 @@ namespace Vuescape.DotNet.Domain.Test
 
     using global::OBeautifulCode.AutoFakeItEasy;
     using global::OBeautifulCode.Math.Recipes;
+    using global::OBeautifulCode.Type;
+
+    using global::Vuescape.DotNet.Domain;
 
     /// <summary>
     /// The default (code generated) Dummy Factory.
@@ -34,8 +37,150 @@ namespace Vuescape.DotNet.Domain.Test
         public DefaultDotNetDummyFactory()
         {
             AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new Class1(
-                                 A.Dummy<bool>()));
+                () => new AdjustTreeTableColumnSizeClientBehavior
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new SortTreeTableClientBehavior
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var availableTypes = new[]
+                    {
+                        typeof(AdjustTreeTableColumnSizeClientBehavior),
+                        typeof(SortTreeTableClientBehavior),
+                        typeof(ConstrainTreeTableHeightClientBehavior),
+                        typeof(GeneratePdfClientBehavior),
+                        typeof(HandleLinkClickClientBehavior),
+                        typeof(ToggleTreeTableChildRowExpansionClientBehavior)
+                    };
+
+                    var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
+
+                    var randomType = availableTypes[randomIndex];
+
+                    var result = (ClientBehaviorBase)AD.ummy(randomType);
+
+                    return result;
+                });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new ConstrainTreeTableHeightClientBehavior
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new GeneratePdfClientBehavior
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new HandleLinkClickClientBehavior
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new ToggleTreeTableChildRowExpansionClientBehavior
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new Link(
+                                 A.Dummy<string>(),
+                                 A.Dummy<LinkTargetKind>(),
+                                 A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new ColumnSorter(
+                                 A.Dummy<string>(),
+                                 A.Dummy<SortDirection>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new NullValueObject(
+                                 A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new Hover(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTable(
+                                 A.Dummy<IReadOnlyList<TreeTableHeaderRow>>(),
+                                 A.Dummy<IReadOnlyList<TreeTableRow>>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<int?>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<IReadOnlyCollection<ClientBehaviorBase>>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTableCell(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<int?>(),
+                                 A.Dummy<Hover>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<IObject>(),
+                                 A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTableHeaderCell(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<int?>(),
+                                 A.Dummy<ColumnSorter>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTableHeaderRow(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<IReadOnlyList<TreeTableHeaderCell>>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTableRow(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<int>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<bool?>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<IReadOnlyList<TreeTableCell>>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<IObject>(),
+                                 A.Dummy<IReadOnlyList<TreeTableRow>>(),
+                                 A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>(),
+                                 A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTableRowDependency(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<IObject>()));
         }
 
         /// <inheritdoc />

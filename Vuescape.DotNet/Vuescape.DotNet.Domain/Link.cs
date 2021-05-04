@@ -25,7 +25,7 @@ namespace Vuescape.DotNet.Domain
         public Link(string title, LinkTargetKind linkTarget, string source)
         {
             new { title }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new {targetKind = linkTarget }.AsArg().Must().NotBeEqualTo(LinkTargetKind.None);
+            new { linkTarget }.AsArg().Must().NotBeEqualTo(LinkTargetKind.None);
             new { source }.AsArg().Must().NotBeNullNorWhiteSpace();
 
             this.Title = title;

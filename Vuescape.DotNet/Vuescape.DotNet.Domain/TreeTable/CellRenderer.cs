@@ -4,8 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-
+// ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
     /// <summary>

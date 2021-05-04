@@ -112,24 +112,25 @@ namespace Vuescape.DotNet.Domain.Test
                 "American|ABC Processing|Warehousing|Steel Metals|Iron Butterfly|Mad Hatter|Florida Fabrication"
                     .Split('|'))
             {
-                var TreeTableCells = new List<TreeTableCell>();
+                var treeTableCells = new List<TreeTableCell>();
 
-                var TreeTableCell = new TreeTableCell("entityName", "who-is-in-report-consolidated__td--entityName", 1, null, true, CellRenderer.DefaultCellRenderer, entityName, null);
-                TreeTableCells.Add(TreeTableCell);
+                var treeTableCell = new TreeTableCell("entityName", "who-is-in-report-consolidated__td--entityName", 1, null, true, CellRenderer.DefaultCellRenderer, entityName, null);
+                treeTableCells.Add(treeTableCell);
                 for (var i = startingYear; i < startingYear + numberOfPeriods; i++)
                 {
                     var status = random.Next(2) == 0 ? "Passed" : "Failed";
                     var cssStyles = status == "Passed" ? "positive" : "negative";
                     cssStyles += " who-is-in-report-consolidated__td--status";
-                    TreeTableCell = new TreeTableCell(entityName + "-" + i, cssStyles, 1, null, true, CellRenderer.DefaultCellRenderer, status, null);
-                    TreeTableCells.Add(TreeTableCell);
+                    treeTableCell = new TreeTableCell(entityName + "-" + i, cssStyles, 1, null, true, CellRenderer.DefaultCellRenderer, status, null);
+                    treeTableCells.Add(treeTableCell);
                 }
 
-                var row = new TreeTableRow("entityName-" + entityName, string.Empty, 0, false, false, null, false, true, TreeTableCells, RowRenderer.DataRowRenderer, null, null);
+                var row = new TreeTableRow("entityName-" + entityName, string.Empty, 0, false, false, null, false, true, treeTableCells, RowRenderer.DataRowRenderer, null, null);
                 rows.Add(row);
             }
 
             var treeTable = new TreeTable(headers, rows, true, true, true, true, false, false, null, null, null);
+            Assert.NotNull(treeTable);
         }
     }
 }

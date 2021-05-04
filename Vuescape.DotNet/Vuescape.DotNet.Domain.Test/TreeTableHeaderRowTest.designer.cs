@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TreeTableHeaderRow>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {systemUnderTest.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Items = {systemUnderTest.Items?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {systemUnderTest.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Items = {systemUnderTest.Cells?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -66,7 +66,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TreeTableHeaderRow(
                                              null,
                                              referenceObject.CssClasses,
-                                             referenceObject.Items);
+                                             referenceObject.Cells);
 
                         return result;
                     },
@@ -84,7 +84,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TreeTableHeaderRow(
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.CssClasses,
-                                             referenceObject.Items);
+                                             referenceObject.Cells);
 
                         return result;
                     },
@@ -102,7 +102,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TreeTableHeaderRow(
                                              referenceObject.Id,
                                              null,
-                                             referenceObject.Items);
+                                             referenceObject.Cells);
 
                         return result;
                     },
@@ -120,7 +120,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TreeTableHeaderRow(
                                              referenceObject.Id,
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.Items);
+                                             referenceObject.Cells);
 
                         return result;
                     },
@@ -174,7 +174,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TreeTableHeaderRow(
                                              referenceObject.Id,
                                              referenceObject.CssClasses,
-                                             new TreeTableHeaderCell[0].Concat(referenceObject.Items).Concat(new TreeTableHeaderCell[] { null }).Concat(referenceObject.Items).ToList());
+                                             new TreeTableHeaderCell[0].Concat(referenceObject.Cells).Concat(new TreeTableHeaderCell[] { null }).Concat(referenceObject.Cells).ToList());
 
                         return result;
                     },
@@ -196,7 +196,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TreeTableHeaderRow(
                                                       referenceObject.Id,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.Items),
+                                                      referenceObject.Cells),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
 
@@ -217,7 +217,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TreeTableHeaderRow(
                                                       referenceObject.Id,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.Items),
+                                                      referenceObject.Cells),
                             ExpectedPropertyValue = referenceObject.CssClasses,
                         };
 
@@ -238,8 +238,8 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TreeTableHeaderRow(
                                                       referenceObject.Id,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.Items),
-                            ExpectedPropertyValue = referenceObject.Items,
+                                                      referenceObject.Cells),
+                            ExpectedPropertyValue = referenceObject.Cells,
                         };
 
                         return result;
@@ -297,12 +297,12 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         var systemUnderTest = A.Dummy<TreeTableHeaderRow>();
 
-                        var referenceObject = A.Dummy<TreeTableHeaderRow>().ThatIs(_ => !systemUnderTest.Items.IsEqualTo(_.Items));
+                        var referenceObject = A.Dummy<TreeTableHeaderRow>().ThatIs(_ => !systemUnderTest.Cells.IsEqualTo(_.Cells));
 
                         var result = new SystemUnderTestDeepCloneWithValue<TreeTableHeaderRow>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Items,
+                            DeepCloneWithValue = referenceObject.Cells,
                         };
 
                         return result;
@@ -322,22 +322,22 @@ namespace Vuescape.DotNet.Domain.Test
                         new TreeTableHeaderRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.Items),
+                                ReferenceObjectForEquatableTestScenarios.Cells),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TreeTableHeaderRow[]
                     {
                         new TreeTableHeaderRow(
                                 A.Dummy<TreeTableHeaderRow>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.Items),
+                                ReferenceObjectForEquatableTestScenarios.Cells),
                         new TreeTableHeaderRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<TreeTableHeaderRow>().Whose(_ => !_.CssClasses.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssClasses)).CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.Items),
+                                ReferenceObjectForEquatableTestScenarios.Cells),
                         new TreeTableHeaderRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                A.Dummy<TreeTableHeaderRow>().Whose(_ => !_.Items.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Items)).Items),
+                                A.Dummy<TreeTableHeaderRow>().Whose(_ => !_.Cells.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Cells)).Cells),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -612,13 +612,13 @@ namespace Vuescape.DotNet.Domain.Test
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
 
-                if (systemUnderTest.Items == null)
+                if (systemUnderTest.Cells == null)
                 {
-                    actual.Items.AsTest().Must().BeNull();
+                    actual.Cells.AsTest().Must().BeNull();
                 }
                 else
                 {
-                    actual.Items.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Items);
+                    actual.Cells.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Cells);
                 }
             }
 

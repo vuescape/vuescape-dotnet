@@ -310,6 +310,10 @@
     <Compile Include="TreeTableCellValueObjectTest.designer.cs">
       <DependentUpon>TreeTableCellValueObjectTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="TreeTableContentTest.cs" />
+    <Compile Include="TreeTableContentTest.designer.cs">
+      <DependentUpon>TreeTableContentTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="TreeTableHeaderCellTest.cs" />
     <Compile Include="TreeTableHeaderCellTest.designer.cs">
       <DependentUpon>TreeTableHeaderCellTest.cs</DependentUpon>

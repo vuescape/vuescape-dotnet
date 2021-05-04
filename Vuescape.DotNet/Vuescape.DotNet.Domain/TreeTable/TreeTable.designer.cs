@@ -68,17 +68,7 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = this.Headers.IsEqualTo(other.Headers)
-                      && this.Rows.IsEqualTo(other.Rows)
-                      && this.ShouldScrollVertical.IsEqualTo(other.ShouldScrollVertical)
-                      && this.ShouldScrollHorizontal.IsEqualTo(other.ShouldScrollHorizontal)
-                      && this.ShouldSyncHeaderScroll.IsEqualTo(other.ShouldSyncHeaderScroll)
-                      && this.ShouldSyncFooterScroll.IsEqualTo(other.ShouldSyncFooterScroll)
-                      && this.ShouldIncludeFooter.IsEqualTo(other.ShouldIncludeFooter)
-                      && this.ShouldFreezeFirstColumn.IsEqualTo(other.ShouldFreezeFirstColumn)
-                      && this.DeadAreaColor.IsEqualTo(other.DeadAreaColor, StringComparer.Ordinal)
-                      && this.MaxRows.IsEqualTo(other.MaxRows)
-                      && this.CssStyle.IsEqualTo(other.CssStyle, StringComparer.Ordinal)
+            var result = this.Content.IsEqualTo(other.Content)
                       && this.Behaviors.IsEqualTo(other.Behaviors);
 
             return result;
@@ -89,17 +79,7 @@ namespace Vuescape.DotNet.Domain
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
-            .Hash(this.Headers)
-            .Hash(this.Rows)
-            .Hash(this.ShouldScrollVertical)
-            .Hash(this.ShouldScrollHorizontal)
-            .Hash(this.ShouldSyncHeaderScroll)
-            .Hash(this.ShouldSyncFooterScroll)
-            .Hash(this.ShouldIncludeFooter)
-            .Hash(this.ShouldFreezeFirstColumn)
-            .Hash(this.DeadAreaColor)
-            .Hash(this.MaxRows)
-            .Hash(this.CssStyle)
+            .Hash(this.Content)
             .Hash(this.Behaviors)
             .Value;
 
@@ -110,27 +90,17 @@ namespace Vuescape.DotNet.Domain
         public TreeTable DeepClone()
         {
             var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 this.ShouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 this.MaxRows,
-                                 this.CssStyle?.DeepClone(),
+                                 this.Content?.DeepClone(),
                                  this.Behaviors?.Select(i => i?.DeepClone()).ToList());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="Headers" />.
+        /// Deep clones this object with a new <see cref="Content" />.
         /// </summary>
-        /// <param name="headers">The new <see cref="Headers" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="headers" /> for <see cref="Headers" /> and a deep clone of every other property.</returns>
+        /// <param name="content">The new <see cref="Content" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="content" /> for <see cref="Content" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -148,430 +118,10 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithHeaders(IReadOnlyList<TreeTableHeaderRow> headers)
+        public TreeTable DeepCloneWithContent(TreeTableContent content)
         {
             var result = new TreeTable(
-                                 headers,
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 this.ShouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 this.MaxRows,
-                                 this.CssStyle?.DeepClone(),
-                                 this.Behaviors?.Select(i => i?.DeepClone()).ToList());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="Rows" />.
-        /// </summary>
-        /// <param name="rows">The new <see cref="Rows" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="rows" /> for <see cref="Rows" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithRows(IReadOnlyList<TreeTableRow> rows)
-        {
-            var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 rows,
-                                 this.ShouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 this.MaxRows,
-                                 this.CssStyle?.DeepClone(),
-                                 this.Behaviors?.Select(i => i?.DeepClone()).ToList());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="ShouldScrollVertical" />.
-        /// </summary>
-        /// <param name="shouldScrollVertical">The new <see cref="ShouldScrollVertical" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="shouldScrollVertical" /> for <see cref="ShouldScrollVertical" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithShouldScrollVertical(bool shouldScrollVertical)
-        {
-            var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 shouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 this.MaxRows,
-                                 this.CssStyle?.DeepClone(),
-                                 this.Behaviors?.Select(i => i?.DeepClone()).ToList());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="ShouldScrollHorizontal" />.
-        /// </summary>
-        /// <param name="shouldScrollHorizontal">The new <see cref="ShouldScrollHorizontal" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="shouldScrollHorizontal" /> for <see cref="ShouldScrollHorizontal" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithShouldScrollHorizontal(bool shouldScrollHorizontal)
-        {
-            var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 this.ShouldScrollVertical,
-                                 shouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 this.MaxRows,
-                                 this.CssStyle?.DeepClone(),
-                                 this.Behaviors?.Select(i => i?.DeepClone()).ToList());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="ShouldSyncHeaderScroll" />.
-        /// </summary>
-        /// <param name="shouldSyncHeaderScroll">The new <see cref="ShouldSyncHeaderScroll" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="shouldSyncHeaderScroll" /> for <see cref="ShouldSyncHeaderScroll" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithShouldSyncHeaderScroll(bool shouldSyncHeaderScroll)
-        {
-            var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 this.ShouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 shouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 this.MaxRows,
-                                 this.CssStyle?.DeepClone(),
-                                 this.Behaviors?.Select(i => i?.DeepClone()).ToList());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="ShouldSyncFooterScroll" />.
-        /// </summary>
-        /// <param name="shouldSyncFooterScroll">The new <see cref="ShouldSyncFooterScroll" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="shouldSyncFooterScroll" /> for <see cref="ShouldSyncFooterScroll" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithShouldSyncFooterScroll(bool shouldSyncFooterScroll)
-        {
-            var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 this.ShouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 shouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 this.MaxRows,
-                                 this.CssStyle?.DeepClone(),
-                                 this.Behaviors?.Select(i => i?.DeepClone()).ToList());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="ShouldIncludeFooter" />.
-        /// </summary>
-        /// <param name="shouldIncludeFooter">The new <see cref="ShouldIncludeFooter" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="shouldIncludeFooter" /> for <see cref="ShouldIncludeFooter" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithShouldIncludeFooter(bool shouldIncludeFooter)
-        {
-            var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 this.ShouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 shouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 this.MaxRows,
-                                 this.CssStyle?.DeepClone(),
-                                 this.Behaviors?.Select(i => i?.DeepClone()).ToList());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="ShouldFreezeFirstColumn" />.
-        /// </summary>
-        /// <param name="shouldFreezeFirstColumn">The new <see cref="ShouldFreezeFirstColumn" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="shouldFreezeFirstColumn" /> for <see cref="ShouldFreezeFirstColumn" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithShouldFreezeFirstColumn(bool shouldFreezeFirstColumn)
-        {
-            var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 this.ShouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 shouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 this.MaxRows,
-                                 this.CssStyle?.DeepClone(),
-                                 this.Behaviors?.Select(i => i?.DeepClone()).ToList());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="DeadAreaColor" />.
-        /// </summary>
-        /// <param name="deadAreaColor">The new <see cref="DeadAreaColor" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="deadAreaColor" /> for <see cref="DeadAreaColor" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithDeadAreaColor(string deadAreaColor)
-        {
-            var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 this.ShouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 deadAreaColor,
-                                 this.MaxRows,
-                                 this.CssStyle?.DeepClone(),
-                                 this.Behaviors?.Select(i => i?.DeepClone()).ToList());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="MaxRows" />.
-        /// </summary>
-        /// <param name="maxRows">The new <see cref="MaxRows" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="maxRows" /> for <see cref="MaxRows" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithMaxRows(int? maxRows)
-        {
-            var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 this.ShouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 maxRows,
-                                 this.CssStyle?.DeepClone(),
-                                 this.Behaviors?.Select(i => i?.DeepClone()).ToList());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="CssStyle" />.
-        /// </summary>
-        /// <param name="cssStyle">The new <see cref="CssStyle" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="cssStyle" /> for <see cref="CssStyle" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithCssStyle(string cssStyle)
-        {
-            var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 this.ShouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 this.MaxRows,
-                                 cssStyle,
+                                 content,
                                  this.Behaviors?.Select(i => i?.DeepClone()).ToList());
 
             return result;
@@ -602,17 +152,7 @@ namespace Vuescape.DotNet.Domain
         public TreeTable DeepCloneWithBehaviors(IReadOnlyCollection<ClientBehaviorBase> behaviors)
         {
             var result = new TreeTable(
-                                 this.Headers?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Rows?.Select(i => i?.DeepClone()).ToList(),
-                                 this.ShouldScrollVertical,
-                                 this.ShouldScrollHorizontal,
-                                 this.ShouldSyncHeaderScroll,
-                                 this.ShouldSyncFooterScroll,
-                                 this.ShouldIncludeFooter,
-                                 this.ShouldFreezeFirstColumn,
-                                 this.DeadAreaColor?.DeepClone(),
-                                 this.MaxRows,
-                                 this.CssStyle?.DeepClone(),
+                                 this.Content?.DeepClone(),
                                  behaviors);
 
             return result;
@@ -622,7 +162,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TreeTable: Headers = {this.Headers?.ToString() ?? "<null>"}, Rows = {this.Rows?.ToString() ?? "<null>"}, ShouldScrollVertical = {this.ShouldScrollVertical.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldScrollHorizontal = {this.ShouldScrollHorizontal.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncHeaderScroll = {this.ShouldSyncHeaderScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncFooterScroll = {this.ShouldSyncFooterScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldIncludeFooter = {this.ShouldIncludeFooter.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldFreezeFirstColumn = {this.ShouldFreezeFirstColumn.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DeadAreaColor = {this.DeadAreaColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxRows = {this.MaxRows?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {this.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Behaviors = {this.Behaviors?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TreeTable: Content = {this.Content?.ToString() ?? "<null>"}, Behaviors = {this.Behaviors?.ToString() ?? "<null>"}.");
 
             return result;
         }

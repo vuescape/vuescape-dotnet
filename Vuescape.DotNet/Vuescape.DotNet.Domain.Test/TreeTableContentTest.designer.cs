@@ -33,203 +33,989 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class TreeTableTest
+    public static partial class TreeTableContentTest
     {
-        private static readonly StringRepresentationTestScenarios<TreeTable> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<TreeTable>()
+        private static readonly StringRepresentationTestScenarios<TreeTableContent> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<TreeTableContent>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<TreeTable>
+                new StringRepresentationTestScenario<TreeTableContent>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TreeTable>();
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<TreeTable>
+                        var result = new SystemUnderTestExpectedStringRepresentation<TreeTableContent>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTable: Content = {systemUnderTest.Content?.ToString() ?? "<null>"}, Behaviors = {systemUnderTest.Behaviors?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableContent: Headers = {systemUnderTest.Headers?.ToString() ?? "<null>"}, Rows = {systemUnderTest.Rows?.ToString() ?? "<null>"}, ShouldScrollVertical = {systemUnderTest.ShouldScrollVertical.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldScrollHorizontal = {systemUnderTest.ShouldScrollHorizontal.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncHeaderScroll = {systemUnderTest.ShouldSyncHeaderScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncFooterScroll = {systemUnderTest.ShouldSyncFooterScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldIncludeFooter = {systemUnderTest.ShouldIncludeFooter.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldFreezeFirstColumn = {systemUnderTest.ShouldFreezeFirstColumn.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DeadAreaColor = {systemUnderTest.DeadAreaColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxRows = {systemUnderTest.MaxRows?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {systemUnderTest.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<TreeTable> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<TreeTable>()
+        private static readonly ConstructorArgumentValidationTestScenarios<TreeTableContent> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<TreeTableContent>()
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'content' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'headers' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TreeTable>();
+                        var referenceObject = A.Dummy<TreeTableContent>();
 
-                        var result = new TreeTable(
+                        var result = new TreeTableContent(
                                              null,
-                                             referenceObject.Behaviors);
+                                             referenceObject.Rows,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
+                                             referenceObject.CssStyle);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "content", },
+                    ExpectedExceptionMessageContains = new[] { "headers", },
                 })
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'behaviors' is null scenario",
+                    Name = "constructor should throw ArgumentException when parameter 'headers' is an empty enumerable scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TreeTable>();
+                        var referenceObject = A.Dummy<TreeTableContent>();
 
-                        var result = new TreeTable(
-                                             referenceObject.Content,
+                        var result = new TreeTableContent(
+                                             new List<TreeTableHeaderRow>(),
+                                             referenceObject.Rows,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
+                                             referenceObject.CssStyle);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "headers", "is an empty enumerable", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'headers' contains a null element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new TreeTableContent(
+                                             new TreeTableHeaderRow[0].Concat(referenceObject.Headers).Concat(new TreeTableHeaderRow[] { null }).Concat(referenceObject.Headers).ToList(),
+                                             referenceObject.Rows,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
+                                             referenceObject.CssStyle);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "headers", "contains at least one null element", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'rows' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new TreeTableContent(
+                                             referenceObject.Headers,
+                                             null,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
+                                             referenceObject.CssStyle);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "rows", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'rows' is an empty enumerable scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new TreeTableContent(
+                                             referenceObject.Headers,
+                                             new List<TreeTableRow>(),
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
+                                             referenceObject.CssStyle);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "rows", "is an empty enumerable", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'rows' contains a null element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new TreeTableContent(
+                                             referenceObject.Headers,
+                                             new TreeTableRow[0].Concat(referenceObject.Rows).Concat(new TreeTableRow[] { null }).Concat(referenceObject.Rows).ToList(),
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
+                                             referenceObject.CssStyle);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "rows", "contains at least one null element", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'deadAreaColor' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new TreeTableContent(
+                                             referenceObject.Headers,
+                                             referenceObject.Rows,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             null,
+                                             referenceObject.MaxRows,
+                                             referenceObject.CssStyle);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "deadAreaColor", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'deadAreaColor' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new TreeTableContent(
+                                             referenceObject.Headers,
+                                             referenceObject.Rows,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.MaxRows,
+                                             referenceObject.CssStyle);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "deadAreaColor", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'cssStyle' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new TreeTableContent(
+                                             referenceObject.Headers,
+                                             referenceObject.Rows,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
                                              null);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "behaviors", },
+                    ExpectedExceptionMessageContains = new[] { "cssStyle", },
                 })
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
                 {
-                    Name = "constructor should throw ArgumentException when parameter 'behaviors' is an empty enumerable scenario",
+                    Name = "constructor should throw ArgumentException when parameter 'cssStyle' is white space scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TreeTable>();
+                        var referenceObject = A.Dummy<TreeTableContent>();
 
-                        var result = new TreeTable(
-                                             referenceObject.Content,
-                                             new List<ClientBehaviorBase>());
+                        var result = new TreeTableContent(
+                                             referenceObject.Headers,
+                                             referenceObject.Rows,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
+                                             Invariant($"  {Environment.NewLine}  "));
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "behaviors", "is an empty enumerable", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'behaviors' contains a null element scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new TreeTable(
-                                             referenceObject.Content,
-                                             new ClientBehaviorBase[0].Concat(referenceObject.Behaviors).Concat(new ClientBehaviorBase[] { null }).Concat(referenceObject.Behaviors).ToList());
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "behaviors", "contains at least one null element", },
+                    ExpectedExceptionMessageContains = new[] { "cssStyle", "white space", },
                 });
 
-        private static readonly ConstructorPropertyAssignmentTestScenarios<TreeTable> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TreeTable>()
+        private static readonly ConstructorPropertyAssignmentTestScenarios<TreeTableContent> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TreeTableContent>()
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TreeTable>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
                 {
-                    Name = "Content should return same 'content' parameter passed to constructor when getting",
+                    Name = "Headers should return same 'headers' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TreeTable>();
+                        var referenceObject = A.Dummy<TreeTableContent>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<TreeTable>
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
                         {
-                            SystemUnderTest = new TreeTable(
-                                                      referenceObject.Content,
-                                                      referenceObject.Behaviors),
-                            ExpectedPropertyValue = referenceObject.Content,
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.Headers,
                         };
 
                         return result;
                     },
-                    PropertyName = "Content",
+                    PropertyName = "Headers",
                 })
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TreeTable>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
                 {
-                    Name = "Behaviors should return same 'behaviors' parameter passed to constructor when getting",
+                    Name = "Rows should return same 'rows' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TreeTable>();
+                        var referenceObject = A.Dummy<TreeTableContent>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<TreeTable>
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
                         {
-                            SystemUnderTest = new TreeTable(
-                                                      referenceObject.Content,
-                                                      referenceObject.Behaviors),
-                            ExpectedPropertyValue = referenceObject.Behaviors,
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.Rows,
                         };
 
                         return result;
                     },
-                    PropertyName = "Behaviors",
+                    PropertyName = "Rows",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
+                {
+                    Name = "ShouldScrollVertical should return same 'shouldScrollVertical' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
+                        {
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.ShouldScrollVertical,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "ShouldScrollVertical",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
+                {
+                    Name = "ShouldScrollHorizontal should return same 'shouldScrollHorizontal' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
+                        {
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.ShouldScrollHorizontal,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "ShouldScrollHorizontal",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
+                {
+                    Name = "ShouldSyncHeaderScroll should return same 'shouldSyncHeaderScroll' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
+                        {
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.ShouldSyncHeaderScroll,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "ShouldSyncHeaderScroll",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
+                {
+                    Name = "ShouldSyncFooterScroll should return same 'shouldSyncFooterScroll' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
+                        {
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.ShouldSyncFooterScroll,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "ShouldSyncFooterScroll",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
+                {
+                    Name = "ShouldIncludeFooter should return same 'shouldIncludeFooter' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
+                        {
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.ShouldIncludeFooter,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "ShouldIncludeFooter",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
+                {
+                    Name = "ShouldFreezeFirstColumn should return same 'shouldFreezeFirstColumn' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
+                        {
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.ShouldFreezeFirstColumn,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "ShouldFreezeFirstColumn",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
+                {
+                    Name = "DeadAreaColor should return same 'deadAreaColor' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
+                        {
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.DeadAreaColor,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "DeadAreaColor",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
+                {
+                    Name = "MaxRows should return same 'maxRows' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
+                        {
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.MaxRows,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "MaxRows",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
+                {
+                    Name = "CssStyle should return same 'cssStyle' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
+                        {
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.CssStyle,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "CssStyle",
                 });
 
-        private static readonly DeepCloneWithTestScenarios<TreeTable> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TreeTable>()
+        private static readonly DeepCloneWithTestScenarios<TreeTableContent> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TreeTableContent>()
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<TreeTable>
+                new DeepCloneWithTestScenario<TreeTableContent>
                 {
-                    Name = "DeepCloneWithContent should deep clone object and replace Content with the provided content",
-                    WithPropertyName = "Content",
+                    Name = "DeepCloneWithHeaders should deep clone object and replace Headers with the provided headers",
+                    WithPropertyName = "Headers",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TreeTable>();
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
 
-                        var referenceObject = A.Dummy<TreeTable>().ThatIs(_ => !systemUnderTest.Content.IsEqualTo(_.Content));
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.Headers.IsEqualTo(_.Headers));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<TreeTable>
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Content,
+                            DeepCloneWithValue = referenceObject.Headers,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<TreeTable>
+                new DeepCloneWithTestScenario<TreeTableContent>
                 {
-                    Name = "DeepCloneWithBehaviors should deep clone object and replace Behaviors with the provided behaviors",
-                    WithPropertyName = "Behaviors",
+                    Name = "DeepCloneWithRows should deep clone object and replace Rows with the provided rows",
+                    WithPropertyName = "Rows",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TreeTable>();
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
 
-                        var referenceObject = A.Dummy<TreeTable>().ThatIs(_ => !systemUnderTest.Behaviors.IsEqualTo(_.Behaviors));
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.Rows.IsEqualTo(_.Rows));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<TreeTable>
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Behaviors,
+                            DeepCloneWithValue = referenceObject.Rows,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TreeTableContent>
+                {
+                    Name = "DeepCloneWithShouldScrollVertical should deep clone object and replace ShouldScrollVertical with the provided shouldScrollVertical",
+                    WithPropertyName = "ShouldScrollVertical",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
+
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.ShouldScrollVertical.IsEqualTo(_.ShouldScrollVertical));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.ShouldScrollVertical,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TreeTableContent>
+                {
+                    Name = "DeepCloneWithShouldScrollHorizontal should deep clone object and replace ShouldScrollHorizontal with the provided shouldScrollHorizontal",
+                    WithPropertyName = "ShouldScrollHorizontal",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
+
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.ShouldScrollHorizontal.IsEqualTo(_.ShouldScrollHorizontal));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.ShouldScrollHorizontal,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TreeTableContent>
+                {
+                    Name = "DeepCloneWithShouldSyncHeaderScroll should deep clone object and replace ShouldSyncHeaderScroll with the provided shouldSyncHeaderScroll",
+                    WithPropertyName = "ShouldSyncHeaderScroll",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
+
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.ShouldSyncHeaderScroll.IsEqualTo(_.ShouldSyncHeaderScroll));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.ShouldSyncHeaderScroll,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TreeTableContent>
+                {
+                    Name = "DeepCloneWithShouldSyncFooterScroll should deep clone object and replace ShouldSyncFooterScroll with the provided shouldSyncFooterScroll",
+                    WithPropertyName = "ShouldSyncFooterScroll",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
+
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.ShouldSyncFooterScroll.IsEqualTo(_.ShouldSyncFooterScroll));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.ShouldSyncFooterScroll,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TreeTableContent>
+                {
+                    Name = "DeepCloneWithShouldIncludeFooter should deep clone object and replace ShouldIncludeFooter with the provided shouldIncludeFooter",
+                    WithPropertyName = "ShouldIncludeFooter",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
+
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.ShouldIncludeFooter.IsEqualTo(_.ShouldIncludeFooter));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.ShouldIncludeFooter,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TreeTableContent>
+                {
+                    Name = "DeepCloneWithShouldFreezeFirstColumn should deep clone object and replace ShouldFreezeFirstColumn with the provided shouldFreezeFirstColumn",
+                    WithPropertyName = "ShouldFreezeFirstColumn",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
+
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.ShouldFreezeFirstColumn.IsEqualTo(_.ShouldFreezeFirstColumn));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.ShouldFreezeFirstColumn,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TreeTableContent>
+                {
+                    Name = "DeepCloneWithDeadAreaColor should deep clone object and replace DeadAreaColor with the provided deadAreaColor",
+                    WithPropertyName = "DeadAreaColor",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
+
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.DeadAreaColor.IsEqualTo(_.DeadAreaColor));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.DeadAreaColor,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TreeTableContent>
+                {
+                    Name = "DeepCloneWithMaxRows should deep clone object and replace MaxRows with the provided maxRows",
+                    WithPropertyName = "MaxRows",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
+
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.MaxRows.IsEqualTo(_.MaxRows));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.MaxRows,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TreeTableContent>
+                {
+                    Name = "DeepCloneWithCssStyle should deep clone object and replace CssStyle with the provided cssStyle",
+                    WithPropertyName = "CssStyle",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
+
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.CssStyle.IsEqualTo(_.CssStyle));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.CssStyle,
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly TreeTable ReferenceObjectForEquatableTestScenarios = A.Dummy<TreeTable>();
+        private static readonly TreeTableContent ReferenceObjectForEquatableTestScenarios = A.Dummy<TreeTableContent>();
 
-        private static readonly EquatableTestScenarios<TreeTable> EquatableTestScenarios = new EquatableTestScenarios<TreeTable>()
+        private static readonly EquatableTestScenarios<TreeTableContent> EquatableTestScenarios = new EquatableTestScenarios<TreeTableContent>()
             .AddScenario(() =>
-                new EquatableTestScenario<TreeTable>
+                new EquatableTestScenario<TreeTableContent>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new TreeTable[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new TreeTableContent[]
                     {
-                        new TreeTable(
-                                ReferenceObjectForEquatableTestScenarios.Content,
-                                ReferenceObjectForEquatableTestScenarios.Behaviors),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new TreeTable[]
+                    ObjectsThatAreNotEqualToReferenceObject = new TreeTableContent[]
                     {
-                        new TreeTable(
-                                A.Dummy<TreeTable>().Whose(_ => !_.Content.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Content)).Content,
-                                ReferenceObjectForEquatableTestScenarios.Behaviors),
-                        new TreeTable(
-                                ReferenceObjectForEquatableTestScenarios.Content,
-                                A.Dummy<TreeTable>().Whose(_ => !_.Behaviors.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Behaviors)).Behaviors),
+                        new TreeTableContent(
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.Headers.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Headers)).Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.Rows.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Rows)).Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.ShouldScrollVertical.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical)).ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.ShouldScrollHorizontal.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal)).ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.ShouldSyncHeaderScroll.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll)).ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.ShouldSyncFooterScroll.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll)).ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.ShouldIncludeFooter.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter)).ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.ShouldFreezeFirstColumn.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn)).ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.DeadAreaColor.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DeadAreaColor)).DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.MaxRows.IsEqualTo(ReferenceObjectForEquatableTestScenarios.MaxRows)).MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.CssStyle.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyle)).CssStyle),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -259,12 +1045,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void TreeTable___Should_implement_IModel_of_TreeTable___When_reflecting()
+            public static void TreeTableContent___Should_implement_IModel_of_TreeTableContent___When_reflecting()
             {
                 // Arrange
-                var type = typeof(TreeTable);
+                var type = typeof(TreeTableContent);
 
-                var expectedModelMethods = typeof(IModel<TreeTable>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<TreeTableContent>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -274,7 +1060,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<TreeTable>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<TreeTableContent>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -292,10 +1078,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void TreeTable___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void TreeTableContent___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(TreeTable);
+                var type = typeof(TreeTableContent);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -468,10 +1254,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<TreeTable>();
+                var systemUnderTest = A.Dummy<TreeTableContent>();
 
                 // Act
-                var actual = (TreeTable)systemUnderTest.Clone();
+                var actual = (TreeTableContent)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -495,7 +1281,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<TreeTable>();
+                var systemUnderTest = A.Dummy<TreeTableContent>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -504,22 +1290,22 @@ namespace Vuescape.DotNet.Domain.Test
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
 
-                if (systemUnderTest.Content == null)
+                if (systemUnderTest.Headers == null)
                 {
-                    actual.Content.AsTest().Must().BeNull();
+                    actual.Headers.AsTest().Must().BeNull();
                 }
                 else
                 {
-                    actual.Content.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Content);
+                    actual.Headers.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Headers);
                 }
 
-                if (systemUnderTest.Behaviors == null)
+                if (systemUnderTest.Rows == null)
                 {
-                    actual.Behaviors.AsTest().Must().BeNull();
+                    actual.Rows.AsTest().Must().BeNull();
                 }
                 else
                 {
-                    actual.Behaviors.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Behaviors);
+                    actual.Rows.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Rows);
                 }
             }
 
@@ -539,7 +1325,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Content", "Behaviors" };
+                var propertyNames = new string[] { "Headers", "Rows", "ShouldScrollVertical", "ShouldScrollHorizontal", "ShouldSyncHeaderScroll", "ShouldSyncFooterScroll", "ShouldIncludeFooter", "ShouldFreezeFirstColumn", "DeadAreaColor", "MaxRows", "CssStyle" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 
@@ -556,12 +1342,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (TreeTable)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (TreeTableContent)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(TreeTable).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(TreeTableContent).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var propertyType = propertyInfo.PropertyType;
 
@@ -629,7 +1415,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TreeTable>();
+                var expected = A.Dummy<TreeTableContent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -658,7 +1444,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TreeTable>();
+                var expected = A.Dummy<TreeTableContent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -687,7 +1473,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TreeTable>();
+                var expected = A.Dummy<TreeTableContent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -716,7 +1502,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TreeTable>();
+                var expected = A.Dummy<TreeTableContent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -750,8 +1536,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                TreeTable systemUnderTest1 = null;
-                TreeTable systemUnderTest2 = null;
+                TreeTableContent systemUnderTest1 = null;
+                TreeTableContent systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -781,7 +1567,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TreeTable systemUnderTest = null;
+                    TreeTableContent systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -930,8 +1716,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                TreeTable systemUnderTest1 = null;
-                TreeTable systemUnderTest2 = null;
+                TreeTableContent systemUnderTest1 = null;
+                TreeTableContent systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -961,7 +1747,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TreeTable systemUnderTest = null;
+                    TreeTableContent systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -1107,14 +1893,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TreeTable___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_TreeTableContent___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TreeTable systemUnderTest = null;
+                    TreeTableContent systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1138,7 +1924,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TreeTable___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_TreeTableContent___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1166,7 +1952,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TreeTable___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_TreeTableContent___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1194,7 +1980,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TreeTable___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_TreeTableContent___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1222,7 +2008,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TreeTable___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_TreeTableContent___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 

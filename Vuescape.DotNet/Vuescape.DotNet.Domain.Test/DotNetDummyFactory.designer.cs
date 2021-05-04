@@ -120,7 +120,7 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new TreeTable(
+                () => new TreeTableContent(
                                  A.Dummy<IReadOnlyList<TreeTableHeaderRow>>(),
                                  A.Dummy<IReadOnlyList<TreeTableRow>>(),
                                  A.Dummy<bool>(),
@@ -131,8 +131,7 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<bool>(),
                                  A.Dummy<string>(),
                                  A.Dummy<int?>(),
-                                 A.Dummy<string>(),
-                                 A.Dummy<IReadOnlyCollection<ClientBehaviorBase>>()));
+                                 A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TreeTableCell(
@@ -165,6 +164,20 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<IReadOnlyList<TreeTableHeaderCell>>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTableRowDependency(
+                                 A.Dummy<string>(),
+                                 A.Dummy<TreeTableRowDependencyClientBehavior>(),
+                                 A.Dummy<IObject>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTableRowValueObject());
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTable(
+                                 A.Dummy<TreeTableContent>(),
+                                 A.Dummy<IReadOnlyCollection<ClientBehaviorBase>>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TreeTableRow(
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
@@ -180,15 +193,6 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<IReadOnlyList<TreeTableRow>>(),
                                  A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>(),
                                  A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>()));
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new TreeTableRowDependency(
-                                 A.Dummy<string>(),
-                                 A.Dummy<TreeTableRowDependencyClientBehavior>(),
-                                 A.Dummy<IObject>()));
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new TreeTableRowValueObject());
         }
 
         /// <inheritdoc />

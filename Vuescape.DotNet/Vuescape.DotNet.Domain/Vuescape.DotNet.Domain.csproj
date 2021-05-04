@@ -139,12 +139,16 @@
     <Compile Include="TreeTable\TreeTable.designer.cs">
       <DependentUpon>TreeTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="TreeTable\TreeTableContent.cs" />
     <Compile Include="TreeTable\TreeTableCell.designer.cs">
       <DependentUpon>TreeTableCell.cs</DependentUpon>
     </Compile>
     <Compile Include="TreeTable\TreeTableCellValueObject.cs" />
     <Compile Include="TreeTable\TreeTableCellValueObject.designer.cs">
       <DependentUpon>TreeTableCellValueObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeTable\TreeTableContent.designer.cs">
+      <DependentUpon>TreeTableContent.cs</DependentUpon>
     </Compile>
     <Compile Include="TreeTable\TreeTableHeaderCell.designer.cs">
       <DependentUpon>TreeTableHeaderCell.cs</DependentUpon>

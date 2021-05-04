@@ -49,7 +49,10 @@ namespace Vuescape.DotNet.Domain.Test
             var cssStyle = A.Dummy<string>();
 
             // Act
-            var ex = Record.Exception(() => new TreeTable(headers, rows, shouldScrollVertical, shouldScrollHorizontal, shouldSyncHeaderScroll, shouldSyncFooterScroll, shouldIncludeFooter, shouldFreezeFirstColumn, deadAreaColor, maxRows, cssStyle));
+            var ex = Record.Exception(() => 
+                new TreeTable(
+                    new TreeTableContent(
+                        headers, rows, shouldScrollVertical, shouldScrollHorizontal, shouldSyncHeaderScroll, shouldSyncFooterScroll, shouldIncludeFooter, shouldFreezeFirstColumn, deadAreaColor, maxRows, cssStyle)));
 
             // Assert
             ex.AsTest().Must().BeNull();
@@ -72,7 +75,9 @@ namespace Vuescape.DotNet.Domain.Test
             var cssStyle = A.Dummy<string>();
 
             // Act
-            var ex = Record.Exception(() => new TreeTable(headers, rows, shouldScrollVertical, shouldScrollHorizontal, shouldSyncHeaderScroll, shouldSyncFooterScroll, shouldIncludeFooter, shouldFreezeFirstColumn, deadAreaColor, maxRows, cssStyle));
+            var ex = Record.Exception(() => 
+                new TreeTable(
+                    new TreeTableContent(headers, rows, shouldScrollVertical, shouldScrollHorizontal, shouldSyncHeaderScroll, shouldSyncFooterScroll, shouldIncludeFooter, shouldFreezeFirstColumn, deadAreaColor, maxRows, cssStyle)));
 
             // Assert
             ex.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -129,7 +134,8 @@ namespace Vuescape.DotNet.Domain.Test
                 rows.Add(row);
             }
 
-            var treeTable = new TreeTable(headers, rows, true, true, true, true, false, false, null, null, null);
+            var treeTable = new TreeTable(
+                new TreeTableContent(headers, rows, true, true, true, true, false, false, null, null, null));
             Assert.NotNull(treeTable);
         }
     }

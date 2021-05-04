@@ -4,6 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+// ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
     using OBeautifulCode.Assertion.Recipes;
@@ -18,18 +19,18 @@ namespace Vuescape.DotNet.Domain
         /// Initializes a new instance of the <see cref="TreeTableRowDependency"/> class.
         /// </summary>
         /// <param name="targetId">The identifier of the target that is dependent on this item.</param>
-        /// <param name="dependencyTypeName">The dependency type name.</param>
+        /// <param name="treeTableRowDependencyClientBehavior">The client behavior for this dependency.</param>
         /// <param name="payload">The payload for this dependency.</param>
         public TreeTableRowDependency(
             string targetId,
-            string dependencyTypeName,
-            IObject payload)
+            TreeTableRowDependencyClientBehavior treeTableRowDependencyClientBehavior,
+            IObject payload = null)
         {
             new { targetId }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { dependencyTypeName }.AsArg().Must().NotBeNullNorWhiteSpace();
+            new { treeTableRowDependencyClientBehavior }.AsArg().Must().NotBeNull();
 
             this.TargetId = targetId;
-            this.DependencyTypeName = dependencyTypeName;
+            this.TreeTableRowDependencyClientBehavior = treeTableRowDependencyClientBehavior;
             this.Payload = payload;
         }
 
@@ -37,17 +38,14 @@ namespace Vuescape.DotNet.Domain
         /// Gets the target ID.
         /// </summary>
         /// <remarks>
-        /// This should be an identifier of the target that is dependent on this item.
+        /// This should be the identifier of the target that of this dependency.
         /// </remarks>
         public string TargetId { get; private set; }
 
         /// <summary>
-        /// Gets the type name of the dependency.
+        /// Gets the client behavior for this <see cref="TreeTableRowDependency"/>.
         /// </summary>
-        /// <remarks>
-        /// This is the type name of the dependency, e.g. totalRowDisplayToggle, not a .NET type.
-        /// </remarks>
-        public string DependencyTypeName { get; private set; }
+        public TreeTableRowDependencyClientBehavior TreeTableRowDependencyClientBehavior { get; private set; }
 
         /// <summary>
         /// Gets the Payload.

@@ -4,13 +4,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+// ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
     using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
-    /// Base class for all client behaviors.
+    /// Base class for all client behaviors. A <see cref="ClientBehaviorBase"/> is used to attach client side behavior
+    /// in JavaScript and indicates to the UI to wire in some JavaScript code to implement the behavior.
     /// </summary>
     public abstract partial class ClientBehaviorBase : IModelViaCodeGen
     {
@@ -27,7 +29,7 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Gets or sets the action name.
+        /// Gets or sets the behavior name.
         /// </summary>
         public string Name { get; set; }
     }

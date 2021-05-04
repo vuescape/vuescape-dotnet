@@ -11,9 +11,9 @@ namespace Vuescape.DotNet.Domain
     using OBeautifulCode.Type;
 
     /// <summary>
-    /// Behavior to add client click handling based on any defined <see cref="Link"/>s.
+    /// A client behavior to add client click handling based on any defined <see cref="Link"/>s.
     /// </summary>
-    public partial class HandleLinkClickClientBehavior : ClientBehaviorBase, IModelViaCodeGen
+    public partial class HandleLinkClickClientBehavior : ClientBehaviorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HandleLinkClickClientBehavior "/> class.

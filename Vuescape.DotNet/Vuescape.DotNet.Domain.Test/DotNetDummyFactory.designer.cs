@@ -43,22 +43,17 @@ namespace Vuescape.DotNet.Domain.Test
                              });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new SortTreeTableClientBehavior
-                             {
-                                 Name = A.Dummy<string>(),
-                             });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
                 {
                     var availableTypes = new[]
                     {
                         typeof(AdjustTreeTableColumnSizeClientBehavior),
-                        typeof(SortTreeTableClientBehavior),
                         typeof(ConstrainTreeTableHeightClientBehavior),
                         typeof(GeneratePdfClientBehavior),
                         typeof(HandleLinkClickClientBehavior),
-                        typeof(ToggleTreeTableChildRowExpansionClientBehavior)
+                        typeof(SortTreeTableClientBehavior),
+                        typeof(ToggleTreeTableChildRowExpansionClientBehavior),
+                        typeof(TreeTableRowDependencyClientBehavior)
                     };
 
                     var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
@@ -89,7 +84,19 @@ namespace Vuescape.DotNet.Domain.Test
                              });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new SortTreeTableClientBehavior
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ToggleTreeTableChildRowExpansionClientBehavior
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTableRowDependencyClientBehavior
                              {
                                  Name = A.Dummy<string>(),
                              });
@@ -103,15 +110,11 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ColumnSorter(
                                  A.Dummy<string>(),
-                                 A.Dummy<SortDirection>()));
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new NullValueObject(
-                                 A.Dummy<string>()));
+                                 A.Dummy<SortDirection>(),
+                                 A.Dummy<SortComparisonStrategy>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Hover(
-                                 A.Dummy<string>(),
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
                                  A.Dummy<string>()));
@@ -144,6 +147,9 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTableCellValueObject());
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TreeTableHeaderCell(
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
@@ -162,7 +168,6 @@ namespace Vuescape.DotNet.Domain.Test
                 () => new TreeTableRow(
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<string>(),
                                  A.Dummy<int>(),
                                  A.Dummy<bool>(),
                                  A.Dummy<bool>(),
@@ -179,8 +184,11 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TreeTableRowDependency(
                                  A.Dummy<string>(),
-                                 A.Dummy<string>(),
+                                 A.Dummy<TreeTableRowDependencyClientBehavior>(),
                                  A.Dummy<IObject>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTableRowValueObject());
         }
 
         /// <inheritdoc />

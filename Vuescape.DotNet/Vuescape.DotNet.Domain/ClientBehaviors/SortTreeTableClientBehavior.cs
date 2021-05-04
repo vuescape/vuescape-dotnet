@@ -11,9 +11,9 @@ namespace Vuescape.DotNet.Domain
     using OBeautifulCode.Type;
 
     /// <summary>
-    /// Base class for all Client Actions.
+    /// A client behavior for advanced <see cref="TreeTable"/> sorting.
     /// </summary>
-    public partial class SortTreeTableClientBehavior : ClientBehaviorBase, IModelViaCodeGen
+    public partial class SortTreeTableClientBehavior : ClientBehaviorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SortTreeTableClientBehavior"/> class.

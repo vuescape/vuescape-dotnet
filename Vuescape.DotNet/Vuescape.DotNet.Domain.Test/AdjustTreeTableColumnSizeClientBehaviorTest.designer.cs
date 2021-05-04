@@ -105,11 +105,12 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<int>(),
                         A.Dummy<int?>(),
                         A.Dummy<Guid>(),
-                        A.Dummy<SortTreeTableClientBehavior>(),
                         A.Dummy<ConstrainTreeTableHeightClientBehavior>(),
                         A.Dummy<GeneratePdfClientBehavior>(),
                         A.Dummy<HandleLinkClickClientBehavior>(),
+                        A.Dummy<SortTreeTableClientBehavior>(),
                         A.Dummy<ToggleTreeTableChildRowExpansionClientBehavior>(),
+                        A.Dummy<TreeTableRowDependencyClientBehavior>(),
                     },
                 });
 

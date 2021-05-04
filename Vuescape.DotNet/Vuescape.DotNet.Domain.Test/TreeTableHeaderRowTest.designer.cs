@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TreeTableHeaderRow>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {systemUnderTest.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Items = {systemUnderTest.Cells?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {systemUnderTest.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {systemUnderTest.Cells?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -130,7 +130,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableHeaderRow>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'items' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'cells' is null scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<TreeTableHeaderRow>();
@@ -143,12 +143,12 @@ namespace Vuescape.DotNet.Domain.Test
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "items", },
+                    ExpectedExceptionMessageContains = new[] { "cells", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableHeaderRow>
                 {
-                    Name = "constructor should throw ArgumentException when parameter 'items' is an empty enumerable scenario",
+                    Name = "constructor should throw ArgumentException when parameter 'cells' is an empty enumerable scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<TreeTableHeaderRow>();
@@ -161,12 +161,12 @@ namespace Vuescape.DotNet.Domain.Test
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "items", "is an empty enumerable", },
+                    ExpectedExceptionMessageContains = new[] { "cells", "is an empty enumerable", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableHeaderRow>
                 {
-                    Name = "constructor should throw ArgumentException when parameter 'items' contains a null element scenario",
+                    Name = "constructor should throw ArgumentException when parameter 'cells' contains a null element scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<TreeTableHeaderRow>();
@@ -179,7 +179,7 @@ namespace Vuescape.DotNet.Domain.Test
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "items", "contains at least one null element", },
+                    ExpectedExceptionMessageContains = new[] { "cells", "contains at least one null element", },
                 });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<TreeTableHeaderRow> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TreeTableHeaderRow>()
@@ -228,7 +228,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<TreeTableHeaderRow>
                 {
-                    Name = "Items should return same 'items' parameter passed to constructor when getting",
+                    Name = "Cells should return same 'cells' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
                         var referenceObject = A.Dummy<TreeTableHeaderRow>();
@@ -244,7 +244,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
-                    PropertyName = "Items",
+                    PropertyName = "Cells",
                 });
 
         private static readonly DeepCloneWithTestScenarios<TreeTableHeaderRow> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TreeTableHeaderRow>()
@@ -291,8 +291,8 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<TreeTableHeaderRow>
                 {
-                    Name = "DeepCloneWithItems should deep clone object and replace Items with the provided items",
-                    WithPropertyName = "Items",
+                    Name = "DeepCloneWithCells should deep clone object and replace Cells with the provided cells",
+                    WithPropertyName = "Cells",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
                         var systemUnderTest = A.Dummy<TreeTableHeaderRow>();
@@ -638,7 +638,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "CssClasses", "Items" };
+                var propertyNames = new string[] { "Id", "CssClasses", "Cells" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

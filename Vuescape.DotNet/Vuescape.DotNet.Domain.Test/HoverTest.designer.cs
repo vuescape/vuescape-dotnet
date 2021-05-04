@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<Hover>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.Hover: Component = {systemUnderTest.Component?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Html = {systemUnderTest.Html?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {systemUnderTest.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.Hover: Html = {systemUnderTest.Html?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {systemUnderTest.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -58,51 +58,12 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<Hover>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'component' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<Hover>();
-
-                        var result = new Hover(
-                                             null,
-                                             referenceObject.Html,
-                                             referenceObject.Text,
-                                             referenceObject.Title);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "component", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<Hover>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'component' is white space scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<Hover>();
-
-                        var result = new Hover(
-                                             Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.Html,
-                                             referenceObject.Text,
-                                             referenceObject.Title);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "component", "white space", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<Hover>
-                {
                     Name = "constructor should throw ArgumentNullException when parameter 'html' is null scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<Hover>();
 
                         var result = new Hover(
-                                             referenceObject.Component,
                                              null,
                                              referenceObject.Text,
                                              referenceObject.Title);
@@ -121,7 +82,6 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<Hover>();
 
                         var result = new Hover(
-                                             referenceObject.Component,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Text,
                                              referenceObject.Title);
@@ -140,7 +100,6 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<Hover>();
 
                         var result = new Hover(
-                                             referenceObject.Component,
                                              referenceObject.Html,
                                              null,
                                              referenceObject.Title);
@@ -159,7 +118,6 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<Hover>();
 
                         var result = new Hover(
-                                             referenceObject.Component,
                                              referenceObject.Html,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Title);
@@ -178,7 +136,6 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<Hover>();
 
                         var result = new Hover(
-                                             referenceObject.Component,
                                              referenceObject.Html,
                                              referenceObject.Text,
                                              null);
@@ -197,7 +154,6 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<Hover>();
 
                         var result = new Hover(
-                                             referenceObject.Component,
                                              referenceObject.Html,
                                              referenceObject.Text,
                                              Invariant($"  {Environment.NewLine}  "));
@@ -212,28 +168,6 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<Hover>
                 {
-                    Name = "Component should return same 'component' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<Hover>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<Hover>
-                        {
-                            SystemUnderTest = new Hover(
-                                                      referenceObject.Component,
-                                                      referenceObject.Html,
-                                                      referenceObject.Text,
-                                                      referenceObject.Title),
-                            ExpectedPropertyValue = referenceObject.Component,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "Component",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<Hover>
-                {
                     Name = "Html should return same 'html' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
@@ -242,7 +176,6 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<Hover>
                         {
                             SystemUnderTest = new Hover(
-                                                      referenceObject.Component,
                                                       referenceObject.Html,
                                                       referenceObject.Text,
                                                       referenceObject.Title),
@@ -264,7 +197,6 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<Hover>
                         {
                             SystemUnderTest = new Hover(
-                                                      referenceObject.Component,
                                                       referenceObject.Html,
                                                       referenceObject.Text,
                                                       referenceObject.Title),
@@ -286,7 +218,6 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<Hover>
                         {
                             SystemUnderTest = new Hover(
-                                                      referenceObject.Component,
                                                       referenceObject.Html,
                                                       referenceObject.Text,
                                                       referenceObject.Title),
@@ -299,26 +230,6 @@ namespace Vuescape.DotNet.Domain.Test
                 });
 
         private static readonly DeepCloneWithTestScenarios<Hover> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<Hover>()
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<Hover>
-                {
-                    Name = "DeepCloneWithComponent should deep clone object and replace Component with the provided component",
-                    WithPropertyName = "Component",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<Hover>();
-
-                        var referenceObject = A.Dummy<Hover>().ThatIs(_ => !systemUnderTest.Component.IsEqualTo(_.Component));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<Hover>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Component,
-                        };
-
-                        return result;
-                    },
-                })
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<Hover>
                 {
@@ -391,7 +302,6 @@ namespace Vuescape.DotNet.Domain.Test
                     ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new Hover[]
                     {
                         new Hover(
-                                ReferenceObjectForEquatableTestScenarios.Component,
                                 ReferenceObjectForEquatableTestScenarios.Html,
                                 ReferenceObjectForEquatableTestScenarios.Text,
                                 ReferenceObjectForEquatableTestScenarios.Title),
@@ -399,22 +309,14 @@ namespace Vuescape.DotNet.Domain.Test
                     ObjectsThatAreNotEqualToReferenceObject = new Hover[]
                     {
                         new Hover(
-                                A.Dummy<Hover>().Whose(_ => !_.Component.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Component)).Component,
-                                ReferenceObjectForEquatableTestScenarios.Html,
-                                ReferenceObjectForEquatableTestScenarios.Text,
-                                ReferenceObjectForEquatableTestScenarios.Title),
-                        new Hover(
-                                ReferenceObjectForEquatableTestScenarios.Component,
                                 A.Dummy<Hover>().Whose(_ => !_.Html.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Html)).Html,
                                 ReferenceObjectForEquatableTestScenarios.Text,
                                 ReferenceObjectForEquatableTestScenarios.Title),
                         new Hover(
-                                ReferenceObjectForEquatableTestScenarios.Component,
                                 ReferenceObjectForEquatableTestScenarios.Html,
                                 A.Dummy<Hover>().Whose(_ => !_.Text.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Text)).Text,
                                 ReferenceObjectForEquatableTestScenarios.Title),
                         new Hover(
-                                ReferenceObjectForEquatableTestScenarios.Component,
                                 ReferenceObjectForEquatableTestScenarios.Html,
                                 ReferenceObjectForEquatableTestScenarios.Text,
                                 A.Dummy<Hover>().Whose(_ => !_.Title.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Title)).Title),
@@ -709,7 +611,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Component", "Html", "Text", "Title" };
+                var propertyNames = new string[] { "Html", "Text", "Title" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

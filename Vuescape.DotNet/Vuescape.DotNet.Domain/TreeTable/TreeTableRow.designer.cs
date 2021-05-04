@@ -69,7 +69,6 @@ namespace Vuescape.DotNet.Domain
             }
 
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
-                      && this.Name.IsEqualTo(other.Name, StringComparer.Ordinal)
                       && this.CssClasses.IsEqualTo(other.CssClasses, StringComparer.Ordinal)
                       && this.Depth.IsEqualTo(other.Depth)
                       && this.Dependencies.IsEqualTo(other.Dependencies)
@@ -93,7 +92,6 @@ namespace Vuescape.DotNet.Domain
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.Id)
-            .Hash(this.Name)
             .Hash(this.CssClasses)
             .Hash(this.Depth)
             .Hash(this.Dependencies)
@@ -117,7 +115,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -161,51 +158,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  id,
-                                 this.Name?.DeepClone(),
-                                 this.CssClasses?.DeepClone(),
-                                 this.Depth,
-                                 this.IsExpandable,
-                                 this.IsExpanded,
-                                 this.IsFocused,
-                                 this.IsSelected,
-                                 this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Renderer?.DeepClone(),
-                                 (IObject)DeepCloneInterface(this.Value),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Dependencies?.Select(i => i?.DeepClone()).ToList(),
-                                 this.Links?.ToDictionary(k => k.Key?.DeepClone(), v => (IReadOnlyCollection<Link>)v.Value?.Select(i2 => i2?.DeepClone()).ToList()));
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="Name" />.
-        /// </summary>
-        /// <param name="name">The new <see cref="Name" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTableRow" /> using the specified <paramref name="name" /> for <see cref="Name" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTableRow DeepCloneWithName(string name)
-        {
-            var result = new TreeTableRow(
-                                 this.Id?.DeepClone(),
-                                 name,
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -249,7 +201,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  cssClasses,
                                  this.Depth,
                                  this.IsExpandable,
@@ -293,7 +244,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  depth,
                                  this.IsExpandable,
@@ -337,7 +287,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -381,7 +330,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  isExpandable,
@@ -425,7 +373,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -469,7 +416,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -513,7 +459,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -557,7 +502,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -578,8 +522,8 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Deep clones this object with a new <see cref="Cells" />.
         /// </summary>
-        /// <param name="items">The new <see cref="Cells" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTableRow" /> using the specified <paramref name="items" /> for <see cref="Cells" /> and a deep clone of every other property.</returns>
+        /// <param name="cells">The new <see cref="Cells" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTableRow" /> using the specified <paramref name="cells" /> for <see cref="Cells" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -597,11 +541,10 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTableRow DeepCloneWithItems(IReadOnlyCollection<TreeTableCell> items)
+        public TreeTableRow DeepCloneWithCells(IReadOnlyCollection<TreeTableCell> cells)
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -609,7 +552,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)items,
+                                 (IReadOnlyList<TreeTableCell>)cells,
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -645,7 +588,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -689,7 +631,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -733,7 +674,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -777,7 +717,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 this.Name?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.Depth,
                                  this.IsExpandable,
@@ -847,7 +786,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Name = {this.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Depth = {this.Depth.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Dependencies = {this.Dependencies?.ToString() ?? "<null>"}, IsExpandable = {this.IsExpandable.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsExpanded = {this.IsExpanded.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsFocused = {this.IsFocused?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsSelected = {this.IsSelected.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {this.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Items = {this.Cells?.ToString() ?? "<null>"}, Renderer = {this.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Value = {this.Value?.ToString() ?? "<null>"}, Children = {this.Children?.ToString() ?? "<null>"}, Links = {this.Links?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Depth = {this.Depth.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Dependencies = {this.Dependencies?.ToString() ?? "<null>"}, IsExpandable = {this.IsExpandable.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsExpanded = {this.IsExpanded.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsFocused = {this.IsFocused?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsSelected = {this.IsSelected.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {this.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {this.Cells?.ToString() ?? "<null>"}, Renderer = {this.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Value = {this.Value?.ToString() ?? "<null>"}, Children = {this.Children?.ToString() ?? "<null>"}, Links = {this.Links?.ToString() ?? "<null>"}.");
 
             return result;
         }

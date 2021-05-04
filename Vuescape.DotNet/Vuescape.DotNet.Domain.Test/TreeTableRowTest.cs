@@ -38,7 +38,6 @@ namespace Vuescape.DotNet.Domain.Test
         {
             // Arrange
             var id = A.Dummy<string>();
-            var name = A.Dummy<string>();
             var cssClasses = A.Dummy<string>();
             var depth = A.Dummy<int>();
 
@@ -55,7 +54,7 @@ namespace Vuescape.DotNet.Domain.Test
             var children = A.Dummy<IReadOnlyList<TreeTableRow>>();
 
             // Act
-            var ex = Record.Exception(() => new TreeTableRow(id, name, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
+            var ex = Record.Exception(() => new TreeTableRow(id, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
 
             // Assert
             ex.AsTest().Must().BeNull();
@@ -66,7 +65,6 @@ namespace Vuescape.DotNet.Domain.Test
         {
             // Arrange
             string id = null;
-            var name = A.Dummy<string>();
             var cssClasses = A.Dummy<string>();
             var depth = A.Dummy<int>();
 
@@ -83,7 +81,7 @@ namespace Vuescape.DotNet.Domain.Test
             var children = A.Dummy<IReadOnlyList<TreeTableRow>>();
 
             // Act
-            var ex = Record.Exception(() => new TreeTableRow(id, name, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
+            var ex = Record.Exception(() => new TreeTableRow(id, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
 
             // Assert
             ex.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -112,7 +110,7 @@ namespace Vuescape.DotNet.Domain.Test
             var children = A.Dummy<IReadOnlyList<TreeTableRow>>();
 
             // Act
-            var ex = Record.Exception(() => new TreeTableRow(id, name, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
+            var ex = Record.Exception(() => new TreeTableRow(id, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
 
             // Assert
             ex.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -124,7 +122,6 @@ namespace Vuescape.DotNet.Domain.Test
         {
             // Arrange
             var id = A.Dummy<string>();
-            var name = A.Dummy<string>();
             var cssClasses = A.Dummy<string>();
             var depth = A.Dummy<int>();
 
@@ -141,7 +138,7 @@ namespace Vuescape.DotNet.Domain.Test
             var children = A.Dummy<IReadOnlyList<TreeTableRow>>();
 
             // Act
-            var ex = Record.Exception(() => new TreeTableRow(id, name, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
+            var ex = Record.Exception(() => new TreeTableRow(id, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
 
             // Assert
             ex.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -153,7 +150,6 @@ namespace Vuescape.DotNet.Domain.Test
         {
             // Arrange
             var id = A.Dummy<string>();
-            var name = A.Dummy<string>();
             var cssClasses = A.Dummy<string>();
             var depth = A.Dummy<int>();
 
@@ -170,7 +166,7 @@ namespace Vuescape.DotNet.Domain.Test
             var children = A.Dummy<IReadOnlyList<TreeTableRow>>();
 
             // Act
-            var ex = Record.Exception(() => new TreeTableRow(id, name, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
+            var ex = Record.Exception(() => new TreeTableRow(id, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
 
             // Assert
             ex.AsTest().Must().BeOfType<ArgumentException>();

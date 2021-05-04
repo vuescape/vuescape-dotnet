@@ -69,7 +69,7 @@ namespace Vuescape.DotNet.Domain
             }
 
             var result = this.TargetId.IsEqualTo(other.TargetId, StringComparer.Ordinal)
-                      && this.DependencyTypeName.IsEqualTo(other.DependencyTypeName, StringComparer.Ordinal)
+                      && this.TreeTableRowDependencyClientBehavior.IsEqualTo(other.TreeTableRowDependencyClientBehavior)
                       && this.Payload.IsEqualTo(other.Payload);
 
             return result;
@@ -81,7 +81,7 @@ namespace Vuescape.DotNet.Domain
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.TargetId)
-            .Hash(this.DependencyTypeName)
+            .Hash(this.TreeTableRowDependencyClientBehavior)
             .Hash(this.Payload)
             .Value;
 
@@ -93,7 +93,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRowDependency(
                                  this.TargetId?.DeepClone(),
-                                 this.DependencyTypeName?.DeepClone(),
+                                 this.TreeTableRowDependencyClientBehavior?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Payload));
 
             return result;
@@ -125,17 +125,17 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRowDependency(
                                  targetId,
-                                 this.DependencyTypeName?.DeepClone(),
+                                 this.TreeTableRowDependencyClientBehavior?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Payload));
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="DependencyTypeName" />.
+        /// Deep clones this object with a new <see cref="TreeTableRowDependencyClientBehavior" />.
         /// </summary>
-        /// <param name="dependencyTypeName">The new <see cref="DependencyTypeName" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTableRowDependency" /> using the specified <paramref name="dependencyTypeName" /> for <see cref="DependencyTypeName" /> and a deep clone of every other property.</returns>
+        /// <param name="treeTableRowDependencyClientBehavior">The new <see cref="TreeTableRowDependencyClientBehavior" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTableRowDependency" /> using the specified <paramref name="treeTableRowDependencyClientBehavior" /> for <see cref="TreeTableRowDependencyClientBehavior" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -153,11 +153,11 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTableRowDependency DeepCloneWithDependencyTypeName(string dependencyTypeName)
+        public TreeTableRowDependency DeepCloneWithTreeTableRowDependencyClientBehavior(TreeTableRowDependencyClientBehavior treeTableRowDependencyClientBehavior)
         {
             var result = new TreeTableRowDependency(
                                  this.TargetId?.DeepClone(),
-                                 dependencyTypeName,
+                                 treeTableRowDependencyClientBehavior,
                                  (IObject)DeepCloneInterface(this.Payload));
 
             return result;
@@ -189,7 +189,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRowDependency(
                                  this.TargetId?.DeepClone(),
-                                 this.DependencyTypeName?.DeepClone(),
+                                 this.TreeTableRowDependencyClientBehavior?.DeepClone(),
                                  payload);
 
             return result;
@@ -247,7 +247,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableRowDependency: TargetId = {this.TargetId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DependencyTypeName = {this.DependencyTypeName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Payload = {this.Payload?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableRowDependency: TargetId = {this.TargetId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, TreeTableRowDependencyClientBehavior = {this.TreeTableRowDependencyClientBehavior?.ToString() ?? "<null>"}, Payload = {this.Payload?.ToString() ?? "<null>"}.");
 
             return result;
         }

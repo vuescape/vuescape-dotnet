@@ -5,15 +5,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable once CheckNamespace
-
 namespace Vuescape.DotNet.Domain
 {
-    using OBeautifulCode.Type;
-
     /// <summary>
-    /// Base class for all Client Actions.
+    /// A client behavior to adjust <see cref="TreeTable"/> column sizes.
     /// </summary>
-    public partial class AdjustTreeTableColumnSizeClientBehavior : ClientBehaviorBase, IModelViaCodeGen
+    public partial class AdjustTreeTableColumnSizeClientBehavior : ClientBehaviorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AdjustTreeTableColumnSizeClientBehavior"/> class.

@@ -166,8 +166,8 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Deep clones this object with a new <see cref="Cells" />.
         /// </summary>
-        /// <param name="items">The new <see cref="Cells" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTableHeaderRow" /> using the specified <paramref name="items" /> for <see cref="Cells" /> and a deep clone of every other property.</returns>
+        /// <param name="cells">The new <see cref="Cells" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTableHeaderRow" /> using the specified <paramref name="cells" /> for <see cref="Cells" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -185,12 +185,12 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTableHeaderRow DeepCloneWithItems(IReadOnlyList<TreeTableHeaderCell> items)
+        public TreeTableHeaderRow DeepCloneWithCells(IReadOnlyList<TreeTableHeaderCell> cells)
         {
             var result = new TreeTableHeaderRow(
                                  this.Id?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 items);
+                                 cells);
 
             return result;
         }
@@ -199,7 +199,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Items = {this.Cells?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {this.Cells?.ToString() ?? "<null>"}.");
 
             return result;
         }

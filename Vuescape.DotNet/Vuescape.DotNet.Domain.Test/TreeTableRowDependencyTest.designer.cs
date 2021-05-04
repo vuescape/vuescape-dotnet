@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TreeTableRowDependency>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableRowDependency: TargetId = {systemUnderTest.TargetId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DependencyTypeName = {systemUnderTest.DependencyTypeName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Payload = {systemUnderTest.Payload?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableRowDependency: TargetId = {systemUnderTest.TargetId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, TreeTableRowDependencyClientBehavior = {systemUnderTest.TreeTableRowDependencyClientBehavior?.ToString() ?? "<null>"}, Payload = {systemUnderTest.Payload?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -65,7 +65,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRowDependency(
                                              null,
-                                             referenceObject.DependencyTypeName,
+                                             referenceObject.TreeTableRowDependencyClientBehavior,
                                              referenceObject.Payload);
 
                         return result;
@@ -83,7 +83,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRowDependency(
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.DependencyTypeName,
+                                             referenceObject.TreeTableRowDependencyClientBehavior,
                                              referenceObject.Payload);
 
                         return result;
@@ -94,7 +94,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableRowDependency>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'dependencyTypeName' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'treeTableRowDependencyClientBehavior' is null scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<TreeTableRowDependency>();
@@ -107,25 +107,7 @@ namespace Vuescape.DotNet.Domain.Test
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "dependencyTypeName", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTableRowDependency>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'dependencyTypeName' is white space scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTableRowDependency>();
-
-                        var result = new TreeTableRowDependency(
-                                             referenceObject.TargetId,
-                                             Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.Payload);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "dependencyTypeName", "white space", },
+                    ExpectedExceptionMessageContains = new[] { "treeTableRowDependencyClientBehavior", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableRowDependency>
@@ -137,7 +119,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRowDependency(
                                              referenceObject.TargetId,
-                                             referenceObject.DependencyTypeName,
+                                             referenceObject.TreeTableRowDependencyClientBehavior,
                                              null);
 
                         return result;
@@ -159,7 +141,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRowDependency(
                                                       referenceObject.TargetId,
-                                                      referenceObject.DependencyTypeName,
+                                                      referenceObject.TreeTableRowDependencyClientBehavior,
                                                       referenceObject.Payload),
                             ExpectedPropertyValue = referenceObject.TargetId,
                         };
@@ -171,7 +153,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<TreeTableRowDependency>
                 {
-                    Name = "DependencyTypeName should return same 'dependencyTypeName' parameter passed to constructor when getting",
+                    Name = "TreeTableRowDependencyClientBehavior should return same 'treeTableRowDependencyClientBehavior' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
                         var referenceObject = A.Dummy<TreeTableRowDependency>();
@@ -180,14 +162,14 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRowDependency(
                                                       referenceObject.TargetId,
-                                                      referenceObject.DependencyTypeName,
+                                                      referenceObject.TreeTableRowDependencyClientBehavior,
                                                       referenceObject.Payload),
-                            ExpectedPropertyValue = referenceObject.DependencyTypeName,
+                            ExpectedPropertyValue = referenceObject.TreeTableRowDependencyClientBehavior,
                         };
 
                         return result;
                     },
-                    PropertyName = "DependencyTypeName",
+                    PropertyName = "TreeTableRowDependencyClientBehavior",
                 })
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<TreeTableRowDependency>
@@ -201,7 +183,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRowDependency(
                                                       referenceObject.TargetId,
-                                                      referenceObject.DependencyTypeName,
+                                                      referenceObject.TreeTableRowDependencyClientBehavior,
                                                       referenceObject.Payload),
                             ExpectedPropertyValue = referenceObject.Payload,
                         };
@@ -235,18 +217,18 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<TreeTableRowDependency>
                 {
-                    Name = "DeepCloneWithDependencyTypeName should deep clone object and replace DependencyTypeName with the provided dependencyTypeName",
-                    WithPropertyName = "DependencyTypeName",
+                    Name = "DeepCloneWithTreeTableRowDependencyClientBehavior should deep clone object and replace TreeTableRowDependencyClientBehavior with the provided treeTableRowDependencyClientBehavior",
+                    WithPropertyName = "TreeTableRowDependencyClientBehavior",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
                         var systemUnderTest = A.Dummy<TreeTableRowDependency>();
 
-                        var referenceObject = A.Dummy<TreeTableRowDependency>().ThatIs(_ => !systemUnderTest.DependencyTypeName.IsEqualTo(_.DependencyTypeName));
+                        var referenceObject = A.Dummy<TreeTableRowDependency>().ThatIs(_ => !systemUnderTest.TreeTableRowDependencyClientBehavior.IsEqualTo(_.TreeTableRowDependencyClientBehavior));
 
                         var result = new SystemUnderTestDeepCloneWithValue<TreeTableRowDependency>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.DependencyTypeName,
+                            DeepCloneWithValue = referenceObject.TreeTableRowDependencyClientBehavior,
                         };
 
                         return result;
@@ -285,22 +267,22 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new TreeTableRowDependency(
                                 ReferenceObjectForEquatableTestScenarios.TargetId,
-                                ReferenceObjectForEquatableTestScenarios.DependencyTypeName,
+                                ReferenceObjectForEquatableTestScenarios.TreeTableRowDependencyClientBehavior,
                                 ReferenceObjectForEquatableTestScenarios.Payload),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TreeTableRowDependency[]
                     {
                         new TreeTableRowDependency(
                                 A.Dummy<TreeTableRowDependency>().Whose(_ => !_.TargetId.IsEqualTo(ReferenceObjectForEquatableTestScenarios.TargetId)).TargetId,
-                                ReferenceObjectForEquatableTestScenarios.DependencyTypeName,
+                                ReferenceObjectForEquatableTestScenarios.TreeTableRowDependencyClientBehavior,
                                 ReferenceObjectForEquatableTestScenarios.Payload),
                         new TreeTableRowDependency(
                                 ReferenceObjectForEquatableTestScenarios.TargetId,
-                                A.Dummy<TreeTableRowDependency>().Whose(_ => !_.DependencyTypeName.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DependencyTypeName)).DependencyTypeName,
+                                A.Dummy<TreeTableRowDependency>().Whose(_ => !_.TreeTableRowDependencyClientBehavior.IsEqualTo(ReferenceObjectForEquatableTestScenarios.TreeTableRowDependencyClientBehavior)).TreeTableRowDependencyClientBehavior,
                                 ReferenceObjectForEquatableTestScenarios.Payload),
                         new TreeTableRowDependency(
                                 ReferenceObjectForEquatableTestScenarios.TargetId,
-                                ReferenceObjectForEquatableTestScenarios.DependencyTypeName,
+                                ReferenceObjectForEquatableTestScenarios.TreeTableRowDependencyClientBehavior,
                                 A.Dummy<TreeTableRowDependency>().Whose(_ => !_.Payload.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Payload)).Payload),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
@@ -576,6 +558,15 @@ namespace Vuescape.DotNet.Domain.Test
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
 
+                if (systemUnderTest.TreeTableRowDependencyClientBehavior == null)
+                {
+                    actual.TreeTableRowDependencyClientBehavior.AsTest().Must().BeNull();
+                }
+                else
+                {
+                    actual.TreeTableRowDependencyClientBehavior.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.TreeTableRowDependencyClientBehavior);
+                }
+
                 if (systemUnderTest.Payload == null)
                 {
                     actual.Payload.AsTest().Must().BeNull();
@@ -602,7 +593,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "TargetId", "DependencyTypeName", "Payload" };
+                var propertyNames = new string[] { "TargetId", "TreeTableRowDependencyClientBehavior", "Payload" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

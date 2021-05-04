@@ -22,15 +22,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class NullValueObject : IModel<NullValueObject>
+    public partial class TreeTableRowDependencyClientBehavior : IModel<TreeTableRowDependencyClientBehavior>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="NullValueObject"/> are equal.
+        /// Determines whether two objects of type <see cref="TreeTableRowDependencyClientBehavior"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(NullValueObject left, NullValueObject right)
+        public static bool operator ==(TreeTableRowDependencyClientBehavior left, TreeTableRowDependencyClientBehavior right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -48,15 +48,15 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="NullValueObject"/> are not equal.
+        /// Determines whether two objects of type <see cref="TreeTableRowDependencyClientBehavior"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(NullValueObject left, NullValueObject right) => !(left == right);
+        public static bool operator !=(TreeTableRowDependencyClientBehavior left, TreeTableRowDependencyClientBehavior right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(NullValueObject other)
+        public bool Equals(TreeTableRowDependencyClientBehavior other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -68,36 +68,23 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = this.Dummy.IsEqualTo(other.Dummy, StringComparer.Ordinal);
+            var result = this.Name.IsEqualTo(other.Name, StringComparer.Ordinal);
 
             return result;
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as NullValueObject);
+        public override bool Equals(object obj) => this == (obj as TreeTableRowDependencyClientBehavior);
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
-            .Hash(this.Dummy)
+            .Hash(this.Name)
             .Value;
 
         /// <inheritdoc />
-        public object Clone() => this.DeepClone();
+        public new TreeTableRowDependencyClientBehavior DeepClone() => (TreeTableRowDependencyClientBehavior)this.DeepCloneInternal();
 
         /// <inheritdoc />
-        public NullValueObject DeepClone()
-        {
-            var result = new NullValueObject(
-                                 this.Dummy?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="Dummy" />.
-        /// </summary>
-        /// <param name="dummy">The new <see cref="Dummy" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="NullValueObject" /> using the specified <paramref name="dummy" /> for <see cref="Dummy" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -115,10 +102,24 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public NullValueObject DeepCloneWithDummy(string dummy)
+        public override ClientBehaviorBase DeepCloneWithName(string name)
         {
-            var result = new NullValueObject(
-                                 dummy);
+            var result = new TreeTableRowDependencyClientBehavior
+                             {
+                                 Name = name,
+                             };
+
+            return result;
+        }
+
+        /// <inheritdoc />
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        protected override ClientBehaviorBase DeepCloneInternal()
+        {
+            var result = new TreeTableRowDependencyClientBehavior
+                             {
+                                 Name = this.Name?.DeepClone(),
+                             };
 
             return result;
         }
@@ -127,7 +128,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.NullValueObject: Dummy = {this.Dummy?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableRowDependencyClientBehavior: Name = {this.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

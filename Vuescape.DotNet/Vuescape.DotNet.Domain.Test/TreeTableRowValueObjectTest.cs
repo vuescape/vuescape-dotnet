@@ -19,14 +19,12 @@ namespace Vuescape.DotNet.Domain.Test
     using static System.FormattableString;
 
     [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = ObcSuppressBecause.CA1505_AvoidUnmaintainableCode_DisagreeWithAssessment)]
-    public static partial class NullValueObjectTest
+    public static partial class TreeTableRowValueObjectTest
     {
         [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = ObcSuppressBecause.CA1505_AvoidUnmaintainableCode_DisagreeWithAssessment)]
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
-        static NullValueObjectTest()
+        static TreeTableRowValueObjectTest()
         {
-            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios()
-                .AddScenario(ConstructorArgumentValidationTestScenario<NullValueObject>.ConstructorCannotThrowScenario);
         }
     }
 }

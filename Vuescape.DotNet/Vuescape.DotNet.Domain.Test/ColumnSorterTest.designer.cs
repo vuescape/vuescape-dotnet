@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ColumnSorter>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ColumnSorter: SortByCellId = {systemUnderTest.SortByCellId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, SortDirection = {systemUnderTest.SortDirection.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ColumnSorter: SortByCellId = {systemUnderTest.SortByCellId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, SortDirection = {systemUnderTest.SortDirection.ToString() ?? "<null>"}, SortComparisonStrategy = {systemUnderTest.SortComparisonStrategy.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -65,7 +65,8 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new ColumnSorter(
                                              null,
-                                             referenceObject.SortDirection);
+                                             referenceObject.SortDirection,
+                                             referenceObject.SortComparisonStrategy);
 
                         return result;
                     },
@@ -82,7 +83,8 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new ColumnSorter(
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.SortDirection);
+                                             referenceObject.SortDirection,
+                                             referenceObject.SortComparisonStrategy);
 
                         return result;
                     },
@@ -103,7 +105,8 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new ColumnSorter(
                                                       referenceObject.SortByCellId,
-                                                      referenceObject.SortDirection),
+                                                      referenceObject.SortDirection,
+                                                      referenceObject.SortComparisonStrategy),
                             ExpectedPropertyValue = referenceObject.SortByCellId,
                         };
 
@@ -123,13 +126,35 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new ColumnSorter(
                                                       referenceObject.SortByCellId,
-                                                      referenceObject.SortDirection),
+                                                      referenceObject.SortDirection,
+                                                      referenceObject.SortComparisonStrategy),
                             ExpectedPropertyValue = referenceObject.SortDirection,
                         };
 
                         return result;
                     },
                     PropertyName = "SortDirection",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ColumnSorter>
+                {
+                    Name = "SortComparisonStrategy should return same 'sortComparisonStrategy' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ColumnSorter>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ColumnSorter>
+                        {
+                            SystemUnderTest = new ColumnSorter(
+                                                      referenceObject.SortByCellId,
+                                                      referenceObject.SortDirection,
+                                                      referenceObject.SortComparisonStrategy),
+                            ExpectedPropertyValue = referenceObject.SortComparisonStrategy,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "SortComparisonStrategy",
                 });
 
         private static readonly DeepCloneWithTestScenarios<ColumnSorter> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ColumnSorter>()
@@ -172,6 +197,26 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ColumnSorter>
+                {
+                    Name = "DeepCloneWithSortComparisonStrategy should deep clone object and replace SortComparisonStrategy with the provided sortComparisonStrategy",
+                    WithPropertyName = "SortComparisonStrategy",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ColumnSorter>();
+
+                        var referenceObject = A.Dummy<ColumnSorter>().ThatIs(_ => !systemUnderTest.SortComparisonStrategy.IsEqualTo(_.SortComparisonStrategy));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ColumnSorter>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.SortComparisonStrategy,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly ColumnSorter ReferenceObjectForEquatableTestScenarios = A.Dummy<ColumnSorter>();
@@ -186,16 +231,23 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new ColumnSorter(
                                 ReferenceObjectForEquatableTestScenarios.SortByCellId,
-                                ReferenceObjectForEquatableTestScenarios.SortDirection),
+                                ReferenceObjectForEquatableTestScenarios.SortDirection,
+                                ReferenceObjectForEquatableTestScenarios.SortComparisonStrategy),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new ColumnSorter[]
                     {
                         new ColumnSorter(
                                 A.Dummy<ColumnSorter>().Whose(_ => !_.SortByCellId.IsEqualTo(ReferenceObjectForEquatableTestScenarios.SortByCellId)).SortByCellId,
-                                ReferenceObjectForEquatableTestScenarios.SortDirection),
+                                ReferenceObjectForEquatableTestScenarios.SortDirection,
+                                ReferenceObjectForEquatableTestScenarios.SortComparisonStrategy),
                         new ColumnSorter(
                                 ReferenceObjectForEquatableTestScenarios.SortByCellId,
-                                A.Dummy<ColumnSorter>().Whose(_ => !_.SortDirection.IsEqualTo(ReferenceObjectForEquatableTestScenarios.SortDirection)).SortDirection),
+                                A.Dummy<ColumnSorter>().Whose(_ => !_.SortDirection.IsEqualTo(ReferenceObjectForEquatableTestScenarios.SortDirection)).SortDirection,
+                                ReferenceObjectForEquatableTestScenarios.SortComparisonStrategy),
+                        new ColumnSorter(
+                                ReferenceObjectForEquatableTestScenarios.SortByCellId,
+                                ReferenceObjectForEquatableTestScenarios.SortDirection,
+                                A.Dummy<ColumnSorter>().Whose(_ => !_.SortComparisonStrategy.IsEqualTo(ReferenceObjectForEquatableTestScenarios.SortComparisonStrategy)).SortComparisonStrategy),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -487,7 +539,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "SortByCellId", "SortDirection" };
+                var propertyNames = new string[] { "SortByCellId", "SortDirection", "SortComparisonStrategy" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

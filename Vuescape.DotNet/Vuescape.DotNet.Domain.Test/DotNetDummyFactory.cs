@@ -47,7 +47,6 @@ namespace Vuescape.DotNet.Domain.Test
                             children.Add(new TreeTableRow(
                                 A.Dummy<string>(),
                                 A.Dummy<string>(),
-                                A.Dummy<string>(),
                                 A.Dummy<int>(),
                                 A.Dummy<bool>(),
                                 A.Dummy<bool>(),
@@ -71,7 +70,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 grandChildren.Add(new TreeTableRow(
                                     A.Dummy<string>(),
                                     A.Dummy<string>(),
-                                    A.Dummy<string>(),
                                     A.Dummy<int>(),
                                     A.Dummy<bool>(),
                                     A.Dummy<bool>(),
@@ -87,7 +85,6 @@ namespace Vuescape.DotNet.Domain.Test
                             }
 
                             children.Add(new TreeTableRow(
-                                A.Dummy<string>(),
                                 A.Dummy<string>(),
                                 A.Dummy<string>(),
                                 A.Dummy<int>(),
@@ -108,7 +105,6 @@ namespace Vuescape.DotNet.Domain.Test
                     return new TreeTableRow(
                        A.Dummy<string>(),
                        A.Dummy<string>(),
-                       A.Dummy<string>(),
                        A.Dummy<int>(),
                        A.Dummy<bool>(),
                        A.Dummy<bool>(),
@@ -123,8 +119,8 @@ namespace Vuescape.DotNet.Domain.Test
                        A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>());
                 });
 
-            AutoFixtureBackedDummyFactory.AddDummyCreator<IObject>(() => new NullValueObject(A.Dummy<string>()));
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(LinkTargetKind.None);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(SortComparisonStrategy.None);
         }
     }
 }

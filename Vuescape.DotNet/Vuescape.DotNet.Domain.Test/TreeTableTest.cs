@@ -95,7 +95,7 @@ namespace Vuescape.DotNet.Domain.Test
             var headers = new List<TreeTableHeaderRow>();
             var items = new List<TreeTableHeaderCell>
             {
-                new TreeTableHeaderCell("entityName", string.Empty, 1, new ColumnSorter("entityName", SortDirection.Ascending), null, "Active Accounts"),
+                new TreeTableHeaderCell("entityName", string.Empty, 1, new ColumnSorter("entityName", SortDirection.Ascending, SortComparisonStrategy.StringCaseInsensitive), null, "Active Accounts"),
             };
 
             for (var i = startingYear; i < startingYear + numberOfPeriods; i++)
@@ -125,7 +125,7 @@ namespace Vuescape.DotNet.Domain.Test
                     TreeTableCells.Add(TreeTableCell);
                 }
 
-                var row = new TreeTableRow("entityName-" + entityName, "entityName", string.Empty, 0, false, false, null, false, true, TreeTableCells, RowRenderer.DataRowRenderer, null, null);
+                var row = new TreeTableRow("entityName-" + entityName, string.Empty, 0, false, false, null, false, true, TreeTableCells, RowRenderer.DataRowRenderer, null, null);
                 rows.Add(row);
             }
 

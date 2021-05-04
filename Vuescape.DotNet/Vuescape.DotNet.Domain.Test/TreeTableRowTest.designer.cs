@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TreeTableRow>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableRow: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Name = {systemUnderTest.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {systemUnderTest.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Depth = {systemUnderTest.Depth.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Dependencies = {systemUnderTest.Dependencies?.ToString() ?? "<null>"}, IsExpandable = {systemUnderTest.IsExpandable.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsExpanded = {systemUnderTest.IsExpanded.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsFocused = {systemUnderTest.IsFocused?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsSelected = {systemUnderTest.IsSelected.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {systemUnderTest.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Items = {systemUnderTest.Cells?.ToString() ?? "<null>"}, Renderer = {systemUnderTest.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Value = {systemUnderTest.Value?.ToString() ?? "<null>"}, Children = {systemUnderTest.Children?.ToString() ?? "<null>"}, Links = {systemUnderTest.Links?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableRow: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {systemUnderTest.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Depth = {systemUnderTest.Depth.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Dependencies = {systemUnderTest.Dependencies?.ToString() ?? "<null>"}, IsExpandable = {systemUnderTest.IsExpandable.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsExpanded = {systemUnderTest.IsExpanded.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsFocused = {systemUnderTest.IsFocused?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsSelected = {systemUnderTest.IsSelected.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {systemUnderTest.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {systemUnderTest.Cells?.ToString() ?? "<null>"}, Renderer = {systemUnderTest.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Value = {systemUnderTest.Value?.ToString() ?? "<null>"}, Children = {systemUnderTest.Children?.ToString() ?? "<null>"}, Links = {systemUnderTest.Links?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -65,7 +65,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              null,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -95,7 +94,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -118,66 +116,6 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableRow>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'name' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTableRow>();
-
-                        var result = new TreeTableRow(
-                                             referenceObject.Id,
-                                             null,
-                                             referenceObject.CssClasses,
-                                             referenceObject.Depth,
-                                             referenceObject.IsExpandable,
-                                             referenceObject.IsExpanded,
-                                             referenceObject.IsFocused,
-                                             referenceObject.IsSelected,
-                                             referenceObject.IsVisible,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
-                                             referenceObject.Renderer,
-                                             referenceObject.Value,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children,
-                                             referenceObject.Dependencies,
-                                             referenceObject.Links);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "name", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTableRow>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'name' is white space scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTableRow>();
-
-                        var result = new TreeTableRow(
-                                             referenceObject.Id,
-                                             Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.CssClasses,
-                                             referenceObject.Depth,
-                                             referenceObject.IsExpandable,
-                                             referenceObject.IsExpanded,
-                                             referenceObject.IsFocused,
-                                             referenceObject.IsSelected,
-                                             referenceObject.IsVisible,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
-                                             referenceObject.Renderer,
-                                             referenceObject.Value,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children,
-                                             referenceObject.Dependencies,
-                                             referenceObject.Links);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "name", "white space", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTableRow>
-                {
                     Name = "constructor should throw ArgumentNullException when parameter 'cssClasses' is null scenario",
                     ConstructionFunc = () =>
                     {
@@ -185,7 +123,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              null,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -215,7 +152,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -238,14 +174,13 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableRow>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'items' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'cells' is null scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<TreeTableRow>();
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -263,19 +198,18 @@ namespace Vuescape.DotNet.Domain.Test
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "items", },
+                    ExpectedExceptionMessageContains = new[] { "cells", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableRow>
                 {
-                    Name = "constructor should throw ArgumentException when parameter 'items' is an empty enumerable scenario",
+                    Name = "constructor should throw ArgumentException when parameter 'cells' is an empty enumerable scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<TreeTableRow>();
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -293,19 +227,18 @@ namespace Vuescape.DotNet.Domain.Test
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "items", "is an empty enumerable", },
+                    ExpectedExceptionMessageContains = new[] { "cells", "is an empty enumerable", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableRow>
                 {
-                    Name = "constructor should throw ArgumentException when parameter 'items' contains a null element scenario",
+                    Name = "constructor should throw ArgumentException when parameter 'cells' contains a null element scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<TreeTableRow>();
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -323,7 +256,7 @@ namespace Vuescape.DotNet.Domain.Test
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "items", "contains at least one null element", },
+                    ExpectedExceptionMessageContains = new[] { "cells", "contains at least one null element", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableRow>
@@ -335,7 +268,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -365,7 +297,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -395,7 +326,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -425,7 +355,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -455,7 +384,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -485,7 +413,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -515,7 +442,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -545,7 +471,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -575,7 +500,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -605,7 +529,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -635,7 +558,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -671,7 +593,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             referenceObject.Name,
                                              referenceObject.CssClasses,
                                              referenceObject.Depth,
                                              referenceObject.IsExpandable,
@@ -705,7 +626,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -729,39 +649,6 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<TreeTableRow>
                 {
-                    Name = "Name should return same 'name' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTableRow>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableRow>
-                        {
-                            SystemUnderTest = new TreeTableRow(
-                                                      referenceObject.Id,
-                                                      referenceObject.Name,
-                                                      referenceObject.CssClasses,
-                                                      referenceObject.Depth,
-                                                      referenceObject.IsExpandable,
-                                                      referenceObject.IsExpanded,
-                                                      referenceObject.IsFocused,
-                                                      referenceObject.IsSelected,
-                                                      referenceObject.IsVisible,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
-                                                      referenceObject.Renderer,
-                                                      referenceObject.Value,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children,
-                                                      referenceObject.Dependencies,
-                                                      referenceObject.Links),
-                            ExpectedPropertyValue = referenceObject.Name,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "Name",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TreeTableRow>
-                {
                     Name = "CssClasses should return same 'cssClasses' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
@@ -771,7 +658,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -804,7 +690,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -837,7 +722,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -870,7 +754,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -903,7 +786,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -936,7 +818,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -969,7 +850,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -993,7 +873,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<TreeTableRow>
                 {
-                    Name = "Items should return same 'items' parameter passed to constructor when getting",
+                    Name = "Cells should return same 'cells' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
                         var referenceObject = A.Dummy<TreeTableRow>();
@@ -1002,7 +882,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -1021,7 +900,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
-                    PropertyName = "Items",
+                    PropertyName = "Cells",
                 })
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<TreeTableRow>
@@ -1035,7 +914,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -1068,7 +946,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -1101,7 +978,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -1134,7 +1010,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -1167,7 +1042,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Name,
                                                       referenceObject.CssClasses,
                                                       referenceObject.Depth,
                                                       referenceObject.IsExpandable,
@@ -1205,26 +1079,6 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = systemUnderTest,
                             DeepCloneWithValue = referenceObject.Id,
-                        };
-
-                        return result;
-                    },
-                })
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<TreeTableRow>
-                {
-                    Name = "DeepCloneWithName should deep clone object and replace Name with the provided name",
-                    WithPropertyName = "Name",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<TreeTableRow>();
-
-                        var referenceObject = A.Dummy<TreeTableRow>().ThatIs(_ => !systemUnderTest.Name.IsEqualTo(_.Name));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableRow>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Name,
                         };
 
                         return result;
@@ -1393,8 +1247,8 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<TreeTableRow>
                 {
-                    Name = "DeepCloneWithItems should deep clone object and replace Items with the provided items",
-                    WithPropertyName = "Items",
+                    Name = "DeepCloneWithCells should deep clone object and replace Cells with the provided cells",
+                    WithPropertyName = "Cells",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
                         var systemUnderTest = A.Dummy<TreeTableRow>();
@@ -1503,7 +1357,6 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1522,7 +1375,6 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new TreeTableRow(
                                 A.Dummy<TreeTableRow>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1538,23 +1390,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                A.Dummy<TreeTableRow>().Whose(_ => !_.Name.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Name)).Name,
-                                ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.Depth,
-                                ReferenceObjectForEquatableTestScenarios.IsExpandable,
-                                ReferenceObjectForEquatableTestScenarios.IsExpanded,
-                                ReferenceObjectForEquatableTestScenarios.IsFocused,
-                                ReferenceObjectForEquatableTestScenarios.IsSelected,
-                                ReferenceObjectForEquatableTestScenarios.IsVisible,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
-                                ReferenceObjectForEquatableTestScenarios.Renderer,
-                                ReferenceObjectForEquatableTestScenarios.Value,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children,
-                                ReferenceObjectForEquatableTestScenarios.Dependencies,
-                                ReferenceObjectForEquatableTestScenarios.Links),
-                        new TreeTableRow(
-                                ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 A.Dummy<TreeTableRow>().Whose(_ => !_.CssClasses.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssClasses)).CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1570,7 +1405,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 A.Dummy<TreeTableRow>().Whose(_ => !_.Depth.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Depth)).Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1586,7 +1420,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1602,7 +1435,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 A.Dummy<TreeTableRow>().Whose(_ => !_.IsExpandable.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsExpandable)).IsExpandable,
@@ -1618,7 +1450,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1634,7 +1465,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1650,7 +1480,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1666,7 +1495,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1682,7 +1510,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1698,7 +1525,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1714,7 +1540,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1730,7 +1555,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -1746,7 +1570,6 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Name,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.IsExpandable,
@@ -2096,7 +1919,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Name", "CssClasses", "Depth", "Dependencies", "IsExpandable", "IsExpanded", "IsFocused", "IsSelected", "IsVisible", "Items", "Renderer", "Value", "Children", "Links" };
+                var propertyNames = new string[] { "Id", "CssClasses", "Depth", "Dependencies", "IsExpandable", "IsExpanded", "IsFocused", "IsSelected", "IsVisible", "Cells", "Renderer", "Value", "Children", "Links" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

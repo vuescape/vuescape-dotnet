@@ -5,15 +5,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable once CheckNamespace
-
 namespace Vuescape.DotNet.Domain
 {
-    using OBeautifulCode.Type;
-
     /// <summary>
-    /// Behavior to add expand/collapse toggle of child rows.
+    /// A client behavior to add expand/collapse toggle of <see cref="TreeTable"/> child <see cref="TreeTableRow"/>s.
     /// </summary>
-    public partial class ToggleTreeTableChildRowExpansionClientBehavior : ClientBehaviorBase, IModelViaCodeGen
+    public partial class ToggleTreeTableChildRowExpansionClientBehavior : ClientBehaviorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ToggleTreeTableChildRowExpansionClientBehavior"/> class.

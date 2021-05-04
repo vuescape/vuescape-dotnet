@@ -11,9 +11,9 @@ namespace Vuescape.DotNet.Domain
     using OBeautifulCode.Type;
 
     /// <summary>
-    /// Behavior to generate PDF.
+    /// A client behavior to create a PDF.
     /// </summary>
-    public partial class GeneratePdfClientBehavior : ClientBehaviorBase, IModelViaCodeGen
+    public partial class GeneratePdfClientBehavior : ClientBehaviorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GeneratePdfClientBehavior"/> class.

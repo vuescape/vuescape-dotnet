@@ -20,7 +20,6 @@ namespace Vuescape.DotNet.Domain
         /// Initializes a new instance of the <see cref="TreeTableRow"/> class.
         /// </summary>
         /// <param name="id">The unique identifier.</param>
-        /// <param name="name">The name.</param>
         /// <param name="cssClasses">The CSS classes.</param>
         /// <param name="depth">The depth of the row in the tree.</param>
         /// <param name="dependencies">The dependencies.</param>
@@ -36,7 +35,6 @@ namespace Vuescape.DotNet.Domain
         /// <param name="links">The links for this row.</param>
         public TreeTableRow(
             string id,
-            string name,
             string cssClasses,
             int depth,
             bool isExpandable,
@@ -52,11 +50,9 @@ namespace Vuescape.DotNet.Domain
             IReadOnlyDictionary<string, IReadOnlyCollection<Link>> links = null)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { name }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { cells }.AsArg().Must().NotBeNullNorEmptyEnumerable();
 
             this.Id = id;
-            this.Name = name;
             this.CssClasses = cssClasses;
             this.Depth = depth;
             this.Dependencies = dependencies;
@@ -76,11 +72,6 @@ namespace Vuescape.DotNet.Domain
         /// Gets the Id.
         /// </summary>
         public string Id { get; private set; }
-
-        /// <summary>
-        /// Gets the name for this row.
-        /// </summary>
-        public string Name { get; private set; }
 
         /// <summary>
         /// Gets the CssClasses. // TODO: Collection or string.

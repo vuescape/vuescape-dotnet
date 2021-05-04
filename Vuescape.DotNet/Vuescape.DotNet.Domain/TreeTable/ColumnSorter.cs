@@ -4,6 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+// ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
     using OBeautifulCode.Assertion.Recipes;
@@ -19,14 +20,18 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="sortByCellId">The cell ID to sort by.</param>
         /// <param name="sortDirection">The sort direction.</param>
+        /// <param name="sortComparisonStrategy">The sort comparison strategy to use.</param>
         public ColumnSorter(
             string sortByCellId,
-            SortDirection sortDirection)
+            SortDirection sortDirection,
+            SortComparisonStrategy sortComparisonStrategy)
         {
             new { sortByCellId }.AsArg().Must().NotBeNullNorWhiteSpace();
+            new { sortComparisonStrategy }.AsArg().Must().NotBeEqualTo(SortComparisonStrategy.None);
 
             this.SortByCellId = sortByCellId;
             this.SortDirection = sortDirection;
+            this.SortComparisonStrategy = sortComparisonStrategy;
         }
 
         /// <summary>
@@ -38,5 +43,10 @@ namespace Vuescape.DotNet.Domain
         /// Gets the sort direction.
         /// </summary>
         public SortDirection SortDirection { get; private set; }
+
+        /// <summary>
+        /// Gets the sort comparison strategy.
+        /// </summary>
+        public SortComparisonStrategy SortComparisonStrategy { get; private set; }
     }
 }

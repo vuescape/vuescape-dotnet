@@ -78,7 +78,7 @@ namespace Vuescape.DotNet.Domain
                       && this.IsFocused.IsEqualTo(other.IsFocused)
                       && this.IsSelected.IsEqualTo(other.IsSelected)
                       && this.IsVisible.IsEqualTo(other.IsVisible)
-                      && this.Items.IsEqualTo(other.Items)
+                      && this.Cells.IsEqualTo(other.Cells)
                       && this.Renderer.IsEqualTo(other.Renderer, StringComparer.Ordinal)
                       && this.Value.IsEqualTo(other.Value)
                       && this.Children.IsEqualTo(other.Children)
@@ -102,7 +102,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.IsFocused)
             .Hash(this.IsSelected)
             .Hash(this.IsVisible)
-            .Hash(this.Items)
+            .Hash(this.Cells)
             .Hash(this.Renderer)
             .Hash(this.Value)
             .Hash(this.Children)
@@ -125,7 +125,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -169,7 +169,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -213,7 +213,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -257,7 +257,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -301,7 +301,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -345,7 +345,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -389,7 +389,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -433,7 +433,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -477,7 +477,7 @@ namespace Vuescape.DotNet.Domain
                                  isFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -521,7 +521,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  isSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -565,7 +565,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  isVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -576,10 +576,10 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="Items" />.
+        /// Deep clones this object with a new <see cref="Cells" />.
         /// </summary>
-        /// <param name="items">The new <see cref="Items" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTableRow" /> using the specified <paramref name="items" /> for <see cref="Items" /> and a deep clone of every other property.</returns>
+        /// <param name="items">The new <see cref="Cells" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTableRow" /> using the specified <paramref name="items" /> for <see cref="Cells" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -653,7 +653,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  renderer,
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -697,7 +697,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  value,
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -741,7 +741,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)children,
@@ -785,7 +785,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsFocused,
                                  this.IsSelected,
                                  this.IsVisible,
-                                 (IReadOnlyList<TreeTableCell>)this.Items?.Select(i => i?.DeepClone()).ToList(),
+                                 (IReadOnlyList<TreeTableCell>)this.Cells?.Select(i => i?.DeepClone()).ToList(),
                                  this.Renderer?.DeepClone(),
                                  (IObject)DeepCloneInterface(this.Value),
                                  (IReadOnlyList<TreeTableRow>)this.Children?.Select(i => i?.DeepClone()).ToList(),
@@ -847,7 +847,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Name = {this.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Depth = {this.Depth.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Dependencies = {this.Dependencies?.ToString() ?? "<null>"}, IsExpandable = {this.IsExpandable.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsExpanded = {this.IsExpanded.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsFocused = {this.IsFocused?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsSelected = {this.IsSelected.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {this.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Items = {this.Items?.ToString() ?? "<null>"}, Renderer = {this.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Value = {this.Value?.ToString() ?? "<null>"}, Children = {this.Children?.ToString() ?? "<null>"}, Links = {this.Links?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Name = {this.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Depth = {this.Depth.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Dependencies = {this.Dependencies?.ToString() ?? "<null>"}, IsExpandable = {this.IsExpandable.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsExpanded = {this.IsExpanded.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsFocused = {this.IsFocused?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsSelected = {this.IsSelected.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {this.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Items = {this.Cells?.ToString() ?? "<null>"}, Renderer = {this.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Value = {this.Value?.ToString() ?? "<null>"}, Children = {this.Children?.ToString() ?? "<null>"}, Links = {this.Links?.ToString() ?? "<null>"}.");
 
             return result;
         }

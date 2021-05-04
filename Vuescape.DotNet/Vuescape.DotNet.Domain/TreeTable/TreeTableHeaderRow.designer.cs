@@ -70,7 +70,7 @@ namespace Vuescape.DotNet.Domain
 
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
                       && this.CssClasses.IsEqualTo(other.CssClasses, StringComparer.Ordinal)
-                      && this.Items.IsEqualTo(other.Items);
+                      && this.Cells.IsEqualTo(other.Cells);
 
             return result;
         }
@@ -82,7 +82,7 @@ namespace Vuescape.DotNet.Domain
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.Id)
             .Hash(this.CssClasses)
-            .Hash(this.Items)
+            .Hash(this.Cells)
             .Value;
 
         /// <inheritdoc />
@@ -94,7 +94,7 @@ namespace Vuescape.DotNet.Domain
             var result = new TreeTableHeaderRow(
                                  this.Id?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.Items?.Select(i => i?.DeepClone()).ToList());
+                                 this.Cells?.Select(i => i?.DeepClone()).ToList());
 
             return result;
         }
@@ -126,7 +126,7 @@ namespace Vuescape.DotNet.Domain
             var result = new TreeTableHeaderRow(
                                  id,
                                  this.CssClasses?.DeepClone(),
-                                 this.Items?.Select(i => i?.DeepClone()).ToList());
+                                 this.Cells?.Select(i => i?.DeepClone()).ToList());
 
             return result;
         }
@@ -158,16 +158,16 @@ namespace Vuescape.DotNet.Domain
             var result = new TreeTableHeaderRow(
                                  this.Id?.DeepClone(),
                                  cssClasses,
-                                 this.Items?.Select(i => i?.DeepClone()).ToList());
+                                 this.Cells?.Select(i => i?.DeepClone()).ToList());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="Items" />.
+        /// Deep clones this object with a new <see cref="Cells" />.
         /// </summary>
-        /// <param name="items">The new <see cref="Items" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTableHeaderRow" /> using the specified <paramref name="items" /> for <see cref="Items" /> and a deep clone of every other property.</returns>
+        /// <param name="items">The new <see cref="Cells" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTableHeaderRow" /> using the specified <paramref name="items" /> for <see cref="Cells" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -199,7 +199,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Items = {this.Items?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Items = {this.Cells?.ToString() ?? "<null>"}.");
 
             return result;
         }

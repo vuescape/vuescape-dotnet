@@ -26,10 +26,10 @@ namespace Vuescape.DotNet.Domain
         /// <param name="dependencies">The dependencies.</param>
         /// <param name="isExpandable">Whether the row is expandable.</param>
         /// <param name="isExpanded">Whether the row is expanded.</param>
-        /// <param name="isFocused">Whether the row is focused.</param>
+        /// <param name="isFocused">Whether the row is focused. Typically in the UI the row will be highlighted.</param>
         /// <param name="isSelected">Whether the row is selected.</param>
         /// <param name="isVisible">Whether the row is visible.</param>
-        /// <param name="items">The items. This is typically the column values.</param>
+        /// <param name="cells">The items. This is typically the column values.</param>
         /// <param name="renderer">The name of the renderer.</param>
         /// <param name="value">The value.</param>
         /// <param name="children">The child rows.</param>
@@ -44,7 +44,7 @@ namespace Vuescape.DotNet.Domain
             bool? isFocused,
             bool isSelected,
             bool isVisible,
-            IReadOnlyList<TreeTableCell> items,
+            IReadOnlyList<TreeTableCell> cells,
             string renderer,
             IObject value,
             IReadOnlyList<TreeTableRow> children,
@@ -53,7 +53,7 @@ namespace Vuescape.DotNet.Domain
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { name }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { items }.AsArg().Must().NotBeNullNorEmptyEnumerable();
+            new { cells }.AsArg().Must().NotBeNullNorEmptyEnumerable();
 
             this.Id = id;
             this.Name = name;
@@ -65,7 +65,7 @@ namespace Vuescape.DotNet.Domain
             this.IsFocused = isFocused;
             this.IsSelected = isSelected;
             this.IsVisible = isVisible;
-            this.Items = items;
+            this.Cells = cells;
             this.Renderer = renderer;
             this.Value = value;
             this.Children = children;
@@ -125,7 +125,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets a collection of items.
         /// </summary>
-        public IReadOnlyCollection<TreeTableCell> Items { get; private set; }
+        public IReadOnlyCollection<TreeTableCell> Cells { get; private set; }
 
         /// <summary>
         /// Gets the Renderer.

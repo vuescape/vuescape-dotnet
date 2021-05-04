@@ -21,18 +21,18 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="id">The unique identifier.</param>
         /// <param name="cssClasses">The CSS classes.</param>
-        /// <param name="items">The items. This is typically the column values.</param>
+        /// <param name="cells">The items. This is typically the column values.</param>
         public TreeTableHeaderRow(
             string id,
             string cssClasses,
-            IReadOnlyList<TreeTableHeaderCell> items)
+            IReadOnlyList<TreeTableHeaderCell> cells)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { items }.AsArg().Must().NotBeNullNorEmptyEnumerable();
+            new { cells }.AsArg().Must().NotBeNullNorEmptyEnumerable();
 
             this.Id = id;
             this.CssClasses = cssClasses;
-            this.Items = items;
+            this.Cells = cells;
         }
 
         /// <summary>
@@ -48,6 +48,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the header items.
         /// </summary>
-        public IReadOnlyList<TreeTableHeaderCell> Items { get; private set; }
+        public IReadOnlyList<TreeTableHeaderCell> Cells { get; private set; }
     }
 }

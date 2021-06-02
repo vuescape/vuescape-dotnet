@@ -29,119 +29,63 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static TreeTableRowTest()
         {
-            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios();
-            ConstructorArgumentValidationTestScenarios.AddScenario(ConstructorArgumentValidationTestScenario<TreeTableRow>.ForceGeneratedTestsToPassAndWriteMyOwnScenario);
-        }
+            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios()
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableRow>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'cells' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableRow>();
 
-        [Fact]
-        public static void Constructor___Should_not_throw___When_id_and_names_and_items_are_provided()
-        {
-            // Arrange
-            var id = A.Dummy<string>();
-            var cssClasses = A.Dummy<string>();
-            var depth = A.Dummy<int>();
+                        var result = new TreeTableRow(
+                                             referenceObject.Id,
+                                             null,
+                                             referenceObject.Depth,
+                                             referenceObject.CssClasses,
+                                             referenceObject.CssStyle,
+                                             referenceObject.Renderer,
+                                             referenceObject.IsExpandable,
+                                             referenceObject.IsExpanded,
+                                             referenceObject.IsVisible,
+                                             referenceObject.IsSelected,
+                                             referenceObject.IsFocused,
+                                             referenceObject.Links,
+                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
 
-            // A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>();
-            IReadOnlyCollection<TreeTableRowDependency> dependencies = null;
-            var isExpandable = A.Dummy<bool>();
-            var isExpanded = A.Dummy<bool>();
-            var isFocused = A.Dummy<bool?>();
-            var isSelected = A.Dummy<bool>();
-            var isVisible = A.Dummy<bool>();
-            var items = A.Dummy<IReadOnlyList<TreeTableCell>>();
-            var renderer = A.Dummy<string>();
-            var value = A.Dummy<IObject>();
-            var children = A.Dummy<IReadOnlyList<TreeTableRow>>();
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "cells", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableRow>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'cells' is an empty enumerable scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableRow>();
 
-            // Act
-            var ex = Record.Exception(() => new TreeTableRow(id, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
+                        var result = new TreeTableRow(
+                                             referenceObject.Id,
+                                             new List<TreeTableCell>(),
+                                             referenceObject.Depth,
+                                             referenceObject.CssClasses,
+                                             referenceObject.CssStyle,
+                                             referenceObject.Renderer,
+                                             referenceObject.IsExpandable,
+                                             referenceObject.IsExpanded,
+                                             referenceObject.IsVisible,
+                                             referenceObject.IsSelected,
+                                             referenceObject.IsFocused,
+                                             referenceObject.Links,
+                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
 
-            // Assert
-            ex.AsTest().Must().BeNull();
-        }
-
-        [Fact]
-        public static void Constructor___Should_throw___When_id_is_null()
-        {
-            // Arrange
-            string id = null;
-            var cssClasses = A.Dummy<string>();
-            var depth = A.Dummy<int>();
-
-            // A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>();
-            IReadOnlyCollection<TreeTableRowDependency> dependencies = null;
-            var isExpandable = A.Dummy<bool>();
-            var isExpanded = A.Dummy<bool>();
-            var isFocused = A.Dummy<bool?>();
-            var isSelected = A.Dummy<bool>();
-            var isVisible = A.Dummy<bool>();
-            var items = A.Dummy<IReadOnlyList<TreeTableCell>>();
-            var renderer = A.Dummy<string>();
-            var value = A.Dummy<IObject>();
-            var children = A.Dummy<IReadOnlyList<TreeTableRow>>();
-
-            // Act
-            var ex = Record.Exception(() => new TreeTableRow(id, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
-
-            // Assert
-            ex.AsTest().Must().BeOfType<ArgumentNullException>();
-            ex.Message.AsTest().Must().ContainString("id");
-        }
-
-        [Fact]
-        public static void Constructor___Should_throw___When_items_is_null()
-        {
-            // Arrange
-            var id = A.Dummy<string>();
-            var cssClasses = A.Dummy<string>();
-            var depth = A.Dummy<int>();
-
-            // A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>();
-            IReadOnlyCollection<TreeTableRowDependency> dependencies = null;
-            var isExpandable = A.Dummy<bool>();
-            var isExpanded = A.Dummy<bool>();
-            var isFocused = A.Dummy<bool?>();
-            var isSelected = A.Dummy<bool>();
-            var isVisible = A.Dummy<bool>();
-            IReadOnlyList<TreeTableCell> items = null;
-            var renderer = A.Dummy<string>();
-            var value = A.Dummy<IObject>();
-            var children = A.Dummy<IReadOnlyList<TreeTableRow>>();
-
-            // Act
-            var ex = Record.Exception(() => new TreeTableRow(id, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
-
-            // Assert
-            ex.AsTest().Must().BeOfType<ArgumentNullException>();
-            ex.Message.AsTest().Must().ContainString("items");
-        }
-
-        [Fact]
-        public static void Constructor___Should_throw___When_items_is_empty()
-        {
-            // Arrange
-            var id = A.Dummy<string>();
-            var cssClasses = A.Dummy<string>();
-            var depth = A.Dummy<int>();
-
-            // A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>();
-            IReadOnlyCollection<TreeTableRowDependency> dependencies = null;
-            var isExpandable = A.Dummy<bool>();
-            var isExpanded = A.Dummy<bool>();
-            var isFocused = A.Dummy<bool?>();
-            var isSelected = A.Dummy<bool>();
-            var isVisible = A.Dummy<bool>();
-            var items = new List<TreeTableCell>();
-            var renderer = A.Dummy<string>();
-            var value = A.Dummy<IObject>();
-            var children = A.Dummy<IReadOnlyList<TreeTableRow>>();
-
-            // Act
-            var ex = Record.Exception(() => new TreeTableRow(id, cssClasses, depth, isExpandable, isExpanded, isFocused, isSelected, isVisible, items, renderer, value, children, dependencies));
-
-            // Assert
-            ex.AsTest().Must().BeOfType<ArgumentException>();
-            ex.Message.AsTest().Must().ContainString("items");
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "cells", "is an empty enumerable", },
+                });
         }
     }
 }

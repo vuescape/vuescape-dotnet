@@ -4,6 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+// ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
     using OBeautifulCode.Assertion.Recipes;
@@ -17,32 +18,42 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="Hover"/> class.
         /// </summary>
-        /// <param name="html">The HTML to render.</param>
-        /// <param name="text">The text to render.</param>
         /// <param name="title">The title of the hover over.</param>
+        /// <param name="content">The content to render.</param>
+        /// <param name="contentKind">The kind of the content.</param>
+        /// <param name="component">The name of the component to use to render with.</param>
         public Hover(
-            string html,
-            string text,
-            string title)
+            string title,
+            string content,
+            ContentKind contentKind,
+            string component = null)
         {
-            this.Html = html;
-            this.Text = text;
+            new { contentKind }.AsArg().Must().NotBeEqualTo(ContentKind.None);
+
             this.Title = title;
+            this.Content = content;
+            this.ContentKind = contentKind;
+            this.Component = component;
         }
 
         /// <summary>
-        /// Gets the HTML for the hover over.
+        /// Gets the content to display in the hover over.
         /// </summary>
-        public string Html { get; private set; }
-
-        /// <summary>
-        /// Gets the text to display in the hover over.
-        /// </summary>
-        public string Text { get; private set; }
+        public string Content { get; private set; }
 
         /// <summary>
         /// Gets the title of the hover over.
         /// </summary>
         public string Title { get; private set; }
+
+        /// <summary>
+        /// Gets the kind of the content.
+        /// </summary>
+        public ContentKind ContentKind { get; private set; }
+
+        /// <summary>
+        /// Gets the component used to render the hover over.
+        /// </summary>
+        public string Component { get; private set; }
     }
 }

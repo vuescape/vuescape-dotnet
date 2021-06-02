@@ -30,6 +30,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Default cell renderer. Render value as text.
         /// </summary>
-        public static readonly string DefaultCellRenderer = "DefaultCellRenderer";
+        public static readonly string DefaultCellRenderer = "TextCellRenderer";
     }
 }

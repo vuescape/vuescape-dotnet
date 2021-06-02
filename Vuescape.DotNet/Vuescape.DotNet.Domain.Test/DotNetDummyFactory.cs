@@ -7,18 +7,18 @@
 // </auto-generated>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-
-using OBeautifulCode.Math.Recipes;
-using OBeautifulCode.Type;
-
 namespace Vuescape.DotNet.Domain.Test
 {
     using System;
+    using System.Collections.Generic;
 
     using FakeItEasy;
 
     using OBeautifulCode.AutoFakeItEasy;
+    using OBeautifulCode.Math.Recipes;
+    using OBeautifulCode.Representation.System;
+
+    using static System.FormattableString;
 
     /// <summary>
     /// A Dummy Factory for types in <see cref="Vuescape.DotNet.Domain"/>.
@@ -32,8 +32,62 @@ namespace Vuescape.DotNet.Domain.Test
 #endif
     class DotNetDummyFactory : DefaultDotNetDummyFactory
     {
+        private static object GetObjectByUiObjectType(
+            UiObjectType uiObjectType)
+        {
+            switch (uiObjectType)
+            {
+                case UiObjectType.None:
+                    throw new ArgumentOutOfRangeException(Invariant(
+                        $"${nameof(uiObjectType)} cannot have value ${UiObjectType.None.ToString()}."));
+                case UiObjectType.Bool:
+                    return A.Dummy<bool>();
+                case UiObjectType.String:
+                    return A.Dummy<string>();
+                case UiObjectType.Int:
+                    return A.Dummy<int>();
+                case UiObjectType.Short:
+                    return A.Dummy<short>();
+                case UiObjectType.Long:
+                    return A.Dummy<long>();
+                case UiObjectType.Decimal:
+                    return A.Dummy<decimal>();
+                case UiObjectType.DateTime:
+                    return A.Dummy<DateTime>();
+                case UiObjectType.Guid:
+                    return A.Dummy<Guid>();
+                case UiObjectType.Enum:
+                    return A.Dummy<ContentKind>();
+                case UiObjectType.SpecifiedType:
+                    return A.Dummy<ClientBehaviorBase>();
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(uiObjectType), uiObjectType, null);
+            }
+        }
+
         public DotNetDummyFactory()
         {
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var uiObjectType = A.Dummy<UiObjectType>();
+                    var value = GetObjectByUiObjectType(uiObjectType);
+
+                    switch (uiObjectType)
+                    {
+                        case UiObjectType.Enum:
+                        {
+                            var assemblyQualifiedNameEnum = value.GetType().ToRepresentation().RemoveAssemblyVersions().BuildAssemblyQualifiedName();
+                            return new UiObject(value, uiObjectType, assemblyQualifiedNameEnum);
+                        }
+                        case UiObjectType.SpecifiedType:
+                            var assemblyQualifiedName = value.GetType().ToRepresentation().RemoveAssemblyVersions().BuildAssemblyQualifiedName();
+                            return new UiObject(value, uiObjectType, assemblyQualifiedName);
+                    }
+
+                    return new UiObject(value);
+                });
+
             /* Add any overriding or custom registrations here. */
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
@@ -46,19 +100,18 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             children.Add(new TreeTableRow(
                                 A.Dummy<string>(),
-                                A.Dummy<string>(),
+                                A.Dummy<IReadOnlyList<TreeTableCell>>(),
                                 A.Dummy<int>(),
+                                A.Dummy<string>(),
+                                A.Dummy<string>(),
+                                A.Dummy<string>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
                                 A.Dummy<bool>(),
                                 A.Dummy<bool>(),
                                 A.Dummy<bool?>(),
-                                A.Dummy<bool>(),
-                                A.Dummy<bool>(),
-                                A.Dummy<IReadOnlyList<TreeTableCell>>(),
-                                A.Dummy<string>(),
-                                A.Dummy<IObject>(),
-                                null,
-                                A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>(),
-                                A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>()));
+                                A.Dummy<IReadOnlyDictionary<string, Link>>(),
+                                null));
                         }
                         else
                         {
@@ -69,57 +122,56 @@ namespace Vuescape.DotNet.Domain.Test
                             {
                                 grandChildren.Add(new TreeTableRow(
                                     A.Dummy<string>(),
-                                    A.Dummy<string>(),
+                                    A.Dummy<IReadOnlyList<TreeTableCell>>(),
                                     A.Dummy<int>(),
+                                    A.Dummy<string>(),
+                                    A.Dummy<string>(),
+                                    A.Dummy<string>(),
+                                    A.Dummy<bool>(),
+                                    A.Dummy<bool>(),
                                     A.Dummy<bool>(),
                                     A.Dummy<bool>(),
                                     A.Dummy<bool?>(),
-                                    A.Dummy<bool>(),
-                                    A.Dummy<bool>(),
-                                    A.Dummy<IReadOnlyList<TreeTableCell>>(),
-                                    A.Dummy<string>(),
-                                    A.Dummy<IObject>(),
-                                    null,
-                                    A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>(),
-                                    A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>()));
+                                    A.Dummy<IReadOnlyDictionary<string, Link>>(),
+                                    null));
                             }
 
                             children.Add(new TreeTableRow(
                                 A.Dummy<string>(),
-                                A.Dummy<string>(),
+                                A.Dummy<IReadOnlyList<TreeTableCell>>(),
                                 A.Dummy<int>(),
+                                A.Dummy<string>(),
+                                A.Dummy<string>(),
+                                A.Dummy<string>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
                                 A.Dummy<bool>(),
                                 A.Dummy<bool>(),
                                 A.Dummy<bool?>(),
-                                A.Dummy<bool>(),
-                                A.Dummy<bool>(),
-                                A.Dummy<IReadOnlyList<TreeTableCell>>(),
-                                A.Dummy<string>(),
-                                A.Dummy<IObject>(),
-                                grandChildren,
-                                A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>(),
-                                A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>()));
+                                A.Dummy<IReadOnlyDictionary<string, Link>>(),
+                                grandChildren));
                         }
                     }
 
                     return new TreeTableRow(
-                       A.Dummy<string>(),
-                       A.Dummy<string>(),
-                       A.Dummy<int>(),
-                       A.Dummy<bool>(),
-                       A.Dummy<bool>(),
-                       A.Dummy<bool?>(),
-                       A.Dummy<bool>(),
-                       A.Dummy<bool>(),
-                       A.Dummy<IReadOnlyList<TreeTableCell>>(),
-                       A.Dummy<string>(),
-                       A.Dummy<IObject>(),
-                       children,
-                       A.Dummy<IReadOnlyCollection<TreeTableRowDependency>>(),
-                       A.Dummy<IReadOnlyDictionary<string, IReadOnlyCollection<Link>>>());
-                });
+                        A.Dummy<string>(),
+                        A.Dummy<IReadOnlyList<TreeTableCell>>(),
+                        A.Dummy<int>(),
+                        A.Dummy<string>(),
+                        A.Dummy<string>(),
+                        A.Dummy<string>(),
+                        A.Dummy<bool>(),
+                        A.Dummy<bool>(),
+                        A.Dummy<bool>(),
+                        A.Dummy<bool>(),
+                        A.Dummy<bool?>(),
+                        A.Dummy<IReadOnlyDictionary<string, Link>>(),
+                        children);
+        });
 
-            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(LinkTargetKind.None);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(LinkTarget.None);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UiObjectType.None);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ContentKind.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(SortComparisonStrategy.None);
         }
     }

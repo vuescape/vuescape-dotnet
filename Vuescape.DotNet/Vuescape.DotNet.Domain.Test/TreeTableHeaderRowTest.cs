@@ -28,71 +28,47 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static TreeTableHeaderRowTest()
         {
-            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios();
-            ConstructorArgumentValidationTestScenarios.AddScenario(ConstructorArgumentValidationTestScenario<TreeTableHeaderRow>.ForceGeneratedTestsToPassAndWriteMyOwnScenario);
-        }
+            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios()
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableHeaderRow>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'cells' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableHeaderRow>();
 
-        [Fact]
-        public static void Constructor___Should_not_throw___When_id_and_items_are_provided()
-        {
-            // Arrange
-            var id = A.Dummy<string>();
-            var cssClasses = A.Dummy<string>();
-            var items = A.Dummy<IReadOnlyList<TreeTableHeaderCell>>();
+                        var result = new TreeTableHeaderRow(
+                                             referenceObject.Id,
+                                             null,
+                                             referenceObject.CssClasses,
+                                             referenceObject.CssStyle,
+                                             referenceObject.Renderer);
 
-            // Act
-            var ex = Record.Exception(() => new TreeTableHeaderRow(id, cssClasses, items));
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "cells", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableHeaderRow>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'cells' is an empty enumerable scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableHeaderRow>();
 
-            // Assert
-            ex.AsTest().Must().BeNull();
-        }
+                        var result = new TreeTableHeaderRow(
+                                             referenceObject.Id,
+                                             new List<TreeTableHeaderCell>(),
+                                             referenceObject.CssClasses,
+                                             referenceObject.CssStyle,
+                                             referenceObject.Renderer);
 
-        [Fact]
-        public static void Constructor___Should_throw___When_id_is_null()
-        {
-            // Arrange
-            string id = null;
-            var cssClasses = A.Dummy<string>();
-            var items = A.Dummy<IReadOnlyList<TreeTableHeaderCell>>();
-
-            // Act
-            var ex = Record.Exception(() => new TreeTableHeaderRow(id, cssClasses, items));
-
-            // Assert
-            ex.AsTest().Must().BeOfType<ArgumentNullException>();
-            ex.Message.AsTest().Must().ContainString("id");
-        }
-
-        [Fact]
-        public static void Constructor___Should_throw___When_items_is_null()
-        {
-            // Arrange
-            var id = A.Dummy<string>();
-            var cssClasses = A.Dummy<string>();
-            IReadOnlyList<TreeTableHeaderCell> items = null;
-
-            // Act
-            var ex = Record.Exception(() => new TreeTableHeaderRow(id, cssClasses, items));
-
-            // Assert
-            ex.AsTest().Must().BeOfType<ArgumentNullException>();
-            ex.Message.AsTest().Must().ContainString("items");
-        }
-
-        [Fact]
-        public static void Constructor___Should_throw___When_items_is_empty()
-        {
-            // Arrange
-            var id = A.Dummy<string>();
-            var cssClasses = A.Dummy<string>();
-            var items = new List<TreeTableHeaderCell>();
-
-            // Act
-            var ex = Record.Exception(() => new TreeTableHeaderRow(id, cssClasses, items));
-
-            // Assert
-            ex.AsTest().Must().BeOfType<ArgumentException>();
-            ex.Message.AsTest().Must().ContainString("items");
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "cells", "is an empty enumerable", },
+                });
         }
     }
 }

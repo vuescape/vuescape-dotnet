@@ -18,14 +18,14 @@ namespace Vuescape.DotNet.Domain
         None = 0,
 
         /// <summary>
-        /// Use ordinal sort comparison.
+        /// Use the default comparison implementation.
         /// </summary>
-        Ordinal,
+        Default,
 
         /// <summary>
-        /// Use string sort comparison.
+        /// Use a string ordinal sort comparison.
         /// </summary>
-        String,
+        StringOrdinal,
 
         /// <summary>
         /// Use string sort comparison.

@@ -37,14 +37,14 @@
     <DocumentationFile>bin\Release\Vuescape.DotNet.Domain.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Naos.Protocol.Domain, Version=1.0.94.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Naos.Protocol.Domain.1.0.94\lib\net462\Naos.Protocol.Domain.dll</HintPath>
+    <Reference Include="Naos.Protocol.Domain, Version=1.0.98.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Naos.Protocol.Domain.1.0.98\lib\net462\Naos.Protocol.Domain.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Representation.System, Version=1.0.57.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Representation.System.1.0.57\lib\net462\OBeautifulCode.Representation.System.dll</HintPath>
+    <Reference Include="OBeautifulCode.Representation.System, Version=1.0.58.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Representation.System.1.0.58\lib\net462\OBeautifulCode.Representation.System.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Type, Version=1.0.78.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Type.1.0.78\lib\net462\OBeautifulCode.Type.dll</HintPath>
+    <Reference Include="OBeautifulCode.Type, Version=1.0.80.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Type.1.0.80\lib\net462\OBeautifulCode.Type.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,8 +73,10 @@
     <Compile Include=".recipes\OBeautifulCode.Assertion\Verifications.TypeValidation.cs" />
     <Compile Include=".recipes\OBeautifulCode.Assertion\Verifications.Workflow.cs" />
     <Compile Include=".recipes\OBeautifulCode.Assertion\WorkflowExtensions.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Cloning\CloningExtensions.cs" />
     <Compile Include=".recipes\OBeautifulCode.CodeAnalysis\ObcSuppressBecause.cs" />
     <Compile Include=".recipes\OBeautifulCode.Collection\EnumerableExtensions.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Equality\ByteArrayEqualityComparer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\DateTimeEqualityComparer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\DictionaryEqualityComparer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\EnumerableEqualityComparer.cs" />
@@ -82,11 +84,14 @@
     <Compile Include=".recipes\OBeautifulCode.Equality\EqualityComparerHelper.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\EqualityExtensions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\HashCodeHelper.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Equality\LambdaBackedEqualityComparer.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Equality\NativeMethods.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Equality\NullableDateTimeEqualityComparer.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Equality\ObjectEqualityComparer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\ReadOnlyDictionaryEqualityComparer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Math\ThreadSafeRandom.cs" />
     <Compile Include=".recipes\OBeautifulCode.String\StringExtensions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\ArrayKind.cs" />
-    <Compile Include=".recipes\OBeautifulCode.Type\DeepCloneExtensions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\ToStringReadableOptions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\ToStringXmlDocOptions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
@@ -102,34 +107,30 @@
     <Compile Include="ClientBehaviors\GeneratePdfClientBehavior.designer.cs">
       <DependentUpon>GeneratePdfClientBehavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientBehaviors\HandleLinkClickClientBehavior.designer.cs">
-      <DependentUpon>HandleLinkClickClientBehavior.cs</DependentUpon>
-    </Compile>
     <Compile Include="ClientBehaviors\SortTreeTableClientBehavior.cs" />
-    <Compile Include="ClientBehaviors\HandleLinkClickClientBehavior.cs" />
     <Compile Include="ClientBehaviors\SortTreeTableClientBehavior.designer.cs">
       <DependentUpon>SortTreeTableClientBehavior.cs</DependentUpon>
     </Compile>
     <Compile Include="ClientBehaviors\ToggleTreeTableChildRowExpansionClientBehavior.cs" />
-    <Compile Include="ClientBehaviors\ToggleTreeTableChildRowExpansionClientBehavior.designer.cs">
-      <DependentUpon>ToggleTreeTableChildRowExpansionClientBehavior.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ClientBehaviors\TreeTableRowDependencyClientBehavior.cs" />
     <Compile Include="ClientBehaviors\GeneratePdfClientBehavior.cs" />
     <Compile Include="ClientBehaviors\ConstrainTreeTableHeightClientBehavior.cs" />
     <Compile Include="ClientBehaviors\AdjustTreeTableColumnSizeClientBehavior.cs" />
     <Compile Include="ClientBehaviors\ClientBehaviorBase.cs" />
-    <Compile Include="ClientBehaviors\TreeTableRowDependencyClientBehavior.designer.cs">
-      <DependentUpon>TreeTableRowDependencyClientBehavior.cs</DependentUpon>
+    <Compile Include="ClientBehaviors\ToggleTreeTableChildRowExpansionClientBehavior.designer.cs">
+      <DependentUpon>ToggleTreeTableChildRowExpansionClientBehavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Link.cs" />
-    <Compile Include="Link.designer.cs">
+    <Compile Include="Css\CssStyles.cs" />
+    <Compile Include="Css\CssStyles.designer.cs">
+      <DependentUpon>CssStyles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Css\CssStyleWrapper.cs" />
+    <Compile Include="Css\CssStyleWrapper.designer.cs">
+      <DependentUpon>CssStyleWrapper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Link\Link.designer.cs">
       <DependentUpon>Link.cs</DependentUpon>
     </Compile>
-    <Compile Include="LinkName.cs" />
-    <Compile Include="LinkTargetKind.cs" />
-    <Compile Include="TreeTable\CellRenderer.cs" />
-    <Compile Include="TreeTable\ColumnSorter.cs" />
     <Compile Include="TreeTable\ColumnSorter.designer.cs">
       <DependentUpon>ColumnSorter.cs</DependentUpon>
     </Compile>
@@ -139,13 +140,8 @@
     <Compile Include="TreeTable\TreeTable.designer.cs">
       <DependentUpon>TreeTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeTable\TreeTableContent.cs" />
     <Compile Include="TreeTable\TreeTableCell.designer.cs">
       <DependentUpon>TreeTableCell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TreeTable\TreeTableCellValueObject.cs" />
-    <Compile Include="TreeTable\TreeTableCellValueObject.designer.cs">
-      <DependentUpon>TreeTableCellValueObject.cs</DependentUpon>
     </Compile>
     <Compile Include="TreeTable\TreeTableContent.designer.cs">
       <DependentUpon>TreeTableContent.cs</DependentUpon>
@@ -159,10 +155,22 @@
     <Compile Include="TreeTable\TreeTableRow.designer.cs">
       <DependentUpon>TreeTableRow.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeTable\TreeTableRowDependency.designer.cs">
-      <DependentUpon>TreeTableRowDependency.cs</DependentUpon>
+    <Compile Include="UiObject\SlottedUiObject.cs" />
+    <Compile Include="UiObject\SlottedUiObject.designer.cs">
+      <DependentUpon>SlottedUiObject.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeTable\TreeTableRowValueObject.cs" />
+    <Compile Include="UiObject\UiObject.designer.cs">
+      <DependentUpon>UiObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UiObject\UiObjectType.cs" />
+    <Compile Include="UiObject\UiObject.cs" />
+    <Compile Include="Link\Link.cs" />
+    <Compile Include="Link\LinkName.cs" />
+    <Compile Include="Link\LinkTarget.cs" />
+    <Compile Include="TreeTable\CellRenderer.cs" />
+    <Compile Include="TreeTable\ColumnSorter.cs" />
+    <Compile Include="TreeTable\ContentKind.cs" />
+    <Compile Include="TreeTable\TreeTableContent.cs" />
     <Compile Include="TreeTable\Hover.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\GlobalSuppressions.cs" />
@@ -175,11 +183,7 @@
     <Compile Include="TreeTable\TreeTableHeaderCell.cs" />
     <Compile Include="TreeTable\TreeTableHeaderRow.cs" />
     <Compile Include="TreeTable\TreeTableCell.cs" />
-    <Compile Include="TreeTable\TreeTableRowDependency.cs" />
     <Compile Include="TreeTable\TreeTableRow.cs" />
-    <Compile Include="TreeTable\TreeTableRowValueObject.designer.cs">
-      <DependentUpon>TreeTableRowValueObject.cs</DependentUpon>
-    </Compile>
     <None Include=".analyzers\release.ruleset" />
     <None Include="packages.config" />
     <None Include="Vuescape.DotNet.Domain.override-nuspec" />

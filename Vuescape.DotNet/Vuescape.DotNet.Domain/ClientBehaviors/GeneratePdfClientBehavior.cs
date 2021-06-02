@@ -5,13 +5,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable once CheckNamespace
-
 namespace Vuescape.DotNet.Domain
 {
-    using OBeautifulCode.Type;
-
     /// <summary>
-    /// A client behavior to create a PDF.
+    /// A client behavior to generate a PDF.
     /// </summary>
     public partial class GeneratePdfClientBehavior : ClientBehaviorBase
     {
@@ -21,7 +18,7 @@ namespace Vuescape.DotNet.Domain
         public GeneratePdfClientBehavior()
             : base("GeneratePdfBehavior")
         {
-            // TODO: determine what args/config this behavior should accept.
+            // TODO: determine what args/properties this behavior should have.
         }
     }
 }

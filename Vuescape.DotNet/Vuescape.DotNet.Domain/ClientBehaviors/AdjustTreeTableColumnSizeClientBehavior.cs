@@ -18,7 +18,7 @@ namespace Vuescape.DotNet.Domain
         public AdjustTreeTableColumnSizeClientBehavior()
             : base("AdjustTreeTableColumnSizeClientBehavior")
         {
-            // TODO: determine what args/config this behavior should accept.
+            // TODO: determine what args/properties this behavior should have.
         }
     }
 }

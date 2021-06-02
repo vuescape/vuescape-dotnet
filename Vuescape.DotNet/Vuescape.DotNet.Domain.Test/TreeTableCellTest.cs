@@ -26,54 +26,9 @@ namespace Vuescape.DotNet.Domain.Test
         static TreeTableCellTest()
         {
             ConstructorArgumentValidationTestScenarios.RemoveAllScenarios()
-                .AddScenario(() =>
-                    new ConstructorArgumentValidationTestScenario<TreeTableCell>
-                    {
-                        Name = "constructor should throw ArgumentNullException when parameter 'id' is null scenario",
-                        ConstructionFunc = () =>
-                        {
-                            var referenceObject = A.Dummy<TreeTableCell>();
-
-                            var result = new TreeTableCell(
-                                                 null,
-                                                 referenceObject.CssClasses,
-                                                 referenceObject.Colspan,
-                                                 referenceObject.Hover,
-                                                 referenceObject.IsVisible,
-                                                 referenceObject.Renderer,
-                                                 referenceObject.DisplayValue,
-                                                 referenceObject.Value,
-                                                 referenceObject.Links);
-
-                            return result;
-                        },
-                        ExpectedExceptionType = typeof(ArgumentNullException),
-                        ExpectedExceptionMessageContains = new[] { "id", },
-                    })
-                .AddScenario(() =>
-                    new ConstructorArgumentValidationTestScenario<TreeTableCell>
-                    {
-                        Name = "constructor should throw ArgumentException when parameter 'id' is white space scenario",
-                        ConstructionFunc = () =>
-                        {
-                            var referenceObject = A.Dummy<TreeTableCell>();
-
-                            var result = new TreeTableCell(
-                                                 Invariant($"  {Environment.NewLine}  "),
-                                                 referenceObject.CssClasses,
-                                                 referenceObject.Colspan,
-                                                 referenceObject.Hover,
-                                                 referenceObject.IsVisible,
-                                                 referenceObject.Renderer,
-                                                 referenceObject.DisplayValue,
-                                                 referenceObject.Value,
-                                                 referenceObject.Links);
-
-                            return result;
-                        },
-                        ExpectedExceptionType = typeof(ArgumentException),
-                        ExpectedExceptionMessageContains = new[] { "id", "white space", },
-                    });
+                                                      .AddScenario(
+                                                          ConstructorArgumentValidationTestScenario<TreeTableCell>
+                                                              .ConstructorCannotThrowScenario);
         }
     }
 }

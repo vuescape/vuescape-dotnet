@@ -28,60 +28,24 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static TreeTableTest()
         {
-            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios();
-            ConstructorArgumentValidationTestScenarios.AddScenario(ConstructorArgumentValidationTestScenario<TreeTable>.ForceGeneratedTestsToPassAndWriteMyOwnScenario);
-        }
+            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios()
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTable>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'content' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTable>();
 
-        [Fact]
-        public static void Constructor___Should_not_throw___When_headers_and_rows_are_provided()
-        {
-            // Arrange
-            var headers = A.Dummy<IReadOnlyList<TreeTableHeaderRow>>();
-            var rows = A.Dummy<IReadOnlyList<TreeTableRow>>();
-            var shouldScrollVertical = A.Dummy<bool>();
-            var shouldScrollHorizontal = A.Dummy<bool>();
-            var shouldSyncHeaderScroll = A.Dummy<bool>();
-            var shouldSyncFooterScroll = A.Dummy<bool>();
-            var shouldIncludeFooter = A.Dummy<bool>();
-            var shouldFreezeFirstColumn = A.Dummy<bool>();
-            var deadAreaColor = A.Dummy<string>();
-            var maxRows = A.Dummy<int?>();
-            var cssStyle = A.Dummy<string>();
+                        var result = new TreeTable(
+                                             null,
+                                             referenceObject.Behaviors);
 
-            // Act
-            var ex = Record.Exception(() => 
-                new TreeTable(
-                    new TreeTableContent(
-                        headers, rows, shouldScrollVertical, shouldScrollHorizontal, shouldSyncHeaderScroll, shouldSyncFooterScroll, shouldIncludeFooter, shouldFreezeFirstColumn, deadAreaColor, maxRows, cssStyle)));
-
-            // Assert
-            ex.AsTest().Must().BeNull();
-        }
-
-        [Fact]
-        public static void Constructor___Should_throw___When_headers_are_null()
-        {
-            // Arrange
-            IReadOnlyList<TreeTableHeaderRow> headers = null;
-            var rows = A.Dummy<IReadOnlyList<TreeTableRow>>();
-            var shouldScrollVertical = A.Dummy<bool>();
-            var shouldScrollHorizontal = A.Dummy<bool>();
-            var shouldSyncHeaderScroll = A.Dummy<bool>();
-            var shouldSyncFooterScroll = A.Dummy<bool>();
-            var shouldIncludeFooter = A.Dummy<bool>();
-            var shouldFreezeFirstColumn = A.Dummy<bool>();
-            var deadAreaColor = A.Dummy<string>();
-            var maxRows = A.Dummy<int?>();
-            var cssStyle = A.Dummy<string>();
-
-            // Act
-            var ex = Record.Exception(() => 
-                new TreeTable(
-                    new TreeTableContent(headers, rows, shouldScrollVertical, shouldScrollHorizontal, shouldSyncHeaderScroll, shouldSyncFooterScroll, shouldIncludeFooter, shouldFreezeFirstColumn, deadAreaColor, maxRows, cssStyle)));
-
-            // Assert
-            ex.AsTest().Must().BeOfType<ArgumentNullException>();
-            ex.Message.AsTest().Must().ContainString("headers");
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "content", },
+                });
         }
 
         [Fact]
@@ -100,16 +64,16 @@ namespace Vuescape.DotNet.Domain.Test
             var headers = new List<TreeTableHeaderRow>();
             var items = new List<TreeTableHeaderCell>
             {
-                new TreeTableHeaderCell("entityName", string.Empty, 1, new ColumnSorter("entityName", SortDirection.Ascending, SortComparisonStrategy.StringCaseInsensitive), null, "Active Accounts"),
+                new TreeTableHeaderCell("entityName", "Active Accounts", null, null, string.Empty, string.Empty, 1, true, new ColumnSorter("entityName", SortDirection.Ascending, SortComparisonStrategy.StringCaseInsensitive)),
             };
 
             for (var i = startingYear; i < startingYear + numberOfPeriods; i++)
             {
-                var item = new TreeTableHeaderCell("reportingPeriod_" + i, string.Empty, 1, null, null, i.ToString());
+                var item = new TreeTableHeaderCell("reportingPeriod_" + i, string.Empty,  null, null, null, string.Empty, 1, true, null, null);
                 items.Add(item);
             }
 
-            headers.Add(new TreeTableHeaderRow("header", string.Empty, items));
+            headers.Add(new TreeTableHeaderRow("header", items));
 
             var rows = new List<TreeTableRow>();
 
@@ -119,18 +83,18 @@ namespace Vuescape.DotNet.Domain.Test
             {
                 var treeTableCells = new List<TreeTableCell>();
 
-                var treeTableCell = new TreeTableCell("entityName", "who-is-in-report-consolidated__td--entityName", 1, null, true, CellRenderer.DefaultCellRenderer, entityName, null);
+                var treeTableCell = new TreeTableCell("entityName", entityName, null, null, "who-is-in-report-consolidated__td--entityName", string.Empty, 1, true);
                 treeTableCells.Add(treeTableCell);
                 for (var i = startingYear; i < startingYear + numberOfPeriods; i++)
                 {
                     var status = random.Next(2) == 0 ? "Passed" : "Failed";
                     var cssStyles = status == "Passed" ? "positive" : "negative";
                     cssStyles += " who-is-in-report-consolidated__td--status";
-                    treeTableCell = new TreeTableCell(entityName + "-" + i, cssStyles, 1, null, true, CellRenderer.DefaultCellRenderer, status, null);
+                    treeTableCell = new TreeTableCell(entityName + "-" + i,null, null, null, cssStyles, string.Empty, 1, true, null);
                     treeTableCells.Add(treeTableCell);
                 }
 
-                var row = new TreeTableRow("entityName-" + entityName, string.Empty, 0, false, false, null, false, true, treeTableCells, RowRenderer.DataRowRenderer, null, null);
+                var row = new TreeTableRow("entityName-" + entityName, treeTableCells,0, string.Empty, string.Empty, RowRenderer.DataRowRenderer, false, false, true, false, false, null, null);
                 rows.Add(row);
             }
 

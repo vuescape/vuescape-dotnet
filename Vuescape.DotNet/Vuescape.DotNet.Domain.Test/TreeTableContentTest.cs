@@ -25,6 +25,59 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static TreeTableContentTest()
         {
+            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios()
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'headers' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new TreeTableContent(
+                                             null,
+                                             referenceObject.Rows,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
+                                             referenceObject.CssStyle);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "headers", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'rows' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new TreeTableContent(
+                                             referenceObject.Headers,
+                                             null,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
+                                             referenceObject.CssStyle);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "rows", },
+                });
         }
     }
 }

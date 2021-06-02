@@ -4,6 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+// ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
@@ -20,52 +21,48 @@ namespace Vuescape.DotNet.Domain
         /// Initializes a new instance of the <see cref="TreeTableRow"/> class.
         /// </summary>
         /// <param name="id">The unique identifier.</param>
-        /// <param name="cssClasses">The CSS classes.</param>
+        /// <param name="cells">The items. This is typically the column values.</param>
         /// <param name="depth">The depth of the row in the tree.</param>
-        /// <param name="dependencies">The dependencies.</param>
+        /// <param name="cssClasses">The CSS classes.</param>
+        /// <param name="cssStyle">The CSS style.</param>
+        /// <param name="renderer">The name of the renderer.</param>
         /// <param name="isExpandable">Whether the row is expandable.</param>
         /// <param name="isExpanded">Whether the row is expanded.</param>
-        /// <param name="isFocused">Whether the row is focused. Typically in the UI the row will be highlighted.</param>
-        /// <param name="isSelected">Whether the row is selected.</param>
         /// <param name="isVisible">Whether the row is visible.</param>
-        /// <param name="cells">The items. This is typically the column values.</param>
-        /// <param name="renderer">The name of the renderer.</param>
-        /// <param name="value">The value.</param>
-        /// <param name="children">The child rows.</param>
+        /// <param name="isSelected">Whether the row is selected.</param>
+        /// <param name="isFocused">Whether the row is focused. Typically in the UI the row will be highlighted.</param>
         /// <param name="links">The links for this row.</param>
+        /// <param name="children">The child rows.</param>
         public TreeTableRow(
             string id,
-            string cssClasses,
+            IReadOnlyList<TreeTableCell> cells,
             int depth,
+            string cssClasses,
+            string cssStyle,
+            string renderer,
             bool isExpandable,
             bool isExpanded,
-            bool? isFocused,
-            bool isSelected,
             bool isVisible,
-            IReadOnlyList<TreeTableCell> cells,
-            string renderer,
-            IObject value,
-            IReadOnlyList<TreeTableRow> children,
-            IReadOnlyCollection<TreeTableRowDependency> dependencies = null,
-            IReadOnlyDictionary<string, IReadOnlyCollection<Link>> links = null)
+            bool isSelected,
+            bool? isFocused,
+            IReadOnlyDictionary<string, Link> links,
+            IReadOnlyList<TreeTableRow> children)
         {
-            new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { cells }.AsArg().Must().NotBeNullNorEmptyEnumerable();
 
             this.Id = id;
-            this.CssClasses = cssClasses;
+            this.Cells = cells;
             this.Depth = depth;
-            this.Dependencies = dependencies;
+            this.CssClasses = cssClasses;
+            this.CssStyle = cssStyle;
+            this.Renderer = renderer;
             this.IsExpandable = isExpandable;
             this.IsExpanded = isExpanded;
-            this.IsFocused = isFocused;
-            this.IsSelected = isSelected;
             this.IsVisible = isVisible;
-            this.Cells = cells;
-            this.Renderer = renderer;
-            this.Value = value;
-            this.Children = children;
+            this.IsSelected = isSelected;
+            this.IsFocused = isFocused;
             this.Links = links;
+            this.Children = children;
         }
 
         /// <summary>
@@ -74,19 +71,29 @@ namespace Vuescape.DotNet.Domain
         public string Id { get; private set; }
 
         /// <summary>
-        /// Gets the CssClasses. // TODO: Collection or string.
+        /// Gets a collection of items.
+        /// </summary>
+        public IReadOnlyCollection<TreeTableCell> Cells { get; private set; }
+
+        /// <summary>
+        /// Gets the CssClasses.
         /// </summary>
         public string CssClasses { get; private set; }
+
+        /// <summary>
+        /// Gets the CssStyle.
+        /// </summary>
+        public string CssStyle { get; private set; }
+
+        /// <summary>
+        /// Gets the Renderer.
+        /// </summary>
+        public string Renderer { get; private set; }
 
         /// <summary>
         /// Gets the indent depth of this row.
         /// </summary>
         public int Depth { get; private set; }
-
-        /// <summary>
-        /// Gets a collection of dependencies.
-        /// </summary>
-        public IReadOnlyCollection<TreeTableRowDependency> Dependencies { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether this row is expandable.
@@ -99,9 +106,9 @@ namespace Vuescape.DotNet.Domain
         public bool IsExpanded { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether this row is focused.
+        /// Gets a value indicating whether this row is visible.
         /// </summary>
-        public bool? IsFocused { get; private set; }
+        public bool IsVisible { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether this row is selected.
@@ -109,37 +116,18 @@ namespace Vuescape.DotNet.Domain
         public bool IsSelected { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether this row is visible.
+        /// Gets a value indicating whether this row is focused.
         /// </summary>
-        public bool IsVisible { get; private set; }
+        public bool? IsFocused { get; private set; }
 
         /// <summary>
-        /// Gets a collection of items.
+        /// Gets the Links.
         /// </summary>
-        public IReadOnlyCollection<TreeTableCell> Cells { get; private set; }
-
-        /// <summary>
-        /// Gets the Renderer.
-        /// </summary>
-        public string Renderer { get; private set; }
-
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        public IObject Value { get; private set; }
+        public IReadOnlyDictionary<string, Link> Links { get; private set; }
 
         /// <summary>
         /// Gets the children tree table rows.
         /// </summary>
         public IReadOnlyCollection<TreeTableRow> Children { get; private set; }
-
-        /// <summary>
-        /// Gets the Links.
-        /// </summary>
-        public IReadOnlyDictionary<string, IReadOnlyCollection<Link>> Links { get; private set; }
-
-        /*
-        public IReadOnlyDictionary<string, object> Onclick { get; private set; }
-        */
     }
 }

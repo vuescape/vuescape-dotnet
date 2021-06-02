@@ -108,7 +108,6 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<AdjustTreeTableColumnSizeClientBehavior>(),
                         A.Dummy<ConstrainTreeTableHeightClientBehavior>(),
                         A.Dummy<GeneratePdfClientBehavior>(),
-                        A.Dummy<HandleLinkClickClientBehavior>(),
                         A.Dummy<SortTreeTableClientBehavior>(),
                     },
                 });

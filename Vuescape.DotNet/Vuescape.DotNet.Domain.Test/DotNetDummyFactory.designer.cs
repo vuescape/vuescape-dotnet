@@ -49,7 +49,6 @@ namespace Vuescape.DotNet.Domain.Test
                         typeof(AdjustTreeTableColumnSizeClientBehavior),
                         typeof(ConstrainTreeTableHeightClientBehavior),
                         typeof(GeneratePdfClientBehavior),
-                        typeof(HandleLinkClickClientBehavior),
                         typeof(SortTreeTableClientBehavior),
                         typeof(ToggleTreeTableChildRowExpansionClientBehavior)
                     };
@@ -71,12 +70,6 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new GeneratePdfClientBehavior
-                             {
-                                 Name = A.Dummy<string>(),
-                             });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new HandleLinkClickClientBehavior
                              {
                                  Name = A.Dummy<string>(),
                              });

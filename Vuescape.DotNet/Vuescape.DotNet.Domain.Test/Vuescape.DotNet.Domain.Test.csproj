@@ -288,10 +288,6 @@
     <Compile Include="GeneratePdfClientBehaviorTest.designer.cs">
       <DependentUpon>GeneratePdfClientBehaviorTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="HandleLinkClickClientBehaviorTest.cs" />
-    <Compile Include="HandleLinkClickClientBehaviorTest.designer.cs">
-      <DependentUpon>HandleLinkClickClientBehaviorTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="HoverTest.cs" />
     <Compile Include="HoverTest.designer.cs">
       <DependentUpon>HoverTest.cs</DependentUpon>

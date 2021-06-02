@@ -107,7 +107,6 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<Guid>(),
                         A.Dummy<AdjustTreeTableColumnSizeClientBehavior>(),
                         A.Dummy<GeneratePdfClientBehavior>(),
-                        A.Dummy<HandleLinkClickClientBehavior>(),
                         A.Dummy<SortTreeTableClientBehavior>(),
                         A.Dummy<ToggleTreeTableChildRowExpansionClientBehavior>(),
                     },

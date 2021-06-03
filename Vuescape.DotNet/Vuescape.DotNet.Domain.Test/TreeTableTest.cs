@@ -7,19 +7,14 @@ namespace Vuescape.DotNet.Domain.Test
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
+    using System.Globalization;
 
     using FakeItEasy;
 
-    using OBeautifulCode.Assertion.Recipes;
-    using OBeautifulCode.AutoFakeItEasy;
     using OBeautifulCode.CodeAnalysis.Recipes;
     using OBeautifulCode.CodeGen.ModelObject.Recipes;
-    using OBeautifulCode.Math.Recipes;
 
     using Xunit;
-
-    using static System.FormattableString;
 
     [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = ObcSuppressBecause.CA1505_AvoidUnmaintainableCode_DisagreeWithAssessment)]
     public static partial class TreeTableTest
@@ -69,7 +64,7 @@ namespace Vuescape.DotNet.Domain.Test
 
             for (var i = startingYear; i < startingYear + numberOfPeriods; i++)
             {
-                var item = new TreeTableHeaderCell("reportingPeriod_" + i, string.Empty,  null, null, null, string.Empty, 1, true, null, null);
+                var item = new TreeTableHeaderCell("reportingPeriod_" + i.ToString(CultureInfo.InvariantCulture), string.Empty,  null, null, null, string.Empty, 1, true, null, null);
                 items.Add(item);
             }
 
@@ -90,11 +85,11 @@ namespace Vuescape.DotNet.Domain.Test
                     var status = random.Next(2) == 0 ? "Passed" : "Failed";
                     var cssStyles = status == "Passed" ? "positive" : "negative";
                     cssStyles += " who-is-in-report-consolidated__td--status";
-                    treeTableCell = new TreeTableCell(entityName + "-" + i,null, null, null, cssStyles, string.Empty, 1, true, null);
+                    treeTableCell = new TreeTableCell(entityName + "-" + i.ToString(CultureInfo.InvariantCulture), null, null, null, cssStyles, string.Empty, 1, true, null);
                     treeTableCells.Add(treeTableCell);
                 }
 
-                var row = new TreeTableRow("entityName-" + entityName, treeTableCells,0, string.Empty, string.Empty, RowRenderer.DataRowRenderer, false, false, true, false, false, null, null);
+                var row = new TreeTableRow("entityName-" + entityName, treeTableCells, 0, string.Empty, string.Empty, RowRenderer.DataRowRenderer, false, false, true, false, false, null, null);
                 rows.Add(row);
             }
 

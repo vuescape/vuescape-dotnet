@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<UiObject>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.UiObject: Value = {systemUnderTest.Value?.ToString() ?? "<null>"}, UiObjectType = {systemUnderTest.UiObjectType.ToString() ?? "<null>"}, AssemblyQualifiedName = {systemUnderTest.AssemblyQualifiedName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.UiObject: Value = {systemUnderTest.Value?.ToString() ?? "<null>"}, UiObjectType = {systemUnderTest.UiObjectType?.ToString() ?? "<null>"}, AssemblyQualifiedName = {systemUnderTest.AssemblyQualifiedName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -65,7 +65,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new UiObject(
                                              null,
-                                             (UiObjectType?)referenceObject.UiObjectType,
+                                             referenceObject.UiObjectType,
                                              referenceObject.AssemblyQualifiedName);
 
                         return result;
@@ -83,7 +83,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new UiObject(
                                              referenceObject.Value,
-                                             (UiObjectType?)referenceObject.UiObjectType,
+                                             referenceObject.UiObjectType,
                                              null);
 
                         return result;
@@ -101,7 +101,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new UiObject(
                                              referenceObject.Value,
-                                             (UiObjectType?)referenceObject.UiObjectType,
+                                             referenceObject.UiObjectType,
                                              Invariant($"  {Environment.NewLine}  "));
 
                         return result;
@@ -123,7 +123,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new UiObject(
                                                       referenceObject.Value,
-                                                      (UiObjectType?)referenceObject.UiObjectType,
+                                                      referenceObject.UiObjectType,
                                                       referenceObject.AssemblyQualifiedName),
                             ExpectedPropertyValue = referenceObject.Value,
                         };
@@ -144,7 +144,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new UiObject(
                                                       referenceObject.Value,
-                                                      (UiObjectType?)referenceObject.UiObjectType,
+                                                      referenceObject.UiObjectType,
                                                       referenceObject.AssemblyQualifiedName),
                             ExpectedPropertyValue = referenceObject.UiObjectType,
                         };
@@ -165,7 +165,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new UiObject(
                                                       referenceObject.Value,
-                                                      (UiObjectType?)referenceObject.UiObjectType,
+                                                      referenceObject.UiObjectType,
                                                       referenceObject.AssemblyQualifiedName),
                             ExpectedPropertyValue = referenceObject.AssemblyQualifiedName,
                         };
@@ -249,22 +249,22 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new UiObject(
                                 ReferenceObjectForEquatableTestScenarios.Value,
-                                (UiObjectType?)ReferenceObjectForEquatableTestScenarios.UiObjectType,
+                                ReferenceObjectForEquatableTestScenarios.UiObjectType,
                                 ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new UiObject[]
                     {
                         new UiObject(
                                 A.Dummy<UiObject>().Whose(_ => !_.Value.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Value)).Value,
-                                (UiObjectType?)ReferenceObjectForEquatableTestScenarios.UiObjectType,
+                                ReferenceObjectForEquatableTestScenarios.UiObjectType,
                                 ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
                         new UiObject(
                                 ReferenceObjectForEquatableTestScenarios.Value,
-                                (UiObjectType?)A.Dummy<UiObject>().Whose(_ => !_.UiObjectType.IsEqualTo(ReferenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
+                                A.Dummy<UiObject>().Whose(_ => !_.UiObjectType.IsEqualTo(ReferenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
                                 ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
                         new UiObject(
                                 ReferenceObjectForEquatableTestScenarios.Value,
-                                (UiObjectType?)ReferenceObjectForEquatableTestScenarios.UiObjectType,
+                                ReferenceObjectForEquatableTestScenarios.UiObjectType,
                                 A.Dummy<UiObject>().Whose(_ => !_.AssemblyQualifiedName.IsEqualTo(ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName)).AssemblyQualifiedName),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]

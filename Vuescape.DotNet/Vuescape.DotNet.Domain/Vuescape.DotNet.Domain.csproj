@@ -155,6 +155,7 @@
     <Compile Include="TreeTable\TreeTableRow.designer.cs">
       <DependentUpon>TreeTableRow.cs</DependentUpon>
     </Compile>
+    <Compile Include="UiObject\UiObjectExtensions.cs" />
     <Compile Include="UiObject\SlottedUiObject.cs" />
     <Compile Include="UiObject\SlottedUiObject.designer.cs">
       <DependentUpon>SlottedUiObject.cs</DependentUpon>

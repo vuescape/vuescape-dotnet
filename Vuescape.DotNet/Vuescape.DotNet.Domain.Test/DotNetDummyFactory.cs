@@ -169,6 +169,47 @@ namespace Vuescape.DotNet.Domain.Test
                         children);
         });
 
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var randomNumber = ThreadSafeRandom.Next(0, 4);
+
+                    UiObject result;
+
+                    if (randomNumber == 0)
+                    {
+                        result = new UiObject(null);
+                    }
+                    else if (randomNumber == 1)
+                    {
+                        var candidateValues = new object[]
+                        {
+                            A.Dummy<bool>(),
+                            A.Dummy<DateTime>(),
+                            A.Dummy<decimal>(),
+                            A.Dummy<Guid>(),
+                            A.Dummy<int>(),
+                            A.Dummy<long>(),
+                            A.Dummy<short>(),
+                            A.Dummy<string>(),
+                        };
+
+                        var value = candidateValues[ThreadSafeRandom.Next(0, candidateValues.Length)];
+
+                        result = new UiObject(value);
+                    }
+                    else if (randomNumber == 2)
+                    {
+                        result = new UiObject(A.Dummy<Link>());
+                    }
+                    else
+                    {
+                        result = new UiObject(A.Dummy<UiObjectType>());
+                    }
+
+                    return result;
+                });
+
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(LinkTarget.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UiObjectType.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ContentKind.None);

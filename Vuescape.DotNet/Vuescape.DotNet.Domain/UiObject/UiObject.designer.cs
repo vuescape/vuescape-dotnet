@@ -94,7 +94,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new UiObject(
                                  this.Value?.DeepClone(),
-                                 (UiObjectType?)this.UiObjectType.DeepClone(),
+                                 this.UiObjectType?.DeepClone(),
                                  this.AssemblyQualifiedName?.DeepClone());
 
             return result;
@@ -126,7 +126,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new UiObject(
                                  value,
-                                 (UiObjectType?)this.UiObjectType.DeepClone(),
+                                 this.UiObjectType?.DeepClone(),
                                  this.AssemblyQualifiedName?.DeepClone());
 
             return result;
@@ -154,11 +154,11 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public UiObject DeepCloneWithUiObjectType(UiObjectType uiObjectType)
+        public UiObject DeepCloneWithUiObjectType(UiObjectType? uiObjectType)
         {
             var result = new UiObject(
                                  this.Value?.DeepClone(),
-                                 (UiObjectType?)uiObjectType,
+                                 uiObjectType,
                                  this.AssemblyQualifiedName?.DeepClone());
 
             return result;
@@ -190,7 +190,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new UiObject(
                                  this.Value?.DeepClone(),
-                                 (UiObjectType?)this.UiObjectType.DeepClone(),
+                                 this.UiObjectType?.DeepClone(),
                                  assemblyQualifiedName);
 
             return result;
@@ -200,7 +200,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.UiObject: Value = {this.Value?.ToString() ?? "<null>"}, UiObjectType = {this.UiObjectType.ToString() ?? "<null>"}, AssemblyQualifiedName = {this.AssemblyQualifiedName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.UiObject: Value = {this.Value?.ToString() ?? "<null>"}, UiObjectType = {this.UiObjectType?.ToString() ?? "<null>"}, AssemblyQualifiedName = {this.AssemblyQualifiedName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

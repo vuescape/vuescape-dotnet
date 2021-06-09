@@ -8,28 +8,27 @@
 namespace Vuescape.DotNet.Domain
 {
     using System;
-    using System.Collections.Generic;
 
-    using OBeautifulCode.Assertion.Recipes;
-    using OBeautifulCode.Representation.System;
     using OBeautifulCode.Type;
+
+    using static System.FormattableString;
 
     /// <summary>
     /// This class wraps an <see cref="object"/> and stores a <see cref="UiObjectType"/> describing the type of the object.
     /// </summary>
     public partial class UiObject : IModelViaCodeGen
     {
-        private static readonly IReadOnlyDictionary<Type, UiObjectType> TypeToUiObjectTypeMap = new Dictionary<Type, UiObjectType>()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UiObject"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This class wraps an object and assigns a <see cref="UiObjectType"/> so that an object can be serialized to and from the UI.
+        /// </remarks>
+        /// <param name="value">The object value.</param>
+        public UiObject(object value)
+        : this(value, value?.GetUiObjectType(), value?.GetUiObjectAssemblyQualifiedName())
         {
-            { typeof(bool), UiObjectType.Bool },
-            { typeof(string), UiObjectType.String },
-            { typeof(short), UiObjectType.Short },
-            { typeof(int), UiObjectType.Int },
-            { typeof(long), UiObjectType.Long },
-            { typeof(decimal), UiObjectType.Decimal },
-            { typeof(DateTime), UiObjectType.DateTime },
-            { typeof(Guid), UiObjectType.Guid },
-        };
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UiObject"/> class.
@@ -38,58 +37,38 @@ namespace Vuescape.DotNet.Domain
         /// This class wraps an object and assigns a <see cref="UiObjectType"/> so that an object can be serialized to and from the UI.
         /// </remarks>
         /// <param name="value">The object value.</param>
-        /// <param name="uiObjectType">The UiObjectType of the value. Only required when object value is null.</param>
-        /// <param name="assemblyQualifiedName">The assembly qualified name of the value. Only required when object value is null.</param>
+        /// <param name="uiObjectType">The <see cref="UiObjectType"/>.</param>
+        /// <param name="assemblyQualifiedName">The assembly qualified name.</param>
 #pragma warning disable SA1305 // Field names should not use Hungarian notation
-        public UiObject(object value, UiObjectType? uiObjectType = null, string assemblyQualifiedName = null)
+        public UiObject(
+            object value,
+            UiObjectType? uiObjectType,
+            string assemblyQualifiedName)
 #pragma warning restore SA1305 // Field names should not use Hungarian notation
         {
-            if (uiObjectType != null)
-            {
-                new { uiObjectType.Value }.AsArg(nameof(uiObjectType)).Must().NotBeEqualTo(UiObjectType.None);
-            }
-
-            if (assemblyQualifiedName != null)
-            {
-                new { uiObjectType }.AsArg().Must().NotBeNull();
-            }
-
             if (value == null)
             {
-                new { uiObjectType }.AsArg().Must().NotBeNull();
-
-                // ReSharper disable once PossibleInvalidOperationException
-                this.UiObjectType = (UiObjectType)uiObjectType;
-
-                if (uiObjectType == UiObjectType.Enum || uiObjectType == UiObjectType.SpecifiedType)
+                if (uiObjectType != null)
                 {
-                    new { assemblyQualifiedName }.AsArg().Must().NotBeNullNorWhiteSpace();
-                    this.AssemblyQualifiedName = assemblyQualifiedName;
+                    throw new ArgumentException(Invariant($"{nameof(value)} is null but {nameof(uiObjectType)} is not null."));
+                }
+            }
+            else
+            {
+                if (uiObjectType == null)
+                {
+                    throw new ArgumentException(Invariant($"{nameof(value)} is not null but {nameof(uiObjectType)} is null."));
                 }
 
-                return;
-            }
-
-            var valueType = value.GetType();
-            if (!TypeToUiObjectTypeMap.TryGetValue(valueType, out var mappedUiObjectType))
-            {
-                mappedUiObjectType = valueType.IsEnum ? UiObjectType.Enum : UiObjectType.SpecifiedType;
-                this.AssemblyQualifiedName = valueType.ToRepresentation().RemoveAssemblyVersions().BuildAssemblyQualifiedName();
-            }
-
-            // throw new NotSupportedException(Invariant($@"Object of type {value.GetType()} is not supported.  Supported types are defined in {nameof(Domain.UiObjectType)} and consist of the following {string.Join(",", typeof(UiObjectType).GetEnumNames())}."));
-            if (uiObjectType != null)
-            {
-                new { uiObjectType.Value }.AsArg(nameof(uiObjectType)).Must().BeEqualTo(mappedUiObjectType);
-            }
-
-            if (assemblyQualifiedName != null)
-            {
-                new { assemblyQualifiedName }.AsArg().Must().BeEqualTo(this.AssemblyQualifiedName);
+                if (((uiObjectType == Domain.UiObjectType.Enum) || (uiObjectType == Domain.UiObjectType.SpecifiedType)) && string.IsNullOrWhiteSpace(assemblyQualifiedName))
+                {
+                    throw new ArgumentException(Invariant($"{nameof(assemblyQualifiedName)} is expected when {nameof(uiObjectType)} is in this set: [{Domain.UiObjectType.Enum}, {Domain.UiObjectType.SpecifiedType}]."));
+                }
             }
 
             this.Value = value;
-            this.UiObjectType = mappedUiObjectType;
+            this.UiObjectType = uiObjectType;
+            this.AssemblyQualifiedName = assemblyQualifiedName;
         }
 
         /// <summary>
@@ -100,7 +79,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the <see cref="UiObjectType"/>.
         /// </summary>
-        public UiObjectType UiObjectType { get; private set; }
+        public UiObjectType? UiObjectType { get; private set; }
 
         /// <summary>
         /// Gets the assembly qualified name.

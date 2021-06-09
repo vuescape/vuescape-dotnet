@@ -81,5 +81,33 @@ namespace Vuescape.DotNet.Domain
 
             return result;
         }
+
+        /// <summary>
+        /// Determines whether an assembly qualified name is needed for a specified <see cref="UiObjectType"/>.
+        /// </summary>
+        /// <param name="uiObjectType">The UI object type.</param>
+        /// <returns>
+        /// true if the assembly qualified name is needed for the specified <see cref="UiObjectType"/>, otherwise false.
+        /// </returns>
+        public static bool RequiresAssemblyQualifiedName(
+            this UiObjectType? uiObjectType)
+        {
+            bool result;
+
+            if (uiObjectType == null)
+            {
+                result = false;
+            }
+            else if ((uiObjectType == UiObjectType.Enum) || (uiObjectType == UiObjectType.SpecifiedType))
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
+        }
     }
 }

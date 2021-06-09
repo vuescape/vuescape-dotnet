@@ -62,7 +62,7 @@ namespace Vuescape.DotNet.Domain.Test
                 })
                 .AddScenario(() =>
                 {
-                    var referenceObjectForEquatableTestScenarios = A.Dummy<UiObject>().Whose(_ => (_.Value != null) && (_.UiObjectType != UiObjectType.Enum) && (_.UiObjectType != UiObjectType.SpecifiedType));
+                    var referenceObjectForEquatableTestScenarios = A.Dummy<UiObject>().Whose(_ => (_.Value != null) && (!_.UiObjectType.RequiresAssemblyQualifiedName()));
 
                     var result = new EquatableTestScenario<UiObject>
                     {
@@ -78,12 +78,12 @@ namespace Vuescape.DotNet.Domain.Test
                         ObjectsThatAreNotEqualToReferenceObject = new[]
                         {
                             new UiObject(
-                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && (_.UiObjectType != UiObjectType.Enum) && (_.UiObjectType != UiObjectType.SpecifiedType) && (!_.Value.IsEqualTo(referenceObjectForEquatableTestScenarios.Value))).Value,
+                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && (!_.UiObjectType.RequiresAssemblyQualifiedName()) && (!_.Value.IsEqualTo(referenceObjectForEquatableTestScenarios.Value))).Value,
                                 referenceObjectForEquatableTestScenarios.UiObjectType,
                                 referenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
                             new UiObject(
                                 referenceObjectForEquatableTestScenarios.Value,
-                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && (_.UiObjectType != UiObjectType.Enum) && (_.UiObjectType != UiObjectType.SpecifiedType) && (_.UiObjectType != referenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
+                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && (!_.UiObjectType.RequiresAssemblyQualifiedName()) && (_.UiObjectType != referenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
                                 referenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
                         },
                         ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
@@ -100,7 +100,7 @@ namespace Vuescape.DotNet.Domain.Test
                 })
                 .AddScenario(() =>
                 {
-                    var referenceObjectForEquatableTestScenarios = A.Dummy<UiObject>().Whose(_ => (_.Value != null) && ((_.UiObjectType == UiObjectType.Enum) || (_.UiObjectType == UiObjectType.SpecifiedType)));
+                    var referenceObjectForEquatableTestScenarios = A.Dummy<UiObject>().Whose(_ => (_.Value != null) && _.UiObjectType.RequiresAssemblyQualifiedName());
 
                     var result = new EquatableTestScenario<UiObject>
                     {
@@ -116,17 +116,17 @@ namespace Vuescape.DotNet.Domain.Test
                         ObjectsThatAreNotEqualToReferenceObject = new UiObject[]
                         {
                             new UiObject(
-                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && ((_.UiObjectType == UiObjectType.Enum) || (_.UiObjectType == UiObjectType.SpecifiedType)) && (!_.Value.IsEqualTo(referenceObjectForEquatableTestScenarios.Value))).Value,
+                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && _.UiObjectType.RequiresAssemblyQualifiedName() && (!_.Value.IsEqualTo(referenceObjectForEquatableTestScenarios.Value))).Value,
                                 referenceObjectForEquatableTestScenarios.UiObjectType,
                                 referenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
                             new UiObject(
                                 referenceObjectForEquatableTestScenarios.Value,
-                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && ((_.UiObjectType == UiObjectType.Enum) || (_.UiObjectType == UiObjectType.SpecifiedType)) && (_.UiObjectType != referenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
+                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && _.UiObjectType.RequiresAssemblyQualifiedName() && (_.UiObjectType != referenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
                                 referenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
                             new UiObject(
                                 referenceObjectForEquatableTestScenarios.Value,
                                 referenceObjectForEquatableTestScenarios.UiObjectType,
-                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && ((_.UiObjectType == UiObjectType.Enum) || (_.UiObjectType == UiObjectType.SpecifiedType)) && (_.AssemblyQualifiedName != referenceObjectForEquatableTestScenarios.AssemblyQualifiedName)).AssemblyQualifiedName),
+                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && _.UiObjectType.RequiresAssemblyQualifiedName() && (_.AssemblyQualifiedName != referenceObjectForEquatableTestScenarios.AssemblyQualifiedName)).AssemblyQualifiedName),
                         },
                         ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                         {
@@ -170,9 +170,9 @@ namespace Vuescape.DotNet.Domain.Test
                         WithPropertyName = "AssemblyQualifiedName",
                         SystemUnderTestDeepCloneWithValueFunc = () =>
                         {
-                            var systemUnderTest = A.Dummy<UiObject>().Whose(_ => (_.UiObjectType == UiObjectType.Enum) || (_.UiObjectType == UiObjectType.SpecifiedType));
+                            var systemUnderTest = A.Dummy<UiObject>().Whose(_ => _.UiObjectType.RequiresAssemblyQualifiedName());
 
-                            var referenceObject = A.Dummy<UiObject>().ThatIs(_ => ((_.UiObjectType == UiObjectType.Enum) || (_.UiObjectType == UiObjectType.SpecifiedType)) && !systemUnderTest.AssemblyQualifiedName.IsEqualTo(_.AssemblyQualifiedName));
+                            var referenceObject = A.Dummy<UiObject>().ThatIs(_ => _.UiObjectType.RequiresAssemblyQualifiedName() && (!systemUnderTest.AssemblyQualifiedName.IsEqualTo(_.AssemblyQualifiedName)));
 
                             var result = new SystemUnderTestDeepCloneWithValue<UiObject>
                             {

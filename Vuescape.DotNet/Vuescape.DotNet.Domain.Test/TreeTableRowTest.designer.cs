@@ -65,7 +65,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              null,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              referenceObject.CssStyle,
@@ -76,7 +76,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -93,7 +93,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              Invariant($"  {Environment.NewLine}  "),
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              referenceObject.CssStyle,
@@ -104,7 +104,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -132,7 +132,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -160,7 +160,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -177,7 +177,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             new TreeTableCell[0].Concat((IReadOnlyList<TreeTableCell>)referenceObject.Cells).Concat(new TreeTableCell[] { null }).Concat((IReadOnlyList<TreeTableCell>)referenceObject.Cells).ToList(),
+                                             new TreeTableCell[0].Concat(referenceObject.Cells).Concat(new TreeTableCell[] { null }).Concat(referenceObject.Cells).ToList(),
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              referenceObject.CssStyle,
@@ -188,7 +188,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -205,7 +205,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              null,
                                              referenceObject.CssStyle,
@@ -216,7 +216,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -233,7 +233,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.CssStyle,
@@ -244,7 +244,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -261,7 +261,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              null,
@@ -272,7 +272,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -289,7 +289,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              Invariant($"  {Environment.NewLine}  "),
@@ -300,7 +300,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -317,7 +317,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              referenceObject.CssStyle,
@@ -328,7 +328,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -345,7 +345,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              referenceObject.CssStyle,
@@ -356,7 +356,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -373,7 +373,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              referenceObject.CssStyle,
@@ -384,7 +384,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              null,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -401,7 +401,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              referenceObject.CssStyle,
@@ -412,7 +412,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              new Dictionary<string, Link>(),
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -435,7 +435,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              referenceObject.CssStyle,
@@ -446,7 +446,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              dictionaryWithNullValue,
-                                             (IReadOnlyList<TreeTableRow>)referenceObject.Children);
+                                             referenceObject.Children);
 
                         return result;
                     },
@@ -463,7 +463,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              referenceObject.CssStyle,
@@ -491,7 +491,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              referenceObject.CssStyle,
@@ -519,7 +519,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTableRow(
                                              referenceObject.Id,
-                                             (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                             referenceObject.Cells,
                                              referenceObject.Depth,
                                              referenceObject.CssClasses,
                                              referenceObject.CssStyle,
@@ -530,7 +530,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.IsSelected,
                                              referenceObject.IsFocused,
                                              referenceObject.Links,
-                                             new TreeTableRow[0].Concat((IReadOnlyList<TreeTableRow>)referenceObject.Children).Concat(new TreeTableRow[] { null }).Concat((IReadOnlyList<TreeTableRow>)referenceObject.Children).ToList());
+                                             new TreeTableRow[0].Concat(referenceObject.Children).Concat(new TreeTableRow[] { null }).Concat(referenceObject.Children).ToList());
 
                         return result;
                     },
@@ -551,7 +551,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -562,7 +562,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
 
@@ -582,7 +582,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -593,7 +593,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.Cells,
                         };
 
@@ -613,7 +613,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -624,7 +624,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.Depth,
                         };
 
@@ -644,7 +644,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -655,7 +655,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.CssClasses,
                         };
 
@@ -675,7 +675,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -686,7 +686,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.CssStyle,
                         };
 
@@ -706,7 +706,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -717,7 +717,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.Renderer,
                         };
 
@@ -737,7 +737,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -748,7 +748,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.IsExpandable,
                         };
 
@@ -768,7 +768,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -779,7 +779,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.IsExpanded,
                         };
 
@@ -799,7 +799,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -810,7 +810,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.IsVisible,
                         };
 
@@ -830,7 +830,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -841,7 +841,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.IsSelected,
                         };
 
@@ -861,7 +861,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -872,7 +872,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.IsFocused,
                         };
 
@@ -892,7 +892,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -903,7 +903,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.Links,
                         };
 
@@ -923,7 +923,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTableRow(
                                                       referenceObject.Id,
-                                                      (IReadOnlyList<TreeTableCell>)referenceObject.Cells,
+                                                      referenceObject.Cells,
                                                       referenceObject.Depth,
                                                       referenceObject.CssClasses,
                                                       referenceObject.CssStyle,
@@ -934,7 +934,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.IsSelected,
                                                       referenceObject.IsFocused,
                                                       referenceObject.Links,
-                                                      (IReadOnlyList<TreeTableRow>)referenceObject.Children),
+                                                      referenceObject.Children),
                             ExpectedPropertyValue = referenceObject.Children,
                         };
 
@@ -1217,7 +1217,7 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1228,13 +1228,13 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TreeTableRow[]
                     {
                         new TreeTableRow(
                                 A.Dummy<TreeTableRow>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1245,10 +1245,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)A.Dummy<TreeTableRow>().Whose(_ => !_.Cells.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Cells)).Cells,
+                                A.Dummy<TreeTableRow>().Whose(_ => !_.Cells.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Cells)).Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1259,10 +1259,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 A.Dummy<TreeTableRow>().Whose(_ => !_.CssClasses.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssClasses)).CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1273,10 +1273,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 A.Dummy<TreeTableRow>().Whose(_ => !_.CssStyle.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyle)).CssStyle,
@@ -1287,10 +1287,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1301,10 +1301,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 A.Dummy<TreeTableRow>().Whose(_ => !_.Depth.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Depth)).Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1315,10 +1315,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1329,10 +1329,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1343,10 +1343,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1357,10 +1357,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1371,10 +1371,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 A.Dummy<TreeTableRow>().Whose(_ => !_.IsSelected.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsSelected)).IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1385,10 +1385,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 A.Dummy<TreeTableRow>().Whose(_ => !_.IsFocused.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsFocused)).IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1399,10 +1399,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 A.Dummy<TreeTableRow>().Whose(_ => !_.Links.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Links)).Links,
-                                (IReadOnlyList<TreeTableRow>)ReferenceObjectForEquatableTestScenarios.Children),
+                                ReferenceObjectForEquatableTestScenarios.Children),
                         new TreeTableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                (IReadOnlyList<TreeTableCell>)ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.Depth,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle,
@@ -1413,7 +1413,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.IsSelected,
                                 ReferenceObjectForEquatableTestScenarios.IsFocused,
                                 ReferenceObjectForEquatableTestScenarios.Links,
-                                (IReadOnlyList<TreeTableRow>)A.Dummy<TreeTableRow>().Whose(_ => !_.Children.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Children)).Children),
+                                A.Dummy<TreeTableRow>().Whose(_ => !_.Children.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Children)).Children),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -2560,7 +2560,7 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
         public static class Hashing
         {
-            [Fact(Skip = "It's possible (and even probable after a few runs of this test) that two dummy, unequal models will have the same hash code.  The model being tested contains at least one property who's type (or a type nested within the generic type, or a property of the IModel type) is a dictionary with keys that are not comparable or an unordered collection with elements that are not comparable.  In these cases the hashing method cannot hash the elements and must resort to hashing the element count.  Two dummies could easily have the same element count for such a type.")]
+            [Fact]
             [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
             [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
             [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]

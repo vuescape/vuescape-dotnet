@@ -114,7 +114,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -125,7 +125,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -156,7 +156,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  id,
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -167,7 +167,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -194,11 +194,11 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTableRow DeepCloneWithCells(IReadOnlyCollection<TreeTableCell> cells)
+        public TreeTableRow DeepCloneWithCells(IReadOnlyList<TreeTableCell> cells)
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)cells,
+                                 cells,
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -209,7 +209,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -240,7 +240,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  cssClasses,
                                  this.CssStyle?.DeepClone(),
@@ -251,7 +251,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -282,7 +282,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  cssStyle,
@@ -293,7 +293,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -324,7 +324,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -335,7 +335,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -366,7 +366,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  depth,
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -377,7 +377,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -408,7 +408,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -419,7 +419,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -450,7 +450,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -461,7 +461,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -492,7 +492,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -503,7 +503,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -534,7 +534,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -545,7 +545,7 @@ namespace Vuescape.DotNet.Domain
                                  isSelected,
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -576,7 +576,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -587,7 +587,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  isFocused,
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -618,7 +618,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -629,7 +629,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  links,
-                                 (IReadOnlyList<TreeTableRow>)this.Children?.DeepClone());
+                                 this.Children?.DeepClone());
 
             return result;
         }
@@ -656,11 +656,11 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTableRow DeepCloneWithChildren(IReadOnlyCollection<TreeTableRow> children)
+        public TreeTableRow DeepCloneWithChildren(IReadOnlyList<TreeTableRow> children)
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
-                                 (IReadOnlyList<TreeTableCell>)this.Cells?.DeepClone(),
+                                 this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
                                  this.CssStyle?.DeepClone(),
@@ -671,7 +671,7 @@ namespace Vuescape.DotNet.Domain
                                  this.IsSelected.DeepClone(),
                                  this.IsFocused?.DeepClone(),
                                  this.Links?.DeepClone(),
-                                 (IReadOnlyList<TreeTableRow>)children);
+                                 children);
 
             return result;
         }

@@ -73,7 +73,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets a collection of items.
         /// </summary>
-        public IReadOnlyCollection<TreeTableCell> Cells { get; private set; }
+        public IReadOnlyList<TreeTableCell> Cells { get; private set; }
 
         /// <summary>
         /// Gets the CssClasses.
@@ -128,6 +128,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the children tree table rows.
         /// </summary>
-        public IReadOnlyCollection<TreeTableRow> Children { get; private set; }
+        public IReadOnlyList<TreeTableRow> Children { get; private set; }
     }
 }

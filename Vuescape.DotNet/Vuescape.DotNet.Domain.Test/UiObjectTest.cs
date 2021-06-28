@@ -78,12 +78,12 @@ namespace Vuescape.DotNet.Domain.Test
                         ObjectsThatAreNotEqualToReferenceObject = new[]
                         {
                             new UiObject(
-                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && (!_.UiObjectType.RequiresAssemblyQualifiedName()) && (!_.Value.IsEqualTo(referenceObjectForEquatableTestScenarios.Value))).Value,
+                                A.Dummy<UiObject>().Whose(_ => (_.Value != null) && (!_.UiObjectType.RequiresAssemblyQualifiedName()) && (!_.Value.IsEqualTo(referenceObjectForEquatableTestScenarios.Value))).Value,
                                 referenceObjectForEquatableTestScenarios.UiObjectType,
                                 referenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
                             new UiObject(
                                 referenceObjectForEquatableTestScenarios.Value,
-                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && (!_.UiObjectType.RequiresAssemblyQualifiedName()) && (_.UiObjectType != referenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
+                                A.Dummy<UiObject>().Whose(_ => (_.Value != null) && (!_.UiObjectType.RequiresAssemblyQualifiedName()) && (_.UiObjectType != referenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
                                 referenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
                         },
                         ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
@@ -116,17 +116,17 @@ namespace Vuescape.DotNet.Domain.Test
                         ObjectsThatAreNotEqualToReferenceObject = new UiObject[]
                         {
                             new UiObject(
-                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && _.UiObjectType.RequiresAssemblyQualifiedName() && (!_.Value.IsEqualTo(referenceObjectForEquatableTestScenarios.Value))).Value,
+                                A.Dummy<UiObject>().Whose(_ => (_.Value != null) && _.UiObjectType.RequiresAssemblyQualifiedName() && (!_.Value.IsEqualTo(referenceObjectForEquatableTestScenarios.Value))).Value,
                                 referenceObjectForEquatableTestScenarios.UiObjectType,
                                 referenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
                             new UiObject(
                                 referenceObjectForEquatableTestScenarios.Value,
-                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && _.UiObjectType.RequiresAssemblyQualifiedName() && (_.UiObjectType != referenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
+                                A.Dummy<UiObject>().Whose(_ => (_.Value != null) && _.UiObjectType.RequiresAssemblyQualifiedName() && (_.UiObjectType != referenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
                                 referenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
                             new UiObject(
                                 referenceObjectForEquatableTestScenarios.Value,
                                 referenceObjectForEquatableTestScenarios.UiObjectType,
-                                A.Dummy<UiObject>().Whose(_=> (_.Value != null) && _.UiObjectType.RequiresAssemblyQualifiedName() && (_.AssemblyQualifiedName != referenceObjectForEquatableTestScenarios.AssemblyQualifiedName)).AssemblyQualifiedName),
+                                A.Dummy<UiObject>().Whose(_ => (_.Value != null) && _.UiObjectType.RequiresAssemblyQualifiedName() && (_.AssemblyQualifiedName != referenceObjectForEquatableTestScenarios.AssemblyQualifiedName)).AssemblyQualifiedName),
                         },
                         ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                         {

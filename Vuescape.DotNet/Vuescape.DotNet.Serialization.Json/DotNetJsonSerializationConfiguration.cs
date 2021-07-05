@@ -9,10 +9,15 @@ namespace Vuescape.DotNet.Serialization.Json
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Naos.Protocol.Serialization.Json;
+
+    using OBeautifulCode.Serialization;
     using OBeautifulCode.Serialization.Json;
     using OBeautifulCode.Type;
     using OBeautifulCode.Type.Recipes;
+
+    using Vuescape.DotNet.Domain;
 
     /// <inheritdoc />
     public class DotNetJsonSerializationConfiguration : JsonSerializationConfigurationBase
@@ -32,10 +37,20 @@ namespace Vuescape.DotNet.Serialization.Json
             };
 
         /// <inheritdoc />
-        protected override IReadOnlyCollection<TypeToRegisterForJson> TypesToRegisterForJson => new Type[0]
-            .Concat(new[] { typeof(IModel) })
-            .Concat(Vuescape.DotNet.Domain.ProjectInfo.Assembly.GetPublicEnumTypes())
-            .Select(_ => _.ToTypeToRegisterForJson())
+        protected override IReadOnlyCollection<TypeToRegisterForJson> TypesToRegisterForJson => new[]
+            {
+                new TypeToRegisterForJson(
+                    typeof(UiObject),
+                    MemberTypesToInclude.None,
+                    RelatedTypesToInclude.None,
+                    new JsonConverterBuilder("ui-object-converter", () => new UiObjectReaderJsonConverter(this), () => new UiObjectReaderJsonConverter(this)),
+                    null),
+            }
+            .Concat(
+                new Type[0]
+                    .Concat(new[] { typeof(IModel) })
+                    .Concat(Vuescape.DotNet.Domain.ProjectInfo.Assembly.GetPublicEnumTypes())
+                    .Select(_ => _.ToTypeToRegisterForJson()))
             .ToList();
     }
 }

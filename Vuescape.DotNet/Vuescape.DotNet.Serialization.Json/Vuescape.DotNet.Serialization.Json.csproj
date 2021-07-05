@@ -87,6 +87,7 @@
     <Compile Include=".recipes\OBeautifulCode.Assertion\WorkflowExtensions.cs" />
     <Compile Include=".recipes\OBeautifulCode.CodeAnalysis\ObcSuppressBecause.cs" />
     <Compile Include=".recipes\OBeautifulCode.Collection\EnumerableExtensions.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Enum\EnumExtensions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\ByteArrayEqualityComparer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\DateTimeEqualityComparer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\DictionaryEqualityComparer.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="DotNetJsonSerializationConfiguration.cs" />
     <Compile Include="Properties\ProjectInfo.cs" />
     <AdditionalFiles Include=".analyzers\stylecop.json" />
+    <Compile Include="UiObjectReaderJsonConverter.cs" />
     <None Include=".analyzers\release.ruleset" />
     <None Include="packages.config" />
     <None Include="Vuescape.DotNet.Serialization.Json.override-nuspec" />

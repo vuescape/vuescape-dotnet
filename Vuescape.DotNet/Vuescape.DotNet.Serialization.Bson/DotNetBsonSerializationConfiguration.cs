@@ -9,10 +9,15 @@ namespace Vuescape.DotNet.Serialization.Bson
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Naos.Protocol.Serialization.Bson;
+
+    using OBeautifulCode.Serialization;
     using OBeautifulCode.Serialization.Bson;
     using OBeautifulCode.Type;
     using OBeautifulCode.Type.Recipes;
+
+    using Vuescape.DotNet.Domain;
 
     /// <inheritdoc />
     public class DotNetBsonSerializationConfiguration : BsonSerializationConfigurationBase
@@ -32,10 +37,20 @@ namespace Vuescape.DotNet.Serialization.Bson
             };
 
         /// <inheritdoc />
-        protected override IReadOnlyCollection<TypeToRegisterForBson> TypesToRegisterForBson => new Type[0]
-            .Concat(new[] { typeof(IModel) })
-            .Concat(Vuescape.DotNet.Domain.ProjectInfo.Assembly.GetPublicEnumTypes())
-            .Select(_ => _.ToTypeToRegisterForBson())
+        protected override IReadOnlyCollection<TypeToRegisterForBson> TypesToRegisterForBson => new[]
+            {
+                new TypeToRegisterForBson(
+                    typeof(UiObject),
+                    MemberTypesToInclude.None,
+                    RelatedTypesToInclude.None,
+                    new BsonSerializerBuilder(() => new UiObjectBsonSerializer(), BsonSerializerOutputKind.Object),
+                    null),
+            }
+            .Concat(
+                new Type[0]
+                    .Concat(new[] { typeof(IModel) })
+                    .Concat(Vuescape.DotNet.Domain.ProjectInfo.Assembly.GetPublicEnumTypes())
+                    .Select(_ => _.ToTypeToRegisterForBson()))
             .ToList();
     }
 }

@@ -15,6 +15,8 @@ namespace Vuescape.DotNet.Domain
     using global::System.Globalization;
     using global::System.Linq;
 
+    using global::Naos.Protocol.Domain;
+
     using global::OBeautifulCode.Cloning.Recipes;
     using global::OBeautifulCode.Equality.Recipes;
     using global::OBeautifulCode.Type;
@@ -23,15 +25,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class TreeTable : IModel<TreeTable>
+    public partial class ConvertObcToVuescapeTreeTableOp : IModel<ConvertObcToVuescapeTreeTableOp>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="TreeTable"/> are equal.
+        /// Determines whether two objects of type <see cref="ConvertObcToVuescapeTreeTableOp"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(TreeTable left, TreeTable right)
+        public static bool operator ==(ConvertObcToVuescapeTreeTableOp left, ConvertObcToVuescapeTreeTableOp right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -49,15 +51,15 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="TreeTable"/> are not equal.
+        /// Determines whether two objects of type <see cref="ConvertObcToVuescapeTreeTableOp"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(TreeTable left, TreeTable right) => !(left == right);
+        public static bool operator !=(ConvertObcToVuescapeTreeTableOp left, ConvertObcToVuescapeTreeTableOp right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(TreeTable other)
+        public bool Equals(ConvertObcToVuescapeTreeTableOp other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -69,129 +71,130 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
-                      && this.Content.IsEqualTo(other.Content)
-                      && this.Behaviors.IsEqualTo(other.Behaviors);
+            var result = this.ObcTreeTable.IsEqualTo(other.ObcTreeTable)
+                      && this.TreeTableConversionMode.IsEqualTo(other.TreeTableConversionMode)
+                      && this.TokenToSubstitutionMap.IsEqualTo(other.TokenToSubstitutionMap);
 
             return result;
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as TreeTable);
+        public override bool Equals(object obj) => this == (obj as ConvertObcToVuescapeTreeTableOp);
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
-            .Hash(this.Id)
-            .Hash(this.Content)
-            .Hash(this.Behaviors)
+            .Hash(this.ObcTreeTable)
+            .Hash(this.TreeTableConversionMode)
+            .Hash(this.TokenToSubstitutionMap)
             .Value;
 
         /// <inheritdoc />
-        public object Clone() => this.DeepClone();
+        public new ConvertObcToVuescapeTreeTableOp DeepClone() => (ConvertObcToVuescapeTreeTableOp)this.DeepCloneInternal();
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="ObcTreeTable" />.
+        /// </summary>
+        /// <param name="obcTreeTable">The new <see cref="ObcTreeTable" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ConvertObcToVuescapeTreeTableOp" /> using the specified <paramref name="obcTreeTable" /> for <see cref="ObcTreeTable" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public ConvertObcToVuescapeTreeTableOp DeepCloneWithObcTreeTable(OBeautifulCode.DataStructure.TreeTable obcTreeTable)
+        {
+            var result = new ConvertObcToVuescapeTreeTableOp(
+                                 obcTreeTable,
+                                 this.TreeTableConversionMode.DeepClone(),
+                                 this.TokenToSubstitutionMap?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="TreeTableConversionMode" />.
+        /// </summary>
+        /// <param name="treeTableConversionMode">The new <see cref="TreeTableConversionMode" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ConvertObcToVuescapeTreeTableOp" /> using the specified <paramref name="treeTableConversionMode" /> for <see cref="TreeTableConversionMode" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public ConvertObcToVuescapeTreeTableOp DeepCloneWithTreeTableConversionMode(TreeTableConversionMode treeTableConversionMode)
+        {
+            var result = new ConvertObcToVuescapeTreeTableOp(
+                                 this.ObcTreeTable?.DeepClone(),
+                                 treeTableConversionMode,
+                                 this.TokenToSubstitutionMap?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="TokenToSubstitutionMap" />.
+        /// </summary>
+        /// <param name="tokenToSubstitutionMap">The new <see cref="TokenToSubstitutionMap" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ConvertObcToVuescapeTreeTableOp" /> using the specified <paramref name="tokenToSubstitutionMap" /> for <see cref="TokenToSubstitutionMap" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public ConvertObcToVuescapeTreeTableOp DeepCloneWithTokenToSubstitutionMap(IReadOnlyDictionary<string, string> tokenToSubstitutionMap)
+        {
+            var result = new ConvertObcToVuescapeTreeTableOp(
+                                 this.ObcTreeTable?.DeepClone(),
+                                 this.TreeTableConversionMode.DeepClone(),
+                                 tokenToSubstitutionMap);
+
+            return result;
+        }
 
         /// <inheritdoc />
-        public TreeTable DeepClone()
-        {
-            var result = new TreeTable(
-                                 this.Id?.DeepClone(),
-                                 this.Content?.DeepClone(),
-                                 this.Behaviors?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="Id" />.
-        /// </summary>
-        /// <param name="id">The new <see cref="Id" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="id" /> for <see cref="Id" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithId(string id)
+        protected override OperationBase DeepCloneInternal()
         {
-            var result = new TreeTable(
-                                 id,
-                                 this.Content?.DeepClone(),
-                                 this.Behaviors?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="Content" />.
-        /// </summary>
-        /// <param name="content">The new <see cref="Content" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="content" /> for <see cref="Content" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithContent(TreeTableContent content)
-        {
-            var result = new TreeTable(
-                                 this.Id?.DeepClone(),
-                                 content,
-                                 this.Behaviors?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="Behaviors" />.
-        /// </summary>
-        /// <param name="behaviors">The new <see cref="Behaviors" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="behaviors" /> for <see cref="Behaviors" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTable DeepCloneWithBehaviors(IReadOnlyCollection<ClientBehaviorBase> behaviors)
-        {
-            var result = new TreeTable(
-                                 this.Id?.DeepClone(),
-                                 this.Content?.DeepClone(),
-                                 behaviors);
+            var result = new ConvertObcToVuescapeTreeTableOp(
+                                 this.ObcTreeTable?.DeepClone(),
+                                 this.TreeTableConversionMode.DeepClone(),
+                                 this.TokenToSubstitutionMap?.DeepClone());
 
             return result;
         }
@@ -200,7 +203,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TreeTable: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Content = {this.Content?.ToString() ?? "<null>"}, Behaviors = {this.Behaviors?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ConvertObcToVuescapeTreeTableOp: ObcTreeTable = {this.ObcTreeTable?.ToString() ?? "<null>"}, TreeTableConversionMode = {this.TreeTableConversionMode.ToString() ?? "<null>"}, TokenToSubstitutionMap = {this.TokenToSubstitutionMap?.ToString() ?? "<null>"}.");
 
             return result;
         }

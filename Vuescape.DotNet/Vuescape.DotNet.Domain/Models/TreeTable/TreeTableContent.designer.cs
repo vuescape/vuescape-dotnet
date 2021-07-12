@@ -79,6 +79,7 @@ namespace Vuescape.DotNet.Domain
                       && this.ShouldFreezeFirstColumn.IsEqualTo(other.ShouldFreezeFirstColumn)
                       && this.DeadAreaColor.IsEqualTo(other.DeadAreaColor, StringComparer.Ordinal)
                       && this.MaxRows.IsEqualTo(other.MaxRows)
+                      && this.CssClass.IsEqualTo(other.CssClass, StringComparer.Ordinal)
                       && this.CssStyle.IsEqualTo(other.CssStyle, StringComparer.Ordinal);
 
             return result;
@@ -99,6 +100,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.ShouldFreezeFirstColumn)
             .Hash(this.DeadAreaColor)
             .Hash(this.MaxRows)
+            .Hash(this.CssClass)
             .Hash(this.CssStyle)
             .Value;
 
@@ -119,6 +121,7 @@ namespace Vuescape.DotNet.Domain
                                  this.ShouldFreezeFirstColumn.DeepClone(),
                                  this.DeadAreaColor?.DeepClone(),
                                  this.MaxRows?.DeepClone(),
+                                 this.CssClass?.DeepClone(),
                                  this.CssStyle?.DeepClone());
 
             return result;
@@ -159,6 +162,7 @@ namespace Vuescape.DotNet.Domain
                                  this.ShouldFreezeFirstColumn.DeepClone(),
                                  this.DeadAreaColor?.DeepClone(),
                                  this.MaxRows?.DeepClone(),
+                                 this.CssClass?.DeepClone(),
                                  this.CssStyle?.DeepClone());
 
             return result;
@@ -199,6 +203,7 @@ namespace Vuescape.DotNet.Domain
                                  this.ShouldFreezeFirstColumn.DeepClone(),
                                  this.DeadAreaColor?.DeepClone(),
                                  this.MaxRows?.DeepClone(),
+                                 this.CssClass?.DeepClone(),
                                  this.CssStyle?.DeepClone());
 
             return result;
@@ -239,6 +244,7 @@ namespace Vuescape.DotNet.Domain
                                  this.ShouldFreezeFirstColumn.DeepClone(),
                                  this.DeadAreaColor?.DeepClone(),
                                  this.MaxRows?.DeepClone(),
+                                 this.CssClass?.DeepClone(),
                                  this.CssStyle?.DeepClone());
 
             return result;
@@ -279,6 +285,7 @@ namespace Vuescape.DotNet.Domain
                                  this.ShouldFreezeFirstColumn.DeepClone(),
                                  this.DeadAreaColor?.DeepClone(),
                                  this.MaxRows?.DeepClone(),
+                                 this.CssClass?.DeepClone(),
                                  this.CssStyle?.DeepClone());
 
             return result;
@@ -319,6 +326,7 @@ namespace Vuescape.DotNet.Domain
                                  this.ShouldFreezeFirstColumn.DeepClone(),
                                  this.DeadAreaColor?.DeepClone(),
                                  this.MaxRows?.DeepClone(),
+                                 this.CssClass?.DeepClone(),
                                  this.CssStyle?.DeepClone());
 
             return result;
@@ -359,6 +367,7 @@ namespace Vuescape.DotNet.Domain
                                  this.ShouldFreezeFirstColumn.DeepClone(),
                                  this.DeadAreaColor?.DeepClone(),
                                  this.MaxRows?.DeepClone(),
+                                 this.CssClass?.DeepClone(),
                                  this.CssStyle?.DeepClone());
 
             return result;
@@ -399,6 +408,7 @@ namespace Vuescape.DotNet.Domain
                                  this.ShouldFreezeFirstColumn.DeepClone(),
                                  this.DeadAreaColor?.DeepClone(),
                                  this.MaxRows?.DeepClone(),
+                                 this.CssClass?.DeepClone(),
                                  this.CssStyle?.DeepClone());
 
             return result;
@@ -439,6 +449,7 @@ namespace Vuescape.DotNet.Domain
                                  shouldFreezeFirstColumn,
                                  this.DeadAreaColor?.DeepClone(),
                                  this.MaxRows?.DeepClone(),
+                                 this.CssClass?.DeepClone(),
                                  this.CssStyle?.DeepClone());
 
             return result;
@@ -479,6 +490,7 @@ namespace Vuescape.DotNet.Domain
                                  this.ShouldFreezeFirstColumn.DeepClone(),
                                  deadAreaColor,
                                  this.MaxRows?.DeepClone(),
+                                 this.CssClass?.DeepClone(),
                                  this.CssStyle?.DeepClone());
 
             return result;
@@ -519,6 +531,48 @@ namespace Vuescape.DotNet.Domain
                                  this.ShouldFreezeFirstColumn.DeepClone(),
                                  this.DeadAreaColor?.DeepClone(),
                                  maxRows,
+                                 this.CssClass?.DeepClone(),
+                                 this.CssStyle?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="CssClass" />.
+        /// </summary>
+        /// <param name="cssClass">The new <see cref="CssClass" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTableContent" /> using the specified <paramref name="cssClass" /> for <see cref="CssClass" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public TreeTableContent DeepCloneWithCssClass(string cssClass)
+        {
+            var result = new TreeTableContent(
+                                 this.Headers?.DeepClone(),
+                                 this.Rows?.DeepClone(),
+                                 this.ShouldScrollVertical.DeepClone(),
+                                 this.ShouldScrollHorizontal.DeepClone(),
+                                 this.ShouldSyncHeaderScroll.DeepClone(),
+                                 this.ShouldSyncFooterScroll.DeepClone(),
+                                 this.ShouldIncludeFooter.DeepClone(),
+                                 this.ShouldFreezeFirstColumn.DeepClone(),
+                                 this.DeadAreaColor?.DeepClone(),
+                                 this.MaxRows?.DeepClone(),
+                                 cssClass,
                                  this.CssStyle?.DeepClone());
 
             return result;
@@ -559,6 +613,7 @@ namespace Vuescape.DotNet.Domain
                                  this.ShouldFreezeFirstColumn.DeepClone(),
                                  this.DeadAreaColor?.DeepClone(),
                                  this.MaxRows?.DeepClone(),
+                                 this.CssClass?.DeepClone(),
                                  cssStyle);
 
             return result;
@@ -568,7 +623,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableContent: Headers = {this.Headers?.ToString() ?? "<null>"}, Rows = {this.Rows?.ToString() ?? "<null>"}, ShouldScrollVertical = {this.ShouldScrollVertical.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldScrollHorizontal = {this.ShouldScrollHorizontal.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncHeaderScroll = {this.ShouldSyncHeaderScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncFooterScroll = {this.ShouldSyncFooterScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldIncludeFooter = {this.ShouldIncludeFooter.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldFreezeFirstColumn = {this.ShouldFreezeFirstColumn.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DeadAreaColor = {this.DeadAreaColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxRows = {this.MaxRows?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {this.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableContent: Headers = {this.Headers?.ToString() ?? "<null>"}, Rows = {this.Rows?.ToString() ?? "<null>"}, ShouldScrollVertical = {this.ShouldScrollVertical.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldScrollHorizontal = {this.ShouldScrollHorizontal.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncHeaderScroll = {this.ShouldSyncHeaderScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncFooterScroll = {this.ShouldSyncFooterScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldIncludeFooter = {this.ShouldIncludeFooter.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldFreezeFirstColumn = {this.ShouldFreezeFirstColumn.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DeadAreaColor = {this.DeadAreaColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxRows = {this.MaxRows?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClass = {this.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {this.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

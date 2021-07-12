@@ -30,6 +30,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="shouldFreezeFirstColumn">Whether the first column is frozen/sticky.</param>
         /// <param name="deadAreaColor">The color of the dead area.</param>
         /// <param name="maxRows">The maximum number of rows to display.</param>
+        /// <param name="cssClass">The CSS class to apply to the parent div.</param>
         /// <param name="cssStyle">The CSS style to apply to the parent div.</param>
         public TreeTableContent(
             IReadOnlyList<TreeTableHeaderRow> headers,
@@ -42,6 +43,7 @@ namespace Vuescape.DotNet.Domain
             bool shouldFreezeFirstColumn,
             string deadAreaColor,
             int? maxRows,
+            string cssClass,
             string cssStyle)
         {
             new { headers }.AsArg().Must().NotBeNull();
@@ -57,6 +59,7 @@ namespace Vuescape.DotNet.Domain
             this.ShouldFreezeFirstColumn = shouldFreezeFirstColumn;
             this.DeadAreaColor = deadAreaColor;
             this.MaxRows = maxRows;
+            this.CssClass = cssClass;
             this.CssStyle = cssStyle;
         }
 
@@ -109,6 +112,11 @@ namespace Vuescape.DotNet.Domain
         /// Gets the maximum number of rows to display.
         /// </summary>
         public int? MaxRows { get; private set; }
+
+        /// <summary>
+        /// Gets the CSS Class of the parent div.
+        /// </summary>
+        public string CssClass { get; private set; }
 
         /// <summary>
         /// Gets the Style of the parent div.

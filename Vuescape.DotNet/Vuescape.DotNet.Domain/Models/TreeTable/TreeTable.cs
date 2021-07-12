@@ -20,17 +20,25 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="TreeTable"/> class.
         /// </summary>
+        /// <param name="id">The unique ID of the TreeTable.</param>
         /// <param name="content">The content of the TreeTable.</param>
         /// <param name="behaviors">The client behaviors to apply to the TreeTable.</param>
         public TreeTable(
+            string id,
             TreeTableContent content,
             IReadOnlyCollection<ClientBehaviorBase> behaviors = null)
         {
             new { content }.AsArg().Must().NotBeNull();
 
+            this.Id = id;
             this.Content = content;
             this.Behaviors = behaviors;
         }
+
+        /// <summary>
+        /// Gets the id.
+        /// </summary>
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets the content.

@@ -87,6 +87,9 @@
     <Reference Include="OBeautifulCode.Compression, Version=1.0.21.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OBeautifulCode.Compression.1.0.21\lib\net462\OBeautifulCode.Compression.dll</HintPath>
     </Reference>
+    <Reference Include="OBeautifulCode.DataStructure, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.4\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
+    </Reference>
     <Reference Include="OBeautifulCode.Representation.System, Version=1.0.58.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OBeautifulCode.Representation.System.1.0.58\lib\net462\OBeautifulCode.Representation.System.dll</HintPath>
     </Reference>
@@ -251,29 +254,29 @@
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.designer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
-    <Compile Include="AdjustTreeTableColumnSizeClientBehaviorTest.cs" />
-    <Compile Include="AdjustTreeTableColumnSizeClientBehaviorTest.designer.cs">
+    <Compile Include="Models\AdjustTreeTableColumnSizeClientBehaviorTest.cs" />
+    <Compile Include="Models\AdjustTreeTableColumnSizeClientBehaviorTest.designer.cs">
       <DependentUpon>AdjustTreeTableColumnSizeClientBehaviorTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientBehaviorBaseTest.cs" />
-    <Compile Include="ClientBehaviorBaseTest.designer.cs">
+    <Compile Include="Models\ClientBehaviorBaseTest.cs" />
+    <Compile Include="Models\ClientBehaviorBaseTest.designer.cs">
       <DependentUpon>ClientBehaviorBaseTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="ColumnSorterTest.cs" />
-    <Compile Include="ColumnSorterTest.designer.cs">
+    <Compile Include="Models\ColumnSorterTest.cs" />
+    <Compile Include="Models\ColumnSorterTest.designer.cs">
       <DependentUpon>ColumnSorterTest.cs</DependentUpon>
     </Compile>
     <Compile Include="ConsoleAbstraction.cs" />
-    <Compile Include="ConstrainTreeTableHeightClientBehaviorTest.cs" />
-    <Compile Include="ConstrainTreeTableHeightClientBehaviorTest.designer.cs">
+    <Compile Include="Models\ConstrainTreeTableHeightClientBehaviorTest.cs" />
+    <Compile Include="Models\ConstrainTreeTableHeightClientBehaviorTest.designer.cs">
       <DependentUpon>ConstrainTreeTableHeightClientBehaviorTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="CssStylesTest.cs" />
-    <Compile Include="CssStylesTest.designer.cs">
+    <Compile Include="Models\CssStylesTest.cs" />
+    <Compile Include="Models\CssStylesTest.designer.cs">
       <DependentUpon>CssStylesTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="CssStyleWrapperTest.cs" />
-    <Compile Include="CssStyleWrapperTest.designer.cs">
+    <Compile Include="Models\CssStyleWrapperTest.cs" />
+    <Compile Include="Models\CssStyleWrapperTest.designer.cs">
       <DependentUpon>CssStyleWrapperTest.cs</DependentUpon>
     </Compile>
     <Compile Include="DotNetDummyFactory.cs" />
@@ -284,17 +287,17 @@
     <Compile Include="DotNetDummyFactoryTest.designer.cs">
       <DependentUpon>DotNetDummyFactoryTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="GeneratePdfClientBehaviorTest.cs" />
-    <Compile Include="GeneratePdfClientBehaviorTest.designer.cs">
+    <Compile Include="Models\GeneratePdfClientBehaviorTest.cs" />
+    <Compile Include="Models\GeneratePdfClientBehaviorTest.designer.cs">
       <DependentUpon>GeneratePdfClientBehaviorTest.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="HoverTest.cs" />
-    <Compile Include="HoverTest.designer.cs">
+    <Compile Include="Models\HoverTest.cs" />
+    <Compile Include="Models\HoverTest.designer.cs">
       <DependentUpon>HoverTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="LinkTest.cs" />
-    <Compile Include="LinkTest.designer.cs">
+    <Compile Include="Models\LinkTest.cs" />
+    <Compile Include="Models\LinkTest.designer.cs">
       <DependentUpon>LinkTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -303,44 +306,44 @@
     <Compile Include="Properties\ProjectInfo.cs" />
     <Compile Include="SerializationConfigurationTypes.cs" />
     <AdditionalFiles Include=".analyzers\stylecop.json" />
-    <Compile Include="SlottedUiObjectTest.cs" />
-    <Compile Include="SlottedUiObjectTest.designer.cs">
+    <Compile Include="Models\SlottedUiObjectTest.cs" />
+    <Compile Include="Models\SlottedUiObjectTest.designer.cs">
       <DependentUpon>SlottedUiObjectTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="SortTreeTableClientBehaviorTest.cs" />
-    <Compile Include="SortTreeTableClientBehaviorTest.designer.cs">
+    <Compile Include="Models\SortTreeTableClientBehaviorTest.cs" />
+    <Compile Include="Models\SortTreeTableClientBehaviorTest.designer.cs">
       <DependentUpon>SortTreeTableClientBehaviorTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToggleTreeTableChildRowExpansionClientBehaviorTest.cs" />
-    <Compile Include="ToggleTreeTableChildRowExpansionClientBehaviorTest.designer.cs">
+    <Compile Include="Models\ToggleTreeTableChildRowExpansionClientBehaviorTest.cs" />
+    <Compile Include="Models\ToggleTreeTableChildRowExpansionClientBehaviorTest.designer.cs">
       <DependentUpon>ToggleTreeTableChildRowExpansionClientBehaviorTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeTableCellTest.cs" />
-    <Compile Include="TreeTableCellTest.designer.cs">
+    <Compile Include="Models\TreeTableCellTest.cs" />
+    <Compile Include="Models\TreeTableCellTest.designer.cs">
       <DependentUpon>TreeTableCellTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeTableContentTest.cs" />
-    <Compile Include="TreeTableContentTest.designer.cs">
+    <Compile Include="Models\TreeTableContentTest.cs" />
+    <Compile Include="Models\TreeTableContentTest.designer.cs">
       <DependentUpon>TreeTableContentTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeTableHeaderCellTest.cs" />
-    <Compile Include="TreeTableHeaderCellTest.designer.cs">
+    <Compile Include="Models\TreeTableHeaderCellTest.cs" />
+    <Compile Include="Models\TreeTableHeaderCellTest.designer.cs">
       <DependentUpon>TreeTableHeaderCellTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeTableHeaderRowTest.cs" />
-    <Compile Include="TreeTableHeaderRowTest.designer.cs">
+    <Compile Include="Models\TreeTableHeaderRowTest.cs" />
+    <Compile Include="Models\TreeTableHeaderRowTest.designer.cs">
       <DependentUpon>TreeTableHeaderRowTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeTableRowTest.cs" />
-    <Compile Include="TreeTableRowTest.designer.cs">
+    <Compile Include="Models\TreeTableRowTest.cs" />
+    <Compile Include="Models\TreeTableRowTest.designer.cs">
       <DependentUpon>TreeTableRowTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeTableTest.cs" />
-    <Compile Include="TreeTableTest.designer.cs">
+    <Compile Include="Models\TreeTableTest.cs" />
+    <Compile Include="Models\TreeTableTest.designer.cs">
       <DependentUpon>TreeTableTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="UiObjectTest.cs" />
-    <Compile Include="UiObjectTest.designer.cs">
+    <Compile Include="Models\UiObjectTest.cs" />
+    <Compile Include="Models\UiObjectTest.designer.cs">
       <DependentUpon>UiObjectTest.cs</DependentUpon>
     </Compile>
     <None Include=".analyzers\test.ruleset" />

@@ -115,6 +115,7 @@
     <Compile Include="DotNetBsonSerializationConfiguration.cs" />
     <Compile Include="Properties\ProjectInfo.cs" />
     <AdditionalFiles Include=".analyzers\stylecop.json" />
+    <Compile Include="UiObjectBsonSerializer.cs" />
     <None Include=".analyzers\release.ruleset" />
     <None Include="packages.config" />
     <None Include="Vuescape.DotNet.Serialization.Bson.override-nuspec" />

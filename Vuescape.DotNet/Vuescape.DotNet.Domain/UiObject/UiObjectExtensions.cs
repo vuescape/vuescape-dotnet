@@ -10,6 +10,7 @@ namespace Vuescape.DotNet.Domain
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using OBeautifulCode.Representation.System;
 
@@ -51,6 +52,30 @@ namespace Vuescape.DotNet.Domain
             {
                 result = valueType.IsEnum ? Domain.UiObjectType.Enum : Domain.UiObjectType.SpecifiedType;
             }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the <see cref="Type"/> for a specified <see cref="UiObjectType"/>.
+        /// </summary>
+        /// <param name="value">The UI object type.</param>
+        /// <param name="assemblyQualifiedName">The assembly qualified name; required if <see cref="value"/> is <see cref="UiObjectType.SpecifiedType"/>.</param>
+        /// <returns>
+        /// The <see cref="Type"/> corresponding to the specified <see cref="UiObjectType"/>.
+        /// </returns>
+        public static Type GetObjectType(
+            this UiObjectType value,
+            string assemblyQualifiedName)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            var result = (value == UiObjectType.SpecifiedType) || (value == UiObjectType.Enum)
+                ? assemblyQualifiedName.ToTypeRepresentationFromAssemblyQualifiedName().ResolveFromLoadedTypes()
+                : TypeToUiObjectTypeMap.Single(_ => _.Value == value).Key;
 
             return result;
         }

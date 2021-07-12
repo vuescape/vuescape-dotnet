@@ -60,7 +60,7 @@ namespace Vuescape.DotNet.Domain
         /// Gets the <see cref="Type"/> for a specified <see cref="UiObjectType"/>.
         /// </summary>
         /// <param name="value">The UI object type.</param>
-        /// <param name="assemblyQualifiedName">The assembly qualified name; required if <see cref="value"/> is <see cref="UiObjectType.SpecifiedType"/>.</param>
+        /// <param name="assemblyQualifiedName">The assembly qualified name; required if <paramref name="value"/> is <see cref="UiObjectType.SpecifiedType"/>.</param>
         /// <returns>
         /// The <see cref="Type"/> corresponding to the specified <see cref="UiObjectType"/>.
         /// </returns>
@@ -68,7 +68,10 @@ namespace Vuescape.DotNet.Domain
             this UiObjectType value,
             string assemblyQualifiedName)
         {
+            // TODO: Verify this.
+#pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
             if (value == null)
+#pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
             {
                 throw new ArgumentNullException(nameof(value));
             }

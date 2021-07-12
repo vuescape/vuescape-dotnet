@@ -87,6 +87,7 @@ namespace Vuescape.DotNet.Serialization.Bson
         }
 
         /// <inheritdoc />
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "Not Hungarian Notation.")]
         public override UiObject Deserialize(
             BsonDeserializationContext context,
             BsonDeserializationArgs args)

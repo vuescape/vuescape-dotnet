@@ -31,7 +31,7 @@ namespace Vuescape.DotNet.Serialization.Json
         private readonly JsonSerializationConfigurationBase jsonSerializationConfiguration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InheritedTypeReaderJsonConverter"/> class.
+        /// Initializes a new instance of the <see cref="UiObjectReaderJsonConverter"/> class.
         /// </summary>
         /// <param name="jsonSerializationConfiguration">The serialization configuration in-use.</param>
         public UiObjectReaderJsonConverter(
@@ -56,6 +56,7 @@ namespace Vuescape.DotNet.Serialization.Json
         }
 
         /// <inheritdoc />
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "Not Hungarian Notation.")]
         public override object ReadJson(
             JsonReader reader,
             Type objectType,

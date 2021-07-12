@@ -27,6 +27,7 @@ namespace Vuescape.DotNet.Serialization.Json
             new[]
             {
                 Vuescape.DotNet.Domain.ProjectInfo.Namespace,
+                OBeautifulCode.DataStructure.ProjectInfo.Namespace,
             };
 
         /// <inheritdoc />

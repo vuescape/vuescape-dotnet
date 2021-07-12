@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TreeTable>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTable: Content = {systemUnderTest.Content?.ToString() ?? "<null>"}, Behaviors = {systemUnderTest.Behaviors?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTable: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Content = {systemUnderTest.Content?.ToString() ?? "<null>"}, Behaviors = {systemUnderTest.Behaviors?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -58,12 +58,49 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTable>
                 {
+                    Name = "constructor should throw ArgumentNullException when parameter 'id' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTable>();
+
+                        var result = new TreeTable(
+                                             null,
+                                             referenceObject.Content,
+                                             referenceObject.Behaviors);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "id", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTable>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'id' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTable>();
+
+                        var result = new TreeTable(
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.Content,
+                                             referenceObject.Behaviors);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "id", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTable>
+                {
                     Name = "constructor should throw ArgumentNullException when parameter 'content' is null scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<TreeTable>();
 
                         var result = new TreeTable(
+                                             referenceObject.Id,
                                              null,
                                              referenceObject.Behaviors);
 
@@ -81,6 +118,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<TreeTable>();
 
                         var result = new TreeTable(
+                                             referenceObject.Id,
                                              referenceObject.Content,
                                              null);
 
@@ -98,6 +136,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<TreeTable>();
 
                         var result = new TreeTable(
+                                             referenceObject.Id,
                                              referenceObject.Content,
                                              new List<ClientBehaviorBase>());
 
@@ -115,6 +154,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<TreeTable>();
 
                         var result = new TreeTable(
+                                             referenceObject.Id,
                                              referenceObject.Content,
                                              new ClientBehaviorBase[0].Concat(referenceObject.Behaviors).Concat(new ClientBehaviorBase[] { null }).Concat(referenceObject.Behaviors).ToList());
 
@@ -128,6 +168,27 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<TreeTable>
                 {
+                    Name = "Id should return same 'id' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTable>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTable>
+                        {
+                            SystemUnderTest = new TreeTable(
+                                                      referenceObject.Id,
+                                                      referenceObject.Content,
+                                                      referenceObject.Behaviors),
+                            ExpectedPropertyValue = referenceObject.Id,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "Id",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TreeTable>
+                {
                     Name = "Content should return same 'content' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
@@ -136,6 +197,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<TreeTable>
                         {
                             SystemUnderTest = new TreeTable(
+                                                      referenceObject.Id,
                                                       referenceObject.Content,
                                                       referenceObject.Behaviors),
                             ExpectedPropertyValue = referenceObject.Content,
@@ -156,6 +218,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<TreeTable>
                         {
                             SystemUnderTest = new TreeTable(
+                                                      referenceObject.Id,
                                                       referenceObject.Content,
                                                       referenceObject.Behaviors),
                             ExpectedPropertyValue = referenceObject.Behaviors,
@@ -167,6 +230,26 @@ namespace Vuescape.DotNet.Domain.Test
                 });
 
         private static readonly DeepCloneWithTestScenarios<TreeTable> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TreeTable>()
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TreeTable>
+                {
+                    Name = "DeepCloneWithId should deep clone object and replace Id with the provided id",
+                    WithPropertyName = "Id",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TreeTable>();
+
+                        var referenceObject = A.Dummy<TreeTable>().ThatIs(_ => !systemUnderTest.Id.IsEqualTo(_.Id));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTable>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.Id,
+                        };
+
+                        return result;
+                    },
+                })
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<TreeTable>
                 {
@@ -219,15 +302,22 @@ namespace Vuescape.DotNet.Domain.Test
                     ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new TreeTable[]
                     {
                         new TreeTable(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Content,
                                 ReferenceObjectForEquatableTestScenarios.Behaviors),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TreeTable[]
                     {
                         new TreeTable(
+                                A.Dummy<TreeTable>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
+                                ReferenceObjectForEquatableTestScenarios.Content,
+                                ReferenceObjectForEquatableTestScenarios.Behaviors),
+                        new TreeTable(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<TreeTable>().Whose(_ => !_.Content.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Content)).Content,
                                 ReferenceObjectForEquatableTestScenarios.Behaviors),
                         new TreeTable(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Content,
                                 A.Dummy<TreeTable>().Whose(_ => !_.Behaviors.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Behaviors)).Behaviors),
                     },
@@ -530,7 +620,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Content", "Behaviors" };
+                var propertyNames = new string[] { "Id", "Content", "Behaviors" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

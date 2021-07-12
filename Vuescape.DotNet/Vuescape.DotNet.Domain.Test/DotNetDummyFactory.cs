@@ -7,6 +7,8 @@
 // </auto-generated>
 // --------------------------------------------------------------------------------------------------------------------
 
+using OBeautifulCode.DataStructure;
+
 namespace Vuescape.DotNet.Domain.Test
 {
     using System;
@@ -214,6 +216,9 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UiObjectType.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ContentKind.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(SortComparisonStrategy.None);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(TreeTableConversionMode.None);
+
+            var obcDataStructureDummyFactory = new OBeautifulCode.DataStructure.Test.DataStructureDummyFactory();
         }
     }
 }

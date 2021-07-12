@@ -4,6 +4,10 @@
 // </auto-generated>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Net;
+
+using CLAP;
+
 namespace Vuescape.DotNet.Domain.Test
 {
     using global::System;
@@ -17,6 +21,8 @@ namespace Vuescape.DotNet.Domain.Test
     using global::System.Reflection;
 
     using global::FakeItEasy;
+
+    using global::Naos.Protocol.Domain;
 
     using global::OBeautifulCode.Assertion.Recipes;
     using global::OBeautifulCode.AutoFakeItEasy;
@@ -33,70 +39,263 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class ConstrainTreeTableHeightClientBehaviorTest
+    public static partial class ConvertObcToVuescapeTreeTableOpTest
     {
-        private static readonly StringRepresentationTestScenarios<ConstrainTreeTableHeightClientBehavior> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<ConstrainTreeTableHeightClientBehavior>()
+        private static readonly StringRepresentationTestScenarios<ConvertObcToVuescapeTreeTableOp> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<ConvertObcToVuescapeTreeTableOp>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<ConstrainTreeTableHeightClientBehavior>
+                new StringRepresentationTestScenario<ConvertObcToVuescapeTreeTableOp>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<ConstrainTreeTableHeightClientBehavior>();
+                        var systemUnderTest = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<ConstrainTreeTableHeightClientBehavior>
+                        var result = new SystemUnderTestExpectedStringRepresentation<ConvertObcToVuescapeTreeTableOp>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ConstrainTreeTableHeightClientBehavior: Name = {systemUnderTest.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ConvertObcToVuescapeTreeTableOp: ObcTreeTable = {systemUnderTest.ObcTreeTable?.ToString() ?? "<null>"}, TreeTableConversionMode = {systemUnderTest.TreeTableConversionMode.ToString() ?? "<null>"}, TokenToSubstitutionMap = {systemUnderTest.TokenToSubstitutionMap?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly DeepCloneWithTestScenarios<ConstrainTreeTableHeightClientBehavior> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ConstrainTreeTableHeightClientBehavior>()
+        private static readonly ConstructorArgumentValidationTestScenarios<ConvertObcToVuescapeTreeTableOp> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<ConvertObcToVuescapeTreeTableOp>()
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<ConstrainTreeTableHeightClientBehavior>
+                new ConstructorArgumentValidationTestScenario<ConvertObcToVuescapeTreeTableOp>
                 {
-                    Name = "DeepCloneWithName should deep clone object and replace Name with the provided name",
-                    WithPropertyName = "Name",
+                    Name = "constructor should throw ArgumentNullException when parameter 'obcTreeTable' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
+
+                        var result = new ConvertObcToVuescapeTreeTableOp(
+                                             null,
+                                             referenceObject.TreeTableConversionMode,
+                                             referenceObject.TokenToSubstitutionMap);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "obcTreeTable", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ConvertObcToVuescapeTreeTableOp>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'tokenToSubstitutionMap' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
+
+                        var result = new ConvertObcToVuescapeTreeTableOp(
+                                             referenceObject.ObcTreeTable,
+                                             referenceObject.TreeTableConversionMode,
+                                             null);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "tokenToSubstitutionMap", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ConvertObcToVuescapeTreeTableOp>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'tokenToSubstitutionMap' is an empty dictionary scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
+
+                        var result = new ConvertObcToVuescapeTreeTableOp(
+                                             referenceObject.ObcTreeTable,
+                                             referenceObject.TreeTableConversionMode,
+                                             new Dictionary<string, string>());
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "tokenToSubstitutionMap", "is an empty dictionary", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ConvertObcToVuescapeTreeTableOp>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'tokenToSubstitutionMap' contains a key-value pair with a null value scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
+
+                        var dictionaryWithNullValue = referenceObject.TokenToSubstitutionMap.ToDictionary(_ => _.Key, _ => _.Value);
+
+                        var randomKey = dictionaryWithNullValue.Keys.ElementAt(ThreadSafeRandom.Next(0, dictionaryWithNullValue.Count));
+
+                        dictionaryWithNullValue[randomKey] = null;
+
+                        var result = new ConvertObcToVuescapeTreeTableOp(
+                                             referenceObject.ObcTreeTable,
+                                             referenceObject.TreeTableConversionMode,
+                                             dictionaryWithNullValue);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "tokenToSubstitutionMap", "contains at least one key-value pair with a null value", },
+                });
+
+        private static readonly ConstructorPropertyAssignmentTestScenarios<ConvertObcToVuescapeTreeTableOp> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ConvertObcToVuescapeTreeTableOp>()
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ConvertObcToVuescapeTreeTableOp>
+                {
+                    Name = "ObcTreeTable should return same 'obcTreeTable' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ConvertObcToVuescapeTreeTableOp>
+                        {
+                            SystemUnderTest = new ConvertObcToVuescapeTreeTableOp(
+                                                      referenceObject.ObcTreeTable,
+                                                      referenceObject.TreeTableConversionMode,
+                                                      referenceObject.TokenToSubstitutionMap),
+                            ExpectedPropertyValue = referenceObject.ObcTreeTable,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "ObcTreeTable",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ConvertObcToVuescapeTreeTableOp>
+                {
+                    Name = "TreeTableConversionMode should return same 'treeTableConversionMode' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ConvertObcToVuescapeTreeTableOp>
+                        {
+                            SystemUnderTest = new ConvertObcToVuescapeTreeTableOp(
+                                                      referenceObject.ObcTreeTable,
+                                                      referenceObject.TreeTableConversionMode,
+                                                      referenceObject.TokenToSubstitutionMap),
+                            ExpectedPropertyValue = referenceObject.TreeTableConversionMode,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "TreeTableConversionMode",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ConvertObcToVuescapeTreeTableOp>
+                {
+                    Name = "TokenToSubstitutionMap should return same 'tokenToSubstitutionMap' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ConvertObcToVuescapeTreeTableOp>
+                        {
+                            SystemUnderTest = new ConvertObcToVuescapeTreeTableOp(
+                                                      referenceObject.ObcTreeTable,
+                                                      referenceObject.TreeTableConversionMode,
+                                                      referenceObject.TokenToSubstitutionMap),
+                            ExpectedPropertyValue = referenceObject.TokenToSubstitutionMap,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "TokenToSubstitutionMap",
+                });
+
+        private static readonly DeepCloneWithTestScenarios<ConvertObcToVuescapeTreeTableOp> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ConvertObcToVuescapeTreeTableOp>()
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ConvertObcToVuescapeTreeTableOp>
+                {
+                    Name = "DeepCloneWithObcTreeTable should deep clone object and replace ObcTreeTable with the provided obcTreeTable",
+                    WithPropertyName = "ObcTreeTable",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<ConstrainTreeTableHeightClientBehavior>();
+                        var systemUnderTest = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
 
-                        var referenceObject = A.Dummy<ConstrainTreeTableHeightClientBehavior>().ThatIs(_ => !systemUnderTest.Name.IsEqualTo(_.Name));
+                        var referenceObject = A.Dummy<ConvertObcToVuescapeTreeTableOp>().ThatIs(_ => !systemUnderTest.ObcTreeTable.IsEqualTo(_.ObcTreeTable));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<ConstrainTreeTableHeightClientBehavior>
+                        var result = new SystemUnderTestDeepCloneWithValue<ConvertObcToVuescapeTreeTableOp>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Name,
+                            DeepCloneWithValue = referenceObject.ObcTreeTable,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ConvertObcToVuescapeTreeTableOp>
+                {
+                    Name = "DeepCloneWithTreeTableConversionMode should deep clone object and replace TreeTableConversionMode with the provided treeTableConversionMode",
+                    WithPropertyName = "TreeTableConversionMode",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
+
+                        var referenceObject = A.Dummy<ConvertObcToVuescapeTreeTableOp>().ThatIs(_ => !systemUnderTest.TreeTableConversionMode.IsEqualTo(_.TreeTableConversionMode));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ConvertObcToVuescapeTreeTableOp>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.TreeTableConversionMode,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ConvertObcToVuescapeTreeTableOp>
+                {
+                    Name = "DeepCloneWithTokenToSubstitutionMap should deep clone object and replace TokenToSubstitutionMap with the provided tokenToSubstitutionMap",
+                    WithPropertyName = "TokenToSubstitutionMap",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
+
+                        var referenceObject = A.Dummy<ConvertObcToVuescapeTreeTableOp>().ThatIs(_ => !systemUnderTest.TokenToSubstitutionMap.IsEqualTo(_.TokenToSubstitutionMap));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ConvertObcToVuescapeTreeTableOp>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.TokenToSubstitutionMap,
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstrainTreeTableHeightClientBehavior ReferenceObjectForEquatableTestScenarios = A.Dummy<ConstrainTreeTableHeightClientBehavior>();
+        private static readonly ConvertObcToVuescapeTreeTableOp ReferenceObjectForEquatableTestScenarios = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
 
-        private static readonly EquatableTestScenarios<ConstrainTreeTableHeightClientBehavior> EquatableTestScenarios = new EquatableTestScenarios<ConstrainTreeTableHeightClientBehavior>()
+        private static readonly EquatableTestScenarios<ConvertObcToVuescapeTreeTableOp> EquatableTestScenarios = new EquatableTestScenarios<ConvertObcToVuescapeTreeTableOp>()
             .AddScenario(() =>
-                new EquatableTestScenario<ConstrainTreeTableHeightClientBehavior>
+                new EquatableTestScenario<ConvertObcToVuescapeTreeTableOp>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new ConstrainTreeTableHeightClientBehavior[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new ConvertObcToVuescapeTreeTableOp[]
                     {
-                        new ConstrainTreeTableHeightClientBehavior
-                            {
-                                Name = ReferenceObjectForEquatableTestScenarios.Name,
-                            },
+                        new ConvertObcToVuescapeTreeTableOp(
+                                ReferenceObjectForEquatableTestScenarios.ObcTreeTable,
+                                ReferenceObjectForEquatableTestScenarios.TreeTableConversionMode,
+                                ReferenceObjectForEquatableTestScenarios.TokenToSubstitutionMap),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new ConstrainTreeTableHeightClientBehavior[]
+                    ObjectsThatAreNotEqualToReferenceObject = new ConvertObcToVuescapeTreeTableOp[]
                     {
-                        new ConstrainTreeTableHeightClientBehavior
-                            {
-                                Name = A.Dummy<ConstrainTreeTableHeightClientBehavior>().Whose(_ => !_.Name.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Name)).Name,
-                            },
+                        new ConvertObcToVuescapeTreeTableOp(
+                                A.Dummy<ConvertObcToVuescapeTreeTableOp>().Whose(_ => !_.ObcTreeTable.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ObcTreeTable)).ObcTreeTable,
+                                ReferenceObjectForEquatableTestScenarios.TreeTableConversionMode,
+                                ReferenceObjectForEquatableTestScenarios.TokenToSubstitutionMap),
+                        new ConvertObcToVuescapeTreeTableOp(
+                                ReferenceObjectForEquatableTestScenarios.ObcTreeTable,
+                                A.Dummy<ConvertObcToVuescapeTreeTableOp>().Whose(_ => !_.TreeTableConversionMode.IsEqualTo(ReferenceObjectForEquatableTestScenarios.TreeTableConversionMode)).TreeTableConversionMode,
+                                ReferenceObjectForEquatableTestScenarios.TokenToSubstitutionMap),
+                        new ConvertObcToVuescapeTreeTableOp(
+                                ReferenceObjectForEquatableTestScenarios.ObcTreeTable,
+                                ReferenceObjectForEquatableTestScenarios.TreeTableConversionMode,
+                                A.Dummy<ConvertObcToVuescapeTreeTableOp>().Whose(_ => !_.TokenToSubstitutionMap.IsEqualTo(ReferenceObjectForEquatableTestScenarios.TokenToSubstitutionMap)).TokenToSubstitutionMap),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -105,10 +304,6 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<int>(),
                         A.Dummy<int?>(),
                         A.Dummy<Guid>(),
-                        A.Dummy<SortTreeTableClientBehavior>(),
-                        A.Dummy<ToggleTreeTableChildRowExpansionClientBehavior>(),
-                        A.Dummy<GeneratePdfClientBehavior>(),
-                        A.Dummy<AdjustTreeTableColumnSizeClientBehavior>(),
                     },
                 });
 
@@ -130,12 +325,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void ConstrainTreeTableHeightClientBehavior___Should_implement_IModel_of_ConstrainTreeTableHeightClientBehavior___When_reflecting()
+            public static void ConvertObcToVuescapeTreeTableOp___Should_implement_IModel_of_ConvertObcToVuescapeTreeTableOp___When_reflecting()
             {
                 // Arrange
-                var type = typeof(ConstrainTreeTableHeightClientBehavior);
+                var type = typeof(ConvertObcToVuescapeTreeTableOp);
 
-                var expectedModelMethods = typeof(IModel<ConstrainTreeTableHeightClientBehavior>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<ConvertObcToVuescapeTreeTableOp>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -145,7 +340,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<ConstrainTreeTableHeightClientBehavior>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<ConvertObcToVuescapeTreeTableOp>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -163,10 +358,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void ConstrainTreeTableHeightClientBehavior___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void ConvertObcToVuescapeTreeTableOp___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(ConstrainTreeTableHeightClientBehavior);
+                var type = typeof(ConvertObcToVuescapeTreeTableOp);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -211,6 +406,100 @@ namespace Vuescape.DotNet.Domain.Test
 
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
         [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
+        public static class Constructing
+        {
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            public static void Constructor___Should_throw___When_parameters_are_not_valid()
+            {
+                var scenarios = ConstructorArgumentValidationTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange, Act
+                    var actual = Record.Exception(scenario.ConstructionFunc);
+
+                    // Assert
+                    actual.AsTest().Must().BeOfType(scenario.ExpectedExceptionType, because: scenario.Id);
+
+                    foreach(var expected in scenario.ExpectedExceptionMessageContains ?? new List<string>())
+                    {
+                        actual.Message.AsTest().Must().ContainString(expected, because: scenario.Id);
+                    }
+
+                    if (scenario.ExpectedExceptionMessageEquals != null)
+                    {
+                        actual.Message.AsTest().Must().BeEqualTo(scenario.ExpectedExceptionMessageEquals, because: scenario.Id);
+                    }
+                }
+            }
+
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "referenceObject")]
+            public static void Properties___Should_be_assigned_by_constructor_to_expected_value___When_getting()
+            {
+                var scenarios = ConstructorPropertyAssignmentTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange
+                    if ((scenario.PropertyName == ConstructorPropertyAssignmentTestScenario.NoPropertiesAssignedInConstructorScenarioPropertyName) || (scenario.PropertyName == ConstructorPropertyAssignmentTestScenario.ForceGeneratedTestsToPassAndWriteMyOwnScenarioPropertyName))
+                    {
+                        continue;
+                    }
+
+                    // Act
+                    var actual = scenario.Property.GetValue(scenario.SystemUnderTest);
+
+                    // Assert
+                    // When the scenario specifies CompareActualToExpectedUsing.DefaultStrategy, ValidateAndPrepareForTesting()
+                    // will check if ExpectedPropertyValue == null.  If so, it sets CompareActualToExpectedUsing = ReferenceEquality.
+                    // If not, then it checks the runtime type of ExpectedPropertyValue and if it's a value type,
+                    // then it sets CompareActualToExpectedUsing = ValueEquality, otherwise it uses ValueEquality.
+                    // So a boxed value type is handled properly (using ValueEquality instead of ReferenceEquality).
+                    if (scenario.CompareActualToExpectedUsing == CompareActualToExpectedUsing.ValueEquality)
+                    {
+                        actual.AsTest().Must().BeEqualTo(scenario.ExpectedPropertyValue, because: scenario.Id);
+                    }
+                    else if (scenario.CompareActualToExpectedUsing == CompareActualToExpectedUsing.ReferenceEquality)
+                    {
+                        actual.AsTest().Must().BeSameReferenceAs(scenario.ExpectedPropertyValue, because: scenario.Id);
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("This CompareActualToExpectedUsing is not supported: " + scenario.CompareActualToExpectedUsing);
+                    }
+                }
+            }
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
+        [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
         public static class Cloning
         {
             [Fact]
@@ -230,10 +519,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<ConstrainTreeTableHeightClientBehavior>();
+                var systemUnderTest = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
 
                 // Act
-                var actual = (ConstrainTreeTableHeightClientBehavior)systemUnderTest.Clone();
+                var actual = (ConvertObcToVuescapeTreeTableOp)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -257,7 +546,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<ConstrainTreeTableHeightClientBehavior>();
+                var systemUnderTest = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -265,6 +554,30 @@ namespace Vuescape.DotNet.Domain.Test
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
+
+                if (systemUnderTest.ObcTreeTable == null)
+                {
+                    actual.ObcTreeTable.AsTest().Must().BeNull();
+                }
+                else if (!actual.ObcTreeTable.GetType().IsValueType)
+                {
+                    // When the declared type is a reference type, we still have to check the runtime type.
+                    // The object could be a boxed value type, which will fail this asseration because
+                    // a deep clone of a value type object is the same object.
+                    actual.ObcTreeTable.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.ObcTreeTable);
+                }
+
+                if (systemUnderTest.TokenToSubstitutionMap == null)
+                {
+                    actual.TokenToSubstitutionMap.AsTest().Must().BeNull();
+                }
+                else if (!actual.TokenToSubstitutionMap.GetType().IsValueType)
+                {
+                    // When the declared type is a reference type, we still have to check the runtime type.
+                    // The object could be a boxed value type, which will fail this asseration because
+                    // a deep clone of a value type object is the same object.
+                    actual.TokenToSubstitutionMap.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.TokenToSubstitutionMap);
+                }
             }
 
             [Fact]
@@ -283,7 +596,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Name" };
+                var propertyNames = new string[] { "ObcTreeTable", "TreeTableConversionMode", "TokenToSubstitutionMap" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 
@@ -296,12 +609,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (ConstrainTreeTableHeightClientBehavior)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (ConvertObcToVuescapeTreeTableOp)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(ConstrainTreeTableHeightClientBehavior).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(ConvertObcToVuescapeTreeTableOp).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var actualPropertyValue = propertyInfo.GetValue(actual);
 
@@ -363,7 +676,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ConstrainTreeTableHeightClientBehavior>();
+                var expected = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -392,7 +705,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ConstrainTreeTableHeightClientBehavior>();
+                var expected = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -421,7 +734,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ConstrainTreeTableHeightClientBehavior>();
+                var expected = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -450,7 +763,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ConstrainTreeTableHeightClientBehavior>();
+                var expected = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -484,8 +797,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                ConstrainTreeTableHeightClientBehavior systemUnderTest1 = null;
-                ConstrainTreeTableHeightClientBehavior systemUnderTest2 = null;
+                ConvertObcToVuescapeTreeTableOp systemUnderTest1 = null;
+                ConvertObcToVuescapeTreeTableOp systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -515,7 +828,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    ConstrainTreeTableHeightClientBehavior systemUnderTest = null;
+                    ConvertObcToVuescapeTreeTableOp systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -664,8 +977,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                ConstrainTreeTableHeightClientBehavior systemUnderTest1 = null;
-                ConstrainTreeTableHeightClientBehavior systemUnderTest2 = null;
+                ConvertObcToVuescapeTreeTableOp systemUnderTest1 = null;
+                ConvertObcToVuescapeTreeTableOp systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -695,7 +1008,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    ConstrainTreeTableHeightClientBehavior systemUnderTest = null;
+                    ConvertObcToVuescapeTreeTableOp systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -841,17 +1154,17 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ClientBehaviorBase___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_OperationBase___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    ClientBehaviorBase systemUnderTest = null;
+                    OperationBase systemUnderTest = null;
 
                     // Act
-                    var actual = scenario.ReferenceObject.Equals((ClientBehaviorBase)systemUnderTest);
+                    var actual = scenario.ReferenceObject.Equals((OperationBase)systemUnderTest);
 
                     // Assert
                     actual.AsTest().Must().BeFalse(because: scenario.Id);
@@ -872,14 +1185,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ClientBehaviorBase___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_OperationBase___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actual = scenario.ReferenceObject.Equals((ClientBehaviorBase)scenario.ReferenceObject);
+                    var actual = scenario.ReferenceObject.Equals((OperationBase)scenario.ReferenceObject);
 
                     // Assert
                     actual.AsTest().Must().BeTrue(because: scenario.Id);
@@ -900,14 +1213,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ClientBehaviorBase___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_OperationBase___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((ClientBehaviorBase)_)).ToList();
+                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((OperationBase)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
@@ -928,14 +1241,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ClientBehaviorBase___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_OperationBase___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((ClientBehaviorBase)_)).ToList();
+                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((OperationBase)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
@@ -956,14 +1269,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ClientBehaviorBase___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_OperationBase___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((ClientBehaviorBase)_)).ToList();
+                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((OperationBase)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeTrue(because: scenario.Id);
@@ -984,14 +1297,157 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ConstrainTreeTableHeightClientBehavior___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_ReturningOperationBase___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    ConstrainTreeTableHeightClientBehavior systemUnderTest = null;
+                    ReturningOperationBase<TreeTable> systemUnderTest = null;
+
+                    // Act
+                    var actual = scenario.ReferenceObject.Equals((ReturningOperationBase<TreeTable>)systemUnderTest);
+
+                    // Assert
+                    actual.AsTest().Must().BeFalse(because: scenario.Id);
+                }
+            }
+
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            public static void Equals_with_ReturningOperationBase___Should_return_true___When_parameter_other_is_same_object()
+            {
+                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange, Act
+                    var actual = scenario.ReferenceObject.Equals((ReturningOperationBase<TreeTable>)scenario.ReferenceObject);
+
+                    // Assert
+                    actual.AsTest().Must().BeTrue(because: scenario.Id);
+                }
+            }
+
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            public static void Equals_with_ReturningOperationBase___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            {
+                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange, Act
+                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((ReturningOperationBase<TreeTable>)_)).ToList();
+
+                    // Assert
+                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
+                }
+            }
+
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            public static void Equals_with_ReturningOperationBase___Should_return_false___When_objects_being_compared_have_different_property_values()
+            {
+                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange, Act
+                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((ReturningOperationBase<TreeTable>)_)).ToList();
+
+                    // Assert
+                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
+                }
+            }
+
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            public static void Equals_with_ReturningOperationBase___Should_return_true___When_objects_being_compared_have_same_property_values()
+            {
+                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange, Act
+                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((ReturningOperationBase<TreeTable>)_)).ToList();
+
+                    // Assert
+                    actuals.AsTest().Must().Each().BeTrue(because: scenario.Id);
+                }
+            }
+
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            public static void Equals_with_ConvertObcToVuescapeTreeTableOp___Should_return_false___When_parameter_other_is_null()
+            {
+                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange
+                    ConvertObcToVuescapeTreeTableOp systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1015,7 +1471,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ConstrainTreeTableHeightClientBehavior___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_ConvertObcToVuescapeTreeTableOp___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1043,7 +1499,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ConstrainTreeTableHeightClientBehavior___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_ConvertObcToVuescapeTreeTableOp___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1071,7 +1527,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ConstrainTreeTableHeightClientBehavior___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_ConvertObcToVuescapeTreeTableOp___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1099,7 +1555,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ConstrainTreeTableHeightClientBehavior___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_ConvertObcToVuescapeTreeTableOp___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 

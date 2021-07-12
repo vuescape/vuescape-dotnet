@@ -41,6 +41,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              referenceObject.CssStyle);
 
                         return result;
@@ -67,6 +68,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              referenceObject.CssStyle);
 
                         return result;

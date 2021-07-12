@@ -33,8 +33,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<TreeTable>();
 
                         var result = new TreeTable(
-                                             null,
-                                             referenceObject.Behaviors);
+                                             A.Dummy<string>(),
+                                             null);
 
                         return result;
                     },

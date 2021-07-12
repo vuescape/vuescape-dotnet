@@ -15,6 +15,8 @@ namespace Vuescape.DotNet.Domain.Test
 
     using global::FakeItEasy;
 
+    using global::Naos.Protocol.Domain;
+
     using global::OBeautifulCode.AutoFakeItEasy;
     using global::OBeautifulCode.Math.Recipes;
 
@@ -36,45 +38,6 @@ namespace Vuescape.DotNet.Domain.Test
         public DefaultDotNetDummyFactory()
         {
             AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new AdjustTreeTableColumnSizeClientBehavior
-                             {
-                                 Name = A.Dummy<string>(),
-                             });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () =>
-                {
-                    var availableTypes = new[]
-                    {
-                        typeof(AdjustTreeTableColumnSizeClientBehavior),
-                        typeof(ConstrainTreeTableHeightClientBehavior),
-                        typeof(GeneratePdfClientBehavior),
-                        typeof(SortTreeTableClientBehavior),
-                        typeof(ToggleTreeTableChildRowExpansionClientBehavior)
-                    };
-
-                    var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
-
-                    var randomType = availableTypes[randomIndex];
-
-                    var result = (ClientBehaviorBase)AD.ummy(randomType);
-
-                    return result;
-                });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new ConstrainTreeTableHeightClientBehavior
-                             {
-                                 Name = A.Dummy<string>(),
-                             });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new GeneratePdfClientBehavior
-                             {
-                                 Name = A.Dummy<string>(),
-                             });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new SortTreeTableClientBehavior
                              {
                                  Name = A.Dummy<string>(),
@@ -87,6 +50,45 @@ namespace Vuescape.DotNet.Domain.Test
                              });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new GeneratePdfClientBehavior
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new ConstrainTreeTableHeightClientBehavior
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new AdjustTreeTableColumnSizeClientBehavior
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var availableTypes = new[]
+                    {
+                        typeof(SortTreeTableClientBehavior),
+                        typeof(ToggleTreeTableChildRowExpansionClientBehavior),
+                        typeof(GeneratePdfClientBehavior),
+                        typeof(ConstrainTreeTableHeightClientBehavior),
+                        typeof(AdjustTreeTableColumnSizeClientBehavior)
+                    };
+
+                    var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
+
+                    var randomType = availableTypes[randomIndex];
+
+                    var result = (ClientBehaviorBase)AD.ummy(randomType);
+
+                    return result;
+                });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new CssStyles(
                                  A.Dummy<CssStyleWrapper>(),
                                  A.Dummy<IReadOnlyList<CssStyleWrapper>>(),
@@ -97,6 +99,17 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new CssStyleWrapper(
+                                 A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new SlottedUiObject(
+                                 A.Dummy<IReadOnlyDictionary<string, UiObject>>(),
+                                 A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new UiObject(
+                                 A.Dummy<object>(),
+                                 A.Dummy<UiObjectType?>(),
                                  A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
@@ -113,31 +126,6 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<SortComparisonStrategy>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new Hover(
-                                 A.Dummy<string>(),
-                                 A.Dummy<string>(),
-                                 A.Dummy<ContentKind>(),
-                                 A.Dummy<string>()));
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new TreeTable(
-                                 A.Dummy<TreeTableContent>(),
-                                 A.Dummy<IReadOnlyCollection<ClientBehaviorBase>>()));
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new TreeTableCell(
-                                 A.Dummy<string>(),
-                                 A.Dummy<string>(),
-                                 A.Dummy<Hover>(),
-                                 A.Dummy<string>(),
-                                 A.Dummy<string>(),
-                                 A.Dummy<string>(),
-                                 A.Dummy<int?>(),
-                                 A.Dummy<bool>(),
-                                 A.Dummy<IReadOnlyDictionary<string, Link>>(),
-                                 A.Dummy<SlottedUiObject>()));
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TreeTableContent(
                                  A.Dummy<IReadOnlyList<TreeTableHeaderRow>>(),
                                  A.Dummy<IReadOnlyList<TreeTableRow>>(),
@@ -149,7 +137,27 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<bool>(),
                                  A.Dummy<string>(),
                                  A.Dummy<int?>(),
+                                 A.Dummy<string>(),
                                  A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new Hover(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<ContentKind>(),
+                                 A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new ConvertObcToVuescapeTreeTableOp(
+                                 A.Dummy<OBeautifulCode.DataStructure.TreeTable>(),
+                                 A.Dummy<TreeTableConversionMode>(),
+                                 A.Dummy<IReadOnlyDictionary<string, string>>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTable(
+                                 A.Dummy<string>(),
+                                 A.Dummy<TreeTableContent>(),
+                                 A.Dummy<IReadOnlyCollection<ClientBehaviorBase>>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TreeTableHeaderCell(
@@ -173,6 +181,19 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TreeTableCell(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<Hover>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<int?>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<IReadOnlyDictionary<string, Link>>(),
+                                 A.Dummy<SlottedUiObject>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TreeTableRow(
                                  A.Dummy<string>(),
                                  A.Dummy<IReadOnlyList<TreeTableCell>>(),
@@ -187,17 +208,6 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<bool?>(),
                                  A.Dummy<IReadOnlyDictionary<string, Link>>(),
                                  A.Dummy<IReadOnlyList<TreeTableRow>>()));
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new SlottedUiObject(
-                                 A.Dummy<IReadOnlyDictionary<string, UiObject>>(),
-                                 A.Dummy<string>()));
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new UiObject(
-                                 A.Dummy<object>(),
-                                 A.Dummy<UiObjectType?>(),
-                                 A.Dummy<string>()));
         }
 
         /// <inheritdoc />

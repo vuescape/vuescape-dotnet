@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TreeTableContent>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableContent: Headers = {systemUnderTest.Headers?.ToString() ?? "<null>"}, Rows = {systemUnderTest.Rows?.ToString() ?? "<null>"}, ShouldScrollVertical = {systemUnderTest.ShouldScrollVertical.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldScrollHorizontal = {systemUnderTest.ShouldScrollHorizontal.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncHeaderScroll = {systemUnderTest.ShouldSyncHeaderScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncFooterScroll = {systemUnderTest.ShouldSyncFooterScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldIncludeFooter = {systemUnderTest.ShouldIncludeFooter.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldFreezeFirstColumn = {systemUnderTest.ShouldFreezeFirstColumn.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DeadAreaColor = {systemUnderTest.DeadAreaColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxRows = {systemUnderTest.MaxRows?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {systemUnderTest.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableContent: Headers = {systemUnderTest.Headers?.ToString() ?? "<null>"}, Rows = {systemUnderTest.Rows?.ToString() ?? "<null>"}, ShouldScrollVertical = {systemUnderTest.ShouldScrollVertical.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldScrollHorizontal = {systemUnderTest.ShouldScrollHorizontal.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncHeaderScroll = {systemUnderTest.ShouldSyncHeaderScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncFooterScroll = {systemUnderTest.ShouldSyncFooterScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldIncludeFooter = {systemUnderTest.ShouldIncludeFooter.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldFreezeFirstColumn = {systemUnderTest.ShouldFreezeFirstColumn.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DeadAreaColor = {systemUnderTest.DeadAreaColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxRows = {systemUnderTest.MaxRows?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClass = {systemUnderTest.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {systemUnderTest.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -74,6 +74,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              referenceObject.CssStyle);
 
                         return result;
@@ -100,6 +101,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              referenceObject.CssStyle);
 
                         return result;
@@ -126,6 +128,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              referenceObject.CssStyle);
 
                         return result;
@@ -152,6 +155,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              referenceObject.CssStyle);
 
                         return result;
@@ -178,6 +182,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              referenceObject.CssStyle);
 
                         return result;
@@ -204,6 +209,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              referenceObject.CssStyle);
 
                         return result;
@@ -230,6 +236,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              null,
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              referenceObject.CssStyle);
 
                         return result;
@@ -256,12 +263,67 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              referenceObject.CssStyle);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "deadAreaColor", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'cssClass' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new TreeTableContent(
+                                             referenceObject.Headers,
+                                             referenceObject.Rows,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
+                                             null,
+                                             referenceObject.CssStyle);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "cssClass", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TreeTableContent>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'cssClass' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new TreeTableContent(
+                                             referenceObject.Headers,
+                                             referenceObject.Rows,
+                                             referenceObject.ShouldScrollVertical,
+                                             referenceObject.ShouldScrollHorizontal,
+                                             referenceObject.ShouldSyncHeaderScroll,
+                                             referenceObject.ShouldSyncFooterScroll,
+                                             referenceObject.ShouldIncludeFooter,
+                                             referenceObject.ShouldFreezeFirstColumn,
+                                             referenceObject.DeadAreaColor,
+                                             referenceObject.MaxRows,
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.CssStyle);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "cssClass", "white space", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableContent>
@@ -282,6 +344,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              null);
 
                         return result;
@@ -308,6 +371,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldFreezeFirstColumn,
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
+                                             referenceObject.CssClass,
                                              Invariant($"  {Environment.NewLine}  "));
 
                         return result;
@@ -338,6 +402,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ShouldFreezeFirstColumn,
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
                                                       referenceObject.CssStyle),
                             ExpectedPropertyValue = referenceObject.Headers,
                         };
@@ -367,6 +432,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ShouldFreezeFirstColumn,
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
                                                       referenceObject.CssStyle),
                             ExpectedPropertyValue = referenceObject.Rows,
                         };
@@ -396,6 +462,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ShouldFreezeFirstColumn,
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
                                                       referenceObject.CssStyle),
                             ExpectedPropertyValue = referenceObject.ShouldScrollVertical,
                         };
@@ -425,6 +492,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ShouldFreezeFirstColumn,
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
                                                       referenceObject.CssStyle),
                             ExpectedPropertyValue = referenceObject.ShouldScrollHorizontal,
                         };
@@ -454,6 +522,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ShouldFreezeFirstColumn,
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
                                                       referenceObject.CssStyle),
                             ExpectedPropertyValue = referenceObject.ShouldSyncHeaderScroll,
                         };
@@ -483,6 +552,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ShouldFreezeFirstColumn,
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
                                                       referenceObject.CssStyle),
                             ExpectedPropertyValue = referenceObject.ShouldSyncFooterScroll,
                         };
@@ -512,6 +582,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ShouldFreezeFirstColumn,
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
                                                       referenceObject.CssStyle),
                             ExpectedPropertyValue = referenceObject.ShouldIncludeFooter,
                         };
@@ -541,6 +612,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ShouldFreezeFirstColumn,
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
                                                       referenceObject.CssStyle),
                             ExpectedPropertyValue = referenceObject.ShouldFreezeFirstColumn,
                         };
@@ -570,6 +642,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ShouldFreezeFirstColumn,
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
                                                       referenceObject.CssStyle),
                             ExpectedPropertyValue = referenceObject.DeadAreaColor,
                         };
@@ -599,6 +672,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ShouldFreezeFirstColumn,
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
                                                       referenceObject.CssStyle),
                             ExpectedPropertyValue = referenceObject.MaxRows,
                         };
@@ -606,6 +680,36 @@ namespace Vuescape.DotNet.Domain.Test
                         return result;
                     },
                     PropertyName = "MaxRows",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
+                {
+                    Name = "CssClass should return same 'cssClass' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TreeTableContent>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TreeTableContent>
+                        {
+                            SystemUnderTest = new TreeTableContent(
+                                                      referenceObject.Headers,
+                                                      referenceObject.Rows,
+                                                      referenceObject.ShouldScrollVertical,
+                                                      referenceObject.ShouldScrollHorizontal,
+                                                      referenceObject.ShouldSyncHeaderScroll,
+                                                      referenceObject.ShouldSyncFooterScroll,
+                                                      referenceObject.ShouldIncludeFooter,
+                                                      referenceObject.ShouldFreezeFirstColumn,
+                                                      referenceObject.DeadAreaColor,
+                                                      referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
+                                                      referenceObject.CssStyle),
+                            ExpectedPropertyValue = referenceObject.CssClass,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "CssClass",
                 })
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<TreeTableContent>
@@ -628,6 +732,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ShouldFreezeFirstColumn,
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
+                                                      referenceObject.CssClass,
                                                       referenceObject.CssStyle),
                             ExpectedPropertyValue = referenceObject.CssStyle,
                         };
@@ -841,6 +946,26 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<TreeTableContent>
                 {
+                    Name = "DeepCloneWithCssClass should deep clone object and replace CssClass with the provided cssClass",
+                    WithPropertyName = "CssClass",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TreeTableContent>();
+
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.CssClass.IsEqualTo(_.CssClass));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.CssClass,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TreeTableContent>
+                {
                     Name = "DeepCloneWithCssStyle should deep clone object and replace CssStyle with the provided cssStyle",
                     WithPropertyName = "CssStyle",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
@@ -880,6 +1005,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TreeTableContent[]
@@ -895,6 +1021,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
@@ -907,6 +1034,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
@@ -919,6 +1047,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
@@ -931,6 +1060,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
@@ -943,6 +1073,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
@@ -955,6 +1086,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
@@ -967,6 +1099,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
@@ -979,6 +1112,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 A.Dummy<TreeTableContent>().Whose(_ => !_.ShouldFreezeFirstColumn.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn)).ShouldFreezeFirstColumn,
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
@@ -991,6 +1125,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
                                 A.Dummy<TreeTableContent>().Whose(_ => !_.DeadAreaColor.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DeadAreaColor)).DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
@@ -1003,6 +1138,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 A.Dummy<TreeTableContent>().Whose(_ => !_.MaxRows.IsEqualTo(ReferenceObjectForEquatableTestScenarios.MaxRows)).MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 ReferenceObjectForEquatableTestScenarios.CssStyle),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
@@ -1015,6 +1151,20 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.CssClass.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssClass)).CssClass,
+                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                        new TreeTableContent(
+                                ReferenceObjectForEquatableTestScenarios.Headers,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollVertical,
+                                ReferenceObjectForEquatableTestScenarios.ShouldScrollHorizontal,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncHeaderScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSyncFooterScroll,
+                                ReferenceObjectForEquatableTestScenarios.ShouldIncludeFooter,
+                                ReferenceObjectForEquatableTestScenarios.ShouldFreezeFirstColumn,
+                                ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
+                                ReferenceObjectForEquatableTestScenarios.MaxRows,
+                                ReferenceObjectForEquatableTestScenarios.CssClass,
                                 A.Dummy<TreeTableContent>().Whose(_ => !_.CssStyle.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyle)).CssStyle),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
@@ -1316,7 +1466,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Headers", "Rows", "ShouldScrollVertical", "ShouldScrollHorizontal", "ShouldSyncHeaderScroll", "ShouldSyncFooterScroll", "ShouldIncludeFooter", "ShouldFreezeFirstColumn", "DeadAreaColor", "MaxRows", "CssStyle" };
+                var propertyNames = new string[] { "Headers", "Rows", "ShouldScrollVertical", "ShouldScrollHorizontal", "ShouldSyncHeaderScroll", "ShouldSyncFooterScroll", "ShouldIncludeFooter", "ShouldFreezeFirstColumn", "DeadAreaColor", "MaxRows", "CssClass", "CssStyle" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

@@ -5,8 +5,6 @@
 // ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
-    using System.Drawing;
-
     using OBeautifulCode.DataStructure;
 
     /// <summary>
@@ -22,7 +20,12 @@ namespace Vuescape.DotNet.Domain
         internal static bool IsVisible(
             this ColumnFormatOptions? obcColumnFormatOptions)
         {
-            var result = (obcColumnFormatOptions & ColumnFormatOptions.Hide) != 0;
+            if (obcColumnFormatOptions == null)
+            {
+                return true;
+            }
+
+            var result = (obcColumnFormatOptions & ColumnFormatOptions.Hide) == 0;
             return result;
         }
 
@@ -34,7 +37,12 @@ namespace Vuescape.DotNet.Domain
         internal static bool IsSortable(
             this ColumnFormatOptions? obcColumnFormatOptions)
         {
-            var result = (obcColumnFormatOptions & ColumnFormatOptions.Sortable) != 0;
+            if (obcColumnFormatOptions == null)
+            {
+                return false;
+            }
+
+            var result = (obcColumnFormatOptions & (ColumnFormatOptions.Sortable | ColumnFormatOptions.SortedAscending | ColumnFormatOptions.SortedDescending)) != 0;
             return result;
         }
 
@@ -46,6 +54,11 @@ namespace Vuescape.DotNet.Domain
         internal static bool IsFrozen(
             this ColumnFormatOptions? obcColumnFormatOptions)
         {
+            if (obcColumnFormatOptions == null)
+            {
+                return false;
+            }
+
             var result = (obcColumnFormatOptions & ColumnFormatOptions.Freeze) != 0;
             return result;
         }

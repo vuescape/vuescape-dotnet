@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new SlottedUiObject(
                             null,
-                            referenceObject.DefaultSlot);
+                            referenceObject.DefaultSlotName);
 
                         return result;
                     },
@@ -65,7 +65,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new SlottedUiObject(
                                              new Dictionary<string, UiObject>(),
-                                             referenceObject.DefaultSlot);
+                                             referenceObject.DefaultSlotName);
 
                         return result;
                     },

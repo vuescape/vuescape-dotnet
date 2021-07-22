@@ -42,8 +42,11 @@ namespace Vuescape.DotNet.Domain
             var treeTableHeaders = ConvertToVuescapeTreeTableHeaderRows(obcTreeTable, operation.TreeTableConversionMode);
             var treeTableRows = ConvertToVuescapeTreeTableRows(obcTreeTable, operation.TreeTableConversionMode);
 
-            var isFirstColumnFrozen = obcTreeTable.TableColumns.Columns[0].Format.Options.IsFrozen();
-            var shouldSyncHeaderRow = obcTreeTable.TableRows.HeaderRows.Format.RowsFormat.Options.IsFrozen();
+            // Default to false
+            var isFirstColumnFrozen = obcTreeTable.TableColumns?.Columns[0]?.Format?.Options.IsFrozen() ?? false;
+
+            // Default to true
+            var shouldSyncHeaderRow = obcTreeTable.TableRows?.HeaderRows?.Format?.RowsFormat?.Options.IsFrozen() ?? true;
 
             // TODO: cssStyle
             // TODO: cssClass
@@ -98,6 +101,11 @@ namespace Vuescape.DotNet.Domain
             var obcDataRowsFormat = obcTreeTable.TableRows.DataRows.Format;
             var obcTableColumns = obcTreeTable.TableColumns;
             var obcTableColumnsFormat = obcTableColumns.ColumnsFormat;
+
+            if (obcTreeTable?.TableRows?.DataRows?.Rows == null)
+            {
+                return null;
+            }
 
             IReadOnlyList<TreeTableRow> treeTableRows = obcTreeTable.TableRows.DataRows.Rows.Select(
                 obcDataRow => obcDataRow.ToVuescapeTreeTableRow(

@@ -36,13 +36,14 @@ namespace Vuescape.DotNet.Domain
             TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
         {
             // TODO: Apply formatting.
+            var cssClasses = "tree-table-row__tr";
             var rowId = obcHeaderRow.Id;
 
             var treeTableHeaderCells = obcHeaderRow.Cells.Select((obcHeaderRowCell, columnIndex) => obcHeaderRowCell.ToVuescapeTreeTableHeaderCell(obcTableFormat, obcRowsFormat, obcHeaderRowsFormat, obcColumnFormat, obcColumns[columnIndex])).ToList();
 
             // TODO: classes/styles
             // TODO: Renderer? Is there a default?
-            var result = new TreeTableHeaderRow(rowId, treeTableHeaderCells);
+            var result = new TreeTableHeaderRow(rowId, treeTableHeaderCells, cssClasses);
             return result;
         }
 
@@ -84,16 +85,24 @@ namespace Vuescape.DotNet.Domain
             // TODO: isSelected
             // TODO: isFocused
             // TODO: links
-            var isVisible = obcRow.Format.Options.IsVisible();
-            var isExpandable = obcRow.ChildRows.Count > 0 && !obcRow.Format.Options.IsNotExpandable();
+            var isVisible = obcRow.Format?.Options.IsVisible() ?? true;
+            var hasChildRows = HasChildRows(obcRow);
+            var isExpandable = hasChildRows && (!obcRow.Format?.Options.IsNotExpandable() ?? false);
 
             IReadOnlyList<TreeTableRow> children = null;
-            if (obcRow.ChildRows.Count > 0)
+            if (hasChildRows)
             {
                 children = obcRow.ChildRows.Select(_ => _.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcColumnFormat, obcColumns, depth + 1)).ToList();
             }
 
             var result = new TreeTableRow(rowId, treeTableCells, depth, null, null, null, isExpandable, false, isVisible, false, false, null, children);
+            return result;
+        }
+
+        private static bool HasChildRows(
+            OBeautifulCode.DataStructure.Row obcRow)
+        {
+            var result = (obcRow.ChildRows?.Count ?? 0) > 0;
             return result;
         }
     }

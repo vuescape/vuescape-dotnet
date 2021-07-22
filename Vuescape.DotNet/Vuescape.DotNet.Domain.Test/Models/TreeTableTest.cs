@@ -59,7 +59,7 @@ namespace Vuescape.DotNet.Domain.Test
             var headers = new List<TreeTableHeaderRow>();
             var items = new List<TreeTableHeaderCell>
             {
-                new TreeTableHeaderCell("entityName", "Active Accounts", null, null, string.Empty, string.Empty, 1, true, new ColumnSorter("entityName", SortDirection.Ascending, SortComparisonStrategy.StringCaseInsensitive)),
+                new TreeTableHeaderCell("entityName", "Active Accounts", null, null, string.Empty, string.Empty, 1, true, new ColumnSorter(SortDirection.Ascending, SortComparisonStrategy.StringCaseInsensitive)),
             };
 
             for (var i = startingYear; i < startingYear + numberOfPeriods; i++)

@@ -70,7 +70,7 @@ namespace Vuescape.DotNet.Domain
             }
 
             var result = this.SlotNameToUiObjectMap.IsEqualTo(other.SlotNameToUiObjectMap)
-                      && this.DefaultSlot.IsEqualTo(other.DefaultSlot, StringComparer.Ordinal);
+                      && this.DefaultSlotName.IsEqualTo(other.DefaultSlotName, StringComparer.Ordinal);
 
             return result;
         }
@@ -81,7 +81,7 @@ namespace Vuescape.DotNet.Domain
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.SlotNameToUiObjectMap)
-            .Hash(this.DefaultSlot)
+            .Hash(this.DefaultSlotName)
             .Value;
 
         /// <inheritdoc />
@@ -92,7 +92,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new SlottedUiObject(
                                  this.SlotNameToUiObjectMap?.DeepClone(),
-                                 this.DefaultSlot?.DeepClone());
+                                 this.DefaultSlotName?.DeepClone());
 
             return result;
         }
@@ -123,16 +123,16 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new SlottedUiObject(
                                  slotNameToUiObjectMap,
-                                 this.DefaultSlot?.DeepClone());
+                                 this.DefaultSlotName?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="DefaultSlot" />.
+        /// Deep clones this object with a new <see cref="DefaultSlotName" />.
         /// </summary>
-        /// <param name="defaultSlot">The new <see cref="DefaultSlot" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="SlottedUiObject" /> using the specified <paramref name="defaultSlot" /> for <see cref="DefaultSlot" /> and a deep clone of every other property.</returns>
+        /// <param name="defaultSlot">The new <see cref="DefaultSlotName" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="SlottedUiObject" /> using the specified <paramref name="defaultSlot" /> for <see cref="DefaultSlotName" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -163,7 +163,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.SlottedUiObject: SlotNameToUiObjectMap = {this.SlotNameToUiObjectMap?.ToString() ?? "<null>"}, DefaultSlot = {this.DefaultSlot?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.SlottedUiObject: SlotNameToUiObjectMap = {this.SlotNameToUiObjectMap?.ToString() ?? "<null>"}, DefaultSlot = {this.DefaultSlotName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

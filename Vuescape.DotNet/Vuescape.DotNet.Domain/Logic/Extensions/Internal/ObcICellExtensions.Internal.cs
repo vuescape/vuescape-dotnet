@@ -3,6 +3,7 @@
 // </copyright>
 
 // ReSharper disable once CheckNamespace
+
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
@@ -37,38 +38,36 @@ namespace Vuescape.DotNet.Domain
             var displayValue = string.Empty;
             var slots = new Dictionary<string, UiObject>();
             string defaultSlot = null;
-            switch (obcRowCell)
+
+            if (obcRowCell is IHaveDisplayValueCell displayValueCell)
             {
-                case IHaveDisplayValueCell displayValueCell:
-                    displayValue = displayValueCell.DisplayValue;
-                    break;
+                displayValue = displayValueCell.DisplayValue;
+            }
 
-                case IHaveValueCell valueCell:
-                    slots.Add("value", new UiObject(valueCell.GetCellValue()));
-                    defaultSlot = "value";
-                    break;
+            if (obcRowCell is IHaveValueCell valueCell)
+            {
+                slots.Add("value", new UiObject(valueCell.GetCellValue()));
+                defaultSlot = "value";
+            }
 
-                case SlottedCell slottedCell:
+            if (obcRowCell is SlottedCell slottedCell)
+            {
+                foreach (var kvp in slottedCell.SlotIdToCellMap)
                 {
-                    foreach (var kvp in slottedCell.SlotIdToCellMap)
-                    {
-                        slots.Add(kvp.Key, new UiObject(kvp.Value.GetCellValue()));
-                    }
-
-                    defaultSlot = slottedCell.DefaultSlotName;
-                    break;
+                    slots.Add(kvp.Key, new UiObject(kvp.Value.GetCellValue()));
                 }
 
-                case ColumnSpanningSlottedCell columnSpanningSlottedCell:
-                {
-                    foreach (var kvp in columnSpanningSlottedCell.SlotIdToCellMap)
-                    {
-                        slots.Add(kvp.Key, new UiObject(kvp.Value.GetCellValue()));
-                    }
+                defaultSlot = slottedCell.DefaultSlotName;
+            }
 
-                    defaultSlot = columnSpanningSlottedCell.DefaultSlotName;
-                    break;
+            if (obcRowCell is ColumnSpanningSlottedCell columnSpanningSlottedCell)
+            {
+                foreach (var kvp in columnSpanningSlottedCell.SlotIdToCellMap)
+                {
+                    slots.Add(kvp.Key, new UiObject(kvp.Value.GetCellValue()));
                 }
+
+                defaultSlot = columnSpanningSlottedCell.DefaultSlotName;
             }
 
             var colspan = 1;
@@ -82,36 +81,31 @@ namespace Vuescape.DotNet.Domain
             {
                 var hoverOver = hoverOverCell.HoverOver;
 
-                string content = null;
-                var contentKind = ContentKind.None;
-
                 if (hoverOver is StringHoverOver stringHoverOver)
                 {
-                    contentKind = ContentKind.Plaintext;
-                    content = stringHoverOver.Value;
+                    hover = new Hover(null, stringHoverOver.Value, ContentKind.Plaintext);
                 }
                 else if (hoverOver is HtmlHoverOver htmlHover)
                 {
-                    contentKind = ContentKind.Html;
-                    content = htmlHover.Html;
+                    hover = new Hover(null, htmlHover.Html, ContentKind.Html);
                 }
-
-                hover = new Hover(null, content, contentKind);
             }
 
             var isVisible = obcColumn.Format.Options.IsVisible();
 
             // TODO: Renderer? Is there a default?
             // TODO: classes/styles (formatting)
-            // TODO: Add links if applicable
+            var cssClasses = "tree-table-cell__td";
 
+            // TODO: Add links if applicable
             SlottedUiObject slottedUiObject = null;
             if (slots.Count > 0)
             {
+                // TODO: Get active slot from OBC
                 slottedUiObject = new SlottedUiObject(slots, defaultSlot);
             }
 
-            var result = new TreeTableCell(obcRowCell.Id, displayValue, hover, null, null, null, colspan, isVisible, null, slottedUiObject);
+            var result = new TreeTableCell(obcRowCell.Id, displayValue, hover, null, cssClasses, null, colspan, isVisible, null, slottedUiObject);
             return result;
         }
 
@@ -135,15 +129,16 @@ namespace Vuescape.DotNet.Domain
             Column obcColumn,
             TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
         {
-            var displayValue = string.Empty;
-            switch (obcHeaderRowCell)
+            string displayValue = null;
+            if (obcHeaderRowCell is IHaveDisplayValueCell displayValueCell)
             {
-                case IHaveDisplayValueCell displayValueCell:
-                    displayValue = displayValueCell.DisplayValue;
-                    break;
-                case IHaveValueCell valueCell:
-                    displayValue = valueCell.GetCellValue().ToString();
-                    break;
+                displayValue = displayValueCell.DisplayValue;
+            }
+
+            if (displayValue == null && obcHeaderRowCell is IHaveValueCell valueCell)
+            {
+                // Assuming this cell value is string for header.
+                displayValue = valueCell.GetCellValue().ToString();
             }
 
             var colspan = 1;
@@ -157,21 +152,14 @@ namespace Vuescape.DotNet.Domain
             {
                 var hoverOver = hoverOverCell.HoverOver;
 
-                string content = null;
-                var contentKind = ContentKind.None;
-
                 if (hoverOver is StringHoverOver stringHoverOver)
                 {
-                    contentKind = ContentKind.Plaintext;
-                    content = stringHoverOver.Value;
+                    hover = new Hover(null, stringHoverOver.Value, ContentKind.Plaintext);
                 }
                 else if (hoverOver is HtmlHoverOver htmlHover)
                 {
-                    contentKind = ContentKind.Html;
-                    content = htmlHover.Html;
+                    hover = new Hover(null, htmlHover.Html, ContentKind.Html);
                 }
-
-                hover = new Hover(null, content, contentKind);
             }
 
             var isVisible = obcColumn.Format.Options.IsVisible();
@@ -180,13 +168,15 @@ namespace Vuescape.DotNet.Domain
             ColumnSorter columnSorter = null;
             if (isSortable)
             {
-                columnSorter = new ColumnSorter(obcHeaderRowCell.Id, obcColumn.Format.Options.GetSortDirection(), SortComparisonStrategy.Default);
+                columnSorter = new ColumnSorter(obcColumn.Format.Options.GetSortDirection(), SortComparisonStrategy.Default);
             }
 
             // TODO: Renderer? Is there a default?
             // TODO: classes/styles (formatting)
+            var cssClasses = "tree-table-cell__th";
+
             // TODO: Add links if applicable
-            var result = new TreeTableHeaderCell(obcHeaderRowCell.Id, displayValue, hover, null, null, null, colspan, isVisible, columnSorter);
+            var result = new TreeTableHeaderCell(obcHeaderRowCell.Id, displayValue, hover, null, cssClasses, null, colspan, isVisible, columnSorter);
             return result;
         }
     }

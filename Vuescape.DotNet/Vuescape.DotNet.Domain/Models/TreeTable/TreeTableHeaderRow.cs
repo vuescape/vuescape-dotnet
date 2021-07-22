@@ -8,6 +8,7 @@
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
@@ -33,6 +34,12 @@ namespace Vuescape.DotNet.Domain
             string renderer = null)
         {
             new { cells }.AsArg().Must().NotBeNullNorEmptyEnumerable();
+
+            var numberOfCellsWithInitialSortDirection = cells.Count(_ =>
+                _.ColumnSorter != null &&
+                (_.ColumnSorter.SortDirection == SortDirection.Ascending ||
+                 _.ColumnSorter.SortDirection == SortDirection.Descending));
+            new { numberOfCellsWithInitialSortDirection }.AsOp().Must().NotBeGreaterThan(1);
 
             this.Id = id;
             this.Cells = cells;

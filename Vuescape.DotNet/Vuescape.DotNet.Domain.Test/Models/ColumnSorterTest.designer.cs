@@ -47,73 +47,14 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ColumnSorter>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ColumnSorter: SortByCellId = {systemUnderTest.SortByCellId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, SortDirection = {systemUnderTest.SortDirection.ToString() ?? "<null>"}, SortComparisonStrategy = {systemUnderTest.SortComparisonStrategy.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ColumnSorter: SortDirection = {systemUnderTest.SortDirection.ToString() ?? "<null>"}, SortComparisonStrategy = {systemUnderTest.SortComparisonStrategy.ToString() ?? "<null>"}."),
                         };
 
                         return result;
                     },
-                });
-
-        private static readonly ConstructorArgumentValidationTestScenarios<ColumnSorter> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<ColumnSorter>()
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<ColumnSorter>
-                {
-                    Name = "constructor should throw ArgumentNullException when parameter 'sortByCellId' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<ColumnSorter>();
-
-                        var result = new ColumnSorter(
-                                             null,
-                                             referenceObject.SortDirection,
-                                             referenceObject.SortComparisonStrategy);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "sortByCellId", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<ColumnSorter>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'sortByCellId' is white space scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<ColumnSorter>();
-
-                        var result = new ColumnSorter(
-                                             Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.SortDirection,
-                                             referenceObject.SortComparisonStrategy);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "sortByCellId", "white space", },
                 });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<ColumnSorter> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ColumnSorter>()
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<ColumnSorter>
-                {
-                    Name = "SortByCellId should return same 'sortByCellId' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<ColumnSorter>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<ColumnSorter>
-                        {
-                            SystemUnderTest = new ColumnSorter(
-                                                      referenceObject.SortByCellId,
-                                                      referenceObject.SortDirection,
-                                                      referenceObject.SortComparisonStrategy),
-                            ExpectedPropertyValue = referenceObject.SortByCellId,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "SortByCellId",
-                })
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<ColumnSorter>
                 {
@@ -125,7 +66,6 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<ColumnSorter>
                         {
                             SystemUnderTest = new ColumnSorter(
-                                                      referenceObject.SortByCellId,
                                                       referenceObject.SortDirection,
                                                       referenceObject.SortComparisonStrategy),
                             ExpectedPropertyValue = referenceObject.SortDirection,
@@ -146,7 +86,6 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<ColumnSorter>
                         {
                             SystemUnderTest = new ColumnSorter(
-                                                      referenceObject.SortByCellId,
                                                       referenceObject.SortDirection,
                                                       referenceObject.SortComparisonStrategy),
                             ExpectedPropertyValue = referenceObject.SortComparisonStrategy,
@@ -158,26 +97,6 @@ namespace Vuescape.DotNet.Domain.Test
                 });
 
         private static readonly DeepCloneWithTestScenarios<ColumnSorter> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ColumnSorter>()
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<ColumnSorter>
-                {
-                    Name = "DeepCloneWithSortByCellId should deep clone object and replace SortByCellId with the provided sortByCellId",
-                    WithPropertyName = "SortByCellId",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<ColumnSorter>();
-
-                        var referenceObject = A.Dummy<ColumnSorter>().ThatIs(_ => !systemUnderTest.SortByCellId.IsEqualTo(_.SortByCellId));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<ColumnSorter>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.SortByCellId,
-                        };
-
-                        return result;
-                    },
-                })
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<ColumnSorter>
                 {
@@ -230,22 +149,18 @@ namespace Vuescape.DotNet.Domain.Test
                     ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new ColumnSorter[]
                     {
                         new ColumnSorter(
-                                ReferenceObjectForEquatableTestScenarios.SortByCellId,
                                 ReferenceObjectForEquatableTestScenarios.SortDirection,
                                 ReferenceObjectForEquatableTestScenarios.SortComparisonStrategy),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new ColumnSorter[]
                     {
                         new ColumnSorter(
-                                A.Dummy<ColumnSorter>().Whose(_ => !_.SortByCellId.IsEqualTo(ReferenceObjectForEquatableTestScenarios.SortByCellId)).SortByCellId,
                                 ReferenceObjectForEquatableTestScenarios.SortDirection,
                                 ReferenceObjectForEquatableTestScenarios.SortComparisonStrategy),
                         new ColumnSorter(
-                                ReferenceObjectForEquatableTestScenarios.SortByCellId,
                                 A.Dummy<ColumnSorter>().Whose(_ => !_.SortDirection.IsEqualTo(ReferenceObjectForEquatableTestScenarios.SortDirection)).SortDirection,
                                 ReferenceObjectForEquatableTestScenarios.SortComparisonStrategy),
                         new ColumnSorter(
-                                ReferenceObjectForEquatableTestScenarios.SortByCellId,
                                 ReferenceObjectForEquatableTestScenarios.SortDirection,
                                 A.Dummy<ColumnSorter>().Whose(_ => !_.SortComparisonStrategy.IsEqualTo(ReferenceObjectForEquatableTestScenarios.SortComparisonStrategy)).SortComparisonStrategy),
                     },
@@ -374,44 +289,6 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Constructor___Should_throw___When_parameters_are_not_valid()
-            {
-                var scenarios = ConstructorArgumentValidationTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actual = Record.Exception(scenario.ConstructionFunc);
-
-                    // Assert
-                    actual.AsTest().Must().BeOfType(scenario.ExpectedExceptionType, because: scenario.Id);
-
-                    foreach(var expected in scenario.ExpectedExceptionMessageContains ?? new List<string>())
-                    {
-                        actual.Message.AsTest().Must().ContainString(expected, because: scenario.Id);
-                    }
-
-                    if (scenario.ExpectedExceptionMessageEquals != null)
-                    {
-                        actual.Message.AsTest().Must().BeEqualTo(scenario.ExpectedExceptionMessageEquals, because: scenario.Id);
-                    }
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "referenceObject")]
             public static void Properties___Should_be_assigned_by_constructor_to_expected_value___When_getting()
             {
@@ -524,7 +401,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "SortByCellId", "SortDirection", "SortComparisonStrategy" };
+                var propertyNames = new string[] { "SortDirection", "SortComparisonStrategy" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

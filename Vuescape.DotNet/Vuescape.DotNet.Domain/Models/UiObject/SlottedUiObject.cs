@@ -21,10 +21,11 @@ namespace Vuescape.DotNet.Domain
         /// Initializes a new instance of the <see cref="SlottedUiObject"/> class.
         /// </summary>
         /// <param name="slotNameToUiObjectMap">The slot name to UiObject map.</param>
-        /// <param name="defaultSlot">The default slot.</param>
-        public SlottedUiObject(IReadOnlyDictionary<string, UiObject> slotNameToUiObjectMap, string defaultSlot)
+        /// <param name="defaultSlotName">The default slot name.</param>
+        /// <param name="activeSlotName">The active slot name.</param>
+        public SlottedUiObject(IReadOnlyDictionary<string, UiObject> slotNameToUiObjectMap, string defaultSlotName, string activeSlotName = null)
         {
-            if (defaultSlot == null)
+            if (defaultSlotName == null)
             {
                 new { slotNameToUiObjectMap }.AsArg().Must().BeNull();
             }
@@ -34,7 +35,8 @@ namespace Vuescape.DotNet.Domain
             }
 
             this.SlotNameToUiObjectMap = slotNameToUiObjectMap;
-            this.DefaultSlot = defaultSlot;
+            this.DefaultSlotName = defaultSlotName;
+            this.ActiveSlotName = activeSlotName;
         }
 
         /// <summary>
@@ -43,8 +45,13 @@ namespace Vuescape.DotNet.Domain
         public IReadOnlyDictionary<string, UiObject>  SlotNameToUiObjectMap { get; private set; }
 
         /// <summary>
-        /// Gets the default slot.
+        /// Gets the default slot name.
         /// </summary>
-        public string DefaultSlot { get; private set; }
+        public string DefaultSlotName { get; private set; }
+
+        /// <summary>
+        /// Gets the active slot name.
+        /// </summary>
+        public string ActiveSlotName { get; private set; }
     }
 }

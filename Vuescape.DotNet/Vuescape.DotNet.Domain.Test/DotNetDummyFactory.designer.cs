@@ -121,7 +121,6 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ColumnSorter(
-                                 A.Dummy<string>(),
                                  A.Dummy<SortDirection>(),
                                  A.Dummy<SortComparisonStrategy>()));
 

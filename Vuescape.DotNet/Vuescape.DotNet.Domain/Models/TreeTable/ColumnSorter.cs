@@ -18,26 +18,17 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="ColumnSorter"/> class.
         /// </summary>
-        /// <param name="sortByCellId">The cell ID to sort by.</param>
         /// <param name="sortDirection">The sort direction.</param>
         /// <param name="sortComparisonStrategy">The sort comparison strategy to use.</param>
         public ColumnSorter(
-            string sortByCellId,
             SortDirection sortDirection,
             SortComparisonStrategy sortComparisonStrategy)
         {
-            new { sortByCellId }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { sortComparisonStrategy }.AsArg().Must().NotBeEqualTo(SortComparisonStrategy.None);
 
-            this.SortByCellId = sortByCellId;
             this.SortDirection = sortDirection;
             this.SortComparisonStrategy = sortComparisonStrategy;
         }
-
-        /// <summary>
-        /// Gets the cell ID to use for sorting.
-        /// </summary>
-        public string SortByCellId { get; private set; }
 
         /// <summary>
         /// Gets the sort direction.

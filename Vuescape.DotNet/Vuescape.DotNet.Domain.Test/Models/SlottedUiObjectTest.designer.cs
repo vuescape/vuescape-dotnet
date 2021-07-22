@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<SlottedUiObject>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.SlottedUiObject: SlotNameToUiObjectMap = {systemUnderTest.SlotNameToUiObjectMap?.ToString() ?? "<null>"}, DefaultSlot = {systemUnderTest.DefaultSlot?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.SlottedUiObject: SlotNameToUiObjectMap = {systemUnderTest.SlotNameToUiObjectMap?.ToString() ?? "<null>"}, DefaultSlot = {systemUnderTest.DefaultSlotName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -65,7 +65,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new SlottedUiObject(
                                              null,
-                                             referenceObject.DefaultSlot);
+                                             referenceObject.DefaultSlotName);
 
                         return result;
                     },
@@ -82,7 +82,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new SlottedUiObject(
                                              new Dictionary<string, UiObject>(),
-                                             referenceObject.DefaultSlot);
+                                             referenceObject.DefaultSlotName);
 
                         return result;
                     },
@@ -105,7 +105,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new SlottedUiObject(
                                              dictionaryWithNullValue,
-                                             referenceObject.DefaultSlot);
+                                             referenceObject.DefaultSlotName);
 
                         return result;
                     },
@@ -160,7 +160,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new SlottedUiObject(
                                                       referenceObject.SlotNameToUiObjectMap,
-                                                      referenceObject.DefaultSlot),
+                                                      referenceObject.DefaultSlotName),
                             ExpectedPropertyValue = referenceObject.SlotNameToUiObjectMap,
                         };
 
@@ -180,8 +180,8 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new SlottedUiObject(
                                                       referenceObject.SlotNameToUiObjectMap,
-                                                      referenceObject.DefaultSlot),
-                            ExpectedPropertyValue = referenceObject.DefaultSlot,
+                                                      referenceObject.DefaultSlotName),
+                            ExpectedPropertyValue = referenceObject.DefaultSlotName,
                         };
 
                         return result;
@@ -219,12 +219,12 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         var systemUnderTest = A.Dummy<SlottedUiObject>();
 
-                        var referenceObject = A.Dummy<SlottedUiObject>().ThatIs(_ => !systemUnderTest.DefaultSlot.IsEqualTo(_.DefaultSlot));
+                        var referenceObject = A.Dummy<SlottedUiObject>().ThatIs(_ => !systemUnderTest.DefaultSlotName.IsEqualTo(_.DefaultSlotName));
 
                         var result = new SystemUnderTestDeepCloneWithValue<SlottedUiObject>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.DefaultSlot,
+                            DeepCloneWithValue = referenceObject.DefaultSlotName,
                         };
 
                         return result;
@@ -243,16 +243,16 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new SlottedUiObject(
                                 ReferenceObjectForEquatableTestScenarios.SlotNameToUiObjectMap,
-                                ReferenceObjectForEquatableTestScenarios.DefaultSlot),
+                                ReferenceObjectForEquatableTestScenarios.DefaultSlotName),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new SlottedUiObject[]
                     {
                         new SlottedUiObject(
                                 A.Dummy<SlottedUiObject>().Whose(_ => !_.SlotNameToUiObjectMap.IsEqualTo(ReferenceObjectForEquatableTestScenarios.SlotNameToUiObjectMap)).SlotNameToUiObjectMap,
-                                ReferenceObjectForEquatableTestScenarios.DefaultSlot),
+                                ReferenceObjectForEquatableTestScenarios.DefaultSlotName),
                         new SlottedUiObject(
                                 ReferenceObjectForEquatableTestScenarios.SlotNameToUiObjectMap,
-                                A.Dummy<SlottedUiObject>().Whose(_ => !_.DefaultSlot.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DefaultSlot)).DefaultSlot),
+                                A.Dummy<SlottedUiObject>().Whose(_ => !_.DefaultSlotName.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DefaultSlotName)).DefaultSlotName),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {

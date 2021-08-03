@@ -62,12 +62,6 @@ namespace Vuescape.DotNet.Domain.Test
                              });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new AdjustTreeTableColumnSizeClientBehavior
-                             {
-                                 Name = A.Dummy<string>(),
-                             });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
                 {
                     var availableTypes = new[]
@@ -76,7 +70,6 @@ namespace Vuescape.DotNet.Domain.Test
                         typeof(ToggleTreeTableChildRowExpansionClientBehavior),
                         typeof(GeneratePdfClientBehavior),
                         typeof(ConstrainTreeTableHeightClientBehavior),
-                        typeof(AdjustTreeTableColumnSizeClientBehavior)
                     };
 
                     var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);

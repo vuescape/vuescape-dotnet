@@ -27,8 +27,8 @@ namespace Vuescape.DotNet.Domain
         /// <param name="cssStyle">The CSS style.</param>
         /// <param name="colspan">The column span (colspan attribute in HTML).</param>
         /// <param name="isVisible">Whether this item is visible.</param>
-        /// <param name="links">The Links for this item.</param>
         /// <param name="columnSorter">The column sorter.</param>
+        /// <param name="links">The Links for this item.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "colspan", Justification = "This aligns with the HTML spelling.")]
         public TreeTableHeaderCell(
             string id,
@@ -50,8 +50,8 @@ namespace Vuescape.DotNet.Domain
             this.CssStyle = cssStyle;
             this.Colspan = colspan;
             this.IsVisible = isVisible;
-            this.Links = links;
             this.ColumnSorter = columnSorter;
+            this.Links = links;
         }
 
         /// <summary>
@@ -95,13 +95,13 @@ namespace Vuescape.DotNet.Domain
         public bool IsVisible { get; private set; }
 
         /// <summary>
-        /// Gets the Links.
-        /// </summary>
-        public IReadOnlyDictionary<string, Link> Links { get; private set; }
-
-        /// <summary>
         /// Gets the column sorter.
         /// </summary>
         public ColumnSorter ColumnSorter { get; private set; }
+
+        /// <summary>
+        /// Gets the Links.
+        /// </summary>
+        public IReadOnlyDictionary<string, Link> Links { get; private set; }
     }
 }

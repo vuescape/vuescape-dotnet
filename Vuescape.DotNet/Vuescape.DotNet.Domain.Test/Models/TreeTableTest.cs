@@ -34,6 +34,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTable(
                                              A.Dummy<string>(),
+                                             A.Dummy<IReadOnlyList<ColumnDefinition>>(),
                                              null);
 
                         return result;
@@ -64,7 +65,7 @@ namespace Vuescape.DotNet.Domain.Test
 
             for (var i = startingYear; i < startingYear + numberOfPeriods; i++)
             {
-                var item = new TreeTableHeaderCell("reportingPeriod_" + i.ToString(CultureInfo.InvariantCulture), string.Empty,  null, null, null, string.Empty, 1, true, null, null);
+                var item = new TreeTableHeaderCell("reportingPeriod_" + i.ToString(CultureInfo.InvariantCulture), string.Empty,  null, null, null, string.Empty, 1, true, null);
                 items.Add(item);
             }
 
@@ -95,6 +96,7 @@ namespace Vuescape.DotNet.Domain.Test
 
             var treeTable = new TreeTable(
                 "id",
+                null,
                 new TreeTableContent(headers, rows, true, true, true, true, false, false, null, null, null, null));
             Assert.NotNull(treeTable);
         }

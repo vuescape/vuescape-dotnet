@@ -65,6 +65,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTable(
                                              null,
+                                             referenceObject.ColumnDefinitions,
                                              referenceObject.Content,
                                              referenceObject.Behaviors);
 
@@ -83,6 +84,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTable(
                                              Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.ColumnDefinitions,
                                              referenceObject.Content,
                                              referenceObject.Behaviors);
 
@@ -101,6 +103,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTable(
                                              referenceObject.Id,
+                                             referenceObject.ColumnDefinitions,
                                              null,
                                              referenceObject.Behaviors);
 
@@ -119,6 +122,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTable(
                                              referenceObject.Id,
+                                             referenceObject.ColumnDefinitions,
                                              referenceObject.Content,
                                              null);
 
@@ -137,6 +141,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTable(
                                              referenceObject.Id,
+                                             referenceObject.ColumnDefinitions,
                                              referenceObject.Content,
                                              new List<ClientBehaviorBase>());
 
@@ -155,6 +160,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TreeTable(
                                              referenceObject.Id,
+                                             referenceObject.ColumnDefinitions,
                                              referenceObject.Content,
                                              new ClientBehaviorBase[0].Concat(referenceObject.Behaviors).Concat(new ClientBehaviorBase[] { null }).Concat(referenceObject.Behaviors).ToList());
 
@@ -177,6 +183,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTable(
                                                       referenceObject.Id,
+                                                      referenceObject.ColumnDefinitions,
                                                       referenceObject.Content,
                                                       referenceObject.Behaviors),
                             ExpectedPropertyValue = referenceObject.Id,
@@ -198,6 +205,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTable(
                                                       referenceObject.Id,
+                                                      referenceObject.ColumnDefinitions,
                                                       referenceObject.Content,
                                                       referenceObject.Behaviors),
                             ExpectedPropertyValue = referenceObject.Content,
@@ -219,6 +227,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TreeTable(
                                                       referenceObject.Id,
+                                                      referenceObject.ColumnDefinitions,
                                                       referenceObject.Content,
                                                       referenceObject.Behaviors),
                             ExpectedPropertyValue = referenceObject.Behaviors,
@@ -303,6 +312,7 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new TreeTable(
                                 ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.ColumnDefinitions,
                                 ReferenceObjectForEquatableTestScenarios.Content,
                                 ReferenceObjectForEquatableTestScenarios.Behaviors),
                     },
@@ -310,16 +320,24 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new TreeTable(
                                 A.Dummy<TreeTable>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
+                                ReferenceObjectForEquatableTestScenarios.ColumnDefinitions,
                                 ReferenceObjectForEquatableTestScenarios.Content,
                                 ReferenceObjectForEquatableTestScenarios.Behaviors),
                         new TreeTable(
                                 ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.ColumnDefinitions,
                                 A.Dummy<TreeTable>().Whose(_ => !_.Content.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Content)).Content,
                                 ReferenceObjectForEquatableTestScenarios.Behaviors),
                         new TreeTable(
                                 ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.ColumnDefinitions,
                                 ReferenceObjectForEquatableTestScenarios.Content,
                                 A.Dummy<TreeTable>().Whose(_ => !_.Behaviors.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Behaviors)).Behaviors),
+                        new TreeTable(
+                            ReferenceObjectForEquatableTestScenarios.Id,
+                            A.Dummy<TreeTable>().Whose(_ => !_.ColumnDefinitions.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ColumnDefinitions)).ColumnDefinitions,
+                            ReferenceObjectForEquatableTestScenarios.Content,
+                            ReferenceObjectForEquatableTestScenarios.Behaviors),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {

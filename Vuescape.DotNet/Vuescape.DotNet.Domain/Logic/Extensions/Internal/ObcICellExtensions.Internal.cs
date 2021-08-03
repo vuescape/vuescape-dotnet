@@ -3,12 +3,14 @@
 // </copyright>
 
 // ReSharper disable once CheckNamespace
-
 namespace Vuescape.DotNet.Domain
 {
+    using System;
     using System.Collections.Generic;
 
     using OBeautifulCode.DataStructure;
+
+    using static System.FormattableString;
 
     /// <summary>
     /// Extension methods on <see cref="OBeautifulCode.DataStructure.ICell"/>.
@@ -177,6 +179,102 @@ namespace Vuescape.DotNet.Domain
 
             // TODO: Add links if applicable
             var result = new TreeTableHeaderCell(obcHeaderRowCell.Id, displayValue, hover, null, cssClasses, null, colspan, isVisible, columnSorter);
+            return result;
+        }
+
+        /// <summary>
+        /// Convert a <see cref="Column"/> to a <see cref="ColumnDefinition"/>.
+        /// </summary>
+        /// <param name="obcColumn">The Column.</param>
+        /// <param name="obcTableFormat">The table format.</param>
+        /// <param name="obcRowsFormat">The table rows format.</param>
+        /// <param name="obcHeaderRowsFormat">The header rows format.</param>
+        /// <param name="obcColumnFormat">The column format.</param>
+        /// <param name="treeTableConversionMode">The TreeTable conversion mode.</param>
+        /// <returns>A <see cref="TreeTableHeaderCell"/>.</returns>
+        internal static ColumnDefinition ToColumnDefinition(
+            this Column obcColumn,
+            TableFormat obcTableFormat,
+            RowFormat obcRowsFormat,
+            HeaderRowsFormat obcHeaderRowsFormat,
+            ColumnFormat obcColumnFormat,
+            TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
+        {
+            var shouldCellWrap = ShouldCellWrap(
+                obcTableFormat,
+                obcRowsFormat,
+                obcHeaderRowsFormat,
+                obcColumnFormat,
+                treeTableConversionMode);
+            var columnWrapBehavior = shouldCellWrap ? ColumnWrapBehavior.Wrap : ColumnWrapBehavior.NoWrapAndDisplayEllipsis;
+
+            var result = GetColumnDefinition(obcColumn.Format, columnWrapBehavior) ?? GetColumnDefinition(obcColumnFormat, columnWrapBehavior);
+            return result;
+        }
+
+        private static ColumnDefinition GetColumnDefinition(ColumnFormat obcColumnFormat, ColumnWrapBehavior columnWrapBehavior)
+        {
+            ColumnDefinition result = null;
+
+            if (obcColumnFormat != null)
+            {
+                decimal? width = null;
+                UnitOfMeasure? widthUnits = null;
+                var columnWidthBehavior = ColumnWidthBehavior.None;
+
+                if (obcColumnFormat.AutofitColumnWidth != null && obcColumnFormat.AutofitColumnWidth.Value)
+                {
+                    columnWrapBehavior = ColumnWrapBehavior.None;
+                    columnWidthBehavior = ColumnWidthBehavior.DynamicallySizeToContent;
+                }
+
+                if (obcColumnFormat.WidthInPixels != null)
+                {
+                    if (columnWidthBehavior != ColumnWidthBehavior.DynamicallySizeToContent)
+                    {
+                        columnWidthBehavior = ColumnWidthBehavior.UseSpecifiedWidth;
+                    }
+
+                    width = obcColumnFormat.WidthInPixels;
+                    widthUnits = UnitOfMeasure.Pixel;
+                }
+
+                result = new ColumnDefinition(columnWidthBehavior, columnWrapBehavior, width, widthUnits);
+            }
+
+            return result;
+        }
+
+        private static bool ShouldCellWrap(
+            TableFormat obcTableFormat,
+            RowFormat obcRowsFormat,
+            HeaderRowsFormat obcHeaderRowsFormat,
+            ColumnFormat obcColumnFormat,
+            TreeTableConversionMode treeTableConversionMode)
+        {
+            var result = false;
+            if (obcColumnFormat?.CellsFormat?.Options != null)
+            {
+                result = obcColumnFormat.CellsFormat.Options.IsCellWrapped();
+            }
+            else if (obcHeaderRowsFormat?.RowsFormat?.CellsFormat?.Options != null)
+            {
+                result = obcHeaderRowsFormat.RowsFormat.CellsFormat.Options.IsCellWrapped();
+            }
+            else if (obcRowsFormat?.CellsFormat?.Options != null)
+            {
+                result = obcRowsFormat.CellsFormat.Options.IsCellWrapped();
+            }
+            else if (obcTableFormat?.CellsFormat?.Options != null)
+            {
+                result = obcTableFormat.CellsFormat.Options.IsCellWrapped();
+            }
+            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            {
+                throw new InvalidOperationException(Invariant(
+                    $"One of the CellFormatOptions must be non-null. Either change the CellFormatOptions or set TreeTableConversionMode to Relaxed."));
+            }
+
             return result;
         }
     }

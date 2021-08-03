@@ -99,15 +99,14 @@
     <Compile Include=".recipes\OBeautifulCode.Type\ToStringReadableOptions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\ToStringXmlDocOptions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
+    <Compile Include="Logic\Extensions\Internal\CellFormatOptionsExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\RowFormatOptionsExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\ColumnFormatOptionsExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\ObcICellExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\ObcRowBaseExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\ObcTreeTableExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\ObcTreeTableExtensions.cs" />
-    <Compile Include="Models\ClientBehaviors\AdjustTreeTableColumnSizeClientBehavior.designer.cs">
-      <DependentUpon>AdjustTreeTableColumnSizeClientBehavior.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Models\ColumnDefinition\ColumnWrapBehavior.cs" />
     <Compile Include="Models\ClientBehaviors\ClientBehaviorBase.designer.cs">
       <DependentUpon>ClientBehaviorBase.cs</DependentUpon>
     </Compile>
@@ -162,6 +161,9 @@
     <Compile Include="Models\UiObject\UiObject.designer.cs">
       <DependentUpon>UiObject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ColumnDefinition\ColumnDefinition.cs" />
+    <Compile Include="Models\ColumnDefinition\UnitOfMeasure.cs" />
+    <Compile Include="Models\ColumnDefinition\ColumnWidthBehavior.cs" />
     <Compile Include="Operations\ConvertObcToVuescapeTreeTableOp.designer.cs">
       <DependentUpon>ConvertObcToVuescapeTreeTableOp.cs</DependentUpon>
     </Compile>
@@ -170,7 +172,6 @@
     <Compile Include="Models\ClientBehaviors\ToggleTreeTableChildRowExpansionClientBehavior.cs" />
     <Compile Include="Models\ClientBehaviors\GeneratePdfClientBehavior.cs" />
     <Compile Include="Models\ClientBehaviors\ConstrainTreeTableHeightClientBehavior.cs" />
-    <Compile Include="Models\ClientBehaviors\AdjustTreeTableColumnSizeClientBehavior.cs" />
     <Compile Include="Models\ClientBehaviors\ClientBehaviorBase.cs" />
     <Compile Include="Models\Css\CssStyles.cs" />
     <Compile Include="Models\Css\CssStyleWrapper.cs" />

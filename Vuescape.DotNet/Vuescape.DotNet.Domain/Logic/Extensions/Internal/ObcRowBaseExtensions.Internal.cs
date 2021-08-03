@@ -39,7 +39,18 @@ namespace Vuescape.DotNet.Domain
             var cssClasses = "tree-table-row__tr";
             var rowId = obcHeaderRow.Id;
 
-            var treeTableHeaderCells = obcHeaderRow.Cells.Select((obcHeaderRowCell, columnIndex) => obcHeaderRowCell.ToVuescapeTreeTableHeaderCell(obcTableFormat, obcRowsFormat, obcHeaderRowsFormat, obcColumnFormat, obcColumns[columnIndex])).ToList();
+            var treeTableHeaderCells = obcHeaderRow.Cells.Select((obcHeaderRowCell, columnIndex) =>
+            {
+                var headerRow = obcHeaderRowCell.ToVuescapeTreeTableHeaderCell(obcTableFormat, obcRowsFormat, obcHeaderRowsFormat, obcColumnFormat, obcColumns[columnIndex]);
+
+                var columnsSpanned = 1;
+                if (obcHeaderRowCell is IColumnSpanningCell columnSpanningCell)
+                {
+                    columnsSpanned = columnSpanningCell.ColumnsSpanned;
+                }
+
+                return headerRow;
+            }).ToList();
 
             // TODO: classes/styles
             // TODO: Renderer? Is there a default?
@@ -77,6 +88,12 @@ namespace Vuescape.DotNet.Domain
             foreach (var obcRowCell in obcRow.Cells)
             {
                 var treeTableCell = obcRowCell.ToVuescapeTreeTableCell(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcColumnFormat, obcColumns[columnIndex++]);
+                var columnsSpanned = 1;
+                if (obcRowCell is IColumnSpanningCell columnSpanningCell)
+                {
+                    columnsSpanned = columnSpanningCell.ColumnsSpanned;
+                }
+
                 treeTableCells.Add(treeTableCell);
             }
 

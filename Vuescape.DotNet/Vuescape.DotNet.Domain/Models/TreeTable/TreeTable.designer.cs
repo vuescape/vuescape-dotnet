@@ -94,6 +94,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTable(
                                  this.Id?.DeepClone(),
+                                 this.ColumnDefinitions?.DeepClone(),
                                  this.Content?.DeepClone(),
                                  this.Behaviors?.DeepClone());
 
@@ -126,6 +127,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTable(
                                  id,
+                                 this.ColumnDefinitions?.DeepClone(),
                                  this.Content?.DeepClone(),
                                  this.Behaviors?.DeepClone());
 
@@ -158,7 +160,41 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTable(
                                  this.Id?.DeepClone(),
+                                 this.ColumnDefinitions?.DeepClone(),
                                  content,
+                                 this.Behaviors?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="ColumnDefinitions" />.
+        /// </summary>
+        /// <param name="columnDefinitions">The new <see cref="ColumnDefinitions" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTable" /> using the specified <paramref name="columnDefinitions" /> for <see cref="ColumnDefinitions" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public TreeTable DeepCloneWithBehaviors(IReadOnlyList<ColumnDefinition> columnDefinitions)
+        {
+            var result = new TreeTable(
+                                 this.Id?.DeepClone(),
+                                 columnDefinitions,
+                                 this.Content?.DeepClone(),
                                  this.Behaviors?.DeepClone());
 
             return result;
@@ -190,6 +226,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TreeTable(
                                  this.Id?.DeepClone(),
+                                 this.ColumnDefinitions?.DeepClone(),
                                  this.Content?.DeepClone(),
                                  behaviors);
 

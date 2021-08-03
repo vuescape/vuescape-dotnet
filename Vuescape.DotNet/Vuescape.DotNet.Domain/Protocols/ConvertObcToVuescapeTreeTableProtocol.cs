@@ -39,6 +39,8 @@ namespace Vuescape.DotNet.Domain
                 }
             }
 
+            var columnDefinitions = ConvertToVuescapeColumnDefinitions(obcTreeTable, operation.TreeTableConversionMode);
+
             var treeTableHeaders = ConvertToVuescapeTreeTableHeaderRows(obcTreeTable, operation.TreeTableConversionMode);
             var treeTableRows = ConvertToVuescapeTreeTableRows(obcTreeTable, operation.TreeTableConversionMode);
 
@@ -66,7 +68,30 @@ namespace Vuescape.DotNet.Domain
 
             // TODO: Add default behaviors.
             // TODO: Determine specific behaviors to add based on parameter data.
-            return new TreeTable(null, treeTableContent);
+            return new TreeTable(null, columnDefinitions, treeTableContent);
+        }
+
+        private static IReadOnlyList<ColumnDefinition> ConvertToVuescapeColumnDefinitions(
+            OBeautifulCode.DataStructure.TreeTable obcTreeTable,
+            TreeTableConversionMode treeTableConversionMode)
+        {
+            var obcTableFormat = obcTreeTable.Format;
+            var obcTableRowsFormat = obcTreeTable.TableRows.RowsFormat;
+            var obcHeaderRowsFormat = obcTreeTable.TableRows.HeaderRows.Format;
+            var obcTableColumns = obcTreeTable.TableColumns;
+            var obcTableColumnsFormat = obcTableColumns.ColumnsFormat;
+
+            IReadOnlyList<ColumnDefinition> columnDefinitions =
+                obcTreeTable.TableColumns.Columns.Select(
+                    obcColumn => obcColumn.ToColumnDefinition(
+                        obcTableFormat,
+                        obcTableRowsFormat,
+                        obcHeaderRowsFormat,
+                        obcTableColumnsFormat,
+                        treeTableConversionMode))
+                .ToList();
+
+            return columnDefinitions;
         }
 
         private static IReadOnlyList<TreeTableHeaderRow> ConvertToVuescapeTreeTableHeaderRows(

@@ -72,6 +72,22 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
                 {
+                    var wrapBehavior = A.Dummy<ColumnWrapBehavior>();
+                    var widthBehavior = A.Dummy<ColumnWidthBehavior>();
+                    decimal? width = null;
+                    UnitOfMeasure? unitOfMeasure = null;
+                    if (ThreadSafeRandom.Next(0, 1) == 0)
+                    {
+                        width = A.Dummy<decimal>();
+                        unitOfMeasure = A.Dummy<UnitOfMeasure>();
+                    }
+
+                    return new ColumnDefinition(widthBehavior, wrapBehavior, width, unitOfMeasure);
+                });
+
+                 AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
                     var uiObjectType = A.Dummy<UiObjectType>();
                     var value = GetObjectByUiObjectType(uiObjectType);
 
@@ -217,6 +233,7 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ContentKind.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(SortComparisonStrategy.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(TreeTableConversionMode.None);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ColumnWidthBehavior.None);
 
             var obcDataStructureDummyFactory = new OBeautifulCode.DataStructure.Test.DataStructureDummyFactory();
         }

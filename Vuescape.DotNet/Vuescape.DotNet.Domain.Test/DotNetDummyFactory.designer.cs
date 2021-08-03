@@ -148,6 +148,7 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TreeTable(
                                  A.Dummy<string>(),
+                                 A.Dummy<IReadOnlyList<ColumnDefinition>>(),
                                  A.Dummy<TreeTableContent>(),
                                  A.Dummy<IReadOnlyCollection<ClientBehaviorBase>>()));
 

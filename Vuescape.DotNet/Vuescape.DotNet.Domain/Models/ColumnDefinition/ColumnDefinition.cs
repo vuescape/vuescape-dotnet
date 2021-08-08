@@ -29,12 +29,12 @@ namespace Vuescape.DotNet.Domain
             if (widthUnitOfMeasure != null)
             {
                 new { width }.AsArg().Must().NotBeNull();
-                new { widthUnitOfMeasure }.AsArg().Must().NotBeEqualTo(UnitOfMeasure.None);
+                new { widthUnitOfMeasure.Value }.AsArg().Must().NotBeEqualTo(UnitOfMeasure.None);
             }
 
             if (width != null && width != 0)
             {
-                new { widthUnitOfMeasure }.AsArg().Must().NotBeEqualTo(UnitOfMeasure.None);
+                new { widthUnitOfMeasure.Value }.AsArg().Must().NotBeEqualTo(UnitOfMeasure.None);
             }
 
             this.ColumnWidthBehavior = columnWidthBehavior;

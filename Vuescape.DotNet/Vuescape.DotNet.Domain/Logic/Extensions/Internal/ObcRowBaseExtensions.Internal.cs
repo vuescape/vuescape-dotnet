@@ -39,9 +39,18 @@ namespace Vuescape.DotNet.Domain
             var cssClasses = "tree-table-row__tr";
             var rowId = obcHeaderRow.Id;
 
-            var treeTableHeaderCells = obcHeaderRow.Cells.Select((obcHeaderRowCell, columnIndex) =>
+            var actualColumnIndex = 0;
+            var treeTableHeaderCells = obcHeaderRow.Cells.SelectMany((obcHeaderRowCell, columnIndex) =>
             {
-                var headerRow = obcHeaderRowCell.ToVuescapeTreeTableHeaderCell(obcTableFormat, obcRowsFormat, obcHeaderRowsFormat, obcColumnFormat, obcColumns[columnIndex]);
+                var headerCells = new List<TreeTableHeaderCell>
+                {
+                    obcHeaderRowCell.ToVuescapeTreeTableHeaderCell(
+                        obcTableFormat,
+                        obcRowsFormat,
+                        obcHeaderRowsFormat,
+                        obcColumnFormat,
+                        obcColumns[actualColumnIndex]),
+                };
 
                 var columnsSpanned = 1;
                 if (obcHeaderRowCell is IColumnSpanningCell columnSpanningCell)
@@ -49,7 +58,15 @@ namespace Vuescape.DotNet.Domain
                     columnsSpanned = columnSpanningCell.ColumnsSpanned;
                 }
 
-                return headerRow;
+                actualColumnIndex += columnsSpanned;
+
+                for (var additionalColumnIndex = 1; additionalColumnIndex < columnsSpanned; additionalColumnIndex++)
+                {
+                    // make cell visible but hidden to allow colspan sizing to work properly
+                    headerCells.Add(new TreeTableHeaderCell(null, null, null, null, "tree-table__display--none", null, null, true, null));
+                }
+
+                return headerCells;
             }).ToList();
 
             // TODO: classes/styles
@@ -87,11 +104,19 @@ namespace Vuescape.DotNet.Domain
             var columnIndex = 0;
             foreach (var obcRowCell in obcRow.Cells)
             {
-                var treeTableCell = obcRowCell.ToVuescapeTreeTableCell(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcColumnFormat, obcColumns[columnIndex++]);
+                var treeTableCell = obcRowCell.ToVuescapeTreeTableCell(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcColumnFormat, obcColumns[columnIndex]);
                 var columnsSpanned = 1;
                 if (obcRowCell is IColumnSpanningCell columnSpanningCell)
                 {
                     columnsSpanned = columnSpanningCell.ColumnsSpanned;
+                }
+
+                columnIndex += columnsSpanned;
+
+                for (var additionalColumnIndex = 1; additionalColumnIndex < columnsSpanned; additionalColumnIndex++)
+                {
+                    // make cell visible but hidden to allow colspan sizing to work properly
+                    treeTableCells.Add(new TreeTableCell(null, null, null, null, "tree-table__display--none", null, null, true));
                 }
 
                 treeTableCells.Add(treeTableCell);

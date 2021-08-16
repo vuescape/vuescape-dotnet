@@ -22,6 +22,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcTableFormat">The table format.</param>
         /// <param name="obcRowsFormat">The table rows format.</param>
         /// <param name="obcHeaderRowsFormat">The header rows format.</param>
+        /// <param name="obcHeaderRowFormat">The header row format.</param>
         /// <param name="obcColumnFormat">The column format.</param>
         /// <param name="obcColumns">The list of Columns.</param>
         /// <param name="treeTableConversionMode">The TreeTable conversion mode.</param>
@@ -31,6 +32,7 @@ namespace Vuescape.DotNet.Domain
             TableFormat obcTableFormat,
             RowFormat obcRowsFormat,
             HeaderRowsFormat obcHeaderRowsFormat,
+            RowFormat obcHeaderRowFormat,
             ColumnFormat obcColumnFormat,
             IReadOnlyList<Column> obcColumns,
             TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
@@ -48,6 +50,7 @@ namespace Vuescape.DotNet.Domain
                         obcTableFormat,
                         obcRowsFormat,
                         obcHeaderRowsFormat,
+                        obcHeaderRowFormat,
                         obcColumnFormat,
                         obcColumns[actualColumnIndex]),
                 };
@@ -82,6 +85,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcTableFormat">The table format.</param>
         /// <param name="obcRowsFormat">The table rows format.</param>
         /// <param name="obcDataRowsFormat">The data rows format.</param>
+        /// <param name="obcRowFormat">The header row format.</param>
         /// <param name="obcColumnFormat">The column format.</param>
         /// <param name="obcColumns">The list of Columns.</param>
         /// <param name="depth">The depth in the TreeTable hierarchy.</param>
@@ -92,9 +96,10 @@ namespace Vuescape.DotNet.Domain
             TableFormat obcTableFormat,
             RowFormat obcRowsFormat,
             DataRowsFormat obcDataRowsFormat,
+            RowFormat obcRowFormat,
             ColumnFormat obcColumnFormat,
             IReadOnlyList<Column> obcColumns,
-            int depth,
+            int? depth,
             TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
         {
             // TODO: Apply formatting.
@@ -104,22 +109,22 @@ namespace Vuescape.DotNet.Domain
             var columnIndex = 0;
             foreach (var obcRowCell in obcRow.Cells)
             {
-                var treeTableCell = obcRowCell.ToVuescapeTreeTableCell(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcColumnFormat, obcColumns[columnIndex]);
+                var treeTableCell = obcRowCell.ToVuescapeTreeTableCell(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcRowFormat, obcColumnFormat, obcColumns[columnIndex]);
                 var columnsSpanned = 1;
                 if (obcRowCell is IColumnSpanningCell columnSpanningCell)
                 {
                     columnsSpanned = columnSpanningCell.ColumnsSpanned;
                 }
 
+                treeTableCells.Add(treeTableCell);
+
                 columnIndex += columnsSpanned;
 
                 for (var additionalColumnIndex = 1; additionalColumnIndex < columnsSpanned; additionalColumnIndex++)
                 {
                     // make cell visible but hidden to allow colspan sizing to work properly
-                    treeTableCells.Add(new TreeTableCell(null, null, null, null, "tree-table__display--none", null, null, true));
+                    treeTableCells.Add(new TreeTableCell(null, null, null, null, "tree-table__display--none", null, null, true, null));
                 }
-
-                treeTableCells.Add(treeTableCell);
             }
 
             // TODO: classes/styles
@@ -134,7 +139,12 @@ namespace Vuescape.DotNet.Domain
             IReadOnlyList<TreeTableRow> children = null;
             if (hasChildRows)
             {
-                children = obcRow.ChildRows.Select(_ => _.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcColumnFormat, obcColumns, depth + 1)).ToList();
+                if (depth == null)
+                {
+                    depth = 0;
+                }
+
+                children = obcRow.ChildRows.Select(_ => _.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcRow.Format, obcColumnFormat, obcColumns, depth + 1)).ToList();
             }
 
             var result = new TreeTableRow(rowId, treeTableCells, depth, null, null, null, isExpandable, false, isVisible, false, false, null, children);

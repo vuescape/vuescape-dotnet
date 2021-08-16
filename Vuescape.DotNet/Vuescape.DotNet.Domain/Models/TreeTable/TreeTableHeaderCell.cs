@@ -24,10 +24,11 @@ namespace Vuescape.DotNet.Domain
         /// <param name="hover">The hover over behavior.</param>
         /// <param name="renderer">The name of the renderer.</param>
         /// <param name="cssClasses">The CSS classes.</param>
-        /// <param name="cssStyle">The CSS style.</param>
+        /// <param name="cssStyles">The CSS style.</param>
         /// <param name="colspan">The column span (colspan attribute in HTML).</param>
         /// <param name="isVisible">Whether this item is visible.</param>
         /// <param name="columnSorter">The column sorter.</param>
+        /// <param name="cellFormat">The cell formatting details.</param>
         /// <param name="links">The Links for this item.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "colspan", Justification = "This aligns with the HTML spelling.")]
         public TreeTableHeaderCell(
@@ -36,10 +37,11 @@ namespace Vuescape.DotNet.Domain
             Hover hover,
             string renderer,
             string cssClasses,
-            string cssStyle,
+            IReadOnlyDictionary<string, string> cssStyles,
             int? colspan,
             bool isVisible,
             ColumnSorter columnSorter,
+            CellFormat cellFormat = null,
             IReadOnlyDictionary<string, Link> links = null)
         {
             this.Id = id;
@@ -47,10 +49,11 @@ namespace Vuescape.DotNet.Domain
             this.Hover = hover;
             this.Renderer = renderer;
             this.CssClasses = cssClasses;
-            this.CssStyle = cssStyle;
+            this.CssStyles = cssStyles;
             this.Colspan = colspan;
             this.IsVisible = isVisible;
             this.ColumnSorter = columnSorter;
+            this.CellFormat = cellFormat;
             this.Links = links;
         }
 
@@ -79,10 +82,12 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         public string CssClasses { get; private set; }
 
+        // TODO: Change CssStyle to dictionary to aid in parsing on the client side
+
         /// <summary>
-        /// Gets the CssStyle.
+        /// Gets the CssStyles.
         /// </summary>
-        public string CssStyle { get; private set; }
+        public IReadOnlyDictionary<string, string> CssStyles { get; private set; }
 
         /// <summary>
         /// Gets the column span (colspan attribute in HTML).
@@ -98,6 +103,10 @@ namespace Vuescape.DotNet.Domain
         /// Gets the column sorter.
         /// </summary>
         public ColumnSorter ColumnSorter { get; private set; }
+
+        /// <summary>
+        /// Gets the cell format.</summary>
+        public CellFormat CellFormat { get; private set; }
 
         /// <summary>
         /// Gets the Links.

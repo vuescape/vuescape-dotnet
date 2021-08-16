@@ -105,6 +105,7 @@
     <Compile Include="Logic\Extensions\Internal\ObcICellExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\ObcRowBaseExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\ObcTreeTableExtensions.Internal.cs" />
+    <Compile Include="Logic\Extensions\ColorExtensions.cs" />
     <Compile Include="Logic\Extensions\ObcTreeTableExtensions.cs" />
     <Compile Include="Models\ColumnDefinition\ColumnWrapBehavior.cs" />
     <Compile Include="Models\ClientBehaviors\ClientBehaviorBase.designer.cs">
@@ -122,6 +123,7 @@
     <Compile Include="Models\ClientBehaviors\ToggleTreeTableChildRowExpansionClientBehavior.designer.cs">
       <DependentUpon>ToggleTreeTableChildRowExpansionClientBehavior.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Css\CssPropertyName.cs" />
     <Compile Include="Models\Css\CssStyles.designer.cs">
       <DependentUpon>CssStyles.cs</DependentUpon>
     </Compile>
@@ -131,6 +133,7 @@
     <Compile Include="Models\Link\Link.designer.cs">
       <DependentUpon>Link.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Format\CellFormat.cs" />
     <Compile Include="Models\TreeTable\ColumnSorter.designer.cs">
       <DependentUpon>ColumnSorter.cs</DependentUpon>
     </Compile>

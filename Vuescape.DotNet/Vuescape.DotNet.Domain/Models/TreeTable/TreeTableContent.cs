@@ -31,7 +31,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="deadAreaColor">The color of the dead area.</param>
         /// <param name="maxRows">The maximum number of rows to display.</param>
         /// <param name="cssClass">The CSS class to apply to the parent div.</param>
-        /// <param name="cssStyle">The CSS style to apply to the parent div.</param>
+        /// <param name="cssStyles">The CSS style to apply to the parent div.</param>
         public TreeTableContent(
             IReadOnlyList<TreeTableHeaderRow> headers,
             IReadOnlyList<TreeTableRow> rows,
@@ -44,7 +44,7 @@ namespace Vuescape.DotNet.Domain
             string deadAreaColor,
             int? maxRows,
             string cssClass,
-            string cssStyle)
+            IReadOnlyDictionary<string, string> cssStyles)
         {
             new { headers }.AsArg().Must().NotBeNull();
             new { rows }.AsArg().Must().NotBeNull();
@@ -60,7 +60,7 @@ namespace Vuescape.DotNet.Domain
             this.DeadAreaColor = deadAreaColor;
             this.MaxRows = maxRows;
             this.CssClass = cssClass;
-            this.CssStyle = cssStyle;
+            this.CssStyles = cssStyles;
         }
 
         /// <summary>
@@ -119,8 +119,8 @@ namespace Vuescape.DotNet.Domain
         public string CssClass { get; private set; }
 
         /// <summary>
-        /// Gets the Style of the parent div.
+        /// Gets the Styles of the parent div.
         /// </summary>
-        public string CssStyle { get; private set; }
+        public IReadOnlyDictionary<string, string> CssStyles { get; private set; }
     }
 }

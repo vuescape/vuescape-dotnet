@@ -41,7 +41,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              null,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Renderer);
 
                         return result;
@@ -61,7 +61,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              new List<TreeTableHeaderCell>(),
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Renderer);
 
                         return result;

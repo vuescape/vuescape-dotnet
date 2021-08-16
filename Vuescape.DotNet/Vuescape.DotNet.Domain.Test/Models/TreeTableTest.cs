@@ -60,12 +60,12 @@ namespace Vuescape.DotNet.Domain.Test
             var headers = new List<TreeTableHeaderRow>();
             var items = new List<TreeTableHeaderCell>
             {
-                new TreeTableHeaderCell("entityName", "Active Accounts", null, null, string.Empty, string.Empty, 1, true, new ColumnSorter(SortDirection.Ascending, SortComparisonStrategy.StringCaseInsensitive)),
+                new TreeTableHeaderCell("entityName", "Active Accounts", null, null, string.Empty, null, 1, true, new ColumnSorter(SortDirection.Ascending, SortComparisonStrategy.StringCaseInsensitive)),
             };
 
             for (var i = startingYear; i < startingYear + numberOfPeriods; i++)
             {
-                var item = new TreeTableHeaderCell("reportingPeriod_" + i.ToString(CultureInfo.InvariantCulture), string.Empty,  null, null, null, string.Empty, 1, true, null);
+                var item = new TreeTableHeaderCell("reportingPeriod_" + i.ToString(CultureInfo.InvariantCulture), string.Empty,  null, null, null, null, 1, true, null);
                 items.Add(item);
             }
 
@@ -79,18 +79,18 @@ namespace Vuescape.DotNet.Domain.Test
             {
                 var treeTableCells = new List<TreeTableCell>();
 
-                var treeTableCell = new TreeTableCell("entityName", entityName, null, null, "who-is-in-report-consolidated__td--entityName", string.Empty, 1, true);
+                var treeTableCell = new TreeTableCell("entityName", entityName, null, null, "who-is-in-report-consolidated__td--entityName", null, 1, true, null);
                 treeTableCells.Add(treeTableCell);
                 for (var i = startingYear; i < startingYear + numberOfPeriods; i++)
                 {
                     var status = random.Next(2) == 0 ? "Passed" : "Failed";
                     var cssStyles = status == "Passed" ? "positive" : "negative";
                     cssStyles += " who-is-in-report-consolidated__td--status";
-                    treeTableCell = new TreeTableCell(entityName + "-" + i.ToString(CultureInfo.InvariantCulture), null, null, null, cssStyles, string.Empty, 1, true, null);
+                    treeTableCell = new TreeTableCell(entityName + "-" + i.ToString(CultureInfo.InvariantCulture), null, null, null, cssStyles, null, 1, true, null);
                     treeTableCells.Add(treeTableCell);
                 }
 
-                var row = new TreeTableRow("entityName-" + entityName, treeTableCells, 0, string.Empty, string.Empty, RowRenderer.DataRowRenderer, false, false, true, false, false, null, null);
+                var row = new TreeTableRow("entityName-" + entityName, treeTableCells, 0, string.Empty, null, RowRenderer.DataRowRenderer, false, false, true, false, false, null, null);
                 rows.Add(row);
             }
 

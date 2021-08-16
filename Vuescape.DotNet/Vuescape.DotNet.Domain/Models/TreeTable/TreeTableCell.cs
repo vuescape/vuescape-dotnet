@@ -25,9 +25,10 @@ namespace Vuescape.DotNet.Domain
         /// <param name="hover">The hover over behavior.</param>
         /// <param name="renderer">The name of the renderer.</param>
         /// <param name="cssClasses">The CSS classes.</param>
-        /// <param name="cssStyle">The CSS style.</param>
+        /// <param name="cssStyles">The CSS styles.</param>
         /// <param name="colspan">The column span (colspan attribute in HTML).</param>
         /// <param name="isVisible">Whether this cell is visible.</param>
+        /// <param name="cellFormat">The cell formatting details.</param>
         /// <param name="links">The Links for this cell.</param>
         /// <param name="slots">The slotted values for this cell.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "colspan", Justification = "This aligns with the HTML spelling.")]
@@ -37,9 +38,10 @@ namespace Vuescape.DotNet.Domain
             Hover hover,
             string renderer,
             string cssClasses,
-            string cssStyle,
+            IReadOnlyDictionary<string, string> cssStyles,
             int? colspan,
             bool isVisible,
+            CellFormat cellFormat,
             IReadOnlyDictionary<string, Link> links = null,
             SlottedUiObject slots = null)
         {
@@ -48,9 +50,10 @@ namespace Vuescape.DotNet.Domain
             this.Hover = hover;
             this.Renderer = renderer;
             this.CssClasses = cssClasses;
-            this.CssStyle = cssStyle;
+            this.CssStyles = cssStyles;
             this.Colspan = colspan;
             this.IsVisible = isVisible;
+            this.CellFormat = cellFormat;
             this.Links = links;
             this.Slots = slots;
         }
@@ -81,9 +84,9 @@ namespace Vuescape.DotNet.Domain
         public string CssClasses { get; private set; }
 
         /// <summary>
-        /// Gets the CssStyle.
+        /// Gets the CssStyles.
         /// </summary>
-        public string CssStyle { get; private set; }
+        public IReadOnlyDictionary<string, string> CssStyles { get; private set; }
 
         /// <summary>
         /// Gets the column span (colspan attribute in HTML).
@@ -94,6 +97,10 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets a value indicating whether the cell is visible.</summary>
         public bool IsVisible { get; private set; }
+
+        /// <summary>
+        /// Gets the cell format.</summary>
+        public CellFormat CellFormat { get; private set; }
 
         /// <summary>
         /// Gets the Links.

@@ -74,7 +74,7 @@ namespace Vuescape.DotNet.Domain
                       && this.Hover.IsEqualTo(other.Hover)
                       && this.Renderer.IsEqualTo(other.Renderer, StringComparer.Ordinal)
                       && this.CssClasses.IsEqualTo(other.CssClasses, StringComparer.Ordinal)
-                      && this.CssStyle.IsEqualTo(other.CssStyle, StringComparer.Ordinal)
+                      && this.CssStyles.IsEqualTo(other.CssStyles)
                       && this.Colspan.IsEqualTo(other.Colspan)
                       && this.IsVisible.IsEqualTo(other.IsVisible)
                       && this.Links.IsEqualTo(other.Links)
@@ -93,7 +93,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.Hover)
             .Hash(this.Renderer)
             .Hash(this.CssClasses)
-            .Hash(this.CssStyle)
+            .Hash(this.CssStyles)
             .Hash(this.Colspan)
             .Hash(this.IsVisible)
             .Hash(this.Links)
@@ -112,10 +112,11 @@ namespace Vuescape.DotNet.Domain
                                  this.Hover?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Colspan?.DeepClone(),
                                  this.IsVisible.DeepClone(),
                                  this.ColumnSorter?.DeepClone(),
+                                 this.CellFormat?.DeepClone(),
                                  this.Links?.DeepClone());
 
             return result;
@@ -151,10 +152,11 @@ namespace Vuescape.DotNet.Domain
                                  this.Hover?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Colspan?.DeepClone(),
                                  this.IsVisible.DeepClone(),
                                  this.ColumnSorter?.DeepClone(),
+                                 this.CellFormat?.DeepClone(),
                                  this.Links?.DeepClone());
 
             return result;
@@ -190,10 +192,11 @@ namespace Vuescape.DotNet.Domain
                                  this.Hover?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Colspan?.DeepClone(),
                                  this.IsVisible.DeepClone(),
                                  this.ColumnSorter?.DeepClone(),
+                                 this.CellFormat?.DeepClone(),
                                  this.Links?.DeepClone());
 
             return result;
@@ -229,10 +232,11 @@ namespace Vuescape.DotNet.Domain
                                  hover,
                                  this.Renderer?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Colspan?.DeepClone(),
                                  this.IsVisible.DeepClone(),
                                  this.ColumnSorter?.DeepClone(),
+                                 this.CellFormat?.DeepClone(),
                                  this.Links?.DeepClone());
 
             return result;
@@ -268,10 +272,11 @@ namespace Vuescape.DotNet.Domain
                                  this.Hover?.DeepClone(),
                                  renderer,
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Colspan?.DeepClone(),
                                  this.IsVisible.DeepClone(),
                                  this.ColumnSorter?.DeepClone(),
+                                 this.CellFormat?.DeepClone(),
                                  this.Links?.DeepClone());
 
             return result;
@@ -307,20 +312,21 @@ namespace Vuescape.DotNet.Domain
                                  this.Hover?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  cssClasses,
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Colspan?.DeepClone(),
                                  this.IsVisible.DeepClone(),
                                  this.ColumnSorter?.DeepClone(),
+                                 this.CellFormat?.DeepClone(),
                                  this.Links?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="CssStyle" />.
+        /// Deep clones this object with a new <see cref="CssStyles" />.
         /// </summary>
-        /// <param name="cssStyle">The new <see cref="CssStyle" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTableHeaderCell" /> using the specified <paramref name="cssStyle" /> for <see cref="CssStyle" /> and a deep clone of every other property.</returns>
+        /// <param name="cssStyles">The new <see cref="CssStyles" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTableHeaderCell" /> using the specified <paramref name="cssStyles" /> for <see cref="CssStyles" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -338,7 +344,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTableHeaderCell DeepCloneWithCssStyle(string cssStyle)
+        public TreeTableHeaderCell DeepCloneWithCssStyle(IReadOnlyDictionary<string, string> cssStyles)
         {
             var result = new TreeTableHeaderCell(
                                  this.Id?.DeepClone(),
@@ -346,10 +352,11 @@ namespace Vuescape.DotNet.Domain
                                  this.Hover?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 cssStyle,
+                                 cssStyles,
                                  this.Colspan?.DeepClone(),
                                  this.IsVisible.DeepClone(),
                                  this.ColumnSorter?.DeepClone(),
+                                 this.CellFormat?.DeepClone(),
                                  this.Links?.DeepClone());
 
             return result;
@@ -385,10 +392,11 @@ namespace Vuescape.DotNet.Domain
                                  this.Hover?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  colspan,
                                  this.IsVisible.DeepClone(),
                                  this.ColumnSorter?.DeepClone(),
+                                 this.CellFormat?.DeepClone(),
                                  this.Links?.DeepClone());
 
             return result;
@@ -424,10 +432,11 @@ namespace Vuescape.DotNet.Domain
                                  this.Hover?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Colspan?.DeepClone(),
                                  isVisible,
                                  this.ColumnSorter?.DeepClone(),
+                                 this.CellFormat?.DeepClone(),
                                  this.Links?.DeepClone());
 
             return result;
@@ -463,10 +472,11 @@ namespace Vuescape.DotNet.Domain
                                  this.Hover?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Colspan?.DeepClone(),
                                  this.IsVisible.DeepClone(),
                                  this.ColumnSorter?.DeepClone(),
+                                 this.CellFormat?.DeepClone(),
                                  links);
 
             return result;
@@ -502,10 +512,51 @@ namespace Vuescape.DotNet.Domain
                                  this.Hover?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Colspan?.DeepClone(),
                                  this.IsVisible.DeepClone(),
                                  columnSorter,
+                                 this.CellFormat?.DeepClone(),
+                                 this.Links?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="CellFormat" />.
+        /// </summary>
+        /// <param name="cellFormat">The new <see cref="CellFormat" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTableHeaderCell" /> using the specified <paramref name="cellFormat" /> for <see cref="CellFormat" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public TreeTableHeaderCell DeepCloneWithColumnSorter(CellFormat cellFormat)
+        {
+            var result = new TreeTableHeaderCell(
+                                 this.Id?.DeepClone(),
+                                 this.DisplayValue?.DeepClone(),
+                                 this.Hover?.DeepClone(),
+                                 this.Renderer?.DeepClone(),
+                                 this.CssClasses?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
+                                 this.Colspan?.DeepClone(),
+                                 this.IsVisible.DeepClone(),
+                                 this.ColumnSorter?.DeepClone(),
+                                 cellFormat,
                                  this.Links?.DeepClone());
 
             return result;
@@ -515,7 +566,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderCell: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DisplayValue = {this.DisplayValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Hover = {this.Hover?.ToString() ?? "<null>"}, Renderer = {this.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {this.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Colspan = {this.Colspan?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {this.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Links = {this.Links?.ToString() ?? "<null>"}, ColumnSorter = {this.ColumnSorter?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderCell: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DisplayValue = {this.DisplayValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Hover = {this.Hover?.ToString() ?? "<null>"}, Renderer = {this.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyles = {this.CssStyles?.ToString() ?? "<null>"}, Colspan = {this.Colspan?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {this.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Links = {this.Links?.ToString() ?? "<null>"}, ColumnSorter = {this.ColumnSorter?.ToString() ?? "<null>"}.");
 
             return result;
         }

@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TreeTableContent>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableContent: Headers = {systemUnderTest.Headers?.ToString() ?? "<null>"}, Rows = {systemUnderTest.Rows?.ToString() ?? "<null>"}, ShouldScrollVertical = {systemUnderTest.ShouldScrollVertical.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldScrollHorizontal = {systemUnderTest.ShouldScrollHorizontal.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncHeaderScroll = {systemUnderTest.ShouldSyncHeaderScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncFooterScroll = {systemUnderTest.ShouldSyncFooterScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldIncludeFooter = {systemUnderTest.ShouldIncludeFooter.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldFreezeFirstColumn = {systemUnderTest.ShouldFreezeFirstColumn.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DeadAreaColor = {systemUnderTest.DeadAreaColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxRows = {systemUnderTest.MaxRows?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClass = {systemUnderTest.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {systemUnderTest.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableContent: Headers = {systemUnderTest.Headers?.ToString() ?? "<null>"}, Rows = {systemUnderTest.Rows?.ToString() ?? "<null>"}, ShouldScrollVertical = {systemUnderTest.ShouldScrollVertical.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldScrollHorizontal = {systemUnderTest.ShouldScrollHorizontal.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncHeaderScroll = {systemUnderTest.ShouldSyncHeaderScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldSyncFooterScroll = {systemUnderTest.ShouldSyncFooterScroll.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldIncludeFooter = {systemUnderTest.ShouldIncludeFooter.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ShouldFreezeFirstColumn = {systemUnderTest.ShouldFreezeFirstColumn.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DeadAreaColor = {systemUnderTest.DeadAreaColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxRows = {systemUnderTest.MaxRows?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClass = {systemUnderTest.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {systemUnderTest.CssStyles?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -75,7 +75,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },
@@ -102,7 +102,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },
@@ -129,7 +129,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },
@@ -156,7 +156,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },
@@ -183,7 +183,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },
@@ -210,7 +210,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },
@@ -237,7 +237,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              null,
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },
@@ -264,7 +264,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },
@@ -291,7 +291,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              null,
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },
@@ -318,7 +318,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },
@@ -351,33 +351,6 @@ namespace Vuescape.DotNet.Domain.Test
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
                     ExpectedExceptionMessageContains = new[] { "cssStyle", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTableContent>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'cssStyle' is white space scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTableContent>();
-
-                        var result = new TreeTableContent(
-                                             referenceObject.Headers,
-                                             referenceObject.Rows,
-                                             referenceObject.ShouldScrollVertical,
-                                             referenceObject.ShouldScrollHorizontal,
-                                             referenceObject.ShouldSyncHeaderScroll,
-                                             referenceObject.ShouldSyncFooterScroll,
-                                             referenceObject.ShouldIncludeFooter,
-                                             referenceObject.ShouldFreezeFirstColumn,
-                                             referenceObject.DeadAreaColor,
-                                             referenceObject.MaxRows,
-                                             referenceObject.CssClass,
-                                             Invariant($"  {Environment.NewLine}  "));
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "cssStyle", "white space", },
                 });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<TreeTableContent> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TreeTableContent>()
@@ -403,7 +376,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
+                                                      referenceObject.CssStyles),
                             ExpectedPropertyValue = referenceObject.Headers,
                         };
 
@@ -433,7 +406,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
+                                                      referenceObject.CssStyles),
                             ExpectedPropertyValue = referenceObject.Rows,
                         };
 
@@ -463,7 +436,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
+                                                      referenceObject.CssStyles),
                             ExpectedPropertyValue = referenceObject.ShouldScrollVertical,
                         };
 
@@ -493,7 +466,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
+                                                      referenceObject.CssStyles),
                             ExpectedPropertyValue = referenceObject.ShouldScrollHorizontal,
                         };
 
@@ -523,7 +496,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
+                                                      referenceObject.CssStyles),
                             ExpectedPropertyValue = referenceObject.ShouldSyncHeaderScroll,
                         };
 
@@ -553,7 +526,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
+                                                      referenceObject.CssStyles),
                             ExpectedPropertyValue = referenceObject.ShouldSyncFooterScroll,
                         };
 
@@ -583,7 +556,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
+                                                      referenceObject.CssStyles),
                             ExpectedPropertyValue = referenceObject.ShouldIncludeFooter,
                         };
 
@@ -613,7 +586,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
+                                                      referenceObject.CssStyles),
                             ExpectedPropertyValue = referenceObject.ShouldFreezeFirstColumn,
                         };
 
@@ -643,7 +616,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
+                                                      referenceObject.CssStyles),
                             ExpectedPropertyValue = referenceObject.DeadAreaColor,
                         };
 
@@ -673,7 +646,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
+                                                      referenceObject.CssStyles),
                             ExpectedPropertyValue = referenceObject.MaxRows,
                         };
 
@@ -703,7 +676,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
+                                                      referenceObject.CssStyles),
                             ExpectedPropertyValue = referenceObject.CssClass,
                         };
 
@@ -733,8 +706,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.DeadAreaColor,
                                                       referenceObject.MaxRows,
                                                       referenceObject.CssClass,
-                                                      referenceObject.CssStyle),
-                            ExpectedPropertyValue = referenceObject.CssStyle,
+                                                      referenceObject.CssStyles),
+                            ExpectedPropertyValue = referenceObject.CssStyles,
                         };
 
                         return result;
@@ -966,18 +939,18 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<TreeTableContent>
                 {
-                    Name = "DeepCloneWithCssStyle should deep clone object and replace CssStyle with the provided cssStyle",
-                    WithPropertyName = "CssStyle",
+                    Name = "DeepCloneWithCssStyles should deep clone object and replace CssStyles with the provided cssStyles",
+                    WithPropertyName = "CssStyles",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
                         var systemUnderTest = A.Dummy<TreeTableContent>();
 
-                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.CssStyle.IsEqualTo(_.CssStyle));
+                        var referenceObject = A.Dummy<TreeTableContent>().ThatIs(_ => !systemUnderTest.CssStyles.IsEqualTo(_.CssStyles));
 
                         var result = new SystemUnderTestDeepCloneWithValue<TreeTableContent>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.CssStyle,
+                            DeepCloneWithValue = referenceObject.CssStyles,
                         };
 
                         return result;
@@ -1006,7 +979,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TreeTableContent[]
                     {
@@ -1022,7 +995,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
                                 A.Dummy<TreeTableContent>().Whose(_ => !_.Rows.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Rows)).Rows,
@@ -1035,7 +1008,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
                                 ReferenceObjectForEquatableTestScenarios.Rows,
@@ -1048,7 +1021,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
                                 ReferenceObjectForEquatableTestScenarios.Rows,
@@ -1061,7 +1034,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
                                 ReferenceObjectForEquatableTestScenarios.Rows,
@@ -1074,7 +1047,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
                                 ReferenceObjectForEquatableTestScenarios.Rows,
@@ -1087,7 +1060,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
                                 ReferenceObjectForEquatableTestScenarios.Rows,
@@ -1100,7 +1073,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
                                 ReferenceObjectForEquatableTestScenarios.Rows,
@@ -1113,7 +1086,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
                                 ReferenceObjectForEquatableTestScenarios.Rows,
@@ -1126,7 +1099,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 A.Dummy<TreeTableContent>().Whose(_ => !_.DeadAreaColor.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DeadAreaColor)).DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
                                 ReferenceObjectForEquatableTestScenarios.Rows,
@@ -1139,7 +1112,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 A.Dummy<TreeTableContent>().Whose(_ => !_.MaxRows.IsEqualTo(ReferenceObjectForEquatableTestScenarios.MaxRows)).MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
                                 ReferenceObjectForEquatableTestScenarios.Rows,
@@ -1152,7 +1125,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 A.Dummy<TreeTableContent>().Whose(_ => !_.CssClass.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssClass)).CssClass,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles),
                         new TreeTableContent(
                                 ReferenceObjectForEquatableTestScenarios.Headers,
                                 ReferenceObjectForEquatableTestScenarios.Rows,
@@ -1165,7 +1138,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.DeadAreaColor,
                                 ReferenceObjectForEquatableTestScenarios.MaxRows,
                                 ReferenceObjectForEquatableTestScenarios.CssClass,
-                                A.Dummy<TreeTableContent>().Whose(_ => !_.CssStyle.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyle)).CssStyle),
+                                A.Dummy<TreeTableContent>().Whose(_ => !_.CssStyles.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyles)).CssStyles),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {

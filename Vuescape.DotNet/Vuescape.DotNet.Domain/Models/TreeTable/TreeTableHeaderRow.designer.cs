@@ -72,7 +72,7 @@ namespace Vuescape.DotNet.Domain
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
                       && this.Cells.IsEqualTo(other.Cells)
                       && this.CssClasses.IsEqualTo(other.CssClasses, StringComparer.Ordinal)
-                      && this.CssStyle.IsEqualTo(other.CssStyle, StringComparer.Ordinal)
+                      && this.CssStyles.IsEqualTo(other.CssStyles)
                       && this.Renderer.IsEqualTo(other.Renderer, StringComparer.Ordinal);
 
             return result;
@@ -86,7 +86,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.Id)
             .Hash(this.Cells)
             .Hash(this.CssClasses)
-            .Hash(this.CssStyle)
+            .Hash(this.CssStyles)
             .Hash(this.Renderer)
             .Value;
 
@@ -100,7 +100,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Cells?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone());
 
             return result;
@@ -134,7 +134,7 @@ namespace Vuescape.DotNet.Domain
                                  id,
                                  this.Cells?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone());
 
             return result;
@@ -168,7 +168,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  cells,
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone());
 
             return result;
@@ -202,17 +202,17 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Cells?.DeepClone(),
                                  cssClasses,
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="CssStyle" />.
+        /// Deep clones this object with a new <see cref="CssStyles" />.
         /// </summary>
-        /// <param name="cssStyle">The new <see cref="CssStyle" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTableHeaderRow" /> using the specified <paramref name="cssStyle" /> for <see cref="CssStyle" /> and a deep clone of every other property.</returns>
+        /// <param name="cssStyles">The new <see cref="CssStyles" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTableHeaderRow" /> using the specified <paramref name="cssStyles" /> for <see cref="CssStyles" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -230,13 +230,13 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTableHeaderRow DeepCloneWithCssStyle(string cssStyle)
+        public TreeTableHeaderRow DeepCloneWithCssStyle(IReadOnlyDictionary<string, string> cssStyles)
         {
             var result = new TreeTableHeaderRow(
                                  this.Id?.DeepClone(),
                                  this.Cells?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 cssStyle,
+                                 cssStyles,
                                  this.Renderer?.DeepClone());
 
             return result;
@@ -270,7 +270,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Cells?.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  renderer);
 
             return result;
@@ -280,7 +280,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {this.Cells?.ToString() ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {this.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Renderer = {this.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {this.Cells?.ToString() ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyles = {this.CssStyles?.ToString() ?? "<null>"}, Renderer = {this.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

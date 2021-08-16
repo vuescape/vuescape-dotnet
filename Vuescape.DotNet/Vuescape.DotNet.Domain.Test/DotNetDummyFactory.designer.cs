@@ -130,7 +130,7 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<int?>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<string>()));
+                                 A.Dummy<IReadOnlyDictionary<string, string>>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Hover(
@@ -159,10 +159,11 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<Hover>(),
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<string>(),
+                                 A.Dummy<IReadOnlyDictionary<string, string>>(),
                                  A.Dummy<int?>(),
                                  A.Dummy<bool>(),
                                  A.Dummy<ColumnSorter>(),
+                                 A.Dummy<CellFormat>(),
                                  A.Dummy<IReadOnlyDictionary<string, Link>>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
@@ -170,7 +171,7 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<IReadOnlyList<TreeTableHeaderCell>>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<string>(),
+                                 A.Dummy<IReadOnlyDictionary<string, string>>(),
                                  A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
@@ -180,9 +181,10 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<Hover>(),
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<string>(),
+                                 A.Dummy<IReadOnlyDictionary<string, string>>(),
                                  A.Dummy<int?>(),
                                  A.Dummy<bool>(),
+                                 A.Dummy<CellFormat>(),
                                  A.Dummy<IReadOnlyDictionary<string, Link>>(),
                                  A.Dummy<SlottedUiObject>()));
 
@@ -192,7 +194,7 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<IReadOnlyList<TreeTableCell>>(),
                                  A.Dummy<int>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<string>(),
+                                 A.Dummy<IReadOnlyDictionary<string, string>>(),
                                  A.Dummy<string>(),
                                  A.Dummy<bool>(),
                                  A.Dummy<bool>(),

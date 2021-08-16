@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TreeTableHeaderRow>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {systemUnderTest.Cells?.ToString() ?? "<null>"}, CssClasses = {systemUnderTest.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {systemUnderTest.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Renderer = {systemUnderTest.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderRow: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {systemUnderTest.Cells?.ToString() ?? "<null>"}, CssClasses = {systemUnderTest.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyles = {systemUnderTest.CssStyles?.ToString() ?? "<null>"}, Renderer = {systemUnderTest.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -67,7 +67,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              null,
                                              referenceObject.Cells,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Renderer);
 
                         return result;
@@ -87,7 +87,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Cells,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Renderer);
 
                         return result;
@@ -107,7 +107,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              null,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Renderer);
 
                         return result;
@@ -127,7 +127,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              new List<TreeTableHeaderCell>(),
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Renderer);
 
                         return result;
@@ -147,7 +147,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              new TreeTableHeaderCell[0].Concat(referenceObject.Cells).Concat(new TreeTableHeaderCell[] { null }).Concat(referenceObject.Cells).ToList(),
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Renderer);
 
                         return result;
@@ -167,7 +167,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              referenceObject.Cells,
                                              null,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Renderer);
 
                         return result;
@@ -187,7 +187,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              referenceObject.Cells,
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Renderer);
 
                         return result;
@@ -218,26 +218,6 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableHeaderRow>
                 {
-                    Name = "constructor should throw ArgumentException when parameter 'cssStyle' is white space scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTableHeaderRow>();
-
-                        var result = new TreeTableHeaderRow(
-                                             referenceObject.Id,
-                                             referenceObject.Cells,
-                                             referenceObject.CssClasses,
-                                             Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.Renderer);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "cssStyle", "white space", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTableHeaderRow>
-                {
                     Name = "constructor should throw ArgumentNullException when parameter 'renderer' is null scenario",
                     ConstructionFunc = () =>
                     {
@@ -247,7 +227,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              referenceObject.Cells,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              null);
 
                         return result;
@@ -267,7 +247,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              referenceObject.Cells,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              Invariant($"  {Environment.NewLine}  "));
 
                         return result;
@@ -291,7 +271,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.Cells,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Renderer),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
@@ -314,7 +294,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.Cells,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Renderer),
                             ExpectedPropertyValue = referenceObject.Cells,
                         };
@@ -337,7 +317,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.Cells,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Renderer),
                             ExpectedPropertyValue = referenceObject.CssClasses,
                         };
@@ -360,9 +340,9 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.Cells,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Renderer),
-                            ExpectedPropertyValue = referenceObject.CssStyle,
+                            ExpectedPropertyValue = referenceObject.CssStyles,
                         };
 
                         return result;
@@ -383,7 +363,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.Cells,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Renderer),
                             ExpectedPropertyValue = referenceObject.Renderer,
                         };
@@ -457,18 +437,18 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<TreeTableHeaderRow>
                 {
-                    Name = "DeepCloneWithCssStyle should deep clone object and replace CssStyle with the provided cssStyle",
-                    WithPropertyName = "CssStyle",
+                    Name = "DeepCloneWithCssStyles should deep clone object and replace CssStyles with the provided cssStyles",
+                    WithPropertyName = "CssStyles",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
                         var systemUnderTest = A.Dummy<TreeTableHeaderRow>();
 
-                        var referenceObject = A.Dummy<TreeTableHeaderRow>().ThatIs(_ => !systemUnderTest.CssStyle.IsEqualTo(_.CssStyle));
+                        var referenceObject = A.Dummy<TreeTableHeaderRow>().ThatIs(_ => !systemUnderTest.CssStyles.IsEqualTo(_.CssStyles));
 
                         var result = new SystemUnderTestDeepCloneWithValue<TreeTableHeaderRow>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.CssStyle,
+                            DeepCloneWithValue = referenceObject.CssStyles,
                         };
 
                         return result;
@@ -509,7 +489,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Renderer),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TreeTableHeaderRow[]
@@ -518,31 +498,31 @@ namespace Vuescape.DotNet.Domain.Test
                                 A.Dummy<TreeTableHeaderRow>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
                                 ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Renderer),
                         new TreeTableHeaderRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<TreeTableHeaderRow>().Whose(_ => !_.Cells.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Cells)).Cells,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Renderer),
                         new TreeTableHeaderRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Cells,
                                 A.Dummy<TreeTableHeaderRow>().Whose(_ => !_.CssClasses.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssClasses)).CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Renderer),
                         new TreeTableHeaderRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                A.Dummy<TreeTableHeaderRow>().Whose(_ => !_.CssStyle.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyle)).CssStyle,
+                                A.Dummy<TreeTableHeaderRow>().Whose(_ => !_.CssStyles.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyles)).CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Renderer),
                         new TreeTableHeaderRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Cells,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 A.Dummy<TreeTableHeaderRow>().Whose(_ => !_.Renderer.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Renderer)).Renderer),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]

@@ -24,13 +24,13 @@ namespace Vuescape.DotNet.Domain
         /// <param name="id">The unique identifier.</param>
         /// <param name="cells">The items. This is typically the column values.</param>
         /// <param name="cssClasses">The CSS classes.</param>
-        /// <param name="cssStyle">The CSS style.</param>
+        /// <param name="cssStyles">The CSS style.</param>
         /// <param name="renderer">The renderer for the row.</param>
         public TreeTableHeaderRow(
             string id,
             IReadOnlyList<TreeTableHeaderCell> cells,
             string cssClasses = null,
-            string cssStyle = null,
+            IReadOnlyDictionary<string, string> cssStyles = null,
             string renderer = null)
         {
             new { cells }.AsArg().Must().NotBeNullNorEmptyEnumerable();
@@ -44,7 +44,7 @@ namespace Vuescape.DotNet.Domain
             this.Id = id;
             this.Cells = cells;
             this.CssClasses = cssClasses;
-            this.CssStyle = cssStyle;
+            this.CssStyles = cssStyles;
             this.Renderer = renderer;
         }
 
@@ -63,10 +63,12 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         public string CssClasses { get; private set; }
 
+        // TODO: Change CssStyle to dictionary to aid in parsing on the client side
+
         /// <summary>
-        /// Gets the CssStyle.
+        /// Gets the CssStyles.
         /// </summary>
-        public string CssStyle { get; private set; }
+        public IReadOnlyDictionary<string, string> CssStyles { get; private set; }
 
         /// <summary>
         /// Gets the cell renderer.

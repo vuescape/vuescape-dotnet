@@ -24,7 +24,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="cells">The items. This is typically the column values.</param>
         /// <param name="depth">The depth of the row in the tree.</param>
         /// <param name="cssClasses">The CSS classes.</param>
-        /// <param name="cssStyle">The CSS style.</param>
+        /// <param name="cssStyles">The CSS style.</param>
         /// <param name="renderer">The name of the renderer.</param>
         /// <param name="isExpandable">Whether the row is expandable.</param>
         /// <param name="isExpanded">Whether the row is expanded.</param>
@@ -36,9 +36,9 @@ namespace Vuescape.DotNet.Domain
         public TreeTableRow(
             string id,
             IReadOnlyList<TreeTableCell> cells,
-            int depth,
+            int? depth,
             string cssClasses,
-            string cssStyle,
+            IReadOnlyDictionary<string, string> cssStyles,
             string renderer,
             bool isExpandable,
             bool isExpanded,
@@ -54,7 +54,7 @@ namespace Vuescape.DotNet.Domain
             this.Cells = cells;
             this.Depth = depth;
             this.CssClasses = cssClasses;
-            this.CssStyle = cssStyle;
+            this.CssStyles = cssStyles;
             this.Renderer = renderer;
             this.IsExpandable = isExpandable;
             this.IsExpanded = isExpanded;
@@ -80,10 +80,12 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         public string CssClasses { get; private set; }
 
+        // TODO: Change CssStyle to dictionary to aid in parsing on the client side
+
         /// <summary>
-        /// Gets the CssStyle.
+        /// Gets the CssStyles.
         /// </summary>
-        public string CssStyle { get; private set; }
+        public IReadOnlyDictionary<string, string> CssStyles { get; private set; }
 
         /// <summary>
         /// Gets the Renderer.
@@ -93,7 +95,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the indent depth of this row.
         /// </summary>
-        public int Depth { get; private set; }
+        public int? Depth { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether this row is expandable.

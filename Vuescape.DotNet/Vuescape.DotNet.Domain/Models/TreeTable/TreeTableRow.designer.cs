@@ -72,7 +72,7 @@ namespace Vuescape.DotNet.Domain
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
                       && this.Cells.IsEqualTo(other.Cells)
                       && this.CssClasses.IsEqualTo(other.CssClasses, StringComparer.Ordinal)
-                      && this.CssStyle.IsEqualTo(other.CssStyle, StringComparer.Ordinal)
+                      && this.CssStyles.IsEqualTo(other.CssStyles)
                       && this.Renderer.IsEqualTo(other.Renderer, StringComparer.Ordinal)
                       && this.Depth.IsEqualTo(other.Depth)
                       && this.IsExpandable.IsEqualTo(other.IsExpandable)
@@ -94,7 +94,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.Id)
             .Hash(this.Cells)
             .Hash(this.CssClasses)
-            .Hash(this.CssStyle)
+            .Hash(this.CssStyles)
             .Hash(this.Renderer)
             .Hash(this.Depth)
             .Hash(this.IsExpandable)
@@ -117,7 +117,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -159,7 +159,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -201,7 +201,7 @@ namespace Vuescape.DotNet.Domain
                                  cells,
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -243,7 +243,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  cssClasses,
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -257,10 +257,10 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="CssStyle" />.
+        /// Deep clones this object with a new <see cref="CssStyles" />.
         /// </summary>
-        /// <param name="cssStyle">The new <see cref="CssStyle" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TreeTableRow" /> using the specified <paramref name="cssStyle" /> for <see cref="CssStyle" /> and a deep clone of every other property.</returns>
+        /// <param name="cssStyles">The new <see cref="CssStyles" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TreeTableRow" /> using the specified <paramref name="cssStyles" /> for <see cref="CssStyles" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -278,14 +278,14 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TreeTableRow DeepCloneWithCssStyle(string cssStyle)
+        public TreeTableRow DeepCloneWithCssStyle(IReadOnlyDictionary<string, string> cssStyles)
         {
             var result = new TreeTableRow(
                                  this.Id?.DeepClone(),
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 cssStyle,
+                                 cssStyles,
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -327,7 +327,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  renderer,
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -369,7 +369,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  depth,
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -411,7 +411,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  isExpandable,
                                  this.IsExpanded.DeepClone(),
@@ -453,7 +453,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  isExpanded,
@@ -495,7 +495,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -537,7 +537,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -579,7 +579,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -621,7 +621,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -663,7 +663,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Cells?.DeepClone(),
                                  this.Depth.DeepClone(),
                                  this.CssClasses?.DeepClone(),
-                                 this.CssStyle?.DeepClone(),
+                                 this.CssStyles?.DeepClone(),
                                  this.Renderer?.DeepClone(),
                                  this.IsExpandable.DeepClone(),
                                  this.IsExpanded.DeepClone(),
@@ -680,7 +680,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {this.Cells?.ToString() ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {this.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Renderer = {this.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Depth = {this.Depth.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsExpandable = {this.IsExpandable.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsExpanded = {this.IsExpanded.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {this.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsSelected = {this.IsSelected.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsFocused = {this.IsFocused?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Links = {this.Links?.ToString() ?? "<null>"}, Children = {this.Children?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TreeTableRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {this.Cells?.ToString() ?? "<null>"}, CssClasses = {this.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyles = {this.CssStyles?.ToString() ?? "<null>"}, Renderer = {this.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Depth = {this.Depth?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsExpandable = {this.IsExpandable.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsExpanded = {this.IsExpanded.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {this.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsSelected = {this.IsSelected.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsFocused = {this.IsFocused?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Links = {this.Links?.ToString() ?? "<null>"}, Children = {this.Children?.ToString() ?? "<null>"}.");
 
             return result;
         }

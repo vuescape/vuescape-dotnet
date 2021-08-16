@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TreeTableHeaderCell>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderCell: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DisplayValue = {systemUnderTest.DisplayValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Hover = {systemUnderTest.Hover?.ToString() ?? "<null>"}, Renderer = {systemUnderTest.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {systemUnderTest.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyle = {systemUnderTest.CssStyle?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Colspan = {systemUnderTest.Colspan?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {systemUnderTest.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Links = {systemUnderTest.Links?.ToString() ?? "<null>"}, ColumnSorter = {systemUnderTest.ColumnSorter?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTableHeaderCell: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DisplayValue = {systemUnderTest.DisplayValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Hover = {systemUnderTest.Hover?.ToString() ?? "<null>"}, Renderer = {systemUnderTest.Renderer?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClasses = {systemUnderTest.CssClasses?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyles = {systemUnderTest.CssStyles?.ToString() ?? "<null>"}, Colspan = {systemUnderTest.Colspan?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsVisible = {systemUnderTest.IsVisible.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Links = {systemUnderTest.Links?.ToString() ?? "<null>"}, ColumnSorter = {systemUnderTest.ColumnSorter?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -69,10 +69,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              referenceObject.Renderer,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              referenceObject.Links);
 
                         return result;
@@ -94,10 +95,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              referenceObject.Renderer,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              referenceObject.Links);
 
                         return result;
@@ -119,10 +121,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              referenceObject.Renderer,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              referenceObject.Links);
 
                         return result;
@@ -144,10 +147,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              referenceObject.Renderer,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              referenceObject.Links);
 
                         return result;
@@ -169,10 +173,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              null,
                                              referenceObject.Renderer,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              referenceObject.Links);
 
                         return result;
@@ -194,10 +199,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              null,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              referenceObject.Links);
 
                         return result;
@@ -219,10 +225,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              referenceObject.Links);
 
                         return result;
@@ -244,10 +251,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              referenceObject.Renderer,
                                              null,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              referenceObject.Links);
 
                         return result;
@@ -269,10 +277,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              referenceObject.Renderer,
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              referenceObject.Links);
 
                         return result;
@@ -298,37 +307,13 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              referenceObject.Links);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
                     ExpectedExceptionMessageContains = new[] { "cssStyle", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTableHeaderCell>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'cssStyle' is white space scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTableHeaderCell>();
-
-                        var result = new TreeTableHeaderCell(
-                                             referenceObject.Id,
-                                             referenceObject.DisplayValue,
-                                             referenceObject.Hover,
-                                             referenceObject.Renderer,
-                                             referenceObject.CssClasses,
-                                             Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.Colspan,
-                                             referenceObject.IsVisible,
-                                             referenceObject.ColumnSorter,
-                                             referenceObject.Links);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "cssStyle", "white space", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableHeaderCell>
@@ -344,10 +329,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              referenceObject.Renderer,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              null,
+                                             referenceObject.CellFormat,
                                              referenceObject.Links);
 
                         return result;
@@ -369,7 +355,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              referenceObject.Renderer,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
@@ -394,10 +380,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              referenceObject.Renderer,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              new Dictionary<string, Link>());
 
                         return result;
@@ -425,10 +412,11 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Hover,
                                              referenceObject.Renderer,
                                              referenceObject.CssClasses,
-                                             referenceObject.CssStyle,
+                                             referenceObject.CssStyles,
                                              referenceObject.Colspan,
                                              referenceObject.IsVisible,
                                              referenceObject.ColumnSorter,
+                                             referenceObject.CellFormat,
                                              dictionaryWithNullValue);
 
                         return result;
@@ -454,10 +442,11 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Hover,
                                                       referenceObject.Renderer,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Colspan,
                                                       referenceObject.IsVisible,
                                                       referenceObject.ColumnSorter,
+                                                      referenceObject.CellFormat,
                                                       referenceObject.Links),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
@@ -482,10 +471,11 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Hover,
                                                       referenceObject.Renderer,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Colspan,
                                                       referenceObject.IsVisible,
                                                       referenceObject.ColumnSorter,
+                                                      referenceObject.CellFormat,
                                                       referenceObject.Links),
                             ExpectedPropertyValue = referenceObject.DisplayValue,
                         };
@@ -510,10 +500,11 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Hover,
                                                       referenceObject.Renderer,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Colspan,
                                                       referenceObject.IsVisible,
                                                       referenceObject.ColumnSorter,
+                                                      referenceObject.CellFormat,
                                                       referenceObject.Links),
                             ExpectedPropertyValue = referenceObject.Hover,
                         };
@@ -538,10 +529,11 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Hover,
                                                       referenceObject.Renderer,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Colspan,
                                                       referenceObject.IsVisible,
                                                       referenceObject.ColumnSorter,
+                                                      referenceObject.CellFormat,
                                                       referenceObject.Links),
                             ExpectedPropertyValue = referenceObject.Renderer,
                         };
@@ -566,10 +558,11 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Hover,
                                                       referenceObject.Renderer,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Colspan,
                                                       referenceObject.IsVisible,
                                                       referenceObject.ColumnSorter,
+                                                      referenceObject.CellFormat,
                                                       referenceObject.Links),
                             ExpectedPropertyValue = referenceObject.CssClasses,
                         };
@@ -594,12 +587,13 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Hover,
                                                       referenceObject.Renderer,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Colspan,
                                                       referenceObject.IsVisible,
                                                       referenceObject.ColumnSorter,
+                                                      referenceObject.CellFormat,
                                                       referenceObject.Links),
-                            ExpectedPropertyValue = referenceObject.CssStyle,
+                            ExpectedPropertyValue = referenceObject.CssStyles,
                         };
 
                         return result;
@@ -622,10 +616,11 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Hover,
                                                       referenceObject.Renderer,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Colspan,
                                                       referenceObject.IsVisible,
                                                       referenceObject.ColumnSorter,
+                                                      referenceObject.CellFormat,
                                                       referenceObject.Links),
                             ExpectedPropertyValue = referenceObject.Colspan,
                         };
@@ -650,10 +645,11 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Hover,
                                                       referenceObject.Renderer,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Colspan,
                                                       referenceObject.IsVisible,
                                                       referenceObject.ColumnSorter,
+                                                      referenceObject.CellFormat,
                                                       referenceObject.Links),
                             ExpectedPropertyValue = referenceObject.IsVisible,
                         };
@@ -678,10 +674,11 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Hover,
                                                       referenceObject.Renderer,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Colspan,
                                                       referenceObject.IsVisible,
                                                       referenceObject.ColumnSorter,
+                                                      referenceObject.CellFormat,
                                                       referenceObject.Links),
                             ExpectedPropertyValue = referenceObject.ColumnSorter,
                         };
@@ -706,10 +703,11 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Hover,
                                                       referenceObject.Renderer,
                                                       referenceObject.CssClasses,
-                                                      referenceObject.CssStyle,
+                                                      referenceObject.CssStyles,
                                                       referenceObject.Colspan,
                                                       referenceObject.IsVisible,
                                                       referenceObject.ColumnSorter,
+                                                      referenceObject.CellFormat,
                                                       referenceObject.Links),
                             ExpectedPropertyValue = referenceObject.Links,
                         };
@@ -823,18 +821,18 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<TreeTableHeaderCell>
                 {
-                    Name = "DeepCloneWithCssStyle should deep clone object and replace CssStyle with the provided cssStyle",
-                    WithPropertyName = "CssStyle",
+                    Name = "DeepCloneWithCssStyles should deep clone object and replace CssStyle with the provided cssStyles",
+                    WithPropertyName = "CssStyles",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
                         var systemUnderTest = A.Dummy<TreeTableHeaderCell>();
 
-                        var referenceObject = A.Dummy<TreeTableHeaderCell>().ThatIs(_ => !systemUnderTest.CssStyle.IsEqualTo(_.CssStyle));
+                        var referenceObject = A.Dummy<TreeTableHeaderCell>().ThatIs(_ => !systemUnderTest.CssStyles.IsEqualTo(_.CssStyles));
 
                         var result = new SystemUnderTestDeepCloneWithValue<TreeTableHeaderCell>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.CssStyle,
+                            DeepCloneWithValue = referenceObject.CssStyles,
                         };
 
                         return result;
@@ -937,10 +935,11 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Hover,
                                 ReferenceObjectForEquatableTestScenarios.Renderer,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Colspan,
                                 ReferenceObjectForEquatableTestScenarios.IsVisible,
                                 ReferenceObjectForEquatableTestScenarios.ColumnSorter,
+                                ReferenceObjectForEquatableTestScenarios.CellFormat,
                                 ReferenceObjectForEquatableTestScenarios.Links),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TreeTableHeaderCell[]
@@ -951,10 +950,11 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Hover,
                                 ReferenceObjectForEquatableTestScenarios.Renderer,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Colspan,
                                 ReferenceObjectForEquatableTestScenarios.IsVisible,
                                 ReferenceObjectForEquatableTestScenarios.ColumnSorter,
+                                ReferenceObjectForEquatableTestScenarios.CellFormat,
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableHeaderCell(
                                 ReferenceObjectForEquatableTestScenarios.Id,
@@ -962,10 +962,11 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Hover,
                                 ReferenceObjectForEquatableTestScenarios.Renderer,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Colspan,
                                 ReferenceObjectForEquatableTestScenarios.IsVisible,
                                 ReferenceObjectForEquatableTestScenarios.ColumnSorter,
+                                ReferenceObjectForEquatableTestScenarios.CellFormat,
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableHeaderCell(
                                 ReferenceObjectForEquatableTestScenarios.Id,
@@ -973,10 +974,11 @@ namespace Vuescape.DotNet.Domain.Test
                                 A.Dummy<TreeTableHeaderCell>().Whose(_ => !_.Hover.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Hover)).Hover,
                                 ReferenceObjectForEquatableTestScenarios.Renderer,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Colspan,
                                 ReferenceObjectForEquatableTestScenarios.IsVisible,
                                 ReferenceObjectForEquatableTestScenarios.ColumnSorter,
+                                ReferenceObjectForEquatableTestScenarios.CellFormat,
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableHeaderCell(
                                 ReferenceObjectForEquatableTestScenarios.Id,
@@ -984,10 +986,11 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Hover,
                                 A.Dummy<TreeTableHeaderCell>().Whose(_ => !_.Renderer.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Renderer)).Renderer,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Colspan,
                                 ReferenceObjectForEquatableTestScenarios.IsVisible,
                                 ReferenceObjectForEquatableTestScenarios.ColumnSorter,
+                                ReferenceObjectForEquatableTestScenarios.CellFormat,
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableHeaderCell(
                                 ReferenceObjectForEquatableTestScenarios.Id,
@@ -995,10 +998,11 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Hover,
                                 ReferenceObjectForEquatableTestScenarios.Renderer,
                                 A.Dummy<TreeTableHeaderCell>().Whose(_ => !_.CssClasses.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssClasses)).CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Colspan,
                                 ReferenceObjectForEquatableTestScenarios.IsVisible,
                                 ReferenceObjectForEquatableTestScenarios.ColumnSorter,
+                                ReferenceObjectForEquatableTestScenarios.CellFormat,
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableHeaderCell(
                                 ReferenceObjectForEquatableTestScenarios.Id,
@@ -1006,10 +1010,11 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Hover,
                                 ReferenceObjectForEquatableTestScenarios.Renderer,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                A.Dummy<TreeTableHeaderCell>().Whose(_ => !_.CssStyle.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyle)).CssStyle,
+                                A.Dummy<TreeTableHeaderCell>().Whose(_ => !_.CssStyles.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyles)).CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Colspan,
                                 ReferenceObjectForEquatableTestScenarios.IsVisible,
                                 ReferenceObjectForEquatableTestScenarios.ColumnSorter,
+                                ReferenceObjectForEquatableTestScenarios.CellFormat,
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableHeaderCell(
                                 ReferenceObjectForEquatableTestScenarios.Id,
@@ -1017,10 +1022,11 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Hover,
                                 ReferenceObjectForEquatableTestScenarios.Renderer,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 A.Dummy<TreeTableHeaderCell>().Whose(_ => !_.Colspan.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Colspan)).Colspan,
                                 ReferenceObjectForEquatableTestScenarios.IsVisible,
                                 ReferenceObjectForEquatableTestScenarios.ColumnSorter,
+                                ReferenceObjectForEquatableTestScenarios.CellFormat,
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableHeaderCell(
                                 ReferenceObjectForEquatableTestScenarios.Id,
@@ -1028,10 +1034,11 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Hover,
                                 ReferenceObjectForEquatableTestScenarios.Renderer,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Colspan,
                                 A.Dummy<TreeTableHeaderCell>().Whose(_ => !_.IsVisible.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsVisible)).IsVisible,
                                 ReferenceObjectForEquatableTestScenarios.ColumnSorter,
+                                ReferenceObjectForEquatableTestScenarios.CellFormat,
                                 ReferenceObjectForEquatableTestScenarios.Links),
                         new TreeTableHeaderCell(
                                 ReferenceObjectForEquatableTestScenarios.Id,
@@ -1039,10 +1046,11 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Hover,
                                 ReferenceObjectForEquatableTestScenarios.Renderer,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Colspan,
                                 ReferenceObjectForEquatableTestScenarios.IsVisible,
                                 ReferenceObjectForEquatableTestScenarios.ColumnSorter,
+                                ReferenceObjectForEquatableTestScenarios.CellFormat,
                                 A.Dummy<TreeTableHeaderCell>().Whose(_ => !_.Links.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Links)).Links),
                         new TreeTableHeaderCell(
                                 ReferenceObjectForEquatableTestScenarios.Id,
@@ -1050,10 +1058,11 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Hover,
                                 ReferenceObjectForEquatableTestScenarios.Renderer,
                                 ReferenceObjectForEquatableTestScenarios.CssClasses,
-                                ReferenceObjectForEquatableTestScenarios.CssStyle,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.Colspan,
                                 ReferenceObjectForEquatableTestScenarios.IsVisible,
                                 A.Dummy<TreeTableHeaderCell>().Whose(_ => !_.ColumnSorter.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ColumnSorter)).ColumnSorter,
+                                ReferenceObjectForEquatableTestScenarios.CellFormat,
                                 ReferenceObjectForEquatableTestScenarios.Links),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]

@@ -81,13 +81,16 @@ namespace Vuescape.DotNet.Domain
             var obcTableColumns = obcTreeTable.TableColumns;
             var obcTableColumnsFormat = obcTableColumns.ColumnsFormat;
 
+            // TODO: Is this the right order of formatting for column definition. Using same approach as elsewhere with rows before columns
             IReadOnlyList<ColumnDefinition> columnDefinitions =
                 obcTreeTable.TableColumns.Columns.Select(
                     obcColumn => obcColumn.ToColumnDefinition(
-                        obcTableFormat,
-                        obcTableRowsFormat,
+                        null,
                         obcHeaderRowsFormat,
+                        obcTableRowsFormat,
+                        obcColumn.Format,
                         obcTableColumnsFormat,
+                        obcTableFormat,
                         treeTableConversionMode))
                 .ToList();
 
@@ -109,6 +112,7 @@ namespace Vuescape.DotNet.Domain
                     obcTableFormat,
                     obcTableRowsFormat,
                     obcHeaderRowsFormat,
+                    obcHeaderRow.Format,
                     obcTableColumnsFormat,
                     obcTableColumns.Columns,
                     treeTableConversionMode))
@@ -137,9 +141,10 @@ namespace Vuescape.DotNet.Domain
                     obcTableFormat,
                     obcTableRowsFormat,
                     obcDataRowsFormat,
+                    obcDataRow.Format,
                     obcTableColumnsFormat,
                     obcTableColumns.Columns,
-                    0,
+                    null,
                     treeTableConversionMode))
                 .ToList();
 

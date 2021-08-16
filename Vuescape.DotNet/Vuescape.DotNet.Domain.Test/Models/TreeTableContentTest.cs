@@ -42,7 +42,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },
@@ -69,7 +69,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,
-                                             referenceObject.CssStyle);
+                                             referenceObject.CssStyles);
 
                         return result;
                     },

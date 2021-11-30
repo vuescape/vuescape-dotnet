@@ -56,10 +56,10 @@ namespace Vuescape.DotNet.Domain
                 };
 
                 var columnsSpanned = 1;
-                if (obcHeaderRowCell is IColumnSpanningCell columnSpanningCell)
-                {
-                    columnsSpanned = columnSpanningCell.ColumnsSpanned;
-                }
+                // if (obcHeaderRowCell is IColumnSpanningCell columnSpanningCell)
+                // {
+                //    columnsSpanned = columnSpanningCell.ColumnsSpanned;
+                // }
 
                 actualColumnIndex += columnsSpanned;
 
@@ -111,10 +111,10 @@ namespace Vuescape.DotNet.Domain
             {
                 var treeTableCell = obcRowCell.ToVuescapeTreeTableCell(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcRowFormat, obcColumnFormat, obcColumns[columnIndex]);
                 var columnsSpanned = 1;
-                if (obcRowCell is IColumnSpanningCell columnSpanningCell)
-                {
-                    columnsSpanned = columnSpanningCell.ColumnsSpanned;
-                }
+                // if (obcRowCell is IColumnSpanningCell columnSpanningCell)
+                // {
+                //    columnsSpanned = columnSpanningCell.ColumnsSpanned;
+                // }
 
                 treeTableCells.Add(treeTableCell);
 

@@ -9,7 +9,7 @@ namespace Vuescape.DotNet.Domain
     using System.Collections.Generic;
     using System.Linq;
 
-    using Naos.Protocol.Domain;
+    using OBeautifulCode.Type;
 
     using static System.FormattableString;
 

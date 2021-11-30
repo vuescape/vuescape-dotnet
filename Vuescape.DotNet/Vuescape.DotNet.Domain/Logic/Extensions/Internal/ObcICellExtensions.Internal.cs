@@ -45,57 +45,57 @@ namespace Vuescape.DotNet.Domain
             var slots = new Dictionary<string, UiObject>();
             string defaultSlot = null;
 
-            if (obcRowCell is IHaveDisplayValueCell displayValueCell)
-            {
-                displayValue = displayValueCell.DisplayValue;
-            }
+            // if (obcRowCell is IHaveDisplayValueCell displayValueCell)
+            // {
+            //    displayValue = displayValueCell.DisplayValue;
+            // }
 
-            if (obcRowCell is IHaveValueCell valueCell)
-            {
-                slots.Add("value", new UiObject(valueCell.GetCellValue()));
-                defaultSlot = "value";
-            }
+            // if (obcRowCell is IHaveValueCell valueCell)
+            // {
+            //    slots.Add("value", new UiObject(valueCell.GetCellValue()));
+            //    defaultSlot = "value";
+            // }
 
             if (obcRowCell is SlottedCell slottedCell)
             {
                 foreach (var kvp in slottedCell.SlotIdToCellMap)
                 {
-                    slots.Add(kvp.Key, new UiObject(kvp.Value.GetCellValue()));
+                    // slots.Add(kvp.Key, new UiObject(kvp.Value.GetCellValue()));
                 }
 
-                defaultSlot = slottedCell.DefaultSlotName;
+                // defaultSlot = slottedCell.DefaultSlotName;
             }
 
-            if (obcRowCell is ColumnSpanningSlottedCell columnSpanningSlottedCell)
-            {
-                foreach (var kvp in columnSpanningSlottedCell.SlotIdToCellMap)
-                {
-                    slots.Add(kvp.Key, new UiObject(kvp.Value.GetCellValue()));
-                }
+            // if (obcRowCell is ColumnSpanningSlottedCell columnSpanningSlottedCell)
+            // {
+            //    foreach (var kvp in columnSpanningSlottedCell.SlotIdToCellMap)
+            //    {
+            //        slots.Add(kvp.Key, new UiObject(kvp.Value.GetCellValue()));
+            //    }
 
-                defaultSlot = columnSpanningSlottedCell.DefaultSlotName;
-            }
+            // defaultSlot = columnSpanningSlottedCell.DefaultSlotName;
+            // }
 
             var colspan = 1;
-            if (obcRowCell is IColumnSpanningCell columnSpanningCell)
-            {
-                colspan = columnSpanningCell.ColumnsSpanned;
-            }
+            // if (obcRowCell is IColumnSpanningCell columnSpanningCell)
+            // {
+            //    colspan = columnSpanningCell.ColumnsSpanned;
+            // }
 
             Hover hover = null;
-            if (obcRowCell is IHaveHoverOverCell hoverOverCell)
-            {
-                var hoverOver = hoverOverCell.HoverOver;
+            // if (obcRowCell is IHaveHoverOverCell hoverOverCell)
+            // {
+            //    var hoverOver = hoverOverCell.HoverOver;
 
-                if (hoverOver is StringHoverOver stringHoverOver)
-                {
-                    hover = new Hover(null, stringHoverOver.Value, ContentKind.Plaintext);
-                }
-                else if (hoverOver is HtmlHoverOver htmlHover)
-                {
-                    hover = new Hover(null, htmlHover.Html, ContentKind.Html);
-                }
-            }
+            // if (hoverOver is StringHoverOver stringHoverOver)
+            //    {
+            //        hover = new Hover(null, stringHoverOver.Value, ContentKind.Plaintext);
+            //    }
+            //    else if (hoverOver is HtmlHoverOver htmlHover)
+            //    {
+            //        hover = new Hover(null, htmlHover.Html, ContentKind.Html);
+            //    }
+            // }
 
             var isVisible = obcColumn.Format.Options.IsVisible();
 
@@ -162,37 +162,37 @@ namespace Vuescape.DotNet.Domain
             TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
         {
             string displayValue = null;
-            if (obcHeaderRowCell is IHaveDisplayValueCell displayValueCell)
-            {
-                displayValue = displayValueCell.DisplayValue;
-            }
+            // if (obcHeaderRowCell is IHaveDisplayValueCell displayValueCell)
+            // {
+            //    displayValue = displayValueCell.DisplayValue;
+            // }
 
-            if (displayValue == null && obcHeaderRowCell is IHaveValueCell valueCell)
-            {
-                // Assuming this cell value is string for header.
-                displayValue = valueCell.GetCellValue().ToString();
-            }
+            // if (displayValue == null && obcHeaderRowCell is IHaveValueCell valueCell)
+            // {
+            //    // Assuming this cell value is string for header.
+            //    displayValue = valueCell.GetCellValue().ToString();
+            // }
 
             var colspan = 1;
-            if (obcHeaderRowCell is IColumnSpanningCell columnSpanningCell)
-            {
-                colspan = columnSpanningCell.ColumnsSpanned;
-            }
+            // if (obcHeaderRowCell is IColumnSpanningCell columnSpanningCell)
+            // {
+            //    colspan = columnSpanningCell.ColumnsSpanned;
+            // }
 
             Hover hover = null;
-            if (obcHeaderRowCell is IHaveHoverOverCell hoverOverCell)
-            {
-                var hoverOver = hoverOverCell.HoverOver;
+            // if (obcHeaderRowCell is IHaveHoverOverCell hoverOverCell)
+            // {
+            //    var hoverOver = hoverOverCell.HoverOver;
 
-                if (hoverOver is StringHoverOver stringHoverOver)
-                {
-                    hover = new Hover(null, stringHoverOver.Value, ContentKind.Plaintext);
-                }
-                else if (hoverOver is HtmlHoverOver htmlHover)
-                {
-                    hover = new Hover(null, htmlHover.Html, ContentKind.Html);
-                }
-            }
+            // if (hoverOver is StringHoverOver stringHoverOver)
+            //    {
+            //        hover = new Hover(null, stringHoverOver.Value, ContentKind.Plaintext);
+            //    }
+            //    else if (hoverOver is HtmlHoverOver htmlHover)
+            //    {
+            //        hover = new Hover(null, htmlHover.Html, ContentKind.Html);
+            //    }
+            // }
 
             var isVisible = obcColumn.Format.Options.IsVisible();
             var isSortable = obcColumn.Format.Options.IsSortable();
@@ -305,9 +305,9 @@ namespace Vuescape.DotNet.Domain
             new Dictionary<OBeautifulCode.DataStructure.CellFormatOptions, string>()
             {
                 { OBeautifulCode.DataStructure.CellFormatOptions.WrapText, "white-space__wrap" },
-                { OBeautifulCode.DataStructure.CellFormatOptions.Bold, "font-weight__bold" },
-                { OBeautifulCode.DataStructure.CellFormatOptions.Italics, "font-style__italic" },
-                { OBeautifulCode.DataStructure.CellFormatOptions.Underline, "text-decoration__underline" },
+                // { OBeautifulCode.DataStructure.CellFormatOptions.Bold, "font-weight__bold" },
+                // { OBeautifulCode.DataStructure.CellFormatOptions.Italics, "font-style__italic" },
+                // { OBeautifulCode.DataStructure.CellFormatOptions.Underline, "text-decoration__underline" },
             };
 
         private static string GetCellFormatOptionsCssClasses(
@@ -323,39 +323,39 @@ namespace Vuescape.DotNet.Domain
         {
             OBeautifulCode.DataStructure.CellFormatOptions? applicableCellFormatOptions = null;
             // ReSharper disable once IdentifierTypo
-            if (cell is IFormattableCell formattableCell && formattableCell.Format?.Options != null)
-            {
-                applicableCellFormatOptions = formattableCell.Format.Options;
-            }
-            else if (obcRowFormat?.CellsFormat?.Options != null)
-            {
-                applicableCellFormatOptions = obcRowFormat.CellsFormat.Options;
-            }
-            else if (obcDataOrHeaderRowsFormat?.CellsFormat?.Options != null)
-            {
-                applicableCellFormatOptions = obcDataOrHeaderRowsFormat.CellsFormat.Options;
-            }
-            else if (obcRowsFormat?.CellsFormat?.Options != null)
-            {
-                applicableCellFormatOptions = obcRowsFormat.CellsFormat.Options;
-            }
-            else if (obcSpecificColumnFormat?.CellsFormat?.Options != null)
-            {
-                applicableCellFormatOptions = obcSpecificColumnFormat.CellsFormat.Options;
-            }
-            else if (obcColumnFormat?.CellsFormat?.Options != null)
-            {
-                applicableCellFormatOptions = obcColumnFormat.CellsFormat.Options;
-            }
-            else if (obcTableFormat?.CellsFormat?.Options != null)
-            {
-                applicableCellFormatOptions = obcTableFormat.CellsFormat.Options;
-            }
-            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
-            {
-                // throw new InvalidOperationException(Invariant(
-                //    $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
-            }
+            // if (cell is IFormattableCell formattableCell && formattableCell.Format?.Options != null)
+            // {
+            //    applicableCellFormatOptions = formattableCell.Format.Options;
+            // }
+            // else if (obcRowFormat?.CellsFormat?.Options != null)
+            // {
+            //    applicableCellFormatOptions = obcRowFormat.CellsFormat.Options;
+            // }
+            // else if (obcDataOrHeaderRowsFormat?.CellsFormat?.Options != null)
+            // {
+            //    applicableCellFormatOptions = obcDataOrHeaderRowsFormat.CellsFormat.Options;
+            // }
+            // else if (obcRowsFormat?.CellsFormat?.Options != null)
+            // {
+            //    applicableCellFormatOptions = obcRowsFormat.CellsFormat.Options;
+            // }
+            // else if (obcSpecificColumnFormat?.CellsFormat?.Options != null)
+            // {
+            //    applicableCellFormatOptions = obcSpecificColumnFormat.CellsFormat.Options;
+            // }
+            // else if (obcColumnFormat?.CellsFormat?.Options != null)
+            // {
+            //    applicableCellFormatOptions = obcColumnFormat.CellsFormat.Options;
+            // }
+            // else if (obcTableFormat?.CellsFormat?.Options != null)
+            // {
+            //    applicableCellFormatOptions = obcTableFormat.CellsFormat.Options;
+            // }
+            // else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            // {
+            //    // throw new InvalidOperationException(Invariant(
+            //    //    $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
+            // }
 
             var result = string.IsNullOrWhiteSpace(additionalCssClasses) ? null : additionalCssClasses + " ";
 
@@ -419,39 +419,39 @@ namespace Vuescape.DotNet.Domain
         {
             Color? result = null;
             // ReSharper disable once IdentifierTypo
-            if (cell is IFormattableCell formattableCell && formattableCell.Format?.FontColor != null)
-            {
-                result = formattableCell.Format.FontColor;
-            }
-            else if (obcRowFormat?.CellsFormat.FontColor != null)
-            {
-                result = obcRowFormat.CellsFormat.FontColor;
-            }
-            else if (obcDataOrHeaderRowsFormat?.CellsFormat.FontColor != null)
-            {
-                result = obcDataOrHeaderRowsFormat.CellsFormat.FontColor;
-            }
-            else if (obcRowsFormat?.CellsFormat.FontColor != null)
-            {
-                result = obcRowsFormat.CellsFormat.FontColor;
-            }
-            else if (obcSpecificColumnFormat?.CellsFormat?.Options != null)
-            {
-                result = obcSpecificColumnFormat.CellsFormat.FontColor;
-            }
-            else if (obcColumnFormat?.CellsFormat != null)
-            {
-                result = obcColumnFormat.CellsFormat.FontColor;
-            }
-            else if (obcTableFormat?.CellsFormat.FontColor != null)
-            {
-                result = obcTableFormat.CellsFormat.FontColor;
-            }
-            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
-            {
-                throw new InvalidOperationException(Invariant(
-                    $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
-            }
+            // if (cell is IFormattableCell formattableCell && formattableCell.Format?.FontColor != null)
+            // {
+            //    result = formattableCell.Format.FontColor;
+            // }
+            // else if (obcRowFormat?.CellsFormat.FontColor != null)
+            // {
+            //    result = obcRowFormat.CellsFormat.FontColor;
+            // }
+            // else if (obcDataOrHeaderRowsFormat?.CellsFormat.FontColor != null)
+            // {
+            //    result = obcDataOrHeaderRowsFormat.CellsFormat.FontColor;
+            // }
+            // else if (obcRowsFormat?.CellsFormat.FontColor != null)
+            // {
+            //    result = obcRowsFormat.CellsFormat.FontColor;
+            // }
+            // else if (obcSpecificColumnFormat?.CellsFormat?.Options != null)
+            // {
+            //    result = obcSpecificColumnFormat.CellsFormat.FontColor;
+            // }
+            // else if (obcColumnFormat?.CellsFormat != null)
+            // {
+            //    result = obcColumnFormat.CellsFormat.FontColor;
+            // }
+            // else if (obcTableFormat?.CellsFormat.FontColor != null)
+            // {
+            //    result = obcTableFormat.CellsFormat.FontColor;
+            // }
+            // else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            // {
+            //    throw new InvalidOperationException(Invariant(
+            //        $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
+            // }
 
             return result;
         }
@@ -469,39 +469,39 @@ namespace Vuescape.DotNet.Domain
             decimal? fontSizeInPoints = null;
 
             // ReSharper disable once IdentifierTypo
-            if (cell is IFormattableCell formattableCell && formattableCell.Format?.FontSizeInPoints != null)
-            {
-                fontSizeInPoints = formattableCell.Format.FontSizeInPoints;
-            }
-            else if (obcRowFormat?.CellsFormat.FontSizeInPoints != null)
-            {
-                fontSizeInPoints = obcRowFormat.CellsFormat.FontSizeInPoints;
-            }
-            else if (obcDataOrHeaderRowsFormat?.CellsFormat.FontSizeInPoints != null)
-            {
-                fontSizeInPoints = obcDataOrHeaderRowsFormat.CellsFormat.FontSizeInPoints;
-            }
-            else if (obcRowsFormat?.CellsFormat.FontSizeInPoints != null)
-            {
-                fontSizeInPoints = obcRowsFormat.CellsFormat.FontSizeInPoints;
-            }
-            else if (obcSpecificColumnFormat?.CellsFormat?.FontSizeInPoints != null)
-            {
-                fontSizeInPoints = obcSpecificColumnFormat.CellsFormat.FontSizeInPoints;
-            }
-            else if (obcColumnFormat?.CellsFormat.FontSizeInPoints != null)
-            {
-                fontSizeInPoints = obcColumnFormat.CellsFormat.FontSizeInPoints;
-            }
-            else if (obcTableFormat?.CellsFormat.FontSizeInPoints != null)
-            {
-                fontSizeInPoints = obcTableFormat.CellsFormat.FontSizeInPoints;
-            }
-            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
-            {
-                throw new InvalidOperationException(Invariant(
-                    $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
-            }
+            // if (cell is IFormattableCell formattableCell && formattableCell.Format?.FontSizeInPoints != null)
+            // {
+            //    fontSizeInPoints = formattableCell.Format.FontSizeInPoints;
+            // }
+            // else if (obcRowFormat?.CellsFormat.FontSizeInPoints != null)
+            // {
+            //    fontSizeInPoints = obcRowFormat.CellsFormat.FontSizeInPoints;
+            // }
+            // else if (obcDataOrHeaderRowsFormat?.CellsFormat.FontSizeInPoints != null)
+            // {
+            //    fontSizeInPoints = obcDataOrHeaderRowsFormat.CellsFormat.FontSizeInPoints;
+            // }
+            // else if (obcRowsFormat?.CellsFormat.FontSizeInPoints != null)
+            // {
+            //    fontSizeInPoints = obcRowsFormat.CellsFormat.FontSizeInPoints;
+            // }
+            // else if (obcSpecificColumnFormat?.CellsFormat?.FontSizeInPoints != null)
+            // {
+            //    fontSizeInPoints = obcSpecificColumnFormat.CellsFormat.FontSizeInPoints;
+            // }
+            // else if (obcColumnFormat?.CellsFormat.FontSizeInPoints != null)
+            // {
+            //    fontSizeInPoints = obcColumnFormat.CellsFormat.FontSizeInPoints;
+            // }
+            // else if (obcTableFormat?.CellsFormat.FontSizeInPoints != null)
+            // {
+            //    fontSizeInPoints = obcTableFormat.CellsFormat.FontSizeInPoints;
+            // }
+            // else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            // {
+            //    throw new InvalidOperationException(Invariant(
+            //        $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
+            // }
 
             var fontSizeInPixels  = fontSizeInPoints * 4 / 3;
             var result = Invariant($"{fontSizeInPixels}px");
@@ -521,39 +521,39 @@ namespace Vuescape.DotNet.Domain
             var result = false;
 
             // ReSharper disable once IdentifierTypo
-            if (cell is IFormattableCell formattableCell && formattableCell.Format?.Options != null)
-            {
-                result = formattableCell.Format.Options.IsCellWrapped();
-            }
-            else if (obcRowFormat?.CellsFormat?.Options != null)
-            {
-                result = obcRowFormat.CellsFormat.Options.IsCellWrapped();
-            }
-            else if (obcHeaderRowsFormat?.RowsFormat?.CellsFormat?.Options != null)
-            {
-                result = obcHeaderRowsFormat.RowsFormat.CellsFormat.Options.IsCellWrapped();
-            }
-            else if (obcRowsFormat?.CellsFormat?.Options != null)
-            {
-                result = obcRowsFormat.CellsFormat.Options.IsCellWrapped();
-            }
-            else if (obcSpecificColumnFormat?.CellsFormat?.Options != null)
-            {
-                result = obcSpecificColumnFormat.CellsFormat.Options.IsCellWrapped();
-            }
-            else if (obcColumnFormat?.CellsFormat?.Options != null)
-            {
-                result = obcColumnFormat.CellsFormat.Options.IsCellWrapped();
-            }
-            else if (obcTableFormat?.CellsFormat?.Options != null)
-            {
-                result = obcTableFormat.CellsFormat.Options.IsCellWrapped();
-            }
-            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
-            {
-                throw new InvalidOperationException(Invariant(
-                    $"One of the CellFormatOptions must be non-null. Either change the CellFormatOptions or set TreeTableConversionMode to Relaxed."));
-            }
+            // if (cell is IFormattableCell formattableCell && formattableCell.Format?.Options != null)
+            // {
+            //    result = formattableCell.Format.Options.IsCellWrapped();
+            // }
+            // else if (obcRowFormat?.CellsFormat?.Options != null)
+            // {
+            //    result = obcRowFormat.CellsFormat.Options.IsCellWrapped();
+            // }
+            // else if (obcHeaderRowsFormat?.RowsFormat?.CellsFormat?.Options != null)
+            // {
+            //    result = obcHeaderRowsFormat.RowsFormat.CellsFormat.Options.IsCellWrapped();
+            // }
+            // else if (obcRowsFormat?.CellsFormat?.Options != null)
+            // {
+            //    result = obcRowsFormat.CellsFormat.Options.IsCellWrapped();
+            // }
+            // else if (obcSpecificColumnFormat?.CellsFormat?.Options != null)
+            // {
+            //    result = obcSpecificColumnFormat.CellsFormat.Options.IsCellWrapped();
+            // }
+            // else if (obcColumnFormat?.CellsFormat?.Options != null)
+            // {
+            //    result = obcColumnFormat.CellsFormat.Options.IsCellWrapped();
+            // }
+            // else if (obcTableFormat?.CellsFormat?.Options != null)
+            // {
+            //    result = obcTableFormat.CellsFormat.Options.IsCellWrapped();
+            // }
+            // else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            // {
+            //    throw new InvalidOperationException(Invariant(
+            //        $"One of the CellFormatOptions must be non-null. Either change the CellFormatOptions or set TreeTableConversionMode to Relaxed."));
+            // }
 
             return result;
         }

@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Serialization.Json
                     null),
             }
             .Concat(
-                new Type[0]
+                Type.EmptyTypes
                     .Concat(new[] { typeof(IModel) })
                     .Concat(Vuescape.DotNet.Domain.ProjectInfo.Assembly.GetPublicEnumTypes())
                     .Select(_ => _.ToTypeToRegisterForJson()))

@@ -23,15 +23,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class ToggleTreeTableChildRowExpansionClientBehavior : IModel<ToggleTreeTableChildRowExpansionClientBehavior>
+    public partial class CellFormat : IModel<CellFormat>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="ToggleTreeTableChildRowExpansionClientBehavior"/> are equal.
+        /// Determines whether two objects of type <see cref="CellFormat"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(ToggleTreeTableChildRowExpansionClientBehavior left, ToggleTreeTableChildRowExpansionClientBehavior right)
+        public static bool operator ==(CellFormat left, CellFormat right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -49,15 +49,15 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="ToggleTreeTableChildRowExpansionClientBehavior"/> are not equal.
+        /// Determines whether two objects of type <see cref="CellFormat"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(ToggleTreeTableChildRowExpansionClientBehavior left, ToggleTreeTableChildRowExpansionClientBehavior right) => !(left == right);
+        public static bool operator !=(CellFormat left, CellFormat right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(ToggleTreeTableChildRowExpansionClientBehavior other)
+        public bool Equals(CellFormat other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -69,23 +69,39 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = this.Name.IsEqualTo(other.Name, StringComparer.Ordinal);
+            var result = this.FontHexColor.IsEqualTo(other.FontHexColor, StringComparer.Ordinal)
+                      && this.FontSize.IsEqualTo(other.FontSize, StringComparer.Ordinal);
 
             return result;
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as ToggleTreeTableChildRowExpansionClientBehavior);
+        public override bool Equals(object obj) => this == (obj as CellFormat);
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
-            .Hash(this.Name)
+            .Hash(this.FontHexColor)
+            .Hash(this.FontSize)
             .Value;
 
         /// <inheritdoc />
-        public new ToggleTreeTableChildRowExpansionClientBehavior DeepClone() => (ToggleTreeTableChildRowExpansionClientBehavior)this.DeepCloneInternal();
+        public object Clone() => this.DeepClone();
 
         /// <inheritdoc />
+        public CellFormat DeepClone()
+        {
+            var result = new CellFormat(
+                                 this.FontHexColor?.DeepClone(),
+                                 this.FontSize?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="FontHexColor" />.
+        /// </summary>
+        /// <param name="fontHexColor">The new <see cref="FontHexColor" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="CellFormat" /> using the specified <paramref name="fontHexColor" /> for <see cref="FontHexColor" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -103,24 +119,42 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public override ClientBehaviorBase DeepCloneWithName(string name)
+        public CellFormat DeepCloneWithFontHexColor(string fontHexColor)
         {
-            var result = new ToggleTreeTableChildRowExpansionClientBehavior
-                             {
-                                 Name = name,
-                             };
+            var result = new CellFormat(
+                                 fontHexColor,
+                                 this.FontSize?.DeepClone());
 
             return result;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Deep clones this object with a new <see cref="FontSize" />.
+        /// </summary>
+        /// <param name="fontSize">The new <see cref="FontSize" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="CellFormat" /> using the specified <paramref name="fontSize" /> for <see cref="FontSize" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        protected override ClientBehaviorBase DeepCloneInternal()
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public CellFormat DeepCloneWithFontSize(string fontSize)
         {
-            var result = new ToggleTreeTableChildRowExpansionClientBehavior
-                             {
-                                 Name = this.Name?.DeepClone(),
-                             };
+            var result = new CellFormat(
+                                 this.FontHexColor?.DeepClone(),
+                                 fontSize);
 
             return result;
         }
@@ -129,7 +163,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.ToggleTreeTableChildRowExpansionClientBehavior: Name = {this.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {this.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSize = {this.FontSize?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

@@ -16,7 +16,6 @@ namespace Vuescape.DotNet.Domain
     using global::System.Linq;
 
     using global::OBeautifulCode.Cloning.Recipes;
-    using global::OBeautifulCode.DataStructure;
     using global::OBeautifulCode.Equality.Recipes;
     using global::OBeautifulCode.Type;
     using global::OBeautifulCode.Type.Recipes;
@@ -24,15 +23,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class ConvertObcToVuescapeTreeTableOp : IModel<ConvertObcToVuescapeTreeTableOp>
+    public partial class ColumnDefinition : IModel<ColumnDefinition>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="ConvertObcToVuescapeTreeTableOp"/> are equal.
+        /// Determines whether two objects of type <see cref="ColumnDefinition"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(ConvertObcToVuescapeTreeTableOp left, ConvertObcToVuescapeTreeTableOp right)
+        public static bool operator ==(ColumnDefinition left, ColumnDefinition right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -50,15 +49,15 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="ConvertObcToVuescapeTreeTableOp"/> are not equal.
+        /// Determines whether two objects of type <see cref="ColumnDefinition"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(ConvertObcToVuescapeTreeTableOp left, ConvertObcToVuescapeTreeTableOp right) => !(left == right);
+        public static bool operator !=(ColumnDefinition left, ColumnDefinition right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(ConvertObcToVuescapeTreeTableOp other)
+        public bool Equals(ColumnDefinition other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -70,130 +69,168 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = this.ObcTreeTable.IsEqualTo(other.ObcTreeTable)
-                      && this.TreeTableConversionMode.IsEqualTo(other.TreeTableConversionMode)
-                      && this.TokenToSubstitutionMap.IsEqualTo(other.TokenToSubstitutionMap);
+            var result = this.ColumnWidthBehavior.IsEqualTo(other.ColumnWidthBehavior)
+                      && this.ColumnWrapBehavior.IsEqualTo(other.ColumnWrapBehavior)
+                      && this.Width.IsEqualTo(other.Width)
+                      && this.WidthUnitOfMeasure.IsEqualTo(other.WidthUnitOfMeasure);
 
             return result;
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as ConvertObcToVuescapeTreeTableOp);
+        public override bool Equals(object obj) => this == (obj as ColumnDefinition);
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
-            .Hash(this.ObcTreeTable)
-            .Hash(this.TreeTableConversionMode)
-            .Hash(this.TokenToSubstitutionMap)
+            .Hash(this.ColumnWidthBehavior)
+            .Hash(this.ColumnWrapBehavior)
+            .Hash(this.Width)
+            .Hash(this.WidthUnitOfMeasure)
             .Value;
 
         /// <inheritdoc />
-        public new ConvertObcToVuescapeTreeTableOp DeepClone() => (ConvertObcToVuescapeTreeTableOp)this.DeepCloneInternal();
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="ObcTreeTable" />.
-        /// </summary>
-        /// <param name="obcTreeTable">The new <see cref="ObcTreeTable" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="ConvertObcToVuescapeTreeTableOp" /> using the specified <paramref name="obcTreeTable" /> for <see cref="ObcTreeTable" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public ConvertObcToVuescapeTreeTableOp DeepCloneWithObcTreeTable(OBeautifulCode.DataStructure.TreeTable obcTreeTable)
-        {
-            var result = new ConvertObcToVuescapeTreeTableOp(
-                                 obcTreeTable,
-                                 this.TreeTableConversionMode.DeepClone(),
-                                 this.TokenToSubstitutionMap?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="TreeTableConversionMode" />.
-        /// </summary>
-        /// <param name="treeTableConversionMode">The new <see cref="TreeTableConversionMode" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="ConvertObcToVuescapeTreeTableOp" /> using the specified <paramref name="treeTableConversionMode" /> for <see cref="TreeTableConversionMode" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public ConvertObcToVuescapeTreeTableOp DeepCloneWithTreeTableConversionMode(TreeTableConversionMode treeTableConversionMode)
-        {
-            var result = new ConvertObcToVuescapeTreeTableOp(
-                                 this.ObcTreeTable?.DeepClone(),
-                                 treeTableConversionMode,
-                                 this.TokenToSubstitutionMap?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="TokenToSubstitutionMap" />.
-        /// </summary>
-        /// <param name="tokenToSubstitutionMap">The new <see cref="TokenToSubstitutionMap" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="ConvertObcToVuescapeTreeTableOp" /> using the specified <paramref name="tokenToSubstitutionMap" /> for <see cref="TokenToSubstitutionMap" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public ConvertObcToVuescapeTreeTableOp DeepCloneWithTokenToSubstitutionMap(IReadOnlyDictionary<string, string> tokenToSubstitutionMap)
-        {
-            var result = new ConvertObcToVuescapeTreeTableOp(
-                                 this.ObcTreeTable?.DeepClone(),
-                                 this.TreeTableConversionMode.DeepClone(),
-                                 tokenToSubstitutionMap);
-
-            return result;
-        }
+        public object Clone() => this.DeepClone();
 
         /// <inheritdoc />
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        protected override OperationBase DeepCloneInternal()
+        public ColumnDefinition DeepClone()
         {
-            var result = new ConvertObcToVuescapeTreeTableOp(
-                                 this.ObcTreeTable?.DeepClone(),
-                                 this.TreeTableConversionMode.DeepClone(),
-                                 this.TokenToSubstitutionMap?.DeepClone());
+            var result = new ColumnDefinition(
+                                 this.ColumnWidthBehavior.DeepClone(),
+                                 this.ColumnWrapBehavior.DeepClone(),
+                                 this.Width?.DeepClone(),
+                                 this.WidthUnitOfMeasure?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="ColumnWidthBehavior" />.
+        /// </summary>
+        /// <param name="columnWidthBehavior">The new <see cref="ColumnWidthBehavior" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ColumnDefinition" /> using the specified <paramref name="columnWidthBehavior" /> for <see cref="ColumnWidthBehavior" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public ColumnDefinition DeepCloneWithColumnWidthBehavior(ColumnWidthBehavior columnWidthBehavior)
+        {
+            var result = new ColumnDefinition(
+                                 columnWidthBehavior,
+                                 this.ColumnWrapBehavior.DeepClone(),
+                                 this.Width?.DeepClone(),
+                                 this.WidthUnitOfMeasure?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="ColumnWrapBehavior" />.
+        /// </summary>
+        /// <param name="columnWrapBehavior">The new <see cref="ColumnWrapBehavior" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ColumnDefinition" /> using the specified <paramref name="columnWrapBehavior" /> for <see cref="ColumnWrapBehavior" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public ColumnDefinition DeepCloneWithColumnWrapBehavior(ColumnWrapBehavior columnWrapBehavior)
+        {
+            var result = new ColumnDefinition(
+                                 this.ColumnWidthBehavior.DeepClone(),
+                                 columnWrapBehavior,
+                                 this.Width?.DeepClone(),
+                                 this.WidthUnitOfMeasure?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="Width" />.
+        /// </summary>
+        /// <param name="width">The new <see cref="Width" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ColumnDefinition" /> using the specified <paramref name="width" /> for <see cref="Width" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public ColumnDefinition DeepCloneWithWidth(decimal? width)
+        {
+            var result = new ColumnDefinition(
+                                 this.ColumnWidthBehavior.DeepClone(),
+                                 this.ColumnWrapBehavior.DeepClone(),
+                                 width,
+                                 this.WidthUnitOfMeasure?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="WidthUnitOfMeasure" />.
+        /// </summary>
+        /// <param name="widthUnitOfMeasure">The new <see cref="WidthUnitOfMeasure" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ColumnDefinition" /> using the specified <paramref name="widthUnitOfMeasure" /> for <see cref="WidthUnitOfMeasure" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public ColumnDefinition DeepCloneWithWidthUnitOfMeasure(UnitOfMeasure? widthUnitOfMeasure)
+        {
+            var result = new ColumnDefinition(
+                                 this.ColumnWidthBehavior.DeepClone(),
+                                 this.ColumnWrapBehavior.DeepClone(),
+                                 this.Width?.DeepClone(),
+                                 widthUnitOfMeasure);
 
             return result;
         }
@@ -202,7 +239,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.ConvertObcToVuescapeTreeTableOp: ObcTreeTable = {this.ObcTreeTable?.ToString() ?? "<null>"}, TreeTableConversionMode = {this.TreeTableConversionMode.ToString() ?? "<null>"}, TokenToSubstitutionMap = {this.TokenToSubstitutionMap?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ColumnDefinition: ColumnWidthBehavior = {this.ColumnWidthBehavior.ToString() ?? "<null>"}, ColumnWrapBehavior = {this.ColumnWrapBehavior.ToString() ?? "<null>"}, Width = {this.Width?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, WidthUnitOfMeasure = {this.WidthUnitOfMeasure?.ToString() ?? "<null>"}.");
 
             return result;
         }

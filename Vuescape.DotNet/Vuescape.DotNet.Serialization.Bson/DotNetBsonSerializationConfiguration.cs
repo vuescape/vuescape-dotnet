@@ -10,8 +10,6 @@ namespace Vuescape.DotNet.Serialization.Bson
     using System.Collections.Generic;
     using System.Linq;
 
-    using Naos.Protocol.Serialization.Bson;
-
     using OBeautifulCode.Serialization;
     using OBeautifulCode.Serialization.Bson;
     using OBeautifulCode.Type;
@@ -30,12 +28,12 @@ namespace Vuescape.DotNet.Serialization.Bson
                 OBeautifulCode.DataStructure.ProjectInfo.Namespace,
             };
 
-        /// <inheritdoc />
-        protected override IReadOnlyCollection<BsonSerializationConfigurationType> DependentBsonSerializationConfigurationTypes =>
-            new[]
-            {
-                typeof(ProtocolBsonSerializationConfiguration).ToBsonSerializationConfigurationType(),
-            };
+        // /// <inheritdoc />
+        // protected override IReadOnlyCollection<BsonSerializationConfigurationType> DependentBsonSerializationConfigurationTypes =>
+        //    new[]
+        //    {
+        //        typeof(ProtocolBsonSerializationConfiguration).ToBsonSerializationConfigurationType(),
+        //    };
 
         /// <inheritdoc />
         protected override IReadOnlyCollection<TypeToRegisterForBson> TypesToRegisterForBson => new[]

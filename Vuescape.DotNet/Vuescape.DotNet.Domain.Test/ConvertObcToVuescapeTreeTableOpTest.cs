@@ -1,4 +1,8 @@
-﻿
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ConvertObcToVuescapeTreeTableOpTest.cs" company="Vuescape">
+//    Copyright (c) Vuescape 2021. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Vuescape.DotNet.Domain.Test
 {

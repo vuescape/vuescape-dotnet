@@ -9,7 +9,7 @@ namespace Vuescape.DotNet.Domain
     using System.Collections.Generic;
     using System.Linq;
 
-    using Naos.Protocol.Domain;
+    using OBeautifulCode.Type;
 
     using static System.FormattableString;
 
@@ -131,12 +131,7 @@ namespace Vuescape.DotNet.Domain
             var obcTableColumns = obcTreeTable.TableColumns;
             var obcTableColumnsFormat = obcTableColumns.ColumnsFormat;
 
-            if (obcTreeTable?.TableRows?.DataRows?.Rows == null)
-            {
-                return null;
-            }
-
-            IReadOnlyList<TreeTableRow> treeTableRows = obcTreeTable.TableRows.DataRows.Rows.Select(
+            IReadOnlyList<TreeTableRow> treeTableRows = obcTreeTable?.TableRows?.DataRows?.Rows?.Select(
                 obcDataRow => obcDataRow.ToVuescapeTreeTableRow(
                     obcTableFormat,
                     obcTableRowsFormat,
@@ -146,7 +141,7 @@ namespace Vuescape.DotNet.Domain
                     obcTableColumns.Columns,
                     null,
                     treeTableConversionMode))
-                .ToList();
+                ?.ToList();
 
             return treeTableRows;
         }

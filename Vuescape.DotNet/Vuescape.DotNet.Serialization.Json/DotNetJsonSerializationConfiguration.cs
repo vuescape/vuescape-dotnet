@@ -10,8 +10,6 @@ namespace Vuescape.DotNet.Serialization.Json
     using System.Collections.Generic;
     using System.Linq;
 
-    using Naos.Protocol.Serialization.Json;
-
     using OBeautifulCode.Serialization;
     using OBeautifulCode.Serialization.Json;
     using OBeautifulCode.Type;
@@ -30,12 +28,12 @@ namespace Vuescape.DotNet.Serialization.Json
                 OBeautifulCode.DataStructure.ProjectInfo.Namespace,
             };
 
-        /// <inheritdoc />
-        protected override IReadOnlyCollection<JsonSerializationConfigurationType> DependentJsonSerializationConfigurationTypes =>
-            new[]
-            {
-                typeof(ProtocolJsonSerializationConfiguration).ToJsonSerializationConfigurationType(),
-            };
+        // /// <inheritdoc />
+        // protected override IReadOnlyCollection<JsonSerializationConfigurationType> DependentJsonSerializationConfigurationTypes =>
+        //    new[]
+        //    {
+        //        typeof(ProtocolJsonSerializationConfiguration).ToJsonSerializationConfigurationType(),
+        //    };
 
         /// <inheritdoc />
         protected override IReadOnlyCollection<TypeToRegisterForJson> TypesToRegisterForJson => new[]
@@ -48,7 +46,7 @@ namespace Vuescape.DotNet.Serialization.Json
                     null),
             }
             .Concat(
-                new Type[0]
+                Type.EmptyTypes
                     .Concat(new[] { typeof(IModel) })
                     .Concat(Vuescape.DotNet.Domain.ProjectInfo.Assembly.GetPublicEnumTypes())
                     .Select(_ => _.ToTypeToRegisterForJson()))

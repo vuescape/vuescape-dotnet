@@ -70,7 +70,7 @@ namespace Vuescape.DotNet.Serialization.Bson
                 }
                 else
                 {
-                    var serializer = value.Value.GetType().GetAppropriateSerializer(defaultToObjectSerializer: false);
+                    var serializer = value.Value.GetType().GetAppropriateSerializer();
 
                     if (serializer == null)
                     {
@@ -158,7 +158,7 @@ namespace Vuescape.DotNet.Serialization.Bson
                 {
                     var valueType = ((UiObjectType)uiObjectType).GetObjectType(assemblyQualifiedName);
 
-                    var serializer = valueType.GetAppropriateSerializer(defaultToObjectSerializer: false);
+                    var serializer = valueType.GetAppropriateSerializer();
 
                     value = serializer == null
                         ? BsonSerializer.Deserialize(context.Reader, valueType)

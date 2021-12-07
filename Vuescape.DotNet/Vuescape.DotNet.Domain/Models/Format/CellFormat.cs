@@ -18,13 +18,16 @@ namespace Vuescape.DotNet.Domain
         /// Initializes a new instance of the <see cref="CellFormat"/> class.
         /// </summary>
         /// <param name="fontHexColor">The font color in hexadecimal.</param>
-        /// <param name="fontSize">The font size.</param>
+        /// <param name="fontSizeInPixels">The font size.</param>
+        /// <param name="backgroundHexColor">The background color in hexadecimal.</param>
         public CellFormat(
             string fontHexColor,
-            string fontSize)
+            string fontSizeInPixels,
+            string backgroundHexColor)
         {
             this.FontHexColor = fontHexColor;
-            this.FontSize = fontSize;
+            this.FontSizeInPixels = fontSizeInPixels;
+            this.BackgroundHexColor = backgroundHexColor;
         }
 
         /// <summary>
@@ -35,6 +38,11 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the font size in pixels.
         /// </summary>
-        public string FontSize { get; private set; }
+        public string FontSizeInPixels { get; private set; }
+
+        /// <summary>
+        /// Gets the background color in hexadecimal.
+        /// </summary>
+        public string BackgroundHexColor { get; private set; }
     }
 }

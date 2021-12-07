@@ -45,45 +45,33 @@ namespace Vuescape.DotNet.Domain
             var slots = new Dictionary<string, UiObject>();
             string defaultSlot = null;
 
-            if (obcRowCell is IHaveDisplayValueCell displayValueCell)
+            if (obcRowCell is IHaveCellValueFormat<string> displayValueCell)
             {
-                displayValue = displayValueCell.DisplayValue;
+                displayValue = displayValueCell.ValueFormat?.ToString();
             }
 
-            if (obcRowCell is IHaveValueCell valueCell)
+            if (obcRowCell is IGetCellValue valueCell)
             {
-                slots.Add("value", new UiObject(valueCell.GetCellValue()));
-                defaultSlot = "value";
+                slots.Add("__vs-value", new UiObject(valueCell.GetCellObjectValue()));
+                defaultSlot = "__vs-value";
             }
 
-            if (obcRowCell is SlottedCell slottedCell)
-            {
-                foreach (var kvp in slottedCell.SlotIdToCellMap)
-                {
-                    slots.Add(kvp.Key, new UiObject(kvp.Value.GetCellValue()));
-                }
+            // TODO: Not handling slotted cells.  OBC and Vuescape have different idea of slotted cell. In OBC a slotted cell has a dictionary of other cells
+            // while in Vuescape a slot is dictionary of UiObject Values
+            // if (obcRowCell is ISlottedCell slottedCell)
+            // {
+            //    foreach (var kvp in slottedCell.SlotIdToCellMap)
+            //    {
+            //        slots.Add(kvp.Key, new UiObject(kvp.Value.GetCellValue()));
+            //    }
+            //
+            //    // defaultSlot = slottedCell.DefaultSlotName;
+            // }
 
-                defaultSlot = slottedCell.DefaultSlotName;
-            }
-
-            if (obcRowCell is ColumnSpanningSlottedCell columnSpanningSlottedCell)
-            {
-                foreach (var kvp in columnSpanningSlottedCell.SlotIdToCellMap)
-                {
-                    slots.Add(kvp.Key, new UiObject(kvp.Value.GetCellValue()));
-                }
-
-                defaultSlot = columnSpanningSlottedCell.DefaultSlotName;
-            }
-
-            var colspan = 1;
-            if (obcRowCell is IColumnSpanningCell columnSpanningCell)
-            {
-                colspan = columnSpanningCell.ColumnsSpanned;
-            }
+            var colspan = obcRowCell.ColumnsSpanned ?? 1;
 
             Hover hover = null;
-            if (obcRowCell is IHaveHoverOverCell hoverOverCell)
+            if (obcRowCell is IHaveHoverOver hoverOverCell)
             {
                 var hoverOver = hoverOverCell.HoverOver;
 
@@ -112,6 +100,17 @@ namespace Vuescape.DotNet.Domain
                 "tree-table-cell__td",
                 treeTableConversionMode);
 
+            cssClasses += GetFontFormatOptionsCssClasses(
+                obcRowCell,
+                obcRowFormat,
+                obcDataRowsFormat?.RowsFormat,
+                obcRowsFormat,
+                obcColumn.Format,
+                obcColumnFormat,
+                obcTableFormat,
+                "tree-table-cell__td",
+                treeTableConversionMode);
+
             // TODO: Add links if applicable
             SlottedUiObject slottedUiObject = null;
             if (slots.Count > 0)
@@ -120,6 +119,7 @@ namespace Vuescape.DotNet.Domain
                 slottedUiObject = new SlottedUiObject(slots, defaultSlot);
             }
 
+            // TODO: instead of fontCssClasses add FontFormat (e.g. bold, italic, underline) to CellFormat?
             var cellFormat = GetCellFormat(
                 obcRowCell,
                 obcRowFormat,
@@ -162,25 +162,21 @@ namespace Vuescape.DotNet.Domain
             TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
         {
             string displayValue = null;
-            if (obcHeaderRowCell is IHaveDisplayValueCell displayValueCell)
+            if (obcHeaderRowCell is IHaveCellValueFormat<string> displayValueCell)
             {
-                displayValue = displayValueCell.DisplayValue;
+                displayValue = displayValueCell.ValueFormat?.ToString();
             }
 
-            if (displayValue == null && obcHeaderRowCell is IHaveValueCell valueCell)
+            if (obcHeaderRowCell is IGetCellValue valueCell)
             {
                 // Assuming this cell value is string for header.
-                displayValue = valueCell.GetCellValue().ToString();
+                displayValue = valueCell.GetCellObjectValue().ToString();
             }
 
-            var colspan = 1;
-            if (obcHeaderRowCell is IColumnSpanningCell columnSpanningCell)
-            {
-                colspan = columnSpanningCell.ColumnsSpanned;
-            }
+            var colspan = obcHeaderRowCell.ColumnsSpanned ?? 1;
 
             Hover hover = null;
-            if (obcHeaderRowCell is IHaveHoverOverCell hoverOverCell)
+            if (obcHeaderRowCell is IHaveHoverOver hoverOverCell)
             {
                 var hoverOver = hoverOverCell.HoverOver;
 
@@ -304,12 +300,18 @@ namespace Vuescape.DotNet.Domain
         private static readonly Dictionary<OBeautifulCode.DataStructure.CellFormatOptions, string> CellFormatToCssClassMap =
             new Dictionary<OBeautifulCode.DataStructure.CellFormatOptions, string>()
             {
-                { OBeautifulCode.DataStructure.CellFormatOptions.WrapText, "white-space__wrap" },
-                { OBeautifulCode.DataStructure.CellFormatOptions.Bold, "font-weight__bold" },
-                { OBeautifulCode.DataStructure.CellFormatOptions.Italics, "font-style__italic" },
-                { OBeautifulCode.DataStructure.CellFormatOptions.Underline, "text-decoration__underline" },
+                 { OBeautifulCode.DataStructure.CellFormatOptions.WrapText, "white-space__wrap" },
             };
 
+        private static readonly Dictionary<OBeautifulCode.DataStructure.FontFormatOptions, string> FontFormatToCssClassMap =
+            new Dictionary<OBeautifulCode.DataStructure.FontFormatOptions, string>()
+            {
+                { OBeautifulCode.DataStructure.FontFormatOptions.Bold, "font-weight__bold" },
+                { OBeautifulCode.DataStructure.FontFormatOptions.Italics, "font-style__italic" },
+                { OBeautifulCode.DataStructure.FontFormatOptions.Underline, "text-decoration__underline" },
+            };
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static string GetCellFormatOptionsCssClasses(
             ICell cell,
             RowFormat obcRowFormat,
@@ -323,7 +325,7 @@ namespace Vuescape.DotNet.Domain
         {
             OBeautifulCode.DataStructure.CellFormatOptions? applicableCellFormatOptions = null;
             // ReSharper disable once IdentifierTypo
-            if (cell is IFormattableCell formattableCell && formattableCell.Format?.Options != null)
+            if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.Options != null)
             {
                 applicableCellFormatOptions = formattableCell.Format.Options;
             }
@@ -368,6 +370,66 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
+        private static string GetFontFormatOptionsCssClasses(
+            ICell cell,
+            RowFormat obcRowFormat,
+            RowFormat obcDataOrHeaderRowsFormat,
+            RowFormat obcRowsFormat,
+            ColumnFormat obcSpecificColumnFormat,
+            ColumnFormat obcColumnFormat,
+            TableFormat obcTableFormat,
+            string additionalCssClasses,
+            TreeTableConversionMode treeTableConversionMode)
+        {
+            OBeautifulCode.DataStructure.FontFormatOptions? applicableFontFormatOptions = null;
+            // ReSharper disable once IdentifierTypo
+            if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.FontFormat?.Options != null)
+            {
+                applicableFontFormatOptions = formattableCell.Format.FontFormat.Options;
+            }
+            else if (obcRowFormat?.CellsFormat.FontFormat?.Options != null)
+            {
+                applicableFontFormatOptions = obcRowFormat.CellsFormat.FontFormat.Options;
+            }
+            else if (obcDataOrHeaderRowsFormat?.CellsFormat.FontFormat?.Options != null)
+            {
+                applicableFontFormatOptions = obcDataOrHeaderRowsFormat.CellsFormat.FontFormat.Options;
+            }
+            else if (obcRowsFormat?.CellsFormat.FontFormat?.Options != null)
+            {
+                applicableFontFormatOptions = obcRowsFormat.CellsFormat.FontFormat.Options;
+            }
+            else if (obcSpecificColumnFormat?.CellsFormat.FontFormat?.Options != null)
+            {
+                applicableFontFormatOptions = obcSpecificColumnFormat.CellsFormat.FontFormat.Options;
+            }
+            else if (obcColumnFormat?.CellsFormat.FontFormat?.Options != null)
+            {
+                applicableFontFormatOptions = obcColumnFormat.CellsFormat.FontFormat.Options;
+            }
+            else if (obcTableFormat?.CellsFormat.FontFormat?.Options != null)
+            {
+                applicableFontFormatOptions = obcTableFormat.CellsFormat.FontFormat.Options;
+            }
+            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            {
+                throw new InvalidOperationException(Invariant(
+                   $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
+            }
+
+            var result = string.IsNullOrWhiteSpace(additionalCssClasses) ? null : additionalCssClasses + " ";
+
+            if (applicableFontFormatOptions != null)
+            {
+                var allOptions = ((OBeautifulCode.DataStructure.FontFormatOptions[])Enum.GetValues(typeof(OBeautifulCode.DataStructure.FontFormatOptions))).ToList();
+                result += string.Join(" ", allOptions.Select(_ => (applicableFontFormatOptions.Value & _) != 0 ? FontFormatToCssClassMap[_] : string.Empty));
+            }
+
+            return result;
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static CellFormat GetCellFormat(
             ICell cell,
             RowFormat obcRowFormat,
@@ -378,10 +440,10 @@ namespace Vuescape.DotNet.Domain
             TableFormat obcTableFormat,
             TreeTableConversionMode treeTableConversionMode)
         {
-            var color = GetCellColor(
+            var color = GetFontColor(
                 cell,
                 obcRowFormat,
-                obcRowFormat,
+                obcDataOrHeaderRowsFormat,
                 obcRowsFormat,
                 obcSpecificColumnFormat,
                 obcColumnFormat,
@@ -391,23 +453,34 @@ namespace Vuescape.DotNet.Domain
             var fontSize = GetCellFontSizeInPixels(
                 cell,
                 obcRowFormat,
-                obcRowFormat,
+                obcDataOrHeaderRowsFormat,
                 obcRowsFormat,
                 obcSpecificColumnFormat,
                 obcColumnFormat,
                 obcTableFormat,
                 treeTableConversionMode);
 
-            if (color == null && fontSize == null)
+            var backgroundColor = GetCellBackgroundColor(
+                cell,
+                obcRowFormat,
+                obcDataOrHeaderRowsFormat,
+                obcRowsFormat,
+                obcSpecificColumnFormat,
+                obcColumnFormat,
+                obcTableFormat,
+                treeTableConversionMode);
+
+            if (color == null && fontSize == null && backgroundColor == null)
             {
                 return null;
             }
 
-            var result = new CellFormat(color?.ToHex(), fontSize);
+            var result = new CellFormat(color?.ToHex(), fontSize, backgroundColor?.ToHex());
             return result;
         }
 
-        private static Color? GetCellColor(
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
+        private static Color? GetCellBackgroundColor(
             ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
@@ -419,33 +492,83 @@ namespace Vuescape.DotNet.Domain
         {
             Color? result = null;
             // ReSharper disable once IdentifierTypo
-            if (cell is IFormattableCell formattableCell && formattableCell.Format?.FontColor != null)
+            if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.BackgroundColor != null)
             {
-                result = formattableCell.Format.FontColor;
+                result = formattableCell.Format.BackgroundColor;
             }
-            else if (obcRowFormat?.CellsFormat.FontColor != null)
+            else if (obcRowFormat?.CellsFormat?.BackgroundColor != null)
             {
-                result = obcRowFormat.CellsFormat.FontColor;
+                result = obcRowFormat.CellsFormat.BackgroundColor;
             }
-            else if (obcDataOrHeaderRowsFormat?.CellsFormat.FontColor != null)
+            else if (obcDataOrHeaderRowsFormat?.CellsFormat?.BackgroundColor != null)
             {
-                result = obcDataOrHeaderRowsFormat.CellsFormat.FontColor;
+                result = obcDataOrHeaderRowsFormat.CellsFormat.BackgroundColor;
             }
-            else if (obcRowsFormat?.CellsFormat.FontColor != null)
+            else if (obcRowsFormat?.CellsFormat?.BackgroundColor != null)
             {
-                result = obcRowsFormat.CellsFormat.FontColor;
+                result = obcRowsFormat.CellsFormat.BackgroundColor;
             }
-            else if (obcSpecificColumnFormat?.CellsFormat?.Options != null)
+            else if (obcSpecificColumnFormat?.CellsFormat?.BackgroundColor != null)
             {
-                result = obcSpecificColumnFormat.CellsFormat.FontColor;
+                result = obcSpecificColumnFormat.CellsFormat.BackgroundColor;
             }
-            else if (obcColumnFormat?.CellsFormat != null)
+            else if (obcColumnFormat?.CellsFormat?.BackgroundColor != null)
             {
-                result = obcColumnFormat.CellsFormat.FontColor;
+                result = obcColumnFormat.CellsFormat.BackgroundColor;
             }
-            else if (obcTableFormat?.CellsFormat.FontColor != null)
+            else if (obcTableFormat?.CellsFormat?.BackgroundColor != null)
             {
-                result = obcTableFormat.CellsFormat.FontColor;
+                result = obcTableFormat.CellsFormat.BackgroundColor;
+            }
+            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            {
+                throw new InvalidOperationException(Invariant(
+                    $"One of the 'BackgroundColor' properties must be non-null. Either change the BackgroundColor to not be null or set TreeTableConversionMode to Relaxed."));
+            }
+
+            return result;
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
+        private static Color? GetFontColor(
+            ICell cell,
+            RowFormat obcRowFormat,
+            RowFormat obcDataOrHeaderRowsFormat,
+            RowFormat obcRowsFormat,
+            ColumnFormat obcSpecificColumnFormat,
+            ColumnFormat obcColumnFormat,
+            TableFormat obcTableFormat,
+            TreeTableConversionMode treeTableConversionMode)
+        {
+            Color? result = null;
+            // ReSharper disable once IdentifierTypo
+            if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.FontFormat?.FontColor != null)
+            {
+                result = formattableCell.Format.FontFormat.FontColor;
+            }
+            else if (obcRowFormat?.CellsFormat?.FontFormat.FontColor != null)
+            {
+                result = obcRowFormat.CellsFormat.FontFormat.FontColor;
+            }
+            else if (obcDataOrHeaderRowsFormat?.CellsFormat?.FontFormat?.FontColor != null)
+            {
+                result = obcDataOrHeaderRowsFormat.CellsFormat.FontFormat.FontColor;
+            }
+            else if (obcRowsFormat?.CellsFormat?.FontFormat?.FontColor != null)
+            {
+                result = obcRowsFormat.CellsFormat.FontFormat.FontColor;
+            }
+            else if (obcSpecificColumnFormat?.CellsFormat?.FontFormat?.FontColor != null)
+            {
+                result = obcSpecificColumnFormat.CellsFormat.FontFormat.FontColor;
+            }
+            else if (obcColumnFormat?.CellsFormat?.FontFormat?.FontColor != null)
+            {
+                result = obcColumnFormat.CellsFormat.FontFormat.FontColor;
+            }
+            else if (obcTableFormat?.CellsFormat?.FontFormat?.FontColor != null)
+            {
+                result = obcTableFormat.CellsFormat.FontFormat.FontColor;
             }
             else if (treeTableConversionMode == TreeTableConversionMode.Strict)
             {
@@ -456,6 +579,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static string GetCellFontSizeInPixels(
             ICell cell,
             RowFormat obcRowFormat,
@@ -466,36 +590,36 @@ namespace Vuescape.DotNet.Domain
             TableFormat obcTableFormat,
             TreeTableConversionMode treeTableConversionMode)
         {
-            decimal? fontSizeInPoints = null;
+            decimal? fontFormatFontSizeInPoints = null;
 
             // ReSharper disable once IdentifierTypo
-            if (cell is IFormattableCell formattableCell && formattableCell.Format?.FontSizeInPoints != null)
+            if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.FontFormat?.FontSizeInPoints != null)
             {
-                fontSizeInPoints = formattableCell.Format.FontSizeInPoints;
+                fontFormatFontSizeInPoints = formattableCell.Format.FontFormat.FontSizeInPoints;
             }
-            else if (obcRowFormat?.CellsFormat.FontSizeInPoints != null)
+            else if (obcRowFormat?.CellsFormat?.FontFormat.FontSizeInPoints != null)
             {
-                fontSizeInPoints = obcRowFormat.CellsFormat.FontSizeInPoints;
+                fontFormatFontSizeInPoints = obcRowFormat.CellsFormat.FontFormat.FontSizeInPoints;
             }
-            else if (obcDataOrHeaderRowsFormat?.CellsFormat.FontSizeInPoints != null)
+            else if (obcDataOrHeaderRowsFormat?.CellsFormat?.FontFormat?.FontSizeInPoints != null)
             {
-                fontSizeInPoints = obcDataOrHeaderRowsFormat.CellsFormat.FontSizeInPoints;
+                fontFormatFontSizeInPoints = obcDataOrHeaderRowsFormat.CellsFormat.FontFormat.FontSizeInPoints;
             }
-            else if (obcRowsFormat?.CellsFormat.FontSizeInPoints != null)
+            else if (obcRowsFormat?.CellsFormat?.FontFormat?.FontSizeInPoints != null)
             {
-                fontSizeInPoints = obcRowsFormat.CellsFormat.FontSizeInPoints;
+                fontFormatFontSizeInPoints = obcRowsFormat.CellsFormat.FontFormat.FontSizeInPoints;
             }
-            else if (obcSpecificColumnFormat?.CellsFormat?.FontSizeInPoints != null)
+            else if (obcSpecificColumnFormat?.CellsFormat?.FontFormat?.FontSizeInPoints != null)
             {
-                fontSizeInPoints = obcSpecificColumnFormat.CellsFormat.FontSizeInPoints;
+                fontFormatFontSizeInPoints = obcSpecificColumnFormat.CellsFormat.FontFormat.FontSizeInPoints;
             }
-            else if (obcColumnFormat?.CellsFormat.FontSizeInPoints != null)
+            else if (obcColumnFormat?.CellsFormat?.FontFormat?.FontSizeInPoints != null)
             {
-                fontSizeInPoints = obcColumnFormat.CellsFormat.FontSizeInPoints;
+                fontFormatFontSizeInPoints = obcColumnFormat.CellsFormat.FontFormat.FontSizeInPoints;
             }
-            else if (obcTableFormat?.CellsFormat.FontSizeInPoints != null)
+            else if (obcTableFormat?.CellsFormat?.FontFormat?.FontSizeInPoints != null)
             {
-                fontSizeInPoints = obcTableFormat.CellsFormat.FontSizeInPoints;
+                fontFormatFontSizeInPoints = obcTableFormat.CellsFormat.FontFormat.FontSizeInPoints;
             }
             else if (treeTableConversionMode == TreeTableConversionMode.Strict)
             {
@@ -503,11 +627,12 @@ namespace Vuescape.DotNet.Domain
                     $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
             }
 
-            var fontSizeInPixels  = fontSizeInPoints * 4 / 3;
-            var result = Invariant($"{fontSizeInPixels}px");
+            fontFormatFontSizeInPoints = fontFormatFontSizeInPoints * 4 / 3;
+            var result = Invariant($"{fontFormatFontSizeInPoints}px");
             return result;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static bool ShouldCellWrap(
             ICell cell,
             RowFormat obcRowFormat,
@@ -521,7 +646,7 @@ namespace Vuescape.DotNet.Domain
             var result = false;
 
             // ReSharper disable once IdentifierTypo
-            if (cell is IFormattableCell formattableCell && formattableCell.Format?.Options != null)
+            if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.Options != null)
             {
                 result = formattableCell.Format.Options.IsCellWrapped();
             }

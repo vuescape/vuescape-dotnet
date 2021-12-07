@@ -3,6 +3,9 @@
 // </copyright>
 
 // ReSharper disable once CheckNamespace
+
+using System;
+
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
@@ -37,6 +40,8 @@ namespace Vuescape.DotNet.Domain
             IReadOnlyList<Column> obcColumns,
             TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
         {
+            Console.Write(treeTableConversionMode);
+
             // TODO: Apply formatting.
             var cssClasses = "tree-table-row__tr";
             var rowId = obcHeaderRow.Id;
@@ -55,12 +60,7 @@ namespace Vuescape.DotNet.Domain
                         obcColumns[actualColumnIndex]),
                 };
 
-                var columnsSpanned = 1;
-                if (obcHeaderRowCell is IColumnSpanningCell columnSpanningCell)
-                {
-                    columnsSpanned = columnSpanningCell.ColumnsSpanned;
-                }
-
+                var columnsSpanned = obcHeaderRowCell.ColumnsSpanned ?? 1;
                 actualColumnIndex += columnsSpanned;
 
                 for (var additionalColumnIndex = 1; additionalColumnIndex < columnsSpanned; additionalColumnIndex++)
@@ -102,6 +102,8 @@ namespace Vuescape.DotNet.Domain
             int? depth,
             TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
         {
+            Console.Write(treeTableConversionMode);
+
             // TODO: Apply formatting.
             var rowId = obcRow.Id;
 
@@ -110,14 +112,9 @@ namespace Vuescape.DotNet.Domain
             foreach (var obcRowCell in obcRow.Cells)
             {
                 var treeTableCell = obcRowCell.ToVuescapeTreeTableCell(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcRowFormat, obcColumnFormat, obcColumns[columnIndex]);
-                var columnsSpanned = 1;
-                if (obcRowCell is IColumnSpanningCell columnSpanningCell)
-                {
-                    columnsSpanned = columnSpanningCell.ColumnsSpanned;
-                }
+                var columnsSpanned = obcRowCell.ColumnsSpanned ?? 1;
 
                 treeTableCells.Add(treeTableCell);
-
                 columnIndex += columnsSpanned;
 
                 for (var additionalColumnIndex = 1; additionalColumnIndex < columnsSpanned; additionalColumnIndex++)

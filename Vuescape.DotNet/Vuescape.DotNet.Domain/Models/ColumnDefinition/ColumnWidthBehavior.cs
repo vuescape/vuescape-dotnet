@@ -7,12 +7,9 @@
 // ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
-    using System;
-
     /// <summary>
     /// The width behavior of a column.
     /// </summary>
-    [Flags]
     public enum ColumnWidthBehavior
     {
         /// <summary>

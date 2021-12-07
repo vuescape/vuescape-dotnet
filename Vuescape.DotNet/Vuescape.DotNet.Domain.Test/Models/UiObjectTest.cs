@@ -152,7 +152,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             var systemUnderTest = A.Dummy<UiObject>().Whose(_ => _.UiObjectType != null);
 
-                            var referenceObject = A.Dummy<UiObject>().ThatIs(_ => !systemUnderTest.Value.IsEqualTo(_.Value));
+                            var referenceObject = A.Dummy<UiObject>().ThatIs(_ => !systemUnderTest.Value.IsEqualTo(_.Value) && _.Value != null);
 
                             var result = new SystemUnderTestDeepCloneWithValue<UiObject>
                             {

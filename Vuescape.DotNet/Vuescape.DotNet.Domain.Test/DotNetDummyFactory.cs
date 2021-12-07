@@ -280,7 +280,7 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ColumnWidthBehavior.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UnitOfMeasure.None);
 
-            var obcDataStructureDummyFactory = new OBeautifulCode.DataStructure.Test.DataStructureDummyFactory();
+            // var obcDataStructureDummyFactory = new OBeautifulCode.DataStructure.Test.DataStructureDummyFactory();
         }
     }
 }

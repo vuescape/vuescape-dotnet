@@ -30,8 +30,6 @@ namespace Vuescape.DotNet.Domain.Test
                     Name = "constructor should throw ArgumentNullException when parameter 'content' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TreeTable>();
-
                         var result = new TreeTable(
                                              A.Dummy<string>(),
                                              A.Dummy<IReadOnlyList<ColumnDefinition>>(),
@@ -48,10 +46,6 @@ namespace Vuescape.DotNet.Domain.Test
         public static void Method___Should_do_something___When_called()
         {
             // Arrange
-
-            // Act
-
-            // Assert
             var startingYear = 2016;
             var endingYear = 2021;
             var numberOfPeriods = endingYear - startingYear + 1;
@@ -98,6 +92,8 @@ namespace Vuescape.DotNet.Domain.Test
                 "id",
                 null,
                 new TreeTableContent(headers, rows, true, true, true, true, false, false, null, null, null, null));
+
+            // Assert
             Assert.NotNull(treeTable);
         }
     }

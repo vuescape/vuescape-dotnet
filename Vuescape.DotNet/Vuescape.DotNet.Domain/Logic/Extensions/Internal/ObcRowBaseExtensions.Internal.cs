@@ -3,11 +3,9 @@
 // </copyright>
 
 // ReSharper disable once CheckNamespace
-
-using System;
-
 namespace Vuescape.DotNet.Domain
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 

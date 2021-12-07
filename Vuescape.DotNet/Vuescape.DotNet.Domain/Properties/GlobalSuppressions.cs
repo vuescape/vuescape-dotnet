@@ -17,4 +17,4 @@ using System.Diagnostics.CodeAnalysis;
 
 using Naos.CodeAnalysis.Recipes;
 
-[assembly: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "Vuescape.DotNet.Domain", Justification = NaosSuppressBecause.CA1020_AvoidNamespacesWithFewTypes_OptimizeForLogicalGroupingOfTypes)]
+[assembly: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "~N:Vuescape.DotNet.Domain", Justification = NaosSuppressBecause.CA1020_AvoidNamespacesWithFewTypes_OptimizeForLogicalGroupingOfTypes)]

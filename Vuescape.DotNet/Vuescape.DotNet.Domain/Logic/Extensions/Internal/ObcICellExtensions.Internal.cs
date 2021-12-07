@@ -311,6 +311,7 @@ namespace Vuescape.DotNet.Domain
                 { OBeautifulCode.DataStructure.FontFormatOptions.Underline, "text-decoration__underline" },
             };
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static string GetCellFormatOptionsCssClasses(
             ICell cell,
             RowFormat obcRowFormat,
@@ -369,6 +370,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static string GetFontFormatOptionsCssClasses(
             ICell cell,
             RowFormat obcRowFormat,
@@ -427,6 +429,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static CellFormat GetCellFormat(
             ICell cell,
             RowFormat obcRowFormat,
@@ -476,6 +479,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static Color? GetCellBackgroundColor(
             ICell cell,
             RowFormat obcRowFormat,
@@ -525,6 +529,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static Color? GetFontColor(
             ICell cell,
             RowFormat obcRowFormat,
@@ -574,6 +579,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static string GetCellFontSizeInPixels(
             ICell cell,
             RowFormat obcRowFormat,
@@ -626,6 +632,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static bool ShouldCellWrap(
             ICell cell,
             RowFormat obcRowFormat,

@@ -20,7 +20,6 @@ namespace Vuescape.DotNet.Domain.Test
     /// <summary>
     /// A Dummy Factory for types in <see cref="Vuescape.DotNet.Domain"/>.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
 #if !VuescapeDotNetSolution
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("Vuescape.DotNet.Domain.Test", "See package version number")]
@@ -31,6 +30,7 @@ namespace Vuescape.DotNet.Domain.Test
     class DotNetDummyFactory : DefaultDotNetDummyFactory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "Not Hungarian notation.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static object GetObjectByUiObjectType(
             UiObjectType uiObjectType)
         {

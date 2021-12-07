@@ -443,7 +443,7 @@ namespace Vuescape.DotNet.Domain
             var color = GetFontColor(
                 cell,
                 obcRowFormat,
-                obcRowFormat,
+                obcDataOrHeaderRowsFormat,
                 obcRowsFormat,
                 obcSpecificColumnFormat,
                 obcColumnFormat,
@@ -453,7 +453,7 @@ namespace Vuescape.DotNet.Domain
             var fontSize = GetCellFontSizeInPixels(
                 cell,
                 obcRowFormat,
-                obcRowFormat,
+                obcDataOrHeaderRowsFormat,
                 obcRowsFormat,
                 obcSpecificColumnFormat,
                 obcColumnFormat,
@@ -463,7 +463,7 @@ namespace Vuescape.DotNet.Domain
             var backgroundColor = GetCellBackgroundColor(
                 cell,
                 obcRowFormat,
-                obcRowFormat,
+                obcDataOrHeaderRowsFormat,
                 obcRowsFormat,
                 obcSpecificColumnFormat,
                 obcColumnFormat,

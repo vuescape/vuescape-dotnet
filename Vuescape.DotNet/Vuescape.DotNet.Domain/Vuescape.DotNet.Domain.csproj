@@ -37,9 +37,6 @@
     <DocumentationFile>bin\Release\Vuescape.DotNet.Domain.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Naos.Protocol.Domain, Version=1.0.102.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Naos.Protocol.Domain.1.0.102\lib\net462\Naos.Protocol.Domain.dll</HintPath>
-    </Reference>
     <Reference Include="OBeautifulCode.DataStructure, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.13\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
     </Reference>

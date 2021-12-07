@@ -33,239 +33,293 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class UiObjectTest
+    public static partial class CellFormatTest
     {
-        private static readonly StringRepresentationTestScenarios<UiObject> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<UiObject>()
+        private static readonly StringRepresentationTestScenarios<CellFormat> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<CellFormat>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<UiObject>
+                new StringRepresentationTestScenario<CellFormat>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<UiObject>();
+                        var systemUnderTest = A.Dummy<CellFormat>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<UiObject>
+                        var result = new SystemUnderTestExpectedStringRepresentation<CellFormat>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.UiObject: Value = {systemUnderTest.Value?.ToString() ?? "<null>"}, UiObjectType = {systemUnderTest.UiObjectType?.ToString() ?? "<null>"}, AssemblyQualifiedName = {systemUnderTest.AssemblyQualifiedName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {systemUnderTest.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSizeInPixels = {systemUnderTest.FontSizeInPixels?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BackgroundHexColor = {systemUnderTest.BackgroundHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<UiObject> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<UiObject>()
+        private static readonly ConstructorArgumentValidationTestScenarios<CellFormat> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<CellFormat>()
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<UiObject>
+                new ConstructorArgumentValidationTestScenario<CellFormat>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'value' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'fontHexColor' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<UiObject>();
+                        var referenceObject = A.Dummy<CellFormat>();
 
-                        var result = new UiObject(
+                        var result = new CellFormat(
                                              null,
-                                             referenceObject.UiObjectType,
-                                             referenceObject.AssemblyQualifiedName);
+                                             referenceObject.FontSizeInPixels,
+                                             referenceObject.BackgroundHexColor);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "value", },
+                    ExpectedExceptionMessageContains = new[] { "fontHexColor", },
                 })
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<UiObject>
+                new ConstructorArgumentValidationTestScenario<CellFormat>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'assemblyQualifiedName' is null scenario",
+                    Name = "constructor should throw ArgumentException when parameter 'fontHexColor' is white space scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<UiObject>();
+                        var referenceObject = A.Dummy<CellFormat>();
 
-                        var result = new UiObject(
-                                             referenceObject.Value,
-                                             referenceObject.UiObjectType,
+                        var result = new CellFormat(
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.FontSizeInPixels,
+                                             referenceObject.BackgroundHexColor);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "fontHexColor", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<CellFormat>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'fontSizeInPixels' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<CellFormat>();
+
+                        var result = new CellFormat(
+                                             referenceObject.FontHexColor,
+                                             null,
+                                             referenceObject.BackgroundHexColor);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "fontSizeInPixels", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<CellFormat>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'fontSizeInPixels' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<CellFormat>();
+
+                        var result = new CellFormat(
+                                             referenceObject.FontHexColor,
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.BackgroundHexColor);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "fontSizeInPixels", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<CellFormat>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'backgroundHexColor' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<CellFormat>();
+
+                        var result = new CellFormat(
+                                             referenceObject.FontHexColor,
+                                             referenceObject.FontSizeInPixels,
                                              null);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "assemblyQualifiedName", },
+                    ExpectedExceptionMessageContains = new[] { "backgroundHexColor", },
                 })
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<UiObject>
+                new ConstructorArgumentValidationTestScenario<CellFormat>
                 {
-                    Name = "constructor should throw ArgumentException when parameter 'assemblyQualifiedName' is white space scenario",
+                    Name = "constructor should throw ArgumentException when parameter 'backgroundHexColor' is white space scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<UiObject>();
+                        var referenceObject = A.Dummy<CellFormat>();
 
-                        var result = new UiObject(
-                                             referenceObject.Value,
-                                             referenceObject.UiObjectType,
+                        var result = new CellFormat(
+                                             referenceObject.FontHexColor,
+                                             referenceObject.FontSizeInPixels,
                                              Invariant($"  {Environment.NewLine}  "));
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "assemblyQualifiedName", "white space", },
+                    ExpectedExceptionMessageContains = new[] { "backgroundHexColor", "white space", },
                 });
 
-        private static readonly ConstructorPropertyAssignmentTestScenarios<UiObject> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<UiObject>()
+        private static readonly ConstructorPropertyAssignmentTestScenarios<CellFormat> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<CellFormat>()
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<UiObject>
+                new ConstructorPropertyAssignmentTestScenario<CellFormat>
                 {
-                    Name = "Value should return same 'value' parameter passed to constructor when getting",
+                    Name = "FontHexColor should return same 'fontHexColor' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<UiObject>();
+                        var referenceObject = A.Dummy<CellFormat>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<UiObject>
+                        var result = new SystemUnderTestExpectedPropertyValue<CellFormat>
                         {
-                            SystemUnderTest = new UiObject(
-                                                      referenceObject.Value,
-                                                      referenceObject.UiObjectType,
-                                                      referenceObject.AssemblyQualifiedName),
-                            ExpectedPropertyValue = referenceObject.Value,
+                            SystemUnderTest = new CellFormat(
+                                                      referenceObject.FontHexColor,
+                                                      referenceObject.FontSizeInPixels,
+                                                      referenceObject.BackgroundHexColor),
+                            ExpectedPropertyValue = referenceObject.FontHexColor,
                         };
 
                         return result;
                     },
-                    PropertyName = "Value",
+                    PropertyName = "FontHexColor",
                 })
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<UiObject>
+                new ConstructorPropertyAssignmentTestScenario<CellFormat>
                 {
-                    Name = "UiObjectType should return same 'uiObjectType' parameter passed to constructor when getting",
+                    Name = "FontSizeInPixels should return same 'fontSizeInPixels' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<UiObject>();
+                        var referenceObject = A.Dummy<CellFormat>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<UiObject>
+                        var result = new SystemUnderTestExpectedPropertyValue<CellFormat>
                         {
-                            SystemUnderTest = new UiObject(
-                                                      referenceObject.Value,
-                                                      referenceObject.UiObjectType,
-                                                      referenceObject.AssemblyQualifiedName),
-                            ExpectedPropertyValue = referenceObject.UiObjectType,
+                            SystemUnderTest = new CellFormat(
+                                                      referenceObject.FontHexColor,
+                                                      referenceObject.FontSizeInPixels,
+                                                      referenceObject.BackgroundHexColor),
+                            ExpectedPropertyValue = referenceObject.FontSizeInPixels,
                         };
 
                         return result;
                     },
-                    PropertyName = "UiObjectType",
+                    PropertyName = "FontSizeInPixels",
                 })
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<UiObject>
+                new ConstructorPropertyAssignmentTestScenario<CellFormat>
                 {
-                    Name = "AssemblyQualifiedName should return same 'assemblyQualifiedName' parameter passed to constructor when getting",
+                    Name = "BackgroundHexColor should return same 'backgroundHexColor' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<UiObject>();
+                        var referenceObject = A.Dummy<CellFormat>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<UiObject>
+                        var result = new SystemUnderTestExpectedPropertyValue<CellFormat>
                         {
-                            SystemUnderTest = new UiObject(
-                                                      referenceObject.Value,
-                                                      referenceObject.UiObjectType,
-                                                      referenceObject.AssemblyQualifiedName),
-                            ExpectedPropertyValue = referenceObject.AssemblyQualifiedName,
+                            SystemUnderTest = new CellFormat(
+                                                      referenceObject.FontHexColor,
+                                                      referenceObject.FontSizeInPixels,
+                                                      referenceObject.BackgroundHexColor),
+                            ExpectedPropertyValue = referenceObject.BackgroundHexColor,
                         };
 
                         return result;
                     },
-                    PropertyName = "AssemblyQualifiedName",
+                    PropertyName = "BackgroundHexColor",
                 });
 
-        private static readonly DeepCloneWithTestScenarios<UiObject> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<UiObject>()
+        private static readonly DeepCloneWithTestScenarios<CellFormat> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<CellFormat>()
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<UiObject>
+                new DeepCloneWithTestScenario<CellFormat>
                 {
-                    Name = "DeepCloneWithValue should deep clone object and replace Value with the provided value",
-                    WithPropertyName = "Value",
+                    Name = "DeepCloneWithFontHexColor should deep clone object and replace FontHexColor with the provided fontHexColor",
+                    WithPropertyName = "FontHexColor",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<UiObject>();
+                        var systemUnderTest = A.Dummy<CellFormat>();
 
-                        var referenceObject = A.Dummy<UiObject>().ThatIs(_ => !systemUnderTest.Value.IsEqualTo(_.Value));
+                        var referenceObject = A.Dummy<CellFormat>().ThatIs(_ => !systemUnderTest.FontHexColor.IsEqualTo(_.FontHexColor));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<UiObject>
+                        var result = new SystemUnderTestDeepCloneWithValue<CellFormat>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Value,
+                            DeepCloneWithValue = referenceObject.FontHexColor,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<UiObject>
+                new DeepCloneWithTestScenario<CellFormat>
                 {
-                    Name = "DeepCloneWithUiObjectType should deep clone object and replace UiObjectType with the provided uiObjectType",
-                    WithPropertyName = "UiObjectType",
+                    Name = "DeepCloneWithFontSizeInPixels should deep clone object and replace FontSizeInPixels with the provided fontSizeInPixels",
+                    WithPropertyName = "FontSizeInPixels",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<UiObject>();
+                        var systemUnderTest = A.Dummy<CellFormat>();
 
-                        var referenceObject = A.Dummy<UiObject>().ThatIs(_ => !systemUnderTest.UiObjectType.IsEqualTo(_.UiObjectType));
+                        var referenceObject = A.Dummy<CellFormat>().ThatIs(_ => !systemUnderTest.FontSizeInPixels.IsEqualTo(_.FontSizeInPixels));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<UiObject>
+                        var result = new SystemUnderTestDeepCloneWithValue<CellFormat>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.UiObjectType,
+                            DeepCloneWithValue = referenceObject.FontSizeInPixels,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<UiObject>
+                new DeepCloneWithTestScenario<CellFormat>
                 {
-                    Name = "DeepCloneWithAssemblyQualifiedName should deep clone object and replace AssemblyQualifiedName with the provided assemblyQualifiedName",
-                    WithPropertyName = "AssemblyQualifiedName",
+                    Name = "DeepCloneWithBackgroundHexColor should deep clone object and replace BackgroundHexColor with the provided backgroundHexColor",
+                    WithPropertyName = "BackgroundHexColor",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<UiObject>();
+                        var systemUnderTest = A.Dummy<CellFormat>();
 
-                        var referenceObject = A.Dummy<UiObject>().ThatIs(_ => !systemUnderTest.AssemblyQualifiedName.IsEqualTo(_.AssemblyQualifiedName));
+                        var referenceObject = A.Dummy<CellFormat>().ThatIs(_ => !systemUnderTest.BackgroundHexColor.IsEqualTo(_.BackgroundHexColor));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<UiObject>
+                        var result = new SystemUnderTestDeepCloneWithValue<CellFormat>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.AssemblyQualifiedName,
+                            DeepCloneWithValue = referenceObject.BackgroundHexColor,
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly UiObject ReferenceObjectForEquatableTestScenarios = A.Dummy<UiObject>();
+        private static readonly CellFormat ReferenceObjectForEquatableTestScenarios = A.Dummy<CellFormat>();
 
-        private static readonly EquatableTestScenarios<UiObject> EquatableTestScenarios = new EquatableTestScenarios<UiObject>()
+        private static readonly EquatableTestScenarios<CellFormat> EquatableTestScenarios = new EquatableTestScenarios<CellFormat>()
             .AddScenario(() =>
-                new EquatableTestScenario<UiObject>
+                new EquatableTestScenario<CellFormat>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new UiObject[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new CellFormat[]
                     {
-                        new UiObject(
-                                ReferenceObjectForEquatableTestScenarios.Value,
-                                ReferenceObjectForEquatableTestScenarios.UiObjectType,
-                                ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
+                        new CellFormat(
+                                ReferenceObjectForEquatableTestScenarios.FontHexColor,
+                                ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
+                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new UiObject[]
+                    ObjectsThatAreNotEqualToReferenceObject = new CellFormat[]
                     {
-                        new UiObject(
-                                A.Dummy<UiObject>().Whose(_ => !_.Value.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Value)).Value,
-                                ReferenceObjectForEquatableTestScenarios.UiObjectType,
-                                ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
-                        new UiObject(
-                                ReferenceObjectForEquatableTestScenarios.Value,
-                                A.Dummy<UiObject>().Whose(_ => !_.UiObjectType.IsEqualTo(ReferenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
-                                ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
-                        new UiObject(
-                                ReferenceObjectForEquatableTestScenarios.Value,
-                                ReferenceObjectForEquatableTestScenarios.UiObjectType,
-                                A.Dummy<UiObject>().Whose(_ => !_.AssemblyQualifiedName.IsEqualTo(ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName)).AssemblyQualifiedName),
+                        new CellFormat(
+                                A.Dummy<CellFormat>().Whose(_ => !_.FontHexColor.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FontHexColor)).FontHexColor,
+                                ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
+                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor),
+                        new CellFormat(
+                                ReferenceObjectForEquatableTestScenarios.FontHexColor,
+                                A.Dummy<CellFormat>().Whose(_ => !_.FontSizeInPixels.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FontSizeInPixels)).FontSizeInPixels,
+                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor),
+                        new CellFormat(
+                                ReferenceObjectForEquatableTestScenarios.FontHexColor,
+                                ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
+                                A.Dummy<CellFormat>().Whose(_ => !_.BackgroundHexColor.IsEqualTo(ReferenceObjectForEquatableTestScenarios.BackgroundHexColor)).BackgroundHexColor),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -295,12 +349,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void UiObject___Should_implement_IModel_of_UiObject___When_reflecting()
+            public static void CellFormat___Should_implement_IModel_of_CellFormat___When_reflecting()
             {
                 // Arrange
-                var type = typeof(UiObject);
+                var type = typeof(CellFormat);
 
-                var expectedModelMethods = typeof(IModel<UiObject>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<CellFormat>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -310,7 +364,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<UiObject>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<CellFormat>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -328,10 +382,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void UiObject___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void CellFormat___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(UiObject);
+                var type = typeof(CellFormat);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -511,10 +565,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<UiObject>();
+                var systemUnderTest = A.Dummy<CellFormat>();
 
                 // Act
-                var actual = (UiObject)systemUnderTest.Clone();
+                var actual = (CellFormat)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -538,7 +592,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<UiObject>();
+                var systemUnderTest = A.Dummy<CellFormat>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -546,18 +600,6 @@ namespace Vuescape.DotNet.Domain.Test
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
-
-                if (systemUnderTest.Value == null)
-                {
-                    actual.Value.AsTest().Must().BeNull();
-                }
-                else if (!actual.Value.GetType().IsValueType)
-                {
-                    // When the declared type is a reference type, we still have to check the runtime type.
-                    // The object could be a boxed value type, which will fail this asseration because
-                    // a deep clone of a value type object is the same object.
-                    actual.Value.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Value);
-                }
             }
 
             [Fact]
@@ -576,7 +618,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Value", "UiObjectType", "AssemblyQualifiedName" };
+                var propertyNames = new string[] { "FontHexColor", "FontSizeInPixels", "BackgroundHexColor" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 
@@ -589,12 +631,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (UiObject)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (CellFormat)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(UiObject).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(CellFormat).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var actualPropertyValue = propertyInfo.GetValue(actual);
 
@@ -656,7 +698,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<UiObject>();
+                var expected = A.Dummy<CellFormat>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -685,7 +727,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<UiObject>();
+                var expected = A.Dummy<CellFormat>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -714,7 +756,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<UiObject>();
+                var expected = A.Dummy<CellFormat>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -743,7 +785,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<UiObject>();
+                var expected = A.Dummy<CellFormat>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -777,8 +819,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                UiObject systemUnderTest1 = null;
-                UiObject systemUnderTest2 = null;
+                CellFormat systemUnderTest1 = null;
+                CellFormat systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -808,7 +850,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    UiObject systemUnderTest = null;
+                    CellFormat systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -957,8 +999,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                UiObject systemUnderTest1 = null;
-                UiObject systemUnderTest2 = null;
+                CellFormat systemUnderTest1 = null;
+                CellFormat systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -988,7 +1030,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    UiObject systemUnderTest = null;
+                    CellFormat systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -1134,14 +1176,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_UiObject___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_CellFormat___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    UiObject systemUnderTest = null;
+                    CellFormat systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1165,7 +1207,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_UiObject___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_CellFormat___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1193,7 +1235,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_UiObject___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_CellFormat___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1221,7 +1263,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_UiObject___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_CellFormat___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1249,7 +1291,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_UiObject___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_CellFormat___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 

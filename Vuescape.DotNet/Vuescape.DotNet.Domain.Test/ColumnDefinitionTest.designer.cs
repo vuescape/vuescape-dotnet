@@ -33,239 +33,239 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class UiObjectTest
+    public static partial class ColumnDefinitionTest
     {
-        private static readonly StringRepresentationTestScenarios<UiObject> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<UiObject>()
+        private static readonly StringRepresentationTestScenarios<ColumnDefinition> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<ColumnDefinition>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<UiObject>
+                new StringRepresentationTestScenario<ColumnDefinition>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<UiObject>();
+                        var systemUnderTest = A.Dummy<ColumnDefinition>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<UiObject>
+                        var result = new SystemUnderTestExpectedStringRepresentation<ColumnDefinition>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.UiObject: Value = {systemUnderTest.Value?.ToString() ?? "<null>"}, UiObjectType = {systemUnderTest.UiObjectType?.ToString() ?? "<null>"}, AssemblyQualifiedName = {systemUnderTest.AssemblyQualifiedName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ColumnDefinition: ColumnWidthBehavior = {systemUnderTest.ColumnWidthBehavior.ToString() ?? "<null>"}, ColumnWrapBehavior = {systemUnderTest.ColumnWrapBehavior.ToString() ?? "<null>"}, Width = {systemUnderTest.Width?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, WidthUnitOfMeasure = {systemUnderTest.WidthUnitOfMeasure?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<UiObject> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<UiObject>()
+        private static readonly ConstructorArgumentValidationTestScenarios<ColumnDefinition> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<ColumnDefinition>();
+
+        private static readonly ConstructorPropertyAssignmentTestScenarios<ColumnDefinition> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ColumnDefinition>()
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<UiObject>
+                new ConstructorPropertyAssignmentTestScenario<ColumnDefinition>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'value' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<UiObject>();
-
-                        var result = new UiObject(
-                                             null,
-                                             referenceObject.UiObjectType,
-                                             referenceObject.AssemblyQualifiedName);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "value", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<UiObject>
-                {
-                    Name = "constructor should throw ArgumentNullException when parameter 'assemblyQualifiedName' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<UiObject>();
-
-                        var result = new UiObject(
-                                             referenceObject.Value,
-                                             referenceObject.UiObjectType,
-                                             null);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "assemblyQualifiedName", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<UiObject>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'assemblyQualifiedName' is white space scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<UiObject>();
-
-                        var result = new UiObject(
-                                             referenceObject.Value,
-                                             referenceObject.UiObjectType,
-                                             Invariant($"  {Environment.NewLine}  "));
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "assemblyQualifiedName", "white space", },
-                });
-
-        private static readonly ConstructorPropertyAssignmentTestScenarios<UiObject> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<UiObject>()
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<UiObject>
-                {
-                    Name = "Value should return same 'value' parameter passed to constructor when getting",
+                    Name = "ColumnWidthBehavior should return same 'columnWidthBehavior' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<UiObject>();
+                        var referenceObject = A.Dummy<ColumnDefinition>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<UiObject>
+                        var result = new SystemUnderTestExpectedPropertyValue<ColumnDefinition>
                         {
-                            SystemUnderTest = new UiObject(
-                                                      referenceObject.Value,
-                                                      referenceObject.UiObjectType,
-                                                      referenceObject.AssemblyQualifiedName),
-                            ExpectedPropertyValue = referenceObject.Value,
+                            SystemUnderTest = new ColumnDefinition(
+                                                      referenceObject.ColumnWidthBehavior,
+                                                      referenceObject.ColumnWrapBehavior,
+                                                      referenceObject.Width,
+                                                      referenceObject.WidthUnitOfMeasure),
+                            ExpectedPropertyValue = referenceObject.ColumnWidthBehavior,
                         };
 
                         return result;
                     },
-                    PropertyName = "Value",
+                    PropertyName = "ColumnWidthBehavior",
                 })
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<UiObject>
+                new ConstructorPropertyAssignmentTestScenario<ColumnDefinition>
                 {
-                    Name = "UiObjectType should return same 'uiObjectType' parameter passed to constructor when getting",
+                    Name = "ColumnWrapBehavior should return same 'columnWrapBehavior' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<UiObject>();
+                        var referenceObject = A.Dummy<ColumnDefinition>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<UiObject>
+                        var result = new SystemUnderTestExpectedPropertyValue<ColumnDefinition>
                         {
-                            SystemUnderTest = new UiObject(
-                                                      referenceObject.Value,
-                                                      referenceObject.UiObjectType,
-                                                      referenceObject.AssemblyQualifiedName),
-                            ExpectedPropertyValue = referenceObject.UiObjectType,
+                            SystemUnderTest = new ColumnDefinition(
+                                                      referenceObject.ColumnWidthBehavior,
+                                                      referenceObject.ColumnWrapBehavior,
+                                                      referenceObject.Width,
+                                                      referenceObject.WidthUnitOfMeasure),
+                            ExpectedPropertyValue = referenceObject.ColumnWrapBehavior,
                         };
 
                         return result;
                     },
-                    PropertyName = "UiObjectType",
+                    PropertyName = "ColumnWrapBehavior",
                 })
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<UiObject>
+                new ConstructorPropertyAssignmentTestScenario<ColumnDefinition>
                 {
-                    Name = "AssemblyQualifiedName should return same 'assemblyQualifiedName' parameter passed to constructor when getting",
+                    Name = "Width should return same 'width' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<UiObject>();
+                        var referenceObject = A.Dummy<ColumnDefinition>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<UiObject>
+                        var result = new SystemUnderTestExpectedPropertyValue<ColumnDefinition>
                         {
-                            SystemUnderTest = new UiObject(
-                                                      referenceObject.Value,
-                                                      referenceObject.UiObjectType,
-                                                      referenceObject.AssemblyQualifiedName),
-                            ExpectedPropertyValue = referenceObject.AssemblyQualifiedName,
+                            SystemUnderTest = new ColumnDefinition(
+                                                      referenceObject.ColumnWidthBehavior,
+                                                      referenceObject.ColumnWrapBehavior,
+                                                      referenceObject.Width,
+                                                      referenceObject.WidthUnitOfMeasure),
+                            ExpectedPropertyValue = referenceObject.Width,
                         };
 
                         return result;
                     },
-                    PropertyName = "AssemblyQualifiedName",
+                    PropertyName = "Width",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ColumnDefinition>
+                {
+                    Name = "WidthUnitOfMeasure should return same 'widthUnitOfMeasure' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ColumnDefinition>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ColumnDefinition>
+                        {
+                            SystemUnderTest = new ColumnDefinition(
+                                                      referenceObject.ColumnWidthBehavior,
+                                                      referenceObject.ColumnWrapBehavior,
+                                                      referenceObject.Width,
+                                                      referenceObject.WidthUnitOfMeasure),
+                            ExpectedPropertyValue = referenceObject.WidthUnitOfMeasure,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "WidthUnitOfMeasure",
                 });
 
-        private static readonly DeepCloneWithTestScenarios<UiObject> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<UiObject>()
+        private static readonly DeepCloneWithTestScenarios<ColumnDefinition> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ColumnDefinition>()
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<UiObject>
+                new DeepCloneWithTestScenario<ColumnDefinition>
                 {
-                    Name = "DeepCloneWithValue should deep clone object and replace Value with the provided value",
-                    WithPropertyName = "Value",
+                    Name = "DeepCloneWithColumnWidthBehavior should deep clone object and replace ColumnWidthBehavior with the provided columnWidthBehavior",
+                    WithPropertyName = "ColumnWidthBehavior",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<UiObject>();
+                        var systemUnderTest = A.Dummy<ColumnDefinition>();
 
-                        var referenceObject = A.Dummy<UiObject>().ThatIs(_ => !systemUnderTest.Value.IsEqualTo(_.Value));
+                        var referenceObject = A.Dummy<ColumnDefinition>().ThatIs(_ => !systemUnderTest.ColumnWidthBehavior.IsEqualTo(_.ColumnWidthBehavior));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<UiObject>
+                        var result = new SystemUnderTestDeepCloneWithValue<ColumnDefinition>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Value,
+                            DeepCloneWithValue = referenceObject.ColumnWidthBehavior,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<UiObject>
+                new DeepCloneWithTestScenario<ColumnDefinition>
                 {
-                    Name = "DeepCloneWithUiObjectType should deep clone object and replace UiObjectType with the provided uiObjectType",
-                    WithPropertyName = "UiObjectType",
+                    Name = "DeepCloneWithColumnWrapBehavior should deep clone object and replace ColumnWrapBehavior with the provided columnWrapBehavior",
+                    WithPropertyName = "ColumnWrapBehavior",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<UiObject>();
+                        var systemUnderTest = A.Dummy<ColumnDefinition>();
 
-                        var referenceObject = A.Dummy<UiObject>().ThatIs(_ => !systemUnderTest.UiObjectType.IsEqualTo(_.UiObjectType));
+                        var referenceObject = A.Dummy<ColumnDefinition>().ThatIs(_ => !systemUnderTest.ColumnWrapBehavior.IsEqualTo(_.ColumnWrapBehavior));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<UiObject>
+                        var result = new SystemUnderTestDeepCloneWithValue<ColumnDefinition>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.UiObjectType,
+                            DeepCloneWithValue = referenceObject.ColumnWrapBehavior,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<UiObject>
+                new DeepCloneWithTestScenario<ColumnDefinition>
                 {
-                    Name = "DeepCloneWithAssemblyQualifiedName should deep clone object and replace AssemblyQualifiedName with the provided assemblyQualifiedName",
-                    WithPropertyName = "AssemblyQualifiedName",
+                    Name = "DeepCloneWithWidth should deep clone object and replace Width with the provided width",
+                    WithPropertyName = "Width",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<UiObject>();
+                        var systemUnderTest = A.Dummy<ColumnDefinition>();
 
-                        var referenceObject = A.Dummy<UiObject>().ThatIs(_ => !systemUnderTest.AssemblyQualifiedName.IsEqualTo(_.AssemblyQualifiedName));
+                        var referenceObject = A.Dummy<ColumnDefinition>().ThatIs(_ => !systemUnderTest.Width.IsEqualTo(_.Width));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<UiObject>
+                        var result = new SystemUnderTestDeepCloneWithValue<ColumnDefinition>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.AssemblyQualifiedName,
+                            DeepCloneWithValue = referenceObject.Width,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ColumnDefinition>
+                {
+                    Name = "DeepCloneWithWidthUnitOfMeasure should deep clone object and replace WidthUnitOfMeasure with the provided widthUnitOfMeasure",
+                    WithPropertyName = "WidthUnitOfMeasure",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ColumnDefinition>();
+
+                        var referenceObject = A.Dummy<ColumnDefinition>().ThatIs(_ => !systemUnderTest.WidthUnitOfMeasure.IsEqualTo(_.WidthUnitOfMeasure));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ColumnDefinition>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.WidthUnitOfMeasure,
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly UiObject ReferenceObjectForEquatableTestScenarios = A.Dummy<UiObject>();
+        private static readonly ColumnDefinition ReferenceObjectForEquatableTestScenarios = A.Dummy<ColumnDefinition>();
 
-        private static readonly EquatableTestScenarios<UiObject> EquatableTestScenarios = new EquatableTestScenarios<UiObject>()
+        private static readonly EquatableTestScenarios<ColumnDefinition> EquatableTestScenarios = new EquatableTestScenarios<ColumnDefinition>()
             .AddScenario(() =>
-                new EquatableTestScenario<UiObject>
+                new EquatableTestScenario<ColumnDefinition>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new UiObject[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new ColumnDefinition[]
                     {
-                        new UiObject(
-                                ReferenceObjectForEquatableTestScenarios.Value,
-                                ReferenceObjectForEquatableTestScenarios.UiObjectType,
-                                ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
+                        new ColumnDefinition(
+                                ReferenceObjectForEquatableTestScenarios.ColumnWidthBehavior,
+                                ReferenceObjectForEquatableTestScenarios.ColumnWrapBehavior,
+                                ReferenceObjectForEquatableTestScenarios.Width,
+                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new UiObject[]
+                    ObjectsThatAreNotEqualToReferenceObject = new ColumnDefinition[]
                     {
-                        new UiObject(
-                                A.Dummy<UiObject>().Whose(_ => !_.Value.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Value)).Value,
-                                ReferenceObjectForEquatableTestScenarios.UiObjectType,
-                                ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
-                        new UiObject(
-                                ReferenceObjectForEquatableTestScenarios.Value,
-                                A.Dummy<UiObject>().Whose(_ => !_.UiObjectType.IsEqualTo(ReferenceObjectForEquatableTestScenarios.UiObjectType)).UiObjectType,
-                                ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName),
-                        new UiObject(
-                                ReferenceObjectForEquatableTestScenarios.Value,
-                                ReferenceObjectForEquatableTestScenarios.UiObjectType,
-                                A.Dummy<UiObject>().Whose(_ => !_.AssemblyQualifiedName.IsEqualTo(ReferenceObjectForEquatableTestScenarios.AssemblyQualifiedName)).AssemblyQualifiedName),
+                        new ColumnDefinition(
+                                A.Dummy<ColumnDefinition>().Whose(_ => !_.ColumnWidthBehavior.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ColumnWidthBehavior)).ColumnWidthBehavior,
+                                ReferenceObjectForEquatableTestScenarios.ColumnWrapBehavior,
+                                ReferenceObjectForEquatableTestScenarios.Width,
+                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure),
+                        new ColumnDefinition(
+                                ReferenceObjectForEquatableTestScenarios.ColumnWidthBehavior,
+                                A.Dummy<ColumnDefinition>().Whose(_ => !_.ColumnWrapBehavior.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ColumnWrapBehavior)).ColumnWrapBehavior,
+                                ReferenceObjectForEquatableTestScenarios.Width,
+                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure),
+                        new ColumnDefinition(
+                                ReferenceObjectForEquatableTestScenarios.ColumnWidthBehavior,
+                                ReferenceObjectForEquatableTestScenarios.ColumnWrapBehavior,
+                                A.Dummy<ColumnDefinition>().Whose(_ => !_.Width.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Width)).Width,
+                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure),
+                        new ColumnDefinition(
+                                ReferenceObjectForEquatableTestScenarios.ColumnWidthBehavior,
+                                ReferenceObjectForEquatableTestScenarios.ColumnWrapBehavior,
+                                ReferenceObjectForEquatableTestScenarios.Width,
+                                A.Dummy<ColumnDefinition>().Whose(_ => !_.WidthUnitOfMeasure.IsEqualTo(ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure)).WidthUnitOfMeasure),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -295,12 +295,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void UiObject___Should_implement_IModel_of_UiObject___When_reflecting()
+            public static void ColumnDefinition___Should_implement_IModel_of_ColumnDefinition___When_reflecting()
             {
                 // Arrange
-                var type = typeof(UiObject);
+                var type = typeof(ColumnDefinition);
 
-                var expectedModelMethods = typeof(IModel<UiObject>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<ColumnDefinition>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -310,7 +310,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<UiObject>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<ColumnDefinition>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -328,10 +328,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void UiObject___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void ColumnDefinition___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(UiObject);
+                var type = typeof(ColumnDefinition);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -511,10 +511,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<UiObject>();
+                var systemUnderTest = A.Dummy<ColumnDefinition>();
 
                 // Act
-                var actual = (UiObject)systemUnderTest.Clone();
+                var actual = (ColumnDefinition)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -538,7 +538,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<UiObject>();
+                var systemUnderTest = A.Dummy<ColumnDefinition>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -546,18 +546,6 @@ namespace Vuescape.DotNet.Domain.Test
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
-
-                if (systemUnderTest.Value == null)
-                {
-                    actual.Value.AsTest().Must().BeNull();
-                }
-                else if (!actual.Value.GetType().IsValueType)
-                {
-                    // When the declared type is a reference type, we still have to check the runtime type.
-                    // The object could be a boxed value type, which will fail this asseration because
-                    // a deep clone of a value type object is the same object.
-                    actual.Value.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Value);
-                }
             }
 
             [Fact]
@@ -576,7 +564,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Value", "UiObjectType", "AssemblyQualifiedName" };
+                var propertyNames = new string[] { "ColumnWidthBehavior", "ColumnWrapBehavior", "Width", "WidthUnitOfMeasure" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 
@@ -589,12 +577,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (UiObject)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (ColumnDefinition)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(UiObject).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(ColumnDefinition).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var actualPropertyValue = propertyInfo.GetValue(actual);
 
@@ -656,7 +644,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<UiObject>();
+                var expected = A.Dummy<ColumnDefinition>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -685,7 +673,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<UiObject>();
+                var expected = A.Dummy<ColumnDefinition>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -714,7 +702,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<UiObject>();
+                var expected = A.Dummy<ColumnDefinition>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -743,7 +731,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<UiObject>();
+                var expected = A.Dummy<ColumnDefinition>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -777,8 +765,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                UiObject systemUnderTest1 = null;
-                UiObject systemUnderTest2 = null;
+                ColumnDefinition systemUnderTest1 = null;
+                ColumnDefinition systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -808,7 +796,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    UiObject systemUnderTest = null;
+                    ColumnDefinition systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -957,8 +945,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                UiObject systemUnderTest1 = null;
-                UiObject systemUnderTest2 = null;
+                ColumnDefinition systemUnderTest1 = null;
+                ColumnDefinition systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -988,7 +976,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    UiObject systemUnderTest = null;
+                    ColumnDefinition systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -1134,14 +1122,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_UiObject___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_ColumnDefinition___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    UiObject systemUnderTest = null;
+                    ColumnDefinition systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1165,7 +1153,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_UiObject___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_ColumnDefinition___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1193,7 +1181,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_UiObject___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_ColumnDefinition___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1221,7 +1209,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_UiObject___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_ColumnDefinition___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1249,7 +1237,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_UiObject___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_ColumnDefinition___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 

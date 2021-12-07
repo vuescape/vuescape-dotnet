@@ -72,6 +72,51 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
                 {
+                    var cells = new List<TreeTableHeaderCell>();
+
+                    var numberOfCells = ThreadSafeRandom.Next(0, 4);
+                    ColumnSorter columnSorter = A.Dummy<ColumnSorter>().Whose(_ => _.SortDirection == SortDirection.Ascending);
+                    for (var i = 0; i <= numberOfCells; i++)
+                    {
+                        string id = A.Dummy<string>();
+                        string displayValue = A.Dummy<string>();
+                        Hover hover = A.Dummy<Hover>();
+                        string renderer = A.Dummy<string>();
+                        string cssClasses = A.Dummy<string>();
+                        IReadOnlyDictionary<string, string> cssStyles = A.Dummy<IReadOnlyDictionary<string, string>>();
+                        int? colspan = A.Dummy<int?>();
+                        bool isVisible = A.Dummy<bool>();
+
+                        CellFormat cellFormat = A.Dummy<CellFormat>();
+                        IReadOnlyDictionary<string, Link> links = A.Dummy<IReadOnlyDictionary<string, Link>>();
+
+                        var treeTableHeaderCell = new TreeTableHeaderCell(id, displayValue, hover, renderer, cssClasses, cssStyles, colspan, isVisible, columnSorter, cellFormat, links);
+                        cells.Add(treeTableHeaderCell);
+                        columnSorter = A.Dummy<ColumnSorter>().Whose(_ => _.SortDirection == SortDirection.None);
+                    }
+
+                    return (IReadOnlyList<TreeTableHeaderCell>)cells;
+                });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var columnWidthBehavior = A.Dummy<ColumnWidthBehavior>();
+                    var widthUnitOfMeasure = A.Dummy<UnitOfMeasure?>();
+                    var width = A.Dummy<decimal?>();
+                    var columnWrapBehavior = A.Dummy<ColumnWrapBehavior>();
+
+                    if (widthUnitOfMeasure != null)
+                    {
+                        width = A.Dummy<decimal>();
+                    }
+
+                    return new ColumnDefinition(columnWidthBehavior, columnWrapBehavior, width, widthUnitOfMeasure);
+                });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
                     var wrapBehavior = A.Dummy<ColumnWrapBehavior>();
                     var widthBehavior = A.Dummy<ColumnWidthBehavior>();
                     decimal? width = null;
@@ -85,7 +130,7 @@ namespace Vuescape.DotNet.Domain.Test
                     return new ColumnDefinition(widthBehavior, wrapBehavior, width, unitOfMeasure);
                 });
 
-                 AutoFixtureBackedDummyFactory.AddDummyCreator(
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
                 {
                     var uiObjectType = A.Dummy<UiObjectType>();
@@ -94,10 +139,10 @@ namespace Vuescape.DotNet.Domain.Test
                     switch (uiObjectType)
                     {
                         case UiObjectType.Enum:
-                        {
-                            var assemblyQualifiedNameEnum = value.GetType().ToRepresentation().RemoveAssemblyVersions().BuildAssemblyQualifiedName();
-                            return new UiObject(value, uiObjectType, assemblyQualifiedNameEnum);
-                        }
+                            {
+                                var assemblyQualifiedNameEnum = value.GetType().ToRepresentation().RemoveAssemblyVersions().BuildAssemblyQualifiedName();
+                                return new UiObject(value, uiObjectType, assemblyQualifiedNameEnum);
+                            }
                         case UiObjectType.SpecifiedType:
                             var assemblyQualifiedName = value.GetType().ToRepresentation().RemoveAssemblyVersions().BuildAssemblyQualifiedName();
                             return new UiObject(value, uiObjectType, assemblyQualifiedName);
@@ -185,7 +230,7 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<bool?>(),
                         A.Dummy<IReadOnlyDictionary<string, Link>>(),
                         children);
-        });
+                });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
@@ -234,6 +279,7 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(SortComparisonStrategy.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(TreeTableConversionMode.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ColumnWidthBehavior.None);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UnitOfMeasure.None);
 
             var obcDataStructureDummyFactory = new OBeautifulCode.DataStructure.Test.DataStructureDummyFactory();
         }

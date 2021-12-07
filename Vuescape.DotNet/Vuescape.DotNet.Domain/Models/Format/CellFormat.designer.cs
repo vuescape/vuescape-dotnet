@@ -70,7 +70,8 @@ namespace Vuescape.DotNet.Domain
             }
 
             var result = this.FontHexColor.IsEqualTo(other.FontHexColor, StringComparer.Ordinal)
-                      && this.FontSize.IsEqualTo(other.FontSize, StringComparer.Ordinal);
+                      && this.FontSizeInPixels.IsEqualTo(other.FontSizeInPixels, StringComparer.Ordinal)
+                      && this.BackgroundHexColor.IsEqualTo(other.BackgroundHexColor, StringComparer.Ordinal);
 
             return result;
         }
@@ -81,7 +82,8 @@ namespace Vuescape.DotNet.Domain
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.FontHexColor)
-            .Hash(this.FontSize)
+            .Hash(this.FontSizeInPixels)
+            .Hash(this.BackgroundHexColor)
             .Value;
 
         /// <inheritdoc />
@@ -92,7 +94,8 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new CellFormat(
                                  this.FontHexColor?.DeepClone(),
-                                 this.FontSize?.DeepClone());
+                                 this.FontSizeInPixels?.DeepClone(),
+                                 this.BackgroundHexColor?.DeepClone());
 
             return result;
         }
@@ -123,16 +126,17 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new CellFormat(
                                  fontHexColor,
-                                 this.FontSize?.DeepClone());
+                                 this.FontSizeInPixels?.DeepClone(),
+                                 this.BackgroundHexColor?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="FontSize" />.
+        /// Deep clones this object with a new <see cref="FontSizeInPixels" />.
         /// </summary>
-        /// <param name="fontSize">The new <see cref="FontSize" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="CellFormat" /> using the specified <paramref name="fontSize" /> for <see cref="FontSize" /> and a deep clone of every other property.</returns>
+        /// <param name="fontSizeInPixels">The new <see cref="FontSizeInPixels" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="CellFormat" /> using the specified <paramref name="fontSizeInPixels" /> for <see cref="FontSizeInPixels" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -150,11 +154,44 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public CellFormat DeepCloneWithFontSize(string fontSize)
+        public CellFormat DeepCloneWithFontSizeInPixels(string fontSizeInPixels)
         {
             var result = new CellFormat(
                                  this.FontHexColor?.DeepClone(),
-                                 fontSize);
+                                 fontSizeInPixels,
+                                 this.BackgroundHexColor?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="BackgroundHexColor" />.
+        /// </summary>
+        /// <param name="backgroundHexColor">The new <see cref="BackgroundHexColor" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="CellFormat" /> using the specified <paramref name="backgroundHexColor" /> for <see cref="BackgroundHexColor" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public CellFormat DeepCloneWithBackgroundHexColor(string backgroundHexColor)
+        {
+            var result = new CellFormat(
+                                 this.FontHexColor?.DeepClone(),
+                                 this.FontSizeInPixels?.DeepClone(),
+                                 backgroundHexColor);
 
             return result;
         }
@@ -163,7 +200,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {this.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSize = {this.FontSize?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {this.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSizeInPixels = {this.FontSizeInPixels?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BackgroundHexColor = {this.BackgroundHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

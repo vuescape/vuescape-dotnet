@@ -4,14 +4,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using OBeautifulCode.DataStructure.Serialization.Json;
-
 namespace Vuescape.DotNet.Serialization.Json
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
+    using OBeautifulCode.DataStructure.Serialization.Json;
     using OBeautifulCode.Serialization;
     using OBeautifulCode.Serialization.Json;
     using OBeautifulCode.Type;

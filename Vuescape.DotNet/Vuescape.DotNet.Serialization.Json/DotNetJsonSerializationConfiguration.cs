@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using OBeautifulCode.DataStructure.Serialization.Json;
+
 namespace Vuescape.DotNet.Serialization.Json
 {
     using System;
@@ -25,15 +27,14 @@ namespace Vuescape.DotNet.Serialization.Json
             new[]
             {
                 Vuescape.DotNet.Domain.ProjectInfo.Namespace,
-                OBeautifulCode.DataStructure.ProjectInfo.Namespace,
             };
 
-        // /// <inheritdoc />
-        // protected override IReadOnlyCollection<JsonSerializationConfigurationType> DependentJsonSerializationConfigurationTypes =>
-        //    new[]
-        //    {
-        //        typeof(ProtocolJsonSerializationConfiguration).ToJsonSerializationConfigurationType(),
-        //    };
+        /// <inheritdoc />
+        protected override IReadOnlyCollection<JsonSerializationConfigurationType> DependentJsonSerializationConfigurationTypes =>
+           new[]
+           {
+                typeof(DataStructureJsonSerializationConfiguration).ToJsonSerializationConfigurationType(),
+           };
 
         /// <inheritdoc />
         protected override IReadOnlyCollection<TypeToRegisterForJson> TypesToRegisterForJson => new[]

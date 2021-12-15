@@ -343,6 +343,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="Properties\ProjectInfo.cs" />
+    <Compile Include="ReportTest.cs" />
+    <Compile Include="ReportTest.designer.cs">
+      <DependentUpon>ReportTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SectionTest.cs" />
+    <Compile Include="SectionTest.designer.cs">
+      <DependentUpon>SectionTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="SerializationConfigurationTypes.cs" />
     <AdditionalFiles Include=".analyzers\stylecop.json" />
     <Compile Include="Models\SlottedUiObjectTest.cs" />

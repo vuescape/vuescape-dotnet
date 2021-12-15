@@ -121,6 +121,18 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<CssStyles>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new Vuescape.DotNet.Domain.Report(
+                                 A.Dummy<string>(),
+                                 A.Dummy<IReadOnlyCollection<Vuescape.DotNet.Domain.Section>>(),
+                                 A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new Vuescape.DotNet.Domain.Section(
+                                 A.Dummy<string>(),
+                                 A.Dummy<Vuescape.DotNet.Domain.TreeTable>(),
+                                 A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new SlottedUiObject(
                                  A.Dummy<IReadOnlyDictionary<string, UiObject>>(),
                                  A.Dummy<string>(),

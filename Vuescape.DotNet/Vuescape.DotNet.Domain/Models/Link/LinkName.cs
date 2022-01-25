@@ -15,16 +15,16 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Link for getting self information. Typically details.
         /// </summary>
-        public static readonly string Self = "self";
+        public static readonly string Self = "__vs-self";
 
         /// <summary>
         /// Link for downloading CSV.
         /// </summary>
-        public static readonly string DownloadCsv = "downloadCsv";
+        public static readonly string DownloadCsv = "__vs-downloadCsv";
 
         /// <summary>
         /// Link for downloading PDF.
         /// </summary>
-        public static readonly string DownloadPdf = "downloadPdf";
+        public static readonly string DownloadPdf = "__vs-downloadPdf";
     }
 }

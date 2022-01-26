@@ -130,13 +130,67 @@ namespace Vuescape.DotNet.Domain
                 obcTableFormat,
                 treeTableConversionMode);
 
-            var links = new Dictionary<string, Link>()
+            var links = new Dictionary<string, Link>();
+            if (obcRowCell is IHaveLink linkedCell)
             {
-                { "__vs_self",  new Link("source", LinkTarget.CenterPane, null, new CssStyles(new CssStyleWrapper("test: bold;"), null, null, null, null, null)) },
-            };
+                if (linkedCell.Link is SimpleLink simpleLink)
+                {
+                    var linkTarget = GetLinkTarget(simpleLink.Target);
+                    if (simpleLink.Resource is UrlLinkedResource urlLinkedResource)
+                    {
+                        // TODO: incorporate urlLinkedResource.ResourceKind
+                        var resource = urlLinkedResource.Url;
+                        var link = new Link(resource, linkTarget);
+                        links.Add(LinkName.Self, link);
+                    }
+                    else
+                    {
+                        if (treeTableConversionMode == TreeTableConversionMode.Strict)
+                        {
+                            throw new InvalidOperationException(Invariant(
+                                $"Only {nameof(ILinkedResource)} of type {nameof(UrlLinkedResource)} is supported. {simpleLink.Resource.GetType().Name} is not supported."));
+                        }
+                    }
+                }
+                else
+                {
+                    if (treeTableConversionMode == TreeTableConversionMode.Strict)
+                    {
+                        throw new InvalidOperationException(Invariant(
+                            $"Only type {nameof(SimpleLink)} is supported {nameof(ILink)} type. {linkedCell.Link.GetType().Name} is not supported."));
+                    }
+                }
+            }
 
             var result = new TreeTableCell(obcRowCell.Id, displayValue, hover, null, cssClasses, null, colspan, isVisible, cellFormat, links, slottedUiObject);
             return result;
+        }
+
+        private static LinkTarget GetLinkTarget(OBeautifulCode.DataStructure.LinkTarget linkTarget)
+        {
+            switch (linkTarget)
+            {
+                case OBeautifulCode.DataStructure.LinkTarget.CenterPane:
+                    return LinkTarget.CenterPane;
+                case OBeautifulCode.DataStructure.LinkTarget.Unknown:
+                    return LinkTarget.None;
+                case OBeautifulCode.DataStructure.LinkTarget.CurrentPane:
+                    return LinkTarget.CenterPane;
+                case OBeautifulCode.DataStructure.LinkTarget.LeftPane:
+                    return LinkTarget.LeftPane;
+                case OBeautifulCode.DataStructure.LinkTarget.RightPane:
+                    return LinkTarget.RightPane;
+                case OBeautifulCode.DataStructure.LinkTarget.CurrentWindow:
+                    return LinkTarget.NavigateCurrentWindow;
+                case OBeautifulCode.DataStructure.LinkTarget.NewWindow:
+                    return LinkTarget.NavigateNewWindow;
+                case OBeautifulCode.DataStructure.LinkTarget.Download:
+                    return LinkTarget.DownloadBase64EncodedFile;
+                case OBeautifulCode.DataStructure.LinkTarget.Modal:
+                    return LinkTarget.Modal;
+                default:
+                    return LinkTarget.None;
+            }
         }
 
         /// <summary>
@@ -625,6 +679,11 @@ namespace Vuescape.DotNet.Domain
             {
                 throw new InvalidOperationException(Invariant(
                     $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
+            }
+
+            if (fontFormatFontSizeInPoints == null)
+            {
+                return null;
             }
 
             fontFormatFontSizeInPoints = fontFormatFontSizeInPoints * 4 / 3;

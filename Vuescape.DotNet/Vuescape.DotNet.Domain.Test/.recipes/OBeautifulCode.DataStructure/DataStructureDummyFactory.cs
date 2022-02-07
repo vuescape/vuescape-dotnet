@@ -91,7 +91,7 @@ namespace OBeautifulCode.DataStructure.Test
             {
                 var numberOfSections = ThreadSafeRandom.Next(1, 4);
 
-                var result = new Report(A.Dummy<string>(), Some.ReadOnlyDummies<Section>(numberOfSections).ToList(), A.Dummy<string>(), A.Dummy<ReportFormat>());
+                var result = new Report(A.Dummy<string>(), Some.ReadOnlyDummies<Section>(numberOfSections).ToList(), A.Dummy<string>(), A.Dummy<UtcDateTime>(), Some.ReadOnlyDummies<SimpleLink>().ToList(), A.Dummy<AdditionalReportInfo>(), A.Dummy<ReportFormat>());
 
                 return result;
             });
@@ -259,6 +259,26 @@ namespace OBeautifulCode.DataStructure.Test
                     A.Dummy<CellFormat>(),
                     A.Dummy<IHoverOver>(),
                     A.Dummy<ILink>());
+
+                return result;
+            });
+
+            // DateTimeFormat
+            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
+            {
+                var localize = A.Dummy<bool>();
+
+                var result = new DateTimeFormat(A.Dummy<DateTimeFormatKind>(), A.Dummy<CultureKind>(), localize, localize ? A.Dummy<StandardTimeZone>() : (StandardTimeZone?)null);
+
+                return result;
+            });
+
+            // ReportFormat
+            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
+            {
+                var displayTimestamp = A.Dummy<bool>();
+
+                var result = new ReportFormat(displayTimestamp, displayTimestamp ? A.Dummy<DateTimeFormat>() : null, A.Dummy<ReportFormatOptions>());
 
                 return result;
             });
@@ -472,11 +492,11 @@ namespace OBeautifulCode.DataStructure.Test
                 : BuildDataRows(numberOfColumns, depth + 1);
 
             var expandedSummaryRow = childRows.Any()
-                ? BuildFlatRow(numberOfColumns, allowSpanningCells: true)
+                ? new[] { BuildFlatRow(numberOfColumns, allowSpanningCells: true) }
                 : null;
 
             var collapsedSummaryRow = childRows.Any()
-                ? BuildFlatRow(numberOfColumns, allowSpanningCells: true)
+                ? new[] { BuildFlatRow(numberOfColumns, allowSpanningCells: true) }
                 : null;
 
             var result = new Row(cells, A.Dummy<string>(), A.Dummy<RowFormat>(), childRows, expandedSummaryRow, collapsedSummaryRow);

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TreeTableConversionMode.cs" company="Vuescape">
+// <copyright file="ReportConversionMode.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -10,7 +10,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// The strategy to use when converting an <see cref="OBeautifulCode.DataStructure.TreeTable"/> to a Vuescape <see cref="TreeTable"/>.
     /// </summary>
-    public enum TreeTableConversionMode
+    public enum ReportConversionMode
     {
         /// <summary>
         /// None.
@@ -18,7 +18,7 @@ namespace Vuescape.DotNet.Domain
         None = 0,
 
         /// <summary>
-        /// Strict will throw an exception if any <see cref="OBeautifulCode.DataStructure.TreeTable"/> properties can not be converted or are not supported.
+        /// Strict will throw an exception if any <see cref="OBeautifulCode.DataStructure.Report"/> properties can not be converted or are not supported.
         /// </summary>
         Strict,
 

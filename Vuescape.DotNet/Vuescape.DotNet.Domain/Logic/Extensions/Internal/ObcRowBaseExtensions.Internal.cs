@@ -26,7 +26,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcHeaderRowFormat">The header row format.</param>
         /// <param name="obcColumnFormat">The column format.</param>
         /// <param name="obcColumns">The list of Columns.</param>
-        /// <param name="treeTableConversionMode">The TreeTable conversion mode.</param>
+        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableHeaderRow"/>.</returns>
         internal static TreeTableHeaderRow ToVuescapeTreeTableHeaderRow(
             this OBeautifulCode.DataStructure.FlatRow obcHeaderRow,
@@ -36,10 +36,8 @@ namespace Vuescape.DotNet.Domain
             RowFormat obcHeaderRowFormat,
             ColumnFormat obcColumnFormat,
             IReadOnlyList<Column> obcColumns,
-            TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
-            Console.Write(treeTableConversionMode);
-
             // TODO: Apply formatting.
             var cssClasses = "tree-table-row__tr";
             var rowId = obcHeaderRow.Id;
@@ -55,7 +53,8 @@ namespace Vuescape.DotNet.Domain
                         obcHeaderRowsFormat,
                         obcHeaderRowFormat,
                         obcColumnFormat,
-                        obcColumns[actualColumnIndex]),
+                        obcColumns[actualColumnIndex],
+                        obcToVuescapeConversionContext),
                 };
 
                 var columnsSpanned = obcHeaderRowCell.ColumnsSpanned ?? 1;
@@ -77,6 +76,67 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
+        /// Convert a Footer <see cref="FlatRow"/> to a <see cref="TreeTableRow"/>.
+        /// </summary>
+        /// <param name="obcFooterRow">The header row.</param>
+        /// <param name="obcTableFormat">The table format.</param>
+        /// <param name="obcRowsFormat">The table rows format.</param>
+        /// <param name="obcFooterRowsFormat">The footer rows format.</param>
+        /// <param name="obcFooterRowFormat">The footer row format.</param>
+        /// <param name="obcColumnFormat">The column format.</param>
+        /// <param name="obcColumns">The list of Columns.</param>
+        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
+        /// <returns>A <see cref="TreeTableHeaderRow"/>.</returns>
+        internal static TreeTableRow ToVuescapeTreeTableFooterRow(
+            this OBeautifulCode.DataStructure.FlatRow obcFooterRow,
+            TableFormat obcTableFormat,
+            RowFormat obcRowsFormat,
+            FooterRowsFormat obcFooterRowsFormat,
+            RowFormat obcFooterRowFormat,
+            ColumnFormat obcColumnFormat,
+            IReadOnlyList<Column> obcColumns,
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
+        {
+            // TODO: Apply formatting.
+            var cssClasses = "tree-table-row__tr";
+            var rowId = obcFooterRow.Id;
+
+            var actualColumnIndex = 0;
+            var treeTableFooterCells = obcFooterRow.Cells.SelectMany((obcHeaderRowCell, columnIndex) =>
+            {
+                var headerCells = new List<TreeTableCell>
+                {
+                    obcHeaderRowCell.ToVuescapeTreeTableCell(
+                        obcTableFormat,
+                        obcRowsFormat,
+                        obcFooterRowsFormat != null ?
+                            new DataRowsFormat(obcFooterRowsFormat.OuterBorders, obcFooterRowsFormat.InnerBorders, obcFooterRowsFormat.RowsFormat) :
+                            null,
+                        obcFooterRowFormat,
+                        obcColumnFormat,
+                        obcColumns[actualColumnIndex],
+                        obcToVuescapeConversionContext),
+                };
+
+                var columnsSpanned = obcHeaderRowCell.ColumnsSpanned ?? 1;
+                actualColumnIndex += columnsSpanned;
+
+                for (var additionalColumnIndex = 1; additionalColumnIndex < columnsSpanned; additionalColumnIndex++)
+                {
+                    // make cell visible but hidden to allow colspan sizing to work properly
+                    headerCells.Add(new TreeTableCell(null, null, null, null, "tree-table__display--none", null, null, true, null));
+                }
+
+                return headerCells;
+            }).ToList();
+
+            // TODO: classes/styles
+            // TODO: Renderer? Is there a default?
+            var result = new TreeTableRow(rowId, treeTableFooterCells, null, cssClasses, null, null, false, false, true, false, false, null, null);
+            return result;
+        }
+
+        /// <summary>
         /// Convert a <see cref="Row"/> to a <see cref="TreeTableRow"/>.
         /// </summary>
         /// <param name="obcRow">The row.</param>
@@ -87,7 +147,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcColumnFormat">The column format.</param>
         /// <param name="obcColumns">The list of Columns.</param>
         /// <param name="depth">The depth in the TreeTable hierarchy.</param>
-        /// <param name="treeTableConversionMode">The TreeTable conversion mode.</param>
+        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableHeaderRow"/>.</returns>
         internal static TreeTableRow ToVuescapeTreeTableRow(
             this OBeautifulCode.DataStructure.Row obcRow,
@@ -98,9 +158,9 @@ namespace Vuescape.DotNet.Domain
             ColumnFormat obcColumnFormat,
             IReadOnlyList<Column> obcColumns,
             int? depth,
-            TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
-            Console.Write(treeTableConversionMode);
+            var rowIndentLevel = depth ?? 0;
 
             // TODO: Apply formatting.
             var rowId = obcRow.Id;
@@ -109,7 +169,7 @@ namespace Vuescape.DotNet.Domain
             var columnIndex = 0;
             foreach (var obcRowCell in obcRow.Cells)
             {
-                var treeTableCell = obcRowCell.ToVuescapeTreeTableCell(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcRowFormat, obcColumnFormat, obcColumns[columnIndex]);
+                var treeTableCell = obcRowCell.ToVuescapeTreeTableCell(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcRowFormat, obcColumnFormat, obcColumns[columnIndex], obcToVuescapeConversionContext);
                 var columnsSpanned = obcRowCell.ColumnsSpanned ?? 1;
 
                 treeTableCells.Add(treeTableCell);
@@ -127,29 +187,64 @@ namespace Vuescape.DotNet.Domain
             // TODO: isSelected
             // TODO: isFocused
             // TODO: links
-            var isVisible = obcRow.Format?.Options.IsVisible() ?? true;
-            var hasChildRows = HasChildRows(obcRow);
+            string cssStyles = null;
+            // cssStyles += "tree-table__display--none";
+
+            var hasChildRows = obcRow.HasChildRows();
             var isExpandable = hasChildRows && (!obcRow.Format?.Options.IsNotExpandable() ?? false);
+            var shouldAlignChildRowsWithParent = obcRow.Format?.Options.ShouldAlignChildRowsWithParent() ?? false;
+            var isVisible = obcRow.Format?.Options.IsVisible() ?? true;
+            bool isExpanded = !isVisible && shouldAlignChildRowsWithParent;
 
             IReadOnlyList<TreeTableRow> children = null;
             if (hasChildRows)
             {
-                if (depth == null)
-                {
-                    depth = 0;
-                }
-
-                children = obcRow.ChildRows.Select(_ => _.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcRow.Format, obcColumnFormat, obcColumns, depth + 1)).ToList();
+                var childIndentLevel = shouldAlignChildRowsWithParent ? rowIndentLevel : rowIndentLevel + 1;
+                children = obcRow.ChildRows.Select(_ => _.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, childIndentLevel, obcToVuescapeConversionContext)).ToList();
             }
 
-            var result = new TreeTableRow(rowId, treeTableCells, depth, null, null, null, isExpandable, false, isVisible, false, false, null, children);
+            IReadOnlyList<TreeTableRow> expandedSummaryRows = null;
+            if (obcRow.HasExpandedSummaryRows())
+            {
+                expandedSummaryRows = obcRow.ExpandedSummaryRows.Select(_ =>
+                {
+                    var row = new Row(_.Cells, _.Id, _.Format);
+                    return row.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, rowIndentLevel, obcToVuescapeConversionContext);
+                }).ToList();
+            }
+
+            IReadOnlyList<TreeTableRow> collapsedSummaryRows = null;
+            if (obcRow.HasCollapsedSummaryRows())
+            {
+                collapsedSummaryRows = obcRow.CollapsedSummaryRows.Select(_ =>
+                {
+                    var row = new Row(_.Cells, _.Id, _.Format);
+                    return row.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, rowIndentLevel, obcToVuescapeConversionContext);
+                }).ToList();
+            }
+
+            var result = new TreeTableRow(rowId, treeTableCells, rowIndentLevel, cssStyles, null, null, isExpandable, isExpanded, isVisible, false, false, null, children, true, expandedSummaryRows, collapsedSummaryRows);
             return result;
         }
 
         private static bool HasChildRows(
-            OBeautifulCode.DataStructure.Row obcRow)
+            this OBeautifulCode.DataStructure.Row obcRow)
         {
-            var result = (obcRow.ChildRows?.Count ?? 0) > 0;
+            var result = obcRow.ChildRows != null && obcRow.ChildRows.Any();
+            return result;
+        }
+
+        private static bool HasExpandedSummaryRows(
+            this OBeautifulCode.DataStructure.Row obcRow)
+        {
+            var result = obcRow.ExpandedSummaryRows != null && obcRow.ExpandedSummaryRows.Any();
+            return result;
+        }
+
+        private static bool HasCollapsedSummaryRows(
+            this OBeautifulCode.DataStructure.Row obcRow)
+        {
+            var result = obcRow.CollapsedSummaryRows != null && obcRow.CollapsedSummaryRows.Any();
             return result;
         }
     }

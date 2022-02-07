@@ -6,8 +6,7 @@
 
 namespace Vuescape.DotNet.Domain
 {
-    using System;
-
+    using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
@@ -21,14 +20,19 @@ namespace Vuescape.DotNet.Domain
         /// <param name="id">The section's unique identifier.</param>
         /// <param name="treeTable">The tree table.</param>
         /// <param name="title">OPTIONAL title of the section.  DEFAULT is a section with no title.</param>
+        /// <param name="name">OPTIONAL name of the section.  DEFAULT is a section with no name.</param>
         public Section(
             string id,
             TreeTable treeTable,
-            string title = null)
+            string title = null,
+            string name = null)
         {
+            new { treeTable }.MustForArg().NotBeNull();
+
             this.Id = id;
-            this.TreeTable = treeTable ?? throw new ArgumentNullException(nameof(treeTable));
+            this.TreeTable = treeTable;
             this.Title = title;
+            this.Name = name;
         }
 
         /// <summary>
@@ -45,5 +49,10 @@ namespace Vuescape.DotNet.Domain
         /// Gets the title of the section.
         /// </summary>
         public string Title { get; private set; }
+
+        /// <summary>
+        /// Gets the name of the section.
+        /// </summary>
+        public string Name { get; private set; }
     }
 }

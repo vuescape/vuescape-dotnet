@@ -91,7 +91,7 @@ namespace Vuescape.DotNet.Domain.Test
             var treeTable = new TreeTable(
                 "id",
                 null,
-                new TreeTableContent(headers, rows, true, true, true, true, false, false, null, null, null, null));
+                new TreeTableContent(headers, rows, new List<TreeTableRow>(), true, true, true, true, false, false, null, null, null, null, SortLevel.None));
 
             // Assert
             Assert.NotNull(treeTable);

@@ -22,6 +22,7 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="headers">The headers.</param>
         /// <param name="rows">The rows.</param>
+        /// <param name="footers">The footers.</param>
         /// <param name="shouldScrollVertical">Whether the table should scroll vertically.</param>
         /// <param name="shouldScrollHorizontal">Whether the table should scroll horizontally.</param>
         /// <param name="shouldSyncHeaderScroll">Whether the table header should scroll with the rows.</param>
@@ -32,9 +33,11 @@ namespace Vuescape.DotNet.Domain
         /// <param name="maxRows">The maximum number of rows to display.</param>
         /// <param name="cssClass">The CSS class to apply to the parent div.</param>
         /// <param name="cssStyles">The CSS style to apply to the parent div.</param>
+        /// <param name="sortLevel">The level to sort on.</param>
         public TreeTableContent(
             IReadOnlyList<TreeTableHeaderRow> headers,
             IReadOnlyList<TreeTableRow> rows,
+            IReadOnlyList<TreeTableRow> footers,
             bool shouldScrollVertical,
             bool shouldScrollHorizontal,
             bool shouldSyncHeaderScroll,
@@ -44,13 +47,14 @@ namespace Vuescape.DotNet.Domain
             string deadAreaColor,
             int? maxRows,
             string cssClass,
-            IReadOnlyDictionary<string, string> cssStyles)
+            IReadOnlyDictionary<string, string> cssStyles,
+            SortLevel sortLevel)
         {
-            new { headers }.AsArg().Must().NotBeNull();
             new { rows }.AsArg().Must().NotBeNull();
 
             this.Headers = headers;
             this.Rows = rows;
+            this.Footers = footers;
             this.ShouldScrollVertical = shouldScrollVertical;
             this.ShouldScrollHorizontal = shouldScrollHorizontal;
             this.ShouldSyncHeaderScroll = shouldSyncHeaderScroll;
@@ -61,6 +65,7 @@ namespace Vuescape.DotNet.Domain
             this.MaxRows = maxRows;
             this.CssClass = cssClass;
             this.CssStyles = cssStyles;
+            this.SortLevel = sortLevel;
         }
 
         /// <summary>
@@ -72,6 +77,11 @@ namespace Vuescape.DotNet.Domain
         /// Gets the Rows.
         /// </summary>
         public IReadOnlyList<TreeTableRow> Rows { get; private set; }
+
+        /// <summary>
+        /// Gets the Footers.
+        /// </summary>
+        public IReadOnlyList<TreeTableRow> Footers { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether the TreeTable should scroll vertically.
@@ -122,5 +132,10 @@ namespace Vuescape.DotNet.Domain
         /// Gets the Styles of the parent div.
         /// </summary>
         public IReadOnlyDictionary<string, string> CssStyles { get; private set; }
+
+        /// <summary>
+        /// Gets the <see cref="SortLevel"/>.
+        /// </summary>
+        public SortLevel SortLevel { get; private set; }
     }
 }

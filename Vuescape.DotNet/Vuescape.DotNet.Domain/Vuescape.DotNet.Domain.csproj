@@ -37,14 +37,14 @@
     <DocumentationFile>bin\Release\Vuescape.DotNet.Domain.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OBeautifulCode.DataStructure, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.13\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
+    <Reference Include="OBeautifulCode.DataStructure, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.24\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Representation.System, Version=1.0.61.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Representation.System.1.0.61\lib\net462\OBeautifulCode.Representation.System.dll</HintPath>
+    <Reference Include="OBeautifulCode.Representation.System, Version=1.0.62.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Representation.System.1.0.62\lib\net462\OBeautifulCode.Representation.System.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Type, Version=1.0.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Type.1.0.106\lib\net462\OBeautifulCode.Type.dll</HintPath>
+    <Reference Include="OBeautifulCode.Type, Version=1.0.112.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Type.1.0.112\lib\net462\OBeautifulCode.Type.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
@@ -100,6 +100,7 @@
     <Compile Include=".recipes\OBeautifulCode.Type\ToStringXmlDocOptions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
     <Compile Include="Logic\Extensions\Internal\CellFormatOptionsExtensions.Internal.cs" />
+    <Compile Include="Logic\Extensions\Internal\ObcILinkExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\RowFormatOptionsExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\ColumnFormatOptionsExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\ObcICellExtensions.Internal.cs" />
@@ -128,6 +129,7 @@
       <DependentUpon>ColumnDefinition.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ColumnDefinition\ColumnWrapBehavior.cs" />
+    <Compile Include="Models\Link\ResourceKind.cs" />
     <Compile Include="Models\Css\CssPropertyName.cs" />
     <Compile Include="Models\Css\CssStyles.designer.cs">
       <DependentUpon>CssStyles.cs</DependentUpon>
@@ -159,6 +161,7 @@
     <Compile Include="Models\TreeTable\Hover.designer.cs">
       <DependentUpon>Hover.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\TreeTable\SortLevel.cs" />
     <Compile Include="Models\TreeTable\TreeTable.designer.cs">
       <DependentUpon>TreeTable.cs</DependentUpon>
     </Compile>
@@ -183,10 +186,14 @@
     <Compile Include="Models\UiObject\UiObject.designer.cs">
       <DependentUpon>UiObject.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operations\ConvertObcToVuescapeTreeTableOp.designer.cs">
-      <DependentUpon>ConvertObcToVuescapeTreeTableOp.cs</DependentUpon>
+    <Compile Include="Operations\ConvertObcToVuescapeReportOp.designer.cs">
+      <DependentUpon>ConvertObcToVuescapeReportOp.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operations\TreeTableConversionMode.cs" />
+    <Compile Include="Operations\ObcToVuescapeConversionContext.cs" />
+    <Compile Include="Operations\ObcToVuescapeConversionContext.designer.cs">
+      <DependentUpon>ObcToVuescapeConversionContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operations\ReportConversionMode.cs" />
     <Compile Include="Models\ClientBehaviors\SortTreeTableClientBehavior.cs" />
     <Compile Include="Models\ClientBehaviors\ToggleTreeTableChildRowExpansionClientBehavior.cs" />
     <Compile Include="Models\ClientBehaviors\GeneratePdfClientBehavior.cs" />
@@ -207,7 +214,7 @@
     <Compile Include="Models\TreeTable\ContentKind.cs" />
     <Compile Include="Models\TreeTable\TreeTableContent.cs" />
     <Compile Include="Models\TreeTable\Hover.cs" />
-    <Compile Include="Operations\ConvertObcToVuescapeTreeTableOp.cs" />
+    <Compile Include="Operations\ConvertObcToVuescapeReportOp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="Properties\ProjectInfo.cs" />
@@ -220,7 +227,7 @@
     <Compile Include="Models\TreeTable\TreeTableHeaderRow.cs" />
     <Compile Include="Models\TreeTable\TreeTableCell.cs" />
     <Compile Include="Models\TreeTable\TreeTableRow.cs" />
-    <Compile Include="Protocols\ConvertObcToVuescapeTreeTableProtocol.cs" />
+    <Compile Include="Protocols\ConvertObcToVuescapeReportProtocol.cs" />
     <None Include=".analyzers\release.ruleset" />
     <None Include="packages.config" />
     <None Include="Vuescape.DotNet.Domain.override-nuspec" />

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConvertObcToVuescapeTreeTableOpTest.cs" company="Vuescape">
+// <copyright file="ConvertObcToVuescapeReportOpTest.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -23,30 +23,30 @@ namespace Vuescape.DotNet.Domain.Test
     using static System.FormattableString;
 
     [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = ObcSuppressBecause.CA1505_AvoidUnmaintainableCode_DisagreeWithAssessment)]
-    public static partial class ConvertObcToVuescapeTreeTableOpTest
+    public static partial class ConvertObcToVuescapeReportOpTest
     {
         [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = ObcSuppressBecause.CA1505_AvoidUnmaintainableCode_DisagreeWithAssessment)]
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
-        static ConvertObcToVuescapeTreeTableOpTest()
+        static ConvertObcToVuescapeReportOpTest()
         {
             ConstructorArgumentValidationTestScenarios.RemoveAllScenarios()
                             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<ConvertObcToVuescapeTreeTableOp>
+                new ConstructorArgumentValidationTestScenario<ConvertObcToVuescapeReportOp>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'obcTreeTable' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'obcReport' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<ConvertObcToVuescapeTreeTableOp>();
+                        var referenceObject = A.Dummy<ConvertObcToVuescapeReportOp>();
 
-                        var result = new ConvertObcToVuescapeTreeTableOp(
+                        var result = new ConvertObcToVuescapeReportOp(
                                              null,
-                                             referenceObject.TreeTableConversionMode,
+                                             referenceObject.ObcToVuescapeConversionContext,
                                              referenceObject.TokenToSubstitutionMap);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "obcTreeTable", },
+                    ExpectedExceptionMessageContains = new[] { "obcReport", },
                 });
         }
     }

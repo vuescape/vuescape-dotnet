@@ -13,6 +13,18 @@ namespace Vuescape.DotNet.Domain
     internal static partial class RowFormatOptionsExtensions
     {
         /// <summary>
+        /// Determine if Row should align child rows with parent.
+        /// </summary>
+        /// <param name="obcRowFormatOptions">The RowFormatOptions.</param>
+        /// <returns>A boolean indicating whether the row should align child rows with parent.</returns>
+        internal static bool ShouldAlignChildRowsWithParent(
+            this RowFormatOptions? obcRowFormatOptions)
+        {
+            var result = (obcRowFormatOptions ?? RowFormatOptions.None & RowFormatOptions.AlignChildRowsWithParent) != 0;
+            return result;
+        }
+
+        /// <summary>
         /// Determine if Row is visible.
         /// </summary>
         /// <param name="obcRowFormatOptions">The RowFormatOptions.</param>
@@ -20,7 +32,7 @@ namespace Vuescape.DotNet.Domain
         internal static bool IsVisible(
             this RowFormatOptions? obcRowFormatOptions)
         {
-            var result = (obcRowFormatOptions & RowFormatOptions.Hide) != 0;
+            var result = (obcRowFormatOptions ?? RowFormatOptions.None & RowFormatOptions.Hide) == 0;
             return result;
         }
 
@@ -32,7 +44,7 @@ namespace Vuescape.DotNet.Domain
         internal static bool IsNotExpandable(
             this RowFormatOptions? obcRowFormatOptions)
         {
-            var result = (obcRowFormatOptions & RowFormatOptions.DisableCollapsing) != 0;
+            var result = (obcRowFormatOptions ?? RowFormatOptions.None & RowFormatOptions.DisableCollapsing) != 0;
             return result;
         }
 
@@ -44,7 +56,7 @@ namespace Vuescape.DotNet.Domain
         internal static bool IsFrozen(
             this RowFormatOptions? obcRowFormatOptions)
         {
-            var result = (obcRowFormatOptions & RowFormatOptions.Freeze) != 0;
+            var result = (obcRowFormatOptions ?? RowFormatOptions.None & RowFormatOptions.Freeze) != 0;
             return result;
         }
     }

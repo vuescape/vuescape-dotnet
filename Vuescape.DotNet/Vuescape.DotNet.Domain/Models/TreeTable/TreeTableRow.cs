@@ -8,6 +8,7 @@
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
@@ -33,6 +34,9 @@ namespace Vuescape.DotNet.Domain
         /// <param name="isFocused">Whether the row is focused. Typically in the UI the row will be highlighted.</param>
         /// <param name="links">The links for this row.</param>
         /// <param name="children">The child rows.</param>
+        /// <param name="shouldDisplayChildren">Whether child rows should be displayed.</param>
+        /// <param name="expandedSummaryRows">The summary rows to display when the row is expanded. These rows will appear after the child rows.</param>
+        /// <param name="collapsedSummaryRows">The summary rows to display when the row is collapsed. These rows will appear in the child rows.</param>
         public TreeTableRow(
             string id,
             IReadOnlyList<TreeTableCell> cells,
@@ -46,7 +50,10 @@ namespace Vuescape.DotNet.Domain
             bool isSelected,
             bool? isFocused,
             IReadOnlyDictionary<string, Link> links,
-            IReadOnlyList<TreeTableRow> children)
+            IReadOnlyList<TreeTableRow> children,
+            bool? shouldDisplayChildren = null,
+            IReadOnlyList<TreeTableRow> expandedSummaryRows = null,
+            IReadOnlyList<TreeTableRow> collapsedSummaryRows = null)
         {
             new { cells }.AsArg().Must().NotBeNullNorEmptyEnumerable();
 
@@ -63,6 +70,17 @@ namespace Vuescape.DotNet.Domain
             this.IsFocused = isFocused;
             this.Links = links;
             this.Children = children;
+            this.ExpandedSummaryRows = expandedSummaryRows;
+            this.CollapsedSummaryRows = collapsedSummaryRows;
+
+            if (shouldDisplayChildren == null)
+            {
+                this.ShouldDisplayChildren = children != null && children.Any();
+            }
+            else
+            {
+                this.ShouldDisplayChildren = shouldDisplayChildren.Value;
+            }
         }
 
         /// <summary>
@@ -131,5 +149,20 @@ namespace Vuescape.DotNet.Domain
         /// Gets the children tree table rows.
         /// </summary>
         public IReadOnlyList<TreeTableRow> Children { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether child row should be displayed.
+        /// </summary>
+        public bool ShouldDisplayChildren { get; private set; }
+
+        /// <summary>
+        /// Gets the expanded summary rows.
+        /// </summary>
+        public IReadOnlyList<TreeTableRow> ExpandedSummaryRows { get; private set; }
+
+        /// <summary>
+        /// Gets the collapsed summary rows.
+        /// </summary>
+        public IReadOnlyList<TreeTableRow> CollapsedSummaryRows { get; private set; }
     }
 }

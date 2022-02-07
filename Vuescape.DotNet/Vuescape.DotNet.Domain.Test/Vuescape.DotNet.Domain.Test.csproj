@@ -78,32 +78,32 @@
     <Reference Include="Naos.Telemetry.Domain, Version=1.0.28.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Naos.Telemetry.Domain.1.0.28\lib\net462\Naos.Telemetry.Domain.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.AutoFakeItEasy, Version=1.0.138.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.AutoFakeItEasy.1.0.138\lib\net462\OBeautifulCode.AutoFakeItEasy.dll</HintPath>
+    <Reference Include="OBeautifulCode.AutoFakeItEasy, Version=1.0.139.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.AutoFakeItEasy.1.0.139\lib\net462\OBeautifulCode.AutoFakeItEasy.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Compression, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Compression.1.0.24\lib\net462\OBeautifulCode.Compression.dll</HintPath>
+    <Reference Include="OBeautifulCode.Compression, Version=1.0.25.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Compression.1.0.25\lib\net462\OBeautifulCode.Compression.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.DataStructure, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.13\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
+    <Reference Include="OBeautifulCode.DataStructure, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.24\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Representation.System, Version=1.0.61.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Representation.System.1.0.61\lib\net462\OBeautifulCode.Representation.System.dll</HintPath>
+    <Reference Include="OBeautifulCode.Representation.System, Version=1.0.62.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Representation.System.1.0.62\lib\net462\OBeautifulCode.Representation.System.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Serialization, Version=1.0.119.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Serialization.1.0.119\lib\net462\OBeautifulCode.Serialization.dll</HintPath>
+    <Reference Include="OBeautifulCode.Serialization, Version=1.0.121.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Serialization.1.0.121\lib\net462\OBeautifulCode.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Serialization.Bson, Version=1.0.119.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Serialization.Bson.1.0.119\lib\net462\OBeautifulCode.Serialization.Bson.dll</HintPath>
+    <Reference Include="OBeautifulCode.Serialization.Bson, Version=1.0.121.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Serialization.Bson.1.0.121\lib\net462\OBeautifulCode.Serialization.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Serialization.Json, Version=1.0.119.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Serialization.Json.1.0.119\lib\net462\OBeautifulCode.Serialization.Json.dll</HintPath>
+    <Reference Include="OBeautifulCode.Serialization.Json, Version=1.0.121.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Serialization.Json.1.0.121\lib\net462\OBeautifulCode.Serialization.Json.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Serialization.PropertyBag, Version=1.0.119.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Serialization.PropertyBag.1.0.119\lib\net462\OBeautifulCode.Serialization.PropertyBag.dll</HintPath>
+    <Reference Include="OBeautifulCode.Serialization.PropertyBag, Version=1.0.121.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Serialization.PropertyBag.1.0.121\lib\net462\OBeautifulCode.Serialization.PropertyBag.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Type, Version=1.0.106.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Type.1.0.106\lib\net462\OBeautifulCode.Type.dll</HintPath>
+    <Reference Include="OBeautifulCode.Type, Version=1.0.112.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Type.1.0.112\lib\net462\OBeautifulCode.Type.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
@@ -263,9 +263,9 @@
     <Compile Include="ColumnDefinitionTest.designer.cs">
       <DependentUpon>ColumnDefinitionTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConvertObcToVuescapeTreeTableOpTest.cs" />
-    <Compile Include="ConvertObcToVuescapeTreeTableOpTest.designer.cs">
-      <DependentUpon>ConvertObcToVuescapeTreeTableOpTest.cs</DependentUpon>
+    <Compile Include="ConvertObcToVuescapeReportOpTest.cs" />
+    <Compile Include="ConvertObcToVuescapeReportOpTest.designer.cs">
+      <DependentUpon>ConvertObcToVuescapeReportOpTest.cs</DependentUpon>
     </Compile>
     <Compile Include="DotNetDummyFactory.designer.cs">
       <DependentUpon>DotNetDummyFactory.cs</DependentUpon>
@@ -338,6 +338,10 @@
     </Compile>
     <Compile Include="Models\UiObjectTest.designer.cs">
       <DependentUpon>UiObjectTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ObcToVuescapeConversionContextTest.cs" />
+    <Compile Include="ObcToVuescapeConversionContextTest.designer.cs">
+      <DependentUpon>ObcToVuescapeConversionContextTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

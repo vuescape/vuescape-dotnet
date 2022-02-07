@@ -25,33 +25,6 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TreeTableContent>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'headers' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTableContent>();
-
-                        var result = new TreeTableContent(
-                                             null,
-                                             referenceObject.Rows,
-                                             referenceObject.ShouldScrollVertical,
-                                             referenceObject.ShouldScrollHorizontal,
-                                             referenceObject.ShouldSyncHeaderScroll,
-                                             referenceObject.ShouldSyncFooterScroll,
-                                             referenceObject.ShouldIncludeFooter,
-                                             referenceObject.ShouldFreezeFirstColumn,
-                                             referenceObject.DeadAreaColor,
-                                             referenceObject.MaxRows,
-                                             referenceObject.CssClass,
-                                             referenceObject.CssStyles);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "headers", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTableContent>
-                {
                     Name = "constructor should throw ArgumentNullException when parameter 'rows' is null scenario",
                     ConstructionFunc = () =>
                     {
@@ -60,6 +33,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TreeTableContent(
                                              referenceObject.Headers,
                                              null,
+                                             referenceObject.Footers,
                                              referenceObject.ShouldScrollVertical,
                                              referenceObject.ShouldScrollHorizontal,
                                              referenceObject.ShouldSyncHeaderScroll,
@@ -69,7 +43,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,
-                                             referenceObject.CssStyles);
+                                             referenceObject.CssStyles,
+                                             referenceObject.SortLevel);
 
                         return result;
                     },

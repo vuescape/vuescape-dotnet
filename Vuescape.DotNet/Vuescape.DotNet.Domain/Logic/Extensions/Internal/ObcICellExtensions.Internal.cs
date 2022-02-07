@@ -29,7 +29,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcRowFormat">The row format.</param>
         /// <param name="obcColumnFormat">The column format.</param>
         /// <param name="obcColumn">The Column.</param>
-        /// <param name="treeTableConversionMode">The TreeTable conversion mode.</param>
+        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableCell"/>.</returns>
         internal static TreeTableCell ToVuescapeTreeTableCell(
             this ICell obcRowCell,
@@ -39,7 +39,7 @@ namespace Vuescape.DotNet.Domain
             RowFormat obcRowFormat,
             ColumnFormat obcColumnFormat,
             Column obcColumn,
-            TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             var displayValue = string.Empty;
             var slots = new Dictionary<string, UiObject>();
@@ -85,7 +85,7 @@ namespace Vuescape.DotNet.Domain
                 }
             }
 
-            var isVisible = obcColumn.Format.Options.IsVisible();
+            var isVisible = obcColumn.IsVisible();
 
             // TODO: Renderer? Is there a default?
             // TODO: classes/styles (formatting)
@@ -98,7 +98,7 @@ namespace Vuescape.DotNet.Domain
                 obcColumnFormat,
                 obcTableFormat,
                 "tree-table-cell__td",
-                treeTableConversionMode);
+                obcToVuescapeConversionContext);
 
             cssClasses += GetFontFormatOptionsCssClasses(
                 obcRowCell,
@@ -109,7 +109,7 @@ namespace Vuescape.DotNet.Domain
                 obcColumnFormat,
                 obcTableFormat,
                 "tree-table-cell__td",
-                treeTableConversionMode);
+                obcToVuescapeConversionContext);
 
             // TODO: Add links if applicable
             SlottedUiObject slottedUiObject = null;
@@ -128,69 +128,17 @@ namespace Vuescape.DotNet.Domain
                 obcColumn.Format,
                 obcColumnFormat,
                 obcTableFormat,
-                treeTableConversionMode);
+                obcToVuescapeConversionContext);
 
             var links = new Dictionary<string, Link>();
-            if (obcRowCell is IHaveLink linkedCell)
+            if (obcRowCell is IHaveLink linkedCell && linkedCell.Link != null)
             {
-                if (linkedCell.Link is SimpleLink simpleLink)
-                {
-                    var linkTarget = GetLinkTarget(simpleLink.Target);
-                    if (simpleLink.Resource is UrlLinkedResource urlLinkedResource)
-                    {
-                        // TODO: incorporate urlLinkedResource.ResourceKind
-                        var resource = urlLinkedResource.Url;
-                        var link = new Link(resource, linkTarget);
-                        links.Add(LinkName.Self, link);
-                    }
-                    else
-                    {
-                        if (treeTableConversionMode == TreeTableConversionMode.Strict)
-                        {
-                            throw new InvalidOperationException(Invariant(
-                                $"Only {nameof(ILinkedResource)} of type {nameof(UrlLinkedResource)} is supported. {simpleLink.Resource.GetType().Name} is not supported."));
-                        }
-                    }
-                }
-                else
-                {
-                    if (treeTableConversionMode == TreeTableConversionMode.Strict)
-                    {
-                        throw new InvalidOperationException(Invariant(
-                            $"Only type {nameof(SimpleLink)} is supported {nameof(ILink)} type. {linkedCell.Link.GetType().Name} is not supported."));
-                    }
-                }
+                var vuescapeLink = linkedCell.Link.ToVuescapeLink(obcToVuescapeConversionContext);
+                links.Add(LinkName.Self, vuescapeLink);
             }
 
             var result = new TreeTableCell(obcRowCell.Id, displayValue, hover, null, cssClasses, null, colspan, isVisible, cellFormat, links, slottedUiObject);
             return result;
-        }
-
-        private static LinkTarget GetLinkTarget(OBeautifulCode.DataStructure.LinkTarget linkTarget)
-        {
-            switch (linkTarget)
-            {
-                case OBeautifulCode.DataStructure.LinkTarget.CenterPane:
-                    return LinkTarget.CenterPane;
-                case OBeautifulCode.DataStructure.LinkTarget.Unknown:
-                    return LinkTarget.None;
-                case OBeautifulCode.DataStructure.LinkTarget.CurrentPane:
-                    return LinkTarget.CenterPane;
-                case OBeautifulCode.DataStructure.LinkTarget.LeftPane:
-                    return LinkTarget.LeftPane;
-                case OBeautifulCode.DataStructure.LinkTarget.RightPane:
-                    return LinkTarget.RightPane;
-                case OBeautifulCode.DataStructure.LinkTarget.CurrentWindow:
-                    return LinkTarget.NavigateCurrentWindow;
-                case OBeautifulCode.DataStructure.LinkTarget.NewWindow:
-                    return LinkTarget.NavigateNewWindow;
-                case OBeautifulCode.DataStructure.LinkTarget.Download:
-                    return LinkTarget.DownloadBase64EncodedFile;
-                case OBeautifulCode.DataStructure.LinkTarget.Modal:
-                    return LinkTarget.Modal;
-                default:
-                    return LinkTarget.None;
-            }
         }
 
         /// <summary>
@@ -203,7 +151,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcRowFormat">The row format.</param>
         /// <param name="obcColumnFormat">The column format.</param>
         /// <param name="obcColumn">The Column.</param>
-        /// <param name="treeTableConversionMode">The TreeTable conversion mode.</param>
+        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableHeaderCell"/>.</returns>
         internal static TreeTableHeaderCell ToVuescapeTreeTableHeaderCell(
             this ICell obcHeaderRowCell,
@@ -213,7 +161,7 @@ namespace Vuescape.DotNet.Domain
             RowFormat obcRowFormat,
             ColumnFormat obcColumnFormat,
             Column obcColumn,
-            TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             string displayValue = null;
             if (obcHeaderRowCell is IHaveCellValueFormat<string> displayValueCell)
@@ -244,13 +192,14 @@ namespace Vuescape.DotNet.Domain
                 }
             }
 
-            var isVisible = obcColumn.Format.Options.IsVisible();
-            var isSortable = obcColumn.Format.Options.IsSortable();
+            var isVisible = obcColumn.IsVisible();
+            var isSortable = obcColumn.IsSortable();
 
             ColumnSorter columnSorter = null;
             if (isSortable)
             {
-                columnSorter = new ColumnSorter(obcColumn.Format.Options.GetSortDirection(), SortComparisonStrategy.Default);
+                // Default to not be sorted
+                columnSorter = new ColumnSorter(SortDirection.None, SortComparisonStrategy.Default);
             }
 
             // TODO: Renderer? Is there a default?
@@ -260,21 +209,21 @@ namespace Vuescape.DotNet.Domain
                 obcRowFormat,
                 obcHeaderRowsFormat?.RowsFormat,
                 obcRowsFormat,
-                obcColumn.Format,
+                obcColumn?.Format,
                 obcColumnFormat,
                 obcTableFormat,
                 "tree-table-cell__th",
-                treeTableConversionMode);
+                obcToVuescapeConversionContext);
 
             var cellFormat = GetCellFormat(
                 obcHeaderRowCell,
                 obcRowFormat,
                 obcHeaderRowsFormat?.RowsFormat,
                 obcRowsFormat,
-                obcColumn.Format,
+                obcColumn?.Format,
                 obcColumnFormat,
                 obcTableFormat,
-                treeTableConversionMode);
+                obcToVuescapeConversionContext);
 
             // TODO: Add links if applicable
             var result = new TreeTableHeaderCell(obcHeaderRowCell.Id, displayValue, hover, null, cssClasses, null, colspan, isVisible, columnSorter, cellFormat);
@@ -291,7 +240,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcSpecificColumnFormat">The specific column format.</param>
         /// <param name="obcColumnFormat">The column format.</param>
         /// <param name="obcTableFormat">The table format.</param>
-        /// <param name="treeTableConversionMode">The TreeTable conversion mode.</param>
+        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableHeaderCell"/>.</returns>
         internal static ColumnDefinition ToColumnDefinition(
             this Column obcColumn,
@@ -301,7 +250,7 @@ namespace Vuescape.DotNet.Domain
             ColumnFormat obcSpecificColumnFormat,
             ColumnFormat obcColumnFormat,
             TableFormat obcTableFormat,
-            TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             var shouldCellWrap = ShouldCellWrap(
                 null,
@@ -311,7 +260,7 @@ namespace Vuescape.DotNet.Domain
                 obcSpecificColumnFormat,
                 obcColumnFormat,
                 obcTableFormat,
-                treeTableConversionMode);
+                obcToVuescapeConversionContext);
             var columnWrapBehavior = shouldCellWrap ? ColumnWrapBehavior.Wrap : ColumnWrapBehavior.NoWrapAndDisplayEllipsis;
 
             var result = GetColumnDefinition(obcColumn.Format, columnWrapBehavior) ?? GetColumnDefinition(obcColumnFormat, columnWrapBehavior);
@@ -365,7 +314,6 @@ namespace Vuescape.DotNet.Domain
                 { OBeautifulCode.DataStructure.FontFormatOptions.Underline, "text-decoration__underline" },
             };
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static string GetCellFormatOptionsCssClasses(
             ICell cell,
             RowFormat obcRowFormat,
@@ -375,7 +323,7 @@ namespace Vuescape.DotNet.Domain
             ColumnFormat obcColumnFormat,
             TableFormat obcTableFormat,
             string additionalCssClasses,
-            TreeTableConversionMode treeTableConversionMode)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             OBeautifulCode.DataStructure.CellFormatOptions? applicableCellFormatOptions = null;
             // ReSharper disable once IdentifierTypo
@@ -407,10 +355,10 @@ namespace Vuescape.DotNet.Domain
             {
                 applicableCellFormatOptions = obcTableFormat.CellsFormat.Options;
             }
-            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            else if (obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
             {
                 // throw new InvalidOperationException(Invariant(
-                //    $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
+                //    $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set ReportConversionMode to Relaxed."));
             }
 
             var result = string.IsNullOrWhiteSpace(additionalCssClasses) ? null : additionalCssClasses + " ";
@@ -424,7 +372,6 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static string GetFontFormatOptionsCssClasses(
             ICell cell,
             RowFormat obcRowFormat,
@@ -434,7 +381,7 @@ namespace Vuescape.DotNet.Domain
             ColumnFormat obcColumnFormat,
             TableFormat obcTableFormat,
             string additionalCssClasses,
-            TreeTableConversionMode treeTableConversionMode)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             OBeautifulCode.DataStructure.FontFormatOptions? applicableFontFormatOptions = null;
             // ReSharper disable once IdentifierTypo
@@ -442,34 +389,34 @@ namespace Vuescape.DotNet.Domain
             {
                 applicableFontFormatOptions = formattableCell.Format.FontFormat.Options;
             }
-            else if (obcRowFormat?.CellsFormat.FontFormat?.Options != null)
+            else if (obcRowFormat?.CellsFormat?.FontFormat?.Options != null)
             {
                 applicableFontFormatOptions = obcRowFormat.CellsFormat.FontFormat.Options;
             }
-            else if (obcDataOrHeaderRowsFormat?.CellsFormat.FontFormat?.Options != null)
+            else if (obcDataOrHeaderRowsFormat?.CellsFormat?.FontFormat?.Options != null)
             {
                 applicableFontFormatOptions = obcDataOrHeaderRowsFormat.CellsFormat.FontFormat.Options;
             }
-            else if (obcRowsFormat?.CellsFormat.FontFormat?.Options != null)
+            else if (obcRowsFormat?.CellsFormat?.FontFormat?.Options != null)
             {
                 applicableFontFormatOptions = obcRowsFormat.CellsFormat.FontFormat.Options;
             }
-            else if (obcSpecificColumnFormat?.CellsFormat.FontFormat?.Options != null)
+            else if (obcSpecificColumnFormat?.CellsFormat?.FontFormat?.Options != null)
             {
                 applicableFontFormatOptions = obcSpecificColumnFormat.CellsFormat.FontFormat.Options;
             }
-            else if (obcColumnFormat?.CellsFormat.FontFormat?.Options != null)
+            else if (obcColumnFormat?.CellsFormat?.FontFormat?.Options != null)
             {
                 applicableFontFormatOptions = obcColumnFormat.CellsFormat.FontFormat.Options;
             }
-            else if (obcTableFormat?.CellsFormat.FontFormat?.Options != null)
+            else if (obcTableFormat?.CellsFormat?.FontFormat?.Options != null)
             {
                 applicableFontFormatOptions = obcTableFormat.CellsFormat.FontFormat.Options;
             }
-            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            else if (obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
             {
                 throw new InvalidOperationException(Invariant(
-                   $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
+                   $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set ReportConversionMode to Relaxed."));
             }
 
             var result = string.IsNullOrWhiteSpace(additionalCssClasses) ? null : additionalCssClasses + " ";
@@ -483,7 +430,6 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static CellFormat GetCellFormat(
             ICell cell,
             RowFormat obcRowFormat,
@@ -492,7 +438,7 @@ namespace Vuescape.DotNet.Domain
             ColumnFormat obcSpecificColumnFormat,
             ColumnFormat obcColumnFormat,
             TableFormat obcTableFormat,
-            TreeTableConversionMode treeTableConversionMode)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             var color = GetFontColor(
                 cell,
@@ -502,7 +448,7 @@ namespace Vuescape.DotNet.Domain
                 obcSpecificColumnFormat,
                 obcColumnFormat,
                 obcTableFormat,
-                treeTableConversionMode);
+                obcToVuescapeConversionContext);
 
             var fontSize = GetCellFontSizeInPixels(
                 cell,
@@ -512,7 +458,7 @@ namespace Vuescape.DotNet.Domain
                 obcSpecificColumnFormat,
                 obcColumnFormat,
                 obcTableFormat,
-                treeTableConversionMode);
+                obcToVuescapeConversionContext);
 
             var backgroundColor = GetCellBackgroundColor(
                 cell,
@@ -522,7 +468,7 @@ namespace Vuescape.DotNet.Domain
                 obcSpecificColumnFormat,
                 obcColumnFormat,
                 obcTableFormat,
-                treeTableConversionMode);
+                obcToVuescapeConversionContext);
 
             if (color == null && fontSize == null && backgroundColor == null)
             {
@@ -533,7 +479,6 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static Color? GetCellBackgroundColor(
             ICell cell,
             RowFormat obcRowFormat,
@@ -542,7 +487,7 @@ namespace Vuescape.DotNet.Domain
             ColumnFormat obcSpecificColumnFormat,
             ColumnFormat obcColumnFormat,
             TableFormat obcTableFormat,
-            TreeTableConversionMode treeTableConversionMode)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             Color? result = null;
             // ReSharper disable once IdentifierTypo
@@ -574,16 +519,15 @@ namespace Vuescape.DotNet.Domain
             {
                 result = obcTableFormat.CellsFormat.BackgroundColor;
             }
-            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            else if (obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
             {
                 throw new InvalidOperationException(Invariant(
-                    $"One of the 'BackgroundColor' properties must be non-null. Either change the BackgroundColor to not be null or set TreeTableConversionMode to Relaxed."));
+                    $"One of the 'BackgroundColor' properties must be non-null. Either change the BackgroundColor to not be null or set ReportConversionMode to Relaxed."));
             }
 
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static Color? GetFontColor(
             ICell cell,
             RowFormat obcRowFormat,
@@ -592,7 +536,7 @@ namespace Vuescape.DotNet.Domain
             ColumnFormat obcSpecificColumnFormat,
             ColumnFormat obcColumnFormat,
             TableFormat obcTableFormat,
-            TreeTableConversionMode treeTableConversionMode)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             Color? result = null;
             // ReSharper disable once IdentifierTypo
@@ -600,7 +544,7 @@ namespace Vuescape.DotNet.Domain
             {
                 result = formattableCell.Format.FontFormat.FontColor;
             }
-            else if (obcRowFormat?.CellsFormat?.FontFormat.FontColor != null)
+            else if (obcRowFormat?.CellsFormat?.FontFormat?.FontColor != null)
             {
                 result = obcRowFormat.CellsFormat.FontFormat.FontColor;
             }
@@ -624,16 +568,15 @@ namespace Vuescape.DotNet.Domain
             {
                 result = obcTableFormat.CellsFormat.FontFormat.FontColor;
             }
-            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            else if (obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
             {
                 throw new InvalidOperationException(Invariant(
-                    $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
+                    $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set ReportConversionMode to Relaxed."));
             }
 
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static string GetCellFontSizeInPixels(
             ICell cell,
             RowFormat obcRowFormat,
@@ -642,7 +585,7 @@ namespace Vuescape.DotNet.Domain
             ColumnFormat obcSpecificColumnFormat,
             ColumnFormat obcColumnFormat,
             TableFormat obcTableFormat,
-            TreeTableConversionMode treeTableConversionMode)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             decimal? fontFormatFontSizeInPoints = null;
 
@@ -651,7 +594,7 @@ namespace Vuescape.DotNet.Domain
             {
                 fontFormatFontSizeInPoints = formattableCell.Format.FontFormat.FontSizeInPoints;
             }
-            else if (obcRowFormat?.CellsFormat?.FontFormat.FontSizeInPoints != null)
+            else if (obcRowFormat?.CellsFormat?.FontFormat?.FontSizeInPoints != null)
             {
                 fontFormatFontSizeInPoints = obcRowFormat.CellsFormat.FontFormat.FontSizeInPoints;
             }
@@ -675,10 +618,10 @@ namespace Vuescape.DotNet.Domain
             {
                 fontFormatFontSizeInPoints = obcTableFormat.CellsFormat.FontFormat.FontSizeInPoints;
             }
-            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            else if (obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
             {
                 throw new InvalidOperationException(Invariant(
-                    $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set TreeTableConversionMode to Relaxed."));
+                    $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set ReportConversionMode to Relaxed."));
             }
 
             if (fontFormatFontSizeInPoints == null)
@@ -691,7 +634,6 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static bool ShouldCellWrap(
             ICell cell,
             RowFormat obcRowFormat,
@@ -700,12 +642,12 @@ namespace Vuescape.DotNet.Domain
             ColumnFormat obcSpecificColumnFormat,
             ColumnFormat obcColumnFormat,
             TableFormat obcTableFormat,
-            TreeTableConversionMode treeTableConversionMode)
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             var result = false;
 
             // ReSharper disable once IdentifierTypo
-            if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.Options != null)
+            if (cell is IHaveCellFormat formattableCell && formattableCell?.Format?.Options != null)
             {
                 result = formattableCell.Format.Options.IsCellWrapped();
             }
@@ -733,10 +675,10 @@ namespace Vuescape.DotNet.Domain
             {
                 result = obcTableFormat.CellsFormat.Options.IsCellWrapped();
             }
-            else if (treeTableConversionMode == TreeTableConversionMode.Strict)
+            else if (obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
             {
                 throw new InvalidOperationException(Invariant(
-                    $"One of the CellFormatOptions must be non-null. Either change the CellFormatOptions or set TreeTableConversionMode to Relaxed."));
+                    $"One of the CellFormatOptions must be non-null. Either change the CellFormatOptions or set ReportConversionMode to Relaxed."));
             }
 
             return result;

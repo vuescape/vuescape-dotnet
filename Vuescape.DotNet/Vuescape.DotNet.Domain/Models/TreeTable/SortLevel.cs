@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LinkName.cs" company="Vuescape">
+// <copyright file="SortLevel.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -8,13 +8,23 @@
 namespace Vuescape.DotNet.Domain
 {
     /// <summary>
-    /// Link name.
+    /// The sort direction of the TreeTable.
     /// </summary>
-    public static class LinkName
+    public enum SortLevel
     {
         /// <summary>
-        /// Link for getting self information. Typically details.
+        /// None
         /// </summary>
-        public static readonly string Self = "__vs-self";
+        None = 0,
+
+        /// <summary>
+        /// Sort on the top level parent rows.
+        /// </summary>
+        Parent,
+
+        /// <summary>
+        /// Sort on the child rows.
+        /// </summary>
+        Children,
     }
 }

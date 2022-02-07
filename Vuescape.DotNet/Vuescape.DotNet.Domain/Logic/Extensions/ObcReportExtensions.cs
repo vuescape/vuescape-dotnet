@@ -3,10 +3,14 @@
 // </copyright>
 
 // ReSharper disable once CheckNamespace
+
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
+
+    using OBeautifulCode.Assertion.Recipes;
 
     /// <summary>
     /// Extension methods on <see cref="OBeautifulCode.DataStructure.Report"/>.
@@ -17,16 +21,36 @@ namespace Vuescape.DotNet.Domain
         /// Convert a <see cref="OBeautifulCode.DataStructure.Report"/> to a <see cref="Report"/>.
         /// </summary>
         /// <param name="obcReport">The OBC TreeTable to convert.</param>
-        /// <param name="treeTableConversionMode">The TreeTable conversion strategy to use.</param>
+        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <param name="tokenToSubstitutionMap">TODO:.</param>
         /// <returns>A Report.</returns>
         public static Report ConvertToVuescapeReport(
             this OBeautifulCode.DataStructure.Report obcReport,
-            TreeTableConversionMode treeTableConversionMode = TreeTableConversionMode.Relaxed,
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext,
             IReadOnlyDictionary<string, string> tokenToSubstitutionMap = null)
         {
-            var sections = obcReport.Sections.Select(_ => _.ConvertToVuescapeSection(treeTableConversionMode, tokenToSubstitutionMap)).ToList();
-            var result = new Report(obcReport.Id, sections, obcReport.Title);
+            new { obcReport }.MustForArg().NotBeNull();
+
+            var sections = obcReport.Sections.Select(_ => _.ConvertToVuescapeSection(obcToVuescapeConversionContext, tokenToSubstitutionMap)).ToList();
+
+            // Convert download links
+            IReadOnlyList<Link> downloadLinks = null;
+            if (obcReport.DownloadLinks != null)
+            {
+                downloadLinks = obcReport.DownloadLinks.Select(_ => _.ToVuescapeLink(obcToVuescapeConversionContext)).ToList();
+            }
+
+            string additionalReportInfo = null;
+            if (obcReport.Format?.DisplayTimestamp == true)
+            {
+                additionalReportInfo = obcReport.TimestampUtc?.ToString("dddd, MMMM, d, yyyy", CultureInfo.InvariantCulture);
+                if (additionalReportInfo != null)
+                {
+                    additionalReportInfo = "As Of: " + additionalReportInfo;
+                }
+            }
+
+            var result = new Report(obcReport.Id, sections, obcReport.Title, additionalReportInfo, downloadLinks);
             return result;
         }
     }

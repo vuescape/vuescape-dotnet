@@ -22,7 +22,8 @@ namespace Vuescape.DotNet.Domain
         /// <param name="linkTarget">The kind of the link target.</param>
         /// <param name="title">The title of the link.</param>
         /// <param name="activatedCssStyles">The CSS Styles to apply when the link is activated.</param>
-        public Link(string source, LinkTarget linkTarget, string title = null, CssStyles activatedCssStyles = null)
+        /// <param name="resourceKind">The kind of resource.</param>
+        public Link(string source, LinkTarget linkTarget, string title = null, CssStyles activatedCssStyles = null, ResourceKind resourceKind = ResourceKind.Report)
         {
             new { linkTarget }.AsArg().Must().NotBeEqualTo(LinkTarget.None);
             new { source }.AsArg().Must().NotBeNullNorWhiteSpace();
@@ -31,6 +32,7 @@ namespace Vuescape.DotNet.Domain
             this.LinkTarget = linkTarget;
             this.Title = title;
             this.ActivatedCssStyles = activatedCssStyles;
+            this.ResourceKind = resourceKind;
         }
 
         /// <summary>
@@ -52,5 +54,10 @@ namespace Vuescape.DotNet.Domain
         /// Gets the activated CSS styles.
         /// </summary>
         public CssStyles ActivatedCssStyles { get; private set; }
+
+        /// <summary>
+        /// Gets the <see cref="ResourceKind"/>.
+        /// </summary>
+        public ResourceKind ResourceKind { get; private set; }
     }
 }

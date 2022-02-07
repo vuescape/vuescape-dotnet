@@ -215,6 +215,46 @@ namespace Vuescape.DotNet.Domain.Test
                         }
                     }
 
+                    var numberOfExpandedSummaryRows = ThreadSafeRandom.Next(0, 4);
+                    var expandedSummaryRows = new List<TreeTableRow>();
+                    for (int x = 0; x < numberOfExpandedSummaryRows; x++)
+                    {
+                            expandedSummaryRows.Add(new TreeTableRow(
+                                A.Dummy<string>(),
+                                A.Dummy<IReadOnlyList<TreeTableCell>>(),
+                                A.Dummy<int>(),
+                                A.Dummy<string>(),
+                                A.Dummy<IReadOnlyDictionary<string, string>>(),
+                                A.Dummy<string>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool?>(),
+                                A.Dummy<IReadOnlyDictionary<string, Link>>(),
+                                null));
+                    }
+
+                    var numberOfCollapsedSummaryRows = ThreadSafeRandom.Next(0, 4);
+                    var collapsedSummaryRows = new List<TreeTableRow>();
+                    for (int x = 0; x < numberOfCollapsedSummaryRows; x++)
+                    {
+                        collapsedSummaryRows.Add(new TreeTableRow(
+                                A.Dummy<string>(),
+                                A.Dummy<IReadOnlyList<TreeTableCell>>(),
+                                A.Dummy<int>(),
+                                A.Dummy<string>(),
+                                A.Dummy<IReadOnlyDictionary<string, string>>(),
+                                A.Dummy<string>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool>(),
+                                A.Dummy<bool?>(),
+                                A.Dummy<IReadOnlyDictionary<string, Link>>(),
+                                null));
+                    }
+
                     return new TreeTableRow(
                         A.Dummy<string>(),
                         A.Dummy<IReadOnlyList<TreeTableCell>>(),
@@ -228,7 +268,10 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<bool>(),
                         A.Dummy<bool?>(),
                         A.Dummy<IReadOnlyDictionary<string, Link>>(),
-                        children);
+                        children,
+                        A.Dummy<bool?>(),
+                        expandedSummaryRows,
+                        collapsedSummaryRows);
                 });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
@@ -276,7 +319,7 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UiObjectType.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ContentKind.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(SortComparisonStrategy.None);
-            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(TreeTableConversionMode.None);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ReportConversionMode.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ColumnWidthBehavior.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UnitOfMeasure.None);
 

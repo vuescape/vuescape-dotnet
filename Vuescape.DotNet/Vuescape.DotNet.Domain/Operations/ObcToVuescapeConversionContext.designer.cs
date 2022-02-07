@@ -23,15 +23,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class Section : IModel<Section>
+    public partial class ObcToVuescapeConversionContext : IModel<ObcToVuescapeConversionContext>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="Section"/> are equal.
+        /// Determines whether two objects of type <see cref="ObcToVuescapeConversionContext"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(Section left, Section right)
+        public static bool operator ==(ObcToVuescapeConversionContext left, ObcToVuescapeConversionContext right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -49,15 +49,15 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="Section"/> are not equal.
+        /// Determines whether two objects of type <see cref="ObcToVuescapeConversionContext"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(Section left, Section right) => !(left == right);
+        public static bool operator !=(ObcToVuescapeConversionContext left, ObcToVuescapeConversionContext right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(Section other)
+        public bool Equals(ObcToVuescapeConversionContext other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -69,45 +69,45 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
-                      && this.TreeTable.IsEqualTo(other.TreeTable)
-                      && this.Title.IsEqualTo(other.Title, StringComparer.Ordinal)
-                      && this.Name.IsEqualTo(other.Name, StringComparer.Ordinal);
+            var result = this.ReportConversionMode.IsEqualTo(other.ReportConversionMode)
+                      && this.QueryString.IsEqualTo(other.QueryString, StringComparer.Ordinal)
+                      && this.CultureKind.IsEqualTo(other.CultureKind)
+                      && this.LocalTimeZone.IsEqualTo(other.LocalTimeZone);
 
             return result;
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as Section);
+        public override bool Equals(object obj) => this == (obj as ObcToVuescapeConversionContext);
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
-            .Hash(this.Id)
-            .Hash(this.TreeTable)
-            .Hash(this.Title)
-            .Hash(this.Name)
+            .Hash(this.ReportConversionMode)
+            .Hash(this.QueryString)
+            .Hash(this.CultureKind)
+            .Hash(this.LocalTimeZone)
             .Value;
 
         /// <inheritdoc />
         public object Clone() => this.DeepClone();
 
         /// <inheritdoc />
-        public Section DeepClone()
+        public ObcToVuescapeConversionContext DeepClone()
         {
-            var result = new Section(
-                                 this.Id?.DeepClone(),
-                                 this.TreeTable?.DeepClone(),
-                                 this.Title?.DeepClone(),
-                                 this.Name?.DeepClone());
+            var result = new ObcToVuescapeConversionContext(
+                                 this.ReportConversionMode.DeepClone(),
+                                 this.QueryString?.DeepClone(),
+                                 this.CultureKind?.DeepClone(),
+                                 this.LocalTimeZone?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="Id" />.
+        /// Deep clones this object with a new <see cref="ReportConversionMode" />.
         /// </summary>
-        /// <param name="id">The new <see cref="Id" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="Section" /> using the specified <paramref name="id" /> for <see cref="Id" /> and a deep clone of every other property.</returns>
+        /// <param name="reportConversionMode">The new <see cref="ReportConversionMode" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ObcToVuescapeConversionContext" /> using the specified <paramref name="reportConversionMode" /> for <see cref="ReportConversionMode" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -125,22 +125,22 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Section DeepCloneWithId(string id)
+        public ObcToVuescapeConversionContext DeepCloneWithReportConversionMode(ReportConversionMode reportConversionMode)
         {
-            var result = new Section(
-                                 id,
-                                 this.TreeTable?.DeepClone(),
-                                 this.Title?.DeepClone(),
-                                 this.Name?.DeepClone());
+            var result = new ObcToVuescapeConversionContext(
+                                 reportConversionMode,
+                                 this.QueryString?.DeepClone(),
+                                 this.CultureKind?.DeepClone(),
+                                 this.LocalTimeZone?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="TreeTable" />.
+        /// Deep clones this object with a new <see cref="QueryString" />.
         /// </summary>
-        /// <param name="treeTable">The new <see cref="TreeTable" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="Section" /> using the specified <paramref name="treeTable" /> for <see cref="TreeTable" /> and a deep clone of every other property.</returns>
+        /// <param name="queryString">The new <see cref="QueryString" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ObcToVuescapeConversionContext" /> using the specified <paramref name="queryString" /> for <see cref="QueryString" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -158,22 +158,22 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Section DeepCloneWithTreeTable(TreeTable treeTable)
+        public ObcToVuescapeConversionContext DeepCloneWithQueryString(string queryString)
         {
-            var result = new Section(
-                                 this.Id?.DeepClone(),
-                                 treeTable,
-                                 this.Title?.DeepClone(),
-                                 this.Name?.DeepClone());
+            var result = new ObcToVuescapeConversionContext(
+                                 this.ReportConversionMode.DeepClone(),
+                                 queryString,
+                                 this.CultureKind?.DeepClone(),
+                                 this.LocalTimeZone?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="Title" />.
+        /// Deep clones this object with a new <see cref="CultureKind" />.
         /// </summary>
-        /// <param name="title">The new <see cref="Title" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="Section" /> using the specified <paramref name="title" /> for <see cref="Title" /> and a deep clone of every other property.</returns>
+        /// <param name="cultureKind">The new <see cref="CultureKind" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ObcToVuescapeConversionContext" /> using the specified <paramref name="cultureKind" /> for <see cref="CultureKind" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -191,22 +191,22 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Section DeepCloneWithTitle(string title)
+        public ObcToVuescapeConversionContext DeepCloneWithCultureKind(CultureKind? cultureKind)
         {
-            var result = new Section(
-                                 this.Id?.DeepClone(),
-                                 this.TreeTable?.DeepClone(),
-                                 title,
-                                 this.Name?.DeepClone());
+            var result = new ObcToVuescapeConversionContext(
+                                 this.ReportConversionMode.DeepClone(),
+                                 this.QueryString?.DeepClone(),
+                                 cultureKind,
+                                 this.LocalTimeZone?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="Name" />.
+        /// Deep clones this object with a new <see cref="LocalTimeZone" />.
         /// </summary>
-        /// <param name="name">The new <see cref="Name" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="Section" /> using the specified <paramref name="name" /> for <see cref="Name" /> and a deep clone of every other property.</returns>
+        /// <param name="localTimeZone">The new <see cref="LocalTimeZone" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ObcToVuescapeConversionContext" /> using the specified <paramref name="localTimeZone" /> for <see cref="LocalTimeZone" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -224,13 +224,13 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Section DeepCloneWithName(string name)
+        public ObcToVuescapeConversionContext DeepCloneWithLocalTimeZone(StandardTimeZone? localTimeZone)
         {
-            var result = new Section(
-                                 this.Id?.DeepClone(),
-                                 this.TreeTable?.DeepClone(),
-                                 this.Title?.DeepClone(),
-                                 name);
+            var result = new ObcToVuescapeConversionContext(
+                                 this.ReportConversionMode.DeepClone(),
+                                 this.QueryString?.DeepClone(),
+                                 this.CultureKind?.DeepClone(),
+                                 localTimeZone);
 
             return result;
         }
@@ -239,7 +239,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.Section: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, TreeTable = {this.TreeTable?.ToString() ?? "<null>"}, Title = {this.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Name = {this.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ObcToVuescapeConversionContext: ReportConversionMode = {this.ReportConversionMode.ToString() ?? "<null>"}, QueryString = {this.QueryString?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CultureKind = {this.CultureKind?.ToString() ?? "<null>"}, LocalTimeZone = {this.LocalTimeZone?.ToString() ?? "<null>"}.");
 
             return result;
         }

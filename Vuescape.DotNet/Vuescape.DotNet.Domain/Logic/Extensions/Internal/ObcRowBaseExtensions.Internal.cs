@@ -26,6 +26,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcHeaderRowFormat">The header row format.</param>
         /// <param name="obcColumnFormat">The column format.</param>
         /// <param name="obcColumns">The list of Columns.</param>
+        /// <param name="isLastRow">Is this the last row in the header.  Used to apply sorting to only the last row.</param>
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableHeaderRow"/>.</returns>
         internal static TreeTableHeaderRow ToVuescapeTreeTableHeaderRow(
@@ -36,6 +37,7 @@ namespace Vuescape.DotNet.Domain
             RowFormat obcHeaderRowFormat,
             ColumnFormat obcColumnFormat,
             IReadOnlyList<Column> obcColumns,
+            bool isLastRow,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             // TODO: Apply formatting.
@@ -54,6 +56,7 @@ namespace Vuescape.DotNet.Domain
                         obcHeaderRowFormat,
                         obcColumnFormat,
                         obcColumns[actualColumnIndex],
+                        isLastRow,
                         obcToVuescapeConversionContext),
                 };
 
@@ -147,6 +150,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcColumnFormat">The column format.</param>
         /// <param name="obcColumns">The list of Columns.</param>
         /// <param name="depth">The depth in the TreeTable hierarchy.</param>
+        /// <param name="shouldIncludeSummaryRows">Should the summary rows be included in the conversion.</param>
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableHeaderRow"/>.</returns>
         internal static TreeTableRow ToVuescapeTreeTableRow(
@@ -158,6 +162,7 @@ namespace Vuescape.DotNet.Domain
             ColumnFormat obcColumnFormat,
             IReadOnlyList<Column> obcColumns,
             int? depth,
+            bool shouldIncludeSummaryRows,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             var rowIndentLevel = depth ?? 0;
@@ -200,26 +205,26 @@ namespace Vuescape.DotNet.Domain
             if (hasChildRows)
             {
                 var childIndentLevel = shouldAlignChildRowsWithParent ? rowIndentLevel : rowIndentLevel + 1;
-                children = obcRow.ChildRows.Select(_ => _.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, childIndentLevel, obcToVuescapeConversionContext)).ToList();
+                children = obcRow.ChildRows.Select(_ => _.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, childIndentLevel, shouldIncludeSummaryRows, obcToVuescapeConversionContext)).ToList();
             }
 
             IReadOnlyList<TreeTableRow> expandedSummaryRows = null;
-            if (obcRow.HasExpandedSummaryRows())
+            if (obcRow.HasExpandedSummaryRows() && shouldIncludeSummaryRows)
             {
                 expandedSummaryRows = obcRow.ExpandedSummaryRows.Select(_ =>
                 {
                     var row = new Row(_.Cells, _.Id, _.Format);
-                    return row.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, rowIndentLevel, obcToVuescapeConversionContext);
+                    return row.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, rowIndentLevel, true, obcToVuescapeConversionContext);
                 }).ToList();
             }
 
             IReadOnlyList<TreeTableRow> collapsedSummaryRows = null;
-            if (obcRow.HasCollapsedSummaryRows())
+            if (obcRow.HasCollapsedSummaryRows() && shouldIncludeSummaryRows)
             {
                 collapsedSummaryRows = obcRow.CollapsedSummaryRows.Select(_ =>
                 {
                     var row = new Row(_.Cells, _.Id, _.Format);
-                    return row.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, rowIndentLevel, obcToVuescapeConversionContext);
+                    return row.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, rowIndentLevel, true, obcToVuescapeConversionContext);
                 }).ToList();
             }
 

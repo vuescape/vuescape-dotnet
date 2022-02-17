@@ -99,6 +99,8 @@
     <Compile Include=".recipes\OBeautifulCode.Type\ToStringReadableOptions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\ToStringXmlDocOptions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
+    <Compile Include="Logic\Extensions\HorizontalAlignmentExtensions.cs" />
+    <Compile Include="Logic\Extensions\Internal\ColumnFormatOptionsHelper.cs" />
     <Compile Include="Logic\Extensions\Internal\CellFormatOptionsExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\ObcILinkExtensions.Internal.cs" />
     <Compile Include="Logic\Extensions\Internal\RowFormatOptionsExtensions.Internal.cs" />
@@ -129,6 +131,10 @@
       <DependentUpon>ColumnDefinition.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ColumnDefinition\ColumnWrapBehavior.cs" />
+    <Compile Include="Models\Format\CellFormat.designer.cs">
+      <DependentUpon>CellFormat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Format\HorizontalAlignment.cs" />
     <Compile Include="Models\Link\ResourceKind.cs" />
     <Compile Include="Models\Css\CssPropertyName.cs" />
     <Compile Include="Models\Css\CssStyles.designer.cs">
@@ -141,9 +147,6 @@
     <Compile Include="Models\ColumnDefinition\ColumnDefinition.cs" />
     <Compile Include="Models\ColumnDefinition\UnitOfMeasure.cs" />
     <Compile Include="Models\ColumnDefinition\ColumnWidthBehavior.cs" />
-    <Compile Include="Models\Format\CellFormat.designer.cs">
-      <DependentUpon>CellFormat.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\Link\Link.designer.cs">
       <DependentUpon>Link.cs</DependentUpon>
     </Compile>

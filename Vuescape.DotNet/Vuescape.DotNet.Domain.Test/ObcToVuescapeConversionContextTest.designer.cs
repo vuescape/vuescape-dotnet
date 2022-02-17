@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ObcToVuescapeConversionContext>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ObcToVuescapeConversionContext: ReportConversionMode = {systemUnderTest.ReportConversionMode.ToString() ?? "<null>"}, QueryString = {systemUnderTest.QueryString?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CultureKind = {systemUnderTest.CultureKind?.ToString() ?? "<null>"}, LocalTimeZone = {systemUnderTest.LocalTimeZone?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ObcToVuescapeConversionContext: ReportConversionMode = {systemUnderTest.ReportConversionMode.ToString() ?? "<null>"}, QueryString = {systemUnderTest.QueryString?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BaseUrl = {systemUnderTest.BaseUrl?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CultureKind = {systemUnderTest.CultureKind?.ToString() ?? "<null>"}, LocalTimeZone = {systemUnderTest.LocalTimeZone?.ToString() ?? "<null>"}, ShouldSummaryRowsDisplayInFooter = {systemUnderTest.ShouldSummaryRowsDisplayInFooter.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -66,8 +66,10 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ObcToVuescapeConversionContext(
                                              referenceObject.ReportConversionMode,
                                              null,
+                                             referenceObject.BaseUrl,
                                              referenceObject.CultureKind,
-                                             referenceObject.LocalTimeZone);
+                                             referenceObject.LocalTimeZone,
+                                             referenceObject.ShouldSummaryRowsDisplayInFooter);
 
                         return result;
                     },
@@ -85,13 +87,57 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ObcToVuescapeConversionContext(
                                              referenceObject.ReportConversionMode,
                                              Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.BaseUrl,
                                              referenceObject.CultureKind,
-                                             referenceObject.LocalTimeZone);
+                                             referenceObject.LocalTimeZone,
+                                             referenceObject.ShouldSummaryRowsDisplayInFooter);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "queryString", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ObcToVuescapeConversionContext>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'baseUrl' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ObcToVuescapeConversionContext>();
+
+                        var result = new ObcToVuescapeConversionContext(
+                                             referenceObject.ReportConversionMode,
+                                             referenceObject.QueryString,
+                                             null,
+                                             referenceObject.CultureKind,
+                                             referenceObject.LocalTimeZone,
+                                             referenceObject.ShouldSummaryRowsDisplayInFooter);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "baseUrl", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ObcToVuescapeConversionContext>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'baseUrl' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ObcToVuescapeConversionContext>();
+
+                        var result = new ObcToVuescapeConversionContext(
+                                             referenceObject.ReportConversionMode,
+                                             referenceObject.QueryString,
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.CultureKind,
+                                             referenceObject.LocalTimeZone,
+                                             referenceObject.ShouldSummaryRowsDisplayInFooter);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "baseUrl", "white space", },
                 });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<ObcToVuescapeConversionContext> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ObcToVuescapeConversionContext>()
@@ -108,8 +154,10 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ObcToVuescapeConversionContext(
                                                       referenceObject.ReportConversionMode,
                                                       referenceObject.QueryString,
+                                                      referenceObject.BaseUrl,
                                                       referenceObject.CultureKind,
-                                                      referenceObject.LocalTimeZone),
+                                                      referenceObject.LocalTimeZone,
+                                                      referenceObject.ShouldSummaryRowsDisplayInFooter),
                             ExpectedPropertyValue = referenceObject.ReportConversionMode,
                         };
 
@@ -130,14 +178,40 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ObcToVuescapeConversionContext(
                                                       referenceObject.ReportConversionMode,
                                                       referenceObject.QueryString,
+                                                      referenceObject.BaseUrl,
                                                       referenceObject.CultureKind,
-                                                      referenceObject.LocalTimeZone),
+                                                      referenceObject.LocalTimeZone,
+                                                      referenceObject.ShouldSummaryRowsDisplayInFooter),
                             ExpectedPropertyValue = referenceObject.QueryString,
                         };
 
                         return result;
                     },
                     PropertyName = "QueryString",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ObcToVuescapeConversionContext>
+                {
+                    Name = "BaseUrl should return same 'baseUrl' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ObcToVuescapeConversionContext>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ObcToVuescapeConversionContext>
+                        {
+                            SystemUnderTest = new ObcToVuescapeConversionContext(
+                                                      referenceObject.ReportConversionMode,
+                                                      referenceObject.QueryString,
+                                                      referenceObject.BaseUrl,
+                                                      referenceObject.CultureKind,
+                                                      referenceObject.LocalTimeZone,
+                                                      referenceObject.ShouldSummaryRowsDisplayInFooter),
+                            ExpectedPropertyValue = referenceObject.BaseUrl,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "BaseUrl",
                 })
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<ObcToVuescapeConversionContext>
@@ -152,8 +226,10 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ObcToVuescapeConversionContext(
                                                       referenceObject.ReportConversionMode,
                                                       referenceObject.QueryString,
+                                                      referenceObject.BaseUrl,
                                                       referenceObject.CultureKind,
-                                                      referenceObject.LocalTimeZone),
+                                                      referenceObject.LocalTimeZone,
+                                                      referenceObject.ShouldSummaryRowsDisplayInFooter),
                             ExpectedPropertyValue = referenceObject.CultureKind,
                         };
 
@@ -174,14 +250,40 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ObcToVuescapeConversionContext(
                                                       referenceObject.ReportConversionMode,
                                                       referenceObject.QueryString,
+                                                      referenceObject.BaseUrl,
                                                       referenceObject.CultureKind,
-                                                      referenceObject.LocalTimeZone),
+                                                      referenceObject.LocalTimeZone,
+                                                      referenceObject.ShouldSummaryRowsDisplayInFooter),
                             ExpectedPropertyValue = referenceObject.LocalTimeZone,
                         };
 
                         return result;
                     },
                     PropertyName = "LocalTimeZone",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ObcToVuescapeConversionContext>
+                {
+                    Name = "ShouldSummaryRowsDisplayInFooter should return same 'shouldSummaryRowsDisplayInFooter' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ObcToVuescapeConversionContext>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ObcToVuescapeConversionContext>
+                        {
+                            SystemUnderTest = new ObcToVuescapeConversionContext(
+                                                      referenceObject.ReportConversionMode,
+                                                      referenceObject.QueryString,
+                                                      referenceObject.BaseUrl,
+                                                      referenceObject.CultureKind,
+                                                      referenceObject.LocalTimeZone,
+                                                      referenceObject.ShouldSummaryRowsDisplayInFooter),
+                            ExpectedPropertyValue = referenceObject.ShouldSummaryRowsDisplayInFooter,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "ShouldSummaryRowsDisplayInFooter",
                 });
 
         private static readonly DeepCloneWithTestScenarios<ObcToVuescapeConversionContext> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ObcToVuescapeConversionContext>()
@@ -228,6 +330,26 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<ObcToVuescapeConversionContext>
                 {
+                    Name = "DeepCloneWithBaseUrl should deep clone object and replace BaseUrl with the provided baseUrl",
+                    WithPropertyName = "BaseUrl",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ObcToVuescapeConversionContext>();
+
+                        var referenceObject = A.Dummy<ObcToVuescapeConversionContext>().ThatIs(_ => !systemUnderTest.BaseUrl.IsEqualTo(_.BaseUrl));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ObcToVuescapeConversionContext>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.BaseUrl,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ObcToVuescapeConversionContext>
+                {
                     Name = "DeepCloneWithCultureKind should deep clone object and replace CultureKind with the provided cultureKind",
                     WithPropertyName = "CultureKind",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
@@ -264,6 +386,26 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ObcToVuescapeConversionContext>
+                {
+                    Name = "DeepCloneWithShouldSummaryRowsDisplayInFooter should deep clone object and replace ShouldSummaryRowsDisplayInFooter with the provided shouldSummaryRowsDisplayInFooter",
+                    WithPropertyName = "ShouldSummaryRowsDisplayInFooter",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ObcToVuescapeConversionContext>();
+
+                        var referenceObject = A.Dummy<ObcToVuescapeConversionContext>().ThatIs(_ => !systemUnderTest.ShouldSummaryRowsDisplayInFooter.IsEqualTo(_.ShouldSummaryRowsDisplayInFooter));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ObcToVuescapeConversionContext>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.ShouldSummaryRowsDisplayInFooter,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly ObcToVuescapeConversionContext ReferenceObjectForEquatableTestScenarios = A.Dummy<ObcToVuescapeConversionContext>();
@@ -279,31 +421,55 @@ namespace Vuescape.DotNet.Domain.Test
                         new ObcToVuescapeConversionContext(
                                 ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
                                 ReferenceObjectForEquatableTestScenarios.QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrl,
                                 ReferenceObjectForEquatableTestScenarios.CultureKind,
-                                ReferenceObjectForEquatableTestScenarios.LocalTimeZone),
+                                ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSummaryRowsDisplayInFooter),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new ObcToVuescapeConversionContext[]
                     {
                         new ObcToVuescapeConversionContext(
                                 A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.ReportConversionMode.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ReportConversionMode)).ReportConversionMode,
                                 ReferenceObjectForEquatableTestScenarios.QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrl,
                                 ReferenceObjectForEquatableTestScenarios.CultureKind,
-                                ReferenceObjectForEquatableTestScenarios.LocalTimeZone),
+                                ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSummaryRowsDisplayInFooter),
                         new ObcToVuescapeConversionContext(
                                 ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
                                 A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.QueryString.IsEqualTo(ReferenceObjectForEquatableTestScenarios.QueryString)).QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrl,
                                 ReferenceObjectForEquatableTestScenarios.CultureKind,
-                                ReferenceObjectForEquatableTestScenarios.LocalTimeZone),
+                                ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSummaryRowsDisplayInFooter),
                         new ObcToVuescapeConversionContext(
                                 ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
                                 ReferenceObjectForEquatableTestScenarios.QueryString,
+                                A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.BaseUrl.IsEqualTo(ReferenceObjectForEquatableTestScenarios.BaseUrl)).BaseUrl,
+                                ReferenceObjectForEquatableTestScenarios.CultureKind,
+                                ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSummaryRowsDisplayInFooter),
+                        new ObcToVuescapeConversionContext(
+                                ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
+                                ReferenceObjectForEquatableTestScenarios.QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrl,
                                 A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.CultureKind.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CultureKind)).CultureKind,
-                                ReferenceObjectForEquatableTestScenarios.LocalTimeZone),
+                                ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSummaryRowsDisplayInFooter),
                         new ObcToVuescapeConversionContext(
                                 ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
                                 ReferenceObjectForEquatableTestScenarios.QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrl,
                                 ReferenceObjectForEquatableTestScenarios.CultureKind,
-                                A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.LocalTimeZone.IsEqualTo(ReferenceObjectForEquatableTestScenarios.LocalTimeZone)).LocalTimeZone),
+                                A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.LocalTimeZone.IsEqualTo(ReferenceObjectForEquatableTestScenarios.LocalTimeZone)).LocalTimeZone,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSummaryRowsDisplayInFooter),
+                        new ObcToVuescapeConversionContext(
+                                ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
+                                ReferenceObjectForEquatableTestScenarios.QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrl,
+                                ReferenceObjectForEquatableTestScenarios.CultureKind,
+                                ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
+                                A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.ShouldSummaryRowsDisplayInFooter.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ShouldSummaryRowsDisplayInFooter)).ShouldSummaryRowsDisplayInFooter),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -602,7 +768,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "ReportConversionMode", "QueryString", "CultureKind", "LocalTimeZone" };
+                var propertyNames = new string[] { "ReportConversionMode", "QueryString", "BaseUrl", "CultureKind", "LocalTimeZone", "ShouldSummaryRowsDisplayInFooter" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

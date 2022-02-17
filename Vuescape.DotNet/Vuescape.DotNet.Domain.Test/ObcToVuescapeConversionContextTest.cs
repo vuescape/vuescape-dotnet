@@ -41,6 +41,7 @@ namespace Vuescape.DotNet.Domain.Test
                             var result = new ObcToVuescapeConversionContext(
                                 ReportConversionMode.None,
                                 referenceObject.QueryString,
+                                referenceObject.BaseUrl,
                                 referenceObject.CultureKind,
                                 referenceObject.LocalTimeZone);
 

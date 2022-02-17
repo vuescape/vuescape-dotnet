@@ -71,7 +71,8 @@ namespace Vuescape.DotNet.Domain
 
             var result = this.FontHexColor.IsEqualTo(other.FontHexColor, StringComparer.Ordinal)
                       && this.FontSizeInPixels.IsEqualTo(other.FontSizeInPixels, StringComparer.Ordinal)
-                      && this.BackgroundHexColor.IsEqualTo(other.BackgroundHexColor, StringComparer.Ordinal);
+                      && this.BackgroundHexColor.IsEqualTo(other.BackgroundHexColor, StringComparer.Ordinal)
+                      && this.HorizontalAlignment.IsEqualTo(other.HorizontalAlignment);
 
             return result;
         }
@@ -84,6 +85,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.FontHexColor)
             .Hash(this.FontSizeInPixels)
             .Hash(this.BackgroundHexColor)
+            .Hash(this.HorizontalAlignment)
             .Value;
 
         /// <inheritdoc />
@@ -95,7 +97,8 @@ namespace Vuescape.DotNet.Domain
             var result = new CellFormat(
                                  this.FontHexColor?.DeepClone(),
                                  this.FontSizeInPixels?.DeepClone(),
-                                 this.BackgroundHexColor?.DeepClone());
+                                 this.BackgroundHexColor?.DeepClone(),
+                                 this.HorizontalAlignment?.DeepClone());
 
             return result;
         }
@@ -127,7 +130,8 @@ namespace Vuescape.DotNet.Domain
             var result = new CellFormat(
                                  fontHexColor,
                                  this.FontSizeInPixels?.DeepClone(),
-                                 this.BackgroundHexColor?.DeepClone());
+                                 this.BackgroundHexColor?.DeepClone(),
+                                 this.HorizontalAlignment?.DeepClone());
 
             return result;
         }
@@ -159,7 +163,8 @@ namespace Vuescape.DotNet.Domain
             var result = new CellFormat(
                                  this.FontHexColor?.DeepClone(),
                                  fontSizeInPixels,
-                                 this.BackgroundHexColor?.DeepClone());
+                                 this.BackgroundHexColor?.DeepClone(),
+                                 this.HorizontalAlignment?.DeepClone());
 
             return result;
         }
@@ -191,7 +196,41 @@ namespace Vuescape.DotNet.Domain
             var result = new CellFormat(
                                  this.FontHexColor?.DeepClone(),
                                  this.FontSizeInPixels?.DeepClone(),
-                                 backgroundHexColor);
+                                 backgroundHexColor,
+                                 this.HorizontalAlignment?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="HorizontalAlignment" />.
+        /// </summary>
+        /// <param name="horizontalAlignment">The new <see cref="HorizontalAlignment" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="CellFormat" /> using the specified <paramref name="horizontalAlignment" /> for <see cref="HorizontalAlignment" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public CellFormat DeepCloneWithHorizontalAlignment(HorizontalAlignment? horizontalAlignment)
+        {
+            var result = new CellFormat(
+                                 this.FontHexColor?.DeepClone(),
+                                 this.FontSizeInPixels?.DeepClone(),
+                                 this.BackgroundHexColor?.DeepClone(),
+                                 horizontalAlignment);
 
             return result;
         }
@@ -200,7 +239,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {this.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSizeInPixels = {this.FontSizeInPixels?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BackgroundHexColor = {this.BackgroundHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {this.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSizeInPixels = {this.FontSizeInPixels?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BackgroundHexColor = {this.BackgroundHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, HorizontalAlignment = {this.HorizontalAlignment?.ToString() ?? "<null>"}.");
 
             return result;
         }

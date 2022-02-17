@@ -36,7 +36,9 @@ namespace Vuescape.DotNet.Domain
             if (obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
             {
                 // Validate that only first column is frozen
-                if (obcTreeTable.TableColumns.Columns.Skip(1).Any(_ => _.IsFrozen()))
+                // This ignores freezing on TableColumns
+                if (obcTreeTable.TableColumns.Columns.Skip(1).Any(_ => _?.Format?.Options.IsFrozen() ?? false) ||
+                    (obcTreeTable.TableColumns?.ColumnsFormat.Options.IsFrozen() ?? false))
                 {
                     throw new InvalidOperationException(Invariant(
                         $"TreeTable only supports freezing the first column. One or more ColumnFormatOptions that are not the first column are defined as frozen. Either change the ColumnFormatOptions or set ReportConversionMode to Relaxed."));
@@ -50,7 +52,7 @@ namespace Vuescape.DotNet.Domain
             var treeTableFooters = ConvertToVuescapeTreeTableFooterRows(obcTreeTable, obcToVuescapeConversionContext);
 
             // Default to false
-            var isFirstColumnFrozen = obcTreeTable.TableColumns?.Columns[0].IsFrozen() ?? false;
+            var isFirstColumnFrozen = ColumnFormatOptionsHelper.IsFrozen(obcTreeTable.TableColumns?.Columns[0], obcTreeTable.TableColumns?.ColumnsFormat, null, obcToVuescapeConversionContext);
 
             // Default to true
             var shouldSyncHeaderRow = obcTreeTable.TableRows?.HeaderRows?.Format?.RowsFormat?.Options.IsFrozen() ?? true;
@@ -74,7 +76,7 @@ namespace Vuescape.DotNet.Domain
                 isFirstColumnFrozen,
                 null,
                 null,
-                null,
+                "cell-border",
                 null,
                 sortLevel);
 
@@ -129,7 +131,9 @@ namespace Vuescape.DotNet.Domain
                 return null;
             }
 
-            IReadOnlyList<TreeTableHeaderRow> treeTableHeaderRows = obcTreeTable.TableRows.HeaderRows.Rows.Select(
+            var totalRows = obcTreeTable.TableRows.HeaderRows.Rows.Count;
+            var rowNumber = 1;
+            var treeTableHeaderRows = obcTreeTable.TableRows.HeaderRows.Rows.Select(
                     obcHeaderRow => obcHeaderRow.ToVuescapeTreeTableHeaderRow(
                         obcTableFormat,
                         obcTableRowsFormat,
@@ -137,6 +141,7 @@ namespace Vuescape.DotNet.Domain
                         obcHeaderRow.Format,
                         obcTableColumnsFormat,
                         obcTableColumns?.Columns,
+                        rowNumber++ == totalRows,
                         obcToVuescapeConversionContext))
                 .ToList();
 
@@ -153,7 +158,34 @@ namespace Vuescape.DotNet.Domain
             var obcTableColumns = obcTreeTable?.TableColumns;
             var obcTableColumnsFormat = obcTableColumns?.ColumnsFormat;
 
-            IReadOnlyList<TreeTableRow> treeTableRows = obcTreeTable?.TableRows?.FooterRows?.Rows?.Select(
+            IReadOnlyList<OBeautifulCode.DataStructure.FlatRow> summaryRowsForFooter = null;
+            if (obcTreeTable?.TableRows?.DataRows?.Rows?.Count == 1 && obcToVuescapeConversionContext.ShouldSummaryRowsDisplayInFooter)
+            {
+                var row = obcTreeTable.TableRows.DataRows.Rows.Single();
+                if (row?.ExpandedSummaryRows?.Count > 0)
+                {
+                    summaryRowsForFooter = row.ExpandedSummaryRows;
+                    row.ExpandedSummaryRows.ToList().Clear();
+
+                    // TODO: Also move collapsed rows to the footer
+                    row.CollapsedSummaryRows?.ToList().Clear();
+                }
+            }
+
+            var footerRows = obcTreeTable?.TableRows?.FooterRows?.Rows?.ToList();
+            if (summaryRowsForFooter != null)
+            {
+                if (footerRows == null)
+                {
+                    footerRows = summaryRowsForFooter.ToList();
+                }
+                else
+                {
+                    footerRows.InsertRange(0, summaryRowsForFooter);
+                }
+            }
+
+            var result = footerRows?.Select(
                 obcFooterRow => obcFooterRow.ToVuescapeTreeTableFooterRow(
                     obcTableFormat,
                     obcTableRowsFormat,
@@ -164,7 +196,7 @@ namespace Vuescape.DotNet.Domain
                     obcToVuescapeConversionContext))
                 ?.ToList();
 
-            return treeTableRows;
+            return result;
         }
 
         private static IReadOnlyList<TreeTableRow> ConvertToVuescapeTreeTableRows(
@@ -177,16 +209,20 @@ namespace Vuescape.DotNet.Domain
             var obcTableColumns = obcTreeTable?.TableColumns;
             var obcTableColumnsFormat = obcTableColumns?.ColumnsFormat;
 
+            var shouldIncludeSummaryRows = !(obcTreeTable?.TableRows?.DataRows?.Rows?.Count == 1 &&
+                                              obcToVuescapeConversionContext.ShouldSummaryRowsDisplayInFooter);
+
             IReadOnlyList<TreeTableRow> treeTableRows = obcTreeTable?.TableRows?.DataRows?.Rows?.Select(
-                obcDataRow => obcDataRow.ToVuescapeTreeTableRow(
-                    obcTableFormat,
-                    obcTableRowsFormat,
-                    obcDataRowsFormat,
-                    obcDataRow.Format,
-                    obcTableColumnsFormat,
-                    obcTableColumns?.Columns,
-                    null,
-                    obcToVuescapeConversionContext))
+                    obcDataRow => obcDataRow.ToVuescapeTreeTableRow(
+                        obcTableFormat,
+                        obcTableRowsFormat,
+                        obcDataRowsFormat,
+                        obcDataRow.Format,
+                        obcTableColumnsFormat,
+                        obcTableColumns?.Columns,
+                        null,
+                        shouldIncludeSummaryRows,
+                        obcToVuescapeConversionContext))
                 ?.ToList();
 
             return treeTableRows;

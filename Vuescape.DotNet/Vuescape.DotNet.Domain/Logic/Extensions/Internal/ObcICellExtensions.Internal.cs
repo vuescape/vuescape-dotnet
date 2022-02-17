@@ -85,7 +85,7 @@ namespace Vuescape.DotNet.Domain
                 }
             }
 
-            var isVisible = obcColumn.IsVisible();
+            var isVisible = ColumnFormatOptionsHelper.IsVisible(obcColumn, obcColumn.Format, obcColumnFormat, obcToVuescapeConversionContext);
 
             // TODO: Renderer? Is there a default?
             // TODO: classes/styles (formatting)
@@ -151,6 +151,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcRowFormat">The row format.</param>
         /// <param name="obcColumnFormat">The column format.</param>
         /// <param name="obcColumn">The Column.</param>
+        /// <param name="isLastRow">Is this the last row in the header.  Used to apply sorting to only the last row.</param>
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableHeaderCell"/>.</returns>
         internal static TreeTableHeaderCell ToVuescapeTreeTableHeaderCell(
@@ -161,6 +162,7 @@ namespace Vuescape.DotNet.Domain
             RowFormat obcRowFormat,
             ColumnFormat obcColumnFormat,
             Column obcColumn,
+            bool isLastRow,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             string displayValue = null;
@@ -192,14 +194,17 @@ namespace Vuescape.DotNet.Domain
                 }
             }
 
-            var isVisible = obcColumn.IsVisible();
-            var isSortable = obcColumn.IsSortable();
+            var isVisible = ColumnFormatOptionsHelper.IsVisible(obcColumn, obcColumn.Format, obcColumnFormat, obcToVuescapeConversionContext);
 
             ColumnSorter columnSorter = null;
-            if (isSortable)
+            if (isLastRow)
             {
-                // Default to not be sorted
-                columnSorter = new ColumnSorter(SortDirection.None, SortComparisonStrategy.Default);
+                var isSortable = ColumnFormatOptionsHelper.IsSortable(obcColumn, obcColumn.Format, obcColumnFormat, obcToVuescapeConversionContext);
+                if (isSortable)
+                {
+                    // Default to not be sorted
+                    columnSorter = new ColumnSorter(SortDirection.None, SortComparisonStrategy.StringCaseInsensitive);
+                }
             }
 
             // TODO: Renderer? Is there a default?
@@ -275,21 +280,16 @@ namespace Vuescape.DotNet.Domain
             {
                 decimal? width = null;
                 UnitOfMeasure? widthUnits = null;
-                var columnWidthBehavior = ColumnWidthBehavior.None;
+                var columnWidthBehavior = ColumnWidthBehavior.DynamicallySizeToContent;
 
                 if (obcColumnFormat.AutofitColumnWidth != null && obcColumnFormat.AutofitColumnWidth.Value)
                 {
                     columnWrapBehavior = ColumnWrapBehavior.None;
-                    columnWidthBehavior = ColumnWidthBehavior.DynamicallySizeToContent;
                 }
 
                 if (obcColumnFormat.WidthInPixels != null)
                 {
-                    if (columnWidthBehavior != ColumnWidthBehavior.DynamicallySizeToContent)
-                    {
-                        columnWidthBehavior = ColumnWidthBehavior.UseSpecifiedWidth;
-                    }
-
+                    columnWidthBehavior = ColumnWidthBehavior.UseSpecifiedWidth;
                     width = obcColumnFormat.WidthInPixels;
                     widthUnits = UnitOfMeasure.Pixel;
                 }
@@ -470,12 +470,22 @@ namespace Vuescape.DotNet.Domain
                 obcTableFormat,
                 obcToVuescapeConversionContext);
 
-            if (color == null && fontSize == null && backgroundColor == null)
+            var horizontalAlignment = GetHorizontalAlignment(
+                    cell,
+                    obcRowFormat,
+                    obcDataOrHeaderRowsFormat,
+                    obcRowsFormat,
+                    obcSpecificColumnFormat,
+                    obcColumnFormat,
+                    obcTableFormat,
+                    obcToVuescapeConversionContext);
+
+            if (color == null && fontSize == null && backgroundColor == null && horizontalAlignment == null)
             {
                 return null;
             }
 
-            var result = new CellFormat(color?.ToHex(), fontSize, backgroundColor?.ToHex());
+            var result = new CellFormat(color?.ToHex(), fontSize, backgroundColor?.ToHex(), horizontalAlignment);
             return result;
         }
 
@@ -523,6 +533,50 @@ namespace Vuescape.DotNet.Domain
             {
                 throw new InvalidOperationException(Invariant(
                     $"One of the 'BackgroundColor' properties must be non-null. Either change the BackgroundColor to not be null or set ReportConversionMode to Relaxed."));
+            }
+
+            return result;
+        }
+
+        private static HorizontalAlignment? GetHorizontalAlignment(
+            ICell cell,
+            RowFormat obcRowFormat,
+            RowFormat obcDataOrHeaderRowsFormat,
+            RowFormat obcRowsFormat,
+            ColumnFormat obcSpecificColumnFormat,
+            ColumnFormat obcColumnFormat,
+            TableFormat obcTableFormat,
+            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
+        {
+            HorizontalAlignment? result = null;
+            // ReSharper disable once IdentifierTypo
+            if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.HorizontalAlignment != null)
+            {
+                result = formattableCell.Format.HorizontalAlignment.ToVuescapeHorizontalAlignment();
+            }
+            else if (obcRowFormat?.CellsFormat?.HorizontalAlignment != null)
+            {
+                result = obcRowFormat.CellsFormat.HorizontalAlignment.ToVuescapeHorizontalAlignment();
+            }
+            else if (obcDataOrHeaderRowsFormat?.CellsFormat?.HorizontalAlignment != null)
+            {
+                result = obcDataOrHeaderRowsFormat.CellsFormat.HorizontalAlignment.ToVuescapeHorizontalAlignment();
+            }
+            else if (obcRowsFormat?.CellsFormat?.HorizontalAlignment != null)
+            {
+                result = obcRowsFormat.CellsFormat.HorizontalAlignment.ToVuescapeHorizontalAlignment();
+            }
+            else if (obcSpecificColumnFormat?.CellsFormat?.HorizontalAlignment != null)
+            {
+                result = obcSpecificColumnFormat.CellsFormat.HorizontalAlignment.ToVuescapeHorizontalAlignment();
+            }
+            else if (obcColumnFormat?.CellsFormat?.HorizontalAlignment != null)
+            {
+                result = obcColumnFormat.CellsFormat.HorizontalAlignment.ToVuescapeHorizontalAlignment();
+            }
+            else if (obcTableFormat?.CellsFormat?.HorizontalAlignment != null)
+            {
+                result = obcTableFormat.CellsFormat.HorizontalAlignment.ToVuescapeHorizontalAlignment();
             }
 
             return result;

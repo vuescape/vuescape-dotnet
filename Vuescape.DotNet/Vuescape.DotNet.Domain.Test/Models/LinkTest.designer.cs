@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<Link>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.Link: Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, LinkTarget = {systemUnderTest.LinkTarget.ToString() ?? "<null>"}, Source = {systemUnderTest.Source?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ActivatedCssStyles = {systemUnderTest.ActivatedCssStyles?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.Link: Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, LinkTarget = {systemUnderTest.LinkTarget.ToString() ?? "<null>"}, Source = {systemUnderTest.Source?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ActivatedCssStyles = {systemUnderTest.ActivatedCssStyles?.ToString() ?? "<null>"}, ResourceKind = {systemUnderTest.ResourceKind.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -67,7 +67,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              null,
                                              referenceObject.LinkTarget,
                                              referenceObject.Title,
-                                             referenceObject.ActivatedCssStyles);
+                                             referenceObject.ActivatedCssStyles,
+                                             referenceObject.ResourceKind);
 
                         return result;
                     },
@@ -86,7 +87,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.LinkTarget,
                                              referenceObject.Title,
-                                             referenceObject.ActivatedCssStyles);
+                                             referenceObject.ActivatedCssStyles,
+                                             referenceObject.ResourceKind);
 
                         return result;
                     },
@@ -105,7 +107,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Source,
                                              referenceObject.LinkTarget,
                                              null,
-                                             referenceObject.ActivatedCssStyles);
+                                             referenceObject.ActivatedCssStyles,
+                                             referenceObject.ResourceKind);
 
                         return result;
                     },
@@ -124,7 +127,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Source,
                                              referenceObject.LinkTarget,
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.ActivatedCssStyles);
+                                             referenceObject.ActivatedCssStyles,
+                                             referenceObject.ResourceKind);
 
                         return result;
                     },
@@ -143,7 +147,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Source,
                                              referenceObject.LinkTarget,
                                              referenceObject.Title,
-                                             null);
+                                             null,
+                                             referenceObject.ResourceKind);
 
                         return result;
                     },
@@ -166,7 +171,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Source,
                                                       referenceObject.LinkTarget,
                                                       referenceObject.Title,
-                                                      referenceObject.ActivatedCssStyles),
+                                                      referenceObject.ActivatedCssStyles,
+                                                      referenceObject.ResourceKind),
                             ExpectedPropertyValue = referenceObject.Source,
                         };
 
@@ -188,7 +194,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Source,
                                                       referenceObject.LinkTarget,
                                                       referenceObject.Title,
-                                                      referenceObject.ActivatedCssStyles),
+                                                      referenceObject.ActivatedCssStyles,
+                                                      referenceObject.ResourceKind),
                             ExpectedPropertyValue = referenceObject.LinkTarget,
                         };
 
@@ -210,7 +217,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Source,
                                                       referenceObject.LinkTarget,
                                                       referenceObject.Title,
-                                                      referenceObject.ActivatedCssStyles),
+                                                      referenceObject.ActivatedCssStyles,
+                                                      referenceObject.ResourceKind),
                             ExpectedPropertyValue = referenceObject.Title,
                         };
 
@@ -232,13 +240,37 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Source,
                                                       referenceObject.LinkTarget,
                                                       referenceObject.Title,
-                                                      referenceObject.ActivatedCssStyles),
+                                                      referenceObject.ActivatedCssStyles,
+                                                      referenceObject.ResourceKind),
                             ExpectedPropertyValue = referenceObject.ActivatedCssStyles,
                         };
 
                         return result;
                     },
                     PropertyName = "ActivatedCssStyles",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<Link>
+                {
+                    Name = "ResourceKind should return same 'resourceKind' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<Link>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<Link>
+                        {
+                            SystemUnderTest = new Link(
+                                                      referenceObject.Source,
+                                                      referenceObject.LinkTarget,
+                                                      referenceObject.Title,
+                                                      referenceObject.ActivatedCssStyles,
+                                                      referenceObject.ResourceKind),
+                            ExpectedPropertyValue = referenceObject.ResourceKind,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "ResourceKind",
                 });
 
         private static readonly DeepCloneWithTestScenarios<Link> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<Link>()
@@ -321,6 +353,26 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<Link>
+                {
+                    Name = "DeepCloneWithResourceKind should deep clone object and replace ResourceKind with the provided resourceKind",
+                    WithPropertyName = "ResourceKind",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<Link>();
+
+                        var referenceObject = A.Dummy<Link>().ThatIs(_ => !systemUnderTest.ResourceKind.IsEqualTo(_.ResourceKind));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<Link>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.ResourceKind,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly Link ReferenceObjectForEquatableTestScenarios = A.Dummy<Link>();
@@ -337,7 +389,8 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Source,
                                 ReferenceObjectForEquatableTestScenarios.LinkTarget,
                                 ReferenceObjectForEquatableTestScenarios.Title,
-                                ReferenceObjectForEquatableTestScenarios.ActivatedCssStyles),
+                                ReferenceObjectForEquatableTestScenarios.ActivatedCssStyles,
+                                ReferenceObjectForEquatableTestScenarios.ResourceKind),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new Link[]
                     {
@@ -345,22 +398,32 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Source,
                                 ReferenceObjectForEquatableTestScenarios.LinkTarget,
                                 A.Dummy<Link>().Whose(_ => !_.Title.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Title)).Title,
-                                ReferenceObjectForEquatableTestScenarios.ActivatedCssStyles),
+                                ReferenceObjectForEquatableTestScenarios.ActivatedCssStyles,
+                                ReferenceObjectForEquatableTestScenarios.ResourceKind),
                         new Link(
                                 ReferenceObjectForEquatableTestScenarios.Source,
                                 A.Dummy<Link>().Whose(_ => !_.LinkTarget.IsEqualTo(ReferenceObjectForEquatableTestScenarios.LinkTarget)).LinkTarget,
                                 ReferenceObjectForEquatableTestScenarios.Title,
-                                ReferenceObjectForEquatableTestScenarios.ActivatedCssStyles),
+                                ReferenceObjectForEquatableTestScenarios.ActivatedCssStyles,
+                                ReferenceObjectForEquatableTestScenarios.ResourceKind),
                         new Link(
                                 A.Dummy<Link>().Whose(_ => !_.Source.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Source)).Source,
                                 ReferenceObjectForEquatableTestScenarios.LinkTarget,
                                 ReferenceObjectForEquatableTestScenarios.Title,
-                                ReferenceObjectForEquatableTestScenarios.ActivatedCssStyles),
+                                ReferenceObjectForEquatableTestScenarios.ActivatedCssStyles,
+                                ReferenceObjectForEquatableTestScenarios.ResourceKind),
                         new Link(
                                 ReferenceObjectForEquatableTestScenarios.Source,
                                 ReferenceObjectForEquatableTestScenarios.LinkTarget,
                                 ReferenceObjectForEquatableTestScenarios.Title,
-                                A.Dummy<Link>().Whose(_ => !_.ActivatedCssStyles.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ActivatedCssStyles)).ActivatedCssStyles),
+                                A.Dummy<Link>().Whose(_ => !_.ActivatedCssStyles.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ActivatedCssStyles)).ActivatedCssStyles,
+                                ReferenceObjectForEquatableTestScenarios.ResourceKind),
+                        new Link(
+                                ReferenceObjectForEquatableTestScenarios.Source,
+                                ReferenceObjectForEquatableTestScenarios.LinkTarget,
+                                ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.ActivatedCssStyles,
+                                A.Dummy<Link>().Whose(_ => !_.ResourceKind.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ResourceKind)).ResourceKind),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -671,7 +734,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Title", "LinkTarget", "Source", "ActivatedCssStyles" };
+                var propertyNames = new string[] { "Title", "LinkTarget", "Source", "ActivatedCssStyles", "ResourceKind" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

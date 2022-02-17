@@ -72,7 +72,8 @@ namespace Vuescape.DotNet.Domain
             var result = this.Title.IsEqualTo(other.Title, StringComparer.Ordinal)
                       && this.LinkTarget.IsEqualTo(other.LinkTarget)
                       && this.Source.IsEqualTo(other.Source, StringComparer.Ordinal)
-                      && this.ActivatedCssStyles.IsEqualTo(other.ActivatedCssStyles);
+                      && this.ActivatedCssStyles.IsEqualTo(other.ActivatedCssStyles)
+                      && this.ResourceKind.IsEqualTo(other.ResourceKind);
 
             return result;
         }
@@ -86,6 +87,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.LinkTarget)
             .Hash(this.Source)
             .Hash(this.ActivatedCssStyles)
+            .Hash(this.ResourceKind)
             .Value;
 
         /// <inheritdoc />
@@ -98,7 +100,8 @@ namespace Vuescape.DotNet.Domain
                                  this.Source?.DeepClone(),
                                  this.LinkTarget.DeepClone(),
                                  this.Title?.DeepClone(),
-                                 this.ActivatedCssStyles?.DeepClone());
+                                 this.ActivatedCssStyles?.DeepClone(),
+                                 this.ResourceKind.DeepClone());
 
             return result;
         }
@@ -131,7 +134,8 @@ namespace Vuescape.DotNet.Domain
                                  this.Source?.DeepClone(),
                                  this.LinkTarget.DeepClone(),
                                  title,
-                                 this.ActivatedCssStyles?.DeepClone());
+                                 this.ActivatedCssStyles?.DeepClone(),
+                                 this.ResourceKind.DeepClone());
 
             return result;
         }
@@ -164,7 +168,8 @@ namespace Vuescape.DotNet.Domain
                                  this.Source?.DeepClone(),
                                  linkTarget,
                                  this.Title?.DeepClone(),
-                                 this.ActivatedCssStyles?.DeepClone());
+                                 this.ActivatedCssStyles?.DeepClone(),
+                                 this.ResourceKind.DeepClone());
 
             return result;
         }
@@ -197,7 +202,8 @@ namespace Vuescape.DotNet.Domain
                                  source,
                                  this.LinkTarget.DeepClone(),
                                  this.Title?.DeepClone(),
-                                 this.ActivatedCssStyles?.DeepClone());
+                                 this.ActivatedCssStyles?.DeepClone(),
+                                 this.ResourceKind.DeepClone());
 
             return result;
         }
@@ -230,7 +236,42 @@ namespace Vuescape.DotNet.Domain
                                  this.Source?.DeepClone(),
                                  this.LinkTarget.DeepClone(),
                                  this.Title?.DeepClone(),
-                                 activatedCssStyles);
+                                 activatedCssStyles,
+                                 this.ResourceKind.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="ResourceKind" />.
+        /// </summary>
+        /// <param name="resourceKind">The new <see cref="ResourceKind" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="Link" /> using the specified <paramref name="resourceKind" /> for <see cref="ResourceKind" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public Link DeepCloneWithResourceKind(ResourceKind resourceKind)
+        {
+            var result = new Link(
+                                 this.Source?.DeepClone(),
+                                 this.LinkTarget.DeepClone(),
+                                 this.Title?.DeepClone(),
+                                 this.ActivatedCssStyles?.DeepClone(),
+                                 resourceKind);
 
             return result;
         }
@@ -239,7 +280,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.Link: Title = {this.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, LinkTarget = {this.LinkTarget.ToString() ?? "<null>"}, Source = {this.Source?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ActivatedCssStyles = {this.ActivatedCssStyles?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.Link: Title = {this.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, LinkTarget = {this.LinkTarget.ToString() ?? "<null>"}, Source = {this.Source?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ActivatedCssStyles = {this.ActivatedCssStyles?.ToString() ?? "<null>"}, ResourceKind = {this.ResourceKind.ToString() ?? "<null>"}.");
 
             return result;
         }

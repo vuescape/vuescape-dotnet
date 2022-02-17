@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<CellFormat>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {systemUnderTest.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSizeInPixels = {systemUnderTest.FontSizeInPixels?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BackgroundHexColor = {systemUnderTest.BackgroundHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {systemUnderTest.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSizeInPixels = {systemUnderTest.FontSizeInPixels?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BackgroundHexColor = {systemUnderTest.BackgroundHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, HorizontalAlignment = {systemUnderTest.HorizontalAlignment?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -66,7 +66,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new CellFormat(
                                              null,
                                              referenceObject.FontSizeInPixels,
-                                             referenceObject.BackgroundHexColor);
+                                             referenceObject.BackgroundHexColor,
+                                             referenceObject.HorizontalAlignment);
 
                         return result;
                     },
@@ -84,7 +85,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new CellFormat(
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.FontSizeInPixels,
-                                             referenceObject.BackgroundHexColor);
+                                             referenceObject.BackgroundHexColor,
+                                             referenceObject.HorizontalAlignment);
 
                         return result;
                     },
@@ -102,7 +104,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new CellFormat(
                                              referenceObject.FontHexColor,
                                              null,
-                                             referenceObject.BackgroundHexColor);
+                                             referenceObject.BackgroundHexColor,
+                                             referenceObject.HorizontalAlignment);
 
                         return result;
                     },
@@ -120,7 +123,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new CellFormat(
                                              referenceObject.FontHexColor,
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.BackgroundHexColor);
+                                             referenceObject.BackgroundHexColor,
+                                             referenceObject.HorizontalAlignment);
 
                         return result;
                     },
@@ -138,7 +142,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new CellFormat(
                                              referenceObject.FontHexColor,
                                              referenceObject.FontSizeInPixels,
-                                             null);
+                                             null,
+                                             referenceObject.HorizontalAlignment);
 
                         return result;
                     },
@@ -156,7 +161,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new CellFormat(
                                              referenceObject.FontHexColor,
                                              referenceObject.FontSizeInPixels,
-                                             Invariant($"  {Environment.NewLine}  "));
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.HorizontalAlignment);
 
                         return result;
                     },
@@ -178,7 +184,8 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new CellFormat(
                                                       referenceObject.FontHexColor,
                                                       referenceObject.FontSizeInPixels,
-                                                      referenceObject.BackgroundHexColor),
+                                                      referenceObject.BackgroundHexColor,
+                                                      referenceObject.HorizontalAlignment),
                             ExpectedPropertyValue = referenceObject.FontHexColor,
                         };
 
@@ -199,7 +206,8 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new CellFormat(
                                                       referenceObject.FontHexColor,
                                                       referenceObject.FontSizeInPixels,
-                                                      referenceObject.BackgroundHexColor),
+                                                      referenceObject.BackgroundHexColor,
+                                                      referenceObject.HorizontalAlignment),
                             ExpectedPropertyValue = referenceObject.FontSizeInPixels,
                         };
 
@@ -220,13 +228,36 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new CellFormat(
                                                       referenceObject.FontHexColor,
                                                       referenceObject.FontSizeInPixels,
-                                                      referenceObject.BackgroundHexColor),
+                                                      referenceObject.BackgroundHexColor,
+                                                      referenceObject.HorizontalAlignment),
                             ExpectedPropertyValue = referenceObject.BackgroundHexColor,
                         };
 
                         return result;
                     },
                     PropertyName = "BackgroundHexColor",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<CellFormat>
+                {
+                    Name = "HorizontalAlignment should return same 'horizontalAlignment' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<CellFormat>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<CellFormat>
+                        {
+                            SystemUnderTest = new CellFormat(
+                                                      referenceObject.FontHexColor,
+                                                      referenceObject.FontSizeInPixels,
+                                                      referenceObject.BackgroundHexColor,
+                                                      referenceObject.HorizontalAlignment),
+                            ExpectedPropertyValue = referenceObject.HorizontalAlignment,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "HorizontalAlignment",
                 });
 
         private static readonly DeepCloneWithTestScenarios<CellFormat> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<CellFormat>()
@@ -289,6 +320,26 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<CellFormat>
+                {
+                    Name = "DeepCloneWithHorizontalAlignment should deep clone object and replace HorizontalAlignment with the provided horizontalAlignment",
+                    WithPropertyName = "HorizontalAlignment",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<CellFormat>();
+
+                        var referenceObject = A.Dummy<CellFormat>().ThatIs(_ => !systemUnderTest.HorizontalAlignment.IsEqualTo(_.HorizontalAlignment));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<CellFormat>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.HorizontalAlignment,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly CellFormat ReferenceObjectForEquatableTestScenarios = A.Dummy<CellFormat>();
@@ -304,22 +355,31 @@ namespace Vuescape.DotNet.Domain.Test
                         new CellFormat(
                                 ReferenceObjectForEquatableTestScenarios.FontHexColor,
                                 ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
-                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor),
+                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor,
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new CellFormat[]
                     {
                         new CellFormat(
                                 A.Dummy<CellFormat>().Whose(_ => !_.FontHexColor.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FontHexColor)).FontHexColor,
                                 ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
-                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor),
+                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor,
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment),
                         new CellFormat(
                                 ReferenceObjectForEquatableTestScenarios.FontHexColor,
                                 A.Dummy<CellFormat>().Whose(_ => !_.FontSizeInPixels.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FontSizeInPixels)).FontSizeInPixels,
-                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor),
+                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor,
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment),
                         new CellFormat(
                                 ReferenceObjectForEquatableTestScenarios.FontHexColor,
                                 ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
-                                A.Dummy<CellFormat>().Whose(_ => !_.BackgroundHexColor.IsEqualTo(ReferenceObjectForEquatableTestScenarios.BackgroundHexColor)).BackgroundHexColor),
+                                A.Dummy<CellFormat>().Whose(_ => !_.BackgroundHexColor.IsEqualTo(ReferenceObjectForEquatableTestScenarios.BackgroundHexColor)).BackgroundHexColor,
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment),
+                        new CellFormat(
+                                ReferenceObjectForEquatableTestScenarios.FontHexColor,
+                                ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
+                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor,
+                                A.Dummy<CellFormat>().Whose(_ => !_.HorizontalAlignment.IsEqualTo(ReferenceObjectForEquatableTestScenarios.HorizontalAlignment)).HorizontalAlignment),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -618,7 +678,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "FontHexColor", "FontSizeInPixels", "BackgroundHexColor" };
+                var propertyNames = new string[] { "FontHexColor", "FontSizeInPixels", "BackgroundHexColor", "HorizontalAlignment" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

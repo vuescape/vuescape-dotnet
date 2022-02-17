@@ -41,7 +41,8 @@ namespace Vuescape.DotNet.Domain.Test
                 () => new Vuescape.DotNet.Domain.CellFormat(
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<string>()));
+                                 A.Dummy<string>(),
+                                 A.Dummy<Vuescape.DotNet.Domain.HorizontalAlignment?>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
@@ -118,7 +119,17 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<Vuescape.DotNet.Domain.LinkTarget>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<CssStyles>()));
+                                 A.Dummy<CssStyles>(),
+                                 A.Dummy<ResourceKind>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new ObcToVuescapeConversionContext(
+                                 A.Dummy<ReportConversionMode>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<CultureKind?>(),
+                                 A.Dummy<StandardTimeZone?>(),
+                                 A.Dummy<bool>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Vuescape.DotNet.Domain.Report(

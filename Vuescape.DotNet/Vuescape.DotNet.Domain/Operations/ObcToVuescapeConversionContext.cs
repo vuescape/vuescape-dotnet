@@ -21,12 +21,14 @@ namespace Vuescape.DotNet.Domain
         /// <param name="baseUrl">OPTIONAL. The base URL to use for constructing links.</param>
         /// <param name="cultureKind">OPTIONAL. The culture kind. Defaults to Invariant.</param>
         /// <param name="localTimeZone">OPTIONAL. The local time zone. Defaults to Eastern.</param>
+        /// <param name="shouldSummaryRowsDisplayInFooter">OPTIONAL. Should summary rows display in the footer. This effectively pins summary rows to the bottom of the report.</param>
         public ObcToVuescapeConversionContext(
             ReportConversionMode reportConversionMode = ReportConversionMode.Relaxed,
             string queryString = null,
             string baseUrl = null,
             CultureKind? cultureKind = OBeautifulCode.Type.CultureKind.Invariant,
-            StandardTimeZone? localTimeZone = StandardTimeZone.Eastern)
+            StandardTimeZone? localTimeZone = StandardTimeZone.Eastern,
+            bool shouldSummaryRowsDisplayInFooter = false)
         {
             new { reportConversionMode }.AsArg().Must().NotBeEqualTo(ReportConversionMode.None);
 
@@ -35,6 +37,7 @@ namespace Vuescape.DotNet.Domain
             this.BaseUrl = baseUrl;
             this.CultureKind = cultureKind;
             this.LocalTimeZone = localTimeZone;
+            this.ShouldSummaryRowsDisplayInFooter = shouldSummaryRowsDisplayInFooter;
         }
 
         /// <summary>
@@ -61,5 +64,10 @@ namespace Vuescape.DotNet.Domain
         /// Gets the <see cref="StandardTimeZone"/> to use when not specified.
         /// </summary>
         public StandardTimeZone? LocalTimeZone { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether summary rows should display in the footer.
+        /// </summary>
+        public bool ShouldSummaryRowsDisplayInFooter { get; private set; }
     }
 }

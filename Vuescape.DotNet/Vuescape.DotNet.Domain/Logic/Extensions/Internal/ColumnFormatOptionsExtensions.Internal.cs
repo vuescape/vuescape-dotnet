@@ -15,54 +15,51 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Determine if a column is visible from the <see cref="ColumnFormatOptions"/>.
         /// </summary>
-        /// <param name="obcColumn">The column.</param>
+        /// <param name="obcColumnFormatOptions">The column.</param>
         /// <returns>Whether a column is visible.</returns>
         internal static bool IsVisible(
-            this Column obcColumn)
+            this ColumnFormatOptions? obcColumnFormatOptions)
         {
-            var options = obcColumn?.Format?.Options;
-            if (options == null)
+            if (obcColumnFormatOptions == null)
             {
                 return true;
             }
 
-            var result = (options & ColumnFormatOptions.Hide) == 0;
+            var result = (obcColumnFormatOptions & ColumnFormatOptions.Hide) == 0;
             return result;
         }
 
         /// <summary>
         /// Determine if a column is sortable from the <see cref="ColumnFormatOptions"/>.
         /// </summary>
-        /// <param name="obcColumn">The column.</param>
+        /// <param name="obcColumnFormatOptions">The column.</param>
         /// <returns>Whether a column is sortable.</returns>
         internal static bool IsSortable(
-            this Column obcColumn)
+            this ColumnFormatOptions? obcColumnFormatOptions)
         {
-            var options = obcColumn?.Format?.Options;
-            if (options == null)
+            if (obcColumnFormatOptions == null)
             {
                 return false;
             }
 
-            var result = (options & ColumnFormatOptions.Sortable) != 0;
+            var result = (obcColumnFormatOptions & ColumnFormatOptions.Sortable) != 0;
             return result;
         }
 
         /// <summary>
-        /// Determine if a column is frozen from the <see cref="ColumnFormatOptions"/>.
+        /// Determine if a column is sortable from the <see cref="ColumnFormatOptions"/>.
         /// </summary>
-        /// <param name="obcColumn">The column.</param>
-        /// <returns>Whether a column is sortable.</returns>
+        /// <param name="obcColumnFormatOptions">The column.</param>
+        /// <returns>Whether a column is frozen.</returns>
         internal static bool IsFrozen(
-            this Column obcColumn)
+            this ColumnFormatOptions? obcColumnFormatOptions)
         {
-            var options = obcColumn?.Format?.Options;
-            if (options == null)
+            if (obcColumnFormatOptions == null)
             {
                 return false;
             }
 
-            var result = (options & ColumnFormatOptions.Freeze) != 0;
+            var result = (obcColumnFormatOptions & ColumnFormatOptions.Freeze) != 0;
             return result;
         }
     }

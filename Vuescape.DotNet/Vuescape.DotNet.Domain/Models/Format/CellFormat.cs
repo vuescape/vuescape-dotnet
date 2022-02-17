@@ -20,14 +20,17 @@ namespace Vuescape.DotNet.Domain
         /// <param name="fontHexColor">The font color in hexadecimal.</param>
         /// <param name="fontSizeInPixels">The font size.</param>
         /// <param name="backgroundHexColor">The background color in hexadecimal.</param>
+        /// <param name="horizontalAlignment">OPTIONAL. The horizontal alignment.</param>
         public CellFormat(
             string fontHexColor,
             string fontSizeInPixels,
-            string backgroundHexColor)
+            string backgroundHexColor,
+            HorizontalAlignment? horizontalAlignment)
         {
             this.FontHexColor = fontHexColor;
             this.FontSizeInPixels = fontSizeInPixels;
             this.BackgroundHexColor = backgroundHexColor;
+            this.HorizontalAlignment = horizontalAlignment;
         }
 
         /// <summary>
@@ -44,5 +47,10 @@ namespace Vuescape.DotNet.Domain
         /// Gets the background color in hexadecimal.
         /// </summary>
         public string BackgroundHexColor { get; private set; }
+
+        /// <summary>
+        /// Gets the horizontal alignment.
+        /// </summary>
+        public HorizontalAlignment? HorizontalAlignment { get; private set; }
     }
 }

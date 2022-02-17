@@ -5,12 +5,14 @@
 // ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using OBeautifulCode.DataStructure;
 
     /// <summary>
     /// Helper methods for <see cref="OBeautifulCode.DataStructure.ColumnFormatOptions"/>.
     /// </summary>
-    internal static partial class ColumnFormatOptionsHelper
+    internal static class ColumnFormatOptionsHelper
     {
         /// <summary>
         /// Determines whether a <see cref="Column"/> is visible.
@@ -20,6 +22,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcColumnFormat">The format for all columns.</param>
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>True if visible otherwise false.</returns>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
         internal static bool IsVisible(
             Column obcColumn,
             ColumnFormat obcSpecificColumnFormat,
@@ -41,6 +44,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcColumnFormat">The format for all columns.</param>
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>True if sortable otherwise false.</returns>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
         internal static bool IsSortable(
             Column obcColumn,
             ColumnFormat obcSpecificColumnFormat,
@@ -62,6 +66,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcColumnFormat">The format for all columns.</param>
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>True if frozen otherwise false.</returns>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
         internal static bool IsFrozen(
             Column obcColumn,
             ColumnFormat obcSpecificColumnFormat,

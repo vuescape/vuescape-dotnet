@@ -3,14 +3,15 @@
 // </copyright>
 
 // ReSharper disable once CheckNamespace
-
 namespace Vuescape.DotNet.Domain
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using OBeautifulCode.Assertion.Recipes;
+    using OBeautifulCode.CodeAnalysis.Recipes;
 
     using static System.FormattableString;
 
@@ -26,6 +27,8 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <param name="tokenToSubstitutionMap">TODO:.</param>
         /// <returns>A TreeTable.</returns>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "tokenToSubstitutionMap", Justification = "Future-proof from protocol.")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = ObcSuppressBecause.CA1506_AvoidExcessiveClassCoupling_DisagreeWithAssessment)]
         public static TreeTable ConvertToVuescapeTreeTable(
             this OBeautifulCode.DataStructure.TreeTable obcTreeTable,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext = null,
@@ -148,6 +151,7 @@ namespace Vuescape.DotNet.Domain
             return treeTableHeaderRows;
         }
 
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         private static IReadOnlyList<TreeTableRow> ConvertToVuescapeTreeTableFooterRows(
             OBeautifulCode.DataStructure.TreeTable obcTreeTable,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)

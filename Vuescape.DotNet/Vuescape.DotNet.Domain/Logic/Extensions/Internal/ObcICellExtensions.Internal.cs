@@ -7,6 +7,7 @@ namespace Vuescape.DotNet.Domain
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.Linq;
 
@@ -314,6 +315,8 @@ namespace Vuescape.DotNet.Domain
                 { OBeautifulCode.DataStructure.FontFormatOptions.Underline, "text-decoration__underline" },
             };
 
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
         private static string GetCellFormatOptionsCssClasses(
             ICell cell,
             RowFormat obcRowFormat,
@@ -372,6 +375,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         private static string GetFontFormatOptionsCssClasses(
             ICell cell,
             RowFormat obcRowFormat,
@@ -489,6 +493,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         private static Color? GetCellBackgroundColor(
             ICell cell,
             RowFormat obcRowFormat,
@@ -538,6 +543,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
         private static HorizontalAlignment? GetHorizontalAlignment(
             ICell cell,
             RowFormat obcRowFormat,
@@ -582,6 +588,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         private static Color? GetFontColor(
             ICell cell,
             RowFormat obcRowFormat,
@@ -631,6 +638,8 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
         private static string GetCellFontSizeInPixels(
             ICell cell,
             RowFormat obcRowFormat,
@@ -688,6 +697,7 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         private static bool ShouldCellWrap(
             ICell cell,
             RowFormat obcRowFormat,

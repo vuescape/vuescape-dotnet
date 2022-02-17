@@ -5,7 +5,10 @@
 // ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using OBeautifulCode.Assertion.Recipes;
+    using OBeautifulCode.CodeAnalysis.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
@@ -22,6 +25,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="cultureKind">OPTIONAL. The culture kind. Defaults to Invariant.</param>
         /// <param name="localTimeZone">OPTIONAL. The local time zone. Defaults to Eastern.</param>
         /// <param name="shouldSummaryRowsDisplayInFooter">OPTIONAL. Should summary rows display in the footer. This effectively pins summary rows to the bottom of the report.</param>
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "2#", Justification = ObcSuppressBecause.CA1054_UriParametersShouldNotBeStrings_PreferToRepresentUrlAsString)]
         public ObcToVuescapeConversionContext(
             ReportConversionMode reportConversionMode = ReportConversionMode.Relaxed,
             string queryString = null,
@@ -53,6 +57,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the Base URL to use when constructing links.
         /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Justification = ObcSuppressBecause.CA1056_UriPropertiesShouldNotBeStrings_PreferToRepresentUrlAsString)]
         public string BaseUrl { get; private set; }
 
         /// <summary>

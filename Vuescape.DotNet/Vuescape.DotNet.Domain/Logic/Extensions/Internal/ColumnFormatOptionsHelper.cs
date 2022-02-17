@@ -12,6 +12,14 @@ namespace Vuescape.DotNet.Domain
     /// </summary>
     internal static partial class ColumnFormatOptionsHelper
     {
+        /// <summary>
+        /// Determines whether a <see cref="Column"/> is visible.
+        /// </summary>
+        /// <param name="obcColumn">The column.</param>
+        /// <param name="obcSpecificColumnFormat">The format for this column.</param>
+        /// <param name="obcColumnFormat">The format for all columns.</param>
+        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
+        /// <returns>True if visible otherwise false.</returns>
         internal static bool IsVisible(
             Column obcColumn,
             ColumnFormat obcSpecificColumnFormat,
@@ -25,6 +33,14 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        /// <summary>
+        /// Determines whether a <see cref="Column"/> is sortable.
+        /// </summary>
+        /// <param name="obcColumn">The column.</param>
+        /// <param name="obcSpecificColumnFormat">The format for this column.</param>
+        /// <param name="obcColumnFormat">The format for all columns.</param>
+        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
+        /// <returns>True if sortable otherwise false.</returns>
         internal static bool IsSortable(
             Column obcColumn,
             ColumnFormat obcSpecificColumnFormat,
@@ -38,6 +54,14 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        /// <summary>
+        /// Determines whether a <see cref="Column"/> is frozen.
+        /// </summary>
+        /// <param name="obcColumn">The column.</param>
+        /// <param name="obcSpecificColumnFormat">The format for this column.</param>
+        /// <param name="obcColumnFormat">The format for all columns.</param>
+        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
+        /// <returns>True if frozen otherwise false.</returns>
         internal static bool IsFrozen(
             Column obcColumn,
             ColumnFormat obcSpecificColumnFormat,
@@ -50,6 +74,5 @@ namespace Vuescape.DotNet.Domain
 
             return result;
         }
-
     }
 }

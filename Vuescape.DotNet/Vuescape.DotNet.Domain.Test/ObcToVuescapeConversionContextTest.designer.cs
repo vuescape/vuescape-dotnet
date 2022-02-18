@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ObcToVuescapeConversionContext>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ObcToVuescapeConversionContext: ReportConversionMode = {systemUnderTest.ReportConversionMode.ToString() ?? "<null>"}, QueryString = {systemUnderTest.QueryString?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BaseUrl = {systemUnderTest.BaseUrl?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CultureKind = {systemUnderTest.CultureKind?.ToString() ?? "<null>"}, LocalTimeZone = {systemUnderTest.LocalTimeZone?.ToString() ?? "<null>"}, ShouldSummaryRowsDisplayInFooter = {systemUnderTest.ShouldSummaryRowsDisplayInFooter.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ObcToVuescapeConversionContext: ReportConversionMode = {systemUnderTest.ReportConversionMode.ToString() ?? "<null>"}, QueryString = {systemUnderTest.QueryString?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BaseUrlToken = {systemUnderTest.BaseUrlToken?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BaseUrl = {systemUnderTest.BaseUrl?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CultureKind = {systemUnderTest.CultureKind?.ToString() ?? "<null>"}, LocalTimeZone = {systemUnderTest.LocalTimeZone?.ToString() ?? "<null>"}, ShouldSummaryRowsDisplayInFooter = {systemUnderTest.ShouldSummaryRowsDisplayInFooter.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -66,6 +66,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ObcToVuescapeConversionContext(
                                              referenceObject.ReportConversionMode,
                                              null,
+                                             referenceObject.BaseUrlToken,
                                              referenceObject.BaseUrl,
                                              referenceObject.CultureKind,
                                              referenceObject.LocalTimeZone,
@@ -87,6 +88,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ObcToVuescapeConversionContext(
                                              referenceObject.ReportConversionMode,
                                              Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.BaseUrlToken,
                                              referenceObject.BaseUrl,
                                              referenceObject.CultureKind,
                                              referenceObject.LocalTimeZone,
@@ -100,6 +102,50 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<ObcToVuescapeConversionContext>
                 {
+                    Name = "constructor should throw ArgumentNullException when parameter 'baseUrlToken' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ObcToVuescapeConversionContext>();
+
+                        var result = new ObcToVuescapeConversionContext(
+                                             referenceObject.ReportConversionMode,
+                                             referenceObject.QueryString,
+                                             null,
+                                             referenceObject.BaseUrl,
+                                             referenceObject.CultureKind,
+                                             referenceObject.LocalTimeZone,
+                                             referenceObject.ShouldSummaryRowsDisplayInFooter);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "baseUrlToken", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ObcToVuescapeConversionContext>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'baseUrlToken' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ObcToVuescapeConversionContext>();
+
+                        var result = new ObcToVuescapeConversionContext(
+                                             referenceObject.ReportConversionMode,
+                                             referenceObject.QueryString,
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.BaseUrl,
+                                             referenceObject.CultureKind,
+                                             referenceObject.LocalTimeZone,
+                                             referenceObject.ShouldSummaryRowsDisplayInFooter);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "baseUrlToken", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ObcToVuescapeConversionContext>
+                {
                     Name = "constructor should throw ArgumentNullException when parameter 'baseUrl' is null scenario",
                     ConstructionFunc = () =>
                     {
@@ -108,6 +154,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ObcToVuescapeConversionContext(
                                              referenceObject.ReportConversionMode,
                                              referenceObject.QueryString,
+                                             referenceObject.BaseUrlToken,
                                              null,
                                              referenceObject.CultureKind,
                                              referenceObject.LocalTimeZone,
@@ -129,6 +176,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ObcToVuescapeConversionContext(
                                              referenceObject.ReportConversionMode,
                                              referenceObject.QueryString,
+                                             referenceObject.BaseUrlToken,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.CultureKind,
                                              referenceObject.LocalTimeZone,
@@ -154,6 +202,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ObcToVuescapeConversionContext(
                                                       referenceObject.ReportConversionMode,
                                                       referenceObject.QueryString,
+                                                      referenceObject.BaseUrlToken,
                                                       referenceObject.BaseUrl,
                                                       referenceObject.CultureKind,
                                                       referenceObject.LocalTimeZone,
@@ -178,6 +227,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ObcToVuescapeConversionContext(
                                                       referenceObject.ReportConversionMode,
                                                       referenceObject.QueryString,
+                                                      referenceObject.BaseUrlToken,
                                                       referenceObject.BaseUrl,
                                                       referenceObject.CultureKind,
                                                       referenceObject.LocalTimeZone,
@@ -192,6 +242,31 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<ObcToVuescapeConversionContext>
                 {
+                    Name = "BaseUrlToken should return same 'baseUrlToken' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ObcToVuescapeConversionContext>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ObcToVuescapeConversionContext>
+                        {
+                            SystemUnderTest = new ObcToVuescapeConversionContext(
+                                                      referenceObject.ReportConversionMode,
+                                                      referenceObject.QueryString,
+                                                      referenceObject.BaseUrlToken,
+                                                      referenceObject.BaseUrl,
+                                                      referenceObject.CultureKind,
+                                                      referenceObject.LocalTimeZone,
+                                                      referenceObject.ShouldSummaryRowsDisplayInFooter),
+                            ExpectedPropertyValue = referenceObject.BaseUrlToken,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "BaseUrlToken",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ObcToVuescapeConversionContext>
+                {
                     Name = "BaseUrl should return same 'baseUrl' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
@@ -202,6 +277,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ObcToVuescapeConversionContext(
                                                       referenceObject.ReportConversionMode,
                                                       referenceObject.QueryString,
+                                                      referenceObject.BaseUrlToken,
                                                       referenceObject.BaseUrl,
                                                       referenceObject.CultureKind,
                                                       referenceObject.LocalTimeZone,
@@ -226,6 +302,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ObcToVuescapeConversionContext(
                                                       referenceObject.ReportConversionMode,
                                                       referenceObject.QueryString,
+                                                      referenceObject.BaseUrlToken,
                                                       referenceObject.BaseUrl,
                                                       referenceObject.CultureKind,
                                                       referenceObject.LocalTimeZone,
@@ -250,6 +327,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ObcToVuescapeConversionContext(
                                                       referenceObject.ReportConversionMode,
                                                       referenceObject.QueryString,
+                                                      referenceObject.BaseUrlToken,
                                                       referenceObject.BaseUrl,
                                                       referenceObject.CultureKind,
                                                       referenceObject.LocalTimeZone,
@@ -274,6 +352,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ObcToVuescapeConversionContext(
                                                       referenceObject.ReportConversionMode,
                                                       referenceObject.QueryString,
+                                                      referenceObject.BaseUrlToken,
                                                       referenceObject.BaseUrl,
                                                       referenceObject.CultureKind,
                                                       referenceObject.LocalTimeZone,
@@ -322,6 +401,26 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = systemUnderTest,
                             DeepCloneWithValue = referenceObject.QueryString,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ObcToVuescapeConversionContext>
+                {
+                    Name = "DeepCloneWithBaseUrlToken should deep clone object and replace BaseUrlToken with the provided baseUrlToken",
+                    WithPropertyName = "BaseUrlToken",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ObcToVuescapeConversionContext>();
+
+                        var referenceObject = A.Dummy<ObcToVuescapeConversionContext>().ThatIs(_ => !systemUnderTest.BaseUrlToken.IsEqualTo(_.BaseUrlToken));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ObcToVuescapeConversionContext>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.BaseUrlToken,
                         };
 
                         return result;
@@ -421,6 +520,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new ObcToVuescapeConversionContext(
                                 ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
                                 ReferenceObjectForEquatableTestScenarios.QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrlToken,
                                 ReferenceObjectForEquatableTestScenarios.BaseUrl,
                                 ReferenceObjectForEquatableTestScenarios.CultureKind,
                                 ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
@@ -431,6 +531,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new ObcToVuescapeConversionContext(
                                 A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.ReportConversionMode.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ReportConversionMode)).ReportConversionMode,
                                 ReferenceObjectForEquatableTestScenarios.QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrlToken,
                                 ReferenceObjectForEquatableTestScenarios.BaseUrl,
                                 ReferenceObjectForEquatableTestScenarios.CultureKind,
                                 ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
@@ -438,6 +539,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new ObcToVuescapeConversionContext(
                                 ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
                                 A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.QueryString.IsEqualTo(ReferenceObjectForEquatableTestScenarios.QueryString)).QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrlToken,
                                 ReferenceObjectForEquatableTestScenarios.BaseUrl,
                                 ReferenceObjectForEquatableTestScenarios.CultureKind,
                                 ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
@@ -445,6 +547,15 @@ namespace Vuescape.DotNet.Domain.Test
                         new ObcToVuescapeConversionContext(
                                 ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
                                 ReferenceObjectForEquatableTestScenarios.QueryString,
+                                A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.BaseUrlToken.IsEqualTo(ReferenceObjectForEquatableTestScenarios.BaseUrlToken)).BaseUrlToken,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrl,
+                                ReferenceObjectForEquatableTestScenarios.CultureKind,
+                                ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
+                                ReferenceObjectForEquatableTestScenarios.ShouldSummaryRowsDisplayInFooter),
+                        new ObcToVuescapeConversionContext(
+                                ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
+                                ReferenceObjectForEquatableTestScenarios.QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrlToken,
                                 A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.BaseUrl.IsEqualTo(ReferenceObjectForEquatableTestScenarios.BaseUrl)).BaseUrl,
                                 ReferenceObjectForEquatableTestScenarios.CultureKind,
                                 ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
@@ -452,6 +563,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new ObcToVuescapeConversionContext(
                                 ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
                                 ReferenceObjectForEquatableTestScenarios.QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrlToken,
                                 ReferenceObjectForEquatableTestScenarios.BaseUrl,
                                 A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.CultureKind.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CultureKind)).CultureKind,
                                 ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
@@ -459,6 +571,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new ObcToVuescapeConversionContext(
                                 ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
                                 ReferenceObjectForEquatableTestScenarios.QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrlToken,
                                 ReferenceObjectForEquatableTestScenarios.BaseUrl,
                                 ReferenceObjectForEquatableTestScenarios.CultureKind,
                                 A.Dummy<ObcToVuescapeConversionContext>().Whose(_ => !_.LocalTimeZone.IsEqualTo(ReferenceObjectForEquatableTestScenarios.LocalTimeZone)).LocalTimeZone,
@@ -466,6 +579,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new ObcToVuescapeConversionContext(
                                 ReferenceObjectForEquatableTestScenarios.ReportConversionMode,
                                 ReferenceObjectForEquatableTestScenarios.QueryString,
+                                ReferenceObjectForEquatableTestScenarios.BaseUrlToken,
                                 ReferenceObjectForEquatableTestScenarios.BaseUrl,
                                 ReferenceObjectForEquatableTestScenarios.CultureKind,
                                 ReferenceObjectForEquatableTestScenarios.LocalTimeZone,
@@ -768,7 +882,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "ReportConversionMode", "QueryString", "BaseUrl", "CultureKind", "LocalTimeZone", "ShouldSummaryRowsDisplayInFooter" };
+                var propertyNames = new string[] { "ReportConversionMode", "QueryString", "BaseUrlToken", "BaseUrl", "CultureKind", "LocalTimeZone", "ShouldSummaryRowsDisplayInFooter" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

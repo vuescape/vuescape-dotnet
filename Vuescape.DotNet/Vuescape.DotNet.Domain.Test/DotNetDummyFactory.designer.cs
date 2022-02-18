@@ -127,6 +127,7 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<ReportConversionMode>(),
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
+                                 A.Dummy<string>(),
                                  A.Dummy<CultureKind?>(),
                                  A.Dummy<StandardTimeZone?>(),
                                  A.Dummy<bool>()));

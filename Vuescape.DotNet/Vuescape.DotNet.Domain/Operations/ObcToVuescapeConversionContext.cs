@@ -21,14 +21,17 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="reportConversionMode">OPTIONAL. The report conversion mode. Defaults to Relaxed.</param>
         /// <param name="queryString">OPTIONAL. The query string of an associated web request that spawned the current operation. Does not include the leading "?".</param>
+        /// <param name="baseUrlToken">OPTIONAL. The base URL token to replace with the <paramref name="baseUrl"/> for use in constructing links.</param>
         /// <param name="baseUrl">OPTIONAL. The base URL to use for constructing links.</param>
         /// <param name="cultureKind">OPTIONAL. The culture kind. Defaults to Invariant.</param>
         /// <param name="localTimeZone">OPTIONAL. The local time zone. Defaults to Eastern.</param>
         /// <param name="shouldSummaryRowsDisplayInFooter">OPTIONAL. Should summary rows display in the footer. This effectively pins summary rows to the bottom of the report.</param>
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "2#", Justification = ObcSuppressBecause.CA1054_UriParametersShouldNotBeStrings_PreferToRepresentUrlAsString)]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "3#", Justification = ObcSuppressBecause.CA1054_UriParametersShouldNotBeStrings_PreferToRepresentUrlAsString)]
         public ObcToVuescapeConversionContext(
             ReportConversionMode reportConversionMode = ReportConversionMode.Relaxed,
             string queryString = null,
+            string baseUrlToken = null,
             string baseUrl = null,
             CultureKind? cultureKind = OBeautifulCode.Type.CultureKind.Invariant,
             StandardTimeZone? localTimeZone = StandardTimeZone.Eastern,
@@ -38,6 +41,7 @@ namespace Vuescape.DotNet.Domain
 
             this.ReportConversionMode = reportConversionMode;
             this.QueryString = queryString;
+            this.BaseUrlToken = baseUrlToken;
             this.BaseUrl = baseUrl;
             this.CultureKind = cultureKind;
             this.LocalTimeZone = localTimeZone;
@@ -53,6 +57,12 @@ namespace Vuescape.DotNet.Domain
         /// Gets the query string that spawned the current operation.  Does not include leading "?".
         /// </summary>
         public string QueryString { get; private set; }
+
+        /// <summary>
+        /// Gets the base URL token to replace with the actual baseUrl when constructing links.
+        /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Justification = ObcSuppressBecause.CA1056_UriPropertiesShouldNotBeStrings_PreferToRepresentUrlAsString)]
+        public string BaseUrlToken { get; private set; }
 
         /// <summary>
         /// Gets the Base URL to use when constructing links.

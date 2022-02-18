@@ -41,7 +41,7 @@ namespace Vuescape.DotNet.Domain
                     if (!string.IsNullOrWhiteSpace(obcToVuescapeConversionContext.BaseUrl))
                     {
                         // TODO: Use URL builder
-                        resource = resource.Replace("[BASE_URL]", obcToVuescapeConversionContext.BaseUrl);
+                        resource = resource.Replace(obcToVuescapeConversionContext.BaseUrlToken, obcToVuescapeConversionContext.BaseUrl);
                     }
 
                     result = new Link(resource, linkTarget, null, null, resourceKind);

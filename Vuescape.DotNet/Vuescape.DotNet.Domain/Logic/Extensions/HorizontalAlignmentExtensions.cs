@@ -13,7 +13,7 @@ namespace Vuescape.DotNet.Domain
     public static partial class HorizontalAlignmentExtensions
     {
         /// <summary>
-        /// Convert a <see cref="System.Drawing.Color"/> to a hexadecimal representation.
+        /// Convert a <see cref="OBeautifulCode.DataStructure.HorizontalAlignment"/> to a <see cref="HorizontalAlignment"/>.
         /// </summary>
         /// <param name="horizontalAlignment">The horizontal alignment to convert.</param>
         /// <returns>Hexadecimal string.</returns>

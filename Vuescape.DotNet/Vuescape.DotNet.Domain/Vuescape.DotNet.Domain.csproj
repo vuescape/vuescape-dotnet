@@ -131,6 +131,11 @@
       <DependentUpon>ColumnDefinition.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ColumnDefinition\ColumnWrapBehavior.cs" />
+    <Compile Include="Models\FeatureRegistration\Instruction\InstructionBase.cs" />
+    <Compile Include="Models\FeatureRegistration\Instruction\NullInstruction.cs" />
+    <Compile Include="Models\FeatureRegistration\Navigation\ChicletNavigationItem.cs" />
+    <Compile Include="Models\FeatureRegistration\Navigation\NavigationItemBase.cs" />
+    <Compile Include="Models\FeatureRegistration\ResourceTarget.cs" />
     <Compile Include="Models\Format\CellFormat.designer.cs">
       <DependentUpon>CellFormat.cs</DependentUpon>
     </Compile>
@@ -189,6 +194,12 @@
     <Compile Include="Models\UiObject\UiObject.designer.cs">
       <DependentUpon>UiObject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\FeatureRegistration\FeatureRegistration.cs" />
+    <Compile Include="Models\FeatureRegistration\ResourceInstruction.cs" />
+    <Compile Include="Models\FeatureRegistration\Instruction\ReportPaneInstruction.cs" />
+    <Compile Include="Models\FeatureRegistration\Navigation\MenuNavigationItem.cs" />
+    <Compile Include="Models\FeatureRegistration\Navigation\NavigationItemKind.cs" />
+    <Compile Include="Models\FeatureRegistration\Instruction\ReportPaneTitleBarButtons.cs" />
     <Compile Include="Operations\ConvertObcToVuescapeReportOp.designer.cs">
       <DependentUpon>ConvertObcToVuescapeReportOp.cs</DependentUpon>
     </Compile>

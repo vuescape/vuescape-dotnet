@@ -26,9 +26,9 @@ namespace Vuescape.DotNet.Domain
         /// <param name="navigationItems">The navigation items describing how to render navigation to this feature.</param>
         public FeatureNavigationRegistration(string id, string featureId, IReadOnlyList<NavigationItemBase> navigationItems)
         {
-            id.MustForArg().NotBeNullNorWhiteSpace();
-            featureId.MustForArg().NotBeNullNorWhiteSpace();
-            navigationItems.MustForArg().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
+            id.MustForArg(nameof(id)).NotBeNullNorWhiteSpace();
+            featureId.MustForArg(nameof(featureId)).NotBeNullNorWhiteSpace();
+            navigationItems.MustForArg(nameof(navigationItems)).NotBeNullNorEmptyEnumerableNorContainAnyNulls();
 
             this.Id = id;
             this.FeatureId = featureId;

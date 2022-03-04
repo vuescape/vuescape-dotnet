@@ -27,7 +27,7 @@ namespace Vuescape.DotNet.Domain
             this ILink link,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
-            new { link }.MustForArg().NotBeNull();
+            new { link }.Must().NotBeNull();
 
             Link result = null;
 

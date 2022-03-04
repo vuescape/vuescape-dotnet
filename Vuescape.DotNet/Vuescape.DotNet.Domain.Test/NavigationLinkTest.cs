@@ -3,18 +3,12 @@
 namespace Vuescape.DotNet.Domain.Test
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     using FakeItEasy;
 
-    using OBeautifulCode.AutoFakeItEasy;
     using OBeautifulCode.CodeAnalysis.Recipes;
     using OBeautifulCode.CodeGen.ModelObject.Recipes;
-    using OBeautifulCode.Math.Recipes;
-
-    using Xunit;
 
     using static System.FormattableString;
 
@@ -25,6 +19,79 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static NavigationLinkTest()
         {
+            NavigationLinkTest.ConstructorArgumentValidationTestScenarios.RemoveAllScenarios()
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<NavigationLink>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'title' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<NavigationLink>();
+
+                        var result = new NavigationLink(
+                                             null,
+                                             referenceObject.Url,
+                                             referenceObject.IconName);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "title", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<NavigationLink>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'title' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<NavigationLink>();
+
+                        var result = new NavigationLink(
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.Url,
+                                             referenceObject.IconName);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "title", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<NavigationLink>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'url' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<NavigationLink>();
+
+                        var result = new NavigationLink(
+                                             referenceObject.Title,
+                                             null,
+                                             referenceObject.IconName);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "url", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<NavigationLink>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'url' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<NavigationLink>();
+
+                        var result = new NavigationLink(
+                                             referenceObject.Title,
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.IconName);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "url", "white space", },
+                });
         }
     }
 }

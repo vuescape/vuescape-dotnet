@@ -27,8 +27,8 @@ namespace Vuescape.DotNet.Domain
         /// Note that arbitrary <see cref="IVoidOperation"/> are not supported -- operations must be implemented in Vuescape web.</param>
         public Feature(string id, IReadOnlyList<IVoidOperation> operations)
         {
-            id.MustForArg().NotBeNullNorWhiteSpace();
-            operations.MustForArg().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
+            id.MustForArg(nameof(id)).NotBeNullNorWhiteSpace();
+            operations.MustForArg(nameof(operations)).NotBeNullNorEmptyEnumerableNorContainAnyNulls();
 
             this.Id = id;
             this.Operations = operations;

@@ -35,7 +35,8 @@ namespace Vuescape.DotNet.Domain
             ReportPaneTitleBarButtons? reportPaneTitleBarButtons = null)
             : base(linkedResource)
         {
-            targetedPaneKind.MustForArg().NotBeEqualTo(PaneKind.None);
+            linkedResource.MustForArg(nameof(linkedResource)).NotBeNull();
+            targetedPaneKind.MustForArg(nameof(targetedPaneKind)).NotBeEqualTo(PaneKind.None);
 
             this.TargetedPaneKind = targetedPaneKind;
             this.InitialWidth = initialWidth;

@@ -8,6 +8,7 @@
 
 namespace Vuescape.DotNet.Domain
 {
+    using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
@@ -23,6 +24,9 @@ namespace Vuescape.DotNet.Domain
         /// <param name="iconName">OPTIONAL. icon name corresponding to representation in a specific icon library. e.g. "fas fa-acorn" for font awesome.</param>
         public NavigationLink(string title, string url, string iconName = null)
         {
+            title.MustForArg(nameof(title)).NotBeNullNorWhiteSpace();
+            url.MustForArg(nameof(url)).NotBeNullNorWhiteSpace();
+
             this.Title = title;
             this.Url = url;
             this.IconName = iconName;

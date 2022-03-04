@@ -23,8 +23,8 @@ namespace Vuescape.DotNet.Domain
         /// <param name="kind">The kind of navigation item.</param>
         protected NavigationItemBase(NavigationLink link, NavigationItemKind kind)
         {
-            link.AsArg().Must().NotBeNullNorWhiteSpace();
-            kind.AsArg().Must().NotBeEqualTo(NavigationItemKind.None);
+            link.MustForArg(nameof(link)).NotBeNull();
+            kind.MustForArg(nameof(kind)).NotBeEqualTo(NavigationItemKind.None);
 
             this.Link = link;
             this.Kind = kind;

@@ -29,7 +29,7 @@ namespace Vuescape.DotNet.Domain
         public MenuNavigationItem(NavigationLink link, string menuTitlePath = null)
             : base(link, NavigationItemKind.Menu)
         {
-            menuTitlePath.MustForArg().NotBeNullNorWhiteSpace();
+            menuTitlePath.MustForArg(nameof(menuTitlePath)).NotBeNullNorWhiteSpace();
 
             this.MenuTitlePath = menuTitlePath;
         }

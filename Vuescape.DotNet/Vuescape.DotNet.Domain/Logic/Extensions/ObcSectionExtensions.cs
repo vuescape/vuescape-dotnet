@@ -27,7 +27,7 @@ namespace Vuescape.DotNet.Domain
             ObcToVuescapeConversionContext obcToVuescapeConversionContext,
             IReadOnlyDictionary<string, string> tokenToSubstitutionMap = null)
         {
-            new { obcSection }.MustForArg().NotBeNull();
+            new { obcSection }.Must().NotBeNull();
 
             var obcTreeTable = obcSection.TreeTable;
 

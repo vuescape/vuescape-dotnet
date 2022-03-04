@@ -29,7 +29,7 @@ namespace Vuescape.DotNet.Domain
             ObcToVuescapeConversionContext obcToVuescapeConversionContext,
             IReadOnlyDictionary<string, string> tokenToSubstitutionMap = null)
         {
-            new { obcReport }.MustForArg().NotBeNull();
+            new { obcReport }.Must().NotBeNull();
 
             var sections = obcReport.Sections.Select(_ => _.ConvertToVuescapeSection(obcToVuescapeConversionContext, tokenToSubstitutionMap)).ToList();
 

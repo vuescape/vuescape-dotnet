@@ -34,7 +34,7 @@ namespace Vuescape.DotNet.Domain
             ObcToVuescapeConversionContext obcToVuescapeConversionContext = null,
             IReadOnlyDictionary<string, string> tokenToSubstitutionMap = null)
         {
-            new { obcTreeTable }.MustForArg().NotBeNull();
+            new { obcTreeTable }.Must().NotBeNull();
 
             if (obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
             {

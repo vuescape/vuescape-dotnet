@@ -27,7 +27,7 @@ namespace Vuescape.DotNet.Domain
             string title = null,
             string name = null)
         {
-            new { treeTable }.MustForArg().NotBeNull();
+            new { treeTable }.AsArg().Must().NotBeNull();
 
             this.Id = id;
             this.TreeTable = treeTable;

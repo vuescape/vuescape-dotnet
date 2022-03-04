@@ -159,7 +159,7 @@
     <Compile Include="Models\Feature\Ops\LinkedResourceOpBase.designer.cs">
       <DependentUpon>LinkedResourceOpBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Report\PaneKind.cs" />
+    <Compile Include="Models\Feature\Ops\PaneKind.cs" />
     <Compile Include="Models\Format\CellFormat.designer.cs">
       <DependentUpon>CellFormat.cs</DependentUpon>
     </Compile>

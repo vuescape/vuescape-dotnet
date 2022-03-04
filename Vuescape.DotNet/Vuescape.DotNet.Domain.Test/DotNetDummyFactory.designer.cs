@@ -45,6 +45,10 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<Vuescape.DotNet.Domain.HorizontalAlignment?>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new ChicletNavigationItem(
+                                 A.Dummy<NavigationLink>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
                 {
                     var availableTypes = new[]
@@ -78,9 +82,9 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ConstrainTreeTableHeightClientBehavior
-                             {
-                                 Name = A.Dummy<string>(),
-                             });
+                {
+                    Name = A.Dummy<string>(),
+                });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ConvertObcToVuescapeReportOp(
@@ -102,10 +106,30 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new DisplayReportOp(
+                                 A.Dummy<ILinkedResource>(),
+                                 A.Dummy<PaneKind>(),
+                                 A.Dummy<int?>(),
+                                 A.Dummy<int?>(),
+                                 A.Dummy<int?>(),
+                                 A.Dummy<ReportPaneTitleBarButtons?>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new Feature(
+                                 A.Dummy<string>(),
+                                 A.Dummy<IReadOnlyList<IVoidOperation>>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new FeatureNavigationRegistration(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<IReadOnlyList<NavigationItemBase>>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new GeneratePdfClientBehavior
-                             {
-                                 Name = A.Dummy<string>(),
-                             });
+                {
+                    Name = A.Dummy<string>(),
+                });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Hover(
@@ -121,6 +145,52 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<CssStyles>(),
                                  A.Dummy<ResourceKind>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var availableTypes = new[]
+                    {
+                        typeof(DisplayReportOp)
+                    };
+
+                    var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
+
+                    var randomType = availableTypes[randomIndex];
+
+                    var result = (LinkedResourceOpBase)AD.ummy(randomType);
+
+                    return result;
+                });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new MenuNavigationItem(
+                                 A.Dummy<NavigationLink>(),
+                                 A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var availableTypes = new[]
+                    {
+                        typeof(ChicletNavigationItem),
+                        typeof(MenuNavigationItem)
+                    };
+
+                    var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
+
+                    var randomType = availableTypes[randomIndex];
+
+                    var result = (NavigationItemBase)AD.ummy(randomType);
+
+                    return result;
+                });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new NavigationLink(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ObcToVuescapeConversionContext(
@@ -155,15 +225,15 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new SortTreeTableClientBehavior
-                             {
-                                 Name = A.Dummy<string>(),
-                             });
+                {
+                    Name = A.Dummy<string>(),
+                });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ToggleTreeTableChildRowExpansionClientBehavior
-                             {
-                                 Name = A.Dummy<string>(),
-                             });
+                {
+                    Name = A.Dummy<string>(),
+                });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Vuescape.DotNet.Domain.TreeTable(

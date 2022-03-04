@@ -1,19 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NavigationItemKind.cs" company="Vuescape">
+// <copyright file="PaneKind.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable once CheckNamespace
-
 namespace Vuescape.DotNet.Domain
 {
-    using System;
-
     /// <summary>
-    /// The kind of <see cref="NavigationItem"/>.
+    /// In the UI, the kind of pane.
     /// </summary>
-    public enum NavigationItemKind
+    public enum PaneKind
     {
         /// <summary>
         /// None.
@@ -21,13 +18,18 @@ namespace Vuescape.DotNet.Domain
         None = 0,
 
         /// <summary>
-        /// Menu.
+        /// Left Pane.
         /// </summary>
-        Menu,
+        LeftPane,
 
         /// <summary>
-        /// Chiclet.
+        /// Center Pane.
         /// </summary>
-        Chiclet,
+        CenterPane,
+
+        /// <summary>
+        /// Right Pane.
+        /// </summary>
+        RightPane,
     }
 }

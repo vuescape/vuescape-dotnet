@@ -259,6 +259,10 @@
     <Compile Include="CellFormatTest.designer.cs">
       <DependentUpon>CellFormatTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChicletNavigationItemTest.cs" />
+    <Compile Include="ChicletNavigationItemTest.designer.cs">
+      <DependentUpon>ChicletNavigationItemTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="ColumnDefinitionTest.cs" />
     <Compile Include="ColumnDefinitionTest.designer.cs">
       <DependentUpon>ColumnDefinitionTest.cs</DependentUpon>
@@ -267,11 +271,31 @@
     <Compile Include="ConvertObcToVuescapeReportOpTest.designer.cs">
       <DependentUpon>ConvertObcToVuescapeReportOpTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="DisplayReportOpTest.cs" />
+    <Compile Include="DisplayReportOpTest.designer.cs">
+      <DependentUpon>DisplayReportOpTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="DotNetDummyFactory.designer.cs">
       <DependentUpon>DotNetDummyFactory.cs</DependentUpon>
     </Compile>
     <Compile Include="DotNetDummyFactoryTest.designer.cs">
       <DependentUpon>DotNetDummyFactoryTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FeatureNavigationRegistrationTest.cs" />
+    <Compile Include="FeatureNavigationRegistrationTest.designer.cs">
+      <DependentUpon>FeatureNavigationRegistrationTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FeatureTest.cs" />
+    <Compile Include="FeatureTest.designer.cs">
+      <DependentUpon>FeatureTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LinkedResourceOpBaseTest.cs" />
+    <Compile Include="LinkedResourceOpBaseTest.designer.cs">
+      <DependentUpon>LinkedResourceOpBaseTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuNavigationItemTest.cs" />
+    <Compile Include="MenuNavigationItemTest.designer.cs">
+      <DependentUpon>MenuNavigationItemTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ClientBehaviorBaseTest.cs" />
     <Compile Include="Models\ClientBehaviorBaseTest.designer.cs">
@@ -338,6 +362,14 @@
     </Compile>
     <Compile Include="Models\UiObjectTest.designer.cs">
       <DependentUpon>UiObjectTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationItemBaseTest.cs" />
+    <Compile Include="NavigationItemBaseTest.designer.cs">
+      <DependentUpon>NavigationItemBaseTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationLinkTest.cs" />
+    <Compile Include="NavigationLinkTest.designer.cs">
+      <DependentUpon>NavigationLinkTest.cs</DependentUpon>
     </Compile>
     <Compile Include="ObcToVuescapeConversionContextTest.cs" />
     <Compile Include="ObcToVuescapeConversionContextTest.designer.cs">

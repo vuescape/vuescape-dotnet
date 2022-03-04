@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ResourceTarget.cs" company="Vuescape">
+// <copyright file="NavigationItemKind.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -9,9 +9,10 @@
 namespace Vuescape.DotNet.Domain
 {
     /// <summary>
-    /// The target kind of a resource.
+    /// The kind of <see cref="NavigationItemBase"/>. This is used to identify the kind of the <see cref="NavigationItemBase"/> instance
+    /// and to decided how to render.
     /// </summary>
-    public enum ResourceTarget
+    public enum NavigationItemKind
     {
         /// <summary>
         /// None.
@@ -19,33 +20,13 @@ namespace Vuescape.DotNet.Domain
         None = 0,
 
         /// <summary>
-        /// Left Pane.
+        /// Menu. Render as part of the main application menu.
         /// </summary>
-        LeftPane,
+        Menu,
 
         /// <summary>
-        /// Center Pane.
+        /// Chiclet. Render as part of the main "Bento Box" grid menu.
         /// </summary>
-        CenterPane,
-
-        /// <summary>
-        /// Right Pane.
-        /// </summary>
-        RightPane,
-
-        /// <summary>
-        /// Modal.
-        /// </summary>
-        Modal,
-
-        /// <summary>
-        /// Download text file.
-        /// </summary>
-        DownloadTextFile,
-
-        /// <summary>
-        /// Download file with Base64 encoding.
-        /// </summary>
-        DownloadBase64EncodedFile,
+        Chiclet,
     }
 }

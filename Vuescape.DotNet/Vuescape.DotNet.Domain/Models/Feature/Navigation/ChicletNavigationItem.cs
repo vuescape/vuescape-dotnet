@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NullInstruction.cs" company="Vuescape">
+// <copyright file="ChicletNavigationItem.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -11,15 +11,16 @@ namespace Vuescape.DotNet.Domain
     using OBeautifulCode.Type;
 
     /// <summary>
-    /// Link.
+    /// A chiclet navigation item.
     /// </summary>
-    public partial class NullInstruction : InstructionBase, IModelViaCodeGen
+    public partial class ChicletNavigationItem : NavigationItemBase, IModelViaCodeGen
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NullInstruction"/> class.
+        /// Initializes a new instance of the <see cref="ChicletNavigationItem"/> class.
         /// </summary>
-        public NullInstruction()
-            : base(ResourceTarget.None)
+        /// <param name="link">The <see cref="NavigationLink"/> to navigate to.</param>
+        public ChicletNavigationItem(NavigationLink link)
+            : base(link, NavigationItemKind.Chiclet)
         {
         }
     }

@@ -68,7 +68,6 @@ namespace Vuescape.DotNet.Domain
             //
             //    // defaultSlot = slottedCell.DefaultSlotName;
             // }
-
             var colspan = obcRowCell.ColumnsSpanned ?? 1;
 
             Hover hover = null;
@@ -329,6 +328,7 @@ namespace Vuescape.DotNet.Domain
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             OBeautifulCode.DataStructure.CellFormatOptions? applicableCellFormatOptions = null;
+
             // ReSharper disable once IdentifierTypo
             if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.Options != null)
             {
@@ -388,6 +388,7 @@ namespace Vuescape.DotNet.Domain
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             OBeautifulCode.DataStructure.FontFormatOptions? applicableFontFormatOptions = null;
+
             // ReSharper disable once IdentifierTypo
             if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.FontFormat?.Options != null)
             {
@@ -505,6 +506,7 @@ namespace Vuescape.DotNet.Domain
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             Color? result = null;
+
             // ReSharper disable once IdentifierTypo
             if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.BackgroundColor != null)
             {
@@ -555,6 +557,7 @@ namespace Vuescape.DotNet.Domain
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             HorizontalAlignment? result = null;
+
             // ReSharper disable once IdentifierTypo
             if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.HorizontalAlignment != null)
             {
@@ -600,6 +603,7 @@ namespace Vuescape.DotNet.Domain
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             Color? result = null;
+
             // ReSharper disable once IdentifierTypo
             if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.FontFormat?.FontColor != null)
             {

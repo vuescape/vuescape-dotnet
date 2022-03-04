@@ -5,11 +5,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable once CheckNamespace
-
-using OBeautifulCode.Assertion.Recipes;
-
 namespace Vuescape.DotNet.Domain
 {
+    using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>

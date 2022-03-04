@@ -5,10 +5,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable once CheckNamespace
-
 namespace Vuescape.DotNet.Domain
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using OBeautifulCode.Assertion.Recipes;
+    using OBeautifulCode.CodeAnalysis.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
@@ -22,6 +24,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="title">The title of the link.</param>
         /// <param name="url">The url to navigate to in the application. e.g. /report/report-name.</param>
         /// <param name="iconName">OPTIONAL. icon name corresponding to representation in a specific icon library. e.g. "fas fa-acorn" for font awesome.</param>
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = ObcSuppressBecause.CA1054_UriParametersShouldNotBeStrings_PreferToRepresentUrlAsString)]
         public NavigationLink(string title, string url, string iconName = null)
         {
             title.MustForArg(nameof(title)).NotBeNullNorWhiteSpace();
@@ -41,6 +44,7 @@ namespace Vuescape.DotNet.Domain
         /// Gets the URL to navigate to in the application.
         /// </summary>
         /// <example>"/report/report-name".</example>
+        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Justification = ObcSuppressBecause.CA1056_UriPropertiesShouldNotBeStrings_PreferToRepresentUrlAsString)]
         public string Url { get; private set; }
 
         /// <summary>

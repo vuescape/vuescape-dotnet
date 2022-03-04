@@ -5,7 +5,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 // ReSharper disable once CheckNamespace
-
 namespace Vuescape.DotNet.Domain
 {
     using OBeautifulCode.DataStructure;
@@ -18,8 +17,8 @@ namespace Vuescape.DotNet.Domain
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LinkedResourceOpBase"/> class.
-        /// <param name="linkedResource">The linked resource.</param>
         /// </summary>
+        /// <param name="linkedResource">The linked resource.</param>
         protected LinkedResourceOpBase(ILinkedResource linkedResource)
         {
             this.LinkedResource = linkedResource;

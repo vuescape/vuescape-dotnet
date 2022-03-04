@@ -193,8 +193,8 @@ namespace Vuescape.DotNet.Domain
             // TODO: isFocused
             // TODO: links
             string cssStyles = null;
-            // cssStyles += "tree-table__display--none";
 
+            // cssStyles += "tree-table__display--none";
             var hasChildRows = obcRow.HasChildRows();
             var isExpandable = hasChildRows && (!obcRow.Format?.Options.IsNotExpandable() ?? false);
             var shouldAlignChildRowsWithParent = obcRow.Format?.Options.ShouldAlignChildRowsWithParent() ?? false;

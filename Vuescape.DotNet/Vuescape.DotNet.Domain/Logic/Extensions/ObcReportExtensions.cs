@@ -3,7 +3,6 @@
 // </copyright>
 
 // ReSharper disable once CheckNamespace
-
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;

@@ -63,7 +63,6 @@ namespace Vuescape.DotNet.Domain
 
             // TODO: cssStyle
             // TODO: cssClass
-
             var areAnyChildren = treeTableRows.Any(_ => _.Children != null && _.Children.Any());
             var sortLevel = areAnyChildren ? SortLevel.Children : SortLevel.Parent;
 

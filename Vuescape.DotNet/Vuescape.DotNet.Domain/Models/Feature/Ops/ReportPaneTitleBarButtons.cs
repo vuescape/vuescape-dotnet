@@ -23,11 +23,11 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// The report pane can be maximized (and by implication restored to the previous size).
         /// </summary>
-        Maximize,
+        Maximize = 1,
 
         /// <summary>
         /// The report pane can be closed.
         /// </summary>
-        Close,
+        Close = 2,
     }
 }

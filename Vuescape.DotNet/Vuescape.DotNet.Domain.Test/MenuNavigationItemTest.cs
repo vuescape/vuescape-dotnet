@@ -25,6 +25,7 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static MenuNavigationItemTest()
         {
+            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios();
         }
     }
 }

@@ -82,9 +82,9 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ConstrainTreeTableHeightClientBehavior
-                {
-                    Name = A.Dummy<string>(),
-                });
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ConvertObcToVuescapeReportOp(
@@ -122,14 +122,14 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new FeatureNavigationRegistration(
                                  A.Dummy<string>(),
-                                 A.Dummy<string>(),
-                                 A.Dummy<IReadOnlyList<NavigationItemBase>>()));
+                                 A.Dummy<IReadOnlyList<NavigationItemBase>>(),
+                                 A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new GeneratePdfClientBehavior
-                {
-                    Name = A.Dummy<string>(),
-                });
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Hover(
@@ -225,15 +225,15 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new SortTreeTableClientBehavior
-                {
-                    Name = A.Dummy<string>(),
-                });
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ToggleTreeTableChildRowExpansionClientBehavior
-                {
-                    Name = A.Dummy<string>(),
-                });
+                             {
+                                 Name = A.Dummy<string>(),
+                             });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Vuescape.DotNet.Domain.TreeTable(

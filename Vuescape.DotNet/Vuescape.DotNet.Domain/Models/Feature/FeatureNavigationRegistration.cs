@@ -21,30 +21,29 @@ namespace Vuescape.DotNet.Domain
         /// Initializes a new instance of the <see cref="FeatureNavigationRegistration"/> class.
         /// </summary>
         /// <param name="id">The ID.</param>
-        /// <param name="featureId">The ID of the <see cref="Feature"/> to be registered.</param>
         /// <param name="navigationItems">The navigation items describing how to render navigation to this feature.</param>
-        public FeatureNavigationRegistration(string id, string featureId, IReadOnlyList<NavigationItemBase> navigationItems)
+        /// <param name="featureId">The ID of the <see cref="Feature"/> to be registered.</param>
+        public FeatureNavigationRegistration(string id, IReadOnlyList<NavigationItemBase> navigationItems, string featureId = null)
         {
             id.MustForArg(nameof(id)).NotBeNullNorWhiteSpace();
-            featureId.MustForArg(nameof(featureId)).NotBeNullNorWhiteSpace();
             navigationItems.MustForArg(nameof(navigationItems)).NotBeNullNorEmptyEnumerableNorContainAnyNulls();
 
             this.Id = id;
-            this.FeatureId = featureId;
             this.NavigationItems = navigationItems;
+            this.FeatureId = featureId;
         }
 
         /// <inheritdoc />
         public string Id { get; private set; }
 
         /// <summary>
-        /// Gets the ID of the <see cref="Feature"/> to register.
-        /// </summary>
-        public string FeatureId { get; private set; }
-
-        /// <summary>
         /// Gets the navigation items.
         /// </summary>
         public IReadOnlyList<NavigationItemBase> NavigationItems { get; private set; }
+
+        /// <summary>
+        /// Gets the ID of the <see cref="Feature"/> to register.
+        /// </summary>
+        public string FeatureId { get; private set; }
     }
 }

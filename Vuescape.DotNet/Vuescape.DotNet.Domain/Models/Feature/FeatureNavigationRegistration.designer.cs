@@ -70,8 +70,8 @@ namespace Vuescape.DotNet.Domain
             }
 
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
-                      && this.FeatureId.IsEqualTo(other.FeatureId, StringComparer.Ordinal)
-                      && this.NavigationItems.IsEqualTo(other.NavigationItems);
+                      && this.NavigationItems.IsEqualTo(other.NavigationItems)
+                      && this.FeatureId.IsEqualTo(other.FeatureId, StringComparer.Ordinal);
 
             return result;
         }
@@ -82,8 +82,8 @@ namespace Vuescape.DotNet.Domain
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.Id)
-            .Hash(this.FeatureId)
             .Hash(this.NavigationItems)
+            .Hash(this.FeatureId)
             .Value;
 
         /// <inheritdoc />
@@ -94,8 +94,8 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new FeatureNavigationRegistration(
                                  this.Id?.DeepClone(),
-                                 this.FeatureId?.DeepClone(),
-                                 this.NavigationItems?.DeepClone());
+                                 this.NavigationItems?.DeepClone(),
+                                 this.FeatureId?.DeepClone());
 
             return result;
         }
@@ -126,40 +126,8 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new FeatureNavigationRegistration(
                                  id,
-                                 this.FeatureId?.DeepClone(),
-                                 this.NavigationItems?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="FeatureId" />.
-        /// </summary>
-        /// <param name="featureId">The new <see cref="FeatureId" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="FeatureNavigationRegistration" /> using the specified <paramref name="featureId" /> for <see cref="FeatureId" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public FeatureNavigationRegistration DeepCloneWithFeatureId(string featureId)
-        {
-            var result = new FeatureNavigationRegistration(
-                                 this.Id?.DeepClone(),
-                                 featureId,
-                                 this.NavigationItems?.DeepClone());
+                                 this.NavigationItems?.DeepClone(),
+                                 this.FeatureId?.DeepClone());
 
             return result;
         }
@@ -190,8 +158,40 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new FeatureNavigationRegistration(
                                  this.Id?.DeepClone(),
-                                 this.FeatureId?.DeepClone(),
-                                 navigationItems);
+                                 navigationItems,
+                                 this.FeatureId?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="FeatureId" />.
+        /// </summary>
+        /// <param name="featureId">The new <see cref="FeatureId" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="FeatureNavigationRegistration" /> using the specified <paramref name="featureId" /> for <see cref="FeatureId" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public FeatureNavigationRegistration DeepCloneWithFeatureId(string featureId)
+        {
+            var result = new FeatureNavigationRegistration(
+                                 this.Id?.DeepClone(),
+                                 this.NavigationItems?.DeepClone(),
+                                 featureId);
 
             return result;
         }
@@ -200,7 +200,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.FeatureNavigationRegistration: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FeatureId = {this.FeatureId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, NavigationItems = {this.NavigationItems?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.FeatureNavigationRegistration: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, NavigationItems = {this.NavigationItems?.ToString() ?? "<null>"}, FeatureId = {this.FeatureId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

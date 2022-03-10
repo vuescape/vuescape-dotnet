@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<FeatureNavigationRegistration>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.FeatureNavigationRegistration: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FeatureId = {systemUnderTest.FeatureId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, NavigationItems = {systemUnderTest.NavigationItems?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.FeatureNavigationRegistration: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, NavigationItems = {systemUnderTest.NavigationItems?.ToString() ?? "<null>"}, FeatureId = {systemUnderTest.FeatureId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -65,8 +65,8 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new FeatureNavigationRegistration(
                                              null,
-                                             referenceObject.FeatureId,
-                                             referenceObject.NavigationItems);
+                                             referenceObject.NavigationItems,
+                                             referenceObject.FeatureId);
 
                         return result;
                     },
@@ -83,49 +83,13 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new FeatureNavigationRegistration(
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.FeatureId,
-                                             referenceObject.NavigationItems);
+                                             referenceObject.NavigationItems,
+                                             referenceObject.FeatureId);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "id", "white space", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<FeatureNavigationRegistration>
-                {
-                    Name = "constructor should throw ArgumentNullException when parameter 'featureId' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<FeatureNavigationRegistration>();
-
-                        var result = new FeatureNavigationRegistration(
-                                             referenceObject.Id,
-                                             null,
-                                             referenceObject.NavigationItems);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "featureId", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<FeatureNavigationRegistration>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'featureId' is white space scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<FeatureNavigationRegistration>();
-
-                        var result = new FeatureNavigationRegistration(
-                                             referenceObject.Id,
-                                             Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.NavigationItems);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "featureId", "white space", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<FeatureNavigationRegistration>
@@ -137,8 +101,8 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new FeatureNavigationRegistration(
                                              referenceObject.Id,
-                                             referenceObject.FeatureId,
-                                             null);
+                                             null,
+                                             referenceObject.FeatureId);
 
                         return result;
                     },
@@ -155,8 +119,8 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new FeatureNavigationRegistration(
                                              referenceObject.Id,
-                                             referenceObject.FeatureId,
-                                             new List<NavigationItemBase>());
+                                             new List<NavigationItemBase>(),
+                                             referenceObject.FeatureId);
 
                         return result;
                     },
@@ -173,13 +137,49 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new FeatureNavigationRegistration(
                                              referenceObject.Id,
-                                             referenceObject.FeatureId,
-                                             new NavigationItemBase[0].Concat(referenceObject.NavigationItems).Concat(new NavigationItemBase[] { null }).Concat(referenceObject.NavigationItems).ToList());
+                                             new NavigationItemBase[0].Concat(referenceObject.NavigationItems).Concat(new NavigationItemBase[] { null }).Concat(referenceObject.NavigationItems).ToList(),
+                                             referenceObject.FeatureId);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "navigationItems", "contains at least one null element", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<FeatureNavigationRegistration>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'featureId' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<FeatureNavigationRegistration>();
+
+                        var result = new FeatureNavigationRegistration(
+                                             referenceObject.Id,
+                                             referenceObject.NavigationItems,
+                                             null);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "featureId", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<FeatureNavigationRegistration>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'featureId' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<FeatureNavigationRegistration>();
+
+                        var result = new FeatureNavigationRegistration(
+                                             referenceObject.Id,
+                                             referenceObject.NavigationItems,
+                                             Invariant($"  {Environment.NewLine}  "));
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "featureId", "white space", },
                 });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<FeatureNavigationRegistration> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<FeatureNavigationRegistration>()
@@ -195,35 +195,14 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new FeatureNavigationRegistration(
                                                       referenceObject.Id,
-                                                      referenceObject.FeatureId,
-                                                      referenceObject.NavigationItems),
+                                                      referenceObject.NavigationItems,
+                                                      referenceObject.FeatureId),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
 
                         return result;
                     },
                     PropertyName = "Id",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<FeatureNavigationRegistration>
-                {
-                    Name = "FeatureId should return same 'featureId' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<FeatureNavigationRegistration>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<FeatureNavigationRegistration>
-                        {
-                            SystemUnderTest = new FeatureNavigationRegistration(
-                                                      referenceObject.Id,
-                                                      referenceObject.FeatureId,
-                                                      referenceObject.NavigationItems),
-                            ExpectedPropertyValue = referenceObject.FeatureId,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "FeatureId",
                 })
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<FeatureNavigationRegistration>
@@ -237,14 +216,35 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new FeatureNavigationRegistration(
                                                       referenceObject.Id,
-                                                      referenceObject.FeatureId,
-                                                      referenceObject.NavigationItems),
+                                                      referenceObject.NavigationItems,
+                                                      referenceObject.FeatureId),
                             ExpectedPropertyValue = referenceObject.NavigationItems,
                         };
 
                         return result;
                     },
                     PropertyName = "NavigationItems",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<FeatureNavigationRegistration>
+                {
+                    Name = "FeatureId should return same 'featureId' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<FeatureNavigationRegistration>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<FeatureNavigationRegistration>
+                        {
+                            SystemUnderTest = new FeatureNavigationRegistration(
+                                                      referenceObject.Id,
+                                                      referenceObject.NavigationItems,
+                                                      referenceObject.FeatureId),
+                            ExpectedPropertyValue = referenceObject.FeatureId,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "FeatureId",
                 });
 
         private static readonly DeepCloneWithTestScenarios<FeatureNavigationRegistration> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<FeatureNavigationRegistration>()
@@ -271,26 +271,6 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<FeatureNavigationRegistration>
                 {
-                    Name = "DeepCloneWithFeatureId should deep clone object and replace FeatureId with the provided featureId",
-                    WithPropertyName = "FeatureId",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<FeatureNavigationRegistration>();
-
-                        var referenceObject = A.Dummy<FeatureNavigationRegistration>().ThatIs(_ => !systemUnderTest.FeatureId.IsEqualTo(_.FeatureId));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<FeatureNavigationRegistration>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.FeatureId,
-                        };
-
-                        return result;
-                    },
-                })
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<FeatureNavigationRegistration>
-                {
                     Name = "DeepCloneWithNavigationItems should deep clone object and replace NavigationItems with the provided navigationItems",
                     WithPropertyName = "NavigationItems",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
@@ -303,6 +283,26 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = systemUnderTest,
                             DeepCloneWithValue = referenceObject.NavigationItems,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<FeatureNavigationRegistration>
+                {
+                    Name = "DeepCloneWithFeatureId should deep clone object and replace FeatureId with the provided featureId",
+                    WithPropertyName = "FeatureId",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<FeatureNavigationRegistration>();
+
+                        var referenceObject = A.Dummy<FeatureNavigationRegistration>().ThatIs(_ => !systemUnderTest.FeatureId.IsEqualTo(_.FeatureId));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<FeatureNavigationRegistration>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.FeatureId,
                         };
 
                         return result;
@@ -321,23 +321,23 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new FeatureNavigationRegistration(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.FeatureId,
-                                ReferenceObjectForEquatableTestScenarios.NavigationItems),
+                                ReferenceObjectForEquatableTestScenarios.NavigationItems,
+                                ReferenceObjectForEquatableTestScenarios.FeatureId),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new FeatureNavigationRegistration[]
                     {
                         new FeatureNavigationRegistration(
                                 A.Dummy<FeatureNavigationRegistration>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
-                                ReferenceObjectForEquatableTestScenarios.FeatureId,
-                                ReferenceObjectForEquatableTestScenarios.NavigationItems),
+                                ReferenceObjectForEquatableTestScenarios.NavigationItems,
+                                ReferenceObjectForEquatableTestScenarios.FeatureId),
                         new FeatureNavigationRegistration(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                A.Dummy<FeatureNavigationRegistration>().Whose(_ => !_.FeatureId.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FeatureId)).FeatureId,
-                                ReferenceObjectForEquatableTestScenarios.NavigationItems),
+                                A.Dummy<FeatureNavigationRegistration>().Whose(_ => !_.NavigationItems.IsEqualTo(ReferenceObjectForEquatableTestScenarios.NavigationItems)).NavigationItems,
+                                ReferenceObjectForEquatableTestScenarios.FeatureId),
                         new FeatureNavigationRegistration(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.FeatureId,
-                                A.Dummy<FeatureNavigationRegistration>().Whose(_ => !_.NavigationItems.IsEqualTo(ReferenceObjectForEquatableTestScenarios.NavigationItems)).NavigationItems),
+                                ReferenceObjectForEquatableTestScenarios.NavigationItems,
+                                A.Dummy<FeatureNavigationRegistration>().Whose(_ => !_.FeatureId.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FeatureId)).FeatureId),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -648,7 +648,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "FeatureId", "NavigationItems" };
+                var propertyNames = new string[] { "Id", "NavigationItems", "FeatureId" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

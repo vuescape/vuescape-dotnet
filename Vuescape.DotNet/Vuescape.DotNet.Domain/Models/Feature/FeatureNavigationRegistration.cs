@@ -22,7 +22,7 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="id">The ID.</param>
         /// <param name="navigationItems">The navigation items describing how to render navigation to this feature.</param>
-        /// <param name="featureId">The ID of the <see cref="Feature"/> to be registered.</param>
+        /// <param name="featureId">OPTIONAL.  The ID of the <see cref="Feature"/> to be registered.</param>
         public FeatureNavigationRegistration(string id, IReadOnlyList<NavigationItemBase> navigationItems, string featureId = null)
         {
             id.MustForArg(nameof(id)).NotBeNullNorWhiteSpace();

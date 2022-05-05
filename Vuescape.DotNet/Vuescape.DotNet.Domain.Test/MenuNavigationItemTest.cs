@@ -25,7 +25,24 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static MenuNavigationItemTest()
         {
-            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios();
+            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios()
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<MenuNavigationItem>
+                    {
+                        Name = "constructor should throw ArgumentNullException when parameter 'link' is null scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<MenuNavigationItem>();
+
+                            var result = new MenuNavigationItem(
+                                null,
+                                referenceObject.MenuTitlePath);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentNullException),
+                        ExpectedExceptionMessageContains = new[] { "link" },
+                    });
         }
     }
 }

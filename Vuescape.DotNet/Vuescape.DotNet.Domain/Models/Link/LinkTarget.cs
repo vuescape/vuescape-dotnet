@@ -20,7 +20,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Left Pane.
         /// </summary>
-        LeftPane,
+        LeftPane = 2,
 
         /// <summary>
         /// Center Pane.
@@ -33,28 +33,23 @@ namespace Vuescape.DotNet.Domain
         RightPane,
 
         /// <summary>
-        /// Modal.
-        /// </summary>
-        Modal,
-
-        /// <summary>
         /// Navigate to Url or route in the current window/tab.
         /// </summary>
-        NavigateCurrentWindow,
+        CurrentWindow,
 
         /// <summary>
         /// Navigate to Url or route in a new window/tab.
         /// </summary>
-        NavigateNewWindow,
+        NewWindow,
 
         /// <summary>
-        /// Download text file.
+        /// Download.
         /// </summary>
-        DownloadTextFile,
+        Download,
 
         /// <summary>
-        /// Download file with Base64 encoding.
+        /// Modal.
         /// </summary>
-        DownloadBase64EncodedFile,
+        Modal,
     }
 }

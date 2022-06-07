@@ -111,11 +111,11 @@ namespace Vuescape.DotNet.Domain
                 case OBeautifulCode.DataStructure.LinkTarget.RightPane:
                     return LinkTarget.RightPane;
                 case OBeautifulCode.DataStructure.LinkTarget.CurrentWindow:
-                    return LinkTarget.NavigateCurrentWindow;
+                    return LinkTarget.CurrentWindow;
                 case OBeautifulCode.DataStructure.LinkTarget.NewWindow:
-                    return LinkTarget.NavigateNewWindow;
+                    return LinkTarget.NewWindow;
                 case OBeautifulCode.DataStructure.LinkTarget.Download:
-                    return LinkTarget.DownloadBase64EncodedFile;
+                    return LinkTarget.Download;
                 case OBeautifulCode.DataStructure.LinkTarget.Modal:
                     return LinkTarget.Modal;
                 default:

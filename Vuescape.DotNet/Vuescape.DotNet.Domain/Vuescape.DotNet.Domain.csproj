@@ -152,8 +152,12 @@
     <Compile Include="Models\Feature\Navigation\NavigationLink.designer.cs">
       <DependentUpon>NavigationLink.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Feature\Ops\DownloadFileOp.cs" />
     <Compile Include="Models\Feature\Ops\DisplayReportOp.designer.cs">
       <DependentUpon>DisplayReportOp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Feature\Ops\DownloadFileOp.designer.cs">
+      <DependentUpon>DownloadFileOp.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Feature\Ops\LinkedResourceOpBase.designer.cs">
       <DependentUpon>LinkedResourceOpBase.cs</DependentUpon>

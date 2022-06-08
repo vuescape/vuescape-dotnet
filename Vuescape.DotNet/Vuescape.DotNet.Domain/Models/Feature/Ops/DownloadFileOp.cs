@@ -7,6 +7,8 @@
 // ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.DataStructure;
     using OBeautifulCode.Type;
@@ -30,6 +32,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the LinkTarget.
         /// </summary>
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Require an instance variable instead of static variable so that the property will serialize.")]
         public LinkTarget LinkTarget => LinkTarget.Download;
     }
 }

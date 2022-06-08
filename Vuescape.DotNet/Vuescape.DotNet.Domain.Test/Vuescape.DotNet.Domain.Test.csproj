@@ -280,6 +280,10 @@
     <Compile Include="DotNetDummyFactoryTest.designer.cs">
       <DependentUpon>DotNetDummyFactoryTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="DownloadFileOpTest.cs" />
+    <Compile Include="DownloadFileOpTest.designer.cs">
+      <DependentUpon>DownloadFileOpTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="FeatureNavigationRegistrationTest.cs" />
     <Compile Include="FeatureNavigationRegistrationTest.designer.cs">
       <DependentUpon>FeatureNavigationRegistrationTest.cs</DependentUpon>

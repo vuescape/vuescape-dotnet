@@ -21,6 +21,7 @@ namespace Vuescape.DotNet.Domain.Test
     using global::OBeautifulCode.Assertion.Recipes;
     using global::OBeautifulCode.AutoFakeItEasy;
     using global::OBeautifulCode.CodeGen.ModelObject.Recipes;
+    using global::OBeautifulCode.DataStructure;
     using global::OBeautifulCode.Equality.Recipes;
     using global::OBeautifulCode.Math.Recipes;
     using global::OBeautifulCode.Reflection.Recipes;
@@ -33,410 +34,103 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class TreeTableTest
+    public static partial class DownloadFileOpTest
     {
-        private static readonly StringRepresentationTestScenarios<TreeTable> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<TreeTable>()
+        private static readonly StringRepresentationTestScenarios<DownloadFileOp> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<DownloadFileOp>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<TreeTable>
+                new StringRepresentationTestScenario<DownloadFileOp>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TreeTable>();
+                        var systemUnderTest = A.Dummy<DownloadFileOp>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<TreeTable>
+                        var result = new SystemUnderTestExpectedStringRepresentation<DownloadFileOp>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TreeTable: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ColumnDefinitions = {systemUnderTest.ColumnDefinitions?.ToString() ?? "<null>"}, Content = {systemUnderTest.Content?.ToString() ?? "<null>"}, Behaviors = {systemUnderTest.Behaviors?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.DownloadFileOp: LinkedResource = {systemUnderTest.LinkedResource?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<TreeTable> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<TreeTable>()
+        private static readonly ConstructorArgumentValidationTestScenarios<DownloadFileOp> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<DownloadFileOp>()
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
+                new ConstructorArgumentValidationTestScenario<DownloadFileOp>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'id' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'linkedResource' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new TreeTable(
-                                             null,
-                                             referenceObject.ColumnDefinitions,
-                                             referenceObject.Content,
-                                             referenceObject.Behaviors);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "id", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'id' is white space scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new TreeTable(
-                                             Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.ColumnDefinitions,
-                                             referenceObject.Content,
-                                             referenceObject.Behaviors);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "id", "white space", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
-                {
-                    Name = "constructor should throw ArgumentNullException when parameter 'columnDefinitions' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new TreeTable(
-                                             referenceObject.Id,
-                                             null,
-                                             referenceObject.Content,
-                                             referenceObject.Behaviors);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "columnDefinitions", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'columnDefinitions' is an empty enumerable scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new TreeTable(
-                                             referenceObject.Id,
-                                             new List<ColumnDefinition>(),
-                                             referenceObject.Content,
-                                             referenceObject.Behaviors);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "columnDefinitions", "is an empty enumerable", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'columnDefinitions' contains a null element scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new TreeTable(
-                                             referenceObject.Id,
-                                             new ColumnDefinition[0].Concat(referenceObject.ColumnDefinitions).Concat(new ColumnDefinition[] { null }).Concat(referenceObject.ColumnDefinitions).ToList(),
-                                             referenceObject.Content,
-                                             referenceObject.Behaviors);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "columnDefinitions", "contains at least one null element", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
-                {
-                    Name = "constructor should throw ArgumentNullException when parameter 'content' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new TreeTable(
-                                             referenceObject.Id,
-                                             referenceObject.ColumnDefinitions,
-                                             null,
-                                             referenceObject.Behaviors);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "content", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
-                {
-                    Name = "constructor should throw ArgumentNullException when parameter 'behaviors' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new TreeTable(
-                                             referenceObject.Id,
-                                             referenceObject.ColumnDefinitions,
-                                             referenceObject.Content,
+                        var result = new DownloadFileOp(
                                              null);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "behaviors", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'behaviors' is an empty enumerable scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new TreeTable(
-                                             referenceObject.Id,
-                                             referenceObject.ColumnDefinitions,
-                                             referenceObject.Content,
-                                             new List<ClientBehaviorBase>());
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "behaviors", "is an empty enumerable", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TreeTable>
-                {
-                    Name = "constructor should throw ArgumentException when parameter 'behaviors' contains a null element scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new TreeTable(
-                                             referenceObject.Id,
-                                             referenceObject.ColumnDefinitions,
-                                             referenceObject.Content,
-                                             new ClientBehaviorBase[0].Concat(referenceObject.Behaviors).Concat(new ClientBehaviorBase[] { null }).Concat(referenceObject.Behaviors).ToList());
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "behaviors", "contains at least one null element", },
+                    ExpectedExceptionMessageContains = new[] { "linkedResource", },
                 });
 
-        private static readonly ConstructorPropertyAssignmentTestScenarios<TreeTable> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TreeTable>()
+        private static readonly ConstructorPropertyAssignmentTestScenarios<DownloadFileOp> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<DownloadFileOp>()
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TreeTable>
+                new ConstructorPropertyAssignmentTestScenario<DownloadFileOp>
                 {
-                    Name = "Id should return same 'id' parameter passed to constructor when getting",
+                    Name = "LinkedResource should return same 'linkedResource' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TreeTable>();
+                        var referenceObject = A.Dummy<DownloadFileOp>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<TreeTable>
+                        var result = new SystemUnderTestExpectedPropertyValue<DownloadFileOp>
                         {
-                            SystemUnderTest = new TreeTable(
-                                                      referenceObject.Id,
-                                                      referenceObject.ColumnDefinitions,
-                                                      referenceObject.Content,
-                                                      referenceObject.Behaviors),
-                            ExpectedPropertyValue = referenceObject.Id,
+                            SystemUnderTest = new DownloadFileOp(
+                                                      referenceObject.LinkedResource),
+                            ExpectedPropertyValue = referenceObject.LinkedResource,
                         };
 
                         return result;
                     },
-                    PropertyName = "Id",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TreeTable>
-                {
-                    Name = "ColumnDefinitions should return same 'columnDefinitions' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<TreeTable>
-                        {
-                            SystemUnderTest = new TreeTable(
-                                                      referenceObject.Id,
-                                                      referenceObject.ColumnDefinitions,
-                                                      referenceObject.Content,
-                                                      referenceObject.Behaviors),
-                            ExpectedPropertyValue = referenceObject.ColumnDefinitions,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "ColumnDefinitions",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TreeTable>
-                {
-                    Name = "Content should return same 'content' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<TreeTable>
-                        {
-                            SystemUnderTest = new TreeTable(
-                                                      referenceObject.Id,
-                                                      referenceObject.ColumnDefinitions,
-                                                      referenceObject.Content,
-                                                      referenceObject.Behaviors),
-                            ExpectedPropertyValue = referenceObject.Content,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "Content",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TreeTable>
-                {
-                    Name = "Behaviors should return same 'behaviors' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TreeTable>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<TreeTable>
-                        {
-                            SystemUnderTest = new TreeTable(
-                                                      referenceObject.Id,
-                                                      referenceObject.ColumnDefinitions,
-                                                      referenceObject.Content,
-                                                      referenceObject.Behaviors),
-                            ExpectedPropertyValue = referenceObject.Behaviors,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "Behaviors",
+                    PropertyName = "LinkedResource",
                 });
 
-        private static readonly DeepCloneWithTestScenarios<TreeTable> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TreeTable>()
+        private static readonly DeepCloneWithTestScenarios<DownloadFileOp> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<DownloadFileOp>()
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<TreeTable>
+                new DeepCloneWithTestScenario<DownloadFileOp>
                 {
-                    Name = "DeepCloneWithId should deep clone object and replace Id with the provided id",
-                    WithPropertyName = "Id",
+                    Name = "DeepCloneWithLinkedResource should deep clone object and replace LinkedResource with the provided linkedResource",
+                    WithPropertyName = "LinkedResource",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TreeTable>();
+                        var systemUnderTest = A.Dummy<DownloadFileOp>();
 
-                        var referenceObject = A.Dummy<TreeTable>().ThatIs(_ => !systemUnderTest.Id.IsEqualTo(_.Id));
+                        var referenceObject = A.Dummy<DownloadFileOp>().ThatIs(_ => !systemUnderTest.LinkedResource.IsEqualTo(_.LinkedResource));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<TreeTable>
+                        var result = new SystemUnderTestDeepCloneWithValue<DownloadFileOp>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Id,
-                        };
-
-                        return result;
-                    },
-                })
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<TreeTable>
-                {
-                    Name = "DeepCloneWithColumnDefinitions should deep clone object and replace ColumnDefinitions with the provided columnDefinitions",
-                    WithPropertyName = "ColumnDefinitions",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<TreeTable>();
-
-                        var referenceObject = A.Dummy<TreeTable>().ThatIs(_ => !systemUnderTest.ColumnDefinitions.IsEqualTo(_.ColumnDefinitions));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<TreeTable>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.ColumnDefinitions,
-                        };
-
-                        return result;
-                    },
-                })
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<TreeTable>
-                {
-                    Name = "DeepCloneWithContent should deep clone object and replace Content with the provided content",
-                    WithPropertyName = "Content",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<TreeTable>();
-
-                        var referenceObject = A.Dummy<TreeTable>().ThatIs(_ => !systemUnderTest.Content.IsEqualTo(_.Content));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<TreeTable>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Content,
-                        };
-
-                        return result;
-                    },
-                })
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<TreeTable>
-                {
-                    Name = "DeepCloneWithBehaviors should deep clone object and replace Behaviors with the provided behaviors",
-                    WithPropertyName = "Behaviors",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<TreeTable>();
-
-                        var referenceObject = A.Dummy<TreeTable>().ThatIs(_ => !systemUnderTest.Behaviors.IsEqualTo(_.Behaviors));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<TreeTable>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Behaviors,
+                            DeepCloneWithValue = referenceObject.LinkedResource,
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly TreeTable ReferenceObjectForEquatableTestScenarios = A.Dummy<TreeTable>();
+        private static readonly DownloadFileOp ReferenceObjectForEquatableTestScenarios = A.Dummy<DownloadFileOp>();
 
-        private static readonly EquatableTestScenarios<TreeTable> EquatableTestScenarios = new EquatableTestScenarios<TreeTable>()
+        private static readonly EquatableTestScenarios<DownloadFileOp> EquatableTestScenarios = new EquatableTestScenarios<DownloadFileOp>()
             .AddScenario(() =>
-                new EquatableTestScenario<TreeTable>
+                new EquatableTestScenario<DownloadFileOp>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new TreeTable[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new DownloadFileOp[]
                     {
-                        new TreeTable(
-                                ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.ColumnDefinitions,
-                                ReferenceObjectForEquatableTestScenarios.Content,
-                                ReferenceObjectForEquatableTestScenarios.Behaviors),
+                        new DownloadFileOp(
+                                ReferenceObjectForEquatableTestScenarios.LinkedResource),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new TreeTable[]
+                    ObjectsThatAreNotEqualToReferenceObject = new DownloadFileOp[]
                     {
-                        new TreeTable(
-                                A.Dummy<TreeTable>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
-                                ReferenceObjectForEquatableTestScenarios.ColumnDefinitions,
-                                ReferenceObjectForEquatableTestScenarios.Content,
-                                ReferenceObjectForEquatableTestScenarios.Behaviors),
-                        new TreeTable(
-                                ReferenceObjectForEquatableTestScenarios.Id,
-                                A.Dummy<TreeTable>().Whose(_ => !_.ColumnDefinitions.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ColumnDefinitions)).ColumnDefinitions,
-                                ReferenceObjectForEquatableTestScenarios.Content,
-                                ReferenceObjectForEquatableTestScenarios.Behaviors),
-                        new TreeTable(
-                                ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.ColumnDefinitions,
-                                A.Dummy<TreeTable>().Whose(_ => !_.Content.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Content)).Content,
-                                ReferenceObjectForEquatableTestScenarios.Behaviors),
-                        new TreeTable(
-                                ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.ColumnDefinitions,
-                                ReferenceObjectForEquatableTestScenarios.Content,
-                                A.Dummy<TreeTable>().Whose(_ => !_.Behaviors.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Behaviors)).Behaviors),
+                        new DownloadFileOp(
+                                A.Dummy<DownloadFileOp>().Whose(_ => !_.LinkedResource.IsEqualTo(ReferenceObjectForEquatableTestScenarios.LinkedResource)).LinkedResource),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -445,6 +139,7 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<int>(),
                         A.Dummy<int?>(),
                         A.Dummy<Guid>(),
+                        A.Dummy<DisplayReportOp>(),
                     },
                 });
 
@@ -466,12 +161,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void TreeTable___Should_implement_IModel_of_TreeTable___When_reflecting()
+            public static void DownloadFileOp___Should_implement_IModel_of_DownloadFileOp___When_reflecting()
             {
                 // Arrange
-                var type = typeof(TreeTable);
+                var type = typeof(DownloadFileOp);
 
-                var expectedModelMethods = typeof(IModel<TreeTable>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<DownloadFileOp>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -481,7 +176,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<TreeTable>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<DownloadFileOp>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -499,10 +194,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void TreeTable___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void DownloadFileOp___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(TreeTable);
+                var type = typeof(DownloadFileOp);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -682,10 +377,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<TreeTable>();
+                var systemUnderTest = A.Dummy<DownloadFileOp>();
 
                 // Act
-                var actual = (TreeTable)systemUnderTest.Clone();
+                var actual = (DownloadFileOp)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -709,7 +404,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<TreeTable>();
+                var systemUnderTest = A.Dummy<DownloadFileOp>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -718,40 +413,16 @@ namespace Vuescape.DotNet.Domain.Test
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
 
-                if (systemUnderTest.ColumnDefinitions == null)
+                if (systemUnderTest.LinkedResource == null)
                 {
-                    actual.ColumnDefinitions.AsTest().Must().BeNull();
+                    actual.LinkedResource.AsTest().Must().BeNull();
                 }
-                else if (!actual.ColumnDefinitions.GetType().IsValueType)
+                else if (!actual.LinkedResource.GetType().IsValueType)
                 {
                     // When the declared type is a reference type, we still have to check the runtime type.
                     // The object could be a boxed value type, which will fail this asseration because
                     // a deep clone of a value type object is the same object.
-                    actual.ColumnDefinitions.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.ColumnDefinitions);
-                }
-
-                if (systemUnderTest.Content == null)
-                {
-                    actual.Content.AsTest().Must().BeNull();
-                }
-                else if (!actual.Content.GetType().IsValueType)
-                {
-                    // When the declared type is a reference type, we still have to check the runtime type.
-                    // The object could be a boxed value type, which will fail this asseration because
-                    // a deep clone of a value type object is the same object.
-                    actual.Content.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Content);
-                }
-
-                if (systemUnderTest.Behaviors == null)
-                {
-                    actual.Behaviors.AsTest().Must().BeNull();
-                }
-                else if (!actual.Behaviors.GetType().IsValueType)
-                {
-                    // When the declared type is a reference type, we still have to check the runtime type.
-                    // The object could be a boxed value type, which will fail this asseration because
-                    // a deep clone of a value type object is the same object.
-                    actual.Behaviors.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Behaviors);
+                    actual.LinkedResource.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.LinkedResource);
                 }
             }
 
@@ -771,7 +442,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "ColumnDefinitions", "Content", "Behaviors" };
+                var propertyNames = new string[] { "LinkedResource" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 
@@ -784,12 +455,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (TreeTable)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (DownloadFileOp)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(TreeTable).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(DownloadFileOp).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var actualPropertyValue = propertyInfo.GetValue(actual);
 
@@ -851,7 +522,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TreeTable>();
+                var expected = A.Dummy<DownloadFileOp>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -880,7 +551,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TreeTable>();
+                var expected = A.Dummy<DownloadFileOp>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -909,7 +580,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TreeTable>();
+                var expected = A.Dummy<DownloadFileOp>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -938,7 +609,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TreeTable>();
+                var expected = A.Dummy<DownloadFileOp>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -972,8 +643,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                TreeTable systemUnderTest1 = null;
-                TreeTable systemUnderTest2 = null;
+                DownloadFileOp systemUnderTest1 = null;
+                DownloadFileOp systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -1003,7 +674,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TreeTable systemUnderTest = null;
+                    DownloadFileOp systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -1152,8 +823,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                TreeTable systemUnderTest1 = null;
-                TreeTable systemUnderTest2 = null;
+                DownloadFileOp systemUnderTest1 = null;
+                DownloadFileOp systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -1183,7 +854,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TreeTable systemUnderTest = null;
+                    DownloadFileOp systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -1329,14 +1000,157 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TreeTable___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_LinkedResourceOpBase___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TreeTable systemUnderTest = null;
+                    LinkedResourceOpBase systemUnderTest = null;
+
+                    // Act
+                    var actual = scenario.ReferenceObject.Equals((LinkedResourceOpBase)systemUnderTest);
+
+                    // Assert
+                    actual.AsTest().Must().BeFalse(because: scenario.Id);
+                }
+            }
+
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            public static void Equals_with_LinkedResourceOpBase___Should_return_true___When_parameter_other_is_same_object()
+            {
+                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange, Act
+                    var actual = scenario.ReferenceObject.Equals((LinkedResourceOpBase)scenario.ReferenceObject);
+
+                    // Assert
+                    actual.AsTest().Must().BeTrue(because: scenario.Id);
+                }
+            }
+
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            public static void Equals_with_LinkedResourceOpBase___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            {
+                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange, Act
+                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((LinkedResourceOpBase)_)).ToList();
+
+                    // Assert
+                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
+                }
+            }
+
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            public static void Equals_with_LinkedResourceOpBase___Should_return_false___When_objects_being_compared_have_different_property_values()
+            {
+                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange, Act
+                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((LinkedResourceOpBase)_)).ToList();
+
+                    // Assert
+                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
+                }
+            }
+
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            public static void Equals_with_LinkedResourceOpBase___Should_return_true___When_objects_being_compared_have_same_property_values()
+            {
+                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange, Act
+                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((LinkedResourceOpBase)_)).ToList();
+
+                    // Assert
+                    actuals.AsTest().Must().Each().BeTrue(because: scenario.Id);
+                }
+            }
+
+            [Fact]
+            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+            public static void Equals_with_DownloadFileOp___Should_return_false___When_parameter_other_is_null()
+            {
+                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
+
+                foreach (var scenario in scenarios)
+                {
+                    // Arrange
+                    DownloadFileOp systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1360,7 +1174,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TreeTable___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_DownloadFileOp___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1388,7 +1202,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TreeTable___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_DownloadFileOp___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1416,7 +1230,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TreeTable___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_DownloadFileOp___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1444,7 +1258,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TreeTable___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_DownloadFileOp___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1605,7 +1419,7 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
         public static class Hashing
         {
-            [Fact(Skip = "It's possible (and even probable after a few runs of this test) that two dummy, unequal models will have the same hash code.  The model being tested contains at least one property who's type (or a type nested within the generic type, or a property of the IModel type) is a dictionary with keys that are not comparable or an unordered collection with elements that are not comparable.  In these cases the hashing method cannot hash the elements and must resort to hashing the element count.  Two dummies could easily have the same element count for such a type.")]
+            [Fact]
             [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
             [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
             [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]

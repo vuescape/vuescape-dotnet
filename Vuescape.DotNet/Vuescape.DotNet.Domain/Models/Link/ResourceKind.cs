@@ -18,7 +18,7 @@ namespace Vuescape.DotNet.Domain
         Unknown,
 
         /// <summary>
-        /// A Report.
+        /// A <see cref="Report"/>.
         /// </summary>
         Report,
 
@@ -61,5 +61,15 @@ namespace Vuescape.DotNet.Domain
         /// A PDF file.
         /// </summary>
         Pdf,
+
+        /// <summary>
+        /// A Zip file.
+        /// </summary>
+        Zip,
+
+        /// <summary>
+        /// Text.
+        /// </summary>
+        Text,
     }
 }

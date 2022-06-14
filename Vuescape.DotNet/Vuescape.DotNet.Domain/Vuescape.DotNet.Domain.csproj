@@ -130,6 +130,10 @@
       <DependentUpon>ColumnDefinition.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ColumnDefinition\ColumnWrapBehavior.cs" />
+    <Compile Include="Models\Content\Content.designer.cs">
+      <DependentUpon>Content.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Content\PayloadEncodingKind.cs" />
     <Compile Include="Models\Feature\Feature.designer.cs">
       <DependentUpon>Feature.cs</DependentUpon>
     </Compile>
@@ -182,6 +186,7 @@
     <Compile Include="Models\Link\Link.designer.cs">
       <DependentUpon>Link.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Content\Content.cs" />
     <Compile Include="Models\Report\Report.cs" />
     <Compile Include="Models\Report\Report.designer.cs">
       <DependentUpon>Report.cs</DependentUpon>

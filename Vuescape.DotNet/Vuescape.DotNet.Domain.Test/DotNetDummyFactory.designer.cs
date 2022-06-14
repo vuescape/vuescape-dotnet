@@ -87,6 +87,13 @@ namespace Vuescape.DotNet.Domain.Test
                              });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new Content(
+                                 A.Dummy<string>(),
+                                 A.Dummy<ResourceKind>(),
+                                 A.Dummy<PayloadEncodingKind>(),
+                                 A.Dummy<IReadOnlyDictionary<string, UiObject>>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ConvertObcToVuescapeReportOp(
                                  A.Dummy<OBeautifulCode.DataStructure.Report>(),
                                  A.Dummy<ObcToVuescapeConversionContext>(),

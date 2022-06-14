@@ -266,6 +266,10 @@
     <Compile Include="ColumnDefinitionTest.designer.cs">
       <DependentUpon>ColumnDefinitionTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContentTest.cs" />
+    <Compile Include="ContentTest.designer.cs">
+      <DependentUpon>ContentTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConvertObcToVuescapeReportOpTest.cs" />
     <Compile Include="ConvertObcToVuescapeReportOpTest.designer.cs">
       <DependentUpon>ConvertObcToVuescapeReportOpTest.cs</DependentUpon>

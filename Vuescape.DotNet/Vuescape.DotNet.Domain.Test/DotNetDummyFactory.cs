@@ -59,7 +59,7 @@ namespace Vuescape.DotNet.Domain.Test
                 case UiObjectType.Guid:
                     return A.Dummy<Guid>();
                 case UiObjectType.Enum:
-                    return A.Dummy<ContentKind>();
+                    return A.Dummy<HoverContentKind>();
                 case UiObjectType.SpecifiedType:
                     return A.Dummy<ClientBehaviorBase>();
                 default:
@@ -320,7 +320,7 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(LinkTarget.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UiObjectType.None);
-            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ContentKind.None);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(HoverContentKind.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(SortComparisonStrategy.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ReportConversionMode.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ColumnWidthBehavior.None);

@@ -25,10 +25,10 @@ namespace Vuescape.DotNet.Domain
         public Hover(
             string title,
             string content,
-            ContentKind contentKind,
+            HoverContentKind contentKind,
             string component = null)
         {
-            new { contentKind }.AsArg().Must().NotBeEqualTo(ContentKind.None);
+            new { contentKind }.AsArg().Must().NotBeEqualTo(HoverContentKind.None);
 
             this.Title = title;
             this.Content = content;
@@ -49,7 +49,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the kind of the content.
         /// </summary>
-        public ContentKind ContentKind { get; private set; }
+        public HoverContentKind ContentKind { get; private set; }
 
         /// <summary>
         /// Gets the component used to render the hover over.

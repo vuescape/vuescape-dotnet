@@ -191,7 +191,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Hover DeepCloneWithContentKind(ContentKind contentKind)
+        public Hover DeepCloneWithContentKind(HoverContentKind contentKind)
         {
             var result = new Hover(
                                  this.Title?.DeepClone(),

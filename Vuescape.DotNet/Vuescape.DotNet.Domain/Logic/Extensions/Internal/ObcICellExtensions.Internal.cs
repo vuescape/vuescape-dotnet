@@ -77,11 +77,11 @@ namespace Vuescape.DotNet.Domain
 
                 if (hoverOver is StringHoverOver stringHoverOver)
                 {
-                    hover = new Hover(null, stringHoverOver.Value, ContentKind.Plaintext);
+                    hover = new Hover(null, stringHoverOver.Value, HoverContentKind.Plaintext);
                 }
                 else if (hoverOver is HtmlHoverOver htmlHover)
                 {
-                    hover = new Hover(null, htmlHover.Html, ContentKind.Html);
+                    hover = new Hover(null, htmlHover.Html, HoverContentKind.Html);
                 }
             }
 
@@ -186,11 +186,11 @@ namespace Vuescape.DotNet.Domain
 
                 if (hoverOver is StringHoverOver stringHoverOver)
                 {
-                    hover = new Hover(null, stringHoverOver.Value, ContentKind.Plaintext);
+                    hover = new Hover(null, stringHoverOver.Value, HoverContentKind.Plaintext);
                 }
                 else if (hoverOver is HtmlHoverOver htmlHover)
                 {
-                    hover = new Hover(null, htmlHover.Html, ContentKind.Html);
+                    hover = new Hover(null, htmlHover.Html, HoverContentKind.Html);
                 }
             }
 

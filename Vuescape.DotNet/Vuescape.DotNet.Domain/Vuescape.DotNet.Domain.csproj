@@ -252,7 +252,7 @@
     <Compile Include="Models\Link\LinkTarget.cs" />
     <Compile Include="Models\TreeTable\CellRenderer.cs" />
     <Compile Include="Models\TreeTable\ColumnSorter.cs" />
-    <Compile Include="Models\TreeTable\ContentKind.cs" />
+    <Compile Include="Models\TreeTable\HoverContentKind.cs" />
     <Compile Include="Models\TreeTable\TreeTableContent.cs" />
     <Compile Include="Models\TreeTable\Hover.cs" />
     <Compile Include="Operations\ConvertObcToVuescapeReportOp.cs" />

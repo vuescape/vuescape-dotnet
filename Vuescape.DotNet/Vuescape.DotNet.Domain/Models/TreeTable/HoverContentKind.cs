@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ContentKind.cs" company="Vuescape">
+// <copyright file="HoverContentKind.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -10,7 +10,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// The kind of content.
     /// </summary>
-    public enum ContentKind
+    public enum HoverContentKind
     {
         /// <summary>
         /// None

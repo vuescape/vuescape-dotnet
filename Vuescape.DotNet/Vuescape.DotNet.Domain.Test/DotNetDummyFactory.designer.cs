@@ -135,7 +135,7 @@ namespace Vuescape.DotNet.Domain.Test
                 () => new Hover(
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<ContentKind>(),
+                                 A.Dummy<HoverContentKind>(),
                                  A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(

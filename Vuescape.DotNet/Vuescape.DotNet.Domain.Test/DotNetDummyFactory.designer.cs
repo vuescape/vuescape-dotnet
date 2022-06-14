@@ -122,6 +122,10 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<ReportPaneTitleBarButtons?>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new DownloadFileOp(
+                                 A.Dummy<ILinkedResource>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Feature(
                                  A.Dummy<string>(),
                                  A.Dummy<IReadOnlyList<IVoidOperation>>()));

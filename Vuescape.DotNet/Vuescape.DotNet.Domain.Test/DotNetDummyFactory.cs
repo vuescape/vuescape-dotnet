@@ -327,6 +327,7 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UnitOfMeasure.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(PaneKind.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(NavigationItemKind.None);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ResourceKind.Unknown);
 
             // var obcDataStructureDummyFactory = new OBeautifulCode.DataStructure.Test.DataStructureDummyFactory();
         }

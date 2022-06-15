@@ -78,8 +78,8 @@ namespace Vuescape.DotNet.Domain
         BsonAsText,
 
         /// <summary>
-        /// BSON as binary.
+        /// BSON as bytes.
         /// </summary>
-        BsonAsBinary,
+        BsonAsBytes,
     }
 }

@@ -22,12 +22,12 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="payload">The content payload.</param>
         /// <param name="resourceKind">The kind of content.</param>
-        /// <param name="payloadEncodingKind">The encoding of the payload.</param>
+        /// <param name="payloadEncodingKind">OPTIONAL. The encoding of the payload.  Defaults to None.</param>
         /// <param name="metadata">OPTIONAL. Metadata associated with the content.</param>
         public Content(
             string payload,
             ResourceKind resourceKind,
-            PayloadEncodingKind payloadEncodingKind,
+            PayloadEncodingKind payloadEncodingKind = PayloadEncodingKind.None,
             IReadOnlyDictionary<string, UiObject> metadata = null)
         {
             resourceKind.AsArg(nameof(resourceKind)).Must().NotBeEqualTo(ResourceKind.Unknown);
@@ -41,18 +41,18 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Creates a new instance of the <see cref="Content"/> class with name metadata populated.
         /// </summary>
+        /// <param name="name">The name of the content.</param>
         /// <param name="payload">The content payload.</param>
         /// <param name="resourceKind">The kind of content.</param>
         /// <param name="payloadEncodingKind">The encoding of the payload.</param>
-        /// <param name="name">The name of the content.</param>
         /// <returns>Content with name metadata populated.</returns>
         public static Content CreateWithName(
+            string name,
             string payload,
             ResourceKind resourceKind,
-            PayloadEncodingKind payloadEncodingKind,
-            string name)
+            PayloadEncodingKind payloadEncodingKind = PayloadEncodingKind.None)
         {
-            name.AsArg(nameof(name)).Must().NotBeNullNorWhiteSpace();
+            name.MustForArg(nameof(name)).NotBeNullNorWhiteSpace();
 
             IReadOnlyDictionary<string, UiObject> metadata = new Dictionary<string, UiObject> { { "name", new UiObject(name) } };
             var result = new Content(payload, resourceKind, payloadEncodingKind, metadata);

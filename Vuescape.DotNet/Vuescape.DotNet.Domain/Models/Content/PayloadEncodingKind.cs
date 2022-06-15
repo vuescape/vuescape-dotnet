@@ -21,10 +21,5 @@ namespace Vuescape.DotNet.Domain
         /// Base64 encoding.
         /// </summary>
         Base64,
-
-        /// <summary>
-        /// Bson encoding.
-        /// </summary>
-        Bson,
     }
 }

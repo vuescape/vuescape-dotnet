@@ -12,7 +12,7 @@ namespace Vuescape.DotNet.Domain.Test
 
     using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Enum.Recipes;
-    
+
     using Xunit;
 
     public class ResourceKindTest
@@ -20,7 +20,7 @@ namespace Vuescape.DotNet.Domain.Test
         [Fact]
         public void ResourceKind___Should_have_same_names_and_values_as_OBC_ResourceKind___Always()
         {
-            // TODO: When OBC has Bson* values then remove where
+            // TODO: When OBC has Bson* values then remove where condition.
             var vuescapeResourceKindMap = typeof(ResourceKind)
                 .GetDefinedEnumValues()
                 .Where(_ =>

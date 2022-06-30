@@ -21,18 +21,18 @@ namespace Vuescape.DotNet.Domain.Test
         public void ResourceKind___Should_have_same_names_and_values_as_OBC_ResourceKind___Always()
         {
             // TODO: When OBC has Bson* values then remove where
-            var vuescapeResourceKinds = typeof(ResourceKind)
+            var vuescapeResourceKindMap = typeof(ResourceKind)
                 .GetDefinedEnumValues()
                 .Where(_ =>
                     (ResourceKind)Convert.ChangeType(_, typeof(ResourceKind)) != ResourceKind.BsonAsBytes &&
                     (ResourceKind)Convert.ChangeType(_, typeof(ResourceKind)) != ResourceKind.BsonAsText)
                 .ToDictionary(_ => Enum.GetName(_.GetType(), _), _ => Convert.ChangeType(_, _.GetTypeCode()));
 
-            var obcResourceKinds = typeof(OBeautifulCode.DataStructure.UrlLinkedResourceKind)
+            var obcResourceKindMap = typeof(OBeautifulCode.DataStructure.UrlLinkedResourceKind)
                 .GetDefinedEnumValues()
                 .ToDictionary(_ => Enum.GetName(_.GetType(), _), _ => Convert.ChangeType(_, _.GetTypeCode()));
 
-            vuescapeResourceKinds.MustForTest(nameof(vuescapeResourceKinds)).BeEqualTo(obcResourceKinds);
+            vuescapeResourceKindMap.MustForTest(nameof(vuescapeResourceKindMap)).BeEqualTo(obcResourceKindMap);
         }
     }
 }

@@ -63,14 +63,14 @@ namespace Vuescape.DotNet.Domain
         Pdf,
 
         /// <summary>
-        /// A Zip file.
-        /// </summary>
-        Zip,
-
-        /// <summary>
-        /// Text.
+        /// A text file.
         /// </summary>
         Text,
+
+        /// <summary>
+        /// A ZIP file.
+        /// </summary>
+        Zip,
 
         /// <summary>
         /// BSON as text.

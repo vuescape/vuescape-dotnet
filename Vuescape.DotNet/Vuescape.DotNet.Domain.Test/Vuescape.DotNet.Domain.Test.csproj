@@ -340,6 +340,7 @@
     <Compile Include="Models\LinkTest.designer.cs">
       <DependentUpon>LinkTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ResourceKindTest.cs" />
     <Compile Include="Models\SlottedUiObjectTest.designer.cs">
       <DependentUpon>SlottedUiObjectTest.cs</DependentUpon>
     </Compile>

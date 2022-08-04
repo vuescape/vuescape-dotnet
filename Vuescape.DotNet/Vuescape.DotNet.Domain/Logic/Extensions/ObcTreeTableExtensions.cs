@@ -54,9 +54,6 @@ namespace Vuescape.DotNet.Domain
             var treeTableRows = ConvertToVuescapeTreeTableRows(obcTreeTable, obcToVuescapeConversionContext);
             var treeTableFooters = ConvertToVuescapeTreeTableFooterRows(obcTreeTable, obcToVuescapeConversionContext);
 
-            // Default to false
-            var isFirstColumnFrozen = ColumnFormatOptionsHelper.IsFrozen(obcTreeTable.TableColumns?.Columns[0], obcTreeTable.TableColumns?.ColumnsFormat, null, obcToVuescapeConversionContext);
-
             // Default to true
             var shouldSyncHeaderRow = obcTreeTable.TableRows?.HeaderRows?.Format?.RowsFormat?.Options.IsFrozen() ?? true;
             var shouldIncludeFooter = treeTableFooters != null && treeTableFooters.Any();

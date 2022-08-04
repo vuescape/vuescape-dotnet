@@ -28,7 +28,6 @@ namespace Vuescape.DotNet.Domain
         /// <param name="shouldSyncHeaderScroll">Whether the table header should scroll with the rows.</param>
         /// <param name="shouldSyncFooterScroll">Whether the table footer should scroll with the rows.</param>
         /// <param name="shouldIncludeFooter">Whether to render a footer.</param>
-        /// <param name="shouldFreezeFirstColumn">Whether the first column is frozen/sticky.</param>
         /// <param name="deadAreaColor">The color of the dead area.</param>
         /// <param name="maxRows">The maximum number of rows to display.</param>
         /// <param name="cssClass">The CSS class to apply to the parent div.</param>
@@ -43,7 +42,6 @@ namespace Vuescape.DotNet.Domain
             bool shouldSyncHeaderScroll,
             bool shouldSyncFooterScroll,
             bool shouldIncludeFooter,
-            bool shouldFreezeFirstColumn,
             string deadAreaColor,
             int? maxRows,
             string cssClass,
@@ -60,7 +58,6 @@ namespace Vuescape.DotNet.Domain
             this.ShouldSyncHeaderScroll = shouldSyncHeaderScroll;
             this.ShouldSyncFooterScroll = shouldSyncFooterScroll;
             this.ShouldIncludeFooter = shouldIncludeFooter;
-            this.ShouldFreezeFirstColumn = shouldFreezeFirstColumn;
             this.DeadAreaColor = deadAreaColor;
             this.MaxRows = maxRows;
             this.CssClass = cssClass;
@@ -107,11 +104,6 @@ namespace Vuescape.DotNet.Domain
         /// Gets a value indicating whether the TreeTable should include a footer.
         /// </summary>
         public bool ShouldIncludeFooter { get; private set; }
-
-        /// <summary>
-        /// Gets a value indicating whether the first column should be sticky. i.e. frozen.
-        /// </summary>
-        public bool ShouldFreezeFirstColumn { get; private set; }
 
         /// <summary>
         /// Gets the color of the dead area if the rows or columns don't fill the parent space.

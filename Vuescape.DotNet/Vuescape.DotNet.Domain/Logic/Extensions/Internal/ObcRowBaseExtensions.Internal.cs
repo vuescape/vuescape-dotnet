@@ -41,7 +41,7 @@ namespace Vuescape.DotNet.Domain
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             // TODO: Apply formatting.
-            var cssClasses = "tree-table-row__tr";
+            var cssClasses = string.Empty;
             var rowId = obcHeaderRow.Id;
 
             var actualColumnIndex = 0;
@@ -101,7 +101,7 @@ namespace Vuescape.DotNet.Domain
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             // TODO: Apply formatting.
-            var cssClasses = "tree-table-row__tr";
+            var cssClasses = string.Empty;
             var rowId = obcFooterRow.Id;
 
             var actualColumnIndex = 0;

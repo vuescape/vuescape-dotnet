@@ -203,7 +203,7 @@ namespace Vuescape.DotNet.Domain
                 if (isSortable)
                 {
                     // Default to not be sorted
-                    columnSorter = new ColumnSorter(SortDirection.None, SortComparisonStrategy.StringCaseInsensitive);
+                    columnSorter = new ColumnSorter(SortDirection.None, SortComparisonStrategy.Default);
                 }
             }
 
@@ -294,7 +294,8 @@ namespace Vuescape.DotNet.Domain
                     widthUnits = UnitOfMeasure.Pixel;
                 }
 
-                result = new ColumnDefinition(columnWidthBehavior, columnWrapBehavior, width, widthUnits);
+                var isFrozen = obcColumnFormat.Options.IsFrozen();
+                result = new ColumnDefinition(columnWidthBehavior, columnWrapBehavior, width, widthUnits, isFrozen);
             }
 
             return result;

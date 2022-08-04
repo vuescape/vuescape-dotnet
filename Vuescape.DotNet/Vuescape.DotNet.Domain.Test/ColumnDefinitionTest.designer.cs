@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ColumnDefinition>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ColumnDefinition: ColumnWidthBehavior = {systemUnderTest.ColumnWidthBehavior.ToString() ?? "<null>"}, ColumnWrapBehavior = {systemUnderTest.ColumnWrapBehavior.ToString() ?? "<null>"}, Width = {systemUnderTest.Width?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, WidthUnitOfMeasure = {systemUnderTest.WidthUnitOfMeasure?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ColumnDefinition: ColumnWidthBehavior = {systemUnderTest.ColumnWidthBehavior.ToString() ?? "<null>"}, ColumnWrapBehavior = {systemUnderTest.ColumnWrapBehavior.ToString() ?? "<null>"}, Width = {systemUnderTest.Width?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, WidthUnitOfMeasure = {systemUnderTest.WidthUnitOfMeasure?.ToString() ?? "<null>"}, IsFrozen = {systemUnderTest.IsFrozen.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -71,7 +71,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ColumnWidthBehavior,
                                                       referenceObject.ColumnWrapBehavior,
                                                       referenceObject.Width,
-                                                      referenceObject.WidthUnitOfMeasure),
+                                                      referenceObject.WidthUnitOfMeasure,
+                                                      referenceObject.IsFrozen),
                             ExpectedPropertyValue = referenceObject.ColumnWidthBehavior,
                         };
 
@@ -93,7 +94,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ColumnWidthBehavior,
                                                       referenceObject.ColumnWrapBehavior,
                                                       referenceObject.Width,
-                                                      referenceObject.WidthUnitOfMeasure),
+                                                      referenceObject.WidthUnitOfMeasure,
+                                                      referenceObject.IsFrozen),
                             ExpectedPropertyValue = referenceObject.ColumnWrapBehavior,
                         };
 
@@ -115,7 +117,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ColumnWidthBehavior,
                                                       referenceObject.ColumnWrapBehavior,
                                                       referenceObject.Width,
-                                                      referenceObject.WidthUnitOfMeasure),
+                                                      referenceObject.WidthUnitOfMeasure,
+                                                      referenceObject.IsFrozen),
                             ExpectedPropertyValue = referenceObject.Width,
                         };
 
@@ -137,13 +140,37 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.ColumnWidthBehavior,
                                                       referenceObject.ColumnWrapBehavior,
                                                       referenceObject.Width,
-                                                      referenceObject.WidthUnitOfMeasure),
+                                                      referenceObject.WidthUnitOfMeasure,
+                                                      referenceObject.IsFrozen),
                             ExpectedPropertyValue = referenceObject.WidthUnitOfMeasure,
                         };
 
                         return result;
                     },
                     PropertyName = "WidthUnitOfMeasure",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ColumnDefinition>
+                {
+                    Name = "IsFrozen should return same 'isFrozen' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ColumnDefinition>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ColumnDefinition>
+                        {
+                            SystemUnderTest = new ColumnDefinition(
+                                                      referenceObject.ColumnWidthBehavior,
+                                                      referenceObject.ColumnWrapBehavior,
+                                                      referenceObject.Width,
+                                                      referenceObject.WidthUnitOfMeasure,
+                                                      referenceObject.IsFrozen),
+                            ExpectedPropertyValue = referenceObject.IsFrozen,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "IsFrozen",
                 });
 
         private static readonly DeepCloneWithTestScenarios<ColumnDefinition> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ColumnDefinition>()
@@ -226,6 +253,26 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ColumnDefinition>
+                {
+                    Name = "DeepCloneWithIsFrozen should deep clone object and replace IsFrozen with the provided isFrozen",
+                    WithPropertyName = "IsFrozen",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ColumnDefinition>();
+
+                        var referenceObject = A.Dummy<ColumnDefinition>().ThatIs(_ => !systemUnderTest.IsFrozen.IsEqualTo(_.IsFrozen));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ColumnDefinition>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.IsFrozen,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly ColumnDefinition ReferenceObjectForEquatableTestScenarios = A.Dummy<ColumnDefinition>();
@@ -242,7 +289,8 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.ColumnWidthBehavior,
                                 ReferenceObjectForEquatableTestScenarios.ColumnWrapBehavior,
                                 ReferenceObjectForEquatableTestScenarios.Width,
-                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure),
+                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure,
+                                ReferenceObjectForEquatableTestScenarios.IsFrozen),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new ColumnDefinition[]
                     {
@@ -250,22 +298,32 @@ namespace Vuescape.DotNet.Domain.Test
                                 A.Dummy<ColumnDefinition>().Whose(_ => !_.ColumnWidthBehavior.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ColumnWidthBehavior)).ColumnWidthBehavior,
                                 ReferenceObjectForEquatableTestScenarios.ColumnWrapBehavior,
                                 ReferenceObjectForEquatableTestScenarios.Width,
-                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure),
+                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure,
+                                ReferenceObjectForEquatableTestScenarios.IsFrozen),
                         new ColumnDefinition(
                                 ReferenceObjectForEquatableTestScenarios.ColumnWidthBehavior,
                                 A.Dummy<ColumnDefinition>().Whose(_ => !_.ColumnWrapBehavior.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ColumnWrapBehavior)).ColumnWrapBehavior,
                                 ReferenceObjectForEquatableTestScenarios.Width,
-                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure),
+                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure,
+                                ReferenceObjectForEquatableTestScenarios.IsFrozen),
                         new ColumnDefinition(
                                 ReferenceObjectForEquatableTestScenarios.ColumnWidthBehavior,
                                 ReferenceObjectForEquatableTestScenarios.ColumnWrapBehavior,
                                 A.Dummy<ColumnDefinition>().Whose(_ => !_.Width.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Width)).Width,
-                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure),
+                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure,
+                                ReferenceObjectForEquatableTestScenarios.IsFrozen),
                         new ColumnDefinition(
                                 ReferenceObjectForEquatableTestScenarios.ColumnWidthBehavior,
                                 ReferenceObjectForEquatableTestScenarios.ColumnWrapBehavior,
                                 ReferenceObjectForEquatableTestScenarios.Width,
-                                A.Dummy<ColumnDefinition>().Whose(_ => !_.WidthUnitOfMeasure.IsEqualTo(ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure)).WidthUnitOfMeasure),
+                                A.Dummy<ColumnDefinition>().Whose(_ => !_.WidthUnitOfMeasure.IsEqualTo(ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure)).WidthUnitOfMeasure,
+                                ReferenceObjectForEquatableTestScenarios.IsFrozen),
+                        new ColumnDefinition(
+                                ReferenceObjectForEquatableTestScenarios.ColumnWidthBehavior,
+                                ReferenceObjectForEquatableTestScenarios.ColumnWrapBehavior,
+                                ReferenceObjectForEquatableTestScenarios.Width,
+                                ReferenceObjectForEquatableTestScenarios.WidthUnitOfMeasure,
+                                A.Dummy<ColumnDefinition>().Whose(_ => !_.IsFrozen.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsFrozen)).IsFrozen),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -564,7 +622,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "ColumnWidthBehavior", "ColumnWrapBehavior", "Width", "WidthUnitOfMeasure" };
+                var propertyNames = new string[] { "ColumnWidthBehavior", "ColumnWrapBehavior", "Width", "WidthUnitOfMeasure", "IsFrozen" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

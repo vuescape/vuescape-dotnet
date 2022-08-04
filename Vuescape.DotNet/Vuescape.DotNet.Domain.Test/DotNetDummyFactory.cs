@@ -102,33 +102,18 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
                 {
-                    var columnWidthBehavior = A.Dummy<ColumnWidthBehavior>();
-                    var widthUnitOfMeasure = A.Dummy<UnitOfMeasure?>();
-                    var width = A.Dummy<decimal?>();
-                    var columnWrapBehavior = A.Dummy<ColumnWrapBehavior>();
-
-                    if (widthUnitOfMeasure != null)
-                    {
-                        width = A.Dummy<decimal>();
-                    }
-
-                    return new ColumnDefinition(columnWidthBehavior, columnWrapBehavior, width, widthUnitOfMeasure);
-                });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () =>
-                {
                     var wrapBehavior = A.Dummy<ColumnWrapBehavior>();
                     var widthBehavior = A.Dummy<ColumnWidthBehavior>();
                     decimal? width = null;
                     UnitOfMeasure? unitOfMeasure = null;
+                    var isFrozen = A.Dummy<bool>();
                     if (ThreadSafeRandom.Next(0, 1) == 0)
                     {
                         width = A.Dummy<decimal>();
                         unitOfMeasure = A.Dummy<UnitOfMeasure>();
                     }
 
-                    return new ColumnDefinition(widthBehavior, wrapBehavior, width, unitOfMeasure);
+                    return new ColumnDefinition(widthBehavior, wrapBehavior, width, unitOfMeasure, isFrozen);
                 });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(

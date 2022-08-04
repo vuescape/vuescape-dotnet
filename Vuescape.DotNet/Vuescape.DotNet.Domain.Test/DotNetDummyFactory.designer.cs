@@ -73,7 +73,8 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<ColumnWidthBehavior>(),
                                  A.Dummy<ColumnWrapBehavior>(),
                                  A.Dummy<decimal?>(),
-                                 A.Dummy<UnitOfMeasure?>()));
+                                 A.Dummy<UnitOfMeasure?>(),
+                                 A.Dummy<bool>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ColumnSorter(
@@ -273,7 +274,6 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<IReadOnlyList<TreeTableHeaderRow>>(),
                                  A.Dummy<IReadOnlyList<TreeTableRow>>(),
                                  A.Dummy<IReadOnlyList<TreeTableRow>>(),
-                                 A.Dummy<bool>(),
                                  A.Dummy<bool>(),
                                  A.Dummy<bool>(),
                                  A.Dummy<bool>(),

@@ -39,7 +39,6 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.ShouldSyncHeaderScroll,
                                              referenceObject.ShouldSyncFooterScroll,
                                              referenceObject.ShouldIncludeFooter,
-                                             referenceObject.ShouldFreezeFirstColumn,
                                              referenceObject.DeadAreaColor,
                                              referenceObject.MaxRows,
                                              referenceObject.CssClass,

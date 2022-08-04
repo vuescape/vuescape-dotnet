@@ -22,7 +22,8 @@ namespace Vuescape.DotNet.Domain
         /// <param name="columnWrapBehavior">The column wrapping behavior.</param>
         /// <param name="width">The width of the column.</param>
         /// <param name="widthUnitOfMeasure">The unit of measure for the width.</param>
-        public ColumnDefinition(ColumnWidthBehavior columnWidthBehavior, ColumnWrapBehavior columnWrapBehavior, decimal? width, UnitOfMeasure? widthUnitOfMeasure)
+        /// <param name="isFrozen">Is the column frozen.</param>
+        public ColumnDefinition(ColumnWidthBehavior columnWidthBehavior, ColumnWrapBehavior columnWrapBehavior, decimal? width, UnitOfMeasure? widthUnitOfMeasure, bool isFrozen)
         {
             new { columnWidthBehavior }.AsArg().Must().NotBeEqualTo(ColumnWidthBehavior.None);
 
@@ -41,6 +42,7 @@ namespace Vuescape.DotNet.Domain
             this.ColumnWrapBehavior = columnWrapBehavior;
             this.Width = width;
             this.WidthUnitOfMeasure = widthUnitOfMeasure;
+            this.IsFrozen = isFrozen;
         }
 
         /// <summary>
@@ -62,5 +64,10 @@ namespace Vuescape.DotNet.Domain
         /// Gets unit of measure for the width.
         /// </summary>
         public UnitOfMeasure? WidthUnitOfMeasure { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the column is frozen.
+        /// </summary>
+        public bool IsFrozen { get; private set; }
     }
 }

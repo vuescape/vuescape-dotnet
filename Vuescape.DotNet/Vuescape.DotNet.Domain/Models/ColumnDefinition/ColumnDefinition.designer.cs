@@ -72,7 +72,8 @@ namespace Vuescape.DotNet.Domain
             var result = this.ColumnWidthBehavior.IsEqualTo(other.ColumnWidthBehavior)
                       && this.ColumnWrapBehavior.IsEqualTo(other.ColumnWrapBehavior)
                       && this.Width.IsEqualTo(other.Width)
-                      && this.WidthUnitOfMeasure.IsEqualTo(other.WidthUnitOfMeasure);
+                      && this.WidthUnitOfMeasure.IsEqualTo(other.WidthUnitOfMeasure)
+                      && this.IsFrozen.IsEqualTo(other.IsFrozen);
 
             return result;
         }
@@ -86,6 +87,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.ColumnWrapBehavior)
             .Hash(this.Width)
             .Hash(this.WidthUnitOfMeasure)
+            .Hash(this.IsFrozen)
             .Value;
 
         /// <inheritdoc />
@@ -98,7 +100,8 @@ namespace Vuescape.DotNet.Domain
                                  this.ColumnWidthBehavior.DeepClone(),
                                  this.ColumnWrapBehavior.DeepClone(),
                                  this.Width?.DeepClone(),
-                                 this.WidthUnitOfMeasure?.DeepClone());
+                                 this.WidthUnitOfMeasure?.DeepClone(),
+                                 this.IsFrozen.DeepClone());
 
             return result;
         }
@@ -131,7 +134,8 @@ namespace Vuescape.DotNet.Domain
                                  columnWidthBehavior,
                                  this.ColumnWrapBehavior.DeepClone(),
                                  this.Width?.DeepClone(),
-                                 this.WidthUnitOfMeasure?.DeepClone());
+                                 this.WidthUnitOfMeasure?.DeepClone(),
+                                 this.IsFrozen.DeepClone());
 
             return result;
         }
@@ -164,7 +168,8 @@ namespace Vuescape.DotNet.Domain
                                  this.ColumnWidthBehavior.DeepClone(),
                                  columnWrapBehavior,
                                  this.Width?.DeepClone(),
-                                 this.WidthUnitOfMeasure?.DeepClone());
+                                 this.WidthUnitOfMeasure?.DeepClone(),
+                                 this.IsFrozen.DeepClone());
 
             return result;
         }
@@ -197,7 +202,8 @@ namespace Vuescape.DotNet.Domain
                                  this.ColumnWidthBehavior.DeepClone(),
                                  this.ColumnWrapBehavior.DeepClone(),
                                  width,
-                                 this.WidthUnitOfMeasure?.DeepClone());
+                                 this.WidthUnitOfMeasure?.DeepClone(),
+                                 this.IsFrozen.DeepClone());
 
             return result;
         }
@@ -230,7 +236,42 @@ namespace Vuescape.DotNet.Domain
                                  this.ColumnWidthBehavior.DeepClone(),
                                  this.ColumnWrapBehavior.DeepClone(),
                                  this.Width?.DeepClone(),
-                                 widthUnitOfMeasure);
+                                 widthUnitOfMeasure,
+                                 this.IsFrozen.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="IsFrozen" />.
+        /// </summary>
+        /// <param name="isFrozen">The new <see cref="IsFrozen" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ColumnDefinition" /> using the specified <paramref name="isFrozen" /> for <see cref="IsFrozen" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public ColumnDefinition DeepCloneWithIsFrozen(bool isFrozen)
+        {
+            var result = new ColumnDefinition(
+                                 this.ColumnWidthBehavior.DeepClone(),
+                                 this.ColumnWrapBehavior.DeepClone(),
+                                 this.Width?.DeepClone(),
+                                 this.WidthUnitOfMeasure?.DeepClone(),
+                                 isFrozen);
 
             return result;
         }
@@ -239,7 +280,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.ColumnDefinition: ColumnWidthBehavior = {this.ColumnWidthBehavior.ToString() ?? "<null>"}, ColumnWrapBehavior = {this.ColumnWrapBehavior.ToString() ?? "<null>"}, Width = {this.Width?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, WidthUnitOfMeasure = {this.WidthUnitOfMeasure?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ColumnDefinition: ColumnWidthBehavior = {this.ColumnWidthBehavior.ToString() ?? "<null>"}, ColumnWrapBehavior = {this.ColumnWrapBehavior.ToString() ?? "<null>"}, Width = {this.Width?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, WidthUnitOfMeasure = {this.WidthUnitOfMeasure?.ToString() ?? "<null>"}, IsFrozen = {this.IsFrozen.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

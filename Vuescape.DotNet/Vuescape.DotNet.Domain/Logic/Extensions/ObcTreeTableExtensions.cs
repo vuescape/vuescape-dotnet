@@ -75,7 +75,6 @@ namespace Vuescape.DotNet.Domain
                 shouldSyncHeaderRow,
                 false,
                 shouldIncludeFooter,
-                isFirstColumnFrozen,
                 null,
                 null,
                 "cell-border",
@@ -98,7 +97,7 @@ namespace Vuescape.DotNet.Domain
             var obcTableColumnsFormat = obcTableColumns?.ColumnsFormat;
 
             // TODO: Is this the right order of formatting for column definition. Using same approach as elsewhere with rows before columns
-            IReadOnlyList<ColumnDefinition> columnDefinitions =
+            var columnDefinitions =
                 obcTreeTable?.TableColumns?.Columns?.Select(
                     obcColumn =>
                     {
@@ -109,13 +108,42 @@ namespace Vuescape.DotNet.Domain
                             obcColumn.Format,
                             obcTableColumnsFormat,
                             obcTableFormat,
-                            obcToVuescapeConversionContext) ?? new ColumnDefinition(ColumnWidthBehavior.DynamicallySizeToContent, ColumnWrapBehavior.None, null, null);
+                            obcToVuescapeConversionContext) ?? new ColumnDefinition(ColumnWidthBehavior.DynamicallySizeToContent, ColumnWrapBehavior.None, null, null, false);
 
                         return columnDefinition;
                     })
                 .ToList();
 
-            return columnDefinitions;
+            var result = columnDefinitions;
+            if (columnDefinitions == null || !columnDefinitions.Any(_ => _.IsFrozen))
+            {
+                return result;
+            }
+
+            result = new List<ColumnDefinition>();
+            var isFrozen = false;
+
+            // All columns before an isFrozen column should also be frozen.
+            for (var i = columnDefinitions.Count - 1; i >= 0; i--)
+            {
+                var columnDefinition = columnDefinitions[i];
+                if (isFrozen)
+                {
+                    // deep clone
+                    columnDefinition = columnDefinition.DeepCloneWithIsFrozen(true);
+                }
+                else
+                {
+                    if (columnDefinition.IsFrozen)
+                    {
+                        isFrozen = true;
+                    }
+                }
+
+                result.Insert(0, columnDefinition);
+            }
+
+            return result;
         }
 
         private static IReadOnlyList<TreeTableHeaderRow> ConvertToVuescapeTreeTableHeaderRows(

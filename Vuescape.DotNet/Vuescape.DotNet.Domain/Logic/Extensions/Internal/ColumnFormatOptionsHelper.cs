@@ -57,27 +57,5 @@ namespace Vuescape.DotNet.Domain
 
             return result;
         }
-
-        /// <summary>
-        /// Determines whether a <see cref="Column"/> is frozen.
-        /// </summary>
-        /// <param name="obcColumn">The column.</param>
-        /// <param name="obcSpecificColumnFormat">The format for this column.</param>
-        /// <param name="obcColumnFormat">The format for all columns.</param>
-        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
-        /// <returns>True if frozen otherwise false.</returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
-        internal static bool IsFrozen(
-            Column obcColumn,
-            ColumnFormat obcSpecificColumnFormat,
-            ColumnFormat obcColumnFormat,
-            ObcToVuescapeConversionContext obcToVuescapeConversionContext)
-        {
-            var result = (obcColumn?.Format?.Options.IsFrozen()).GetValueOrDefault(false) ||
-                         (obcSpecificColumnFormat?.Options.IsFrozen()).GetValueOrDefault(false) ||
-                         (obcColumnFormat?.Options.IsFrozen()).GetValueOrDefault(false);
-
-            return result;
-        }
     }
 }

@@ -23,15 +23,22 @@ namespace Vuescape.DotNet.Domain
         /// Path separator is the pipe: "|".  If null or empty string then the item will be placed as a top level menu item.
         /// Note that there is currently a UI limitation to one nested level.
         /// </param>
-        public MenuNavigationItem(NavigationLink link, string menuTitlePath = null)
+        /// <param name="horizontalAlignment">The horizontal alignment of the menu item in the menu.</param>
+        public MenuNavigationItem(NavigationLink link, string menuTitlePath = null, HorizontalAlignment horizontalAlignment = HorizontalAlignment.Right)
             : base(link, NavigationItemKind.Menu)
         {
             this.MenuTitlePath = menuTitlePath;
+            this.HorizontalAlignment = horizontalAlignment;
         }
 
         /// <summary>
         /// Gets the menu title path.
         /// </summary>
         public string MenuTitlePath { get; private set; }
+
+        /// <summary>
+        /// Gets the horizontal alignment.
+        /// </summary>
+        public HorizontalAlignment HorizontalAlignment { get; private set; }
     }
 }

@@ -47,7 +47,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<MenuNavigationItem>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.MenuNavigationItem: Link = {systemUnderTest.Link?.ToString() ?? "<null>"}, Kind = {systemUnderTest.Kind.ToString() ?? "<null>"}, MenuTitlePath = {systemUnderTest.MenuTitlePath?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.MenuNavigationItem: Link = {systemUnderTest.Link?.ToString() ?? "<null>"}, Kind = {systemUnderTest.Kind.ToString() ?? "<null>"}, MenuTitlePath = {systemUnderTest.MenuTitlePath?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, HorizontalAlignment = {systemUnderTest.HorizontalAlignment.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -65,7 +65,8 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new MenuNavigationItem(
                                              null,
-                                             referenceObject.MenuTitlePath);
+                                             referenceObject.MenuTitlePath,
+                                             referenceObject.HorizontalAlignment);
 
                         return result;
                     },
@@ -82,7 +83,8 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new MenuNavigationItem(
                                              referenceObject.Link,
-                                             null);
+                                             null,
+                                             referenceObject.HorizontalAlignment);
 
                         return result;
                     },
@@ -99,7 +101,8 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new MenuNavigationItem(
                                              referenceObject.Link,
-                                             Invariant($"  {Environment.NewLine}  "));
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.HorizontalAlignment);
 
                         return result;
                     },
@@ -120,7 +123,8 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new MenuNavigationItem(
                                                       referenceObject.Link,
-                                                      referenceObject.MenuTitlePath),
+                                                      referenceObject.MenuTitlePath,
+                                                      referenceObject.HorizontalAlignment),
                             ExpectedPropertyValue = referenceObject.Link,
                         };
 
@@ -140,13 +144,35 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new MenuNavigationItem(
                                                       referenceObject.Link,
-                                                      referenceObject.MenuTitlePath),
+                                                      referenceObject.MenuTitlePath,
+                                                      referenceObject.HorizontalAlignment),
                             ExpectedPropertyValue = referenceObject.MenuTitlePath,
                         };
 
                         return result;
                     },
                     PropertyName = "MenuTitlePath",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<MenuNavigationItem>
+                {
+                    Name = "HorizontalAlignment should return same 'horizontalAlignment' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MenuNavigationItem>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<MenuNavigationItem>
+                        {
+                            SystemUnderTest = new MenuNavigationItem(
+                                                      referenceObject.Link,
+                                                      referenceObject.MenuTitlePath,
+                                                      referenceObject.HorizontalAlignment),
+                            ExpectedPropertyValue = referenceObject.HorizontalAlignment,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "HorizontalAlignment",
                 });
 
         private static readonly DeepCloneWithTestScenarios<MenuNavigationItem> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<MenuNavigationItem>()
@@ -189,6 +215,26 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<MenuNavigationItem>
+                {
+                    Name = "DeepCloneWithHorizontalAlignment should deep clone object and replace HorizontalAlignment with the provided horizontalAlignment",
+                    WithPropertyName = "HorizontalAlignment",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<MenuNavigationItem>();
+
+                        var referenceObject = A.Dummy<MenuNavigationItem>().ThatIs(_ => !systemUnderTest.HorizontalAlignment.IsEqualTo(_.HorizontalAlignment));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<MenuNavigationItem>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.HorizontalAlignment,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly MenuNavigationItem ReferenceObjectForEquatableTestScenarios = A.Dummy<MenuNavigationItem>();
@@ -203,16 +249,23 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new MenuNavigationItem(
                                 ReferenceObjectForEquatableTestScenarios.Link,
-                                ReferenceObjectForEquatableTestScenarios.MenuTitlePath),
+                                ReferenceObjectForEquatableTestScenarios.MenuTitlePath,
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new MenuNavigationItem[]
                     {
                         new MenuNavigationItem(
                                 A.Dummy<MenuNavigationItem>().Whose(_ => !_.Link.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Link)).Link,
-                                ReferenceObjectForEquatableTestScenarios.MenuTitlePath),
+                                ReferenceObjectForEquatableTestScenarios.MenuTitlePath,
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment),
                         new MenuNavigationItem(
                                 ReferenceObjectForEquatableTestScenarios.Link,
-                                A.Dummy<MenuNavigationItem>().Whose(_ => !_.MenuTitlePath.IsEqualTo(ReferenceObjectForEquatableTestScenarios.MenuTitlePath)).MenuTitlePath),
+                                A.Dummy<MenuNavigationItem>().Whose(_ => !_.MenuTitlePath.IsEqualTo(ReferenceObjectForEquatableTestScenarios.MenuTitlePath)).MenuTitlePath,
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment),
+                        new MenuNavigationItem(
+                                ReferenceObjectForEquatableTestScenarios.Link,
+                                ReferenceObjectForEquatableTestScenarios.MenuTitlePath,
+                                A.Dummy<MenuNavigationItem>().Whose(_ => !_.HorizontalAlignment.IsEqualTo(ReferenceObjectForEquatableTestScenarios.HorizontalAlignment)).HorizontalAlignment),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -524,7 +577,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Link", "Kind", "MenuTitlePath" };
+                var propertyNames = new string[] { "Link", "Kind", "MenuTitlePath", "HorizontalAlignment" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

@@ -179,7 +179,8 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new MenuNavigationItem(
                                  A.Dummy<NavigationLink>(),
-                                 A.Dummy<string>()));
+                                 A.Dummy<string>(),
+                                 A.Dummy<Vuescape.DotNet.Domain.HorizontalAlignment>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>

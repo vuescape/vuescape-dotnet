@@ -9,9 +9,12 @@ namespace Vuescape.DotNet.Domain
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
+    using System.Globalization;
     using System.Linq;
 
     using OBeautifulCode.DataStructure;
+    using OBeautifulCode.Math.Recipes;
+    using OBeautifulCode.Type.Recipes;
 
     using static System.FormattableString;
 
@@ -42,15 +45,10 @@ namespace Vuescape.DotNet.Domain
             Column obcColumn,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
-            var displayValue = string.Empty;
             var slots = new Dictionary<string, UiObject>();
             string defaultSlot = null;
 
-            if (obcRowCell is IHaveCellValueFormat<string> displayValueCell)
-            {
-                displayValue = displayValueCell.ValueFormat?.ToString();
-            }
-
+            var displayValue = GetDisplayValue(obcRowCell) ?? string.Empty;
             if (obcRowCell is IGetCellValue valueCell)
             {
                 slots.Add("__vs-value", new UiObject(valueCell.GetCellObjectValue()));
@@ -165,35 +163,9 @@ namespace Vuescape.DotNet.Domain
             bool isLastRow,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
-            string displayValue = null;
-            if (obcHeaderRowCell is IHaveCellValueFormat<string> displayValueCell)
-            {
-                displayValue = displayValueCell.ValueFormat?.ToString();
-            }
-
-            if (obcHeaderRowCell is IGetCellValue valueCell)
-            {
-                // Assuming this cell value is string for header.
-                displayValue = valueCell.GetCellObjectValue().ToString();
-            }
-
+            var displayValue = GetDisplayValue(obcHeaderRowCell);
             var colspan = obcHeaderRowCell.ColumnsSpanned ?? 1;
-
-            Hover hover = null;
-            if (obcHeaderRowCell is IHaveHoverOver hoverOverCell)
-            {
-                var hoverOver = hoverOverCell.HoverOver;
-
-                if (hoverOver is StringHoverOver stringHoverOver)
-                {
-                    hover = new Hover(null, stringHoverOver.Value, HoverContentKind.Plaintext);
-                }
-                else if (hoverOver is HtmlHoverOver htmlHover)
-                {
-                    hover = new Hover(null, htmlHover.Html, HoverContentKind.Html);
-                }
-            }
-
+            var hover = GetHover(obcHeaderRowCell);
             var isVisible = ColumnFormatOptionsHelper.IsVisible(obcColumn, obcColumn.Format, obcColumnFormat, obcToVuescapeConversionContext);
 
             ColumnSorter columnSorter = null;
@@ -233,6 +205,74 @@ namespace Vuescape.DotNet.Domain
             // TODO: Add links if applicable
             var result = new TreeTableHeaderCell(obcHeaderRowCell.Id, displayValue, hover, null, cssClasses, null, colspan, isVisible, columnSorter, cellFormat);
             return result;
+        }
+
+        private static Hover GetHover(this ICell obcHeaderRowCell)
+        {
+            if (!(obcHeaderRowCell is IHaveHoverOver hoverOverCell))
+            {
+                return null;
+            }
+
+            var hoverOver = hoverOverCell.HoverOver;
+            switch (hoverOver)
+            {
+                case StringHoverOver stringHoverOver:
+                    return new Hover(null, stringHoverOver.Value, HoverContentKind.Plaintext);
+                case HtmlHoverOver htmlHover:
+                    return new Hover(null, htmlHover.Html, HoverContentKind.Html);
+            }
+
+            throw new NotImplementedException(Invariant($"The only supported {nameof(hoverOverCell.HoverOver)} are {nameof(StringHoverOver)} and {nameof(HtmlHoverOver)}."));
+        }
+
+        private static string GetDisplayValue(this ICell obcHeaderRowCell)
+        {
+            if (!(obcHeaderRowCell is IGetCellValue valueCell))
+            {
+                return null;
+            }
+
+            string displayValue = null;
+
+            if (obcHeaderRowCell is IHaveCellValueFormat displayValueCell)
+            {
+                var valueFormat = displayValueCell.GetCellValueFormat();
+                if (valueFormat is PercentCellValueFormat percentCellValueFormat)
+                {
+                    if (percentCellValueFormat.PercentDisplayKind != null ||
+                        percentCellValueFormat.DecimalSeparator != null ||
+                        percentCellValueFormat.DigitGroupKind != null ||
+                        percentCellValueFormat.DigitGroupSeparator != null ||
+                        percentCellValueFormat.MissingValueText != null ||
+                        percentCellValueFormat.NegativeNumberDisplayKind != null)
+                    {
+                        // TODO: Get property names dynamically
+                        throw new NotImplementedException(Invariant(
+                            $"The only currently supported properties of {nameof(PercentCellValueFormat)} are 'RoundingStrategy' and 'NumberOfDecimalPlaces': {percentCellValueFormat}."));
+                    }
+
+                    var roundingStrategy = percentCellValueFormat.RoundingStrategy ?? MidpointRounding.AwayFromZero;
+                    var numberOfDecimalPlaces = percentCellValueFormat.NumberOfDecimalPlaces ?? 0;
+
+                    // PercentCellValueFormat is a NumberCellFormatBase<Decimal>
+                    var cellValue = (decimal)valueCell.GetCellObjectValue() * 100;
+                    displayValue = cellValue.Round(numberOfDecimalPlaces, roundingStrategy)
+                        .ToString(CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    throw new NotImplementedException(Invariant(
+                        $"This {nameof(ICellValueFormat)} is not yet implemented: {valueFormat.GetType().ToStringReadable()}."));
+                }
+            }
+            else
+            {
+                // Assuming this cell value is string for header.
+                displayValue = valueCell.GetCellObjectValue().ToString();
+            }
+
+            return displayValue;
         }
 
         /// <summary>

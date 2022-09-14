@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain
             var slots = new Dictionary<string, UiObject>();
             string defaultSlot = null;
 
-            var displayValue = GetDisplayValue(obcRowCell) ?? string.Empty;
+            var displayValue = obcRowCell.GetDisplayValue();
             if (obcRowCell is IGetCellValue valueCell)
             {
                 slots.Add("__vs-value", new UiObject(valueCell.GetCellObjectValue()));
@@ -68,20 +68,7 @@ namespace Vuescape.DotNet.Domain
             // }
             var colspan = obcRowCell.ColumnsSpanned ?? 1;
 
-            Hover hover = null;
-            if (obcRowCell is IHaveHoverOver hoverOverCell)
-            {
-                var hoverOver = hoverOverCell.HoverOver;
-
-                if (hoverOver is StringHoverOver stringHoverOver)
-                {
-                    hover = new Hover(null, stringHoverOver.Value, HoverContentKind.Plaintext);
-                }
-                else if (hoverOver is HtmlHoverOver htmlHover)
-                {
-                    hover = new Hover(null, htmlHover.Html, HoverContentKind.Html);
-                }
-            }
+            var hover = obcRowCell.GetHover();
 
             var isVisible = ColumnFormatOptionsHelper.IsVisible(obcColumn, obcColumn.Format, obcColumnFormat, obcToVuescapeConversionContext);
 
@@ -163,9 +150,9 @@ namespace Vuescape.DotNet.Domain
             bool isLastRow,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
-            var displayValue = GetDisplayValue(obcHeaderRowCell);
+            var displayValue = obcHeaderRowCell.GetDisplayValue();
             var colspan = obcHeaderRowCell.ColumnsSpanned ?? 1;
-            var hover = GetHover(obcHeaderRowCell);
+            var hover = obcHeaderRowCell.GetHover();
             var isVisible = ColumnFormatOptionsHelper.IsVisible(obcColumn, obcColumn.Format, obcColumnFormat, obcToVuescapeConversionContext);
 
             ColumnSorter columnSorter = null;
@@ -207,9 +194,9 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
-        private static Hover GetHover(this ICell obcHeaderRowCell)
+        private static Hover GetHover(this ICell obcCell)
         {
-            if (!(obcHeaderRowCell is IHaveHoverOver hoverOverCell))
+            if (!(obcCell is IHaveHoverOver hoverOverCell))
             {
                 return null;
             }
@@ -217,6 +204,8 @@ namespace Vuescape.DotNet.Domain
             var hoverOver = hoverOverCell.HoverOver;
             switch (hoverOver)
             {
+                case null:
+                    return null;
                 case StringHoverOver stringHoverOver:
                     return new Hover(null, stringHoverOver.Value, HoverContentKind.Plaintext);
                 case HtmlHoverOver htmlHover:
@@ -233,46 +222,48 @@ namespace Vuescape.DotNet.Domain
                 return null;
             }
 
-            string displayValue = null;
-
             if (obcHeaderRowCell is IHaveCellValueFormat displayValueCell)
             {
                 var valueFormat = displayValueCell.GetCellValueFormat();
-                if (valueFormat is PercentCellValueFormat percentCellValueFormat)
+                if (valueFormat != null)
                 {
-                    if (percentCellValueFormat.PercentDisplayKind != null ||
-                        percentCellValueFormat.DecimalSeparator != null ||
-                        percentCellValueFormat.DigitGroupKind != null ||
-                        percentCellValueFormat.DigitGroupSeparator != null ||
-                        percentCellValueFormat.MissingValueText != null ||
-                        percentCellValueFormat.NegativeNumberDisplayKind != null)
+                    if (valueFormat is PercentCellValueFormat percentCellValueFormat)
                     {
-                        // TODO: Get property names dynamically
-                        throw new NotImplementedException(Invariant(
-                            $"The only currently supported properties of {nameof(PercentCellValueFormat)} are 'RoundingStrategy' and 'NumberOfDecimalPlaces': {percentCellValueFormat}."));
+                        if (percentCellValueFormat.PercentDisplayKind != null ||
+                            percentCellValueFormat.DecimalSeparator != null ||
+                            percentCellValueFormat.DigitGroupKind != null ||
+                            percentCellValueFormat.DigitGroupSeparator != null ||
+                            percentCellValueFormat.MissingValueText != null ||
+                            percentCellValueFormat.NegativeNumberDisplayKind != null)
+                        {
+                            // TODO: Get property names dynamically
+                            throw new NotImplementedException(Invariant(
+                                $"The only currently supported properties of {nameof(PercentCellValueFormat)} are 'RoundingStrategy' and 'NumberOfDecimalPlaces': {percentCellValueFormat}."));
+                        }
+
+                        var roundingStrategy = percentCellValueFormat.RoundingStrategy ?? MidpointRounding.AwayFromZero;
+                        var numberOfDecimalPlaces = percentCellValueFormat.NumberOfDecimalPlaces ?? 0;
+
+                        // PercentCellValueFormat is a NumberCellFormatBase<Decimal>
+                        var cellValue = (decimal) valueCell.GetCellObjectValue() * 100;
+                        var percentValue = cellValue.Round(numberOfDecimalPlaces, roundingStrategy)
+                            .ToString(CultureInfo.InvariantCulture);
+
+                        // Hard code % suffix
+                        // TODO: Implement full formatting.
+                        return percentValue + '%';
                     }
-
-                    var roundingStrategy = percentCellValueFormat.RoundingStrategy ?? MidpointRounding.AwayFromZero;
-                    var numberOfDecimalPlaces = percentCellValueFormat.NumberOfDecimalPlaces ?? 0;
-
-                    // PercentCellValueFormat is a NumberCellFormatBase<Decimal>
-                    var cellValue = (decimal)valueCell.GetCellObjectValue() * 100;
-                    displayValue = cellValue.Round(numberOfDecimalPlaces, roundingStrategy)
-                        .ToString(CultureInfo.InvariantCulture);
-                }
-                else
-                {
-                    throw new NotImplementedException(Invariant(
-                        $"This {nameof(ICellValueFormat)} is not yet implemented: {valueFormat.GetType().ToStringReadable()}."));
+                    else
+                    {
+                        throw new NotImplementedException(Invariant(
+                            $"This {nameof(ICellValueFormat)} is not yet implemented: {valueFormat.GetType().ToStringReadable()}."));
+                    }
                 }
             }
-            else
-            {
-                // Assuming this cell value is string for header.
-                displayValue = valueCell.GetCellObjectValue().ToString();
-            }
 
-            return displayValue;
+            // Assuming this cell value is string.
+            var result = valueCell.GetCellObjectValue()?.ToString();
+            return result;
         }
 
         /// <summary>

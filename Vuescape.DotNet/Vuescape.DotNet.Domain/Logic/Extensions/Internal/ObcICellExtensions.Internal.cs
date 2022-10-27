@@ -245,7 +245,7 @@ namespace Vuescape.DotNet.Domain
                         var numberOfDecimalPlaces = percentCellValueFormat.NumberOfDecimalPlaces ?? 0;
 
                         // PercentCellValueFormat is a NumberCellFormatBase<Decimal>
-                        var cellValue = (decimal) valueCell.GetCellObjectValue() * 100;
+                        var cellValue = (decimal)valueCell.GetCellObjectValue() * 100;
                         var percentValue = cellValue.Round(numberOfDecimalPlaces, roundingStrategy)
                             .ToString(CultureInfo.InvariantCulture);
 

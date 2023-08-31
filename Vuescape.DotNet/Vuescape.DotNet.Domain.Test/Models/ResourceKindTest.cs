@@ -28,8 +28,12 @@ namespace Vuescape.DotNet.Domain.Test
                     (ResourceKind)Convert.ChangeType(_, typeof(ResourceKind)) != ResourceKind.BsonAsText)
                 .ToDictionary(_ => Enum.GetName(_.GetType(), _), _ => Convert.ChangeType(_, _.GetTypeCode()));
 
+            // TODO: remove where exclusion for Website when the Vuescape ResourceKind contains Website.
+            // Avoiding changing value of Bson* in Vuescape ResourceKind until validate that it is safe to make that breaking change.
+            // i.e. that integer value is not persisted such as in a serialized payload/config.
             var obcResourceKindMap = typeof(OBeautifulCode.DataStructure.UrlLinkedResourceKind)
                 .GetDefinedEnumValues()
+                .Where(_ => (OBeautifulCode.DataStructure.UrlLinkedResourceKind)_ != OBeautifulCode.DataStructure.UrlLinkedResourceKind.Website)
                 .ToDictionary(_ => Enum.GetName(_.GetType(), _), _ => Convert.ChangeType(_, _.GetTypeCode()));
 
             vuescapeResourceKindMap.MustForTest(nameof(vuescapeResourceKindMap)).BeEqualTo(obcResourceKindMap);

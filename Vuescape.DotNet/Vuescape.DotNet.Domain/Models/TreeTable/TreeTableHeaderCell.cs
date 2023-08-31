@@ -112,5 +112,25 @@ namespace Vuescape.DotNet.Domain
         /// Gets the Links.
         /// </summary>
         public IReadOnlyDictionary<string, Link> Links { get; private set; }
+
+        /// <summary>
+        /// Creates a visible header cell (i.e. will appear in the DOM) but is hidden via CSS.
+        /// </summary>
+        /// <returns>A hidden cell.</returns>
+        public static TreeTableHeaderCell CreateHiddenCell()
+        {
+            var result = new TreeTableHeaderCell(
+                null,
+                null,
+                null,
+                null,
+                "tree-table__display--none",
+                null,
+                null,
+                true,
+                null);
+
+            return result;
+        }
     }
 }

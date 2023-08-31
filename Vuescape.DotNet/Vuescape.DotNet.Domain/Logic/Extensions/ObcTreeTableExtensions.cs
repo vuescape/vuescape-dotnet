@@ -12,6 +12,7 @@ namespace Vuescape.DotNet.Domain
 
     using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.CodeAnalysis.Recipes;
+    using OBeautifulCode.DataStructure;
 
     using static System.FormattableString;
 
@@ -186,17 +187,20 @@ namespace Vuescape.DotNet.Domain
             var obcTableColumns = obcTreeTable?.TableColumns;
             var obcTableColumnsFormat = obcTableColumns?.ColumnsFormat;
 
-            IReadOnlyList<OBeautifulCode.DataStructure.FlatRow> summaryRowsForFooter = null;
+            IReadOnlyList<FlatRow> summaryRowsForFooter = null;
             if (obcTreeTable?.TableRows?.DataRows?.Rows?.Count == 1 && obcToVuescapeConversionContext.ShouldSummaryRowsDisplayInFooter)
             {
-                var row = obcTreeTable.TableRows.DataRows.Rows.Single();
-                if (row?.ExpandedSummaryRows?.Count > 0)
+                var rowBase = obcTreeTable.TableRows.DataRows.Rows.Single();
+                if (rowBase is Row row)
                 {
-                    summaryRowsForFooter = row.ExpandedSummaryRows;
-                    row.ExpandedSummaryRows.ToList().Clear();
+                    if (row.ExpandedSummaryRows?.Count > 0)
+                    {
+                        summaryRowsForFooter = row.ExpandedSummaryRows;
+                        row.ExpandedSummaryRows.ToList().Clear();
 
-                    // TODO: Also move collapsed rows to the footer
-                    row.CollapsedSummaryRows?.ToList().Clear();
+                        // TODO: Also move collapsed rows to the footer
+                        row.CollapsedSummaryRows?.ToList().Clear();
+                    }
                 }
             }
 

@@ -111,5 +111,25 @@ namespace Vuescape.DotNet.Domain
         /// Gets the Slots.
         /// </summary>
         public SlottedUiObject Slots { get; private set; }
+
+        /// <summary>
+        /// Creates a visible cell (i.e. will appear in the DOM) but is hidden via CSS.
+        /// </summary>
+        /// <returns>A hidden cell.</returns>
+        public static TreeTableCell CreateHiddenCell()
+        {
+            var result = new TreeTableCell(
+                null,
+                null,
+                null,
+                null,
+                "tree-table__display--none",
+                null,
+                null,
+                true,
+                null);
+
+            return result;
+        }
     }
 }

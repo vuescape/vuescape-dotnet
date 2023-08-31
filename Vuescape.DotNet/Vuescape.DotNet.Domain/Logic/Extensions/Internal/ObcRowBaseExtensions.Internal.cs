@@ -5,10 +5,8 @@
 // ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using OBeautifulCode.DataStructure;
 
     /// <summary>
@@ -66,7 +64,7 @@ namespace Vuescape.DotNet.Domain
                 for (var additionalColumnIndex = 1; additionalColumnIndex < columnsSpanned; additionalColumnIndex++)
                 {
                     // make cell visible but hidden to allow colspan sizing to work properly
-                    headerCells.Add(new TreeTableHeaderCell(null, null, null, null, "tree-table__display--none", null, null, true, null));
+                    headerCells.Add(TreeTableHeaderCell.CreateHiddenCell());
                 }
 
                 return headerCells;
@@ -112,9 +110,12 @@ namespace Vuescape.DotNet.Domain
                     obcHeaderRowCell.ToVuescapeTreeTableCell(
                         obcTableFormat,
                         obcRowsFormat,
-                        obcFooterRowsFormat != null ?
-                            new DataRowsFormat(obcFooterRowsFormat.OuterBorders, obcFooterRowsFormat.InnerBorders, obcFooterRowsFormat.RowsFormat) :
-                            null,
+                        obcFooterRowsFormat != null
+                            ? new DataRowsFormat(
+                                obcFooterRowsFormat.OuterBorders,
+                                obcFooterRowsFormat.InnerBorders,
+                                obcFooterRowsFormat.RowsFormat)
+                            : null,
                         obcFooterRowFormat,
                         obcColumnFormat,
                         obcColumns[actualColumnIndex],
@@ -127,7 +128,7 @@ namespace Vuescape.DotNet.Domain
                 for (var additionalColumnIndex = 1; additionalColumnIndex < columnsSpanned; additionalColumnIndex++)
                 {
                     // make cell visible but hidden to allow colspan sizing to work properly
-                    headerCells.Add(new TreeTableCell(null, null, null, null, "tree-table__display--none", null, null, true, null));
+                    headerCells.Add(TreeTableCell.CreateHiddenCell());
                 }
 
                 return headerCells;
@@ -135,14 +136,28 @@ namespace Vuescape.DotNet.Domain
 
             // TODO: classes/styles
             // TODO: Renderer? Is there a default?
-            var result = new TreeTableRow(rowId, treeTableFooterCells, null, cssClasses, null, null, false, false, true, false, false, null, null);
+            var result = new TreeTableRow(
+                rowId,
+                treeTableFooterCells,
+                null,
+                cssClasses,
+                null,
+                null,
+                false,
+                false,
+                true,
+                false,
+                false,
+                null,
+                null);
+
             return result;
         }
 
         /// <summary>
         /// Convert a <see cref="Row"/> to a <see cref="TreeTableRow"/>.
         /// </summary>
-        /// <param name="obcRow">The row.</param>
+        /// <param name="obcRowBase">The row.</param>
         /// <param name="obcTableFormat">The table format.</param>
         /// <param name="obcRowsFormat">The table rows format.</param>
         /// <param name="obcDataRowsFormat">The data rows format.</param>
@@ -154,7 +169,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableHeaderRow"/>.</returns>
         internal static TreeTableRow ToVuescapeTreeTableRow(
-            this OBeautifulCode.DataStructure.Row obcRow,
+            this OBeautifulCode.DataStructure.RowBase obcRowBase,
             TableFormat obcTableFormat,
             RowFormat obcRowsFormat,
             DataRowsFormat obcDataRowsFormat,
@@ -168,13 +183,21 @@ namespace Vuescape.DotNet.Domain
             var rowIndentLevel = depth ?? 0;
 
             // TODO: Apply formatting.
-            var rowId = obcRow.Id;
+            var rowId = obcRowBase.Id;
 
             var treeTableCells = new List<TreeTableCell>();
             var columnIndex = 0;
-            foreach (var obcRowCell in obcRow.Cells)
+            foreach (var obcRowCell in obcRowBase.Cells)
             {
-                var treeTableCell = obcRowCell.ToVuescapeTreeTableCell(obcTableFormat, obcRowsFormat, obcDataRowsFormat, obcRowFormat, obcColumnFormat, obcColumns[columnIndex], obcToVuescapeConversionContext);
+                var treeTableCell = obcRowCell.ToVuescapeTreeTableCell(
+                    obcTableFormat,
+                    obcRowsFormat,
+                    obcDataRowsFormat,
+                    obcRowFormat,
+                    obcColumnFormat,
+                    obcColumns[columnIndex],
+                    obcToVuescapeConversionContext);
+
                 var columnsSpanned = obcRowCell.ColumnsSpanned ?? 1;
 
                 treeTableCells.Add(treeTableCell);
@@ -183,7 +206,7 @@ namespace Vuescape.DotNet.Domain
                 for (var additionalColumnIndex = 1; additionalColumnIndex < columnsSpanned; additionalColumnIndex++)
                 {
                     // make cell visible but hidden to allow colspan sizing to work properly
-                    treeTableCells.Add(new TreeTableCell(null, null, null, null, "tree-table__display--none", null, null, true, null));
+                    treeTableCells.Add(TreeTableCell.CreateHiddenCell());
                 }
             }
 
@@ -195,48 +218,103 @@ namespace Vuescape.DotNet.Domain
             string cssStyles = null;
 
             // cssStyles += "tree-table__display--none";
-            var hasChildRows = obcRow.HasChildRows();
-            var isExpandable = hasChildRows && (!obcRow.Format?.Options.IsNotExpandable() ?? false);
-            var shouldAlignChildRowsWithParent = obcRow.Format?.Options.ShouldAlignChildRowsWithParent() ?? false;
-            var isVisible = obcRow.Format?.Options.IsVisible() ?? true;
-            bool isExpanded = !isVisible && shouldAlignChildRowsWithParent;
+            var hasChildRows = obcRowBase.HasChildRows();
+            var isExpandable = hasChildRows && (!obcRowBase.Format?.Options.IsNotExpandable() ?? false);
+            var shouldAlignChildRowsWithParent = obcRowBase.Format?.Options.ShouldAlignChildRowsWithParent() ?? false;
+            var isVisible = obcRowBase.Format?.Options.IsVisible() ?? true;
+            var isExpanded = !isVisible && shouldAlignChildRowsWithParent;
 
             IReadOnlyList<TreeTableRow> children = null;
-            if (hasChildRows)
-            {
-                var childIndentLevel = shouldAlignChildRowsWithParent ? rowIndentLevel : rowIndentLevel + 1;
-                children = obcRow.ChildRows.Select(_ => _.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, childIndentLevel, shouldIncludeSummaryRows, obcToVuescapeConversionContext)).ToList();
-            }
-
-            IReadOnlyList<TreeTableRow> expandedSummaryRows = null;
-            if (obcRow.HasExpandedSummaryRows() && shouldIncludeSummaryRows)
-            {
-                expandedSummaryRows = obcRow.ExpandedSummaryRows.Select(_ =>
-                {
-                    var row = new Row(_.Cells, _.Id, _.Format);
-                    return row.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, rowIndentLevel, true, obcToVuescapeConversionContext);
-                }).ToList();
-            }
-
             IReadOnlyList<TreeTableRow> collapsedSummaryRows = null;
-            if (obcRow.HasCollapsedSummaryRows() && shouldIncludeSummaryRows)
+            IReadOnlyList<TreeTableRow> expandedSummaryRows = null;
+
+            if (obcRowBase is Row obcRow)
             {
-                collapsedSummaryRows = obcRow.CollapsedSummaryRows.Select(_ =>
+                if (hasChildRows)
                 {
-                    var row = new Row(_.Cells, _.Id, _.Format);
-                    return row.ToVuescapeTreeTableRow(obcTableFormat, obcRowsFormat, obcDataRowsFormat, _.Format, obcColumnFormat, obcColumns, rowIndentLevel, true, obcToVuescapeConversionContext);
-                }).ToList();
+                    var childIndentLevel = shouldAlignChildRowsWithParent ? rowIndentLevel : rowIndentLevel + 1;
+                    children = obcRow.ChildRows.Select(_ =>
+                            _.ToVuescapeTreeTableRow(
+                                obcTableFormat,
+                                obcRowsFormat,
+                                obcDataRowsFormat,
+                                _.Format,
+                                obcColumnFormat,
+                                obcColumns,
+                                childIndentLevel,
+                                shouldIncludeSummaryRows,
+                                obcToVuescapeConversionContext))
+                        .ToList();
+                }
+
+                if (obcRow.HasExpandedSummaryRows() && shouldIncludeSummaryRows)
+                {
+                    expandedSummaryRows = obcRow.ExpandedSummaryRows.Select(_ =>
+                    {
+                        var row = new Row(_.Cells, _.Id, _.Format);
+                        return row.ToVuescapeTreeTableRow(
+                            obcTableFormat,
+                            obcRowsFormat,
+                            obcDataRowsFormat,
+                            _.Format,
+                            obcColumnFormat,
+                            obcColumns,
+                            rowIndentLevel,
+                            true,
+                            obcToVuescapeConversionContext);
+                    }).ToList();
+                }
+
+                if (obcRow.HasCollapsedSummaryRows() && shouldIncludeSummaryRows)
+                {
+                    collapsedSummaryRows = obcRow.CollapsedSummaryRows.Select(_ =>
+                    {
+                        var row = new Row(_.Cells, _.Id, _.Format);
+                        return row.ToVuescapeTreeTableRow(
+                            obcTableFormat,
+                            obcRowsFormat,
+                            obcDataRowsFormat,
+                            _.Format,
+                            obcColumnFormat,
+                            obcColumns,
+                            rowIndentLevel,
+                            true,
+                            obcToVuescapeConversionContext);
+                    }).ToList();
+                }
             }
 
-            var result = new TreeTableRow(rowId, treeTableCells, rowIndentLevel, cssStyles, null, null, isExpandable, isExpanded, isVisible, false, false, null, children, true, expandedSummaryRows, collapsedSummaryRows);
+            var result = new TreeTableRow(
+                rowId,
+                treeTableCells,
+                rowIndentLevel,
+                cssStyles,
+                null,
+                null,
+                isExpandable,
+                isExpanded,
+                isVisible,
+                false,
+                false,
+                null,
+                children,
+                true,
+                expandedSummaryRows,
+                collapsedSummaryRows);
+
             return result;
         }
 
         private static bool HasChildRows(
-            this OBeautifulCode.DataStructure.Row obcRow)
+            this OBeautifulCode.DataStructure.RowBase obcRowBase)
         {
-            var result = obcRow.ChildRows != null && obcRow.ChildRows.Any();
-            return result;
+            if (obcRowBase is Row obcRow)
+            {
+                var result = obcRow.ChildRows != null && obcRow.ChildRows.Any();
+                return result;
+            }
+
+            return false;
         }
 
         private static bool HasExpandedSummaryRows(

@@ -194,7 +194,8 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
-        private static Hover GetHover(this ICell obcCell)
+        private static Hover GetHover(
+            this ICell obcCell)
         {
             if (!(obcCell is IHaveHoverOver hoverOverCell))
             {
@@ -215,7 +216,8 @@ namespace Vuescape.DotNet.Domain
             throw new NotImplementedException(Invariant($"The only supported {nameof(hoverOverCell.HoverOver)} are {nameof(StringHoverOver)} and {nameof(HtmlHoverOver)}."));
         }
 
-        private static string GetDisplayValue(this ICell obcHeaderRowCell)
+        private static string GetDisplayValue(
+            this ICell obcHeaderRowCell)
         {
             if (!(obcHeaderRowCell is IGetCellValue valueCell))
             {
@@ -227,7 +229,7 @@ namespace Vuescape.DotNet.Domain
                 var valueFormat = displayValueCell.GetCellValueFormat();
                 if (valueFormat != null)
                 {
-                    if (valueFormat is PercentCellValueFormat percentCellValueFormat)
+                    if (valueFormat is PercentCellValueFormat<decimal> percentCellValueFormat)
                     {
                         if (percentCellValueFormat.PercentDisplayKind != null ||
                             percentCellValueFormat.DecimalSeparator != null ||
@@ -238,7 +240,7 @@ namespace Vuescape.DotNet.Domain
                         {
                             // TODO: Get property names dynamically
                             throw new NotImplementedException(Invariant(
-                                $"The only currently supported properties of {nameof(PercentCellValueFormat)} are 'RoundingStrategy' and 'NumberOfDecimalPlaces': {percentCellValueFormat}."));
+                                $"The only currently supported properties of {nameof(PercentCellValueFormat<decimal>)} are 'RoundingStrategy' and 'NumberOfDecimalPlaces': {percentCellValueFormat}."));
                         }
 
                         var roundingStrategy = percentCellValueFormat.RoundingStrategy ?? MidpointRounding.AwayFromZero;
@@ -303,7 +305,9 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
-        private static ColumnDefinition GetColumnDefinition(ColumnFormat obcColumnFormat, ColumnWrapBehavior columnWrapBehavior)
+        private static ColumnDefinition GetColumnDefinition(
+            ColumnFormat obcColumnFormat,
+            ColumnWrapBehavior columnWrapBehavior)
         {
             ColumnDefinition result = null;
 
@@ -349,7 +353,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
         private static string GetCellFormatOptionsCssClasses(
-            ICell cell,
+            this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
             RowFormat obcRowsFormat,
@@ -409,7 +413,7 @@ namespace Vuescape.DotNet.Domain
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         private static string GetFontFormatOptionsCssClasses(
-            ICell cell,
+            this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
             RowFormat obcRowsFormat,
@@ -468,7 +472,7 @@ namespace Vuescape.DotNet.Domain
         }
 
         private static CellFormat GetCellFormat(
-            ICell cell,
+            this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
             RowFormat obcRowsFormat,
@@ -528,7 +532,7 @@ namespace Vuescape.DotNet.Domain
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         private static Color? GetCellBackgroundColor(
-            ICell cell,
+            this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
             RowFormat obcRowsFormat,
@@ -579,7 +583,7 @@ namespace Vuescape.DotNet.Domain
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
         private static HorizontalAlignment? GetHorizontalAlignment(
-            ICell cell,
+            this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
             RowFormat obcRowsFormat,
@@ -625,7 +629,7 @@ namespace Vuescape.DotNet.Domain
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         private static Color? GetFontColor(
-            ICell cell,
+            this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
             RowFormat obcRowsFormat,
@@ -677,7 +681,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
         private static string GetCellFontSizeInPixels(
-            ICell cell,
+            this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
             RowFormat obcRowsFormat,
@@ -735,7 +739,7 @@ namespace Vuescape.DotNet.Domain
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         private static bool ShouldCellWrap(
-            ICell cell,
+            this ICell cell,
             RowFormat obcRowFormat,
             HeaderRowsFormat obcHeaderRowsFormat,
             RowFormat obcRowsFormat,

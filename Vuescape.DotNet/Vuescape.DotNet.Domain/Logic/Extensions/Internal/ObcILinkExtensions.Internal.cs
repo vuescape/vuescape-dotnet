@@ -31,10 +31,10 @@ namespace Vuescape.DotNet.Domain
 
             Link result = null;
 
-            if (link is SimpleLink simpleLink)
+            if (link is StandardLink standardLink)
             {
-                var linkTarget = GetLinkTarget(simpleLink.Target);
-                if (simpleLink.Resource is UrlLinkedResource urlLinkedResource)
+                var linkTarget = standardLink.Target.GetLinkTarget();
+                if (standardLink.Resource is UrlLinkedResource urlLinkedResource)
                 {
                     var resourceKind = GetResourceKind(urlLinkedResource.ResourceKind);
                     var resource = urlLinkedResource.Url;
@@ -51,7 +51,7 @@ namespace Vuescape.DotNet.Domain
                     if (obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
                     {
                         throw new InvalidOperationException(Invariant(
-                            $"Only {nameof(ILinkedResource)} of type {nameof(UrlLinkedResource)} is supported. {simpleLink.Resource.GetType().Name} is not supported."));
+                            $"Only {nameof(ILinkedResource)} of type {nameof(UrlLinkedResource)} is supported. {standardLink.Resource.GetType().Name} is not supported."));
                     }
                 }
             }
@@ -60,14 +60,15 @@ namespace Vuescape.DotNet.Domain
                 if (obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
                 {
                     throw new InvalidOperationException(Invariant(
-                        $"Only type {nameof(SimpleLink)} is supported {nameof(ILink)} type. {link.GetType().Name} is not supported."));
+                        $"Only type {nameof(StandardLink)} is supported {nameof(ILink)} type. {link.GetType().Name} is not supported."));
                 }
             }
 
             return result;
         }
 
-        private static ResourceKind GetResourceKind(OBeautifulCode.DataStructure.UrlLinkedResourceKind urlLinkedResourceKind)
+        private static ResourceKind GetResourceKind(
+            this OBeautifulCode.DataStructure.UrlLinkedResourceKind urlLinkedResourceKind)
         {
             switch (urlLinkedResourceKind)
             {
@@ -96,7 +97,8 @@ namespace Vuescape.DotNet.Domain
             }
         }
 
-        private static LinkTarget GetLinkTarget(OBeautifulCode.DataStructure.LinkTarget linkTarget)
+        private static LinkTarget GetLinkTarget(
+            this OBeautifulCode.DataStructure.LinkTarget? linkTarget)
         {
             switch (linkTarget)
             {

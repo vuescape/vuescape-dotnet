@@ -48,7 +48,7 @@ namespace OBeautifulCode.DataStructure.Test
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(HorizontalAlignment.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(InnerBorderEdges.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(LinkTarget.Unknown);
-            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(MediaReferenceKind.Unknown);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(MediaKind.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(MessageFormatKind.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(NumberFormatDigitGroupKind.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(NumberFormatNegativeDisplayKind.Unknown);
@@ -69,10 +69,12 @@ namespace OBeautifulCode.DataStructure.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator<IValidationCell>(A.Dummy<NotSlottedCellBase>);
             AutoFixtureBackedDummyFactory.AddDummyCreator<ICellValueFormat<Version>>(A.Dummy<CellValueFormatBase<Version>>);
             AutoFixtureBackedDummyFactory.AddDummyCreator<IHoverOver>(A.Dummy<HoverOverBase>);
-            AutoFixtureBackedDummyFactory.AddDummyCreator<ILink>(A.Dummy<SimpleLink>);
+            AutoFixtureBackedDummyFactory.AddDummyCreator<ILink>(A.Dummy<StandardLink>);
             AutoFixtureBackedDummyFactory.AddDummyCreator<ILinkedResource>(A.Dummy<LinkedResourceBase>);
+            AutoFixtureBackedDummyFactory.AddDummyCreator<IMedia>(A.Dummy<MediaBase>);
             AutoFixtureBackedDummyFactory.AddDummyCreator<IOperationOutputCell<Version>>(A.Dummy<OperationCell<Version>>);
             AutoFixtureBackedDummyFactory.AddDummyCreator<IDetails>(A.Dummy<DetailsBase>);
+            AutoFixtureBackedDummyFactory.UseRandomInterfaceImplementationForDummy<ICellLocator>();
 
             // <------------------- OPERATIONS ------------------------>
             RegisterReturningOperation<bool>();
@@ -82,7 +84,7 @@ namespace OBeautifulCode.DataStructure.Test
             RegisterReturningOperation<AvailabilityCheckResult>();
             RegisterReturningOperation<Availability>();
             RegisterReturningOperation<Validity>();
-            RegisterReturningOperation<CellLocatorBase>();
+            RegisterReturningOperation<ICellLocator>();
             RegisterReturningOperation<CompareOperator>();
 
             // <------------------- MODELS ------------------------>
@@ -92,7 +94,7 @@ namespace OBeautifulCode.DataStructure.Test
             {
                 var numberOfSections = ThreadSafeRandom.Next(1, 4);
 
-                var result = new Report(A.Dummy<string>(), Some.ReadOnlyDummies<Section>(numberOfSections).ToList(), A.Dummy<string>(), A.Dummy<UtcDateTime>(), Some.ReadOnlyDummies<SimpleLink>().ToList(), A.Dummy<AdditionalReportInfo>(), A.Dummy<ReportFormat>());
+                var result = new Report(A.Dummy<string>(), Some.ReadOnlyDummies<Section>(numberOfSections).ToList(), A.Dummy<string>(), A.Dummy<UtcDateTime>(), Some.ReadOnlyDummies<StandardLink>().ToList(), A.Dummy<AdditionalReportInfo>(), A.Dummy<ReportFormat>());
 
                 return result;
             });
@@ -134,7 +136,7 @@ namespace OBeautifulCode.DataStructure.Test
             // DataRows
             AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
             {
-                var allDataRows = BuildDataRows(GetRandomNumberOfColumns());
+                var allDataRows = BuildRowBases(GetRandomNumberOfColumns());
 
                 var result = new DataRows(allDataRows, A.Dummy<DataRowsFormat>());
 
@@ -154,7 +156,7 @@ namespace OBeautifulCode.DataStructure.Test
             // Row
             AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
             {
-                var result = BuildDataRow(GetRandomNumberOfColumns());
+                var result = BuildRow(GetRandomNumberOfColumns());
 
                 return result;
             });
@@ -295,7 +297,14 @@ namespace OBeautifulCode.DataStructure.Test
             // CellValueFormat
             AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
             {
-                var result = new DecimalCellValueFormat(A.Dummy<string>(), A.Dummy<string>(), A.Dummy<ZeroOrPositiveInteger>(), A.Dummy<MidpointRounding>(), A.Dummy<char>(), A.Dummy<NumberFormatDigitGroupKind>(), A.Dummy<char>(), A.Dummy<NumberFormatNegativeDisplayKind>(), A.Dummy<string>());
+                var result = new CurrencyCellValueFormat<Version>(A.Dummy<CurrencyCode>(), A.Dummy<ZeroOrPositiveInteger>(), A.Dummy<MidpointRounding>(), A.Dummy<char>(), A.Dummy<NumberFormatDigitGroupKind>(), A.Dummy<char>(), A.Dummy<NumberFormatNegativeDisplayKind>(), A.Dummy<string>());
+
+                return result;
+            });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
+            {
+                var result = new NumberCellValueFormat<Version>(A.Dummy<string>(), A.Dummy<string>(), A.Dummy<ZeroOrPositiveInteger>(), A.Dummy<MidpointRounding>(), A.Dummy<char>(), A.Dummy<NumberFormatDigitGroupKind>(), A.Dummy<char>(), A.Dummy<NumberFormatNegativeDisplayKind>(), A.Dummy<string>());
 
                 return result;
             });
@@ -330,7 +339,7 @@ namespace OBeautifulCode.DataStructure.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
             {
-                var result = new PercentCellValueFormat(A.Dummy<NumberFormatPercentDisplayKind>(), A.Dummy<ZeroOrPositiveInteger>(), A.Dummy<MidpointRounding>(), A.Dummy<char>(), A.Dummy<NumberFormatDigitGroupKind>(), A.Dummy<char>(), A.Dummy<NumberFormatNegativeDisplayKind>(), A.Dummy<string>());
+                var result = new PercentCellValueFormat<Version>(A.Dummy<NumberFormatPercentDisplayKind>(), A.Dummy<ZeroOrPositiveInteger>(), A.Dummy<MidpointRounding>(), A.Dummy<char>(), A.Dummy<NumberFormatDigitGroupKind>(), A.Dummy<char>(), A.Dummy<NumberFormatNegativeDisplayKind>(), A.Dummy<string>());
 
                 return result;
             });
@@ -454,9 +463,17 @@ namespace OBeautifulCode.DataStructure.Test
 
                 return result;
             });
+
+            // Details
+            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
+            {
+                var result = new LogoDetails(A.Dummy<MediaBase>().Whose(_ => _.MediaKind == MediaKind.Image));
+
+                return result;
+            });
         }
 
-        private static TableRows BuildTableRows(
+        public static TableRows BuildTableRows(
             int numberOfColumns)
         {
             var allHeaderRows = BuildFlatRows(numberOfColumns);
@@ -467,7 +484,7 @@ namespace OBeautifulCode.DataStructure.Test
 
             var footerRows = new FooterRows(allFooterRows, A.Dummy<FooterRowsFormat>());
 
-            var allDataRows = BuildDataRows(numberOfColumns);
+            var allDataRows = BuildRowBases(numberOfColumns);
 
             var dataRows = new DataRows(allDataRows, A.Dummy<DataRowsFormat>());
 
@@ -476,7 +493,7 @@ namespace OBeautifulCode.DataStructure.Test
             return result;
         }
 
-        private static IReadOnlyList<FlatRow> BuildFlatRows(
+        public static IReadOnlyList<FlatRow> BuildFlatRows(
             int numberOfColumns)
         {
             var numberOfRows = GetRandomNumberOfRows();
@@ -495,7 +512,7 @@ namespace OBeautifulCode.DataStructure.Test
             return result;
         }
 
-        private static FlatRow BuildFlatRow(
+        public static FlatRow BuildFlatRow(
             int numberOfColumns,
             bool allowSpanningCells)
         {
@@ -507,17 +524,17 @@ namespace OBeautifulCode.DataStructure.Test
 
         }
 
-        private static IReadOnlyList<Row> BuildDataRows(
+        public static IReadOnlyList<RowBase> BuildRowBases(
             int numberOfColumns,
             int depth = 0)
         {
             var numberOfRows = GetRandomNumberOfRows();
 
-            var result = new List<Row>();
+            var result = new List<RowBase>();
 
             for (var x = 0; x < numberOfRows; x++)
             {
-                var dataRow = BuildDataRow(numberOfColumns, depth);
+                var dataRow = BuildRowBase(numberOfColumns, depth);
 
                 result.Add(dataRow);
             }
@@ -525,15 +542,35 @@ namespace OBeautifulCode.DataStructure.Test
             return result;
         }
 
-        private static Row BuildDataRow(
+        public static RowBase BuildRowBase(
+            int numberOfColumns,
+            int depth = 0)
+        {
+            var hasChildren = A.Dummy<bool>();
+
+            RowBase result;
+            
+            if (hasChildren)
+            {
+                result = BuildRow(numberOfColumns, depth);
+            }
+            else
+            {
+                result = BuildFlatRow(numberOfColumns, allowSpanningCells: true);
+            }
+
+            return result;
+        }
+
+        public static Row BuildRow(
             int numberOfColumns,
             int depth = 0)
         {
             var cells = BuildRowCells(numberOfColumns, allowSpanningCells: true);
 
             var childRows = depth == 2
-                ? new Row[0]
-                : BuildDataRows(numberOfColumns, depth + 1);
+                ? new RowBase[0]
+                : BuildRowBases(numberOfColumns, depth + 1);
 
             var expandedSummaryRow = childRows.Any()
                 ? new[] { BuildFlatRow(numberOfColumns, allowSpanningCells: true) }
@@ -548,7 +585,7 @@ namespace OBeautifulCode.DataStructure.Test
             return result;
         }
 
-        private static IReadOnlyList<ICell> BuildRowCells(
+        public static IReadOnlyList<ICell> BuildRowCells(
             int numberOfColumns,
             bool allowSpanningCells)
         {

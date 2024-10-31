@@ -7,6 +7,7 @@
 namespace Vuescape.DotNet.Serialization.Bson
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using MongoDB.Bson;
     using MongoDB.Bson.IO;
@@ -87,7 +88,7 @@ namespace Vuescape.DotNet.Serialization.Bson
         }
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "Not Hungarian Notation.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "Not Hungarian Notation.")]
         public override UiObject Deserialize(
             BsonDeserializationContext context,
             BsonDeserializationArgs args)

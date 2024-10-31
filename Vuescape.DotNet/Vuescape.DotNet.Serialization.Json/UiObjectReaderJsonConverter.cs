@@ -8,6 +8,7 @@ namespace Vuescape.DotNet.Serialization.Json
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
 
@@ -56,7 +57,7 @@ namespace Vuescape.DotNet.Serialization.Json
         }
 
         /// <inheritdoc />
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "Not Hungarian Notation.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "Not Hungarian Notation.")]
         public override object ReadJson(
             JsonReader reader,
             Type objectType,

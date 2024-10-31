@@ -8,8 +8,8 @@
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
-    using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
@@ -31,7 +31,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="cellFormat">The cell formatting details.</param>
         /// <param name="links">The Links for this cell.</param>
         /// <param name="slots">The slotted values for this cell.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "colspan", Justification = "This aligns with the HTML spelling.")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "colspan", Justification = "This aligns with the HTML spelling.")]
         public TreeTableCell(
             string id,
             string displayValue,
@@ -91,7 +91,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the column span (colspan attribute in HTML).
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Colspan", Justification = "Aligns with client side HTML naming")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Colspan", Justification = "Aligns with client side HTML naming")]
         public int? Colspan { get; private set; }
 
         /// <summary>

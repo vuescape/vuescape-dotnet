@@ -136,6 +136,25 @@
       <DependentUpon>Content.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Content\PayloadEncodingKind.cs" />
+    <Compile Include="Models\DynamicUI\Action\ActionBase.cs" />
+    <Compile Include="Models\DynamicUI\Action\NavigationAction.cs" />
+    <Compile Include="Models\DynamicUI\Action\Payload\NavigationActionPayload.cs" />
+    <Compile Include="Models\DynamicUI\Action\NoAction.cs" />
+    <Compile Include="Models\DynamicUI\Action\UnknownAction.cs" />
+    <Compile Include="Models\DynamicUI\Chiclet.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\ButtonComponent.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\ChicletGridComponent.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\PaneComponentBase.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\ButtonComponentPayload.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\ChicletGridComponentPayload.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableComponentPayload.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TitleComponentPayload.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\TableComponent.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\TitleComponent.cs" />
+    <Compile Include="Models\DynamicUI\PaneItem.cs" />
+    <Compile Include="Models\DynamicUI\PaneLayout.cs" />
+    <Compile Include="Models\DynamicUI\PaneSection.cs" />
+    <Compile Include="Models\DynamicUI\ReportLayout.cs" />
     <Compile Include="Models\Feature\Feature.designer.cs">
       <DependentUpon>Feature.cs</DependentUpon>
     </Compile>
@@ -172,6 +191,7 @@
     <Compile Include="Models\Format\CellFormat.designer.cs">
       <DependentUpon>CellFormat.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Format\VerticalAlignment.cs" />
     <Compile Include="Models\Format\HorizontalAlignment.cs" />
     <Compile Include="Models\Link\ResourceKind.cs" />
     <Compile Include="Models\Css\CssPropertyName.cs" />

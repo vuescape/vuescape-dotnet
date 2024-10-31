@@ -187,7 +187,7 @@
     <Compile Include="Models\Feature\Ops\LinkedResourceOpBase.designer.cs">
       <DependentUpon>LinkedResourceOpBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Feature\Ops\PaneKind.cs" />
+    <Compile Include="Models\Feature\PaneKind.cs" />
     <Compile Include="Models\Format\CellFormat.designer.cs">
       <DependentUpon>CellFormat.cs</DependentUpon>
     </Compile>
@@ -253,7 +253,7 @@
     <Compile Include="Models\Feature\Ops\DisplayReportOp.cs" />
     <Compile Include="Models\Feature\Navigation\MenuNavigationItem.cs" />
     <Compile Include="Models\Feature\Navigation\NavigationItemKind.cs" />
-    <Compile Include="Models\Feature\Ops\ReportPaneTitleBarButtons.cs" />
+    <Compile Include="Models\Feature\ReportPaneTitleBarButtons.cs" />
     <Compile Include="Operations\ConvertObcToVuescapeReportOp.designer.cs">
       <DependentUpon>ConvertObcToVuescapeReportOp.cs</DependentUpon>
     </Compile>

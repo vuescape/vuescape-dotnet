@@ -25,8 +25,8 @@ namespace Vuescape.DotNet.Domain
             IReadOnlyList<string> headers,
             IReadOnlyList<IReadOnlyList<string>> rows)
         {
-            new { headers }.AsArg().Must().NotBeNull();
-            new { rows }.AsArg().Must().NotBeNull();
+            new { headers }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
+            new { rows }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
 
             this.Headers = headers;
             this.Rows = rows;

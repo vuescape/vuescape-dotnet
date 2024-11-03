@@ -30,11 +30,11 @@ namespace Vuescape.DotNet.Domain
             string id,
             string title,
             bool isVisible,
-            Action action,
+            ActionBase action,
             IReadOnlyList<string> icons = null,
             string cssClass = null)
         {
-            new { id }.AsArg().Must().NotBeNull();
+            new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { title }.AsArg().Must().NotBeNull();
 
             this.Id = id;
@@ -73,6 +73,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the action associated with the chiclet.
         /// </summary>
-        public Action Action { get; private set; }
+        public ActionBase Action { get; private set; }
     }
 }

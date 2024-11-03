@@ -23,6 +23,7 @@ namespace Vuescape.DotNet.Domain
         public ChicletGridComponentPayload(IReadOnlyList<Chiclet> chiclets)
         {
             new { chiclets }.AsArg().Must().NotBeNull();
+            new { chiclets }.AsArg().Must().NotContainAnyNullElements();
 
             this.Chiclets = chiclets;
         }

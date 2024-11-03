@@ -7,7 +7,7 @@
 // ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
-    using OBeautifulCode.Type;
+    using OBeautifulCode.Assertion.Recipes;
 
     /// <summary>
     /// Represents a navigation action with a payload containing navigation details.
@@ -20,6 +20,9 @@ namespace Vuescape.DotNet.Domain
         /// <param name="payload">The payload containing navigation details.</param>
         public NavigationAction(NavigationActionPayload payload)
         {
+            new { payload }.AsArg().Must().NotBeNull();
+
+            this.Payload = payload;
         }
 
         /// <inheritdoc />

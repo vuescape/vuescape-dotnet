@@ -29,7 +29,7 @@ namespace Vuescape.DotNet.Domain
             double paneWidthPercent)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { sections }.AsArg().Must().NotBeNull();
+            new { sections }.AsArg().Must().NotContainAnyNullElements();
 
             this.Id = id;
             this.Sections = sections;

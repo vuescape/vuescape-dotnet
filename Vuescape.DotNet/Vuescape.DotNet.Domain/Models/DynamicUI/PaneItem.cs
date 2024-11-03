@@ -29,7 +29,9 @@ namespace Vuescape.DotNet.Domain
             HorizontalAlignment horizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment verticalAlignment = VerticalAlignment.Top)
         {
-            new { components }.AsArg().Must().NotBeNull();
+            new { components }.AsArg().Must().NotContainAnyNullElements();
+            new { horizontalAlignment }.AsArg().Must().NotBeEqualTo(HorizontalAlignment.Unknown);
+            new { verticalAlignment }.AsArg().Must().NotBeEqualTo(VerticalAlignment.Unknown);
 
             this.Width = width;
             this.HorizontalAlignment = horizontalAlignment;

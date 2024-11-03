@@ -26,7 +26,7 @@ namespace Vuescape.DotNet.Domain
             IReadOnlyList<PaneItem> items)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { items }.AsArg().Must().NotBeNull();
+            new { items }.AsArg().Must().NotContainAnyNullElements();
 
             this.Id = id;
             this.Items = items;

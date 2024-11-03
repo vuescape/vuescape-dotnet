@@ -21,7 +21,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="text">The text to display in the title component.</param>
         public TitleComponentPayload(string text)
         {
-            new { text }.AsArg().Must().NotBeNull();
+            new { text }.AsArg().Must().NotBeNullNorWhiteSpace();
 
             this.Text = text;
         }

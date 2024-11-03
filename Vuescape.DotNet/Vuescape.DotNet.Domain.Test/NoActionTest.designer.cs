@@ -78,7 +78,6 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<int?>(),
                         A.Dummy<Guid>(),
                         A.Dummy<NavigationAction>(),
-                        A.Dummy<UnknownAction>(),
                     },
                 });
 

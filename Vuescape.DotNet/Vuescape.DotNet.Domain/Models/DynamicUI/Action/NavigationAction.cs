@@ -12,7 +12,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a navigation action with a payload containing navigation details.
     /// </summary>
-    public class NavigationAction : ActionBase, IModelViaCodeGen
+    public partial class NavigationAction : ActionBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NavigationAction"/> class.
@@ -20,7 +20,6 @@ namespace Vuescape.DotNet.Domain
         /// <param name="payload">The payload containing navigation details.</param>
         public NavigationAction(NavigationActionPayload payload)
         {
-            this.Payload = payload;
         }
 
         /// <inheritdoc />
@@ -29,6 +28,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the payload containing navigation details.
         /// </summary>
-        public NavigationActionPayload Payload { get; }
+        public NavigationActionPayload Payload { get; private set; }
     }
 }

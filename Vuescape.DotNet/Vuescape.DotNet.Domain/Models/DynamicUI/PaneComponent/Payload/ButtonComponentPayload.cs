@@ -14,7 +14,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the payload for a button component, including label, action, and optional icons.
     /// </summary>
-    public class ButtonComponentPayload : IModelViaCodeGen
+    public partial class ButtonComponentPayload : IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ButtonComponentPayload"/> class.
@@ -38,16 +38,16 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the label to display on the button.
         /// </summary>
-        public string Label { get; }
+        public string Label { get; private set; }
 
         /// <summary>
         /// Gets the action associated with the button.
         /// </summary>
-        public ActionBase Action { get; }
+        public ActionBase Action { get; private set; }
 
         /// <summary>
         /// Gets the optional icons to display on the button.
         /// </summary>
-        public IReadOnlyList<string> Icons { get; }
+        public IReadOnlyList<string> Icons { get; private set; }
     }
 }

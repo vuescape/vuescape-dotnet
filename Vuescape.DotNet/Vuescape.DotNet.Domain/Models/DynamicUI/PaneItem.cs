@@ -14,7 +14,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents an item within a pane, including its alignment, width, and contained components.
     /// </summary>
-    public class PaneItem : IModelViaCodeGen
+    public partial class PaneItem : IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PaneItem"/> class.
@@ -40,21 +40,21 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the flexbox width of the item (e.g., "30%", "flex-grow-1").
         /// </summary>
-        public string Width { get; }
+        public string Width { get; private set; }
 
         /// <summary>
         /// Gets the horizontal alignment of the content within the item.
         /// </summary>
-        public HorizontalAlignment HorizontalAlignment { get; }
+        public HorizontalAlignment HorizontalAlignment { get; private set; }
 
         /// <summary>
         /// Gets the vertical alignment of the content within the item.
         /// </summary>
-        public VerticalAlignment VerticalAlignment { get; }
+        public VerticalAlignment VerticalAlignment { get; private set; }
 
         /// <summary>
         /// Gets the components to display within this pane item.
         /// </summary>
-        public IReadOnlyList<PaneComponentBase> Components { get; }
+        public IReadOnlyList<PaneComponentBase> Components { get; private set; }
     }
 }

@@ -44,7 +44,6 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         typeof(NavigationAction),
                         typeof(NoAction),
-                        typeof(UnknownAction)
                     };
 
                     var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
@@ -454,9 +453,6 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<object>(),
                                  A.Dummy<UiObjectType?>(),
                                  A.Dummy<string>()));
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new UnknownAction());
         }
 
         /// <inheritdoc />

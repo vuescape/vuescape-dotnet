@@ -15,7 +15,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the layout of a pane, including its sections and width percentage.
     /// </summary>
-    public class PaneLayout : IHaveId<string>, IModelViaCodeGen
+    public partial class PaneLayout : IHaveId<string>, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PaneLayout"/> class.
@@ -39,16 +39,16 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the unique identifier for the pane layout.
         /// </summary>
-        public string Id { get; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets the collection of sections within the pane.
         /// </summary>
-        public IReadOnlyList<PaneSection> Sections { get; }
+        public IReadOnlyList<PaneSection> Sections { get; private set; }
 
         /// <summary>
         /// Gets the width of the pane as a percentage.
         /// </summary>
-        public double PaneWidthPercent { get; }
+        public double PaneWidthPercent { get; private set; }
     }
 }

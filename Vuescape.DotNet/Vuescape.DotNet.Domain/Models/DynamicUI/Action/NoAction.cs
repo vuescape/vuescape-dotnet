@@ -12,7 +12,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents an unknown action type.
     /// </summary>
-    public class NoAction : ActionBase, IModelViaCodeGen
+    public partial class NoAction : ActionBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NoAction"/> class.

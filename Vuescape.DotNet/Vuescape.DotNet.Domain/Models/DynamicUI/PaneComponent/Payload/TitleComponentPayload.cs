@@ -13,7 +13,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the payload for a title component, containing the text to display.
     /// </summary>
-    public class TitleComponentPayload : IModelViaCodeGen
+    public partial class TitleComponentPayload : IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleComponentPayload"/> class.
@@ -29,6 +29,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the text to display in the title component.
         /// </summary>
-        public string Text { get; }
+        public string Text { get; private set; }
     }
 }

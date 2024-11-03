@@ -15,7 +15,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a chiclet item with an ID, title, visibility, icons, CSS class, and action.
     /// </summary>
-    public class Chiclet : IHaveId<string>, IModelViaCodeGen
+    public partial class Chiclet : IHaveId<string>, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Chiclet"/> class.
@@ -48,31 +48,31 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the unique identifier for the chiclet.
         /// </summary>
-        public string Id { get; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets the title of the chiclet.
         /// </summary>
-        public string Title { get; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether the chiclet is visible.
         /// </summary>
-        public bool IsVisible { get; }
+        public bool IsVisible { get; private set; }
 
         /// <summary>
         /// Gets the optional list of icon identifiers for the chiclet.
         /// </summary>
-        public IReadOnlyList<string> Icons { get; }
+        public IReadOnlyList<string> Icons { get; private set; }
 
         /// <summary>
         /// Gets the optional CSS class to style the chiclet.
         /// </summary>
-        public string CssClass { get; }
+        public string CssClass { get; private set; }
 
         /// <summary>
         /// Gets the action associated with the chiclet.
         /// </summary>
-        public Action Action { get; }
+        public Action Action { get; private set; }
     }
 }

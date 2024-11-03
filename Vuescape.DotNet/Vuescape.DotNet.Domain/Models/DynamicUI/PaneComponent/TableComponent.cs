@@ -13,7 +13,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a table component with an associated payload.
     /// </summary>
-    public class TableComponent : PaneComponentBase, IModelViaCodeGen
+    public partial class TableComponent : PaneComponentBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TableComponent"/> class.
@@ -34,6 +34,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the payload containing details of the table component.
         /// </summary>
-        public TableComponentPayload Payload { get; }
+        public TableComponentPayload Payload { get; private set; }
     }
 }

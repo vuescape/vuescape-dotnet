@@ -13,7 +13,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the layout for a report with defined sections for left, right, and center panes.
     /// </summary>
-    public class ReportLayout : IHaveId<string>, IModelViaCodeGen
+    public partial class ReportLayout : IHaveId<string>, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportLayout"/> class.
@@ -45,26 +45,26 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the unique identifier for the report layout.
         /// </summary>
-        public string Id { get; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets the title of the report layout, if available.
         /// </summary>
-        public string Title { get; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// Gets the layout configuration for the left pane.
         /// </summary>
-        public PaneLayout LeftPane { get; }
+        public PaneLayout LeftPane { get; private set; }
 
         /// <summary>
         /// Gets the layout configuration for the right pane.
         /// </summary>
-        public PaneLayout RightPane { get; }
+        public PaneLayout RightPane { get; private set; }
 
         /// <summary>
         /// Gets the layout configuration for the center pane.
         /// </summary>
-        public PaneLayout CenterPane { get; }
+        public PaneLayout CenterPane { get; private set; }
     }
 }

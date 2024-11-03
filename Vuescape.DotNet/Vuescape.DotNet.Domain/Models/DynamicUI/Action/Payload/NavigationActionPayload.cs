@@ -14,7 +14,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the payload for a navigation action, including URL, target, and replace flag.
     /// </summary>
-    public class NavigationActionPayload : IModelViaCodeGen
+    public partial class NavigationActionPayload : IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NavigationActionPayload"/> class.
@@ -39,16 +39,16 @@ namespace Vuescape.DotNet.Domain
         /// Gets the URL to navigate to.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Justification = "Prefer using string URL for serialization.")]
-        public string Url { get; }
+        public string Url { get; private set; }
 
         /// <summary>
         /// Gets the optional target for the navigation, such as "_blank".
         /// </summary>
-        public string Target { get; }
+        public string Target { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether to replace the current page in history.
         /// </summary>
-        public bool? Replace { get; }
+        public bool? Replace { get; private set; }
     }
 }

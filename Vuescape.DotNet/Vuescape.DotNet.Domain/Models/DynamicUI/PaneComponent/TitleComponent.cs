@@ -13,7 +13,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a title component with an associated payload.
     /// </summary>
-    public class TitleComponent : PaneComponentBase, IModelViaCodeGen
+    public partial class TitleComponent : PaneComponentBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleComponent"/> class.
@@ -34,6 +34,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the payload containing details of the title component.
         /// </summary>
-        public TitleComponentPayload Payload { get; }
+        public TitleComponentPayload Payload { get; private set; }
     }
 }

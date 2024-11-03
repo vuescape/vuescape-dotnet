@@ -13,7 +13,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a component within a pane, which can be a button, chiclet grid, table, or title component.
     /// </summary>
-    public abstract class PaneComponentBase : IModelViaCodeGen
+    public abstract partial class PaneComponentBase : IModelViaCodeGen
     {
         /// <summary>
         /// Gets the type of the pane component.

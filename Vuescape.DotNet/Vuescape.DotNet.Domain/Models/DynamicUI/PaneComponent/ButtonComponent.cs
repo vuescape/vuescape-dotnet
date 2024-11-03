@@ -13,7 +13,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a button component with an associated payload.
     /// </summary>
-    public class ButtonComponent : PaneComponentBase, IModelViaCodeGen
+    public partial class ButtonComponent : PaneComponentBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ButtonComponent"/> class.
@@ -34,6 +34,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the payload containing details of the button component.
         /// </summary>
-        public ButtonComponentPayload Payload { get; }
+        public ButtonComponentPayload Payload { get; private set; }
     }
 }

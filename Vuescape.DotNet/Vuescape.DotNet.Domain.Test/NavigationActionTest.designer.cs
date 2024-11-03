@@ -140,7 +140,6 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<int?>(),
                         A.Dummy<Guid>(),
                         A.Dummy<NoAction>(),
-                        A.Dummy<UnknownAction>(),
                     },
                 });
 

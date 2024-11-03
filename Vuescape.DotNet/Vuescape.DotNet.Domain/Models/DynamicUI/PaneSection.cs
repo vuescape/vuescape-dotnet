@@ -14,7 +14,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a section within a pane containing a list of pane items.
     /// </summary>
-    public class PaneSection : IHaveId<string>, IModelViaCodeGen
+    public partial class PaneSection : IHaveId<string>, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PaneSection"/> class.
@@ -35,11 +35,11 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the unique identifier for the pane section.
         /// </summary>
-        public string Id { get; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets the collection of items contained in this pane section.
         /// </summary>
-        public IReadOnlyList<PaneItem> Items { get; }
+        public IReadOnlyList<PaneItem> Items { get; private set; }
     }
 }

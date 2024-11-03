@@ -13,7 +13,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents an action, which can be a navigation action or an unknown action.
     /// </summary>
-    public abstract class ActionBase : IModelViaCodeGen
+    public abstract partial class ActionBase : IModelViaCodeGen
     {
         /// <summary>
         /// Gets the type of the action. Used to discriminate actions in JavaScript.

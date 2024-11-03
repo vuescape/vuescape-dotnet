@@ -14,7 +14,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents properties for a chiclet grid, containing a collection of chiclets.
     /// </summary>
-    public class ChicletGridComponentPayload : IModelViaCodeGen
+    public partial class ChicletGridComponentPayload : IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChicletGridComponentPayload"/> class.
@@ -30,6 +30,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the collection of chiclets displayed in the grid.
         /// </summary>
-        public IReadOnlyList<Chiclet> Chiclets { get; }
+        public IReadOnlyList<Chiclet> Chiclets { get; private set; }
     }
 }

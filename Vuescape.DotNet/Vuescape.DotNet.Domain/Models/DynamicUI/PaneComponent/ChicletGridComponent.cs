@@ -13,7 +13,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a chiclet grid component with an associated payload.
     /// </summary>
-    public class ChicletGridComponent : PaneComponentBase, IModelViaCodeGen
+    public partial class ChicletGridComponent : PaneComponentBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChicletGridComponent"/> class.
@@ -34,6 +34,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the payload containing details of the chiclet grid component.
         /// </summary>
-        public ChicletGridComponentPayload Payload { get; }
+        public ChicletGridComponentPayload Payload { get; private set; }
     }
 }

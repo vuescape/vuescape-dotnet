@@ -14,7 +14,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the payload for a table component, including headers and rows of data.
     /// </summary>
-    public class TableComponentPayload : IModelViaCodeGen
+    public partial class TableComponentPayload : IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TableComponentPayload"/> class.
@@ -35,11 +35,11 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the headers of the table.
         /// </summary>
-        public IReadOnlyList<string> Headers { get; }
+        public IReadOnlyList<string> Headers { get; private set; }
 
         /// <summary>
         /// Gets the rows of the table, where each row is a collection of cell values.
         /// </summary>
-        public IReadOnlyList<IReadOnlyList<string>> Rows { get; }
+        public IReadOnlyList<IReadOnlyList<string>> Rows { get; private set; }
     }
 }

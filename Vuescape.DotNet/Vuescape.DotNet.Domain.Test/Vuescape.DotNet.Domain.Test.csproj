@@ -255,13 +255,37 @@
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.designer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
+    <Compile Include="ActionBaseTest.cs" />
+    <Compile Include="ActionBaseTest.designer.cs">
+      <DependentUpon>ActionBaseTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ButtonComponentPayloadTest.cs" />
+    <Compile Include="ButtonComponentPayloadTest.designer.cs">
+      <DependentUpon>ButtonComponentPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ButtonComponentTest.cs" />
+    <Compile Include="ButtonComponentTest.designer.cs">
+      <DependentUpon>ButtonComponentTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="CellFormatTest.cs" />
     <Compile Include="CellFormatTest.designer.cs">
       <DependentUpon>CellFormatTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChicletGridComponentPayloadTest.cs" />
+    <Compile Include="ChicletGridComponentPayloadTest.designer.cs">
+      <DependentUpon>ChicletGridComponentPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChicletGridComponentTest.cs" />
+    <Compile Include="ChicletGridComponentTest.designer.cs">
+      <DependentUpon>ChicletGridComponentTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChicletNavigationItemTest.cs" />
     <Compile Include="ChicletNavigationItemTest.designer.cs">
       <DependentUpon>ChicletNavigationItemTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChicletTest.cs" />
+    <Compile Include="ChicletTest.designer.cs">
+      <DependentUpon>ChicletTest.cs</DependentUpon>
     </Compile>
     <Compile Include="ColumnDefinitionTest.cs" />
     <Compile Include="ColumnDefinitionTest.designer.cs">
@@ -372,6 +396,14 @@
     <Compile Include="Models\UiObjectTest.designer.cs">
       <DependentUpon>UiObjectTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="NavigationActionPayloadTest.cs" />
+    <Compile Include="NavigationActionPayloadTest.designer.cs">
+      <DependentUpon>NavigationActionPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationActionTest.cs" />
+    <Compile Include="NavigationActionTest.designer.cs">
+      <DependentUpon>NavigationActionTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="NavigationItemBaseTest.cs" />
     <Compile Include="NavigationItemBaseTest.designer.cs">
       <DependentUpon>NavigationItemBaseTest.cs</DependentUpon>
@@ -380,14 +412,38 @@
     <Compile Include="NavigationLinkTest.designer.cs">
       <DependentUpon>NavigationLinkTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="NoActionTest.cs" />
+    <Compile Include="NoActionTest.designer.cs">
+      <DependentUpon>NoActionTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="ObcToVuescapeConversionContextTest.cs" />
     <Compile Include="ObcToVuescapeConversionContextTest.designer.cs">
       <DependentUpon>ObcToVuescapeConversionContextTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PaneComponentBaseTest.cs" />
+    <Compile Include="PaneComponentBaseTest.designer.cs">
+      <DependentUpon>PaneComponentBaseTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PaneItemTest.cs" />
+    <Compile Include="PaneItemTest.designer.cs">
+      <DependentUpon>PaneItemTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PaneLayoutTest.cs" />
+    <Compile Include="PaneLayoutTest.designer.cs">
+      <DependentUpon>PaneLayoutTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PaneSectionTest.cs" />
+    <Compile Include="PaneSectionTest.designer.cs">
+      <DependentUpon>PaneSectionTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="Properties\ProjectInfo.cs" />
+    <Compile Include="ReportLayoutTest.cs" />
+    <Compile Include="ReportLayoutTest.designer.cs">
+      <DependentUpon>ReportLayoutTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportTest.cs" />
     <Compile Include="ReportTest.designer.cs">
       <DependentUpon>ReportTest.cs</DependentUpon>
@@ -408,6 +464,22 @@
     <Compile Include="Models\TreeTableRowTest.cs" />
     <Compile Include="Models\TreeTableTest.cs" />
     <Compile Include="Models\UiObjectTest.cs" />
+    <Compile Include="TableComponentPayloadTest.cs" />
+    <Compile Include="TableComponentPayloadTest.designer.cs">
+      <DependentUpon>TableComponentPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableComponentTest.cs" />
+    <Compile Include="TableComponentTest.designer.cs">
+      <DependentUpon>TableComponentTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TitleComponentPayloadTest.cs" />
+    <Compile Include="TitleComponentPayloadTest.designer.cs">
+      <DependentUpon>TitleComponentPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TitleComponentTest.cs" />
+    <Compile Include="TitleComponentTest.designer.cs">
+      <DependentUpon>TitleComponentTest.cs</DependentUpon>
+    </Compile>
     <None Include=".analyzers\test.ruleset" />
     <None Include="DummyFactory.recipe-nuspec" />
     <None Include="packages.config" />

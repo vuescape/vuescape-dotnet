@@ -25,6 +25,83 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static PaneLayoutTest()
         {
+            ConstructorArgumentValidationTestScenarios
+                .RemoveAllScenarios()
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<PaneLayout>
+                    {
+                        Name = "constructor should throw ArgumentNullException when parameter 'id' is null scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<PaneLayout>();
+
+                            var result = new PaneLayout(
+                                null,
+                                referenceObject.Sections,
+                                referenceObject.PaneWidthPercent);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentNullException),
+                        ExpectedExceptionMessageContains = new[] { "id", },
+                    })
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<PaneLayout>
+                    {
+                        Name = "constructor should throw ArgumentException when parameter 'id' is white space scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<PaneLayout>();
+
+                            var result = new PaneLayout(
+                                Invariant($"  {Environment.NewLine}  "),
+                                referenceObject.Sections,
+                                referenceObject.PaneWidthPercent);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentException),
+                        ExpectedExceptionMessageContains = new[] { "id", "white space", },
+                    })
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<PaneLayout>
+                    {
+                        Name =
+                            "constructor should throw ArgumentNullException when parameter 'sections' is null scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<PaneLayout>();
+
+                            var result = new PaneLayout(
+                                referenceObject.Id,
+                                null,
+                                referenceObject.PaneWidthPercent);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentNullException),
+                        ExpectedExceptionMessageContains = new[] { "sections", },
+                    })
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<PaneLayout>
+                    {
+                        Name =
+                            "constructor should throw ArgumentException when parameter 'sections' contains a null element scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<PaneLayout>();
+
+                            var result = new PaneLayout(
+                                referenceObject.Id,
+                                new PaneSection[0].Concat(referenceObject.Sections).Concat(new PaneSection[] { null })
+                                    .Concat(referenceObject.Sections).ToList(),
+                                referenceObject.PaneWidthPercent);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentException),
+                        ExpectedExceptionMessageContains = new[] { "sections", "contains at least one null element", },
+                    });
         }
     }
 }

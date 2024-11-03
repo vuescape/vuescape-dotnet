@@ -46,7 +46,7 @@ namespace Vuescape.DotNet.Serialization.Bson
                     null),
             }
             .Concat(
-                new Type[0]
+                Type.EmptyTypes
                     .Concat(new[] { typeof(IModel) })
                     .Concat(Vuescape.DotNet.Domain.ProjectInfo.Assembly.GetPublicEnumTypes())
                     .Select(_ => _.ToTypeToRegisterForBson()))

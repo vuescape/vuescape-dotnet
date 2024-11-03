@@ -77,7 +77,7 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
                                  A.Dummy<bool>(),
-                                 A.Dummy<Action>(),
+                                 A.Dummy<ActionBase>(),
                                  A.Dummy<IReadOnlyList<string>>(),
                                  A.Dummy<string>()));
 

@@ -25,6 +25,71 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static ChicletTest()
         {
+            ConstructorArgumentValidationTestScenarios
+                .RemoveAllScenarios()
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<Chiclet>
+                    {
+                        Name = "constructor should throw ArgumentNullException when parameter 'id' is null scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<Chiclet>();
+
+                            var result = new Chiclet(
+                                null,
+                                referenceObject.Title,
+                                referenceObject.IsVisible,
+                                referenceObject.Action,
+                                referenceObject.Icons,
+                                referenceObject.CssClass);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentNullException),
+                        ExpectedExceptionMessageContains = new[] { "id", },
+                    })
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<Chiclet>
+                    {
+                        Name = "constructor should throw ArgumentException when parameter 'id' is white space scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<Chiclet>();
+
+                            var result = new Chiclet(
+                                Invariant($"  {Environment.NewLine}  "),
+                                referenceObject.Title,
+                                referenceObject.IsVisible,
+                                referenceObject.Action,
+                                referenceObject.Icons,
+                                referenceObject.CssClass);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentException),
+                        ExpectedExceptionMessageContains = new[] { "id", "white space", },
+                    })
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<Chiclet>
+                    {
+                        Name = "constructor should throw ArgumentNullException when parameter 'title' is null scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<Chiclet>();
+
+                            var result = new Chiclet(
+                                referenceObject.Id,
+                                null,
+                                referenceObject.IsVisible,
+                                referenceObject.Action,
+                                referenceObject.Icons,
+                                referenceObject.CssClass);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentNullException),
+                        ExpectedExceptionMessageContains = new[] { "title", },
+                    });
         }
     }
 }

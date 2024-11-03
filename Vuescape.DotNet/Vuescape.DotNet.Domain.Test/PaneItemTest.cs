@@ -25,6 +25,84 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static PaneItemTest()
         {
-        }
+        ConstructorArgumentValidationTestScenarios
+            .RemoveAllScenarios()
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<PaneItem>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'components' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<PaneItem>();
+
+                        var result = new PaneItem(
+                                             null,
+                                             referenceObject.Width,
+                                             referenceObject.HorizontalAlignment,
+                                             referenceObject.VerticalAlignment);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "components", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<PaneItem>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'components' contains a null element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<PaneItem>();
+
+                        var result = new PaneItem(
+                                             new PaneComponentBase[0].Concat(referenceObject.Components).Concat(new PaneComponentBase[] { null }).Concat(referenceObject.Components).ToList(),
+                                             referenceObject.Width,
+                                             referenceObject.HorizontalAlignment,
+                                             referenceObject.VerticalAlignment);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "components", "contains at least one null element", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<PaneItem>
+                {
+                    Name = "constructor should throw ArgumentOutOfRangeException when parameter 'horizontalAlignment' is HorizontalAlignment.Unknown",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<PaneItem>();
+
+                        var result = new PaneItem(
+                                             referenceObject.Components,
+                                             referenceObject.Width,
+                                             HorizontalAlignment.Unknown,
+                                             referenceObject.VerticalAlignment);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentOutOfRangeException),
+                    ExpectedExceptionMessageContains = new[] { "horizontalAlignment", "Unknown", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<PaneItem>
+                {
+                    Name = "constructor should throw ArgumentOutOfRangeException when parameter 'verticalAlignment' is VerticalAlignment.Unknown",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<PaneItem>();
+
+                        var result = new PaneItem(
+                                             referenceObject.Components,
+                                             referenceObject.Width,
+                                             referenceObject.HorizontalAlignment,
+                                             VerticalAlignment.Unknown);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentOutOfRangeException),
+                    ExpectedExceptionMessageContains = new[] { "verticalAlignment", "Unknown", },
+                });
     }
+}
 }

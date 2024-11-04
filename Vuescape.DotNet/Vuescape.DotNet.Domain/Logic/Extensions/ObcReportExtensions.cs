@@ -19,7 +19,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Convert a <see cref="OBeautifulCode.DataStructure.Report"/> to a <see cref="Report"/>.
         /// </summary>
-        /// <param name="obcReport">The OBC TreeTable to convert.</param>
+        /// <param name="obcReport">The OBC Report to convert.</param>
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <param name="tokenToSubstitutionMap">TODO:.</param>
         /// <returns>A Report.</returns>

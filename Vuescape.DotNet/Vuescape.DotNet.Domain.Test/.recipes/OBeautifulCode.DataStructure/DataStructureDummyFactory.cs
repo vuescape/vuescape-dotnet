@@ -54,6 +54,7 @@ namespace OBeautifulCode.DataStructure.Test
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(NumberFormatNegativeDisplayKind.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(NumberFormatPercentDisplayKind.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(OuterBorderSides.None);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(ReportRenderMode.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(SlotSelectionStrategy.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(StringPayloadLinkedResourceKind.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UrlLinkedResourceKind.Unknown);
@@ -75,6 +76,9 @@ namespace OBeautifulCode.DataStructure.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator<IOperationOutputCell<Version>>(A.Dummy<OperationCell<Version>>);
             AutoFixtureBackedDummyFactory.AddDummyCreator<IDetails>(A.Dummy<DetailsBase>);
             AutoFixtureBackedDummyFactory.UseRandomInterfaceImplementationForDummy<ICellLocator>();
+            AutoFixtureBackedDummyFactory.AddDummyCreator<ICellInputAppliedEvent>(A.Dummy<CellInputAppliedEvent<Version>>);
+            AutoFixtureBackedDummyFactory.AddDummyCreator<ICellOpExecutionCompletedEvent>(A.Dummy<CellOpExecutionCompletedEvent<Version>>);
+            AutoFixtureBackedDummyFactory.AddDummyCreator<ICellValueFormat>(A.Dummy<BooleanCellValueFormat>);
 
             // <------------------- OPERATIONS ------------------------>
             RegisterReturningOperation<bool>();
@@ -344,130 +348,21 @@ namespace OBeautifulCode.DataStructure.Test
                 return result;
             });
 
-            // Events
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellAvailabilityCheckClearedEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellAvailabilityCheckDeterminedCellDisabledEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellAvailabilityCheckDeterminedCellEnabledEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellAvailabilityCheckFailedEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellInputAppliedEvent<Version>(A.Dummy<UtcDateTime>(), A.Dummy<Version>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellInputClearedEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellOpExecutionAbortedEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellOpExecutionClearedEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellOpExecutionCompletedEvent<Version>(A.Dummy<UtcDateTime>(), A.Dummy<string>(), A.Dummy<Version>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellOpExecutionDeemedNotApplicableEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellOpExecutionFailedEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellValidationAbortedEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellValidationClearedEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellValidationDeemedNotApplicableEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellValidationDeterminedCellInvalidEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellValidationDeterminedCellValidEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
-            {
-                var result = new CellValidationFailedEvent(A.Dummy<UtcDateTime>(), A.Dummy<string>());
-
-                return result;
-            });
-
-            // Details
+            // CellValue
             AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
             {
                 var result = new LogoDetails(A.Dummy<MediaBase>().Whose(_ => _.MediaKind == MediaKind.Image));
+
+                return result;
+            });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(() =>
+            {
+                var items = Some.ReadOnlyDummies<NamedValue<ILink>>().ToList();
+
+                var selectedItem = items[ThreadSafeRandom.Next(0, items.Count)].Name;
+
+                var result = new DropdownSelector(items, selectedItem);
 
                 return result;
             });

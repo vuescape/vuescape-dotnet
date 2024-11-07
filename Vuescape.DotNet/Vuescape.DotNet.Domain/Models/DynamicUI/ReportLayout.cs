@@ -7,8 +7,11 @@
 // ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
+    using System;
     using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
+
+    using static System.FormattableString;
 
     /// <summary>
     /// Represents the layout for a report with defined sections for left, right, and center panes.
@@ -31,9 +34,11 @@ namespace Vuescape.DotNet.Domain
             string title = null)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { leftPane }.AsArg().Must().NotBeNull();
-            new { rightPane }.AsArg().Must().NotBeNull();
-            new { centerPane }.AsArg().Must().NotBeNull();
+            if (leftPane == null && rightPane == null && centerPane == null)
+            {
+                throw new ArgumentNullException(Invariant(
+                    $"All of {nameof(leftPane)}, {nameof(rightPane)}, and {nameof(centerPane)} are null."));
+            }
 
             this.Id = id;
             this.LeftPane = leftPane;

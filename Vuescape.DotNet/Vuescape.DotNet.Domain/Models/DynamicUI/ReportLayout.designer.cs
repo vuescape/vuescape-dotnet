@@ -71,9 +71,7 @@ namespace Vuescape.DotNet.Domain
 
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
                       && this.Title.IsEqualTo(other.Title, StringComparer.Ordinal)
-                      && this.LeftPane.IsEqualTo(other.LeftPane)
-                      && this.RightPane.IsEqualTo(other.RightPane)
-                      && this.CenterPane.IsEqualTo(other.CenterPane);
+                      && this.Content.IsEqualTo(other.Content);
 
             return result;
         }
@@ -85,9 +83,7 @@ namespace Vuescape.DotNet.Domain
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.Id)
             .Hash(this.Title)
-            .Hash(this.LeftPane)
-            .Hash(this.RightPane)
-            .Hash(this.CenterPane)
+            .Hash(this.Content)
             .Value;
 
         /// <inheritdoc />
@@ -98,9 +94,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new ReportLayout(
                                  this.Id?.DeepClone(),
-                                 this.LeftPane?.DeepClone(),
-                                 this.RightPane?.DeepClone(),
-                                 this.CenterPane?.DeepClone(),
+                                 this.Content?.DeepClone(),
                                  this.Title?.DeepClone());
 
             return result;
@@ -132,9 +126,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new ReportLayout(
                                  id,
-                                 this.LeftPane?.DeepClone(),
-                                 this.RightPane?.DeepClone(),
-                                 this.CenterPane?.DeepClone(),
+                                 this.Content?.DeepClone(),
                                  this.Title?.DeepClone());
 
             return result;
@@ -166,19 +158,17 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new ReportLayout(
                                  this.Id?.DeepClone(),
-                                 this.LeftPane?.DeepClone(),
-                                 this.RightPane?.DeepClone(),
-                                 this.CenterPane?.DeepClone(),
+                                 this.Content?.DeepClone(),
                                  title);
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="LeftPane" />.
+        /// Deep clones this object with a new <see cref="Content" />.
         /// </summary>
-        /// <param name="leftPane">The new <see cref="LeftPane" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="ReportLayout" /> using the specified <paramref name="leftPane" /> for <see cref="LeftPane" /> and a deep clone of every other property.</returns>
+        /// <param name="content">The new <see cref="Content" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ReportLayout" /> using the specified <paramref name="content" /> for <see cref="Content" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -196,81 +186,11 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public ReportLayout DeepCloneWithLeftPane(PaneLayout leftPane)
+        public ReportLayout DeepCloneWithContent(PaneLayout content)
         {
             var result = new ReportLayout(
                                  this.Id?.DeepClone(),
-                                 leftPane,
-                                 this.RightPane?.DeepClone(),
-                                 this.CenterPane?.DeepClone(),
-                                 this.Title?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="RightPane" />.
-        /// </summary>
-        /// <param name="rightPane">The new <see cref="RightPane" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="ReportLayout" /> using the specified <paramref name="rightPane" /> for <see cref="RightPane" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public ReportLayout DeepCloneWithRightPane(PaneLayout rightPane)
-        {
-            var result = new ReportLayout(
-                                 this.Id?.DeepClone(),
-                                 this.LeftPane?.DeepClone(),
-                                 rightPane,
-                                 this.CenterPane?.DeepClone(),
-                                 this.Title?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="CenterPane" />.
-        /// </summary>
-        /// <param name="centerPane">The new <see cref="CenterPane" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="ReportLayout" /> using the specified <paramref name="centerPane" /> for <see cref="CenterPane" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public ReportLayout DeepCloneWithCenterPane(PaneLayout centerPane)
-        {
-            var result = new ReportLayout(
-                                 this.Id?.DeepClone(),
-                                 this.LeftPane?.DeepClone(),
-                                 this.RightPane?.DeepClone(),
-                                 centerPane,
+                                 content,
                                  this.Title?.DeepClone());
 
             return result;
@@ -280,7 +200,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.ReportLayout: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {this.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, LeftPane = {this.LeftPane?.ToString() ?? "<null>"}, RightPane = {this.RightPane?.ToString() ?? "<null>"}, CenterPane = {this.CenterPane?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ReportLayout: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {this.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Content = {this.Content?.ToString() ?? "<null>"}.");
 
             return result;
         }

@@ -37,8 +37,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                             var result = new PaneLayout(
                                 null,
-                                referenceObject.Sections,
-                                referenceObject.PaneWidthPercent);
+                                referenceObject.Sections);
 
                             return result;
                         },
@@ -55,8 +54,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                             var result = new PaneLayout(
                                 Invariant($"  {Environment.NewLine}  "),
-                                referenceObject.Sections,
-                                referenceObject.PaneWidthPercent);
+                                referenceObject.Sections);
 
                             return result;
                         },
@@ -74,8 +72,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                             var result = new PaneLayout(
                                 referenceObject.Id,
-                                null,
-                                referenceObject.PaneWidthPercent);
+                                null);
 
                             return result;
                         },
@@ -92,10 +89,8 @@ namespace Vuescape.DotNet.Domain.Test
                             var referenceObject = A.Dummy<PaneLayout>();
 
                             var result = new PaneLayout(
-                                referenceObject.Id,
-                                new PaneSection[0].Concat(referenceObject.Sections).Concat(new PaneSection[] { null })
-                                    .Concat(referenceObject.Sections).ToList(),
-                                referenceObject.PaneWidthPercent);
+                                referenceObject.Id, Array.Empty<PaneSection>().Concat(referenceObject.Sections).Concat(new PaneSection[] { null })
+                                    .Concat(referenceObject.Sections).ToList());
 
                             return result;
                         },

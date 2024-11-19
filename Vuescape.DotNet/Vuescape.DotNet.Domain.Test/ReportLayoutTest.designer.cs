@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ReportLayout>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReportLayout: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, LeftPane = {systemUnderTest.LeftPane?.ToString() ?? "<null>"}, RightPane = {systemUnderTest.RightPane?.ToString() ?? "<null>"}, CenterPane = {systemUnderTest.CenterPane?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReportLayout: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Content = {systemUnderTest.Content?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -66,9 +66,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new ReportLayout(
                                              null,
-                                             referenceObject.LeftPane,
-                                             referenceObject.RightPane,
-                                             referenceObject.CenterPane,
+                                             referenceObject.Content,
                                              referenceObject.Title);
 
                         return result;
@@ -86,9 +84,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new ReportLayout(
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.LeftPane,
-                                             referenceObject.RightPane,
-                                             referenceObject.CenterPane,
+                                             referenceObject.Content,
                                              referenceObject.Title);
 
                         return result;
@@ -99,7 +95,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<ReportLayout>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'leftPane' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'content' is null scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<ReportLayout>();
@@ -107,54 +103,12 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ReportLayout(
                                              referenceObject.Id,
                                              null,
-                                             referenceObject.RightPane,
-                                             referenceObject.CenterPane,
                                              referenceObject.Title);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "leftPane", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<ReportLayout>
-                {
-                    Name = "constructor should throw ArgumentNullException when parameter 'rightPane' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<ReportLayout>();
-
-                        var result = new ReportLayout(
-                                             referenceObject.Id,
-                                             referenceObject.LeftPane,
-                                             null,
-                                             referenceObject.CenterPane,
-                                             referenceObject.Title);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "rightPane", },
-                })
-            .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<ReportLayout>
-                {
-                    Name = "constructor should throw ArgumentNullException when parameter 'centerPane' is null scenario",
-                    ConstructionFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<ReportLayout>();
-
-                        var result = new ReportLayout(
-                                             referenceObject.Id,
-                                             referenceObject.LeftPane,
-                                             referenceObject.RightPane,
-                                             null,
-                                             referenceObject.Title);
-
-                        return result;
-                    },
-                    ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "centerPane", },
+                    ExpectedExceptionMessageContains = new[] { "content", },
                 });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<ReportLayout> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ReportLayout>()
@@ -170,9 +124,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new ReportLayout(
                                                       referenceObject.Id,
-                                                      referenceObject.LeftPane,
-                                                      referenceObject.RightPane,
-                                                      referenceObject.CenterPane,
+                                                      referenceObject.Content,
                                                       referenceObject.Title),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
@@ -184,7 +136,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<ReportLayout>
                 {
-                    Name = "LeftPane should return same 'leftPane' parameter passed to constructor when getting",
+                    Name = "Content should return same 'content' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
                         var referenceObject = A.Dummy<ReportLayout>();
@@ -193,62 +145,14 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new ReportLayout(
                                                       referenceObject.Id,
-                                                      referenceObject.LeftPane,
-                                                      referenceObject.RightPane,
-                                                      referenceObject.CenterPane,
+                                                      referenceObject.Content,
                                                       referenceObject.Title),
-                            ExpectedPropertyValue = referenceObject.LeftPane,
+                            ExpectedPropertyValue = referenceObject.Content,
                         };
 
                         return result;
                     },
-                    PropertyName = "LeftPane",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<ReportLayout>
-                {
-                    Name = "RightPane should return same 'rightPane' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<ReportLayout>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<ReportLayout>
-                        {
-                            SystemUnderTest = new ReportLayout(
-                                                      referenceObject.Id,
-                                                      referenceObject.LeftPane,
-                                                      referenceObject.RightPane,
-                                                      referenceObject.CenterPane,
-                                                      referenceObject.Title),
-                            ExpectedPropertyValue = referenceObject.RightPane,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "RightPane",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<ReportLayout>
-                {
-                    Name = "CenterPane should return same 'centerPane' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<ReportLayout>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<ReportLayout>
-                        {
-                            SystemUnderTest = new ReportLayout(
-                                                      referenceObject.Id,
-                                                      referenceObject.LeftPane,
-                                                      referenceObject.RightPane,
-                                                      referenceObject.CenterPane,
-                                                      referenceObject.Title),
-                            ExpectedPropertyValue = referenceObject.CenterPane,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "CenterPane",
+                    PropertyName = "Content",
                 })
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<ReportLayout>
@@ -262,9 +166,7 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new ReportLayout(
                                                       referenceObject.Id,
-                                                      referenceObject.LeftPane,
-                                                      referenceObject.RightPane,
-                                                      referenceObject.CenterPane,
+                                                      referenceObject.Content,
                                                       referenceObject.Title),
                             ExpectedPropertyValue = referenceObject.Title,
                         };
@@ -318,58 +220,18 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<ReportLayout>
                 {
-                    Name = "DeepCloneWithLeftPane should deep clone object and replace LeftPane with the provided leftPane",
-                    WithPropertyName = "LeftPane",
+                    Name = "DeepCloneWithContent should deep clone object and replace Content with the provided content",
+                    WithPropertyName = "Content",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
                         var systemUnderTest = A.Dummy<ReportLayout>();
 
-                        var referenceObject = A.Dummy<ReportLayout>().ThatIs(_ => !systemUnderTest.LeftPane.IsEqualTo(_.LeftPane));
+                        var referenceObject = A.Dummy<ReportLayout>().ThatIs(_ => !systemUnderTest.Content.IsEqualTo(_.Content));
 
                         var result = new SystemUnderTestDeepCloneWithValue<ReportLayout>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.LeftPane,
-                        };
-
-                        return result;
-                    },
-                })
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<ReportLayout>
-                {
-                    Name = "DeepCloneWithRightPane should deep clone object and replace RightPane with the provided rightPane",
-                    WithPropertyName = "RightPane",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<ReportLayout>();
-
-                        var referenceObject = A.Dummy<ReportLayout>().ThatIs(_ => !systemUnderTest.RightPane.IsEqualTo(_.RightPane));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<ReportLayout>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.RightPane,
-                        };
-
-                        return result;
-                    },
-                })
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<ReportLayout>
-                {
-                    Name = "DeepCloneWithCenterPane should deep clone object and replace CenterPane with the provided centerPane",
-                    WithPropertyName = "CenterPane",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<ReportLayout>();
-
-                        var referenceObject = A.Dummy<ReportLayout>().ThatIs(_ => !systemUnderTest.CenterPane.IsEqualTo(_.CenterPane));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<ReportLayout>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.CenterPane,
+                            DeepCloneWithValue = referenceObject.Content,
                         };
 
                         return result;
@@ -388,42 +250,22 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new ReportLayout(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.LeftPane,
-                                ReferenceObjectForEquatableTestScenarios.RightPane,
-                                ReferenceObjectForEquatableTestScenarios.CenterPane,
+                                ReferenceObjectForEquatableTestScenarios.Content,
                                 ReferenceObjectForEquatableTestScenarios.Title),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new ReportLayout[]
                     {
                         new ReportLayout(
                                 A.Dummy<ReportLayout>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
-                                ReferenceObjectForEquatableTestScenarios.LeftPane,
-                                ReferenceObjectForEquatableTestScenarios.RightPane,
-                                ReferenceObjectForEquatableTestScenarios.CenterPane,
+                                ReferenceObjectForEquatableTestScenarios.Content,
                                 ReferenceObjectForEquatableTestScenarios.Title),
                         new ReportLayout(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.LeftPane,
-                                ReferenceObjectForEquatableTestScenarios.RightPane,
-                                ReferenceObjectForEquatableTestScenarios.CenterPane,
+                                ReferenceObjectForEquatableTestScenarios.Content,
                                 A.Dummy<ReportLayout>().Whose(_ => !_.Title.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Title)).Title),
                         new ReportLayout(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                A.Dummy<ReportLayout>().Whose(_ => !_.LeftPane.IsEqualTo(ReferenceObjectForEquatableTestScenarios.LeftPane)).LeftPane,
-                                ReferenceObjectForEquatableTestScenarios.RightPane,
-                                ReferenceObjectForEquatableTestScenarios.CenterPane,
-                                ReferenceObjectForEquatableTestScenarios.Title),
-                        new ReportLayout(
-                                ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.LeftPane,
-                                A.Dummy<ReportLayout>().Whose(_ => !_.RightPane.IsEqualTo(ReferenceObjectForEquatableTestScenarios.RightPane)).RightPane,
-                                ReferenceObjectForEquatableTestScenarios.CenterPane,
-                                ReferenceObjectForEquatableTestScenarios.Title),
-                        new ReportLayout(
-                                ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.LeftPane,
-                                ReferenceObjectForEquatableTestScenarios.RightPane,
-                                A.Dummy<ReportLayout>().Whose(_ => !_.CenterPane.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CenterPane)).CenterPane,
+                                A.Dummy<ReportLayout>().Whose(_ => !_.Content.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Content)).Content,
                                 ReferenceObjectForEquatableTestScenarios.Title),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
@@ -706,40 +548,16 @@ namespace Vuescape.DotNet.Domain.Test
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
 
-                if (systemUnderTest.LeftPane == null)
+                if (systemUnderTest.Content == null)
                 {
-                    actual.LeftPane.AsTest().Must().BeNull();
+                    actual.Content.AsTest().Must().BeNull();
                 }
-                else if (!actual.LeftPane.GetType().IsValueType)
+                else if (!actual.Content.GetType().IsValueType)
                 {
                     // When the declared type is a reference type, we still have to check the runtime type.
                     // The object could be a boxed value type, which will fail this asseration because
                     // a deep clone of a value type object is the same object.
-                    actual.LeftPane.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.LeftPane);
-                }
-
-                if (systemUnderTest.RightPane == null)
-                {
-                    actual.RightPane.AsTest().Must().BeNull();
-                }
-                else if (!actual.RightPane.GetType().IsValueType)
-                {
-                    // When the declared type is a reference type, we still have to check the runtime type.
-                    // The object could be a boxed value type, which will fail this asseration because
-                    // a deep clone of a value type object is the same object.
-                    actual.RightPane.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.RightPane);
-                }
-
-                if (systemUnderTest.CenterPane == null)
-                {
-                    actual.CenterPane.AsTest().Must().BeNull();
-                }
-                else if (!actual.CenterPane.GetType().IsValueType)
-                {
-                    // When the declared type is a reference type, we still have to check the runtime type.
-                    // The object could be a boxed value type, which will fail this asseration because
-                    // a deep clone of a value type object is the same object.
-                    actual.CenterPane.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.CenterPane);
+                    actual.Content.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Content);
                 }
             }
 
@@ -759,7 +577,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Title", "LeftPane", "RightPane", "CenterPane" };
+                var propertyNames = new string[] { "Id", "Title", "Content" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

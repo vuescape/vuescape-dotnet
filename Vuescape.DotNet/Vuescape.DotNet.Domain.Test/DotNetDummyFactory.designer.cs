@@ -43,7 +43,7 @@ namespace Vuescape.DotNet.Domain.Test
                     var availableTypes = new[]
                     {
                         typeof(NavigationAction),
-                        typeof(NoAction),
+                        typeof(NoAction)
                     };
 
                     var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
@@ -304,8 +304,7 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new PaneLayout(
                                  A.Dummy<string>(),
-                                 A.Dummy<IReadOnlyList<PaneSection>>(),
-                                 A.Dummy<double>()));
+                                 A.Dummy<IReadOnlyList<PaneSection>>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new PaneSection(
@@ -323,8 +322,6 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ReportLayout(
                                  A.Dummy<string>(),
-                                 A.Dummy<PaneLayout>(),
-                                 A.Dummy<PaneLayout>(),
                                  A.Dummy<PaneLayout>(),
                                  A.Dummy<string>()));
 

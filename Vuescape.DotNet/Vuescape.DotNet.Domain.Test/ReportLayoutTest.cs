@@ -30,9 +30,7 @@
 
                             var result = new ReportLayout(
                                 null,
-                                referenceObject.LeftPane,
-                                referenceObject.RightPane,
-                                referenceObject.CenterPane,
+                                referenceObject.Content,
                                 referenceObject.Title);
 
                             return result;
@@ -50,9 +48,7 @@
 
                             var result = new ReportLayout(
                                 Invariant($"  {Environment.NewLine}  "),
-                                referenceObject.LeftPane,
-                                referenceObject.RightPane,
-                                referenceObject.CenterPane,
+                                referenceObject.Content,
                                 referenceObject.Title);
 
                             return result;
@@ -64,7 +60,7 @@
                     new ConstructorArgumentValidationTestScenario<ReportLayout>
                     {
                         Name =
-                            "constructor should throw ArgumentNullException when parameter 'leftPane', 'rightPane', and 'centerPane' are all null scenario",
+                            "constructor should throw ArgumentNullException when parameter 'content' is null scenario",
                         ConstructionFunc = () =>
                         {
                             var referenceObject = A.Dummy<ReportLayout>();
@@ -72,39 +68,13 @@
                             var result = new ReportLayout(
                                 referenceObject.Id,
                                 null,
-                                null,
-                                null,
                                 referenceObject.Title);
 
                             return result;
                         },
                         ExpectedExceptionType = typeof(ArgumentNullException),
-                        ExpectedExceptionMessageContains = new[] { "leftPane", },
+                        ExpectedExceptionMessageContains = new[] { "content", },
                     });
-        }
-
-        [Fact]
-        public static void Constructor___Should_not_throw___When_leftPane_is_null()
-        {
-            var sut = new ReportLayout(A.Dummy<string>(), A.Dummy<PaneLayout>(), null, null);
-
-            sut.AsTest().Must().NotBeNull();
-        }
-
-        [Fact]
-        public static void Constructor___Should_not_throw___When_rightPane_is_null()
-        {
-            var sut = new ReportLayout(A.Dummy<string>(), null, A.Dummy<PaneLayout>(), null);
-
-            sut.AsTest().Must().NotBeNull();
-        }
-
-        [Fact]
-        public static void Constructor___Should_not_throw___When_centerPane_is_null()
-        {
-            var sut = new ReportLayout(A.Dummy<string>(), null, null, A.Dummy<PaneLayout>());
-
-            sut.AsTest().Must().NotBeNull();
         }
     }
 }

@@ -22,18 +22,15 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="id">The unique identifier for the pane layout.</param>
         /// <param name="sections">The collection of sections within the pane.</param>
-        /// <param name="paneWidthPercent">The width of the pane as a percentage.</param>
         public PaneLayout(
             string id,
-            IReadOnlyList<PaneSection> sections,
-            double paneWidthPercent)
+            IReadOnlyList<PaneSection> sections)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { sections }.AsArg().Must().NotContainAnyNullElements();
 
             this.Id = id;
             this.Sections = sections;
-            this.PaneWidthPercent = paneWidthPercent;
         }
 
         /// <summary>
@@ -45,10 +42,5 @@ namespace Vuescape.DotNet.Domain
         /// Gets the collection of sections within the pane.
         /// </summary>
         public IReadOnlyList<PaneSection> Sections { get; private set; }
-
-        /// <summary>
-        /// Gets the width of the pane as a percentage.
-        /// </summary>
-        public double PaneWidthPercent { get; private set; }
     }
 }

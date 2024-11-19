@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ReportLayout>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReportLayout: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Content = {systemUnderTest.Content?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReportLayout: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Content = {systemUnderTest.Content?.ToString() ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, TargetPane = {systemUnderTest.TargetPane?.ToString() ?? "<null>"}, PaneWidthPercent = {systemUnderTest.PaneWidthPercent?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -67,7 +67,9 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ReportLayout(
                                              null,
                                              referenceObject.Content,
-                                             referenceObject.Title);
+                                             referenceObject.Title,
+                                             referenceObject.TargetPane,
+                                             referenceObject.PaneWidthPercent);
 
                         return result;
                     },
@@ -85,7 +87,9 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ReportLayout(
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Content,
-                                             referenceObject.Title);
+                                             referenceObject.Title,
+                                             referenceObject.TargetPane,
+                                             referenceObject.PaneWidthPercent);
 
                         return result;
                     },
@@ -103,7 +107,9 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ReportLayout(
                                              referenceObject.Id,
                                              null,
-                                             referenceObject.Title);
+                                             referenceObject.Title,
+                                             referenceObject.TargetPane,
+                                             referenceObject.PaneWidthPercent);
 
                         return result;
                     },
@@ -125,7 +131,9 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ReportLayout(
                                                       referenceObject.Id,
                                                       referenceObject.Content,
-                                                      referenceObject.Title),
+                                                      referenceObject.Title,
+                                                      referenceObject.TargetPane,
+                                                      referenceObject.PaneWidthPercent),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
 
@@ -146,7 +154,9 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ReportLayout(
                                                       referenceObject.Id,
                                                       referenceObject.Content,
-                                                      referenceObject.Title),
+                                                      referenceObject.Title,
+                                                      referenceObject.TargetPane,
+                                                      referenceObject.PaneWidthPercent),
                             ExpectedPropertyValue = referenceObject.Content,
                         };
 
@@ -167,13 +177,61 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ReportLayout(
                                                       referenceObject.Id,
                                                       referenceObject.Content,
-                                                      referenceObject.Title),
+                                                      referenceObject.Title,
+                                                      referenceObject.TargetPane,
+                                                      referenceObject.PaneWidthPercent),
                             ExpectedPropertyValue = referenceObject.Title,
                         };
 
                         return result;
                     },
                     PropertyName = "Title",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ReportLayout>
+                {
+                    Name = "TargetPane should return same 'targetPane' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ReportLayout>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ReportLayout>
+                        {
+                            SystemUnderTest = new ReportLayout(
+                                                      referenceObject.Id,
+                                                      referenceObject.Content,
+                                                      referenceObject.Title,
+                                                      referenceObject.TargetPane,
+                                                      referenceObject.PaneWidthPercent),
+                            ExpectedPropertyValue = referenceObject.TargetPane,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "TargetPane",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ReportLayout>
+                {
+                    Name = "PaneWidthPercent should return same 'paneWidthPercent' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ReportLayout>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ReportLayout>
+                        {
+                            SystemUnderTest = new ReportLayout(
+                                                      referenceObject.Id,
+                                                      referenceObject.Content,
+                                                      referenceObject.Title,
+                                                      referenceObject.TargetPane,
+                                                      referenceObject.PaneWidthPercent),
+                            ExpectedPropertyValue = referenceObject.PaneWidthPercent,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "PaneWidthPercent",
                 });
 
         private static readonly DeepCloneWithTestScenarios<ReportLayout> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ReportLayout>()
@@ -192,6 +250,26 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = systemUnderTest,
                             DeepCloneWithValue = referenceObject.Id,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ReportLayout>
+                {
+                    Name = "DeepCloneWithContent should deep clone object and replace Content with the provided content",
+                    WithPropertyName = "Content",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ReportLayout>();
+
+                        var referenceObject = A.Dummy<ReportLayout>().ThatIs(_ => !systemUnderTest.Content.IsEqualTo(_.Content));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ReportLayout>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.Content,
                         };
 
                         return result;
@@ -220,18 +298,38 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<ReportLayout>
                 {
-                    Name = "DeepCloneWithContent should deep clone object and replace Content with the provided content",
-                    WithPropertyName = "Content",
+                    Name = "DeepCloneWithTargetPane should deep clone object and replace TargetPane with the provided targetPane",
+                    WithPropertyName = "TargetPane",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
                         var systemUnderTest = A.Dummy<ReportLayout>();
 
-                        var referenceObject = A.Dummy<ReportLayout>().ThatIs(_ => !systemUnderTest.Content.IsEqualTo(_.Content));
+                        var referenceObject = A.Dummy<ReportLayout>().ThatIs(_ => !systemUnderTest.TargetPane.IsEqualTo(_.TargetPane));
 
                         var result = new SystemUnderTestDeepCloneWithValue<ReportLayout>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Content,
+                            DeepCloneWithValue = referenceObject.TargetPane,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ReportLayout>
+                {
+                    Name = "DeepCloneWithPaneWidthPercent should deep clone object and replace PaneWidthPercent with the provided paneWidthPercent",
+                    WithPropertyName = "PaneWidthPercent",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ReportLayout>();
+
+                        var referenceObject = A.Dummy<ReportLayout>().ThatIs(_ => !systemUnderTest.PaneWidthPercent.IsEqualTo(_.PaneWidthPercent));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ReportLayout>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.PaneWidthPercent,
                         };
 
                         return result;
@@ -251,22 +349,42 @@ namespace Vuescape.DotNet.Domain.Test
                         new ReportLayout(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Content,
-                                ReferenceObjectForEquatableTestScenarios.Title),
+                                ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.TargetPane,
+                                ReferenceObjectForEquatableTestScenarios.PaneWidthPercent),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new ReportLayout[]
                     {
                         new ReportLayout(
                                 A.Dummy<ReportLayout>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
                                 ReferenceObjectForEquatableTestScenarios.Content,
-                                ReferenceObjectForEquatableTestScenarios.Title),
-                        new ReportLayout(
-                                ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Content,
-                                A.Dummy<ReportLayout>().Whose(_ => !_.Title.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Title)).Title),
+                                ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.TargetPane,
+                                ReferenceObjectForEquatableTestScenarios.PaneWidthPercent),
                         new ReportLayout(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<ReportLayout>().Whose(_ => !_.Content.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Content)).Content,
-                                ReferenceObjectForEquatableTestScenarios.Title),
+                                ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.TargetPane,
+                                ReferenceObjectForEquatableTestScenarios.PaneWidthPercent),
+                        new ReportLayout(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Content,
+                                A.Dummy<ReportLayout>().Whose(_ => !_.Title.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Title)).Title,
+                                ReferenceObjectForEquatableTestScenarios.TargetPane,
+                                ReferenceObjectForEquatableTestScenarios.PaneWidthPercent),
+                        new ReportLayout(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Content,
+                                ReferenceObjectForEquatableTestScenarios.Title,
+                                A.Dummy<ReportLayout>().Whose(_ => !_.TargetPane.IsEqualTo(ReferenceObjectForEquatableTestScenarios.TargetPane)).TargetPane,
+                                ReferenceObjectForEquatableTestScenarios.PaneWidthPercent),
+                        new ReportLayout(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Content,
+                                ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.TargetPane,
+                                A.Dummy<ReportLayout>().Whose(_ => !_.PaneWidthPercent.IsEqualTo(ReferenceObjectForEquatableTestScenarios.PaneWidthPercent)).PaneWidthPercent),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -577,7 +695,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Title", "Content" };
+                var propertyNames = new string[] { "Id", "Content", "Title", "TargetPane", "PaneWidthPercent" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

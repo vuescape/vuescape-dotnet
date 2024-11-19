@@ -21,10 +21,14 @@ namespace Vuescape.DotNet.Domain
         /// <param name="id">The unique identifier for the report layout.</param>
         /// <param name="content">The report content.</param>
         /// <param name="title">The title of the report layout. OPTIONAL.</param>
+        /// <param name="targetPane">The pane to target when rendering the report. OPTIONAL.</param>
+        /// <param name="paneWidthPercent">The default paneWidth in percent. OPTIONAL.</param>
         public ReportLayout(
             string id,
             PaneLayout content,
-            string title = null)
+            string title = null,
+            PaneKind? targetPane = null,
+            decimal? paneWidthPercent = null)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { content }.AsArg().Must().NotBeNull();
@@ -32,6 +36,8 @@ namespace Vuescape.DotNet.Domain
             this.Id = id;
             this.Content = content;
             this.Title = title;
+            this.TargetPane = targetPane;
+            this.PaneWidthPercent = paneWidthPercent;
         }
 
         /// <summary>
@@ -48,5 +54,15 @@ namespace Vuescape.DotNet.Domain
         /// Gets the title of the report layout, if available.
         /// </summary>
         public string Title { get; private set; }
+
+        /// <summary>
+        /// Gets the target pane.
+        /// </summary>
+        public PaneKind? TargetPane { get; private set; }
+
+        /// <summary>
+        /// Gets the pane width in percent.
+        /// </summary>
+        public decimal? PaneWidthPercent { get; private set; }
     }
 }

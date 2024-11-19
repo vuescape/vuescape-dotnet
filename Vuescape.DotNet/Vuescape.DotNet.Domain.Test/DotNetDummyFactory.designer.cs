@@ -323,7 +323,9 @@ namespace Vuescape.DotNet.Domain.Test
                 () => new ReportLayout(
                                  A.Dummy<string>(),
                                  A.Dummy<PaneLayout>(),
-                                 A.Dummy<string>()));
+                                 A.Dummy<string>(),
+                                 A.Dummy<PaneKind?>(),
+                                 A.Dummy<decimal?>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Domain.Section(

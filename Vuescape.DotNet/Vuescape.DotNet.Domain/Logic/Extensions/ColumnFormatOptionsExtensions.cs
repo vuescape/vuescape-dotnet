@@ -1,4 +1,4 @@
-﻿// <copyright file="ColumnFormatOptionsExtensions.Internal.cs" company="Vuescape">
+﻿// <copyright file="ColumnFormatOptionsExtensions.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 

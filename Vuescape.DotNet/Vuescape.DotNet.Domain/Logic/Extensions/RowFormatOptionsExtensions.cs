@@ -1,4 +1,4 @@
-﻿// <copyright file="RowFormatOptionsExtensions.Internal.cs" company="Vuescape">
+﻿// <copyright file="RowFormatOptionsExtensions.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 

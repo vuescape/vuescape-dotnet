@@ -1,4 +1,4 @@
-﻿// <copyright file="CellFormatOptionsExtensions.Internal.cs" company="Vuescape">
+﻿// <copyright file="CellFormatOptionsExtensions.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 

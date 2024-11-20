@@ -70,7 +70,7 @@ namespace Vuescape.DotNet.Domain
             }
 
             var result = this.Url.IsEqualTo(other.Url, StringComparer.Ordinal)
-                      && this.Target.IsEqualTo(other.Target, StringComparer.Ordinal)
+                      && this.Target.IsEqualTo(other.Target)
                       && this.Replace.IsEqualTo(other.Replace);
 
             return result;
@@ -94,7 +94,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new NavigationActionPayload(
                                  this.Url?.DeepClone(),
-                                 this.Target?.DeepClone(),
+                                 this.Target.DeepClone(),
                                  this.Replace?.DeepClone());
 
             return result;
@@ -126,7 +126,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new NavigationActionPayload(
                                  url,
-                                 this.Target?.DeepClone(),
+                                 this.Target.DeepClone(),
                                  this.Replace?.DeepClone());
 
             return result;
@@ -154,7 +154,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public NavigationActionPayload DeepCloneWithTarget(string target)
+        public NavigationActionPayload DeepCloneWithTarget(LinkTarget target)
         {
             var result = new NavigationActionPayload(
                                  this.Url?.DeepClone(),
@@ -190,7 +190,7 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new NavigationActionPayload(
                                  this.Url?.DeepClone(),
-                                 this.Target?.DeepClone(),
+                                 this.Target.DeepClone(),
                                  replace);
 
             return result;
@@ -200,7 +200,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.NavigationActionPayload: Url = {this.Url?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Target = {this.Target?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Replace = {this.Replace?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.NavigationActionPayload: Url = {this.Url?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Target = {this.Target.ToString() ?? "<null>"}, Replace = {this.Replace?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

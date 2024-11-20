@@ -20,12 +20,12 @@ namespace Vuescape.DotNet.Domain
         /// Initializes a new instance of the <see cref="NavigationActionPayload"/> class.
         /// </summary>
         /// <param name="url">The URL to navigate to.</param>
-        /// <param name="target">The optional target for the navigation, such as "_blank".</param>
+        /// <param name="target">The optional target for the navigation.</param>
         /// <param name="replace">Optional flag indicating whether to replace the current page in history.</param>
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#", Justification = "Prefer using string URL for serialization.")]
         public NavigationActionPayload(
             string url,
-            string target = null,
+            LinkTarget target,
             bool? replace = null)
         {
             new { url }.AsArg().Must().NotBeNullNorWhiteSpace();
@@ -42,9 +42,9 @@ namespace Vuescape.DotNet.Domain
         public string Url { get; private set; }
 
         /// <summary>
-        /// Gets the optional target for the navigation, such as "_blank".
+        /// Gets the optional target for the navigation.
         /// </summary>
-        public string Target { get; private set; }
+        public LinkTarget Target { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether to replace the current page in history.

@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<NavigationActionPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.NavigationActionPayload: Url = {systemUnderTest.Url?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Target = {systemUnderTest.Target?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Replace = {systemUnderTest.Replace?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.NavigationActionPayload: Url = {systemUnderTest.Url?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Target = {systemUnderTest.Target.ToString() ?? "<null>"}, Replace = {systemUnderTest.Replace?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;

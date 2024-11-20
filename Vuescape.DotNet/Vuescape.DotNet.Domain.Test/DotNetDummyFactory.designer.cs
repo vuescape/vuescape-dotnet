@@ -234,7 +234,7 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new NavigationActionPayload(
                                  A.Dummy<string>(),
-                                 A.Dummy<string>(),
+                                 A.Dummy<Domain.LinkTarget>(),
                                  A.Dummy<bool?>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(

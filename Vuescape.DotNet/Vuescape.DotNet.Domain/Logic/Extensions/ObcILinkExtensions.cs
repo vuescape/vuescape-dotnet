@@ -23,11 +23,12 @@ namespace Vuescape.DotNet.Domain
         /// <param name="link">The link.</param>
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableCell"/>.</returns>
-        internal static Link ToVuescapeLink(
+        public static Link ToVuescapeLink(
             this ILink link,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
             new { link }.Must().NotBeNull();
+            new { obcToVuescapeConversionContext }.AsArg().Must().NotBeNull();
 
             Link result = null;
 
@@ -36,7 +37,7 @@ namespace Vuescape.DotNet.Domain
                 var linkTarget = standardLink.Target.GetLinkTarget();
                 if (standardLink.Resource is UrlLinkedResource urlLinkedResource)
                 {
-                    var resourceKind = GetResourceKind(urlLinkedResource.ResourceKind);
+                    var resourceKind = ToResourceKind(urlLinkedResource.ResourceKind);
                     var resource = urlLinkedResource.Url;
                     if (!string.IsNullOrWhiteSpace(obcToVuescapeConversionContext.BaseUrl))
                     {
@@ -67,7 +68,13 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
-        private static ResourceKind GetResourceKind(
+        /// <summary>
+        /// Converts a <see cref="OBeautifulCode.DataStructure.UrlLinkedResourceKind"/> to a Vuescape <see cref="ResourceKind"/>.
+        /// </summary>
+        /// <param name="urlLinkedResourceKind">The URL linked resource to convert from.</param>
+        /// <returns>The converted ResourceKind.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Throws when a UrlLinkedResourceKind cannot be converted.</exception>
+        public static ResourceKind ToResourceKind(
             this OBeautifulCode.DataStructure.UrlLinkedResourceKind urlLinkedResourceKind)
         {
             switch (urlLinkedResourceKind)
@@ -97,7 +104,17 @@ namespace Vuescape.DotNet.Domain
             }
         }
 
-        private static LinkTarget GetLinkTarget(
+        /// <summary>
+        /// Converts a nullable <see cref="OBeautifulCode.DataStructure.LinkTarget"/> to a non-nullable <see cref="LinkTarget"/>.
+        /// </summary>
+        /// <param name="linkTarget">The nullable <see cref="OBeautifulCode.DataStructure.LinkTarget"/> to convert.</param>
+        /// <returns>
+        /// A <see cref="LinkTarget"/> corresponding to the specified <paramref name="linkTarget"/>, or a default value if <paramref name="linkTarget"/> is <c>null</c>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// Thrown if the provided <paramref name="linkTarget"/> value is not supported.
+        /// </exception>
+        public static LinkTarget GetLinkTarget(
             this OBeautifulCode.DataStructure.LinkTarget? linkTarget)
         {
             switch (linkTarget)

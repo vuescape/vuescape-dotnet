@@ -12,6 +12,7 @@ namespace Vuescape.DotNet.Domain
     using System.Globalization;
     using System.Linq;
 
+    using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.DataStructure;
     using OBeautifulCode.Math.Recipes;
     using OBeautifulCode.Type.Recipes;
@@ -19,23 +20,23 @@ namespace Vuescape.DotNet.Domain
     using static System.FormattableString;
 
     /// <summary>
-    /// Extension methods on <see cref="OBeautifulCode.DataStructure.ICell"/>.
+    /// Extension methods for converting <see cref="ICell"/> objects to Vuescape-compatible objects.
     /// </summary>
     public static partial class ObcICellExtensions
     {
         /// <summary>
-        /// Convert an <see cref="ICell"/> to a <see cref="TreeTableCell"/>.
+        /// Converts an <see cref="ICell"/> to a <see cref="TreeTableCell"/>.
         /// </summary>
-        /// <param name="obcRowCell">The cell.</param>
-        /// <param name="obcTableFormat">The table format.</param>
-        /// <param name="obcRowsFormat">The table rows format.</param>
-        /// <param name="obcDataRowsFormat">The data rows format.</param>
-        /// <param name="obcRowFormat">The row format.</param>
-        /// <param name="obcColumnFormat">The column format.</param>
-        /// <param name="obcColumn">The Column.</param>
-        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
-        /// <returns>A <see cref="TreeTableCell"/>.</returns>
-        internal static TreeTableCell ToVuescapeTreeTableCell(
+        /// <param name="obcRowCell">The cell to be converted.</param>
+        /// <param name="obcTableFormat">The format of the table containing the cell.</param>
+        /// <param name="obcRowsFormat">The format of the rows in the table.</param>
+        /// <param name="obcDataRowsFormat">The format of the data rows in the table.</param>
+        /// <param name="obcRowFormat">The format of the specific row containing the cell.</param>
+        /// <param name="obcColumnFormat">The format of the column containing the cell.</param>
+        /// <param name="obcColumn">The column containing the cell.</param>
+        /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
+        /// <returns>A <see cref="TreeTableCell"/> representing the cell in a Vuescape-compatible format.</returns>
+        public static TreeTableCell ToVuescapeTreeTableCell(
             this ICell obcRowCell,
             TableFormat obcTableFormat,
             RowFormat obcRowsFormat,
@@ -45,6 +46,9 @@ namespace Vuescape.DotNet.Domain
             Column obcColumn,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
+            new { obcRowCell }.AsArg().Must().NotBeNull();
+            new { obcColumn }.AsArg().Must().NotBeNull();
+
             var slots = new Dictionary<string, UiObject>();
             string defaultSlot = null;
 
@@ -127,19 +131,19 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Convert an <see cref="ICell"/> to a <see cref="TreeTableHeaderCell"/>.
+        /// Converts an <see cref="ICell"/> to a <see cref="TreeTableHeaderCell"/>.
         /// </summary>
-        /// <param name="obcHeaderRowCell">The header cell.</param>
-        /// <param name="obcTableFormat">The table format.</param>
-        /// <param name="obcRowsFormat">The table rows format.</param>
-        /// <param name="obcHeaderRowsFormat">The header rows format.</param>
-        /// <param name="obcRowFormat">The row format.</param>
-        /// <param name="obcColumnFormat">The column format.</param>
-        /// <param name="obcColumn">The Column.</param>
-        /// <param name="isLastRow">Is this the last row in the header.  Used to apply sorting to only the last row.</param>
-        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
-        /// <returns>A <see cref="TreeTableHeaderCell"/>.</returns>
-        internal static TreeTableHeaderCell ToVuescapeTreeTableHeaderCell(
+        /// <param name="obcHeaderRowCell">The header cell to be converted.</param>
+        /// <param name="obcTableFormat">The format of the table containing the header cell.</param>
+        /// <param name="obcRowsFormat">The format of the rows in the table.</param>
+        /// <param name="obcHeaderRowsFormat">The format of the header rows in the table.</param>
+        /// <param name="obcRowFormat">The format of the specific row containing the header cell.</param>
+        /// <param name="obcColumnFormat">The format of the column containing the header cell.</param>
+        /// <param name="obcColumn">The column containing the header cell.</param>
+        /// <param name="isLastRow">Indicates if this is the last row in the header.</param>
+        /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
+        /// <returns>A <see cref="TreeTableHeaderCell"/> representing the header cell in a Vuescape-compatible format.</returns>
+        public static TreeTableHeaderCell ToVuescapeTreeTableHeaderCell(
             this ICell obcHeaderRowCell,
             TableFormat obcTableFormat,
             RowFormat obcRowsFormat,
@@ -150,6 +154,9 @@ namespace Vuescape.DotNet.Domain
             bool isLastRow,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
+            new { obcHeaderRowCell }.AsArg().Must().NotBeNull();
+            new { obcColumn }.AsArg().Must().NotBeNull();
+
             var displayValue = obcHeaderRowCell.GetDisplayValue();
             var colspan = obcHeaderRowCell.ColumnsSpanned ?? 1;
             var hover = obcHeaderRowCell.GetHover();
@@ -194,7 +201,12 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
-        private static Hover GetHover(
+        /// <summary>
+        /// Gets the hover information for a cell.
+        /// </summary>
+        /// <param name="obcCell">The cell to retrieve hover information from.</param>
+        /// <returns>A <see cref="Hover"/> object containing the hover details, or null if none exist.</returns>
+        public static Hover GetHover(
             this ICell obcCell)
         {
             if (!(obcCell is IHaveHoverOver hoverOverCell))
@@ -216,7 +228,12 @@ namespace Vuescape.DotNet.Domain
             throw new NotImplementedException(Invariant($"The only supported {nameof(hoverOverCell.HoverOver)} are {nameof(StringHoverOver)} and {nameof(HtmlHoverOver)}."));
         }
 
-        private static string GetDisplayValue(
+        /// <summary>
+        /// Gets the display value of a cell.
+        /// </summary>
+        /// <param name="obcHeaderRowCell">The cell to retrieve the display value from.</param>
+        /// <returns>The display value as a string, or null if none exists.</returns>
+        public static string GetDisplayValue(
             this ICell obcHeaderRowCell)
         {
             if (!(obcHeaderRowCell is IGetCellValue valueCell))
@@ -269,18 +286,18 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Convert a <see cref="Column"/> to a <see cref="ColumnDefinition"/>.
+        /// Converts a <see cref="Column"/> to a <see cref="ColumnDefinition"/>.
         /// </summary>
-        /// <param name="obcColumn">The Column.</param>
-        /// <param name="obcRowFormat">The row format.</param>
-        /// <param name="obcHeaderRowsFormat">The header rows format.</param>
-        /// <param name="obcRowsFormat">The table rows format.</param>
-        /// <param name="obcSpecificColumnFormat">The specific column format.</param>
-        /// <param name="obcColumnFormat">The column format.</param>
-        /// <param name="obcTableFormat">The table format.</param>
-        /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
-        /// <returns>A <see cref="TreeTableHeaderCell"/>.</returns>
-        internal static ColumnDefinition ToColumnDefinition(
+        /// <param name="obcColumn">The column to be converted.</param>
+        /// <param name="obcRowFormat">The format of the rows in the table.</param>
+        /// <param name="obcHeaderRowsFormat">The format of the header rows in the table.</param>
+        /// <param name="obcRowsFormat">The format of the rows.</param>
+        /// <param name="obcSpecificColumnFormat">The specific format of the column.</param>
+        /// <param name="obcColumnFormat">The format of the columns in the table.</param>
+        /// <param name="obcTableFormat">The format of the table.</param>
+        /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
+        /// <returns>A <see cref="ColumnDefinition"/> representing the column in a Vuescape-compatible format.</returns>
+        public static ColumnDefinition ToColumnDefinition(
             this Column obcColumn,
             RowFormat obcRowFormat,
             HeaderRowsFormat obcHeaderRowsFormat,
@@ -290,6 +307,8 @@ namespace Vuescape.DotNet.Domain
             TableFormat obcTableFormat,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
+            new { obcColumn }.AsArg().Must().NotBeNull();
+
             var shouldCellWrap = ShouldCellWrap(
                 null,
                 obcRowFormat,
@@ -305,7 +324,13 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
-        private static ColumnDefinition GetColumnDefinition(
+        /// <summary>
+        /// Create a <see cref="ColumnDefinition"/> from <see cref="ColumnFormat"/>.
+        /// </summary>
+        /// <param name="obcColumnFormat">The column format to convert.</param>
+        /// <param name="columnWrapBehavior">The default ColumnWrapBehavior to use.</param>
+        /// <returns>The ColumnDefinition.</returns>
+        public static ColumnDefinition GetColumnDefinition(
             ColumnFormat obcColumnFormat,
             ColumnWrapBehavior columnWrapBehavior)
         {
@@ -350,9 +375,22 @@ namespace Vuescape.DotNet.Domain
                 { OBeautifulCode.DataStructure.FontFormatOptions.Underline, "text-decoration__underline" },
             };
 
+        /// <summary>
+        /// Maps cell formatting options to CSS classes.
+        /// </summary>
+        /// <param name="cell">The cell to retrieve formatting options for.</param>
+        /// <param name="obcRowFormat">The format of the row containing the cell.</param>
+        /// <param name="obcDataOrHeaderRowsFormat">The format of the data or header rows in the table.</param>
+        /// <param name="obcRowsFormat">The format of the rows in the table.</param>
+        /// <param name="obcSpecificColumnFormat">The specific format of the column containing the cell.</param>
+        /// <param name="obcColumnFormat">The format of the columns in the table.</param>
+        /// <param name="obcTableFormat">The format of the table.</param>
+        /// <param name="additionalCssClasses">Additional CSS classes to include.</param>
+        /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
+        /// <returns>A string of CSS classes.</returns>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
-        private static string GetCellFormatOptionsCssClasses(
+        public static string GetCellFormatOptionsCssClasses(
             this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
@@ -411,8 +449,21 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        /// <summary>
+        /// Maps font formatting options to CSS classes.
+        /// </summary>
+        /// <param name="cell">The cell to retrieve font formatting options for.</param>
+        /// <param name="obcRowFormat">The format of the row containing the cell.</param>
+        /// <param name="obcDataOrHeaderRowsFormat">The format of the data or header rows in the table.</param>
+        /// <param name="obcRowsFormat">The format of the rows in the table.</param>
+        /// <param name="obcSpecificColumnFormat">The specific format of the column containing the cell.</param>
+        /// <param name="obcColumnFormat">The format of the columns in the table.</param>
+        /// <param name="obcTableFormat">The format of the table.</param>
+        /// <param name="additionalCssClasses">Additional CSS classes to include.</param>
+        /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
+        /// <returns>A string of CSS classes.</returns>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
-        private static string GetFontFormatOptionsCssClasses(
+        public static string GetFontFormatOptionsCssClasses(
             this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
@@ -471,7 +522,19 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
-        private static CellFormat GetCellFormat(
+        /// <summary>
+        /// Retrieves the format of a cell.
+        /// </summary>
+        /// <param name="cell">The cell to retrieve the format for.</param>
+        /// <param name="obcRowFormat">The format of the row containing the cell.</param>
+        /// <param name="obcDataOrHeaderRowsFormat">The format of the data or header rows in the table.</param>
+        /// <param name="obcRowsFormat">The format of the rows in the table.</param>
+        /// <param name="obcSpecificColumnFormat">The specific format of the column containing the cell.</param>
+        /// <param name="obcColumnFormat">The format of the columns in the table.</param>
+        /// <param name="obcTableFormat">The format of the table.</param>
+        /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
+        /// <returns>A <see cref="CellFormat"/> representing the cell's format.</returns>
+        public static CellFormat GetCellFormat(
             this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
@@ -530,8 +593,25 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        /// <summary>
+        /// Retrieves the background color for a given cell, considering various formatting options.
+        /// </summary>
+        /// <param name="cell">The cell to retrieve the background color for.</param>
+        /// <param name="obcRowFormat">The format of the row containing the cell.</param>
+        /// <param name="obcDataOrHeaderRowsFormat">The format of the data or header rows in the table.</param>
+        /// <param name="obcRowsFormat">The format of the rows in the table.</param>
+        /// <param name="obcSpecificColumnFormat">The specific format of the column containing the cell.</param>
+        /// <param name="obcColumnFormat">The general format of the columns in the table.</param>
+        /// <param name="obcTableFormat">The format of the table.</param>
+        /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
+        /// <returns>
+        /// A <see cref="Color"/> representing the background color of the cell, or <c>null</c> if no background color is defined.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if the method is called in strict conversion mode and no background color is defined in the provided formatting options.
+        /// </exception>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
-        private static Color? GetCellBackgroundColor(
+        public static Color? GetCellBackgroundColor(
             this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
@@ -581,8 +661,22 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        /// <summary>
+        /// Retrieves the horizontal alignment for a given cell, considering various formatting options.
+        /// </summary>
+        /// <param name="cell">The cell to retrieve the horizontal alignment for.</param>
+        /// <param name="obcRowFormat">The format of the row containing the cell.</param>
+        /// <param name="obcDataOrHeaderRowsFormat">The format of the data or header rows in the table.</param>
+        /// <param name="obcRowsFormat">The format of the rows in the table.</param>
+        /// <param name="obcSpecificColumnFormat">The specific format of the column containing the cell.</param>
+        /// <param name="obcColumnFormat">The general format of the columns in the table.</param>
+        /// <param name="obcTableFormat">The format of the table.</param>
+        /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
+        /// <returns>
+        /// A <see cref="HorizontalAlignment"/> value representing the alignment of the cell, or <c>null</c> if no alignment is defined.
+        /// </returns>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
-        private static HorizontalAlignment? GetHorizontalAlignment(
+        public static HorizontalAlignment? GetHorizontalAlignment(
             this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
@@ -627,8 +721,25 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        /// <summary>
+        /// Retrieves the font color for a given cell, considering various formatting options.
+        /// </summary>
+        /// <param name="cell">The cell to retrieve the font color for.</param>
+        /// <param name="obcRowFormat">The format of the row containing the cell.</param>
+        /// <param name="obcDataOrHeaderRowsFormat">The format of the data or header rows in the table.</param>
+        /// <param name="obcRowsFormat">The format of the rows in the table.</param>
+        /// <param name="obcSpecificColumnFormat">The specific format of the column containing the cell.</param>
+        /// <param name="obcColumnFormat">The general format of the columns in the table.</param>
+        /// <param name="obcTableFormat">The format of the table.</param>
+        /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
+        /// <returns>
+        /// A <see cref="Color"/> representing the font color of the cell, or <c>null</c> if no font color is defined.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if the method is called in strict conversion mode and no font color is defined in the provided formatting options.
+        /// </exception>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
-        private static Color? GetFontColor(
+        public static Color? GetFontColor(
             this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
@@ -678,9 +789,26 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        /// <summary>
+        /// Retrieves the font size for a given cell in pixels, considering various formatting options.
+        /// </summary>
+        /// <param name="cell">The cell to retrieve the font size for.</param>
+        /// <param name="obcRowFormat">The format of the row containing the cell.</param>
+        /// <param name="obcDataOrHeaderRowsFormat">The format of the data or header rows in the table.</param>
+        /// <param name="obcRowsFormat">The format of the rows in the table.</param>
+        /// <param name="obcSpecificColumnFormat">The specific format of the column containing the cell.</param>
+        /// <param name="obcColumnFormat">The general format of the columns in the table.</param>
+        /// <param name="obcTableFormat">The format of the table.</param>
+        /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
+        /// <returns>
+        /// A string representing the font size in pixels (e.g., "12px"), or <c>null</c> if no font size is defined.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if the method is called in strict conversion mode and no font size is defined in the provided formatting options.
+        /// </exception>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
-        private static string GetCellFontSizeInPixels(
+        public static string GetCellFontSizeInPixels(
             this ICell cell,
             RowFormat obcRowFormat,
             RowFormat obcDataOrHeaderRowsFormat,
@@ -737,8 +865,25 @@ namespace Vuescape.DotNet.Domain
             return result;
         }
 
+        /// <summary>
+        /// Determines whether the content of a given cell should wrap, based on various formatting options.
+        /// </summary>
+        /// <param name="cell">The cell to check for wrapping behavior.</param>
+        /// <param name="obcRowFormat">The format of the row containing the cell.</param>
+        /// <param name="obcHeaderRowsFormat">The format of the header rows in the table.</param>
+        /// <param name="obcRowsFormat">The format of the rows in the table.</param>
+        /// <param name="obcSpecificColumnFormat">The specific format of the column containing the cell.</param>
+        /// <param name="obcColumnFormat">The general format of the columns in the table.</param>
+        /// <param name="obcTableFormat">The format of the table.</param>
+        /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
+        /// <returns>
+        /// <c>true</c> if the cell content should wrap; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if the method is called in strict conversion mode and no wrapping behavior is defined in the provided formatting options.
+        /// </exception>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
-        private static bool ShouldCellWrap(
+        public static bool ShouldCellWrap(
             this ICell cell,
             RowFormat obcRowFormat,
             HeaderRowsFormat obcHeaderRowsFormat,

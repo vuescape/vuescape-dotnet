@@ -7,6 +7,8 @@ namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
     using System.Linq;
+    using OBeautifulCode.Assertion.Recipes;
+    using OBeautifulCode.CodeAnalysis.Recipes;
     using OBeautifulCode.DataStructure;
 
     /// <summary>
@@ -27,7 +29,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="isLastRow">Is this the last row in the header.  Used to apply sorting to only the last row.</param>
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableHeaderRow"/>.</returns>
-        internal static TreeTableHeaderRow ToVuescapeTreeTableHeaderRow(
+        public static TreeTableHeaderRow ToVuescapeTreeTableHeaderRow(
             this OBeautifulCode.DataStructure.FlatRow obcHeaderRow,
             TableFormat obcTableFormat,
             RowFormat obcRowsFormat,
@@ -38,6 +40,8 @@ namespace Vuescape.DotNet.Domain
             bool isLastRow,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
+            new { obcHeaderRow }.AsArg().Must().NotBeNull();
+
             // TODO: Apply formatting.
             var cssClasses = string.Empty;
             var rowId = obcHeaderRow.Id;
@@ -88,7 +92,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcColumns">The list of Columns.</param>
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableHeaderRow"/>.</returns>
-        internal static TreeTableRow ToVuescapeTreeTableFooterRow(
+        public static TreeTableRow ToVuescapeTreeTableFooterRow(
             this OBeautifulCode.DataStructure.FlatRow obcFooterRow,
             TableFormat obcTableFormat,
             RowFormat obcRowsFormat,
@@ -98,6 +102,8 @@ namespace Vuescape.DotNet.Domain
             IReadOnlyList<Column> obcColumns,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
+            new { obcFooterRow }.AsArg().Must().NotBeNull();
+
             // TODO: Apply formatting.
             var cssClasses = string.Empty;
             var rowId = obcFooterRow.Id;
@@ -168,7 +174,8 @@ namespace Vuescape.DotNet.Domain
         /// <param name="shouldIncludeSummaryRows">Should the summary rows be included in the conversion.</param>
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>A <see cref="TreeTableHeaderRow"/>.</returns>
-        internal static TreeTableRow ToVuescapeTreeTableRow(
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = ObcSuppressBecause.CA1506_AvoidExcessiveClassCoupling_DisagreeWithAssessment)]
+        public static TreeTableRow ToVuescapeTreeTableRow(
             this OBeautifulCode.DataStructure.RowBase obcRowBase,
             TableFormat obcTableFormat,
             RowFormat obcRowsFormat,
@@ -180,6 +187,8 @@ namespace Vuescape.DotNet.Domain
             bool shouldIncludeSummaryRows,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
+            new { obcRowBase }.AsArg().Must().NotBeNull();
+
             var rowIndentLevel = depth ?? 0;
 
             // TODO: Apply formatting.

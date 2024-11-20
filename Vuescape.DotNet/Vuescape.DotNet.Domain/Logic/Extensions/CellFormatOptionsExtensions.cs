@@ -15,7 +15,7 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="obcCellFormatOptions">The cell format options.</param>
         /// <returns>Whether a column has wrapped.</returns>
-        internal static bool IsCellWrapped(
+        public static bool IsCellWrapped(
             this OBeautifulCode.DataStructure.CellFormatOptions? obcCellFormatOptions)
         {
             if (obcCellFormatOptions == null)

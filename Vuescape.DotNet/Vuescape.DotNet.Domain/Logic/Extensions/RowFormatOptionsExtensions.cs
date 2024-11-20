@@ -29,7 +29,7 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="obcRowFormatOptions">The RowFormatOptions.</param>
         /// <returns>A boolean indicating whether the row is visible.</returns>
-        internal static bool IsVisible(
+        public static bool IsVisible(
             this RowFormatOptions? obcRowFormatOptions)
         {
             var result = (obcRowFormatOptions ?? RowFormatOptions.None & RowFormatOptions.Hide) == 0;
@@ -41,7 +41,7 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="obcRowFormatOptions">The RowFormatOptions.</param>
         /// <returns>A boolean indicating whether the row is not expandable.</returns>
-        internal static bool IsNotExpandable(
+        public static bool IsNotExpandable(
             this RowFormatOptions? obcRowFormatOptions)
         {
             var result = (obcRowFormatOptions ?? RowFormatOptions.None & RowFormatOptions.DisableCollapsing) != 0;
@@ -53,7 +53,7 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="obcRowFormatOptions">The RowFormatOptions.</param>
         /// <returns>A boolean indicating whether the row is frozen.</returns>
-        internal static bool IsFrozen(
+        public static bool IsFrozen(
             this RowFormatOptions? obcRowFormatOptions)
         {
             var result = (obcRowFormatOptions ?? RowFormatOptions.None & RowFormatOptions.Freeze) != 0;

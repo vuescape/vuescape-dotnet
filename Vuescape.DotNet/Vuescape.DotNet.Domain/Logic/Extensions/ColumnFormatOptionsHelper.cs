@@ -23,7 +23,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>True if visible otherwise false.</returns>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
-        internal static bool IsVisible(
+        public static bool IsVisible(
             Column obcColumn,
             ColumnFormat obcSpecificColumnFormat,
             ColumnFormat obcColumnFormat,
@@ -45,7 +45,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="obcToVuescapeConversionContext">The conversion context.</param>
         /// <returns>True if sortable otherwise false.</returns>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "obcToVuescapeConversionContext", Justification = "Future-proof usage.")]
-        internal static bool IsSortable(
+        public static bool IsSortable(
             Column obcColumn,
             ColumnFormat obcSpecificColumnFormat,
             ColumnFormat obcColumnFormat,

@@ -17,7 +17,7 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="obcColumnFormatOptions">The column.</param>
         /// <returns>Whether a column is visible.</returns>
-        internal static bool IsVisible(
+        public static bool IsVisible(
             this ColumnFormatOptions? obcColumnFormatOptions)
         {
             if (obcColumnFormatOptions == null)
@@ -34,7 +34,7 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="obcColumnFormatOptions">The column.</param>
         /// <returns>Whether a column is sortable.</returns>
-        internal static bool IsSortable(
+        public static bool IsSortable(
             this ColumnFormatOptions? obcColumnFormatOptions)
         {
             if (obcColumnFormatOptions == null)
@@ -51,7 +51,7 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="obcColumnFormatOptions">The column.</param>
         /// <returns>Whether a column is frozen.</returns>
-        internal static bool IsFrozen(
+        public static bool IsFrozen(
             this ColumnFormatOptions? obcColumnFormatOptions)
         {
             if (obcColumnFormatOptions == null)

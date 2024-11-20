@@ -12,7 +12,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Helper methods for <see cref="OBeautifulCode.DataStructure.ColumnFormatOptions"/>.
     /// </summary>
-    internal static class ColumnFormatOptionsHelper
+    public static class ColumnFormatOptionsHelper
     {
         /// <summary>
         /// Determines whether a <see cref="Column"/> is visible.

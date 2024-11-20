@@ -15,7 +15,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Extension methods on <see cref="OBeautifulCode.DataStructure.ICell"/>.
     /// </summary>
-    internal static partial class ObcILinkExtensions
+    public static partial class ObcILinkExtensions
     {
         /// <summary>
         /// Convert an <see cref="ILink"/> to a <see cref="Link"/>.

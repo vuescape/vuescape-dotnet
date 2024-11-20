@@ -10,7 +10,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Extension methods on <see cref="OBeautifulCode.DataStructure.RowFormatOptions"/>.
     /// </summary>
-    internal static partial class RowFormatOptionsExtensions
+    public static partial class RowFormatOptionsExtensions
     {
         /// <summary>
         /// Determine if Row should align child rows with parent.

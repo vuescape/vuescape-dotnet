@@ -10,7 +10,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Extension methods on <see cref="OBeautifulCode.DataStructure.ColumnFormatOptions"/>.
     /// </summary>
-    internal static partial class ColumnFormatOptionsExtensions
+    public static partial class ColumnFormatOptionsExtensions
     {
         /// <summary>
         /// Determine if a column is visible from the <see cref="ColumnFormatOptions"/>.

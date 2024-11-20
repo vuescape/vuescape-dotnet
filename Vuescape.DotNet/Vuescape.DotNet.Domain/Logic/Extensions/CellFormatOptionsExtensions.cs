@@ -8,7 +8,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Extension methods on <see cref="OBeautifulCode.DataStructure.CellFormatOptions"/>.
     /// </summary>
-    internal static partial class CellFormatOptionsExtensions
+    public static partial class CellFormatOptionsExtensions
     {
         /// <summary>
         /// Determine if a cell has wrapped text from the <see cref="OBeautifulCode.DataStructure.CellFormatOptions"/>.

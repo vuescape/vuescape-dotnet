@@ -21,7 +21,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Extension methods on <see cref="OBeautifulCode.DataStructure.ICell"/>.
     /// </summary>
-    internal static partial class ObcICellExtensions
+    public static partial class ObcICellExtensions
     {
         /// <summary>
         /// Convert an <see cref="ICell"/> to a <see cref="TreeTableCell"/>.

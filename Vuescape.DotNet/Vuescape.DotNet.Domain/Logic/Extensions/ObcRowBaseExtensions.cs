@@ -12,7 +12,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Extension methods on all subtypes of <see cref="OBeautifulCode.DataStructure.RowBase"/>.
     /// </summary>
-    internal static partial class ObcRowBaseExtensions
+    public static partial class ObcRowBaseExtensions
     {
         /// <summary>
         /// Convert a header <see cref="FlatRow"/> to a <see cref="TreeTableHeaderRow"/>.

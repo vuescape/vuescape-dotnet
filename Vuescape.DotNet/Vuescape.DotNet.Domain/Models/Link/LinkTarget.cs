@@ -18,6 +18,11 @@ namespace Vuescape.DotNet.Domain
         None = 0,
 
         /// <summary>
+        /// The Current Pane.
+        /// </summary>
+        CurrentPane = 1,
+
+        /// <summary>
         /// Left Pane.
         /// </summary>
         LeftPane = 2,

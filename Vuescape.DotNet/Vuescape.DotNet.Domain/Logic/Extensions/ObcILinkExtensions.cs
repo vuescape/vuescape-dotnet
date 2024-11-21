@@ -124,7 +124,7 @@ namespace Vuescape.DotNet.Domain
                 case OBeautifulCode.DataStructure.LinkTarget.Unknown:
                     return LinkTarget.None;
                 case OBeautifulCode.DataStructure.LinkTarget.CurrentPane:
-                    return LinkTarget.CenterPane;
+                    return LinkTarget.CurrentPane;
                 case OBeautifulCode.DataStructure.LinkTarget.LeftPane:
                     return LinkTarget.LeftPane;
                 case OBeautifulCode.DataStructure.LinkTarget.RightPane:

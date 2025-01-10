@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NoAction.cs" company="Vuescape">
+// <copyright file="DataTypeKind.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -8,18 +8,23 @@
 namespace Vuescape.DotNet.Domain
 {
     /// <summary>
-    /// Represents an unknown action type.
+    /// Represents the type of data for a table column.
     /// </summary>
-    public partial class NoAction : ActionBase
+    public enum DataTypeKind
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NoAction"/> class.
+        /// Date type.
         /// </summary>
-        public NoAction()
-        {
-        }
+        Date,
 
-        /// <inheritdoc />
-        public override string Type => "noAction";
+        /// <summary>
+        /// Numeric type.
+        /// </summary>
+        Numeric,
+
+        /// <summary>
+        /// Boolean type.
+        /// </summary>
+        Boolean,
     }
 }

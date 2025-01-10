@@ -8,7 +8,6 @@
 namespace Vuescape.DotNet.Domain
 {
     using OBeautifulCode.Assertion.Recipes;
-    using OBeautifulCode.Type;
 
     /// <summary>
     /// Represents a button component with an associated payload.

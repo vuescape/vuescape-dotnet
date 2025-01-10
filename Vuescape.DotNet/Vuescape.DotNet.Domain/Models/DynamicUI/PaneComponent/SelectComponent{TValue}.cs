@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TableComponent.cs" company="Vuescape">
+// <copyright file="SelectComponent{TValue}.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -10,15 +10,16 @@ namespace Vuescape.DotNet.Domain
     using OBeautifulCode.Assertion.Recipes;
 
     /// <summary>
-    /// Represents a table component with an associated payload.
+    /// Represents a select component with an associated payload.
     /// </summary>
-    public partial class TableComponent : PaneComponentBase
+    /// <typeparam name="TValue">The underlying value type of the select.</typeparam>
+    public partial class SelectComponent<TValue> : PaneComponentBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TableComponent"/> class.
+        /// Initializes a new instance of the <see cref="SelectComponent{TValue}"/> class.
         /// </summary>
-        /// <param name="payload">The payload containing details of the table component.</param>
-        public TableComponent(TableComponentPayload payload)
+        /// <param name="payload">The payload containing details of the button component.</param>
+        public SelectComponent(SelectComponentPayload<TValue> payload)
         {
             new { payload }.AsArg().Must().NotBeNull();
 
@@ -28,11 +29,11 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the type of the pane component.
         /// </summary>
-        public override string Type => "table";
+        public override string Type => "select";
 
         /// <summary>
-        /// Gets the payload containing details of the table component.
+        /// Gets the payload containing details of the select component.
         /// </summary>
-        public TableComponentPayload Payload { get; private set; }
+        public SelectComponentPayload<TValue> Payload { get; private set; }
     }
 }

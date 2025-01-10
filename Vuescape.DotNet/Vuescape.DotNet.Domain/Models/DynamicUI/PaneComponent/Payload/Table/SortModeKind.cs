@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NoAction.cs" company="Vuescape">
-//    Copyright (c) Vuescape 2021. All rights reserved.
+// <copyright file="SortModeKind.cs" company="Vuescape">
+//   Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -8,18 +8,18 @@
 namespace Vuescape.DotNet.Domain
 {
     /// <summary>
-    /// Represents an unknown action type.
+    /// Represents the sort mode for a table column.
     /// </summary>
-    public partial class NoAction : ActionBase
+    public enum SortModeKind
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NoAction"/> class.
+        /// Single sort mode.
         /// </summary>
-        public NoAction()
-        {
-        }
+        Single,
 
-        /// <inheritdoc />
-        public override string Type => "noAction";
+        /// <summary>
+        /// Multiple sort mode.
+        /// </summary>
+        Multiple,
     }
 }

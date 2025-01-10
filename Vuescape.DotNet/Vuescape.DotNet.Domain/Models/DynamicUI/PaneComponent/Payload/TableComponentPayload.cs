@@ -19,27 +19,36 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="TableComponentPayload"/> class.
         /// </summary>
-        /// <param name="headers">The headers of the table.</param>
+        /// <param name="id">The identifier of the table.</param>
+        /// <param name="columns">The headers of the table.</param>
         /// <param name="rows">The rows of the table, where each row is a collection of cell values.</param>
         public TableComponentPayload(
-            IReadOnlyList<string> headers,
-            IReadOnlyList<IReadOnlyList<string>> rows)
+            string id,
+            IReadOnlyList<TableColumn> columns,
+            IReadOnlyList<TableRow> rows)
         {
-            new { headers }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
+            new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
+            new { columns }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
             new { rows }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
 
-            this.Headers = headers;
+            this.Id = id;
+            this.Columns = columns;
             this.Rows = rows;
         }
 
         /// <summary>
-        /// Gets the headers of the table.
+        /// Gets the identifier of the table.
         /// </summary>
-        public IReadOnlyList<string> Headers { get; private set; }
+        public string Id { get; private set; }
 
         /// <summary>
-        /// Gets the rows of the table, where each row is a collection of cell values.
+        /// Gets the columns of the table.
         /// </summary>
-        public IReadOnlyList<IReadOnlyList<string>> Rows { get; private set; }
+        public IReadOnlyList<TableColumn> Columns { get; private set; }
+
+        /// <summary>
+        /// Gets the rows of the table.
+        /// </summary>
+        public IReadOnlyList<TableRow> Rows { get; private set; }
     }
 }

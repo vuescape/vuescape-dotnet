@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NoAction.cs" company="Vuescape">
+// <copyright file="AlignFrozenKind.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -8,18 +8,18 @@
 namespace Vuescape.DotNet.Domain
 {
     /// <summary>
-    /// Represents an unknown action type.
+    /// Represents the alignment for a frozen column.
     /// </summary>
-    public partial class NoAction : ActionBase
+    public enum AlignFrozenKind
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NoAction"/> class.
+        /// Align left.
         /// </summary>
-        public NoAction()
-        {
-        }
+        Left,
 
-        /// <inheritdoc />
-        public override string Type => "noAction";
+        /// <summary>
+        /// Align right.
+        /// </summary>
+        Right,
     }
 }

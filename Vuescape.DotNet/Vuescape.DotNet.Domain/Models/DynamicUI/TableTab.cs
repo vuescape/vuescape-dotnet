@@ -30,6 +30,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the table to display in the tab.
         /// </summary>
-        public TableComponent Table { get; }
+        public TableComponent Table { get; private set; }
     }
 }

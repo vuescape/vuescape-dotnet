@@ -259,6 +259,10 @@
     <Compile Include="ActionBaseTest.designer.cs">
       <DependentUpon>ActionBaseTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="BadgeTest.cs" />
+    <Compile Include="BadgeTest.designer.cs">
+      <DependentUpon>BadgeTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="ButtonComponentPayloadTest.cs" />
     <Compile Include="ButtonComponentPayloadTest.designer.cs">
       <DependentUpon>ButtonComponentPayloadTest.cs</DependentUpon>
@@ -302,6 +306,9 @@
     <Compile Include="DisplayReportOpTest.cs" />
     <Compile Include="DisplayReportOpTest.designer.cs">
       <DependentUpon>DisplayReportOpTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DotNetDummyFactory.designer.cs">
+      <DependentUpon>DotNetDummyFactory.cs</DependentUpon>
     </Compile>
     <Compile Include="DotNetDummyFactoryTest.designer.cs">
       <DependentUpon>DotNetDummyFactoryTest.cs</DependentUpon>
@@ -449,6 +456,22 @@
     <Compile Include="SectionTest.designer.cs">
       <DependentUpon>SectionTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelectComponentPayloadTest.cs" />
+    <Compile Include="SelectComponentPayloadTest.designer.cs">
+      <DependentUpon>SelectComponentPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectComponentTest.cs" />
+    <Compile Include="SelectComponentTest.designer.cs">
+      <DependentUpon>SelectComponentTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectNavigationActionTest.cs" />
+    <Compile Include="SelectNavigationActionTest.designer.cs">
+      <DependentUpon>SelectNavigationActionTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectOptionTest.cs" />
+    <Compile Include="SelectOptionTest.designer.cs">
+      <DependentUpon>SelectOptionTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="SerializationConfigurationTypes.cs" />
     <AdditionalFiles Include=".analyzers\stylecop.json" />
     <Compile Include="Models\SlottedUiObjectTest.cs" />
@@ -461,6 +484,14 @@
     <Compile Include="Models\TreeTableRowTest.cs" />
     <Compile Include="Models\TreeTableTest.cs" />
     <Compile Include="Models\UiObjectTest.cs" />
+    <Compile Include="TableCellTest.cs" />
+    <Compile Include="TableCellTest.designer.cs">
+      <DependentUpon>TableCellTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableColumnTest.cs" />
+    <Compile Include="TableColumnTest.designer.cs">
+      <DependentUpon>TableColumnTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="TableComponentPayloadTest.cs" />
     <Compile Include="TableComponentPayloadTest.designer.cs">
       <DependentUpon>TableComponentPayloadTest.cs</DependentUpon>
@@ -468,6 +499,26 @@
     <Compile Include="TableComponentTest.cs" />
     <Compile Include="TableComponentTest.designer.cs">
       <DependentUpon>TableComponentTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableRowTest.cs" />
+    <Compile Include="TableRowTest.designer.cs">
+      <DependentUpon>TableRowTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableTabsComponentPayloadTest.cs" />
+    <Compile Include="TableTabsComponentPayloadTest.designer.cs">
+      <DependentUpon>TableTabsComponentPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableTabsComponentTest.cs" />
+    <Compile Include="TableTabsComponentTest.designer.cs">
+      <DependentUpon>TableTabsComponentTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TableTabTest.cs" />
+    <Compile Include="TableTabTest.designer.cs">
+      <DependentUpon>TableTabTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabTest.cs" />
+    <Compile Include="TabTest.designer.cs">
+      <DependentUpon>TabTest.cs</DependentUpon>
     </Compile>
     <Compile Include="TitleComponentPayloadTest.cs" />
     <Compile Include="TitleComponentPayloadTest.designer.cs">

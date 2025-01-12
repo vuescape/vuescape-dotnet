@@ -143,6 +143,10 @@
     <Compile Include="Models\DynamicUI\Action\NavigationAction.designer.cs">
       <DependentUpon>NavigationAction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\Action\SelectNavigationAction.cs" />
+    <Compile Include="Models\DynamicUI\Action\SelectNavigationAction.designer.cs">
+      <DependentUpon>SelectNavigationAction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\Action\NoAction.designer.cs">
       <DependentUpon>NoAction.cs</DependentUpon>
     </Compile>
@@ -151,19 +155,64 @@
     <Compile Include="Models\DynamicUI\Action\Payload\NavigationActionPayload.designer.cs">
       <DependentUpon>NavigationActionPayload.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\Badge.designer.cs">
+      <DependentUpon>Badge.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\BadgeSeverity.cs" />
     <Compile Include="Models\DynamicUI\Chiclet.cs" />
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Select\SelectOption{TValue}.cs" />
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Select\SelectComponentPayload{TValue}.cs" />
+    <Compile Include="Models\DynamicUI\Chiclet.designer.cs">
+      <DependentUpon>Chiclet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\ButtonComponent.designer.cs">
+      <DependentUpon>ButtonComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\ChicletGridComponent.designer.cs">
+      <DependentUpon>ChicletGridComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\PaneComponentBase.designer.cs">
+      <DependentUpon>PaneComponentBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\ButtonComponentPayload.designer.cs">
+      <DependentUpon>ButtonComponentPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\ChicletGridComponentPayload.designer.cs">
+      <DependentUpon>ChicletGridComponentPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Select\SelectComponentPayload.designer.cs">
+      <DependentUpon>SelectComponentPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Select\SelectOption.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Select\SelectComponentPayload.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Select\SelectOption.designer.cs">
+      <DependentUpon>SelectOption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableComponentPayload.designer.cs">
+      <DependentUpon>TableComponentPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableTabsComponentPayload.designer.cs">
+      <DependentUpon>TableTabsComponentPayload.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\AlignFrozenKind.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\FilterModeKind.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\SortModeKind.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\DataTypeKind.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableCell.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableCell.designer.cs">
+      <DependentUpon>TableCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableColumn.designer.cs">
+      <DependentUpon>TableColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableRow.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableColumn.cs" />
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableTabsComponentPayload{TSelectValue}.cs" />
-    <Compile Include="Models\DynamicUI\PaneComponent\SelectComponent{TValue}.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableTabsComponentPayload.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableRow.designer.cs">
+      <DependentUpon>TableRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TitleComponentPayload.designer.cs">
+      <DependentUpon>TitleComponentPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\SelectComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\ButtonComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\ChicletGridComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\PaneComponentBase.cs" />
@@ -171,16 +220,46 @@
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ChicletGridComponentPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableComponentPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\TitleComponentPayload.cs" />
-    <Compile Include="Models\DynamicUI\PaneComponent\TableTabsComponent{TSelectValue}.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\SelectComponent.designer.cs">
+      <DependentUpon>SelectComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\TableComponent.designer.cs">
+      <DependentUpon>TableComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\TableTabsComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\TableComponent.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\TableTabsComponent.designer.cs">
+      <DependentUpon>TableTabsComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\TitleComponent.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\TitleComponent.designer.cs">
+      <DependentUpon>TitleComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneItem.cs" />
+    <Compile Include="Models\DynamicUI\PaneItem.designer.cs">
+      <DependentUpon>PaneItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneLayout.cs" />
+    <Compile Include="Models\DynamicUI\PaneLayout.designer.cs">
+      <DependentUpon>PaneLayout.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneSection.cs" />
     <Compile Include="Models\DynamicUI\Badge.cs" />
+    <Compile Include="Models\DynamicUI\PaneSection.designer.cs">
+      <DependentUpon>PaneSection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\ReportLayout.designer.cs">
+      <DependentUpon>ReportLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\Tab.designer.cs">
+      <DependentUpon>Tab.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\TableTab.cs" />
     <Compile Include="Models\DynamicUI\Tab.cs" />
     <Compile Include="Models\DynamicUI\ReportLayout.cs" />
+    <Compile Include="Models\DynamicUI\TableTab.designer.cs">
+      <DependentUpon>TableTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Feature\Feature.designer.cs">
       <DependentUpon>Feature.cs</DependentUpon>
     </Compile>

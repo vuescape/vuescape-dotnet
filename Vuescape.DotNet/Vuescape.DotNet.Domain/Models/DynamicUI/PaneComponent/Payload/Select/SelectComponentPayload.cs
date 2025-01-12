@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SelectComponentPayload{TValue}.cs" company="Vuescape">
+// <copyright file="SelectComponentPayload.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -15,11 +15,10 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the payload for a select component.
     /// </summary>
-    /// <typeparam name="TValue">The type of the underlying options.</typeparam>
-    public partial class SelectComponentPayload<TValue> : IModelViaCodeGen
+    public partial class SelectComponentPayload : IModelViaCodeGen
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SelectComponentPayload{TValue}"/> class.
+        /// Initializes a new instance of the <see cref="SelectComponentPayload"/> class.
         /// </summary>
         /// <param name="options">The options to display in the select component.</param>
         /// <param name="selectedValue">The currently selected value.</param>
@@ -28,17 +27,17 @@ namespace Vuescape.DotNet.Domain
         /// <param name="optionLabel">The property used to display labels for options.</param>
         /// <param name="placeholder">The placeholder text for the select component.</param>
         /// <param name="disabled">Indicates whether the component is disabled.</param>
-        /// <param name="className">The CSS class for the select component.</param>
+        /// <param name="cssClass">The CSS class for the select component.</param>
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "This is not Hungarian notation")]
         public SelectComponentPayload(
-            IReadOnlyList<SelectOption<TValue>> options,
-            SelectOption<TValue> selectedValue = null,
+            IReadOnlyList<SelectOption> options,
+            SelectOption selectedValue = null,
             ActionBase onChangeAction = null,
             string name = null,
             string optionLabel = null,
             string placeholder = null,
             bool? disabled = null,
-            string className = null)
+            string cssClass = null)
         {
             new { options }.AsArg().Must().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
 
@@ -49,18 +48,18 @@ namespace Vuescape.DotNet.Domain
             this.OptionLabel = optionLabel;
             this.Placeholder = placeholder;
             this.Disabled = disabled;
-            this.Class = className;
+            this.CssClass = cssClass;
         }
 
         /// <summary>
         /// Gets the options to display in the select component.
         /// </summary>
-        public IReadOnlyList<SelectOption<TValue>> Options { get; private set; }
+        public IReadOnlyList<SelectOption> Options { get; private set; }
 
         /// <summary>
         /// Gets the currently selected value. Null if no value is selected.
         /// </summary>
-        public SelectOption<TValue> SelectedValue { get; private set; }
+        public SelectOption SelectedValue { get; private set; }
 
         /// <summary>
         /// Gets the action to perform when the value of the select component changes.
@@ -96,6 +95,6 @@ namespace Vuescape.DotNet.Domain
         /// Gets the CSS class for the select component.
         /// Optional.
         /// </summary>
-        public string Class { get; private set; }
+        public string CssClass { get; private set; }
     }
 }

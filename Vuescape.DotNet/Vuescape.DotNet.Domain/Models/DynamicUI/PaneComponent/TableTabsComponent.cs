@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TableTabsComponent{TSelectValue}.cs" company="Vuescape">
+// <copyright file="TableTabsComponent.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -12,14 +12,13 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a table component with an associated payload.
     /// </summary>
-    /// <typeparam name="TSelectValue">The underlying type of the select component.</typeparam>
-    public partial class TableTabsComponent<TSelectValue> : PaneComponentBase
+    public partial class TableTabsComponent : PaneComponentBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TableTabsComponent{TSelectValue}"/> class.
+        /// Initializes a new instance of the <see cref="TableTabsComponent"/> class.
         /// </summary>
         /// <param name="payload">The payload containing details of the table component.</param>
-        public TableTabsComponent(TableTabsComponentPayload<TSelectValue> payload)
+        public TableTabsComponent(TableTabsComponentPayload payload)
         {
             new { payload }.AsArg().Must().NotBeNull();
 
@@ -34,6 +33,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the payload containing details of the table component.
         /// </summary>
-        public TableTabsComponentPayload<TSelectValue> Payload { get; private set; }
+        public TableTabsComponentPayload Payload { get; private set; }
     }
 }

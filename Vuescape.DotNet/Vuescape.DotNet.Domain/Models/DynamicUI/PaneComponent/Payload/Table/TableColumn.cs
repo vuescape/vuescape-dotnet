@@ -48,13 +48,13 @@ namespace Vuescape.DotNet.Domain
             FilterModeKind? filterMode = null,
             string headerText = null,
             string footerText = null,
-            Dictionary<string, string> style = null,
+            IReadOnlyDictionary<string, string> style = null,
             string cssClass = null,
-            Dictionary<string, string> headerStyle = null,
+            IReadOnlyDictionary<string, string> headerStyle = null,
             string cssHeaderClass = null,
-            Dictionary<string, string> bodyStyle = null,
+            IReadOnlyDictionary<string, string> bodyStyle = null,
             string cssBodyClass = null,
-            Dictionary<string, string> footerStyle = null,
+            IReadOnlyDictionary<string, string> footerStyle = null,
             string cssFooterClass = null,
             int? colspan = null,
             int? rowspan = null,
@@ -136,7 +136,7 @@ namespace Vuescape.DotNet.Domain
         /// Gets the inline styles for the header, body, and footer cells.
         /// Optional.
         /// </summary>
-        public Dictionary<string, string> Style { get; private set; }
+        public IReadOnlyDictionary<string, string> Style { get; private set; }
 
         /// <summary>
         /// Gets the CSS classes for the header, body, and footer cells.
@@ -148,7 +148,7 @@ namespace Vuescape.DotNet.Domain
         /// Gets the inline styles for the column header.
         /// Optional.
         /// </summary>
-        public Dictionary<string, string> HeaderStyle { get; private set; }
+        public IReadOnlyDictionary<string, string> HeaderStyle { get; private set; }
 
         /// <summary>
         /// Gets the CSS class for the column header.
@@ -160,7 +160,7 @@ namespace Vuescape.DotNet.Domain
         /// Gets the inline styles for the column body.
         /// Optional.
         /// </summary>
-        public Dictionary<string, string> BodyStyle { get; private set; }
+        public IReadOnlyDictionary<string, string> BodyStyle { get; private set; }
 
         /// <summary>
         /// Gets the CSS class for the column body.
@@ -172,7 +172,7 @@ namespace Vuescape.DotNet.Domain
         /// Gets the inline styles for the column footer.
         /// Optional.
         /// </summary>
-        public Dictionary<string, string> FooterStyle { get; private set; }
+        public IReadOnlyDictionary<string, string> FooterStyle { get; private set; }
 
         /// <summary>
         /// Gets the CSS class for the column footer.

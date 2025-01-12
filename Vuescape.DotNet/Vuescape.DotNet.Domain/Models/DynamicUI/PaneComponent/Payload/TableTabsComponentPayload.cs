@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TableTabsComponentPayload{TSelectValue}.cs" company="Vuescape">
+// <copyright file="TableTabsComponentPayload.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -14,11 +14,10 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the payload for table tabs. i.e. Tabs that contain tables only.
     /// </summary>
-    /// <typeparam name="TSelectValue">The type of the <see cref="SelectComponent{T}"/>.</typeparam>
-    public partial class TableTabsComponentPayload<TSelectValue> : IModelViaCodeGen
+    public partial class TableTabsComponentPayload : IModelViaCodeGen
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TableTabsComponentPayload{TSelectValue}"/> class.
+        /// Initializes a new instance of the <see cref="TableTabsComponentPayload"/> class.
         /// </summary>
         /// <param name="id">The identifier for this component.</param>
         /// <param name="tabs">The tabs to display.</param>
@@ -26,7 +25,7 @@ namespace Vuescape.DotNet.Domain
         public TableTabsComponentPayload(
             string id,
             IReadOnlyList<TableTab> tabs,
-            SelectComponent<TSelectValue> selectComponent = null)
+            SelectComponent selectComponent = null)
         {
             this.Id = id;
             this.Tabs = tabs;
@@ -37,16 +36,16 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the identifier.
         /// </summary>
-        public string Id { get; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets the list of table tabs.
         /// </summary>
-        public IReadOnlyList<TableTab> Tabs { get; }
+        public IReadOnlyList<TableTab> Tabs { get; private set; }
 
         /// <summary>
         /// Gets the select component for the table tabs.
         /// </summary>
-        public SelectComponent<TSelectValue> SelectComponent { get; }
+        public SelectComponent SelectComponent { get; private set; }
     }
 }

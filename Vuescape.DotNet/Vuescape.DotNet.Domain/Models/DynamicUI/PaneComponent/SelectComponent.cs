@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SelectComponent{TValue}.cs" company="Vuescape">
+// <copyright file="SelectComponent.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -12,14 +12,13 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a select component with an associated payload.
     /// </summary>
-    /// <typeparam name="TValue">The underlying value type of the select.</typeparam>
-    public partial class SelectComponent<TValue> : PaneComponentBase
+    public partial class SelectComponent : PaneComponentBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SelectComponent{TValue}"/> class.
+        /// Initializes a new instance of the <see cref="SelectComponent"/> class.
         /// </summary>
         /// <param name="payload">The payload containing details of the button component.</param>
-        public SelectComponent(SelectComponentPayload<TValue> payload)
+        public SelectComponent(SelectComponentPayload payload)
         {
             new { payload }.AsArg().Must().NotBeNull();
 
@@ -34,6 +33,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the payload containing details of the select component.
         /// </summary>
-        public SelectComponentPayload<TValue> Payload { get; private set; }
+        public SelectComponentPayload Payload { get; private set; }
     }
 }

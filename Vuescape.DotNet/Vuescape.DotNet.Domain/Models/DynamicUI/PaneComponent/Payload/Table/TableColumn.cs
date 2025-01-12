@@ -8,6 +8,8 @@
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using OBeautifulCode.CodeAnalysis.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
@@ -39,6 +41,8 @@ namespace Vuescape.DotNet.Domain
         /// <param name="isFrozen">Whether the column is fixed in horizontal scrolling.</param>
         /// <param name="alignFrozen">The position of the frozen column.</param>
         /// <param name="isHidden">Whether the column is rendered.</param>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "rowspan", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "colspan", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
         public TableColumn(
             string id,
             DataTypeKind? dataType = null,
@@ -184,12 +188,14 @@ namespace Vuescape.DotNet.Domain
         /// Gets the number of columns to span for grouping.
         /// Optional.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Colspan", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
         public int? Colspan { get; private set; }
 
         /// <summary>
         /// Gets the number of rows to span for grouping.
         /// Optional.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rowspan", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
         public int? Rowspan { get; private set; }
 
         /// <summary>

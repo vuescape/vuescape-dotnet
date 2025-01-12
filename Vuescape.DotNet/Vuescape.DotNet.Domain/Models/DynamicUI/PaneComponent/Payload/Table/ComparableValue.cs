@@ -8,6 +8,8 @@
 namespace Vuescape.DotNet.Domain
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
+    using OBeautifulCode.CodeAnalysis.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
@@ -23,6 +25,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="numericValue">OPTIONAL The numeric value to compare against.</param>
         /// <param name="dateValue">OPTIONAL The date value to compare against.</param>
         /// <param name="booleanValue">OPTIONAL The boolean value to compare against.</param>
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "string", Justification = ObcSuppressBecause.CA1720_IdentifiersShouldNotContainTypeNames_TypeNameAddsClarityToIdentifierAndAlternativesDegradeClarity)]
         public ComparableValue(
             string stringValue = null,
             decimal? numericValue = null,

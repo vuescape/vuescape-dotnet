@@ -9,13 +9,14 @@ namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.CodeAnalysis.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
     /// Represents a column in a table.
     /// </summary>
-    public partial class TableColumn : IModelViaCodeGen
+    public partial class TableColumn : IHaveId<string>, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TableColumn"/> class.
@@ -66,6 +67,12 @@ namespace Vuescape.DotNet.Domain
             string alignFrozen = null,
             bool? isHidden = null)
         {
+            new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
+            new { style }.AsArg().Must().NotContainAnyKeyValuePairsWithNullValueWhenNotNull();
+            new { headerStyle }.AsArg().Must().NotContainAnyKeyValuePairsWithNullValueWhenNotNull();
+            new { bodyStyle }.AsArg().Must().NotContainAnyKeyValuePairsWithNullValueWhenNotNull();
+            new { footerStyle }.AsArg().Must().NotContainAnyKeyValuePairsWithNullValueWhenNotNull();
+
             this.Id = id;
             this.DataType = dataType;
             this.IsSortable = isSortable;
@@ -74,13 +81,13 @@ namespace Vuescape.DotNet.Domain
             this.FilterMode = filterMode;
             this.HeaderText = headerText;
             this.FooterText = footerText;
-            this.Style = style ?? new Dictionary<string, string>();
+            this.Style = style;
             this.CssClass = cssClass;
-            this.HeaderStyle = headerStyle ?? new Dictionary<string, string>();
+            this.HeaderStyle = headerStyle;
             this.CssHeaderClass = cssHeaderClass;
-            this.BodyStyle = bodyStyle ?? new Dictionary<string, string>();
+            this.BodyStyle = bodyStyle;
             this.CssBodyClass = cssBodyClass;
-            this.FooterStyle = footerStyle ?? new Dictionary<string, string>();
+            this.FooterStyle = footerStyle;
             this.CssFooterClass = cssFooterClass;
             this.Colspan = colspan;
             this.Rowspan = rowspan;

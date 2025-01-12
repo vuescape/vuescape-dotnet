@@ -8,6 +8,7 @@
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
+    using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
@@ -18,23 +19,25 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="TableCell"/> class.
         /// </summary>
-        /// <param name="displayValue">The value to display in the cell if no component is provided.</param>
-        /// <param name="component">The component to use for rendering the cell.</param>
-        /// <param name="rawValue">The raw value of the cell.</param>
-        /// <param name="comparableValue">The value used for comparisons such as filtering or sorting.</param>
-        /// <param name="cssStyles">The inline styles of the cell.</param>
+        /// <param name="displayValue">OPTIONAL The value to display in the cell if no component is provided.</param>
+        /// <param name="component">OPTIONAL The component to use for rendering the cell.</param>
+        /// <param name="rawValue">OPTIONAL The raw value of the cell.</param>
+        /// <param name="comparableValue">OPTIONAL The value used for comparisons such as filtering or sorting as a string.</param>
+        /// <param name="cssStyles">OPTIONAL The inline styles of the cell.</param>
         public TableCell(
             string displayValue = null,
             PaneComponentBase component = null,
             UiObject rawValue = null,
-            object comparableValue = null,
-            Dictionary<string, string> cssStyles = null)
+            ComparableValue comparableValue = null,
+            IReadOnlyDictionary<string, string> cssStyles = null)
         {
+            new { cssStyles }.AsArg().Must().NotContainAnyKeyValuePairsWithNullValueWhenNotNull();
+
             this.DisplayValue = displayValue;
             this.Component = component;
             this.RawValue = rawValue;
             this.ComparableValue = comparableValue;
-            this.CssStyles = cssStyles ?? new Dictionary<string, string>();
+            this.CssStyles = cssStyles;
         }
 
         /// <summary>
@@ -57,11 +60,11 @@ namespace Vuescape.DotNet.Domain
         public UiObject RawValue { get; private set; }
 
         /// <summary>
-        /// Gets the value used for comparisons such as filtering or sorting.
+        /// Gets the value used for comparisons such as filtering or sorting as a string.
         /// If not provided, the <see cref="DisplayValue"/> will be used, followed by the <see cref="RawValue"/>.
         /// Optional.
         /// </summary>
-        public object ComparableValue { get; private set; }
+        public ComparableValue ComparableValue { get; private set; }
 
         /// <summary>
         /// Gets the inline styles of the cell.

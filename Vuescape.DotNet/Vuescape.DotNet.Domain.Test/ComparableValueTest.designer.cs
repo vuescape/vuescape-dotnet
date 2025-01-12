@@ -34,323 +34,239 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class TableCellTest
+    public static partial class ComparableValueTest
     {
-        private static readonly StringRepresentationTestScenarios<TableCell> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<TableCell>()
+        private static readonly StringRepresentationTestScenarios<ComparableValue> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<ComparableValue>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<TableCell>
+                new StringRepresentationTestScenario<ComparableValue>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TableCell>();
+                        var systemUnderTest = A.Dummy<ComparableValue>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<TableCell>
+                        var result = new SystemUnderTestExpectedStringRepresentation<ComparableValue>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TableCell: DisplayValue = {systemUnderTest.DisplayValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Component = {systemUnderTest.Component?.ToString() ?? "<null>"}, RawValue = {systemUnderTest.RawValue?.ToString() ?? "<null>"}, ComparableValue = {systemUnderTest.ComparableValue?.ToString() ?? "<null>"}, CssStyles = {systemUnderTest.CssStyles?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ComparableValue: StringValue = {systemUnderTest.StringValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, NumericValue = {systemUnderTest.NumericValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DateValue = {systemUnderTest.DateValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BooleanValue = {systemUnderTest.BooleanValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<TableCell> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<TableCell>()
+        private static readonly ConstructorArgumentValidationTestScenarios<ComparableValue> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<ComparableValue>();
+
+        private static readonly ConstructorPropertyAssignmentTestScenarios<ComparableValue> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ComparableValue>()
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TableCell>
+                new ConstructorPropertyAssignmentTestScenario<ComparableValue>
                 {
-                    Name = "constructor should throw ArgumentException when parameter 'cssStyles' contains a key-value pair with a null value scenario",
-                    ConstructionFunc = () =>
+                    Name = "StringValue should return same 'stringValue' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TableCell>();
+                        var referenceObject = A.Dummy<ComparableValue>();
 
-                        var dictionaryWithNullValue = referenceObject.CssStyles.ToDictionary(_ => _.Key, _ => _.Value);
-
-                        var randomKey = dictionaryWithNullValue.Keys.ElementAt(ThreadSafeRandom.Next(0, dictionaryWithNullValue.Count));
-
-                        dictionaryWithNullValue[randomKey] = null;
-
-                        var result = new TableCell(
-                                             referenceObject.DisplayValue,
-                                             referenceObject.Component,
-                                             referenceObject.RawValue,
-                                             referenceObject.ComparableValue,
-                                             dictionaryWithNullValue);
+                        var result = new SystemUnderTestExpectedPropertyValue<ComparableValue>
+                        {
+                            SystemUnderTest = new ComparableValue(
+                                                      referenceObject.StringValue,
+                                                      referenceObject.NumericValue,
+                                                      referenceObject.DateValue,
+                                                      referenceObject.BooleanValue),
+                            ExpectedPropertyValue = referenceObject.StringValue,
+                        };
 
                         return result;
                     },
-                    ExpectedExceptionType = typeof(ArgumentException),
-                    ExpectedExceptionMessageContains = new[] { "cssStyles", "contains at least one key-value pair with a null value", },
+                    PropertyName = "StringValue",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ComparableValue>
+                {
+                    Name = "NumericValue should return same 'numericValue' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ComparableValue>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ComparableValue>
+                        {
+                            SystemUnderTest = new ComparableValue(
+                                                      referenceObject.StringValue,
+                                                      referenceObject.NumericValue,
+                                                      referenceObject.DateValue,
+                                                      referenceObject.BooleanValue),
+                            ExpectedPropertyValue = referenceObject.NumericValue,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "NumericValue",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ComparableValue>
+                {
+                    Name = "DateValue should return same 'dateValue' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ComparableValue>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ComparableValue>
+                        {
+                            SystemUnderTest = new ComparableValue(
+                                                      referenceObject.StringValue,
+                                                      referenceObject.NumericValue,
+                                                      referenceObject.DateValue,
+                                                      referenceObject.BooleanValue),
+                            ExpectedPropertyValue = referenceObject.DateValue,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "DateValue",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ComparableValue>
+                {
+                    Name = "BooleanValue should return same 'booleanValue' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ComparableValue>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ComparableValue>
+                        {
+                            SystemUnderTest = new ComparableValue(
+                                                      referenceObject.StringValue,
+                                                      referenceObject.NumericValue,
+                                                      referenceObject.DateValue,
+                                                      referenceObject.BooleanValue),
+                            ExpectedPropertyValue = referenceObject.BooleanValue,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "BooleanValue",
                 });
 
-        private static readonly ConstructorPropertyAssignmentTestScenarios<TableCell> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TableCell>()
+        private static readonly DeepCloneWithTestScenarios<ComparableValue> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ComparableValue>()
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TableCell>
+                new DeepCloneWithTestScenario<ComparableValue>
                 {
-                    Name = "DisplayValue should return same 'displayValue' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TableCell>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<TableCell>
-                        {
-                            SystemUnderTest = new TableCell(
-                                                      referenceObject.DisplayValue,
-                                                      referenceObject.Component,
-                                                      referenceObject.RawValue,
-                                                      referenceObject.ComparableValue,
-                                                      referenceObject.CssStyles),
-                            ExpectedPropertyValue = referenceObject.DisplayValue,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "DisplayValue",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TableCell>
-                {
-                    Name = "Component should return same 'component' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TableCell>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<TableCell>
-                        {
-                            SystemUnderTest = new TableCell(
-                                                      referenceObject.DisplayValue,
-                                                      referenceObject.Component,
-                                                      referenceObject.RawValue,
-                                                      referenceObject.ComparableValue,
-                                                      referenceObject.CssStyles),
-                            ExpectedPropertyValue = referenceObject.Component,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "Component",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TableCell>
-                {
-                    Name = "RawValue should return same 'rawValue' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TableCell>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<TableCell>
-                        {
-                            SystemUnderTest = new TableCell(
-                                                      referenceObject.DisplayValue,
-                                                      referenceObject.Component,
-                                                      referenceObject.RawValue,
-                                                      referenceObject.ComparableValue,
-                                                      referenceObject.CssStyles),
-                            ExpectedPropertyValue = referenceObject.RawValue,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "RawValue",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TableCell>
-                {
-                    Name = "ComparableValue should return same 'comparableValue' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TableCell>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<TableCell>
-                        {
-                            SystemUnderTest = new TableCell(
-                                                      referenceObject.DisplayValue,
-                                                      referenceObject.Component,
-                                                      referenceObject.RawValue,
-                                                      referenceObject.ComparableValue,
-                                                      referenceObject.CssStyles),
-                            ExpectedPropertyValue = referenceObject.ComparableValue,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "ComparableValue",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TableCell>
-                {
-                    Name = "CssStyles should return same 'cssStyles' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<TableCell>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<TableCell>
-                        {
-                            SystemUnderTest = new TableCell(
-                                                      referenceObject.DisplayValue,
-                                                      referenceObject.Component,
-                                                      referenceObject.RawValue,
-                                                      referenceObject.ComparableValue,
-                                                      referenceObject.CssStyles),
-                            ExpectedPropertyValue = referenceObject.CssStyles,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "CssStyles",
-                });
-
-        private static readonly DeepCloneWithTestScenarios<TableCell> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TableCell>()
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<TableCell>
-                {
-                    Name = "DeepCloneWithDisplayValue should deep clone object and replace DisplayValue with the provided displayValue",
-                    WithPropertyName = "DisplayValue",
+                    Name = "DeepCloneWithStringValue should deep clone object and replace StringValue with the provided stringValue",
+                    WithPropertyName = "StringValue",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TableCell>();
+                        var systemUnderTest = A.Dummy<ComparableValue>();
 
-                        var referenceObject = A.Dummy<TableCell>().ThatIs(_ => !systemUnderTest.DisplayValue.IsEqualTo(_.DisplayValue));
+                        var referenceObject = A.Dummy<ComparableValue>().ThatIs(_ => !systemUnderTest.StringValue.IsEqualTo(_.StringValue));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<TableCell>
+                        var result = new SystemUnderTestDeepCloneWithValue<ComparableValue>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.DisplayValue,
+                            DeepCloneWithValue = referenceObject.StringValue,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<TableCell>
+                new DeepCloneWithTestScenario<ComparableValue>
                 {
-                    Name = "DeepCloneWithComponent should deep clone object and replace Component with the provided component",
-                    WithPropertyName = "Component",
+                    Name = "DeepCloneWithNumericValue should deep clone object and replace NumericValue with the provided numericValue",
+                    WithPropertyName = "NumericValue",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TableCell>();
+                        var systemUnderTest = A.Dummy<ComparableValue>();
 
-                        var referenceObject = A.Dummy<TableCell>().ThatIs(_ => !systemUnderTest.Component.IsEqualTo(_.Component));
+                        var referenceObject = A.Dummy<ComparableValue>().ThatIs(_ => !systemUnderTest.NumericValue.IsEqualTo(_.NumericValue));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<TableCell>
+                        var result = new SystemUnderTestDeepCloneWithValue<ComparableValue>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Component,
+                            DeepCloneWithValue = referenceObject.NumericValue,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<TableCell>
+                new DeepCloneWithTestScenario<ComparableValue>
                 {
-                    Name = "DeepCloneWithRawValue should deep clone object and replace RawValue with the provided rawValue",
-                    WithPropertyName = "RawValue",
+                    Name = "DeepCloneWithDateValue should deep clone object and replace DateValue with the provided dateValue",
+                    WithPropertyName = "DateValue",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TableCell>();
+                        var systemUnderTest = A.Dummy<ComparableValue>();
 
-                        var referenceObject = A.Dummy<TableCell>().ThatIs(_ => !systemUnderTest.RawValue.IsEqualTo(_.RawValue));
+                        var referenceObject = A.Dummy<ComparableValue>().ThatIs(_ => !systemUnderTest.DateValue.IsEqualTo(_.DateValue));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<TableCell>
+                        var result = new SystemUnderTestDeepCloneWithValue<ComparableValue>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.RawValue,
+                            DeepCloneWithValue = referenceObject.DateValue,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<TableCell>
+                new DeepCloneWithTestScenario<ComparableValue>
                 {
-                    Name = "DeepCloneWithComparableValue should deep clone object and replace ComparableValue with the provided comparableValue",
-                    WithPropertyName = "ComparableValue",
+                    Name = "DeepCloneWithBooleanValue should deep clone object and replace BooleanValue with the provided booleanValue",
+                    WithPropertyName = "BooleanValue",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TableCell>();
+                        var systemUnderTest = A.Dummy<ComparableValue>();
 
-                        var referenceObject = A.Dummy<TableCell>().ThatIs(_ => !systemUnderTest.ComparableValue.IsEqualTo(_.ComparableValue));
+                        var referenceObject = A.Dummy<ComparableValue>().ThatIs(_ => !systemUnderTest.BooleanValue.IsEqualTo(_.BooleanValue));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<TableCell>
+                        var result = new SystemUnderTestDeepCloneWithValue<ComparableValue>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.ComparableValue,
-                        };
-
-                        return result;
-                    },
-                })
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<TableCell>
-                {
-                    Name = "DeepCloneWithCssStyles should deep clone object and replace CssStyles with the provided cssStyles",
-                    WithPropertyName = "CssStyles",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<TableCell>();
-
-                        var referenceObject = A.Dummy<TableCell>().ThatIs(_ => !systemUnderTest.CssStyles.IsEqualTo(_.CssStyles));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<TableCell>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.CssStyles,
+                            DeepCloneWithValue = referenceObject.BooleanValue,
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly TableCell ReferenceObjectForEquatableTestScenarios = A.Dummy<TableCell>();
+        private static readonly ComparableValue ReferenceObjectForEquatableTestScenarios = A.Dummy<ComparableValue>();
 
-        private static readonly EquatableTestScenarios<TableCell> EquatableTestScenarios = new EquatableTestScenarios<TableCell>()
+        private static readonly EquatableTestScenarios<ComparableValue> EquatableTestScenarios = new EquatableTestScenarios<ComparableValue>()
             .AddScenario(() =>
-                new EquatableTestScenario<TableCell>
+                new EquatableTestScenario<ComparableValue>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new TableCell[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new ComparableValue[]
                     {
-                        new TableCell(
-                                ReferenceObjectForEquatableTestScenarios.DisplayValue,
-                                ReferenceObjectForEquatableTestScenarios.Component,
-                                ReferenceObjectForEquatableTestScenarios.RawValue,
-                                ReferenceObjectForEquatableTestScenarios.ComparableValue,
-                                ReferenceObjectForEquatableTestScenarios.CssStyles),
+                        new ComparableValue(
+                                ReferenceObjectForEquatableTestScenarios.StringValue,
+                                ReferenceObjectForEquatableTestScenarios.NumericValue,
+                                ReferenceObjectForEquatableTestScenarios.DateValue,
+                                ReferenceObjectForEquatableTestScenarios.BooleanValue),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new TableCell[]
+                    ObjectsThatAreNotEqualToReferenceObject = new ComparableValue[]
                     {
-                        new TableCell(
-                                A.Dummy<TableCell>().Whose(_ => !_.DisplayValue.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DisplayValue)).DisplayValue,
-                                ReferenceObjectForEquatableTestScenarios.Component,
-                                ReferenceObjectForEquatableTestScenarios.RawValue,
-                                ReferenceObjectForEquatableTestScenarios.ComparableValue,
-                                ReferenceObjectForEquatableTestScenarios.CssStyles),
-                        new TableCell(
-                                ReferenceObjectForEquatableTestScenarios.DisplayValue,
-                                A.Dummy<TableCell>().Whose(_ => !_.Component.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Component)).Component,
-                                ReferenceObjectForEquatableTestScenarios.RawValue,
-                                ReferenceObjectForEquatableTestScenarios.ComparableValue,
-                                ReferenceObjectForEquatableTestScenarios.CssStyles),
-                        new TableCell(
-                                ReferenceObjectForEquatableTestScenarios.DisplayValue,
-                                ReferenceObjectForEquatableTestScenarios.Component,
-                                A.Dummy<TableCell>().Whose(_ => !_.RawValue.IsEqualTo(ReferenceObjectForEquatableTestScenarios.RawValue)).RawValue,
-                                ReferenceObjectForEquatableTestScenarios.ComparableValue,
-                                ReferenceObjectForEquatableTestScenarios.CssStyles),
-                        new TableCell(
-                                ReferenceObjectForEquatableTestScenarios.DisplayValue,
-                                ReferenceObjectForEquatableTestScenarios.Component,
-                                ReferenceObjectForEquatableTestScenarios.RawValue,
-                                A.Dummy<TableCell>().Whose(_ => !_.ComparableValue.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ComparableValue)).ComparableValue,
-                                ReferenceObjectForEquatableTestScenarios.CssStyles),
-                        new TableCell(
-                                ReferenceObjectForEquatableTestScenarios.DisplayValue,
-                                ReferenceObjectForEquatableTestScenarios.Component,
-                                ReferenceObjectForEquatableTestScenarios.RawValue,
-                                ReferenceObjectForEquatableTestScenarios.ComparableValue,
-                                A.Dummy<TableCell>().Whose(_ => !_.CssStyles.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyles)).CssStyles),
+                        new ComparableValue(
+                                A.Dummy<ComparableValue>().Whose(_ => !_.StringValue.IsEqualTo(ReferenceObjectForEquatableTestScenarios.StringValue)).StringValue,
+                                ReferenceObjectForEquatableTestScenarios.NumericValue,
+                                ReferenceObjectForEquatableTestScenarios.DateValue,
+                                ReferenceObjectForEquatableTestScenarios.BooleanValue),
+                        new ComparableValue(
+                                ReferenceObjectForEquatableTestScenarios.StringValue,
+                                A.Dummy<ComparableValue>().Whose(_ => !_.NumericValue.IsEqualTo(ReferenceObjectForEquatableTestScenarios.NumericValue)).NumericValue,
+                                ReferenceObjectForEquatableTestScenarios.DateValue,
+                                ReferenceObjectForEquatableTestScenarios.BooleanValue),
+                        new ComparableValue(
+                                ReferenceObjectForEquatableTestScenarios.StringValue,
+                                ReferenceObjectForEquatableTestScenarios.NumericValue,
+                                A.Dummy<ComparableValue>().Whose(_ => !_.DateValue.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DateValue)).DateValue,
+                                ReferenceObjectForEquatableTestScenarios.BooleanValue),
+                        new ComparableValue(
+                                ReferenceObjectForEquatableTestScenarios.StringValue,
+                                ReferenceObjectForEquatableTestScenarios.NumericValue,
+                                ReferenceObjectForEquatableTestScenarios.DateValue,
+                                A.Dummy<ComparableValue>().Whose(_ => !_.BooleanValue.IsEqualTo(ReferenceObjectForEquatableTestScenarios.BooleanValue)).BooleanValue),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -380,12 +296,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void TableCell___Should_implement_IModel_of_TableCell___When_reflecting()
+            public static void ComparableValue___Should_implement_IModel_of_ComparableValue___When_reflecting()
             {
                 // Arrange
-                var type = typeof(TableCell);
+                var type = typeof(ComparableValue);
 
-                var expectedModelMethods = typeof(IModel<TableCell>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<ComparableValue>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -395,7 +311,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<TableCell>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<ComparableValue>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -413,10 +329,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void TableCell___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void ComparableValue___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(TableCell);
+                var type = typeof(ComparableValue);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -596,10 +512,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<TableCell>();
+                var systemUnderTest = A.Dummy<ComparableValue>();
 
                 // Act
-                var actual = (TableCell)systemUnderTest.Clone();
+                var actual = (ComparableValue)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -623,7 +539,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<TableCell>();
+                var systemUnderTest = A.Dummy<ComparableValue>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -631,54 +547,6 @@ namespace Vuescape.DotNet.Domain.Test
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
-
-                if (systemUnderTest.Component == null)
-                {
-                    actual.Component.AsTest().Must().BeNull();
-                }
-                else if (!actual.Component.GetType().IsValueType)
-                {
-                    // When the declared type is a reference type, we still have to check the runtime type.
-                    // The object could be a boxed value type, which will fail this asseration because
-                    // a deep clone of a value type object is the same object.
-                    actual.Component.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Component);
-                }
-
-                if (systemUnderTest.RawValue == null)
-                {
-                    actual.RawValue.AsTest().Must().BeNull();
-                }
-                else if (!actual.RawValue.GetType().IsValueType)
-                {
-                    // When the declared type is a reference type, we still have to check the runtime type.
-                    // The object could be a boxed value type, which will fail this asseration because
-                    // a deep clone of a value type object is the same object.
-                    actual.RawValue.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.RawValue);
-                }
-
-                if (systemUnderTest.ComparableValue == null)
-                {
-                    actual.ComparableValue.AsTest().Must().BeNull();
-                }
-                else if (!actual.ComparableValue.GetType().IsValueType)
-                {
-                    // When the declared type is a reference type, we still have to check the runtime type.
-                    // The object could be a boxed value type, which will fail this asseration because
-                    // a deep clone of a value type object is the same object.
-                    actual.ComparableValue.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.ComparableValue);
-                }
-
-                if (systemUnderTest.CssStyles == null)
-                {
-                    actual.CssStyles.AsTest().Must().BeNull();
-                }
-                else if (!actual.CssStyles.GetType().IsValueType)
-                {
-                    // When the declared type is a reference type, we still have to check the runtime type.
-                    // The object could be a boxed value type, which will fail this asseration because
-                    // a deep clone of a value type object is the same object.
-                    actual.CssStyles.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.CssStyles);
-                }
             }
 
             [Fact]
@@ -697,7 +565,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "DisplayValue", "Component", "RawValue", "ComparableValue", "CssStyles" };
+                var propertyNames = new string[] { "StringValue", "NumericValue", "DateValue", "BooleanValue" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 
@@ -710,12 +578,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (TableCell)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (ComparableValue)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(TableCell).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(ComparableValue).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var actualPropertyValue = propertyInfo.GetValue(actual);
 
@@ -777,7 +645,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TableCell>();
+                var expected = A.Dummy<ComparableValue>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -806,7 +674,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TableCell>();
+                var expected = A.Dummy<ComparableValue>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -835,7 +703,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TableCell>();
+                var expected = A.Dummy<ComparableValue>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -864,7 +732,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TableCell>();
+                var expected = A.Dummy<ComparableValue>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -898,8 +766,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                TableCell systemUnderTest1 = null;
-                TableCell systemUnderTest2 = null;
+                ComparableValue systemUnderTest1 = null;
+                ComparableValue systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -929,7 +797,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TableCell systemUnderTest = null;
+                    ComparableValue systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -1078,8 +946,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                TableCell systemUnderTest1 = null;
-                TableCell systemUnderTest2 = null;
+                ComparableValue systemUnderTest1 = null;
+                ComparableValue systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -1109,7 +977,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TableCell systemUnderTest = null;
+                    ComparableValue systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -1255,14 +1123,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TableCell___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_ComparableValue___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TableCell systemUnderTest = null;
+                    ComparableValue systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1286,7 +1154,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TableCell___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_ComparableValue___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1314,7 +1182,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TableCell___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_ComparableValue___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1342,7 +1210,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TableCell___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_ComparableValue___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1370,7 +1238,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TableCell___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_ComparableValue___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 

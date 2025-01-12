@@ -23,15 +23,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class TableCell : IModel<TableCell>
+    public partial class ComparableValue : IModel<ComparableValue>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="TableCell"/> are equal.
+        /// Determines whether two objects of type <see cref="ComparableValue"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(TableCell left, TableCell right)
+        public static bool operator ==(ComparableValue left, ComparableValue right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -49,15 +49,15 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="TableCell"/> are not equal.
+        /// Determines whether two objects of type <see cref="ComparableValue"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(TableCell left, TableCell right) => !(left == right);
+        public static bool operator !=(ComparableValue left, ComparableValue right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(TableCell other)
+        public bool Equals(ComparableValue other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -69,48 +69,45 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = this.DisplayValue.IsEqualTo(other.DisplayValue, StringComparer.Ordinal)
-                      && this.Component.IsEqualTo(other.Component)
-                      && this.RawValue.IsEqualTo(other.RawValue)
-                      && this.ComparableValue.IsEqualTo(other.ComparableValue)
-                      && this.CssStyles.IsEqualTo(other.CssStyles);
+            var result = this.StringValue.IsEqualTo(other.StringValue, StringComparer.Ordinal)
+                      && this.NumericValue.IsEqualTo(other.NumericValue)
+                      && this.DateValue.IsEqualTo(other.DateValue)
+                      && this.BooleanValue.IsEqualTo(other.BooleanValue);
 
             return result;
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as TableCell);
+        public override bool Equals(object obj) => this == (obj as ComparableValue);
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
-            .Hash(this.DisplayValue)
-            .Hash(this.Component)
-            .Hash(this.RawValue)
-            .Hash(this.ComparableValue)
-            .Hash(this.CssStyles)
+            .Hash(this.StringValue)
+            .Hash(this.NumericValue)
+            .Hash(this.DateValue)
+            .Hash(this.BooleanValue)
             .Value;
 
         /// <inheritdoc />
         public object Clone() => this.DeepClone();
 
         /// <inheritdoc />
-        public TableCell DeepClone()
+        public ComparableValue DeepClone()
         {
-            var result = new TableCell(
-                                 this.DisplayValue?.DeepClone(),
-                                 this.Component?.DeepClone(),
-                                 this.RawValue?.DeepClone(),
-                                 this.ComparableValue?.DeepClone(),
-                                 this.CssStyles?.DeepClone());
+            var result = new ComparableValue(
+                                 this.StringValue?.DeepClone(),
+                                 this.NumericValue?.DeepClone(),
+                                 this.DateValue?.DeepClone(),
+                                 this.BooleanValue?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="DisplayValue" />.
+        /// Deep clones this object with a new <see cref="StringValue" />.
         /// </summary>
-        /// <param name="displayValue">The new <see cref="DisplayValue" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TableCell" /> using the specified <paramref name="displayValue" /> for <see cref="DisplayValue" /> and a deep clone of every other property.</returns>
+        /// <param name="stringValue">The new <see cref="StringValue" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ComparableValue" /> using the specified <paramref name="stringValue" /> for <see cref="StringValue" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -128,23 +125,22 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TableCell DeepCloneWithDisplayValue(string displayValue)
+        public ComparableValue DeepCloneWithStringValue(string stringValue)
         {
-            var result = new TableCell(
-                                 displayValue,
-                                 this.Component?.DeepClone(),
-                                 this.RawValue?.DeepClone(),
-                                 this.ComparableValue?.DeepClone(),
-                                 this.CssStyles?.DeepClone());
+            var result = new ComparableValue(
+                                 stringValue,
+                                 this.NumericValue?.DeepClone(),
+                                 this.DateValue?.DeepClone(),
+                                 this.BooleanValue?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="Component" />.
+        /// Deep clones this object with a new <see cref="NumericValue" />.
         /// </summary>
-        /// <param name="component">The new <see cref="Component" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TableCell" /> using the specified <paramref name="component" /> for <see cref="Component" /> and a deep clone of every other property.</returns>
+        /// <param name="numericValue">The new <see cref="NumericValue" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ComparableValue" /> using the specified <paramref name="numericValue" /> for <see cref="NumericValue" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -162,23 +158,22 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TableCell DeepCloneWithComponent(PaneComponentBase component)
+        public ComparableValue DeepCloneWithNumericValue(decimal? numericValue)
         {
-            var result = new TableCell(
-                                 this.DisplayValue?.DeepClone(),
-                                 component,
-                                 this.RawValue?.DeepClone(),
-                                 this.ComparableValue?.DeepClone(),
-                                 this.CssStyles?.DeepClone());
+            var result = new ComparableValue(
+                                 this.StringValue?.DeepClone(),
+                                 numericValue,
+                                 this.DateValue?.DeepClone(),
+                                 this.BooleanValue?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="RawValue" />.
+        /// Deep clones this object with a new <see cref="DateValue" />.
         /// </summary>
-        /// <param name="rawValue">The new <see cref="RawValue" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TableCell" /> using the specified <paramref name="rawValue" /> for <see cref="RawValue" /> and a deep clone of every other property.</returns>
+        /// <param name="dateValue">The new <see cref="DateValue" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ComparableValue" /> using the specified <paramref name="dateValue" /> for <see cref="DateValue" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -196,23 +191,22 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TableCell DeepCloneWithRawValue(UiObject rawValue)
+        public ComparableValue DeepCloneWithDateValue(DateTime? dateValue)
         {
-            var result = new TableCell(
-                                 this.DisplayValue?.DeepClone(),
-                                 this.Component?.DeepClone(),
-                                 rawValue,
-                                 this.ComparableValue?.DeepClone(),
-                                 this.CssStyles?.DeepClone());
+            var result = new ComparableValue(
+                                 this.StringValue?.DeepClone(),
+                                 this.NumericValue?.DeepClone(),
+                                 dateValue,
+                                 this.BooleanValue?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="ComparableValue" />.
+        /// Deep clones this object with a new <see cref="BooleanValue" />.
         /// </summary>
-        /// <param name="comparableValue">The new <see cref="ComparableValue" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TableCell" /> using the specified <paramref name="comparableValue" /> for <see cref="ComparableValue" /> and a deep clone of every other property.</returns>
+        /// <param name="booleanValue">The new <see cref="BooleanValue" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ComparableValue" /> using the specified <paramref name="booleanValue" /> for <see cref="BooleanValue" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -230,48 +224,13 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TableCell DeepCloneWithComparableValue(ComparableValue comparableValue)
+        public ComparableValue DeepCloneWithBooleanValue(bool? booleanValue)
         {
-            var result = new TableCell(
-                                 this.DisplayValue?.DeepClone(),
-                                 this.Component?.DeepClone(),
-                                 this.RawValue?.DeepClone(),
-                                 comparableValue,
-                                 this.CssStyles?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="CssStyles" />.
-        /// </summary>
-        /// <param name="cssStyles">The new <see cref="CssStyles" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TableCell" /> using the specified <paramref name="cssStyles" /> for <see cref="CssStyles" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TableCell DeepCloneWithCssStyles(IReadOnlyDictionary<string, string> cssStyles)
-        {
-            var result = new TableCell(
-                                 this.DisplayValue?.DeepClone(),
-                                 this.Component?.DeepClone(),
-                                 this.RawValue?.DeepClone(),
-                                 this.ComparableValue?.DeepClone(),
-                                 cssStyles);
+            var result = new ComparableValue(
+                                 this.StringValue?.DeepClone(),
+                                 this.NumericValue?.DeepClone(),
+                                 this.DateValue?.DeepClone(),
+                                 booleanValue);
 
             return result;
         }
@@ -280,7 +239,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TableCell: DisplayValue = {this.DisplayValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Component = {this.Component?.ToString() ?? "<null>"}, RawValue = {this.RawValue?.ToString() ?? "<null>"}, ComparableValue = {this.ComparableValue?.ToString() ?? "<null>"}, CssStyles = {this.CssStyles?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ComparableValue: StringValue = {this.StringValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, NumericValue = {this.NumericValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DateValue = {this.DateValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BooleanValue = {this.BooleanValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

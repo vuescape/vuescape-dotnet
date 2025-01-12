@@ -32,6 +32,17 @@ namespace Vuescape.DotNet.Domain.Test
 #endif
     class DotNetDummyFactory : DefaultDotNetDummyFactory
     {
+        private static PaneComponentBase GetPaneComponentBaseByType(params Type[] availableTypes)
+        {
+            var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
+
+            var randomType = availableTypes[randomIndex];
+
+            var result = (PaneComponentBase)AD.ummy(randomType);
+
+            return result;
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "Not Hungarian notation.")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Methods with simple switch statements can be excluded.")]
         private static object GetObjectByUiObjectType(
@@ -70,6 +81,43 @@ namespace Vuescape.DotNet.Domain.Test
         [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "Not Hungarian notation.")]
         public DotNetDummyFactory()
         {
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var availableTypes = new[]
+                    {
+                        typeof(ButtonComponent),
+                        typeof(ChicletGridComponent),
+                        typeof(SelectComponent),
+                        typeof(TitleComponent)
+                    };
+
+                    var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
+
+                    var randomType = availableTypes[randomIndex];
+
+                    var result = (PaneComponentBase)AD.ummy(randomType);
+
+                    return result;
+                });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var displayValue = A.Dummy<string>();
+                    var rawValue = A.Dummy<UiObject>();
+                    var cssStyles = A.Dummy<IReadOnlyDictionary<string, string>>();
+                    var component = GetPaneComponentBaseByType(
+                        typeof(ButtonComponent),
+                        typeof(ChicletGridComponent),
+                        typeof(SelectComponent),
+                        typeof(TitleComponent)
+                    );
+
+                    var comparableValue = A.Dummy<ComparableValue>();
+                    return new TableCell(displayValue, component, rawValue, comparableValue, cssStyles);
+                });
+
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
                 {
@@ -207,20 +255,20 @@ namespace Vuescape.DotNet.Domain.Test
                     var expandedSummaryRows = new List<TreeTableRow>();
                     for (int x = 0; x < numberOfExpandedSummaryRows; x++)
                     {
-                            expandedSummaryRows.Add(new TreeTableRow(
-                                A.Dummy<string>(),
-                                A.Dummy<IReadOnlyList<TreeTableCell>>(),
-                                A.Dummy<int>(),
-                                A.Dummy<string>(),
-                                A.Dummy<IReadOnlyDictionary<string, string>>(),
-                                A.Dummy<string>(),
-                                A.Dummy<bool>(),
-                                A.Dummy<bool>(),
-                                A.Dummy<bool>(),
-                                A.Dummy<bool>(),
-                                A.Dummy<bool?>(),
-                                A.Dummy<IReadOnlyDictionary<string, Link>>(),
-                                null));
+                        expandedSummaryRows.Add(new TreeTableRow(
+                            A.Dummy<string>(),
+                            A.Dummy<IReadOnlyList<TreeTableCell>>(),
+                            A.Dummy<int>(),
+                            A.Dummy<string>(),
+                            A.Dummy<IReadOnlyDictionary<string, string>>(),
+                            A.Dummy<string>(),
+                            A.Dummy<bool>(),
+                            A.Dummy<bool>(),
+                            A.Dummy<bool>(),
+                            A.Dummy<bool>(),
+                            A.Dummy<bool?>(),
+                            A.Dummy<IReadOnlyDictionary<string, Link>>(),
+                            null));
                     }
 
                     var numberOfCollapsedSummaryRows = ThreadSafeRandom.Next(0, 4);

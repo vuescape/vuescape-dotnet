@@ -28,8 +28,8 @@ namespace Vuescape.DotNet.Domain
             IReadOnlyList<TableRow> rows)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { columns }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
-            new { rows }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
+            new { columns }.AsArg().Must().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
+            new { rows }.AsArg().Must().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
 
             this.Id = id;
             this.Columns = columns;

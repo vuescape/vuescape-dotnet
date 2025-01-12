@@ -8,12 +8,13 @@
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
+    using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
     /// Represents a row in a table.
     /// </summary>
-    public partial class TableRow : IModelViaCodeGen
+    public partial class TableRow : IHaveId<string>, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TableRow"/> class.
@@ -24,6 +25,9 @@ namespace Vuescape.DotNet.Domain
             string id,
             IReadOnlyDictionary<string, TableCell> cells)
         {
+            new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
+            new { cells }.AsArg().Must().NotBeNullNorEmptyDictionaryNorContainAnyNullValues();
+
             this.Id = id;
             this.Cells = cells;
         }

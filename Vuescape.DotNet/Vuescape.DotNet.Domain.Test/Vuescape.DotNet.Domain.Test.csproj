@@ -295,6 +295,10 @@
     <Compile Include="ColumnDefinitionTest.designer.cs">
       <DependentUpon>ColumnDefinitionTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComparableValueTest.cs" />
+    <Compile Include="ComparableValueTest.designer.cs">
+      <DependentUpon>ComparableValueTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContentTest.cs" />
     <Compile Include="ContentTest.designer.cs">
       <DependentUpon>ContentTest.cs</DependentUpon>

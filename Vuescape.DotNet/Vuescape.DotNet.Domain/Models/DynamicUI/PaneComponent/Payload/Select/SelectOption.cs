@@ -7,6 +7,7 @@
 // ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
+    using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
@@ -21,6 +22,9 @@ namespace Vuescape.DotNet.Domain
         /// <param name="displayName">The label for the UI.</param>
         public SelectOption(string id, string displayName)
         {
+            new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
+            new { displayName }.AsArg().Must().NotBeNullNorWhiteSpace();
+
             this.Id = id;
             this.DisplayName = displayName;
         }

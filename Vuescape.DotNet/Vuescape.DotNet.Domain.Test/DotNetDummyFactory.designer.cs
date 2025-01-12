@@ -133,6 +133,13 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<SortComparisonStrategy>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new ComparableValue(
+                                 A.Dummy<string>(),
+                                 A.Dummy<decimal?>(),
+                                 A.Dummy<DateTime?>(),
+                                 A.Dummy<bool?>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ConstrainTreeTableHeightClientBehavior
                              {
                                  Name = A.Dummy<string>(),
@@ -389,8 +396,8 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<PaneComponentBase>(),
                                  A.Dummy<UiObject>(),
-                                 A.Dummy<object>(),
-                                 A.Dummy<Dictionary<string, string>>()));
+                                 A.Dummy<ComparableValue>(),
+                                 A.Dummy<IReadOnlyDictionary<string, string>>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TableColumn(

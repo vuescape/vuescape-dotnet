@@ -193,6 +193,9 @@
       <DependentUpon>TableTabsComponentPayload.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\AlignFrozenKind.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\ComparableValue.designer.cs">
+      <DependentUpon>ComparableValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\FilterModeKind.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\SortModeKind.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\DataTypeKind.cs" />
@@ -203,6 +206,7 @@
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableColumn.designer.cs">
       <DependentUpon>TableColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\ComparableValue.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableRow.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableColumn.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableTabsComponentPayload.cs" />

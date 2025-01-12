@@ -27,10 +27,12 @@ namespace Vuescape.DotNet.Domain
             IReadOnlyList<TableTab> tabs,
             SelectComponent selectComponent = null)
         {
+            new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
+            new { tabs }.AsArg().Must().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
+
             this.Id = id;
             this.Tabs = tabs;
             this.SelectComponent = selectComponent;
-            new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
         }
 
         /// <summary>

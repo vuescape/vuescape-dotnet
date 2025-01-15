@@ -19,12 +19,14 @@ namespace Vuescape.DotNet.Domain.Test
     using static System.FormattableString;
 
     [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = ObcSuppressBecause.CA1505_AvoidUnmaintainableCode_DisagreeWithAssessment)]
-    public static partial class PaneComponentTest
+    public static partial class PaneComponentTPayloadTest
     {
         [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = ObcSuppressBecause.CA1505_AvoidUnmaintainableCode_DisagreeWithAssessment)]
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
-        static PaneComponentTest()
+        static PaneComponentTPayloadTest()
         {
+            // TODO: Need to exclude all tests from running since there are no derived generic types to test.
+            // Right now just mark designer file as content.
         }
     }
 }

@@ -34,103 +34,321 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class SelectComponentTest
+    public static partial class TextLinkPayloadTest
     {
-        private static readonly StringRepresentationTestScenarios<SelectComponent> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<SelectComponent>()
+        private static readonly StringRepresentationTestScenarios<TextLinkPayload> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<TextLinkPayload>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<SelectComponent>
+                new StringRepresentationTestScenario<TextLinkPayload>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<SelectComponent>();
+                        var systemUnderTest = A.Dummy<TextLinkPayload>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<SelectComponent>
+                        var result = new SystemUnderTestExpectedStringRepresentation<TextLinkPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.SelectComponent: Payload = {systemUnderTest.Payload?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TextLinkPayload: NavigationAction = {systemUnderTest.NavigationAction?.ToString() ?? "<null>"}, Text = {systemUnderTest.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyles = {systemUnderTest.CssStyles?.ToString() ?? "<null>"}, CssClass = {systemUnderTest.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<SelectComponent> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<SelectComponent>()
+        private static readonly ConstructorArgumentValidationTestScenarios<TextLinkPayload> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<TextLinkPayload>()
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<SelectComponent>
+                new ConstructorArgumentValidationTestScenario<TextLinkPayload>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'payload' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'text' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var result = new SelectComponent(
-                                             null);
+                        var referenceObject = A.Dummy<TextLinkPayload>();
+
+                        var result = new TextLinkPayload(
+                                             null,
+                                             referenceObject.NavigationAction,
+                                             referenceObject.CssStyles,
+                                             referenceObject.CssClass);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "payload", },
+                    ExpectedExceptionMessageContains = new[] { "text", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TextLinkPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'text' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TextLinkPayload>();
+
+                        var result = new TextLinkPayload(
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.NavigationAction,
+                                             referenceObject.CssStyles,
+                                             referenceObject.CssClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "text", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TextLinkPayload>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'navigationAction' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TextLinkPayload>();
+
+                        var result = new TextLinkPayload(
+                                             referenceObject.Text,
+                                             null,
+                                             referenceObject.CssStyles,
+                                             referenceObject.CssClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "navigationAction", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TextLinkPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'cssStyles' contains a key-value pair with a null value scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TextLinkPayload>();
+
+                        var dictionaryWithNullValue = referenceObject.CssStyles.ToDictionary(_ => _.Key, _ => _.Value);
+
+                        var randomKey = dictionaryWithNullValue.Keys.ElementAt(ThreadSafeRandom.Next(0, dictionaryWithNullValue.Count));
+
+                        dictionaryWithNullValue[randomKey] = null;
+
+                        var result = new TextLinkPayload(
+                                             referenceObject.Text,
+                                             referenceObject.NavigationAction,
+                                             dictionaryWithNullValue,
+                                             referenceObject.CssClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "cssStyles", "contains at least one key-value pair with a null value", },
                 });
 
-        private static readonly ConstructorPropertyAssignmentTestScenarios<SelectComponent> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<SelectComponent>()
+        private static readonly ConstructorPropertyAssignmentTestScenarios<TextLinkPayload> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TextLinkPayload>()
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<SelectComponent>
+                new ConstructorPropertyAssignmentTestScenario<TextLinkPayload>
                 {
-                    Name = "Payload should return same 'payload' parameter passed to constructor when getting",
+                    Name = "Text should return same 'text' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<SelectComponent>();
+                        var referenceObject = A.Dummy<TextLinkPayload>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<SelectComponent>
+                        var result = new SystemUnderTestExpectedPropertyValue<TextLinkPayload>
                         {
-                            SystemUnderTest = new SelectComponent(
-                                                      referenceObject.Payload),
-                            ExpectedPropertyValue = referenceObject.Payload,
+                            SystemUnderTest = new TextLinkPayload(
+                                                      referenceObject.Text,
+                                                      referenceObject.NavigationAction,
+                                                      referenceObject.CssStyles,
+                                                      referenceObject.CssClass),
+                            ExpectedPropertyValue = referenceObject.Text,
                         };
 
                         return result;
                     },
-                    PropertyName = "Payload",
+                    PropertyName = "Text",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TextLinkPayload>
+                {
+                    Name = "NavigationAction should return same 'navigationAction' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TextLinkPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TextLinkPayload>
+                        {
+                            SystemUnderTest = new TextLinkPayload(
+                                                      referenceObject.Text,
+                                                      referenceObject.NavigationAction,
+                                                      referenceObject.CssStyles,
+                                                      referenceObject.CssClass),
+                            ExpectedPropertyValue = referenceObject.NavigationAction,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "NavigationAction",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TextLinkPayload>
+                {
+                    Name = "CssStyles should return same 'cssStyles' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TextLinkPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TextLinkPayload>
+                        {
+                            SystemUnderTest = new TextLinkPayload(
+                                                      referenceObject.Text,
+                                                      referenceObject.NavigationAction,
+                                                      referenceObject.CssStyles,
+                                                      referenceObject.CssClass),
+                            ExpectedPropertyValue = referenceObject.CssStyles,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "CssStyles",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TextLinkPayload>
+                {
+                    Name = "CssClass should return same 'cssClass' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TextLinkPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TextLinkPayload>
+                        {
+                            SystemUnderTest = new TextLinkPayload(
+                                                      referenceObject.Text,
+                                                      referenceObject.NavigationAction,
+                                                      referenceObject.CssStyles,
+                                                      referenceObject.CssClass),
+                            ExpectedPropertyValue = referenceObject.CssClass,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "CssClass",
                 });
 
-        private static readonly DeepCloneWithTestScenarios<SelectComponent> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<SelectComponent>()
+        private static readonly DeepCloneWithTestScenarios<TextLinkPayload> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TextLinkPayload>()
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<SelectComponent>
+                new DeepCloneWithTestScenario<TextLinkPayload>
                 {
-                    Name = "DeepCloneWithPayload should deep clone object and replace Payload with the provided payload",
-                    WithPropertyName = "Payload",
+                    Name = "DeepCloneWithNavigationAction should deep clone object and replace NavigationAction with the provided navigationAction",
+                    WithPropertyName = "NavigationAction",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<SelectComponent>();
+                        var systemUnderTest = A.Dummy<TextLinkPayload>();
 
-                        var referenceObject = A.Dummy<SelectComponent>().ThatIs(_ => !systemUnderTest.Payload.IsEqualTo(_.Payload));
+                        var referenceObject = A.Dummy<TextLinkPayload>().ThatIs(_ => !systemUnderTest.NavigationAction.IsEqualTo(_.NavigationAction));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<SelectComponent>
+                        var result = new SystemUnderTestDeepCloneWithValue<TextLinkPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Payload,
+                            DeepCloneWithValue = referenceObject.NavigationAction,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TextLinkPayload>
+                {
+                    Name = "DeepCloneWithText should deep clone object and replace Text with the provided text",
+                    WithPropertyName = "Text",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TextLinkPayload>();
+
+                        var referenceObject = A.Dummy<TextLinkPayload>().ThatIs(_ => !systemUnderTest.Text.IsEqualTo(_.Text));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TextLinkPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.Text,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TextLinkPayload>
+                {
+                    Name = "DeepCloneWithCssStyles should deep clone object and replace CssStyles with the provided cssStyles",
+                    WithPropertyName = "CssStyles",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TextLinkPayload>();
+
+                        var referenceObject = A.Dummy<TextLinkPayload>().ThatIs(_ => !systemUnderTest.CssStyles.IsEqualTo(_.CssStyles));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TextLinkPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.CssStyles,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TextLinkPayload>
+                {
+                    Name = "DeepCloneWithCssClass should deep clone object and replace CssClass with the provided cssClass",
+                    WithPropertyName = "CssClass",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TextLinkPayload>();
+
+                        var referenceObject = A.Dummy<TextLinkPayload>().ThatIs(_ => !systemUnderTest.CssClass.IsEqualTo(_.CssClass));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TextLinkPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.CssClass,
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly SelectComponent ReferenceObjectForEquatableTestScenarios = A.Dummy<SelectComponent>();
+        private static readonly TextLinkPayload ReferenceObjectForEquatableTestScenarios = A.Dummy<TextLinkPayload>();
 
-        private static readonly EquatableTestScenarios<SelectComponent> EquatableTestScenarios = new EquatableTestScenarios<SelectComponent>()
+        private static readonly EquatableTestScenarios<TextLinkPayload> EquatableTestScenarios = new EquatableTestScenarios<TextLinkPayload>()
             .AddScenario(() =>
-                new EquatableTestScenario<SelectComponent>
+                new EquatableTestScenario<TextLinkPayload>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new SelectComponent[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new TextLinkPayload[]
                     {
-                        new SelectComponent(
-                                ReferenceObjectForEquatableTestScenarios.Payload),
+                        new TextLinkPayload(
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                ReferenceObjectForEquatableTestScenarios.NavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
+                                ReferenceObjectForEquatableTestScenarios.CssClass),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new SelectComponent[]
+                    ObjectsThatAreNotEqualToReferenceObject = new TextLinkPayload[]
                     {
-                        new SelectComponent(
-                                A.Dummy<SelectComponent>().Whose(_ => !_.Payload.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Payload)).Payload),
+                        new TextLinkPayload(
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                A.Dummy<TextLinkPayload>().Whose(_ => !_.NavigationAction.IsEqualTo(ReferenceObjectForEquatableTestScenarios.NavigationAction)).NavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
+                                ReferenceObjectForEquatableTestScenarios.CssClass),
+                        new TextLinkPayload(
+                                A.Dummy<TextLinkPayload>().Whose(_ => !_.Text.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Text)).Text,
+                                ReferenceObjectForEquatableTestScenarios.NavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
+                                ReferenceObjectForEquatableTestScenarios.CssClass),
+                        new TextLinkPayload(
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                ReferenceObjectForEquatableTestScenarios.NavigationAction,
+                                A.Dummy<TextLinkPayload>().Whose(_ => !_.CssStyles.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyles)).CssStyles,
+                                ReferenceObjectForEquatableTestScenarios.CssClass),
+                        new TextLinkPayload(
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                ReferenceObjectForEquatableTestScenarios.NavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
+                                A.Dummy<TextLinkPayload>().Whose(_ => !_.CssClass.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssClass)).CssClass),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -139,12 +357,6 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<int>(),
                         A.Dummy<int?>(),
                         A.Dummy<Guid>(),
-                        A.Dummy<ButtonComponent>(),
-                        A.Dummy<ChicletGridComponent>(),
-                        A.Dummy<TableComponent>(),
-                        A.Dummy<TableTabsComponent>(),
-                        A.Dummy<TextLinkComponent>(),
-                        A.Dummy<TitleComponent>(),
                     },
                 });
 
@@ -166,12 +378,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void SelectComponent___Should_implement_IModel_of_SelectComponent___When_reflecting()
+            public static void TextLinkPayload___Should_implement_IModel_of_TextLinkPayload___When_reflecting()
             {
                 // Arrange
-                var type = typeof(SelectComponent);
+                var type = typeof(TextLinkPayload);
 
-                var expectedModelMethods = typeof(IModel<SelectComponent>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<TextLinkPayload>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -181,7 +393,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<SelectComponent>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<TextLinkPayload>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -199,10 +411,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void SelectComponent___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void TextLinkPayload___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(SelectComponent);
+                var type = typeof(TextLinkPayload);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -382,10 +594,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<SelectComponent>();
+                var systemUnderTest = A.Dummy<TextLinkPayload>();
 
                 // Act
-                var actual = (SelectComponent)systemUnderTest.Clone();
+                var actual = (TextLinkPayload)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -409,7 +621,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<SelectComponent>();
+                var systemUnderTest = A.Dummy<TextLinkPayload>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -418,16 +630,28 @@ namespace Vuescape.DotNet.Domain.Test
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
 
-                if (systemUnderTest.Payload == null)
+                if (systemUnderTest.NavigationAction == null)
                 {
-                    actual.Payload.AsTest().Must().BeNull();
+                    actual.NavigationAction.AsTest().Must().BeNull();
                 }
-                else if (!actual.Payload.GetType().IsValueType)
+                else if (!actual.NavigationAction.GetType().IsValueType)
                 {
                     // When the declared type is a reference type, we still have to check the runtime type.
                     // The object could be a boxed value type, which will fail this asseration because
                     // a deep clone of a value type object is the same object.
-                    actual.Payload.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Payload);
+                    actual.NavigationAction.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.NavigationAction);
+                }
+
+                if (systemUnderTest.CssStyles == null)
+                {
+                    actual.CssStyles.AsTest().Must().BeNull();
+                }
+                else if (!actual.CssStyles.GetType().IsValueType)
+                {
+                    // When the declared type is a reference type, we still have to check the runtime type.
+                    // The object could be a boxed value type, which will fail this asseration because
+                    // a deep clone of a value type object is the same object.
+                    actual.CssStyles.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.CssStyles);
                 }
             }
 
@@ -447,7 +671,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Payload" };
+                var propertyNames = new string[] { "NavigationAction", "Text", "CssStyles", "CssClass" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 
@@ -460,12 +684,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (SelectComponent)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (TextLinkPayload)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(SelectComponent).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(TextLinkPayload).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var actualPropertyValue = propertyInfo.GetValue(actual);
 
@@ -527,7 +751,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<SelectComponent>();
+                var expected = A.Dummy<TextLinkPayload>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -556,7 +780,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<SelectComponent>();
+                var expected = A.Dummy<TextLinkPayload>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -585,7 +809,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<SelectComponent>();
+                var expected = A.Dummy<TextLinkPayload>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -614,7 +838,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<SelectComponent>();
+                var expected = A.Dummy<TextLinkPayload>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -648,8 +872,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                SelectComponent systemUnderTest1 = null;
-                SelectComponent systemUnderTest2 = null;
+                TextLinkPayload systemUnderTest1 = null;
+                TextLinkPayload systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -679,7 +903,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    SelectComponent systemUnderTest = null;
+                    TextLinkPayload systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -828,8 +1052,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                SelectComponent systemUnderTest1 = null;
-                SelectComponent systemUnderTest2 = null;
+                TextLinkPayload systemUnderTest1 = null;
+                TextLinkPayload systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -859,7 +1083,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    SelectComponent systemUnderTest = null;
+                    TextLinkPayload systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -1005,17 +1229,17 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponentBase___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_LinkPayloadBase___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    PaneComponentBase systemUnderTest = null;
+                    LinkPayloadBase systemUnderTest = null;
 
                     // Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponentBase)systemUnderTest);
+                    var actual = scenario.ReferenceObject.Equals((LinkPayloadBase)systemUnderTest);
 
                     // Assert
                     actual.AsTest().Must().BeFalse(because: scenario.Id);
@@ -1036,14 +1260,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponentBase___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_LinkPayloadBase___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponentBase)scenario.ReferenceObject);
+                    var actual = scenario.ReferenceObject.Equals((LinkPayloadBase)scenario.ReferenceObject);
 
                     // Assert
                     actual.AsTest().Must().BeTrue(because: scenario.Id);
@@ -1064,14 +1288,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponentBase___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_LinkPayloadBase___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponentBase)_)).ToList();
+                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((LinkPayloadBase)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
@@ -1092,14 +1316,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponentBase___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_LinkPayloadBase___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponentBase)_)).ToList();
+                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((LinkPayloadBase)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
@@ -1120,14 +1344,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponentBase___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_LinkPayloadBase___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponentBase)_)).ToList();
+                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((LinkPayloadBase)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeTrue(because: scenario.Id);
@@ -1148,157 +1372,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_SelectComponentPayload___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_TextLinkPayload___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    PaneComponent<SelectComponentPayload> systemUnderTest = null;
-
-                    // Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponent<SelectComponentPayload>)systemUnderTest);
-
-                    // Assert
-                    actual.AsTest().Must().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_SelectComponentPayload___Should_return_true___When_parameter_other_is_same_object()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponent<SelectComponentPayload>)scenario.ReferenceObject);
-
-                    // Assert
-                    actual.AsTest().Must().BeTrue(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_SelectComponentPayload___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<SelectComponentPayload>)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_SelectComponentPayload___Should_return_false___When_objects_being_compared_have_different_property_values()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<SelectComponentPayload>)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_SelectComponentPayload___Should_return_true___When_objects_being_compared_have_same_property_values()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<SelectComponentPayload>)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeTrue(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_SelectComponent___Should_return_false___When_parameter_other_is_null()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange
-                    SelectComponent systemUnderTest = null;
+                    TextLinkPayload systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1322,7 +1403,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_SelectComponent___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_TextLinkPayload___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1350,7 +1431,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_SelectComponent___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_TextLinkPayload___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1378,7 +1459,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_SelectComponent___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_TextLinkPayload___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1406,7 +1487,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_SelectComponent___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_TextLinkPayload___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 

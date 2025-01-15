@@ -23,15 +23,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class TableComponent : IModel<TableComponent>
+    public partial class TextLinkComponent : IModel<TextLinkComponent>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="TableComponent"/> are equal.
+        /// Determines whether two objects of type <see cref="TextLinkComponent"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(TableComponent left, TableComponent right)
+        public static bool operator ==(TextLinkComponent left, TextLinkComponent right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -49,15 +49,15 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="TableComponent"/> are not equal.
+        /// Determines whether two objects of type <see cref="TextLinkComponent"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(TableComponent left, TableComponent right) => !(left == right);
+        public static bool operator !=(TextLinkComponent left, TextLinkComponent right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(TableComponent other)
+        public bool Equals(TextLinkComponent other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -75,7 +75,7 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as TableComponent);
+        public override bool Equals(object obj) => this == (obj as TextLinkComponent);
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
@@ -83,7 +83,7 @@ namespace Vuescape.DotNet.Domain
             .Value;
 
         /// <inheritdoc />
-        public new TableComponent DeepClone() => (TableComponent)this.DeepCloneInternal();
+        public new TextLinkComponent DeepClone() => (TextLinkComponent)this.DeepCloneInternal();
 
         /// <inheritdoc />
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
@@ -103,9 +103,9 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public override PaneComponent<TableComponentPayload> DeepCloneWithPayload(TableComponentPayload payload)
+        public override PaneComponent<TextLinkPayload> DeepCloneWithPayload(TextLinkPayload payload)
         {
-            var result = new TableComponent(
+            var result = new TextLinkComponent(
                                  payload);
 
             return result;
@@ -115,7 +115,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         protected override PaneComponentBase DeepCloneInternal()
         {
-            var result = new TableComponent(
+            var result = new TextLinkComponent(
                                  this.Payload?.DeepClone());
 
             return result;
@@ -125,7 +125,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TableComponent: Payload = {this.Payload?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TextLinkComponent: Payload = {this.Payload?.ToString() ?? "<null>"}.");
 
             return result;
         }

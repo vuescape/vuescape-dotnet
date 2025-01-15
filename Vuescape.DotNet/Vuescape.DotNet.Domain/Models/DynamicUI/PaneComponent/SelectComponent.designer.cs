@@ -85,11 +85,7 @@ namespace Vuescape.DotNet.Domain
         /// <inheritdoc />
         public new SelectComponent DeepClone() => (SelectComponent)this.DeepCloneInternal();
 
-        /// <summary>
-        /// Deep clones this object with a new <see cref="Payload" />.
-        /// </summary>
-        /// <param name="payload">The new <see cref="Payload" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="SelectComponent" /> using the specified <paramref name="payload" /> for <see cref="Payload" /> and a deep clone of every other property.</returns>
+        /// <inheritdoc />
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -107,7 +103,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public SelectComponent DeepCloneWithPayload(SelectComponentPayload payload)
+        public override PaneComponent<SelectComponentPayload> DeepCloneWithPayload(SelectComponentPayload payload)
         {
             var result = new SelectComponent(
                                  payload);

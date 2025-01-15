@@ -235,6 +235,23 @@ namespace Vuescape.DotNet.Domain.Test
                 });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var availableTypes = new[]
+                    {
+                        typeof(TextLinkPayload)
+                    };
+
+                    var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
+
+                    var randomType = availableTypes[randomIndex];
+
+                    var result = (LinkPayloadBase)AD.ummy(randomType);
+
+                    return result;
+                });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new MenuNavigationItem(
                                  A.Dummy<NavigationLink>(),
                                  A.Dummy<string>(),
@@ -297,6 +314,7 @@ namespace Vuescape.DotNet.Domain.Test
                         typeof(SelectComponent),
                         typeof(TableComponent),
                         typeof(TableTabsComponent),
+                        typeof(TextLinkComponent),
                         typeof(TitleComponent)
                     };
 
@@ -451,6 +469,17 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<IReadOnlyList<TableTab>>(),
                                  A.Dummy<SelectComponent>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TextLinkComponent(
+                                 A.Dummy<TextLinkPayload>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TextLinkPayload(
+                                 A.Dummy<string>(),
+                                 A.Dummy<NavigationAction>(),
+                                 A.Dummy<IReadOnlyDictionary<string, string>>(),
+                                 A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TitleComponent(

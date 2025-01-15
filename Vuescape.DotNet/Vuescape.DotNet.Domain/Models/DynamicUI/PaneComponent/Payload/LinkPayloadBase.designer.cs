@@ -23,15 +23,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class TableComponent : IModel<TableComponent>
+    public partial class LinkPayloadBase : IModel<LinkPayloadBase>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="TableComponent"/> are equal.
+        /// Determines whether two objects of type <see cref="LinkPayloadBase"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(TableComponent left, TableComponent right)
+        public static bool operator ==(LinkPayloadBase left, LinkPayloadBase right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -43,49 +43,47 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = left.Equals(right);
+            var result = left.Equals((object)right);
 
             return result;
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="TableComponent"/> are not equal.
+        /// Determines whether two objects of type <see cref="LinkPayloadBase"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(TableComponent left, TableComponent right) => !(left == right);
+        public static bool operator !=(LinkPayloadBase left, LinkPayloadBase right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(TableComponent other)
+        public bool Equals(LinkPayloadBase other) => this == other;
+
+        /// <inheritdoc />
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
+        public override bool Equals(object obj)
         {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (ReferenceEquals(other, null))
-            {
-                return false;
-            }
-
-            var result = this.Payload.IsEqualTo(other.Payload);
-
-            return result;
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as TableComponent);
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
+        }
 
         /// <inheritdoc />
-        public override int GetHashCode() => HashCodeHelper.Initialize()
-            .Hash(this.Payload)
-            .Value;
+        public object Clone() => this.DeepClone();
 
         /// <inheritdoc />
-        public new TableComponent DeepClone() => (TableComponent)this.DeepCloneInternal();
+        public LinkPayloadBase DeepClone() => this.DeepCloneInternal();
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Deep clones this object with a new <see cref="NavigationAction" />.
+        /// </summary>
+        /// <param name="navigationAction">The new <see cref="NavigationAction" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="LinkPayloadBase" /> using the specified <paramref name="navigationAction" /> for <see cref="NavigationAction" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -103,31 +101,27 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public override PaneComponent<TableComponentPayload> DeepCloneWithPayload(TableComponentPayload payload)
+        public virtual LinkPayloadBase DeepCloneWithNavigationAction(NavigationAction navigationAction)
         {
-            var result = new TableComponent(
-                                 payload);
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
+        }
 
-            return result;
+        /// <summary>
+        /// Creates a new object that is a deep clone of this instance.
+        /// </summary>
+        /// <returns>
+        /// A new object that is a deep clone of this instance.
+        /// </returns>
+        protected virtual LinkPayloadBase DeepCloneInternal()
+        {
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
         }
 
         /// <inheritdoc />
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        protected override PaneComponentBase DeepCloneInternal()
-        {
-            var result = new TableComponent(
-                                 this.Payload?.DeepClone());
-
-            return result;
-        }
-
-        /// <inheritdoc />
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TableComponent: Payload = {this.Payload?.ToString() ?? "<null>"}.");
-
-            return result;
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
         }
     }
 }

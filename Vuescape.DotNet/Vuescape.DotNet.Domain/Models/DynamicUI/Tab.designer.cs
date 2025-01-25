@@ -43,7 +43,7 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = left.Equals(right);
+            var result = left.Equals((object)right);
 
             return result;
         }
@@ -57,48 +57,27 @@ namespace Vuescape.DotNet.Domain
         public static bool operator !=(Tab left, Tab right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(Tab other)
+        public bool Equals(Tab other) => this == other;
+
+        /// <inheritdoc />
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
+        public override bool Equals(object obj)
         {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (ReferenceEquals(other, null))
-            {
-                return false;
-            }
-
-            var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
-                      && this.Label.IsEqualTo(other.Label, StringComparer.Ordinal)
-                      && this.Badge.IsEqualTo(other.Badge);
-
-            return result;
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as Tab);
-
-        /// <inheritdoc />
-        public override int GetHashCode() => HashCodeHelper.Initialize()
-            .Hash(this.Id)
-            .Hash(this.Label)
-            .Hash(this.Badge)
-            .Value;
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
+        }
 
         /// <inheritdoc />
         public object Clone() => this.DeepClone();
 
         /// <inheritdoc />
-        public Tab DeepClone()
-        {
-            var result = new Tab(
-                                 this.Id?.DeepClone(),
-                                 this.Label?.DeepClone(),
-                                 this.Badge?.DeepClone());
-
-            return result;
-        }
+        public Tab DeepClone() => this.DeepCloneInternal();
 
         /// <summary>
         /// Deep clones this object with a new <see cref="Id" />.
@@ -122,14 +101,9 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Tab DeepCloneWithId(string id)
+        public virtual Tab DeepCloneWithId(string id)
         {
-            var result = new Tab(
-                                 id,
-                                 this.Label?.DeepClone(),
-                                 this.Badge?.DeepClone());
-
-            return result;
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
         }
 
         /// <summary>
@@ -154,14 +128,9 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Tab DeepCloneWithLabel(string label)
+        public virtual Tab DeepCloneWithLabel(string label)
         {
-            var result = new Tab(
-                                 this.Id?.DeepClone(),
-                                 label,
-                                 this.Badge?.DeepClone());
-
-            return result;
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
         }
 
         /// <summary>
@@ -186,23 +155,27 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public Tab DeepCloneWithBadge(Badge badge)
+        public virtual Tab DeepCloneWithBadge(Badge badge)
         {
-            var result = new Tab(
-                                 this.Id?.DeepClone(),
-                                 this.Label?.DeepClone(),
-                                 badge);
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
+        }
 
-            return result;
+        /// <summary>
+        /// Creates a new object that is a deep clone of this instance.
+        /// </summary>
+        /// <returns>
+        /// A new object that is a deep clone of this instance.
+        /// </returns>
+        protected virtual Tab DeepCloneInternal()
+        {
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
         }
 
         /// <inheritdoc />
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.Tab: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {this.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Badge = {this.Badge?.ToString() ?? "<null>"}.");
-
-            return result;
+            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the layout for a report with defined sections for left, right, and center panes.
     /// </summary>
-    public partial class Tab : IHaveId<string>, IModelViaCodeGen
+    public abstract partial class Tab : IHaveId<string>, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Tab"/> class.
@@ -21,7 +21,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="id">The unique identifier of the tab.</param>
         /// <param name="label">The tab label.</param>
         /// <param name="badge">OPTIONAL badge to display on the tab.</param>
-        public Tab(
+        protected Tab(
             string id,
             string label,
             Badge badge = null)

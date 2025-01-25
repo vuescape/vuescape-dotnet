@@ -404,10 +404,21 @@ namespace Vuescape.DotNet.Domain.Test
                              });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new Tab(
-                                 A.Dummy<string>(),
-                                 A.Dummy<string>(),
-                                 A.Dummy<Badge>()));
+                () =>
+                {
+                    var availableTypes = new[]
+                    {
+                        typeof(TableTab)
+                    };
+
+                    var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
+
+                    var randomType = availableTypes[randomIndex];
+
+                    var result = (Tab)AD.ummy(randomType);
+
+                    return result;
+                });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TableCell(
@@ -458,7 +469,10 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TableTab(
-                                 A.Dummy<TableComponent>()));
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<TableComponent>(),
+                                 A.Dummy<Badge>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TableTabsComponent(

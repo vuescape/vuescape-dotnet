@@ -110,9 +110,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
-    <Reference Include="Validation, Version=2.5.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Validation.2.5.51\lib\net45\Validation.dll</HintPath>
-    </Reference>
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.abstractions.2.0.3\lib\net35\xunit.abstractions.dll</HintPath>
     </Reference>
@@ -127,9 +124,6 @@
     </Reference>
     <Reference Include="xunit.runner.utility.net452, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.runner.utility.2.4.1\lib\net452\xunit.runner.utility.net452.dll</HintPath>
-    </Reference>
-    <Reference Include="Xunit.SkippableFact, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b2b52da82b58eb73, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xunit.SkippableFact.1.5.23\lib\net462\Xunit.SkippableFact.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

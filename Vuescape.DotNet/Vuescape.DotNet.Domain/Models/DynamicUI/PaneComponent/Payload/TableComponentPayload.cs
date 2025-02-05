@@ -29,7 +29,8 @@ namespace Vuescape.DotNet.Domain
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { columns }.AsArg().Must().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
-            new { rows }.AsArg().Must().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
+            new { rows }.AsArg().Must().NotBeNull();
+            new { rows }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
 
             this.Id = id;
             this.Columns = columns;

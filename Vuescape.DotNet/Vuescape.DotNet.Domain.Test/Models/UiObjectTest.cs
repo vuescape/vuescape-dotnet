@@ -286,6 +286,13 @@ namespace Vuescape.DotNet.Domain.Test
                 A.Dummy<long>(),
                 A.Dummy<short>(),
                 A.Dummy<string>(),
+                A.Dummy<bool?>(),
+                A.Dummy<DateTime?>(),
+                A.Dummy<decimal?>(),
+                A.Dummy<Guid?>(),
+                A.Dummy<int?>(),
+                A.Dummy<long?>(),
+                A.Dummy<short?>(),
             };
 
             var expectedUiObjectType = new UiObjectType?[]
@@ -298,6 +305,13 @@ namespace Vuescape.DotNet.Domain.Test
                 UiObjectType.Long,
                 UiObjectType.Short,
                 UiObjectType.String,
+                UiObjectType.Bool,
+                UiObjectType.DateTime,
+                UiObjectType.Decimal,
+                UiObjectType.Guid,
+                UiObjectType.Int,
+                UiObjectType.Long,
+                UiObjectType.Short,
             };
 
             // Act

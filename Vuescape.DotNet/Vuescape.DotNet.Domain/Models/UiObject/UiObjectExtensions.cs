@@ -20,8 +20,15 @@ namespace Vuescape.DotNet.Domain
     {
         private static readonly IReadOnlyDictionary<Type, UiObjectType> TypeToUiObjectTypeMap = new Dictionary<Type, UiObjectType>
         {
-            { typeof(bool), UiObjectType.Bool },
             { typeof(string), UiObjectType.String },
+            { typeof(bool?), UiObjectType.Bool },
+            { typeof(short?), UiObjectType.Short },
+            { typeof(int?), UiObjectType.Int },
+            { typeof(long?), UiObjectType.Long },
+            { typeof(decimal?), UiObjectType.Decimal },
+            { typeof(DateTime?), UiObjectType.DateTime },
+            { typeof(Guid?), UiObjectType.Guid },
+            { typeof(bool), UiObjectType.Bool },
             { typeof(short), UiObjectType.Short },
             { typeof(int), UiObjectType.Int },
             { typeof(long), UiObjectType.Long },
@@ -77,7 +84,7 @@ namespace Vuescape.DotNet.Domain
 
             var result = (value == UiObjectType.SpecifiedType) || (value == UiObjectType.Enum)
                 ? assemblyQualifiedName.ToTypeRepresentationFromAssemblyQualifiedName().ResolveFromLoadedTypes()
-                : TypeToUiObjectTypeMap.Single(_ => _.Value == value).Key;
+                : TypeToUiObjectTypeMap.First(_ => _.Value == value).Key;
 
             return result;
         }

@@ -189,38 +189,6 @@ namespace Vuescape.DotNet.Domain.Test
                 .AddScenario(() =>
                     new ConstructorArgumentValidationTestScenario<UiObject>
                     {
-                        Name = "constructor should throw ArgumentException when parameter 'value' is null and parameter 'uiObjectType' is not null",
-                        ConstructionFunc = () =>
-                        {
-                            var result = new UiObject(
-                                                 null,
-                                                 A.Dummy<UiObjectType>(),
-                                                 null);
-
-                            return result;
-                        },
-                        ExpectedExceptionType = typeof(ArgumentException),
-                        ExpectedExceptionMessageEquals = "value is null but uiObjectType is not null.",
-                    })
-                .AddScenario(() =>
-                    new ConstructorArgumentValidationTestScenario<UiObject>
-                    {
-                        Name = "constructor should throw ArgumentException when parameter 'value' is not null and parameter 'uiObjectType' is null",
-                        ConstructionFunc = () =>
-                        {
-                            var result = new UiObject(
-                                A.Dummy<object>(),
-                                null,
-                                null);
-
-                            return result;
-                        },
-                        ExpectedExceptionType = typeof(ArgumentException),
-                        ExpectedExceptionMessageEquals = "value is not null but uiObjectType is null.",
-                    })
-                .AddScenario(() =>
-                    new ConstructorArgumentValidationTestScenario<UiObject>
-                    {
                         Name = "constructor should throw ArgumentException when parameter 'assemblyQualifiedName' is null and parameter 'uiObjectType' is either Enum or SpecifiedType",
                         ConstructionFunc = () =>
                         {

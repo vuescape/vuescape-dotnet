@@ -46,24 +46,9 @@ namespace Vuescape.DotNet.Domain
             string assemblyQualifiedName)
 #pragma warning restore SA1305 // Field names should not use Hungarian notation
         {
-            if (value == null)
+            if (((uiObjectType == Domain.UiObjectType.Enum) || (uiObjectType == Domain.UiObjectType.SpecifiedType)) && string.IsNullOrWhiteSpace(assemblyQualifiedName))
             {
-                if (uiObjectType != null)
-                {
-                    throw new ArgumentException(Invariant($"{nameof(value)} is null but {nameof(uiObjectType)} is not null."));
-                }
-            }
-            else
-            {
-                if (uiObjectType == null)
-                {
-                    throw new ArgumentException(Invariant($"{nameof(value)} is not null but {nameof(uiObjectType)} is null."));
-                }
-
-                if (((uiObjectType == Domain.UiObjectType.Enum) || (uiObjectType == Domain.UiObjectType.SpecifiedType)) && string.IsNullOrWhiteSpace(assemblyQualifiedName))
-                {
-                    throw new ArgumentException(Invariant($"{nameof(assemblyQualifiedName)} is expected when {nameof(uiObjectType)} is in this set: [{Domain.UiObjectType.Enum}, {Domain.UiObjectType.SpecifiedType}]."));
-                }
+                throw new ArgumentException(Invariant($"{nameof(assemblyQualifiedName)} is expected when {nameof(uiObjectType)} is in this set: [{Domain.UiObjectType.Enum}, {Domain.UiObjectType.SpecifiedType}]."));
             }
 
             this.Value = value;

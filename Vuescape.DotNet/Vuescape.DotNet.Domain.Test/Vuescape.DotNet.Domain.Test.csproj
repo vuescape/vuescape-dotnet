@@ -329,6 +329,14 @@
     <Compile Include="FeatureTest.designer.cs">
       <DependentUpon>FeatureTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileUploadComponentPayloadTest.cs" />
+    <Compile Include="FileUploadComponentPayloadTest.designer.cs">
+      <DependentUpon>FileUploadComponentPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileUploadComponentTest.cs" />
+    <Compile Include="FileUploadComponentTest.designer.cs">
+      <DependentUpon>FileUploadComponentTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="LinkedResourceOpBaseTest.cs" />
     <Compile Include="LinkedResourceOpBaseTest.designer.cs">
       <DependentUpon>LinkedResourceOpBaseTest.cs</DependentUpon>

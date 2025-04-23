@@ -196,6 +196,19 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new FileUploadComponent(
+                                 A.Dummy<FileUploadComponentPayload>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new FileUploadComponentPayload(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<long?>(),
+                                 A.Dummy<IReadOnlyList<string>>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new GeneratePdfClientBehavior
                              {
                                  Name = A.Dummy<string>(),
@@ -311,6 +324,7 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         typeof(ButtonComponent),
                         typeof(ChicletGridComponent),
+                        typeof(FileUploadComponent),
                         typeof(SelectComponent),
                         typeof(TableComponent),
                         typeof(TableTabsComponent),

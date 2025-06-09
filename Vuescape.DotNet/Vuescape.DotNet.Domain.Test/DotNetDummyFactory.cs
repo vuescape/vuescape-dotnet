@@ -351,6 +351,18 @@ namespace Vuescape.DotNet.Domain.Test
                     return result;
                 });
 
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var result = new ReadOnlyFileUploadComponentPayload(
+                        A.Dummy<string>(),
+                        A.Dummy<string>(),
+                        A.Dummy<string>(),
+                        A.Dummy<long>().ThatIs(_ => _ >= 0));
+
+                    return result;
+                });
+
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(LinkTarget.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UiObjectType.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(HoverContentKind.None);

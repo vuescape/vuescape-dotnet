@@ -203,6 +203,7 @@ namespace Vuescape.DotNet.Domain.Test
                 () => new FileUploadComponentPayload(
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
+                                 A.Dummy<string>(),
                                  A.Dummy<bool>(),
                                  A.Dummy<string>(),
                                  A.Dummy<long?>(),
@@ -365,6 +366,7 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ReadOnlyFileUploadComponentPayload(
+                                 A.Dummy<string>(),
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),

@@ -169,6 +169,9 @@
     <Compile Include="Models\DynamicUI\PaneComponent\ChicletGridComponent.designer.cs">
       <DependentUpon>ChicletGridComponent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\FileUploadComponentPayload.designer.cs">
+      <DependentUpon>FileUploadComponentPayload.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ReadOnlyFileUploadComponentPayload.designer.cs">
       <DependentUpon>ReadOnlyFileUploadComponentPayload.cs</DependentUpon>
     </Compile>
@@ -184,9 +187,6 @@
       <DependentUpon>PaneComponent{TPayload}.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ReadOnlyFileUploadComponentPayload.cs" />
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\FileUploadComponentPayload.designer.cs">
-      <DependentUpon>FileUploadComponentPayload.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\LinkPayloadBase.designer.cs">
       <DependentUpon>LinkPayloadBase.cs</DependentUpon>
     </Compile>

@@ -21,6 +21,7 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="id">The unique identifier for this component.</param>
         /// <param name="title">The title to display.</param>
+        /// <param name="descriptionText">OPTIONAL The description text to display under the title.</param>
         /// <param name="isRequired">Indicates if it is required to select a file to upload.</param>
         /// <param name="uploadInstructionText">OPTIONAL upload instructional text to display inside file upload area.</param>
         /// /// <param name="maxFileSizeInBytes">OPTIONAL maximum file size in bytes -- used for validation.</param>
@@ -28,6 +29,7 @@ namespace Vuescape.DotNet.Domain
         public FileUploadComponentPayload(
             string id,
             string title,
+            string descriptionText,
             bool isRequired,
             string uploadInstructionText = null,
             long? maxFileSizeInBytes = null,
@@ -37,6 +39,7 @@ namespace Vuescape.DotNet.Domain
 
             this.Id = id;
             this.Title = title;
+            this.DescriptionText = descriptionText;
             this.IsRequired = isRequired;
             this.UploadInstructionText = uploadInstructionText;
             this.MaxFileSizeInBytes = maxFileSizeInBytes;
@@ -52,6 +55,11 @@ namespace Vuescape.DotNet.Domain
         /// Gets the title.
         /// </summary>
         public string Title { get; private set; }
+
+        /// <summary>
+        /// Gets the description text.
+        /// </summary>
+        public string DescriptionText { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether it is required to select a file to upload.

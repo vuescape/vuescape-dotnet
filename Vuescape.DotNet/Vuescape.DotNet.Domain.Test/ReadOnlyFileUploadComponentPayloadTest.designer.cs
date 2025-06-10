@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ReadOnlyFileUploadComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReadOnlyFileUploadComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileName = {systemUnderTest.FileName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileSizeInBytes = {systemUnderTest.FileSizeInBytes.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReadOnlyFileUploadComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DescriptionText = {systemUnderTest.DescriptionText?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileName = {systemUnderTest.FileName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileSizeInBytes = {systemUnderTest.FileSizeInBytes.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -67,6 +67,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ReadOnlyFileUploadComponentPayload(
                                              null,
                                              referenceObject.Title,
+                                             referenceObject.DescriptionText,
                                              referenceObject.FileName,
                                              referenceObject.FileSizeInBytes);
 
@@ -86,6 +87,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ReadOnlyFileUploadComponentPayload(
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Title,
+                                             referenceObject.DescriptionText,
                                              referenceObject.FileName,
                                              referenceObject.FileSizeInBytes);
 
@@ -105,6 +107,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ReadOnlyFileUploadComponentPayload(
                                              referenceObject.Id,
                                              null,
+                                             referenceObject.DescriptionText,
                                              referenceObject.FileName,
                                              referenceObject.FileSizeInBytes);
 
@@ -124,6 +127,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ReadOnlyFileUploadComponentPayload(
                                              referenceObject.Id,
                                              Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.DescriptionText,
                                              referenceObject.FileName,
                                              referenceObject.FileSizeInBytes);
 
@@ -131,6 +135,46 @@ namespace Vuescape.DotNet.Domain.Test
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "title", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ReadOnlyFileUploadComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'descriptionText' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>();
+
+                        var result = new ReadOnlyFileUploadComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Title,
+                                             null,
+                                             referenceObject.FileName,
+                                             referenceObject.FileSizeInBytes);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "descriptionText", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ReadOnlyFileUploadComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'descriptionText' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>();
+
+                        var result = new ReadOnlyFileUploadComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Title,
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.FileName,
+                                             referenceObject.FileSizeInBytes);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "descriptionText", "white space", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<ReadOnlyFileUploadComponentPayload>
@@ -143,6 +187,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ReadOnlyFileUploadComponentPayload(
                                              referenceObject.Id,
                                              referenceObject.Title,
+                                             referenceObject.DescriptionText,
                                              null,
                                              referenceObject.FileSizeInBytes);
 
@@ -162,6 +207,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ReadOnlyFileUploadComponentPayload(
                                              referenceObject.Id,
                                              referenceObject.Title,
+                                             referenceObject.DescriptionText,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.FileSizeInBytes);
 
@@ -185,6 +231,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ReadOnlyFileUploadComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Title,
+                                                      referenceObject.DescriptionText,
                                                       referenceObject.FileName,
                                                       referenceObject.FileSizeInBytes),
                             ExpectedPropertyValue = referenceObject.Id,
@@ -207,6 +254,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ReadOnlyFileUploadComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Title,
+                                                      referenceObject.DescriptionText,
                                                       referenceObject.FileName,
                                                       referenceObject.FileSizeInBytes),
                             ExpectedPropertyValue = referenceObject.Title,
@@ -215,6 +263,29 @@ namespace Vuescape.DotNet.Domain.Test
                         return result;
                     },
                     PropertyName = "Title",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ReadOnlyFileUploadComponentPayload>
+                {
+                    Name = "DescriptionText should return same 'descriptionText' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ReadOnlyFileUploadComponentPayload>
+                        {
+                            SystemUnderTest = new ReadOnlyFileUploadComponentPayload(
+                                                      referenceObject.Id,
+                                                      referenceObject.Title,
+                                                      referenceObject.DescriptionText,
+                                                      referenceObject.FileName,
+                                                      referenceObject.FileSizeInBytes),
+                            ExpectedPropertyValue = referenceObject.DescriptionText,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "DescriptionText",
                 })
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<ReadOnlyFileUploadComponentPayload>
@@ -229,6 +300,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ReadOnlyFileUploadComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Title,
+                                                      referenceObject.DescriptionText,
                                                       referenceObject.FileName,
                                                       referenceObject.FileSizeInBytes),
                             ExpectedPropertyValue = referenceObject.FileName,
@@ -251,6 +323,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ReadOnlyFileUploadComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Title,
+                                                      referenceObject.DescriptionText,
                                                       referenceObject.FileName,
                                                       referenceObject.FileSizeInBytes),
                             ExpectedPropertyValue = referenceObject.FileSizeInBytes,
@@ -297,6 +370,26 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = systemUnderTest,
                             DeepCloneWithValue = referenceObject.Title,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ReadOnlyFileUploadComponentPayload>
+                {
+                    Name = "DeepCloneWithDescriptionText should deep clone object and replace DescriptionText with the provided descriptionText",
+                    WithPropertyName = "DescriptionText",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponentPayload>();
+
+                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>().ThatIs(_ => !systemUnderTest.DescriptionText.IsEqualTo(_.DescriptionText));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ReadOnlyFileUploadComponentPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.DescriptionText,
                         };
 
                         return result;
@@ -356,6 +449,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
                                 ReferenceObjectForEquatableTestScenarios.FileSizeInBytes),
                     },
@@ -364,21 +458,31 @@ namespace Vuescape.DotNet.Domain.Test
                         new ReadOnlyFileUploadComponentPayload(
                                 A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
                                 ReferenceObjectForEquatableTestScenarios.FileSizeInBytes),
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.Title.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Title)).Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
                                 ReferenceObjectForEquatableTestScenarios.FileSizeInBytes),
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
+                                A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.DescriptionText.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DescriptionText)).DescriptionText,
+                                ReferenceObjectForEquatableTestScenarios.FileName,
+                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes),
+                        new ReadOnlyFileUploadComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.FileName.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FileName)).FileName,
                                 ReferenceObjectForEquatableTestScenarios.FileSizeInBytes),
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
                                 A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.FileSizeInBytes.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FileSizeInBytes)).FileSizeInBytes),
                     },
@@ -679,7 +783,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Title", "FileName", "FileSizeInBytes" };
+                var propertyNames = new string[] { "Id", "Title", "DescriptionText", "FileName", "FileSizeInBytes" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

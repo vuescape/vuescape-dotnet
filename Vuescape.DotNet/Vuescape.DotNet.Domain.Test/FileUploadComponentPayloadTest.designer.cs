@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<FileUploadComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.FileUploadComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsRequired = {systemUnderTest.IsRequired.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, UploadInstructionText = {systemUnderTest.UploadInstructionText?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxFileSizeInBytes = {systemUnderTest.MaxFileSizeInBytes?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, AcceptFileTypeExtensions = {systemUnderTest.AcceptFileTypeExtensions?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.FileUploadComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DescriptionText = {systemUnderTest.DescriptionText?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsRequired = {systemUnderTest.IsRequired.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, UploadInstructionText = {systemUnderTest.UploadInstructionText?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxFileSizeInBytes = {systemUnderTest.MaxFileSizeInBytes?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, AcceptFileTypeExtensions = {systemUnderTest.AcceptFileTypeExtensions?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -67,6 +67,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new FileUploadComponentPayload(
                                              null,
                                              referenceObject.Title,
+                                             referenceObject.DescriptionText,
                                              referenceObject.IsRequired,
                                              referenceObject.UploadInstructionText,
                                              referenceObject.MaxFileSizeInBytes,
@@ -88,6 +89,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new FileUploadComponentPayload(
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Title,
+                                             referenceObject.DescriptionText,
                                              referenceObject.IsRequired,
                                              referenceObject.UploadInstructionText,
                                              referenceObject.MaxFileSizeInBytes,
@@ -109,6 +111,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new FileUploadComponentPayload(
                                              referenceObject.Id,
                                              null,
+                                             referenceObject.DescriptionText,
                                              referenceObject.IsRequired,
                                              referenceObject.UploadInstructionText,
                                              referenceObject.MaxFileSizeInBytes,
@@ -130,6 +133,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new FileUploadComponentPayload(
                                              referenceObject.Id,
                                              Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.DescriptionText,
                                              referenceObject.IsRequired,
                                              referenceObject.UploadInstructionText,
                                              referenceObject.MaxFileSizeInBytes,
@@ -143,6 +147,50 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<FileUploadComponentPayload>
                 {
+                    Name = "constructor should throw ArgumentNullException when parameter 'descriptionText' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<FileUploadComponentPayload>();
+
+                        var result = new FileUploadComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Title,
+                                             null,
+                                             referenceObject.IsRequired,
+                                             referenceObject.UploadInstructionText,
+                                             referenceObject.MaxFileSizeInBytes,
+                                             referenceObject.AcceptFileTypeExtensions);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "descriptionText", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<FileUploadComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'descriptionText' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<FileUploadComponentPayload>();
+
+                        var result = new FileUploadComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Title,
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.IsRequired,
+                                             referenceObject.UploadInstructionText,
+                                             referenceObject.MaxFileSizeInBytes,
+                                             referenceObject.AcceptFileTypeExtensions);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "descriptionText", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<FileUploadComponentPayload>
+                {
                     Name = "constructor should throw ArgumentException when parameter 'acceptFileTypeExtensions' contains a null element scenario",
                     ConstructionFunc = () =>
                     {
@@ -151,6 +199,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new FileUploadComponentPayload(
                                              referenceObject.Id,
                                              referenceObject.Title,
+                                             referenceObject.DescriptionText,
                                              referenceObject.IsRequired,
                                              referenceObject.UploadInstructionText,
                                              referenceObject.MaxFileSizeInBytes,
@@ -176,6 +225,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new FileUploadComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Title,
+                                                      referenceObject.DescriptionText,
                                                       referenceObject.IsRequired,
                                                       referenceObject.UploadInstructionText,
                                                       referenceObject.MaxFileSizeInBytes,
@@ -200,6 +250,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new FileUploadComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Title,
+                                                      referenceObject.DescriptionText,
                                                       referenceObject.IsRequired,
                                                       referenceObject.UploadInstructionText,
                                                       referenceObject.MaxFileSizeInBytes,
@@ -214,6 +265,31 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<FileUploadComponentPayload>
                 {
+                    Name = "DescriptionText should return same 'descriptionText' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<FileUploadComponentPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<FileUploadComponentPayload>
+                        {
+                            SystemUnderTest = new FileUploadComponentPayload(
+                                                      referenceObject.Id,
+                                                      referenceObject.Title,
+                                                      referenceObject.DescriptionText,
+                                                      referenceObject.IsRequired,
+                                                      referenceObject.UploadInstructionText,
+                                                      referenceObject.MaxFileSizeInBytes,
+                                                      referenceObject.AcceptFileTypeExtensions),
+                            ExpectedPropertyValue = referenceObject.DescriptionText,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "DescriptionText",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<FileUploadComponentPayload>
+                {
                     Name = "IsRequired should return same 'isRequired' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
@@ -224,6 +300,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new FileUploadComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Title,
+                                                      referenceObject.DescriptionText,
                                                       referenceObject.IsRequired,
                                                       referenceObject.UploadInstructionText,
                                                       referenceObject.MaxFileSizeInBytes,
@@ -248,6 +325,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new FileUploadComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Title,
+                                                      referenceObject.DescriptionText,
                                                       referenceObject.IsRequired,
                                                       referenceObject.UploadInstructionText,
                                                       referenceObject.MaxFileSizeInBytes,
@@ -272,6 +350,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new FileUploadComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Title,
+                                                      referenceObject.DescriptionText,
                                                       referenceObject.IsRequired,
                                                       referenceObject.UploadInstructionText,
                                                       referenceObject.MaxFileSizeInBytes,
@@ -296,6 +375,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new FileUploadComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Title,
+                                                      referenceObject.DescriptionText,
                                                       referenceObject.IsRequired,
                                                       referenceObject.UploadInstructionText,
                                                       referenceObject.MaxFileSizeInBytes,
@@ -344,6 +424,26 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = systemUnderTest,
                             DeepCloneWithValue = referenceObject.Title,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<FileUploadComponentPayload>
+                {
+                    Name = "DeepCloneWithDescriptionText should deep clone object and replace DescriptionText with the provided descriptionText",
+                    WithPropertyName = "DescriptionText",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<FileUploadComponentPayload>();
+
+                        var referenceObject = A.Dummy<FileUploadComponentPayload>().ThatIs(_ => !systemUnderTest.DescriptionText.IsEqualTo(_.DescriptionText));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<FileUploadComponentPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.DescriptionText,
                         };
 
                         return result;
@@ -443,6 +543,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new FileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.IsRequired,
                                 ReferenceObjectForEquatableTestScenarios.UploadInstructionText,
                                 ReferenceObjectForEquatableTestScenarios.MaxFileSizeInBytes,
@@ -453,6 +554,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new FileUploadComponentPayload(
                                 A.Dummy<FileUploadComponentPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.IsRequired,
                                 ReferenceObjectForEquatableTestScenarios.UploadInstructionText,
                                 ReferenceObjectForEquatableTestScenarios.MaxFileSizeInBytes,
@@ -460,6 +562,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new FileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<FileUploadComponentPayload>().Whose(_ => !_.Title.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Title)).Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.IsRequired,
                                 ReferenceObjectForEquatableTestScenarios.UploadInstructionText,
                                 ReferenceObjectForEquatableTestScenarios.MaxFileSizeInBytes,
@@ -467,6 +570,15 @@ namespace Vuescape.DotNet.Domain.Test
                         new FileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
+                                A.Dummy<FileUploadComponentPayload>().Whose(_ => !_.DescriptionText.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DescriptionText)).DescriptionText,
+                                ReferenceObjectForEquatableTestScenarios.IsRequired,
+                                ReferenceObjectForEquatableTestScenarios.UploadInstructionText,
+                                ReferenceObjectForEquatableTestScenarios.MaxFileSizeInBytes,
+                                ReferenceObjectForEquatableTestScenarios.AcceptFileTypeExtensions),
+                        new FileUploadComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 A.Dummy<FileUploadComponentPayload>().Whose(_ => !_.IsRequired.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsRequired)).IsRequired,
                                 ReferenceObjectForEquatableTestScenarios.UploadInstructionText,
                                 ReferenceObjectForEquatableTestScenarios.MaxFileSizeInBytes,
@@ -474,6 +586,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new FileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.IsRequired,
                                 A.Dummy<FileUploadComponentPayload>().Whose(_ => !_.UploadInstructionText.IsEqualTo(ReferenceObjectForEquatableTestScenarios.UploadInstructionText)).UploadInstructionText,
                                 ReferenceObjectForEquatableTestScenarios.MaxFileSizeInBytes,
@@ -481,6 +594,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new FileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.IsRequired,
                                 ReferenceObjectForEquatableTestScenarios.UploadInstructionText,
                                 A.Dummy<FileUploadComponentPayload>().Whose(_ => !_.MaxFileSizeInBytes.IsEqualTo(ReferenceObjectForEquatableTestScenarios.MaxFileSizeInBytes)).MaxFileSizeInBytes,
@@ -488,6 +602,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new FileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.IsRequired,
                                 ReferenceObjectForEquatableTestScenarios.UploadInstructionText,
                                 ReferenceObjectForEquatableTestScenarios.MaxFileSizeInBytes,
@@ -802,7 +917,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Title", "IsRequired", "UploadInstructionText", "MaxFileSizeInBytes", "AcceptFileTypeExtensions" };
+                var propertyNames = new string[] { "Id", "Title", "DescriptionText", "IsRequired", "UploadInstructionText", "MaxFileSizeInBytes", "AcceptFileTypeExtensions" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

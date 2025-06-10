@@ -39,7 +39,8 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Title,
                                 referenceObject.DescriptionText,
                                 referenceObject.FileName,
-                                referenceObject.FileSizeInBytes);
+                                referenceObject.FileSizeInBytes,
+                                referenceObject.DownloadNavigationAction);
 
                             return result;
                         },
@@ -59,7 +60,8 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Title,
                                 referenceObject.DescriptionText,
                                 referenceObject.FileName,
-                                referenceObject.FileSizeInBytes);
+                                referenceObject.FileSizeInBytes,
+                                referenceObject.DownloadNavigationAction);
 
                             return result;
                         },
@@ -80,7 +82,8 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Title,
                                 referenceObject.DescriptionText,
                                 null,
-                                referenceObject.FileSizeInBytes);
+                                referenceObject.FileSizeInBytes,
+                                referenceObject.DownloadNavigationAction);
 
                             return result;
                         },
@@ -101,7 +104,8 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Title,
                                 referenceObject.DescriptionText,
                                 Invariant($"  {Environment.NewLine}  "),
-                                referenceObject.FileSizeInBytes);
+                                referenceObject.FileSizeInBytes,
+                                referenceObject.DownloadNavigationAction);
 
                             return result;
                         },
@@ -122,7 +126,8 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Title,
                                 referenceObject.DescriptionText,
                                 referenceObject.FileName,
-                                A.Dummy<long>().ThatIs(_ => _ < 0L));
+                                A.Dummy<long>().ThatIs(_ => _ < 0L),
+                                referenceObject.DownloadNavigationAction);
 
                             return result;
                         },

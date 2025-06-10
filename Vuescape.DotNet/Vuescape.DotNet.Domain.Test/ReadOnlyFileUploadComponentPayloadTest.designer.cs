@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ReadOnlyFileUploadComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReadOnlyFileUploadComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DescriptionText = {systemUnderTest.DescriptionText?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileName = {systemUnderTest.FileName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileSizeInBytes = {systemUnderTest.FileSizeInBytes.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReadOnlyFileUploadComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {systemUnderTest.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DescriptionText = {systemUnderTest.DescriptionText?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileName = {systemUnderTest.FileName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileSizeInBytes = {systemUnderTest.FileSizeInBytes.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DownloadNavigationAction = {systemUnderTest.DownloadNavigationAction?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -69,7 +69,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Title,
                                              referenceObject.DescriptionText,
                                              referenceObject.FileName,
-                                             referenceObject.FileSizeInBytes);
+                                             referenceObject.FileSizeInBytes,
+                                             referenceObject.DownloadNavigationAction);
 
                         return result;
                     },
@@ -89,7 +90,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Title,
                                              referenceObject.DescriptionText,
                                              referenceObject.FileName,
-                                             referenceObject.FileSizeInBytes);
+                                             referenceObject.FileSizeInBytes,
+                                             referenceObject.DownloadNavigationAction);
 
                         return result;
                     },
@@ -109,7 +111,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              null,
                                              referenceObject.DescriptionText,
                                              referenceObject.FileName,
-                                             referenceObject.FileSizeInBytes);
+                                             referenceObject.FileSizeInBytes,
+                                             referenceObject.DownloadNavigationAction);
 
                         return result;
                     },
@@ -129,7 +132,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.DescriptionText,
                                              referenceObject.FileName,
-                                             referenceObject.FileSizeInBytes);
+                                             referenceObject.FileSizeInBytes,
+                                             referenceObject.DownloadNavigationAction);
 
                         return result;
                     },
@@ -149,7 +153,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Title,
                                              null,
                                              referenceObject.FileName,
-                                             referenceObject.FileSizeInBytes);
+                                             referenceObject.FileSizeInBytes,
+                                             referenceObject.DownloadNavigationAction);
 
                         return result;
                     },
@@ -169,7 +174,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Title,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.FileName,
-                                             referenceObject.FileSizeInBytes);
+                                             referenceObject.FileSizeInBytes,
+                                             referenceObject.DownloadNavigationAction);
 
                         return result;
                     },
@@ -189,7 +195,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Title,
                                              referenceObject.DescriptionText,
                                              null,
-                                             referenceObject.FileSizeInBytes);
+                                             referenceObject.FileSizeInBytes,
+                                             referenceObject.DownloadNavigationAction);
 
                         return result;
                     },
@@ -209,12 +216,34 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Title,
                                              referenceObject.DescriptionText,
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.FileSizeInBytes);
+                                             referenceObject.FileSizeInBytes,
+                                             referenceObject.DownloadNavigationAction);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "fileName", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ReadOnlyFileUploadComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'downloadNavigationAction' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>();
+
+                        var result = new ReadOnlyFileUploadComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Title,
+                                             referenceObject.DescriptionText,
+                                             referenceObject.FileName,
+                                             referenceObject.FileSizeInBytes,
+                                             null);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "downloadNavigationAction", },
                 });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<ReadOnlyFileUploadComponentPayload> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ReadOnlyFileUploadComponentPayload>()
@@ -233,7 +262,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Title,
                                                       referenceObject.DescriptionText,
                                                       referenceObject.FileName,
-                                                      referenceObject.FileSizeInBytes),
+                                                      referenceObject.FileSizeInBytes,
+                                                      referenceObject.DownloadNavigationAction),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
 
@@ -256,7 +286,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Title,
                                                       referenceObject.DescriptionText,
                                                       referenceObject.FileName,
-                                                      referenceObject.FileSizeInBytes),
+                                                      referenceObject.FileSizeInBytes,
+                                                      referenceObject.DownloadNavigationAction),
                             ExpectedPropertyValue = referenceObject.Title,
                         };
 
@@ -279,7 +310,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Title,
                                                       referenceObject.DescriptionText,
                                                       referenceObject.FileName,
-                                                      referenceObject.FileSizeInBytes),
+                                                      referenceObject.FileSizeInBytes,
+                                                      referenceObject.DownloadNavigationAction),
                             ExpectedPropertyValue = referenceObject.DescriptionText,
                         };
 
@@ -302,7 +334,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Title,
                                                       referenceObject.DescriptionText,
                                                       referenceObject.FileName,
-                                                      referenceObject.FileSizeInBytes),
+                                                      referenceObject.FileSizeInBytes,
+                                                      referenceObject.DownloadNavigationAction),
                             ExpectedPropertyValue = referenceObject.FileName,
                         };
 
@@ -325,13 +358,38 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Title,
                                                       referenceObject.DescriptionText,
                                                       referenceObject.FileName,
-                                                      referenceObject.FileSizeInBytes),
+                                                      referenceObject.FileSizeInBytes,
+                                                      referenceObject.DownloadNavigationAction),
                             ExpectedPropertyValue = referenceObject.FileSizeInBytes,
                         };
 
                         return result;
                     },
                     PropertyName = "FileSizeInBytes",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ReadOnlyFileUploadComponentPayload>
+                {
+                    Name = "DownloadNavigationAction should return same 'downloadNavigationAction' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ReadOnlyFileUploadComponentPayload>
+                        {
+                            SystemUnderTest = new ReadOnlyFileUploadComponentPayload(
+                                                      referenceObject.Id,
+                                                      referenceObject.Title,
+                                                      referenceObject.DescriptionText,
+                                                      referenceObject.FileName,
+                                                      referenceObject.FileSizeInBytes,
+                                                      referenceObject.DownloadNavigationAction),
+                            ExpectedPropertyValue = referenceObject.DownloadNavigationAction,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "DownloadNavigationAction",
                 });
 
         private static readonly DeepCloneWithTestScenarios<ReadOnlyFileUploadComponentPayload> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ReadOnlyFileUploadComponentPayload>()
@@ -434,6 +492,26 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ReadOnlyFileUploadComponentPayload>
+                {
+                    Name = "DeepCloneWithDownloadNavigationAction should deep clone object and replace DownloadNavigationAction with the provided downloadNavigationAction",
+                    WithPropertyName = "DownloadNavigationAction",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponentPayload>();
+
+                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>().ThatIs(_ => !systemUnderTest.DownloadNavigationAction.IsEqualTo(_.DownloadNavigationAction));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ReadOnlyFileUploadComponentPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.DownloadNavigationAction,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly ReadOnlyFileUploadComponentPayload ReferenceObjectForEquatableTestScenarios = A.Dummy<ReadOnlyFileUploadComponentPayload>();
@@ -451,7 +529,8 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Title,
                                 ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
-                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes),
+                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes,
+                                ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new ReadOnlyFileUploadComponentPayload[]
                     {
@@ -460,31 +539,43 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Title,
                                 ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
-                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes),
+                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes,
+                                ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction),
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.Title.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Title)).Title,
                                 ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
-                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes),
+                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes,
+                                ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction),
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
                                 A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.DescriptionText.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DescriptionText)).DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
-                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes),
+                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes,
+                                ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction),
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
                                 ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.FileName.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FileName)).FileName,
-                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes),
+                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes,
+                                ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction),
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Title,
                                 ReferenceObjectForEquatableTestScenarios.DescriptionText,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
-                                A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.FileSizeInBytes.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FileSizeInBytes)).FileSizeInBytes),
+                                A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.FileSizeInBytes.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FileSizeInBytes)).FileSizeInBytes,
+                                ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction),
+                        new ReadOnlyFileUploadComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Title,
+                                ReferenceObjectForEquatableTestScenarios.DescriptionText,
+                                ReferenceObjectForEquatableTestScenarios.FileName,
+                                ReferenceObjectForEquatableTestScenarios.FileSizeInBytes,
+                                A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.DownloadNavigationAction.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction)).DownloadNavigationAction),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -765,6 +856,18 @@ namespace Vuescape.DotNet.Domain.Test
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
+
+                if (systemUnderTest.DownloadNavigationAction == null)
+                {
+                    actual.DownloadNavigationAction.AsTest().Must().BeNull();
+                }
+                else if (!actual.DownloadNavigationAction.GetType().IsValueType)
+                {
+                    // When the declared type is a reference type, we still have to check the runtime type.
+                    // The object could be a boxed value type, which will fail this asseration because
+                    // a deep clone of a value type object is the same object.
+                    actual.DownloadNavigationAction.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.DownloadNavigationAction);
+                }
             }
 
             [Fact]
@@ -783,7 +886,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Title", "DescriptionText", "FileName", "FileSizeInBytes" };
+                var propertyNames = new string[] { "Id", "Title", "DescriptionText", "FileName", "FileSizeInBytes", "DownloadNavigationAction" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

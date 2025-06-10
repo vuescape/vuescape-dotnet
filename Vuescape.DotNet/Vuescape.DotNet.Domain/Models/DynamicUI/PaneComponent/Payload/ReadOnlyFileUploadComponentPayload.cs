@@ -24,12 +24,14 @@ namespace Vuescape.DotNet.Domain
         /// <param name="descriptionText">OPTIONAL The description text to show under the title.</param>
         /// <param name="fileName">The file name to display.</param>
         /// <param name="fileSizeInBytes">The file size in bytes.</param>
+        /// <param name="downloadNavigationAction">OPTIONAL A navigation action to perform in order to download the file.</param>
         public ReadOnlyFileUploadComponentPayload(
             string id,
             string title,
             string descriptionText,
             string fileName,
-            long fileSizeInBytes)
+            long fileSizeInBytes,
+            NavigationAction downloadNavigationAction)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { fileName }.AsArg().Must().NotBeNullNorWhiteSpace();
@@ -40,6 +42,7 @@ namespace Vuescape.DotNet.Domain
             this.DescriptionText = descriptionText;
             this.FileName = fileName;
             this.FileSizeInBytes = fileSizeInBytes;
+            this.DownloadNavigationAction = downloadNavigationAction;
         }
 
         /// <summary>
@@ -66,5 +69,10 @@ namespace Vuescape.DotNet.Domain
         /// Gets the file size in bytes.
         /// </summary>
         public long FileSizeInBytes { get; private set; }
+
+        /// <summary>
+        /// Gets the download navigation action.
+        /// </summary>
+        public NavigationAction DownloadNavigationAction { get; private set; }
     }
 }

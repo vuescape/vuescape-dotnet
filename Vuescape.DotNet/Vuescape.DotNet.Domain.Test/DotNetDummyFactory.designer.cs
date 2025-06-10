@@ -370,7 +370,8 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<long>()));
+                                 A.Dummy<long>(),
+                                 A.Dummy<NavigationAction>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Vuescape.DotNet.Domain.Report(

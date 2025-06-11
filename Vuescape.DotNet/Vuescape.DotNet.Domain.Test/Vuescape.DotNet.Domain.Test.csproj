@@ -255,6 +255,7 @@
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.designer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
+    <Compile Include="RowBaseExtensionsTests.cs" />
     <Compile Include="ActionBaseTest.cs" />
     <Compile Include="ActionBaseTest.designer.cs">
       <DependentUpon>ActionBaseTest.cs</DependentUpon>

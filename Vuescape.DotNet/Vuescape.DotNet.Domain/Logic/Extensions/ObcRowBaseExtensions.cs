@@ -17,6 +17,27 @@ namespace Vuescape.DotNet.Domain
     public static partial class ObcRowBaseExtensions
     {
         /// <summary>
+        /// Determines whether the specified <see cref="RowBase"/> is a blank <see cref="FlatRow"/>.
+        /// A row is considered blank if it is a <see cref="FlatRow"/> and:
+        ///   o Has no cells (i.e., <c>Cells == null</c> or empty), or
+        ///   o All of its cells are <see cref="ConstCell{String}"/> instances containing only whitespace or empty strings.
+        /// </summary>
+        /// <param name="row">The row to evaluate. Must not be null.</param>
+        /// <returns><c>true</c> if the row is a blank <see cref="FlatRow"/>; otherwise, <c>false</c>.</returns>
+        public static bool IsBlankFlatRow(this RowBase row)
+        {
+            new { row }.AsArg().Must().NotBeNull();
+
+            var result = row is FlatRow flatRow &&
+                         (flatRow.Cells == null ||
+                          flatRow.Cells.Count == 0 ||
+                          flatRow.Cells.All(c =>
+                              c is ConstCell<string> constCell && string.IsNullOrWhiteSpace(constCell.Value)));
+
+            return result;
+        }
+
+        /// <summary>
         /// Convert a header <see cref="FlatRow"/> to a <see cref="TreeTableHeaderRow"/>.
         /// </summary>
         /// <param name="obcHeaderRow">The header row.</param>

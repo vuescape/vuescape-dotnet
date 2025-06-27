@@ -32,13 +32,6 @@ namespace Vuescape.DotNet.Domain
 
             var sections = obcReport.Sections.Select(_ => _.ConvertToVuescapeSection(obcToVuescapeConversionContext, tokenToSubstitutionMap)).ToList();
 
-            // Convert download links
-            IReadOnlyList<Link> downloadLinks = null;
-            if (obcReport.DownloadLinks != null)
-            {
-                downloadLinks = obcReport.DownloadLinks.Select(_ => _.ToVuescapeLink(obcToVuescapeConversionContext)).ToList();
-            }
-
             string additionalReportInfo = null;
             if (obcReport.Format?.DisplayTimestamp == true)
             {
@@ -49,7 +42,7 @@ namespace Vuescape.DotNet.Domain
                 }
             }
 
-            var result = new Report(obcReport.Id, sections, obcReport.Title, additionalReportInfo, downloadLinks);
+            var result = new Report(obcReport.Id, sections, obcReport.Title, additionalReportInfo);
             return result;
         }
     }

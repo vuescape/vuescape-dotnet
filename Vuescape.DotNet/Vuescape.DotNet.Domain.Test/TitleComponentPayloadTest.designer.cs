@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TitleComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TitleComponentPayload: Text = {systemUnderTest.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TitleComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {systemUnderTest.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -59,10 +59,47 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TitleComponentPayload>
                 {
+                    Name = "constructor should throw ArgumentNullException when parameter 'id' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TitleComponentPayload>();
+
+                        var result = new TitleComponentPayload(
+                                             null,
+                                             referenceObject.Text);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "id", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TitleComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'id' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TitleComponentPayload>();
+
+                        var result = new TitleComponentPayload(
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.Text);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "id", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TitleComponentPayload>
+                {
                     Name = "constructor should throw ArgumentNullException when parameter 'text' is null scenario",
                     ConstructionFunc = () =>
                     {
+                        var referenceObject = A.Dummy<TitleComponentPayload>();
+
                         var result = new TitleComponentPayload(
+                                             referenceObject.Id,
                                              null);
 
                         return result;
@@ -76,7 +113,10 @@ namespace Vuescape.DotNet.Domain.Test
                     Name = "constructor should throw ArgumentException when parameter 'text' is white space scenario",
                     ConstructionFunc = () =>
                     {
+                        var referenceObject = A.Dummy<TitleComponentPayload>();
+
                         var result = new TitleComponentPayload(
+                                             referenceObject.Id,
                                              Invariant($"  {Environment.NewLine}  "));
 
                         return result;
@@ -89,6 +129,26 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<TitleComponentPayload>
                 {
+                    Name = "Id should return same 'id' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TitleComponentPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TitleComponentPayload>
+                        {
+                            SystemUnderTest = new TitleComponentPayload(
+                                                      referenceObject.Id,
+                                                      referenceObject.Text),
+                            ExpectedPropertyValue = referenceObject.Id,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "Id",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TitleComponentPayload>
+                {
                     Name = "Text should return same 'text' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
@@ -97,6 +157,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<TitleComponentPayload>
                         {
                             SystemUnderTest = new TitleComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Text),
                             ExpectedPropertyValue = referenceObject.Text,
                         };
@@ -107,6 +168,26 @@ namespace Vuescape.DotNet.Domain.Test
                 });
 
         private static readonly DeepCloneWithTestScenarios<TitleComponentPayload> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TitleComponentPayload>()
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TitleComponentPayload>
+                {
+                    Name = "DeepCloneWithId should deep clone object and replace Id with the provided id",
+                    WithPropertyName = "Id",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TitleComponentPayload>();
+
+                        var referenceObject = A.Dummy<TitleComponentPayload>().ThatIs(_ => !systemUnderTest.Id.IsEqualTo(_.Id));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TitleComponentPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.Id,
+                        };
+
+                        return result;
+                    },
+                })
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<TitleComponentPayload>
                 {
@@ -139,11 +220,16 @@ namespace Vuescape.DotNet.Domain.Test
                     ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new TitleComponentPayload[]
                     {
                         new TitleComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Text),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TitleComponentPayload[]
                     {
                         new TitleComponentPayload(
+                                A.Dummy<TitleComponentPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
+                                ReferenceObjectForEquatableTestScenarios.Text),
+                        new TitleComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<TitleComponentPayload>().Whose(_ => !_.Text.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Text)).Text),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
@@ -443,7 +529,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Text" };
+                var propertyNames = new string[] { "Id", "Text" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

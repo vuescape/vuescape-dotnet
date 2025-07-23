@@ -169,6 +169,9 @@
     <Compile Include="Models\DynamicUI\PaneComponent\ChicletGridComponent.designer.cs">
       <DependentUpon>ChicletGridComponent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\ButtonComponentPayload.designer.cs">
+      <DependentUpon>ButtonComponentPayload.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\FileUploadComponentPayload.designer.cs">
       <DependentUpon>FileUploadComponentPayload.cs</DependentUpon>
     </Compile>
@@ -177,6 +180,18 @@
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Select\SelectComponentPayload.designer.cs">
       <DependentUpon>SelectComponentPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableComponentPayload.designer.cs">
+      <DependentUpon>TableComponentPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableTabsComponentPayload.designer.cs">
+      <DependentUpon>TableTabsComponentPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TextLinkPayload.designer.cs">
+      <DependentUpon>TextLinkPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TitleComponentPayload.designer.cs">
+      <DependentUpon>TitleComponentPayload.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\ReadOnlyFileUploadComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\FileUploadComponent.designer.cs">
@@ -196,9 +211,6 @@
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\FileUploadComponentPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\TextLinkPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\LinkPayloadBase.cs" />
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TextLinkPayload.designer.cs">
-      <DependentUpon>TextLinkPayload.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\ReadOnlyFileUploadComponent.designer.cs">
       <DependentUpon>ReadOnlyFileUploadComponent.cs</DependentUpon>
     </Compile>
@@ -212,9 +224,6 @@
       <DependentUpon>TableTabsComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\TextLinkComponent.cs" />
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\ButtonComponentPayload.designer.cs">
-      <DependentUpon>ButtonComponentPayload.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ChicletGridComponentPayload.designer.cs">
       <DependentUpon>ChicletGridComponentPayload.cs</DependentUpon>
     </Compile>
@@ -222,12 +231,6 @@
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Select\SelectComponentPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Select\SelectOption.designer.cs">
       <DependentUpon>SelectOption.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableComponentPayload.designer.cs">
-      <DependentUpon>TableComponentPayload.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableTabsComponentPayload.designer.cs">
-      <DependentUpon>TableTabsComponentPayload.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\AlignFrozenKind.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\ComparableValue.designer.cs">
@@ -250,9 +253,6 @@
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableRow.designer.cs">
       <DependentUpon>TableRow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TitleComponentPayload.designer.cs">
-      <DependentUpon>TitleComponentPayload.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\SelectComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\ButtonComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\ChicletGridComponent.cs" />
@@ -263,10 +263,10 @@
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\TitleComponentPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\TableTabsComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\TableComponent.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\FileUploadComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\TextLinkComponent.designer.cs">
       <DependentUpon>TextLinkComponent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\DynamicUI\PaneComponent\FileUploadComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\TitleComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\TitleComponent.designer.cs">
       <DependentUpon>TitleComponent.cs</DependentUpon>

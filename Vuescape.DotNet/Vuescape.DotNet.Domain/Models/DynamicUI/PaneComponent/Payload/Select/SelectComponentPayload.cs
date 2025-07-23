@@ -15,12 +15,12 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the payload for a select component.
     /// </summary>
-    public partial class SelectComponentPayload : IModelViaCodeGen
+    public partial class SelectComponentPayload : IHaveId<string>, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectComponentPayload"/> class.
         /// </summary>
-        /// <param name="id">The unique identifier for the component.</param>
+        /// <param name="id">The unique identifier for this component.</param>
         /// <param name="options">The options to display in the select component.</param>
         /// <param name="selectedValue">The currently selected value.</param>
         /// <param name="onChangeAction">The action to perform when the value changes.</param>

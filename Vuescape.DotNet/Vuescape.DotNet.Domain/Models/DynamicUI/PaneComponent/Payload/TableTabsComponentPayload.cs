@@ -14,7 +14,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the payload for table tabs. i.e. Tabs that contain tables only.
     /// </summary>
-    public partial class TableTabsComponentPayload : IModelViaCodeGen
+    public partial class TableTabsComponentPayload : IHaveId<string>, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TableTabsComponentPayload"/> class.

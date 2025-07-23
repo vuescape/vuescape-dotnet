@@ -69,7 +69,8 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = this.Label.IsEqualTo(other.Label, StringComparer.Ordinal)
+            var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
+                      && this.Label.IsEqualTo(other.Label, StringComparer.Ordinal)
                       && this.Action.IsEqualTo(other.Action)
                       && this.Icons.IsEqualTo(other.Icons);
 
@@ -81,6 +82,7 @@ namespace Vuescape.DotNet.Domain
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
+            .Hash(this.Id)
             .Hash(this.Label)
             .Hash(this.Action)
             .Hash(this.Icons)
@@ -93,6 +95,40 @@ namespace Vuescape.DotNet.Domain
         public ButtonComponentPayload DeepClone()
         {
             var result = new ButtonComponentPayload(
+                                 this.Id?.DeepClone(),
+                                 this.Label?.DeepClone(),
+                                 this.Action?.DeepClone(),
+                                 this.Icons?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="Id" />.
+        /// </summary>
+        /// <param name="id">The new <see cref="Id" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ButtonComponentPayload" /> using the specified <paramref name="id" /> for <see cref="Id" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public ButtonComponentPayload DeepCloneWithId(string id)
+        {
+            var result = new ButtonComponentPayload(
+                                 id,
                                  this.Label?.DeepClone(),
                                  this.Action?.DeepClone(),
                                  this.Icons?.DeepClone());
@@ -125,6 +161,7 @@ namespace Vuescape.DotNet.Domain
         public ButtonComponentPayload DeepCloneWithLabel(string label)
         {
             var result = new ButtonComponentPayload(
+                                 this.Id?.DeepClone(),
                                  label,
                                  this.Action?.DeepClone(),
                                  this.Icons?.DeepClone());
@@ -157,6 +194,7 @@ namespace Vuescape.DotNet.Domain
         public ButtonComponentPayload DeepCloneWithAction(ActionBase action)
         {
             var result = new ButtonComponentPayload(
+                                 this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
                                  action,
                                  this.Icons?.DeepClone());
@@ -189,6 +227,7 @@ namespace Vuescape.DotNet.Domain
         public ButtonComponentPayload DeepCloneWithIcons(IReadOnlyList<string> icons)
         {
             var result = new ButtonComponentPayload(
+                                 this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
                                  this.Action?.DeepClone(),
                                  icons);
@@ -200,7 +239,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.ButtonComponentPayload: Label = {this.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Action = {this.Action?.ToString() ?? "<null>"}, Icons = {this.Icons?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ButtonComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {this.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Action = {this.Action?.ToString() ?? "<null>"}, Icons = {this.Icons?.ToString() ?? "<null>"}.");
 
             return result;
         }

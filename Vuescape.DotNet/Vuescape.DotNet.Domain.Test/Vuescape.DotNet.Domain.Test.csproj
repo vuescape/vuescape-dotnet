@@ -255,8 +255,17 @@
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.designer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
+    <Compile Include="ButtonComponentPayloadTest.designer.cs">
+      <DependentUpon>ButtonComponentPayloadTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="DotNetDummyFactory.designer.cs">
       <DependentUpon>DotNetDummyFactory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileUploadComponentPayloadTest.designer.cs">
+      <DependentUpon>FileUploadComponentPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReadOnlyFileUploadComponentPayloadTest.designer.cs">
+      <DependentUpon>ReadOnlyFileUploadComponentPayloadTest.cs</DependentUpon>
     </Compile>
     <Compile Include="RowBaseExtensionsTests.cs" />
     <Compile Include="ActionBaseTest.cs" />
@@ -268,9 +277,6 @@
       <DependentUpon>BadgeTest.cs</DependentUpon>
     </Compile>
     <Compile Include="ButtonComponentPayloadTest.cs" />
-    <Compile Include="ButtonComponentPayloadTest.designer.cs">
-      <DependentUpon>ButtonComponentPayloadTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="ButtonComponentTest.cs" />
     <Compile Include="ButtonComponentTest.designer.cs">
       <DependentUpon>ButtonComponentTest.cs</DependentUpon>
@@ -331,9 +337,6 @@
       <DependentUpon>FeatureTest.cs</DependentUpon>
     </Compile>
     <Compile Include="FileUploadComponentPayloadTest.cs" />
-    <Compile Include="FileUploadComponentPayloadTest.designer.cs">
-      <DependentUpon>FileUploadComponentPayloadTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="FileUploadComponentTest.cs" />
     <Compile Include="FileUploadComponentTest.designer.cs">
       <DependentUpon>FileUploadComponentTest.cs</DependentUpon>
@@ -466,9 +469,6 @@
     <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="Properties\ProjectInfo.cs" />
     <Compile Include="ReadOnlyFileUploadComponentPayloadTest.cs" />
-    <Compile Include="ReadOnlyFileUploadComponentPayloadTest.designer.cs">
-      <DependentUpon>ReadOnlyFileUploadComponentPayloadTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="ReadOnlyFileUploadComponentTest.cs" />
     <Compile Include="ReadOnlyFileUploadComponentTest.designer.cs">
       <DependentUpon>ReadOnlyFileUploadComponentTest.cs</DependentUpon>

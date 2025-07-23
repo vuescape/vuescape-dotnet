@@ -68,6 +68,7 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ButtonComponentPayload(
                                  A.Dummy<string>(),
+                                 A.Dummy<string>(),
                                  A.Dummy<ActionBase>(),
                                  A.Dummy<IReadOnlyList<string>>()));
 
@@ -521,6 +522,7 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TextLinkPayload(
                                  A.Dummy<string>(),
+                                 A.Dummy<string>(),
                                  A.Dummy<NavigationAction>(),
                                  A.Dummy<IReadOnlyDictionary<string, string>>(),
                                  A.Dummy<string>()));
@@ -531,6 +533,7 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TitleComponentPayload(
+                                 A.Dummy<string>(),
                                  A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(

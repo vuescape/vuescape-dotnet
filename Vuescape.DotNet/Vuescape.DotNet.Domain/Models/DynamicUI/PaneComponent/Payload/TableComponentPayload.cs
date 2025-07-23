@@ -14,7 +14,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the payload for a table component, including headers and rows of data.
     /// </summary>
-    public partial class TableComponentPayload : IModelViaCodeGen
+    public partial class TableComponentPayload : IHaveId<string>, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TableComponentPayload"/> class.

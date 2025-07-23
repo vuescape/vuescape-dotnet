@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ButtonComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ButtonComponentPayload: Label = {systemUnderTest.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Action = {systemUnderTest.Action?.ToString() ?? "<null>"}, Icons = {systemUnderTest.Icons?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ButtonComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {systemUnderTest.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Action = {systemUnderTest.Action?.ToString() ?? "<null>"}, Icons = {systemUnderTest.Icons?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -59,12 +59,51 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<ButtonComponentPayload>
                 {
+                    Name = "constructor should throw ArgumentNullException when parameter 'id' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ButtonComponentPayload>();
+
+                        var result = new ButtonComponentPayload(
+                                             null,
+                                             referenceObject.Label,
+                                             referenceObject.Action,
+                                             referenceObject.Icons);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "id", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ButtonComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'id' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ButtonComponentPayload>();
+
+                        var result = new ButtonComponentPayload(
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.Label,
+                                             referenceObject.Action,
+                                             referenceObject.Icons);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "id", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ButtonComponentPayload>
+                {
                     Name = "constructor should throw ArgumentNullException when parameter 'label' is null scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<ButtonComponentPayload>();
 
                         var result = new ButtonComponentPayload(
+                                             referenceObject.Id,
                                              null,
                                              referenceObject.Action,
                                              referenceObject.Icons);
@@ -83,6 +122,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<ButtonComponentPayload>();
 
                         var result = new ButtonComponentPayload(
+                                             referenceObject.Id,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Action,
                                              referenceObject.Icons);
@@ -101,6 +141,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<ButtonComponentPayload>();
 
                         var result = new ButtonComponentPayload(
+                                             referenceObject.Id,
                                              referenceObject.Label,
                                              null,
                                              referenceObject.Icons);
@@ -119,6 +160,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<ButtonComponentPayload>();
 
                         var result = new ButtonComponentPayload(
+                                             referenceObject.Id,
                                              referenceObject.Label,
                                              referenceObject.Action,
                                              new string[0].Concat(referenceObject.Icons).Concat(new string[] { null }).Concat(referenceObject.Icons).ToList());
@@ -137,6 +179,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<ButtonComponentPayload>();
 
                         var result = new ButtonComponentPayload(
+                                             referenceObject.Id,
                                              referenceObject.Label,
                                              referenceObject.Action,
                                              new string[0].Concat(referenceObject.Icons).Concat(new string[] { "  \r\n  " }).Concat(referenceObject.Icons).ToList());
@@ -151,6 +194,28 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<ButtonComponentPayload>
                 {
+                    Name = "Id should return same 'id' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ButtonComponentPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ButtonComponentPayload>
+                        {
+                            SystemUnderTest = new ButtonComponentPayload(
+                                                      referenceObject.Id,
+                                                      referenceObject.Label,
+                                                      referenceObject.Action,
+                                                      referenceObject.Icons),
+                            ExpectedPropertyValue = referenceObject.Id,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "Id",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ButtonComponentPayload>
+                {
                     Name = "Label should return same 'label' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
@@ -159,6 +224,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<ButtonComponentPayload>
                         {
                             SystemUnderTest = new ButtonComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Label,
                                                       referenceObject.Action,
                                                       referenceObject.Icons),
@@ -180,6 +246,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<ButtonComponentPayload>
                         {
                             SystemUnderTest = new ButtonComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Label,
                                                       referenceObject.Action,
                                                       referenceObject.Icons),
@@ -201,6 +268,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<ButtonComponentPayload>
                         {
                             SystemUnderTest = new ButtonComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Label,
                                                       referenceObject.Action,
                                                       referenceObject.Icons),
@@ -213,6 +281,26 @@ namespace Vuescape.DotNet.Domain.Test
                 });
 
         private static readonly DeepCloneWithTestScenarios<ButtonComponentPayload> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ButtonComponentPayload>()
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ButtonComponentPayload>
+                {
+                    Name = "DeepCloneWithId should deep clone object and replace Id with the provided id",
+                    WithPropertyName = "Id",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ButtonComponentPayload>();
+
+                        var referenceObject = A.Dummy<ButtonComponentPayload>().ThatIs(_ => !systemUnderTest.Id.IsEqualTo(_.Id));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ButtonComponentPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.Id,
+                        };
+
+                        return result;
+                    },
+                })
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<ButtonComponentPayload>
                 {
@@ -285,6 +373,7 @@ namespace Vuescape.DotNet.Domain.Test
                     ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new ButtonComponentPayload[]
                     {
                         new ButtonComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 ReferenceObjectForEquatableTestScenarios.Action,
                                 ReferenceObjectForEquatableTestScenarios.Icons),
@@ -292,14 +381,22 @@ namespace Vuescape.DotNet.Domain.Test
                     ObjectsThatAreNotEqualToReferenceObject = new ButtonComponentPayload[]
                     {
                         new ButtonComponentPayload(
+                                A.Dummy<ButtonComponentPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
+                                ReferenceObjectForEquatableTestScenarios.Label,
+                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.Icons),
+                        new ButtonComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<ButtonComponentPayload>().Whose(_ => !_.Label.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Label)).Label,
                                 ReferenceObjectForEquatableTestScenarios.Action,
                                 ReferenceObjectForEquatableTestScenarios.Icons),
                         new ButtonComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 A.Dummy<ButtonComponentPayload>().Whose(_ => !_.Action.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Action)).Action,
                                 ReferenceObjectForEquatableTestScenarios.Icons),
                         new ButtonComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 ReferenceObjectForEquatableTestScenarios.Action,
                                 A.Dummy<ButtonComponentPayload>().Whose(_ => !_.Icons.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Icons)).Icons),
@@ -625,7 +722,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Label", "Action", "Icons" };
+                var propertyNames = new string[] { "Id", "Label", "Action", "Icons" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

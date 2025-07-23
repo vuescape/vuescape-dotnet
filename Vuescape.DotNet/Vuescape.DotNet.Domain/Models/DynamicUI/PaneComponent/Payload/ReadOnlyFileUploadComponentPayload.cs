@@ -14,7 +14,7 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents the file upload component payload.
     /// </summary>
-    public partial class ReadOnlyFileUploadComponentPayload : IModelViaCodeGen
+    public partial class ReadOnlyFileUploadComponentPayload : IHaveId<string>, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ReadOnlyFileUploadComponentPayload"/> class.

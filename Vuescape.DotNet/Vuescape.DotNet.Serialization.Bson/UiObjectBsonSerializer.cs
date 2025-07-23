@@ -14,6 +14,7 @@ namespace Vuescape.DotNet.Serialization.Bson
     using MongoDB.Bson.Serialization;
     using MongoDB.Bson.Serialization.Serializers;
 
+    using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Serialization.Bson;
 
     using Vuescape.DotNet.Domain;
@@ -93,10 +94,7 @@ namespace Vuescape.DotNet.Serialization.Bson
             BsonDeserializationContext context,
             BsonDeserializationArgs args)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+            new { context }.AsArg().Must().NotBeNull();
 
             if (context.Reader == null)
             {
@@ -157,13 +155,42 @@ namespace Vuescape.DotNet.Serialization.Bson
                 }
                 else
                 {
+                    new { uiObjectType }.AsArg().Must().NotBeNull();
+
+                    // ReSharper disable once PossibleInvalidOperationException - null check above
                     var valueType = ((UiObjectType)uiObjectType).GetObjectType(assemblyQualifiedName);
+                    if (valueType == typeof(short))
+                    {
+                        var intValue = context.Reader.ReadInt32();
+                        value = (short)intValue;
+                    }
+                    else if (valueType == typeof(short?))
+                    {
+                        switch (context.Reader.CurrentBsonType)
+                        {
+                            case BsonType.Int32:
+                                value = (short?)context.Reader.ReadInt32();
+                                break;
 
-                    var serializer = valueType.GetAppropriateSerializer();
+                            case BsonType.Null:
+                                // value = null was set above.
+                                context.Reader.ReadNull();
+                                break;
 
-                    value = serializer == null
-                        ? BsonSerializer.Deserialize(context.Reader, valueType)
-                        : serializer.Deserialize(context, args);
+                            default:
+                                throw new FormatException(
+                                    Invariant(
+                                        $"Unsupported BSON type '{context.Reader.CurrentBsonType}' when deserializing into Nullable<short>."));
+                        }
+                    }
+                    else
+                    {
+                        var serializer = valueType.GetAppropriateSerializer();
+
+                        value = serializer == null
+                            ? BsonSerializer.Deserialize(context.Reader, valueType)
+                            : serializer.Deserialize(context, args);
+                    }
                 }
 
                 context.Reader.ReadEndDocument();

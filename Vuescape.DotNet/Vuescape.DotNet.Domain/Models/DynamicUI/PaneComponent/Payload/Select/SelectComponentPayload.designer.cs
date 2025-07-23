@@ -69,7 +69,8 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = this.Options.IsEqualTo(other.Options)
+            var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
+                      && this.Options.IsEqualTo(other.Options)
                       && this.SelectedValue.IsEqualTo(other.SelectedValue)
                       && this.OnChangeAction.IsEqualTo(other.OnChangeAction)
                       && this.Name.IsEqualTo(other.Name, StringComparer.Ordinal)
@@ -86,6 +87,7 @@ namespace Vuescape.DotNet.Domain
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
+            .Hash(this.Id)
             .Hash(this.Options)
             .Hash(this.SelectedValue)
             .Hash(this.OnChangeAction)
@@ -103,6 +105,45 @@ namespace Vuescape.DotNet.Domain
         public SelectComponentPayload DeepClone()
         {
             var result = new SelectComponentPayload(
+                                 this.Id?.DeepClone(),
+                                 this.Options?.DeepClone(),
+                                 this.SelectedValue?.DeepClone(),
+                                 this.OnChangeAction?.DeepClone(),
+                                 this.Name?.DeepClone(),
+                                 this.OptionLabel?.DeepClone(),
+                                 this.Placeholder?.DeepClone(),
+                                 this.Disabled?.DeepClone(),
+                                 this.CssClass?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="Id" />.
+        /// </summary>
+        /// <param name="id">The new <see cref="Id" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="SelectComponentPayload" /> using the specified <paramref name="id" /> for <see cref="Id" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public SelectComponentPayload DeepCloneWithId(string id)
+        {
+            var result = new SelectComponentPayload(
+                                 id,
                                  this.Options?.DeepClone(),
                                  this.SelectedValue?.DeepClone(),
                                  this.OnChangeAction?.DeepClone(),
@@ -140,6 +181,7 @@ namespace Vuescape.DotNet.Domain
         public SelectComponentPayload DeepCloneWithOptions(IReadOnlyList<SelectOption> options)
         {
             var result = new SelectComponentPayload(
+                                 this.Id?.DeepClone(),
                                  options,
                                  this.SelectedValue?.DeepClone(),
                                  this.OnChangeAction?.DeepClone(),
@@ -177,6 +219,7 @@ namespace Vuescape.DotNet.Domain
         public SelectComponentPayload DeepCloneWithSelectedValue(SelectOption selectedValue)
         {
             var result = new SelectComponentPayload(
+                                 this.Id?.DeepClone(),
                                  this.Options?.DeepClone(),
                                  selectedValue,
                                  this.OnChangeAction?.DeepClone(),
@@ -214,6 +257,7 @@ namespace Vuescape.DotNet.Domain
         public SelectComponentPayload DeepCloneWithOnChangeAction(ActionBase onChangeAction)
         {
             var result = new SelectComponentPayload(
+                                 this.Id?.DeepClone(),
                                  this.Options?.DeepClone(),
                                  this.SelectedValue?.DeepClone(),
                                  onChangeAction,
@@ -251,6 +295,7 @@ namespace Vuescape.DotNet.Domain
         public SelectComponentPayload DeepCloneWithName(string name)
         {
             var result = new SelectComponentPayload(
+                                 this.Id?.DeepClone(),
                                  this.Options?.DeepClone(),
                                  this.SelectedValue?.DeepClone(),
                                  this.OnChangeAction?.DeepClone(),
@@ -288,6 +333,7 @@ namespace Vuescape.DotNet.Domain
         public SelectComponentPayload DeepCloneWithOptionLabel(string optionLabel)
         {
             var result = new SelectComponentPayload(
+                                 this.Id?.DeepClone(),
                                  this.Options?.DeepClone(),
                                  this.SelectedValue?.DeepClone(),
                                  this.OnChangeAction?.DeepClone(),
@@ -325,6 +371,7 @@ namespace Vuescape.DotNet.Domain
         public SelectComponentPayload DeepCloneWithPlaceholder(string placeholder)
         {
             var result = new SelectComponentPayload(
+                                 this.Id?.DeepClone(),
                                  this.Options?.DeepClone(),
                                  this.SelectedValue?.DeepClone(),
                                  this.OnChangeAction?.DeepClone(),
@@ -362,6 +409,7 @@ namespace Vuescape.DotNet.Domain
         public SelectComponentPayload DeepCloneWithDisabled(bool? disabled)
         {
             var result = new SelectComponentPayload(
+                                 this.Id?.DeepClone(),
                                  this.Options?.DeepClone(),
                                  this.SelectedValue?.DeepClone(),
                                  this.OnChangeAction?.DeepClone(),
@@ -399,6 +447,7 @@ namespace Vuescape.DotNet.Domain
         public SelectComponentPayload DeepCloneWithCssClass(string cssClass)
         {
             var result = new SelectComponentPayload(
+                                 this.Id?.DeepClone(),
                                  this.Options?.DeepClone(),
                                  this.SelectedValue?.DeepClone(),
                                  this.OnChangeAction?.DeepClone(),
@@ -415,7 +464,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.SelectComponentPayload: Options = {this.Options?.ToString() ?? "<null>"}, SelectedValue = {this.SelectedValue?.ToString() ?? "<null>"}, OnChangeAction = {this.OnChangeAction?.ToString() ?? "<null>"}, Name = {this.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, OptionLabel = {this.OptionLabel?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Placeholder = {this.Placeholder?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Disabled = {this.Disabled?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClass = {this.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.SelectComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Options = {this.Options?.ToString() ?? "<null>"}, SelectedValue = {this.SelectedValue?.ToString() ?? "<null>"}, OnChangeAction = {this.OnChangeAction?.ToString() ?? "<null>"}, Name = {this.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, OptionLabel = {this.OptionLabel?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Placeholder = {this.Placeholder?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Disabled = {this.Disabled?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClass = {this.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

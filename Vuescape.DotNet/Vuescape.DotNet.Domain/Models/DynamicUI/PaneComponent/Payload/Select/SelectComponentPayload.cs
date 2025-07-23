@@ -20,6 +20,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectComponentPayload"/> class.
         /// </summary>
+        /// <param name="id">The unique identifier for the component.</param>
         /// <param name="options">The options to display in the select component.</param>
         /// <param name="selectedValue">The currently selected value.</param>
         /// <param name="onChangeAction">The action to perform when the value changes.</param>
@@ -30,6 +31,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="cssClass">The CSS class for the select component.</param>
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "This is not Hungarian notation")]
         public SelectComponentPayload(
+            string id,
             IReadOnlyList<SelectOption> options,
             SelectOption selectedValue = null,
             ActionBase onChangeAction = null,
@@ -39,8 +41,10 @@ namespace Vuescape.DotNet.Domain
             bool? disabled = null,
             string cssClass = null)
         {
+            new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { options }.AsArg().Must().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
 
+            this.Id = id;
             this.Options = options;
             this.SelectedValue = selectedValue;
             this.OnChangeAction = onChangeAction;
@@ -50,6 +54,11 @@ namespace Vuescape.DotNet.Domain
             this.Disabled = disabled;
             this.CssClass = cssClass;
         }
+
+        /// <summary>
+        /// Gets the unique identifier of the select component.
+        /// </summary>
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets the options to display in the select component.

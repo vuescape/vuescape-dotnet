@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<SelectComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.SelectComponentPayload: Options = {systemUnderTest.Options?.ToString() ?? "<null>"}, SelectedValue = {systemUnderTest.SelectedValue?.ToString() ?? "<null>"}, OnChangeAction = {systemUnderTest.OnChangeAction?.ToString() ?? "<null>"}, Name = {systemUnderTest.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, OptionLabel = {systemUnderTest.OptionLabel?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Placeholder = {systemUnderTest.Placeholder?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Disabled = {systemUnderTest.Disabled?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClass = {systemUnderTest.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.SelectComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Options = {systemUnderTest.Options?.ToString() ?? "<null>"}, SelectedValue = {systemUnderTest.SelectedValue?.ToString() ?? "<null>"}, OnChangeAction = {systemUnderTest.OnChangeAction?.ToString() ?? "<null>"}, Name = {systemUnderTest.Name?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, OptionLabel = {systemUnderTest.OptionLabel?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Placeholder = {systemUnderTest.Placeholder?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Disabled = {systemUnderTest.Disabled?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssClass = {systemUnderTest.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -59,12 +59,61 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<SelectComponentPayload>
                 {
+                    Name = "constructor should throw ArgumentNullException when parameter 'id' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<SelectComponentPayload>();
+
+                        var result = new SelectComponentPayload(
+                                             null,
+                                             referenceObject.Options,
+                                             referenceObject.SelectedValue,
+                                             referenceObject.OnChangeAction,
+                                             referenceObject.Name,
+                                             referenceObject.OptionLabel,
+                                             referenceObject.Placeholder,
+                                             referenceObject.Disabled,
+                                             referenceObject.CssClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "id", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<SelectComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'id' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<SelectComponentPayload>();
+
+                        var result = new SelectComponentPayload(
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.Options,
+                                             referenceObject.SelectedValue,
+                                             referenceObject.OnChangeAction,
+                                             referenceObject.Name,
+                                             referenceObject.OptionLabel,
+                                             referenceObject.Placeholder,
+                                             referenceObject.Disabled,
+                                             referenceObject.CssClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "id", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<SelectComponentPayload>
+                {
                     Name = "constructor should throw ArgumentNullException when parameter 'options' is null scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<SelectComponentPayload>();
 
                         var result = new SelectComponentPayload(
+                                             referenceObject.Id,
                                              null,
                                              referenceObject.SelectedValue,
                                              referenceObject.OnChangeAction,
@@ -88,6 +137,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<SelectComponentPayload>();
 
                         var result = new SelectComponentPayload(
+                                             referenceObject.Id,
                                              new List<SelectOption>(),
                                              referenceObject.SelectedValue,
                                              referenceObject.OnChangeAction,
@@ -111,6 +161,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var referenceObject = A.Dummy<SelectComponentPayload>();
 
                         var result = new SelectComponentPayload(
+                                             referenceObject.Id,
                                              new SelectOption[0].Concat(referenceObject.Options).Concat(new SelectOption[] { null }).Concat(referenceObject.Options).ToList(),
                                              referenceObject.SelectedValue,
                                              referenceObject.OnChangeAction,
@@ -130,6 +181,33 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<SelectComponentPayload>
                 {
+                    Name = "Id should return same 'id' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<SelectComponentPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<SelectComponentPayload>
+                        {
+                            SystemUnderTest = new SelectComponentPayload(
+                                                      referenceObject.Id,
+                                                      referenceObject.Options,
+                                                      referenceObject.SelectedValue,
+                                                      referenceObject.OnChangeAction,
+                                                      referenceObject.Name,
+                                                      referenceObject.OptionLabel,
+                                                      referenceObject.Placeholder,
+                                                      referenceObject.Disabled,
+                                                      referenceObject.CssClass),
+                            ExpectedPropertyValue = referenceObject.Id,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "Id",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<SelectComponentPayload>
+                {
                     Name = "Options should return same 'options' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
@@ -138,6 +216,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<SelectComponentPayload>
                         {
                             SystemUnderTest = new SelectComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Options,
                                                       referenceObject.SelectedValue,
                                                       referenceObject.OnChangeAction,
@@ -164,6 +243,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<SelectComponentPayload>
                         {
                             SystemUnderTest = new SelectComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Options,
                                                       referenceObject.SelectedValue,
                                                       referenceObject.OnChangeAction,
@@ -190,6 +270,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<SelectComponentPayload>
                         {
                             SystemUnderTest = new SelectComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Options,
                                                       referenceObject.SelectedValue,
                                                       referenceObject.OnChangeAction,
@@ -216,6 +297,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<SelectComponentPayload>
                         {
                             SystemUnderTest = new SelectComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Options,
                                                       referenceObject.SelectedValue,
                                                       referenceObject.OnChangeAction,
@@ -242,6 +324,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<SelectComponentPayload>
                         {
                             SystemUnderTest = new SelectComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Options,
                                                       referenceObject.SelectedValue,
                                                       referenceObject.OnChangeAction,
@@ -268,6 +351,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<SelectComponentPayload>
                         {
                             SystemUnderTest = new SelectComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Options,
                                                       referenceObject.SelectedValue,
                                                       referenceObject.OnChangeAction,
@@ -294,6 +378,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<SelectComponentPayload>
                         {
                             SystemUnderTest = new SelectComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Options,
                                                       referenceObject.SelectedValue,
                                                       referenceObject.OnChangeAction,
@@ -320,6 +405,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedPropertyValue<SelectComponentPayload>
                         {
                             SystemUnderTest = new SelectComponentPayload(
+                                                      referenceObject.Id,
                                                       referenceObject.Options,
                                                       referenceObject.SelectedValue,
                                                       referenceObject.OnChangeAction,
@@ -337,6 +423,26 @@ namespace Vuescape.DotNet.Domain.Test
                 });
 
         private static readonly DeepCloneWithTestScenarios<SelectComponentPayload> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<SelectComponentPayload>()
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<SelectComponentPayload>
+                {
+                    Name = "DeepCloneWithId should deep clone object and replace Id with the provided id",
+                    WithPropertyName = "Id",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<SelectComponentPayload>();
+
+                        var referenceObject = A.Dummy<SelectComponentPayload>().ThatIs(_ => !systemUnderTest.Id.IsEqualTo(_.Id));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<SelectComponentPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.Id,
+                        };
+
+                        return result;
+                    },
+                })
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<SelectComponentPayload>
                 {
@@ -509,6 +615,7 @@ namespace Vuescape.DotNet.Domain.Test
                     ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new SelectComponentPayload[]
                     {
                         new SelectComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Options,
                                 ReferenceObjectForEquatableTestScenarios.SelectedValue,
                                 ReferenceObjectForEquatableTestScenarios.OnChangeAction,
@@ -521,6 +628,17 @@ namespace Vuescape.DotNet.Domain.Test
                     ObjectsThatAreNotEqualToReferenceObject = new SelectComponentPayload[]
                     {
                         new SelectComponentPayload(
+                                A.Dummy<SelectComponentPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
+                                ReferenceObjectForEquatableTestScenarios.Options,
+                                ReferenceObjectForEquatableTestScenarios.SelectedValue,
+                                ReferenceObjectForEquatableTestScenarios.OnChangeAction,
+                                ReferenceObjectForEquatableTestScenarios.Name,
+                                ReferenceObjectForEquatableTestScenarios.OptionLabel,
+                                ReferenceObjectForEquatableTestScenarios.Placeholder,
+                                ReferenceObjectForEquatableTestScenarios.Disabled,
+                                ReferenceObjectForEquatableTestScenarios.CssClass),
+                        new SelectComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<SelectComponentPayload>().Whose(_ => !_.Options.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Options)).Options,
                                 ReferenceObjectForEquatableTestScenarios.SelectedValue,
                                 ReferenceObjectForEquatableTestScenarios.OnChangeAction,
@@ -530,6 +648,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Disabled,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                         new SelectComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Options,
                                 A.Dummy<SelectComponentPayload>().Whose(_ => !_.SelectedValue.IsEqualTo(ReferenceObjectForEquatableTestScenarios.SelectedValue)).SelectedValue,
                                 ReferenceObjectForEquatableTestScenarios.OnChangeAction,
@@ -539,6 +658,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Disabled,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                         new SelectComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Options,
                                 ReferenceObjectForEquatableTestScenarios.SelectedValue,
                                 A.Dummy<SelectComponentPayload>().Whose(_ => !_.OnChangeAction.IsEqualTo(ReferenceObjectForEquatableTestScenarios.OnChangeAction)).OnChangeAction,
@@ -548,6 +668,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Disabled,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                         new SelectComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Options,
                                 ReferenceObjectForEquatableTestScenarios.SelectedValue,
                                 ReferenceObjectForEquatableTestScenarios.OnChangeAction,
@@ -557,6 +678,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Disabled,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                         new SelectComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Options,
                                 ReferenceObjectForEquatableTestScenarios.SelectedValue,
                                 ReferenceObjectForEquatableTestScenarios.OnChangeAction,
@@ -566,6 +688,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Disabled,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                         new SelectComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Options,
                                 ReferenceObjectForEquatableTestScenarios.SelectedValue,
                                 ReferenceObjectForEquatableTestScenarios.OnChangeAction,
@@ -575,6 +698,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Disabled,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                         new SelectComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Options,
                                 ReferenceObjectForEquatableTestScenarios.SelectedValue,
                                 ReferenceObjectForEquatableTestScenarios.OnChangeAction,
@@ -584,6 +708,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 A.Dummy<SelectComponentPayload>().Whose(_ => !_.Disabled.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Disabled)).Disabled,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                         new SelectComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Options,
                                 ReferenceObjectForEquatableTestScenarios.SelectedValue,
                                 ReferenceObjectForEquatableTestScenarios.OnChangeAction,
@@ -926,7 +1051,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Options", "SelectedValue", "OnChangeAction", "Name", "OptionLabel", "Placeholder", "Disabled", "CssClass" };
+                var propertyNames = new string[] { "Id", "Options", "SelectedValue", "OnChangeAction", "Name", "OptionLabel", "Placeholder", "Disabled", "CssClass" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

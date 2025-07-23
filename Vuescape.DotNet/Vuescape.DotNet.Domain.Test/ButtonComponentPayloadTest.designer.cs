@@ -127,6 +127,24 @@ namespace Vuescape.DotNet.Domain.Test
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "icons", "contains at least one null element", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ButtonComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'icons' contains a white space element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ButtonComponentPayload>();
+
+                        var result = new ButtonComponentPayload(
+                                             referenceObject.Label,
+                                             referenceObject.Action,
+                                             new string[0].Concat(referenceObject.Icons).Concat(new string[] { "  \r\n  " }).Concat(referenceObject.Icons).ToList());
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "icons", "contains an element that is white space", },
                 });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<ButtonComponentPayload> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ButtonComponentPayload>()

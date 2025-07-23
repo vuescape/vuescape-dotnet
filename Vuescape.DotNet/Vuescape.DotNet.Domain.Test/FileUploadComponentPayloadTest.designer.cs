@@ -209,6 +209,28 @@ namespace Vuescape.DotNet.Domain.Test
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "acceptFileTypeExtensions", "contains at least one null element", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<FileUploadComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'acceptFileTypeExtensions' contains a white space element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<FileUploadComponentPayload>();
+
+                        var result = new FileUploadComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Title,
+                                             referenceObject.DescriptionText,
+                                             referenceObject.IsRequired,
+                                             referenceObject.UploadInstructionText,
+                                             referenceObject.MaxFileSizeInBytes,
+                                             new string[0].Concat(referenceObject.AcceptFileTypeExtensions).Concat(new string[] { "  \r\n  " }).Concat(referenceObject.AcceptFileTypeExtensions).ToList());
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "acceptFileTypeExtensions", "contains an element that is white space", },
                 });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<FileUploadComponentPayload> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<FileUploadComponentPayload>()

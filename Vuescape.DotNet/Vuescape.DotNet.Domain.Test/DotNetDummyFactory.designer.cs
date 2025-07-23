@@ -402,6 +402,7 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new SelectComponentPayload(
+                                 A.Dummy<string>(),
                                  A.Dummy<IReadOnlyList<SelectOption>>(),
                                  A.Dummy<SelectOption>(),
                                  A.Dummy<ActionBase>(),

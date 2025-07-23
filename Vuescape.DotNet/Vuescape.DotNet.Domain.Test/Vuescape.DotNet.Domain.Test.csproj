@@ -255,6 +255,9 @@
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.designer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
+    <Compile Include="DotNetDummyFactory.designer.cs">
+      <DependentUpon>DotNetDummyFactory.cs</DependentUpon>
+    </Compile>
     <Compile Include="RowBaseExtensionsTests.cs" />
     <Compile Include="ActionBaseTest.cs" />
     <Compile Include="ActionBaseTest.designer.cs">
@@ -311,9 +314,6 @@
     <Compile Include="DisplayReportOpTest.cs" />
     <Compile Include="DisplayReportOpTest.designer.cs">
       <DependentUpon>DisplayReportOpTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DotNetDummyFactory.designer.cs">
-      <DependentUpon>DotNetDummyFactory.cs</DependentUpon>
     </Compile>
     <Compile Include="DotNetDummyFactoryTest.designer.cs">
       <DependentUpon>DotNetDummyFactoryTest.cs</DependentUpon>

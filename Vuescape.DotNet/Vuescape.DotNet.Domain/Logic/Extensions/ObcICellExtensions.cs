@@ -229,6 +229,28 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
+        /// Gets a value indicating whether the cell holds HTML.
+        /// </summary>
+        /// <param name="cell">The cell to query.</param>
+        /// <returns>True if the cell is HTML otherwise false.</returns>
+        public static bool IsHtmlCell(
+            this ICell cell)
+        {
+            var result = false;
+
+            if (cell is IHaveCellValueFormat cellWithFormat)
+            {
+                var cellValueFormat = cellWithFormat.GetCellValueFormat();
+                if (cellValueFormat is HtmlCellValueFormat)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Gets the display value of a cell.
         /// </summary>
         /// <param name="obcHeaderRowCell">The cell to retrieve the display value from.</param>

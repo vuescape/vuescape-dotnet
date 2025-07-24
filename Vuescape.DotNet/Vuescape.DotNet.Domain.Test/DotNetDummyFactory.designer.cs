@@ -329,8 +329,8 @@ namespace Vuescape.DotNet.Domain.Test
                         typeof(SelectComponent),
                         typeof(TableComponent),
                         typeof(TableTabsComponent),
-                        typeof(TextLinkComponent),
-                        typeof(TitleComponent)
+                        typeof(TextComponent),
+                        typeof(TextLinkComponent)
                     };
 
                     var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
@@ -514,6 +514,16 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<SelectComponent>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TextComponent(
+                                 A.Dummy<TextComponentPayload>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TextComponentPayload(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<RenderTextAs>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TextLinkComponent(
                                  A.Dummy<TextLinkPayload>()));
 
@@ -523,15 +533,6 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<NavigationAction>(),
                                  A.Dummy<IReadOnlyDictionary<string, string>>(),
-                                 A.Dummy<string>()));
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new TitleComponent(
-                                 A.Dummy<TitleComponentPayload>()));
-
-            AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new TitleComponentPayload(
-                                 A.Dummy<string>(),
                                  A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(

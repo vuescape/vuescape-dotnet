@@ -549,6 +549,9 @@
     <Compile Include="TabTest.designer.cs">
       <DependentUpon>TabTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextComponentPayloadTest.designer.cs">
+      <DependentUpon>TextComponentPayloadTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextLinkComponentTest.cs" />
     <Compile Include="TextLinkComponentTest.designer.cs">
       <DependentUpon>TextLinkComponentTest.cs</DependentUpon>
@@ -557,13 +560,10 @@
     <Compile Include="TextLinkPayloadTest.designer.cs">
       <DependentUpon>TextLinkPayloadTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="TitleComponentPayloadTest.cs" />
-    <Compile Include="TitleComponentPayloadTest.designer.cs">
-      <DependentUpon>TitleComponentPayloadTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TitleComponentTest.cs" />
-    <Compile Include="TitleComponentTest.designer.cs">
-      <DependentUpon>TitleComponentTest.cs</DependentUpon>
+    <Compile Include="TextComponentPayloadTest.cs" />
+    <Compile Include="TextComponentTest.cs" />
+    <Compile Include="TextComponentTest.designer.cs">
+      <DependentUpon>TextComponentTest.cs</DependentUpon>
     </Compile>
     <None Include=".analyzers\test.ruleset" />
     <None Include="app.config" />

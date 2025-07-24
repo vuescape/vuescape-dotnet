@@ -89,7 +89,7 @@ namespace Vuescape.DotNet.Domain.Test
                         typeof(ButtonComponent),
                         typeof(ChicletGridComponent),
                         typeof(SelectComponent),
-                        typeof(TitleComponent)
+                        typeof(TextComponent)
                     };
 
                     var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
@@ -111,7 +111,7 @@ namespace Vuescape.DotNet.Domain.Test
                         typeof(ButtonComponent),
                         typeof(ChicletGridComponent),
                         typeof(SelectComponent),
-                        typeof(TitleComponent)
+                        typeof(TextComponent)
                     );
 
                     var comparableValue = A.Dummy<ComparableValue>();

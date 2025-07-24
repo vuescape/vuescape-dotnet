@@ -34,35 +34,35 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class TitleComponentTest
+    public static partial class TextComponentTest
     {
-        private static readonly StringRepresentationTestScenarios<TitleComponent> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<TitleComponent>()
+        private static readonly StringRepresentationTestScenarios<TextComponent> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<TextComponent>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<TitleComponent>
+                new StringRepresentationTestScenario<TextComponent>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TitleComponent>();
+                        var systemUnderTest = A.Dummy<TextComponent>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<TitleComponent>
+                        var result = new SystemUnderTestExpectedStringRepresentation<TextComponent>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TitleComponent: Payload = {systemUnderTest.Payload?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TextComponent: Payload = {systemUnderTest.Payload?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<TitleComponent> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<TitleComponent>()
+        private static readonly ConstructorArgumentValidationTestScenarios<TextComponent> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<TextComponent>()
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TitleComponent>
+                new ConstructorArgumentValidationTestScenario<TextComponent>
                 {
                     Name = "constructor should throw ArgumentNullException when parameter 'payload' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var result = new TitleComponent(
+                        var result = new TextComponent(
                                              null);
 
                         return result;
@@ -71,18 +71,18 @@ namespace Vuescape.DotNet.Domain.Test
                     ExpectedExceptionMessageContains = new[] { "payload", },
                 });
 
-        private static readonly ConstructorPropertyAssignmentTestScenarios<TitleComponent> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TitleComponent>()
+        private static readonly ConstructorPropertyAssignmentTestScenarios<TextComponent> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TextComponent>()
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TitleComponent>
+                new ConstructorPropertyAssignmentTestScenario<TextComponent>
                 {
                     Name = "Payload should return same 'payload' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TitleComponent>();
+                        var referenceObject = A.Dummy<TextComponent>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<TitleComponent>
+                        var result = new SystemUnderTestExpectedPropertyValue<TextComponent>
                         {
-                            SystemUnderTest = new TitleComponent(
+                            SystemUnderTest = new TextComponent(
                                                       referenceObject.Payload),
                             ExpectedPropertyValue = referenceObject.Payload,
                         };
@@ -92,19 +92,19 @@ namespace Vuescape.DotNet.Domain.Test
                     PropertyName = "Payload",
                 });
 
-        private static readonly DeepCloneWithTestScenarios<TitleComponent> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TitleComponent>()
+        private static readonly DeepCloneWithTestScenarios<TextComponent> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TextComponent>()
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<TitleComponent>
+                new DeepCloneWithTestScenario<TextComponent>
                 {
                     Name = "DeepCloneWithPayload should deep clone object and replace Payload with the provided payload",
                     WithPropertyName = "Payload",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TitleComponent>();
+                        var systemUnderTest = A.Dummy<TextComponent>();
 
-                        var referenceObject = A.Dummy<TitleComponent>().ThatIs(_ => !systemUnderTest.Payload.IsEqualTo(_.Payload));
+                        var referenceObject = A.Dummy<TextComponent>().ThatIs(_ => !systemUnderTest.Payload.IsEqualTo(_.Payload));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<TitleComponent>
+                        var result = new SystemUnderTestDeepCloneWithValue<TextComponent>
                         {
                             SystemUnderTest = systemUnderTest,
                             DeepCloneWithValue = referenceObject.Payload,
@@ -114,23 +114,23 @@ namespace Vuescape.DotNet.Domain.Test
                     },
                 });
 
-        private static readonly TitleComponent ReferenceObjectForEquatableTestScenarios = A.Dummy<TitleComponent>();
+        private static readonly TextComponent ReferenceObjectForEquatableTestScenarios = A.Dummy<TextComponent>();
 
-        private static readonly EquatableTestScenarios<TitleComponent> EquatableTestScenarios = new EquatableTestScenarios<TitleComponent>()
+        private static readonly EquatableTestScenarios<TextComponent> EquatableTestScenarios = new EquatableTestScenarios<TextComponent>()
             .AddScenario(() =>
-                new EquatableTestScenario<TitleComponent>
+                new EquatableTestScenario<TextComponent>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new TitleComponent[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new TextComponent[]
                     {
-                        new TitleComponent(
+                        new TextComponent(
                                 ReferenceObjectForEquatableTestScenarios.Payload),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new TitleComponent[]
+                    ObjectsThatAreNotEqualToReferenceObject = new TextComponent[]
                     {
-                        new TitleComponent(
-                                A.Dummy<TitleComponent>().Whose(_ => !_.Payload.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Payload)).Payload),
+                        new TextComponent(
+                                A.Dummy<TextComponent>().Whose(_ => !_.Payload.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Payload)).Payload),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -168,12 +168,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void TitleComponent___Should_implement_IModel_of_TitleComponent___When_reflecting()
+            public static void TextComponent___Should_implement_IModel_of_TextComponent___When_reflecting()
             {
                 // Arrange
-                var type = typeof(TitleComponent);
+                var type = typeof(TextComponent);
 
-                var expectedModelMethods = typeof(IModel<TitleComponent>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<TextComponent>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -183,7 +183,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<TitleComponent>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<TextComponent>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -201,10 +201,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void TitleComponent___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void TextComponent___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(TitleComponent);
+                var type = typeof(TextComponent);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -384,10 +384,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<TitleComponent>();
+                var systemUnderTest = A.Dummy<TextComponent>();
 
                 // Act
-                var actual = (TitleComponent)systemUnderTest.Clone();
+                var actual = (TextComponent)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -411,7 +411,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<TitleComponent>();
+                var systemUnderTest = A.Dummy<TextComponent>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -462,12 +462,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (TitleComponent)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (TextComponent)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(TitleComponent).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(TextComponent).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var actualPropertyValue = propertyInfo.GetValue(actual);
 
@@ -529,7 +529,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TitleComponent>();
+                var expected = A.Dummy<TextComponent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -558,7 +558,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TitleComponent>();
+                var expected = A.Dummy<TextComponent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -587,7 +587,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TitleComponent>();
+                var expected = A.Dummy<TextComponent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -616,7 +616,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TitleComponent>();
+                var expected = A.Dummy<TextComponent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -650,8 +650,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                TitleComponent systemUnderTest1 = null;
-                TitleComponent systemUnderTest2 = null;
+                TextComponent systemUnderTest1 = null;
+                TextComponent systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -681,7 +681,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TitleComponent systemUnderTest = null;
+                    TextComponent systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -830,8 +830,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                TitleComponent systemUnderTest1 = null;
-                TitleComponent systemUnderTest2 = null;
+                TextComponent systemUnderTest1 = null;
+                TextComponent systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -861,7 +861,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TitleComponent systemUnderTest = null;
+                    TextComponent systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -1150,17 +1150,17 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_TitleComponentPayload___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_PaneComponent_of_TextComponentPayload___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    PaneComponent<TitleComponentPayload> systemUnderTest = null;
+                    PaneComponent<TextComponentPayload> systemUnderTest = null;
 
                     // Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponent<TitleComponentPayload>)systemUnderTest);
+                    var actual = scenario.ReferenceObject.Equals((PaneComponent<TextComponentPayload>)systemUnderTest);
 
                     // Assert
                     actual.AsTest().Must().BeFalse(because: scenario.Id);
@@ -1181,14 +1181,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_TitleComponentPayload___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_PaneComponent_of_TextComponentPayload___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponent<TitleComponentPayload>)scenario.ReferenceObject);
+                    var actual = scenario.ReferenceObject.Equals((PaneComponent<TextComponentPayload>)scenario.ReferenceObject);
 
                     // Assert
                     actual.AsTest().Must().BeTrue(because: scenario.Id);
@@ -1209,14 +1209,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_TitleComponentPayload___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_PaneComponent_of_TextComponentPayload___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<TitleComponentPayload>)_)).ToList();
+                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<TextComponentPayload>)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
@@ -1237,14 +1237,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_TitleComponentPayload___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_PaneComponent_of_TextComponentPayload___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<TitleComponentPayload>)_)).ToList();
+                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<TextComponentPayload>)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
@@ -1265,14 +1265,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_TitleComponentPayload___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_PaneComponent_of_TextComponentPayload___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<TitleComponentPayload>)_)).ToList();
+                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<TextComponentPayload>)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeTrue(because: scenario.Id);
@@ -1293,14 +1293,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TitleComponent___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_TextComponent___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TitleComponent systemUnderTest = null;
+                    TextComponent systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1324,7 +1324,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TitleComponent___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_TextComponent___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1352,7 +1352,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TitleComponent___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_TextComponent___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1380,7 +1380,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TitleComponent___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_TextComponent___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1408,7 +1408,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TitleComponent___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_TextComponent___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 

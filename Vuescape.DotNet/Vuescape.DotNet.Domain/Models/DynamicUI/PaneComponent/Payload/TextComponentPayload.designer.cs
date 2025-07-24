@@ -23,15 +23,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class TitleComponentPayload : IModel<TitleComponentPayload>
+    public partial class TextComponentPayload : IModel<TextComponentPayload>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="TitleComponentPayload"/> are equal.
+        /// Determines whether two objects of type <see cref="TextComponentPayload"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(TitleComponentPayload left, TitleComponentPayload right)
+        public static bool operator ==(TextComponentPayload left, TextComponentPayload right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -49,15 +49,15 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="TitleComponentPayload"/> are not equal.
+        /// Determines whether two objects of type <see cref="TextComponentPayload"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(TitleComponentPayload left, TitleComponentPayload right) => !(left == right);
+        public static bool operator !=(TextComponentPayload left, TextComponentPayload right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(TitleComponentPayload other)
+        public bool Equals(TextComponentPayload other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -70,29 +70,32 @@ namespace Vuescape.DotNet.Domain
             }
 
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
-                      && this.Text.IsEqualTo(other.Text, StringComparer.Ordinal);
+                      && this.Text.IsEqualTo(other.Text, StringComparer.Ordinal)
+                      && this.RenderTextAs.IsEqualTo(other.RenderTextAs);
 
             return result;
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as TitleComponentPayload);
+        public override bool Equals(object obj) => this == (obj as TextComponentPayload);
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.Id)
             .Hash(this.Text)
+            .Hash(this.RenderTextAs)
             .Value;
 
         /// <inheritdoc />
         public object Clone() => this.DeepClone();
 
         /// <inheritdoc />
-        public TitleComponentPayload DeepClone()
+        public TextComponentPayload DeepClone()
         {
-            var result = new TitleComponentPayload(
+            var result = new TextComponentPayload(
                                  this.Id?.DeepClone(),
-                                 this.Text?.DeepClone());
+                                 this.Text?.DeepClone(),
+                                 this.RenderTextAs.DeepClone());
 
             return result;
         }
@@ -101,7 +104,7 @@ namespace Vuescape.DotNet.Domain
         /// Deep clones this object with a new <see cref="Id" />.
         /// </summary>
         /// <param name="id">The new <see cref="Id" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TitleComponentPayload" /> using the specified <paramref name="id" /> for <see cref="Id" /> and a deep clone of every other property.</returns>
+        /// <returns>New <see cref="TextComponentPayload" /> using the specified <paramref name="id" /> for <see cref="Id" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -119,11 +122,12 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TitleComponentPayload DeepCloneWithId(string id)
+        public TextComponentPayload DeepCloneWithId(string id)
         {
-            var result = new TitleComponentPayload(
+            var result = new TextComponentPayload(
                                  id,
-                                 this.Text?.DeepClone());
+                                 this.Text?.DeepClone(),
+                                 this.RenderTextAs.DeepClone());
 
             return result;
         }
@@ -132,7 +136,7 @@ namespace Vuescape.DotNet.Domain
         /// Deep clones this object with a new <see cref="Text" />.
         /// </summary>
         /// <param name="text">The new <see cref="Text" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="TitleComponentPayload" /> using the specified <paramref name="text" /> for <see cref="Text" /> and a deep clone of every other property.</returns>
+        /// <returns>New <see cref="TextComponentPayload" /> using the specified <paramref name="text" /> for <see cref="Text" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -150,11 +154,44 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public TitleComponentPayload DeepCloneWithText(string text)
+        public TextComponentPayload DeepCloneWithText(string text)
         {
-            var result = new TitleComponentPayload(
+            var result = new TextComponentPayload(
                                  this.Id?.DeepClone(),
-                                 text);
+                                 text,
+                                 this.RenderTextAs.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="RenderTextAs" />.
+        /// </summary>
+        /// <param name="renderTextAs">The new <see cref="RenderTextAs" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TextComponentPayload" /> using the specified <paramref name="renderTextAs" /> for <see cref="RenderTextAs" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public TextComponentPayload DeepCloneWithRenderTextAs(RenderTextAs renderTextAs)
+        {
+            var result = new TextComponentPayload(
+                                 this.Id?.DeepClone(),
+                                 this.Text?.DeepClone(),
+                                 renderTextAs);
 
             return result;
         }
@@ -163,7 +200,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TitleComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {this.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TextComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {this.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, RenderTextAs = {this.RenderTextAs.ToString() ?? "<null>"}.");
 
             return result;
         }

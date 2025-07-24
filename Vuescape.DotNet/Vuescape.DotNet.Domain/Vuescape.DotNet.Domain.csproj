@@ -159,6 +159,13 @@
     <Compile Include="Models\DynamicUI\Badge.designer.cs">
       <DependentUpon>Badge.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TextComponentPayload.designer.cs">
+      <DependentUpon>TextComponentPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\TextComponent.designer.cs">
+      <DependentUpon>TextComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\RenderTextAs.cs" />
     <Compile Include="Models\DynamicUI\BadgeSeverity.cs" />
     <Compile Include="Models\DynamicUI\Chiclet.cs" />
     <Compile Include="Models\DynamicUI\Chiclet.designer.cs">
@@ -190,9 +197,6 @@
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\TextLinkPayload.designer.cs">
       <DependentUpon>TextLinkPayload.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TitleComponentPayload.designer.cs">
-      <DependentUpon>TitleComponentPayload.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\ReadOnlyFileUploadComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\FileUploadComponent.designer.cs">
@@ -261,17 +265,14 @@
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ButtonComponentPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ChicletGridComponentPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableComponentPayload.cs" />
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TitleComponentPayload.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TextComponentPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\TableTabsComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\TableComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\FileUploadComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\TextLinkComponent.designer.cs">
       <DependentUpon>TextLinkComponent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\DynamicUI\PaneComponent\TitleComponent.cs" />
-    <Compile Include="Models\DynamicUI\PaneComponent\TitleComponent.designer.cs">
-      <DependentUpon>TitleComponent.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\TextComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneItem.cs" />
     <Compile Include="Models\DynamicUI\PaneItem.designer.cs">
       <DependentUpon>PaneItem.cs</DependentUpon>

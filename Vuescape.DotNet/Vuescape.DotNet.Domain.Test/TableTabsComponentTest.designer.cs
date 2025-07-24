@@ -145,8 +145,8 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<ReadOnlyFileUploadComponent>(),
                         A.Dummy<SelectComponent>(),
                         A.Dummy<TableComponent>(),
+                        A.Dummy<TextComponent>(),
                         A.Dummy<TextLinkComponent>(),
-                        A.Dummy<TitleComponent>(),
                     },
                 });
 

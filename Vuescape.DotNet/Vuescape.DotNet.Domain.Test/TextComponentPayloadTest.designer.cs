@@ -34,39 +34,40 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class TitleComponentPayloadTest
+    public static partial class TextComponentPayloadTest
     {
-        private static readonly StringRepresentationTestScenarios<TitleComponentPayload> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<TitleComponentPayload>()
+        private static readonly StringRepresentationTestScenarios<TextComponentPayload> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<TextComponentPayload>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<TitleComponentPayload>
+                new StringRepresentationTestScenario<TextComponentPayload>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TitleComponentPayload>();
+                        var systemUnderTest = A.Dummy<TextComponentPayload>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<TitleComponentPayload>
+                        var result = new SystemUnderTestExpectedStringRepresentation<TextComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TitleComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {systemUnderTest.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TextComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {systemUnderTest.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, RenderTextAs = {systemUnderTest.RenderTextAs.ToString() ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<TitleComponentPayload> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<TitleComponentPayload>()
+        private static readonly ConstructorArgumentValidationTestScenarios<TextComponentPayload> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<TextComponentPayload>()
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TitleComponentPayload>
+                new ConstructorArgumentValidationTestScenario<TextComponentPayload>
                 {
                     Name = "constructor should throw ArgumentNullException when parameter 'id' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TitleComponentPayload>();
+                        var referenceObject = A.Dummy<TextComponentPayload>();
 
-                        var result = new TitleComponentPayload(
+                        var result = new TextComponentPayload(
                                              null,
-                                             referenceObject.Text);
+                                             referenceObject.Text,
+                                             referenceObject.RenderTextAs);
 
                         return result;
                     },
@@ -74,16 +75,17 @@ namespace Vuescape.DotNet.Domain.Test
                     ExpectedExceptionMessageContains = new[] { "id", },
                 })
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TitleComponentPayload>
+                new ConstructorArgumentValidationTestScenario<TextComponentPayload>
                 {
                     Name = "constructor should throw ArgumentException when parameter 'id' is white space scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TitleComponentPayload>();
+                        var referenceObject = A.Dummy<TextComponentPayload>();
 
-                        var result = new TitleComponentPayload(
+                        var result = new TextComponentPayload(
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.Text);
+                                             referenceObject.Text,
+                                             referenceObject.RenderTextAs);
 
                         return result;
                     },
@@ -91,16 +93,17 @@ namespace Vuescape.DotNet.Domain.Test
                     ExpectedExceptionMessageContains = new[] { "id", "white space", },
                 })
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TitleComponentPayload>
+                new ConstructorArgumentValidationTestScenario<TextComponentPayload>
                 {
                     Name = "constructor should throw ArgumentNullException when parameter 'text' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TitleComponentPayload>();
+                        var referenceObject = A.Dummy<TextComponentPayload>();
 
-                        var result = new TitleComponentPayload(
+                        var result = new TextComponentPayload(
                                              referenceObject.Id,
-                                             null);
+                                             null,
+                                             referenceObject.RenderTextAs);
 
                         return result;
                     },
@@ -108,16 +111,17 @@ namespace Vuescape.DotNet.Domain.Test
                     ExpectedExceptionMessageContains = new[] { "text", },
                 })
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<TitleComponentPayload>
+                new ConstructorArgumentValidationTestScenario<TextComponentPayload>
                 {
                     Name = "constructor should throw ArgumentException when parameter 'text' is white space scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TitleComponentPayload>();
+                        var referenceObject = A.Dummy<TextComponentPayload>();
 
-                        var result = new TitleComponentPayload(
+                        var result = new TextComponentPayload(
                                              referenceObject.Id,
-                                             Invariant($"  {Environment.NewLine}  "));
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.RenderTextAs);
 
                         return result;
                     },
@@ -125,20 +129,21 @@ namespace Vuescape.DotNet.Domain.Test
                     ExpectedExceptionMessageContains = new[] { "text", "white space", },
                 });
 
-        private static readonly ConstructorPropertyAssignmentTestScenarios<TitleComponentPayload> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TitleComponentPayload>()
+        private static readonly ConstructorPropertyAssignmentTestScenarios<TextComponentPayload> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TextComponentPayload>()
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TitleComponentPayload>
+                new ConstructorPropertyAssignmentTestScenario<TextComponentPayload>
                 {
                     Name = "Id should return same 'id' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TitleComponentPayload>();
+                        var referenceObject = A.Dummy<TextComponentPayload>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<TitleComponentPayload>
+                        var result = new SystemUnderTestExpectedPropertyValue<TextComponentPayload>
                         {
-                            SystemUnderTest = new TitleComponentPayload(
+                            SystemUnderTest = new TextComponentPayload(
                                                       referenceObject.Id,
-                                                      referenceObject.Text),
+                                                      referenceObject.Text,
+                                                      referenceObject.RenderTextAs),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
 
@@ -147,39 +152,61 @@ namespace Vuescape.DotNet.Domain.Test
                     PropertyName = "Id",
                 })
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<TitleComponentPayload>
+                new ConstructorPropertyAssignmentTestScenario<TextComponentPayload>
                 {
                     Name = "Text should return same 'text' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<TitleComponentPayload>();
+                        var referenceObject = A.Dummy<TextComponentPayload>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<TitleComponentPayload>
+                        var result = new SystemUnderTestExpectedPropertyValue<TextComponentPayload>
                         {
-                            SystemUnderTest = new TitleComponentPayload(
+                            SystemUnderTest = new TextComponentPayload(
                                                       referenceObject.Id,
-                                                      referenceObject.Text),
+                                                      referenceObject.Text,
+                                                      referenceObject.RenderTextAs),
                             ExpectedPropertyValue = referenceObject.Text,
                         };
 
                         return result;
                     },
                     PropertyName = "Text",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TextComponentPayload>
+                {
+                    Name = "RenderTextAs should return same 'renderTextAs' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TextComponentPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TextComponentPayload>
+                        {
+                            SystemUnderTest = new TextComponentPayload(
+                                                      referenceObject.Id,
+                                                      referenceObject.Text,
+                                                      referenceObject.RenderTextAs),
+                            ExpectedPropertyValue = referenceObject.RenderTextAs,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "RenderTextAs",
                 });
 
-        private static readonly DeepCloneWithTestScenarios<TitleComponentPayload> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TitleComponentPayload>()
+        private static readonly DeepCloneWithTestScenarios<TextComponentPayload> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TextComponentPayload>()
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<TitleComponentPayload>
+                new DeepCloneWithTestScenario<TextComponentPayload>
                 {
                     Name = "DeepCloneWithId should deep clone object and replace Id with the provided id",
                     WithPropertyName = "Id",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TitleComponentPayload>();
+                        var systemUnderTest = A.Dummy<TextComponentPayload>();
 
-                        var referenceObject = A.Dummy<TitleComponentPayload>().ThatIs(_ => !systemUnderTest.Id.IsEqualTo(_.Id));
+                        var referenceObject = A.Dummy<TextComponentPayload>().ThatIs(_ => !systemUnderTest.Id.IsEqualTo(_.Id));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<TitleComponentPayload>
+                        var result = new SystemUnderTestDeepCloneWithValue<TextComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
                             DeepCloneWithValue = referenceObject.Id,
@@ -189,17 +216,17 @@ namespace Vuescape.DotNet.Domain.Test
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<TitleComponentPayload>
+                new DeepCloneWithTestScenario<TextComponentPayload>
                 {
                     Name = "DeepCloneWithText should deep clone object and replace Text with the provided text",
                     WithPropertyName = "Text",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<TitleComponentPayload>();
+                        var systemUnderTest = A.Dummy<TextComponentPayload>();
 
-                        var referenceObject = A.Dummy<TitleComponentPayload>().ThatIs(_ => !systemUnderTest.Text.IsEqualTo(_.Text));
+                        var referenceObject = A.Dummy<TextComponentPayload>().ThatIs(_ => !systemUnderTest.Text.IsEqualTo(_.Text));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<TitleComponentPayload>
+                        var result = new SystemUnderTestDeepCloneWithValue<TextComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
                             DeepCloneWithValue = referenceObject.Text,
@@ -207,30 +234,57 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TextComponentPayload>
+                {
+                    Name = "DeepCloneWithRenderTextAs should deep clone object and replace RenderTextAs with the provided renderTextAs",
+                    WithPropertyName = "RenderTextAs",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TextComponentPayload>();
+
+                        var referenceObject = A.Dummy<TextComponentPayload>().ThatIs(_ => !systemUnderTest.RenderTextAs.IsEqualTo(_.RenderTextAs));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TextComponentPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.RenderTextAs,
+                        };
+
+                        return result;
+                    },
                 });
 
-        private static readonly TitleComponentPayload ReferenceObjectForEquatableTestScenarios = A.Dummy<TitleComponentPayload>();
+        private static readonly TextComponentPayload ReferenceObjectForEquatableTestScenarios = A.Dummy<TextComponentPayload>();
 
-        private static readonly EquatableTestScenarios<TitleComponentPayload> EquatableTestScenarios = new EquatableTestScenarios<TitleComponentPayload>()
+        private static readonly EquatableTestScenarios<TextComponentPayload> EquatableTestScenarios = new EquatableTestScenarios<TextComponentPayload>()
             .AddScenario(() =>
-                new EquatableTestScenario<TitleComponentPayload>
+                new EquatableTestScenario<TextComponentPayload>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new TitleComponentPayload[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new TextComponentPayload[]
                     {
-                        new TitleComponentPayload(
+                        new TextComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Text),
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                ReferenceObjectForEquatableTestScenarios.RenderTextAs),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new TitleComponentPayload[]
+                    ObjectsThatAreNotEqualToReferenceObject = new TextComponentPayload[]
                     {
-                        new TitleComponentPayload(
-                                A.Dummy<TitleComponentPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
-                                ReferenceObjectForEquatableTestScenarios.Text),
-                        new TitleComponentPayload(
+                        new TextComponentPayload(
+                                A.Dummy<TextComponentPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                ReferenceObjectForEquatableTestScenarios.RenderTextAs),
+                        new TextComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                A.Dummy<TitleComponentPayload>().Whose(_ => !_.Text.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Text)).Text),
+                                A.Dummy<TextComponentPayload>().Whose(_ => !_.Text.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Text)).Text,
+                                ReferenceObjectForEquatableTestScenarios.RenderTextAs),
+                        new TextComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                A.Dummy<TextComponentPayload>().Whose(_ => !_.RenderTextAs.IsEqualTo(ReferenceObjectForEquatableTestScenarios.RenderTextAs)).RenderTextAs),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -260,12 +314,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void TitleComponentPayload___Should_implement_IModel_of_TitleComponentPayload___When_reflecting()
+            public static void TextComponentPayload___Should_implement_IModel_of_TextComponentPayload___When_reflecting()
             {
                 // Arrange
-                var type = typeof(TitleComponentPayload);
+                var type = typeof(TextComponentPayload);
 
-                var expectedModelMethods = typeof(IModel<TitleComponentPayload>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<TextComponentPayload>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -275,7 +329,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<TitleComponentPayload>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<TextComponentPayload>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -293,10 +347,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void TitleComponentPayload___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void TextComponentPayload___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(TitleComponentPayload);
+                var type = typeof(TextComponentPayload);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -476,10 +530,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<TitleComponentPayload>();
+                var systemUnderTest = A.Dummy<TextComponentPayload>();
 
                 // Act
-                var actual = (TitleComponentPayload)systemUnderTest.Clone();
+                var actual = (TextComponentPayload)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -503,7 +557,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<TitleComponentPayload>();
+                var systemUnderTest = A.Dummy<TextComponentPayload>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -529,7 +583,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Text" };
+                var propertyNames = new string[] { "Id", "Text", "RenderTextAs" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 
@@ -542,12 +596,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (TitleComponentPayload)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (TextComponentPayload)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(TitleComponentPayload).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(TextComponentPayload).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var actualPropertyValue = propertyInfo.GetValue(actual);
 
@@ -609,7 +663,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TitleComponentPayload>();
+                var expected = A.Dummy<TextComponentPayload>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -638,7 +692,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TitleComponentPayload>();
+                var expected = A.Dummy<TextComponentPayload>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -667,7 +721,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TitleComponentPayload>();
+                var expected = A.Dummy<TextComponentPayload>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -696,7 +750,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<TitleComponentPayload>();
+                var expected = A.Dummy<TextComponentPayload>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -730,8 +784,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                TitleComponentPayload systemUnderTest1 = null;
-                TitleComponentPayload systemUnderTest2 = null;
+                TextComponentPayload systemUnderTest1 = null;
+                TextComponentPayload systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -761,7 +815,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TitleComponentPayload systemUnderTest = null;
+                    TextComponentPayload systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -910,8 +964,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                TitleComponentPayload systemUnderTest1 = null;
-                TitleComponentPayload systemUnderTest2 = null;
+                TextComponentPayload systemUnderTest1 = null;
+                TextComponentPayload systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -941,7 +995,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TitleComponentPayload systemUnderTest = null;
+                    TextComponentPayload systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -1087,14 +1141,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TitleComponentPayload___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_TextComponentPayload___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    TitleComponentPayload systemUnderTest = null;
+                    TextComponentPayload systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1118,7 +1172,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TitleComponentPayload___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_TextComponentPayload___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1146,7 +1200,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TitleComponentPayload___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_TextComponentPayload___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1174,7 +1228,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TitleComponentPayload___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_TextComponentPayload___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1202,7 +1256,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_TitleComponentPayload___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_TextComponentPayload___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 

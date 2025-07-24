@@ -146,7 +146,7 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<SelectComponent>(),
                         A.Dummy<TableComponent>(),
                         A.Dummy<TableTabsComponent>(),
-                        A.Dummy<TitleComponent>(),
+                        A.Dummy<TextComponent>(),
                     },
                 });
 

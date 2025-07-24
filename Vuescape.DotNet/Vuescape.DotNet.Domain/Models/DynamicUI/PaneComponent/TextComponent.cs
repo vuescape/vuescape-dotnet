@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TitleComponent.cs" company="Vuescape">
+// <copyright file="TextComponent.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -12,13 +12,13 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a title component with an associated payload.
     /// </summary>
-    public partial class TitleComponent : PaneComponent<TitleComponentPayload>, IModelViaCodeGen
+    public partial class TextComponent : PaneComponent<TextComponentPayload>, IModelViaCodeGen
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TitleComponent"/> class.
+        /// Initializes a new instance of the <see cref="TextComponent"/> class.
         /// </summary>
         /// <param name="payload">The payload containing details of the title component.</param>
-        public TitleComponent(TitleComponentPayload payload)
+        public TextComponent(TextComponentPayload payload)
             : base(payload)
         {
         }
@@ -26,6 +26,6 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the type of the pane component.
         /// </summary>
-        public override string Type => "title";
+        public override string Type => "text";
     }
 }

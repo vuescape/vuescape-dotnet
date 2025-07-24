@@ -20,15 +20,11 @@ namespace Vuescape.DotNet.Domain
         /// Initializes a new instance of the <see cref="ReadOnlyFileUploadComponentPayload"/> class.
         /// </summary>
         /// <param name="id">The unique identifier for this component.</param>
-        /// <param name="title">OPTIONAL The title to display.</param>
-        /// <param name="descriptionText">OPTIONAL The description text to show under the title.</param>
         /// <param name="fileName">The file name to display.</param>
         /// <param name="fileSizeInBytes">The file size in bytes.</param>
         /// <param name="downloadNavigationAction">OPTIONAL A navigation action to perform in order to download the file.</param>
         public ReadOnlyFileUploadComponentPayload(
             string id,
-            string title,
-            string descriptionText,
             string fileName,
             long fileSizeInBytes,
             NavigationAction downloadNavigationAction)
@@ -38,8 +34,6 @@ namespace Vuescape.DotNet.Domain
             new { fileSizeInBytes }.AsArg().Must().NotBeLessThan(0L);
 
             this.Id = id;
-            this.Title = title;
-            this.DescriptionText = descriptionText;
             this.FileName = fileName;
             this.FileSizeInBytes = fileSizeInBytes;
             this.DownloadNavigationAction = downloadNavigationAction;
@@ -49,16 +43,6 @@ namespace Vuescape.DotNet.Domain
         /// Gets the ID.
         /// </summary>
         public string Id { get; private set; }
-
-        /// <summary>
-        /// Gets the title.
-        /// </summary>
-        public string Title { get; private set; }
-
-        /// <summary>
-        /// Gets the description text.
-        /// </summary>
-        public string DescriptionText { get; private set; }
 
         /// <summary>
         /// Gets the file name.

@@ -367,8 +367,6 @@ namespace Vuescape.DotNet.Domain.Test
                 () => new ReadOnlyFileUploadComponentPayload(
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<string>(),
-                                 A.Dummy<string>(),
                                  A.Dummy<long>(),
                                  A.Dummy<NavigationAction>()));
 

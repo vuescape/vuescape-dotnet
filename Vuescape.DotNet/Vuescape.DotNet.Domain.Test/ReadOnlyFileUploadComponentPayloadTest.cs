@@ -36,8 +36,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                             var result = new ReadOnlyFileUploadComponentPayload(
                                 null,
-                                referenceObject.Title,
-                                referenceObject.DescriptionText,
                                 referenceObject.FileName,
                                 referenceObject.FileSizeInBytes,
                                 referenceObject.DownloadNavigationAction);
@@ -57,8 +55,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                             var result = new ReadOnlyFileUploadComponentPayload(
                                 Invariant($"  {Environment.NewLine}  "),
-                                referenceObject.Title,
-                                referenceObject.DescriptionText,
                                 referenceObject.FileName,
                                 referenceObject.FileSizeInBytes,
                                 referenceObject.DownloadNavigationAction);
@@ -79,8 +75,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                             var result = new ReadOnlyFileUploadComponentPayload(
                                 referenceObject.Id,
-                                referenceObject.Title,
-                                referenceObject.DescriptionText,
                                 null,
                                 referenceObject.FileSizeInBytes,
                                 referenceObject.DownloadNavigationAction);
@@ -101,8 +95,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                             var result = new ReadOnlyFileUploadComponentPayload(
                                 referenceObject.Id,
-                                referenceObject.Title,
-                                referenceObject.DescriptionText,
                                 Invariant($"  {Environment.NewLine}  "),
                                 referenceObject.FileSizeInBytes,
                                 referenceObject.DownloadNavigationAction);
@@ -123,8 +115,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                             var result = new ReadOnlyFileUploadComponentPayload(
                                 referenceObject.Id,
-                                referenceObject.Title,
-                                referenceObject.DescriptionText,
                                 referenceObject.FileName,
                                 A.Dummy<long>().ThatIs(_ => _ < 0L),
                                 referenceObject.DownloadNavigationAction);

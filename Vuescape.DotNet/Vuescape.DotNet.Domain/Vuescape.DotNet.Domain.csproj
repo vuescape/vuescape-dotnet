@@ -159,6 +159,9 @@
     <Compile Include="Models\DynamicUI\Badge.designer.cs">
       <DependentUpon>Badge.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\ReadOnlyFileUploadComponentPayload.designer.cs">
+      <DependentUpon>ReadOnlyFileUploadComponentPayload.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\TextComponentPayload.designer.cs">
       <DependentUpon>TextComponentPayload.cs</DependentUpon>
     </Compile>
@@ -182,9 +185,6 @@
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\FileUploadComponentPayload.designer.cs">
       <DependentUpon>FileUploadComponentPayload.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\ReadOnlyFileUploadComponentPayload.designer.cs">
-      <DependentUpon>ReadOnlyFileUploadComponentPayload.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Select\SelectComponentPayload.designer.cs">
       <DependentUpon>SelectComponentPayload.cs</DependentUpon>

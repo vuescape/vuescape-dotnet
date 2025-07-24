@@ -70,8 +70,6 @@ namespace Vuescape.DotNet.Domain
             }
 
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
-                      && this.Title.IsEqualTo(other.Title, StringComparer.Ordinal)
-                      && this.DescriptionText.IsEqualTo(other.DescriptionText, StringComparer.Ordinal)
                       && this.IsRequired.IsEqualTo(other.IsRequired)
                       && this.UploadInstructionText.IsEqualTo(other.UploadInstructionText, StringComparer.Ordinal)
                       && this.MaxFileSizeInBytes.IsEqualTo(other.MaxFileSizeInBytes)
@@ -86,8 +84,6 @@ namespace Vuescape.DotNet.Domain
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.Id)
-            .Hash(this.Title)
-            .Hash(this.DescriptionText)
             .Hash(this.IsRequired)
             .Hash(this.UploadInstructionText)
             .Hash(this.MaxFileSizeInBytes)
@@ -102,8 +98,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new FileUploadComponentPayload(
                                  this.Id?.DeepClone(),
-                                 this.Title?.DeepClone(),
-                                 this.DescriptionText?.DeepClone(),
                                  this.IsRequired.DeepClone(),
                                  this.UploadInstructionText?.DeepClone(),
                                  this.MaxFileSizeInBytes?.DeepClone(),
@@ -138,80 +132,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new FileUploadComponentPayload(
                                  id,
-                                 this.Title?.DeepClone(),
-                                 this.DescriptionText?.DeepClone(),
-                                 this.IsRequired.DeepClone(),
-                                 this.UploadInstructionText?.DeepClone(),
-                                 this.MaxFileSizeInBytes?.DeepClone(),
-                                 this.AcceptFileTypeExtensions?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="Title" />.
-        /// </summary>
-        /// <param name="title">The new <see cref="Title" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="FileUploadComponentPayload" /> using the specified <paramref name="title" /> for <see cref="Title" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public FileUploadComponentPayload DeepCloneWithTitle(string title)
-        {
-            var result = new FileUploadComponentPayload(
-                                 this.Id?.DeepClone(),
-                                 title,
-                                 this.DescriptionText?.DeepClone(),
-                                 this.IsRequired.DeepClone(),
-                                 this.UploadInstructionText?.DeepClone(),
-                                 this.MaxFileSizeInBytes?.DeepClone(),
-                                 this.AcceptFileTypeExtensions?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="DescriptionText" />.
-        /// </summary>
-        /// <param name="descriptionText">The new <see cref="DescriptionText" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="FileUploadComponentPayload" /> using the specified <paramref name="descriptionText" /> for <see cref="DescriptionText" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public FileUploadComponentPayload DeepCloneWithDescriptionText(string descriptionText)
-        {
-            var result = new FileUploadComponentPayload(
-                                 this.Id?.DeepClone(),
-                                 this.Title?.DeepClone(),
-                                 descriptionText,
                                  this.IsRequired.DeepClone(),
                                  this.UploadInstructionText?.DeepClone(),
                                  this.MaxFileSizeInBytes?.DeepClone(),
@@ -246,8 +166,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new FileUploadComponentPayload(
                                  this.Id?.DeepClone(),
-                                 this.Title?.DeepClone(),
-                                 this.DescriptionText?.DeepClone(),
                                  isRequired,
                                  this.UploadInstructionText?.DeepClone(),
                                  this.MaxFileSizeInBytes?.DeepClone(),
@@ -282,8 +200,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new FileUploadComponentPayload(
                                  this.Id?.DeepClone(),
-                                 this.Title?.DeepClone(),
-                                 this.DescriptionText?.DeepClone(),
                                  this.IsRequired.DeepClone(),
                                  uploadInstructionText,
                                  this.MaxFileSizeInBytes?.DeepClone(),
@@ -318,8 +234,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new FileUploadComponentPayload(
                                  this.Id?.DeepClone(),
-                                 this.Title?.DeepClone(),
-                                 this.DescriptionText?.DeepClone(),
                                  this.IsRequired.DeepClone(),
                                  this.UploadInstructionText?.DeepClone(),
                                  maxFileSizeInBytes,
@@ -354,8 +268,6 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new FileUploadComponentPayload(
                                  this.Id?.DeepClone(),
-                                 this.Title?.DeepClone(),
-                                 this.DescriptionText?.DeepClone(),
                                  this.IsRequired.DeepClone(),
                                  this.UploadInstructionText?.DeepClone(),
                                  this.MaxFileSizeInBytes?.DeepClone(),
@@ -368,7 +280,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.FileUploadComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Title = {this.Title?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DescriptionText = {this.DescriptionText?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsRequired = {this.IsRequired.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, UploadInstructionText = {this.UploadInstructionText?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxFileSizeInBytes = {this.MaxFileSizeInBytes?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, AcceptFileTypeExtensions = {this.AcceptFileTypeExtensions?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.FileUploadComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsRequired = {this.IsRequired.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, UploadInstructionText = {this.UploadInstructionText?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxFileSizeInBytes = {this.MaxFileSizeInBytes?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, AcceptFileTypeExtensions = {this.AcceptFileTypeExtensions?.ToString() ?? "<null>"}.");
 
             return result;
         }

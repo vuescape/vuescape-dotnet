@@ -203,8 +203,6 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new FileUploadComponentPayload(
                                  A.Dummy<string>(),
-                                 A.Dummy<string>(),
-                                 A.Dummy<string>(),
                                  A.Dummy<bool>(),
                                  A.Dummy<string>(),
                                  A.Dummy<long?>(),

@@ -36,8 +36,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                             var result = new FileUploadComponentPayload(
                                 null,
-                                referenceObject.Title,
-                                referenceObject.DescriptionText,
                                 referenceObject.IsRequired,
                                 referenceObject.UploadInstructionText,
                                 referenceObject.MaxFileSizeInBytes,
@@ -58,8 +56,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                             var result = new FileUploadComponentPayload(
                                 Invariant($"  {Environment.NewLine}  "),
-                                referenceObject.Title,
-                                referenceObject.DescriptionText,
                                 referenceObject.IsRequired,
                                 referenceObject.UploadInstructionText,
                                 referenceObject.MaxFileSizeInBytes,

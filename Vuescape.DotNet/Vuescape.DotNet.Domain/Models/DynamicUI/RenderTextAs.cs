@@ -29,5 +29,10 @@ namespace Vuescape.DotNet.Domain
         /// Render text as a Paragraph.
         /// </summary>
         Paragraph,
+
+        /// <summary>
+        /// Render text as a HTML.
+        /// </summary>
+        Html,
     }
 }

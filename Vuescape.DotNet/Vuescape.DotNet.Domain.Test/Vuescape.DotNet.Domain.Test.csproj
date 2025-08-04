@@ -264,6 +264,7 @@
     <Compile Include="FileUploadComponentPayloadTest.designer.cs">
       <DependentUpon>FileUploadComponentPayloadTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logic\HtmlIdGeneratorTest.cs" />
     <Compile Include="ReadOnlyFileUploadComponentPayloadTest.designer.cs">
       <DependentUpon>ReadOnlyFileUploadComponentPayloadTest.cs</DependentUpon>
     </Compile>

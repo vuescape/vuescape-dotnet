@@ -68,46 +68,6 @@ namespace Vuescape.DotNet.Domain.Test
                     new ConstructorArgumentValidationTestScenario<ReadOnlyFileUploadComponentPayload>
                     {
                         Name =
-                            "constructor should throw ArgumentNullException when parameter 'fileName' is null scenario",
-                        ConstructionFunc = () =>
-                        {
-                            var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>();
-
-                            var result = new ReadOnlyFileUploadComponentPayload(
-                                referenceObject.Id,
-                                null,
-                                referenceObject.FileSizeInBytes,
-                                referenceObject.DownloadNavigationAction);
-
-                            return result;
-                        },
-                        ExpectedExceptionType = typeof(ArgumentNullException),
-                        ExpectedExceptionMessageContains = new[] { "fileName", },
-                    })
-                .AddScenario(() =>
-                    new ConstructorArgumentValidationTestScenario<ReadOnlyFileUploadComponentPayload>
-                    {
-                        Name =
-                            "constructor should throw ArgumentException when parameter 'fileName' is white space scenario",
-                        ConstructionFunc = () =>
-                        {
-                            var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>();
-
-                            var result = new ReadOnlyFileUploadComponentPayload(
-                                referenceObject.Id,
-                                Invariant($"  {Environment.NewLine}  "),
-                                referenceObject.FileSizeInBytes,
-                                referenceObject.DownloadNavigationAction);
-
-                            return result;
-                        },
-                        ExpectedExceptionType = typeof(ArgumentException),
-                        ExpectedExceptionMessageContains = new[] { "fileName", "white space", },
-                    })
-                .AddScenario(() =>
-                    new ConstructorArgumentValidationTestScenario<ReadOnlyFileUploadComponentPayload>
-                    {
-                        Name =
                             "constructor should throw ArgumentException when parameter 'fileSizeInBytes' is less than zero scenario",
                         ConstructionFunc = () =>
                         {

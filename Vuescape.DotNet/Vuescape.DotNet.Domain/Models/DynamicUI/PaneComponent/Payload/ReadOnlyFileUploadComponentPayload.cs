@@ -30,7 +30,6 @@ namespace Vuescape.DotNet.Domain
             NavigationAction downloadNavigationAction)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { fileName }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { fileSizeInBytes }.AsArg().Must().NotBeLessThan(0L);
 
             this.Id = id;

@@ -265,6 +265,10 @@
       <DependentUpon>FileUploadComponentPayloadTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Logic\HtmlIdGeneratorTest.cs" />
+    <Compile Include="Logic\IanaTimeZoneConverterTest.cs" />
+    <Compile Include="Logic\IanaTimeZoneConverterTest.designer.cs">
+      <DependentUpon>IanaTimeZoneConverterTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReadOnlyFileUploadComponentPayloadTest.designer.cs">
       <DependentUpon>ReadOnlyFileUploadComponentPayloadTest.cs</DependentUpon>
     </Compile>

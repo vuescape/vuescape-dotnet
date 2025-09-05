@@ -94,7 +94,9 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "whitespace", Justification = ObcSuppressBecause.CA1702_CompoundWordsShouldBeCasedCorrectly_AnalyzerIsIncorrectlyDetectingCompoundWords)]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Iana", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
         [Theory]
+#pragma warning disable CS3016 // Arrays as attribute arguments is not CLS-compliant
         [InlineData(null)]
+#pragma warning restore CS3016 // Arrays as attribute arguments is not CLS-compliant
         [InlineData("")]
         [InlineData("   ")]
         [InlineData("\t")]
@@ -189,7 +191,9 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "whitespace", Justification = ObcSuppressBecause.CA1702_CompoundWordsShouldBeCasedCorrectly_AnalyzerIsIncorrectlyDetectingCompoundWords)]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Iana", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
         [Theory]
+#pragma warning disable CS3016 // Arrays as attribute arguments is not CLS-compliant
         [InlineData(null)]
+#pragma warning restore CS3016 // Arrays as attribute arguments is not CLS-compliant
         [InlineData("")]
         [InlineData("   ")]
         [InlineData("\t")]

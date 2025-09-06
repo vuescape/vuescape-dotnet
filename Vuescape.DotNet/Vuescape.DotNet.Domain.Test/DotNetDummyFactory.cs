@@ -358,7 +358,8 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<string>(),
                         A.Dummy<string>(),
                         A.Dummy<long>().ThatIs(_ => _ >= 0),
-                        A.Dummy<NavigationAction>());
+                        A.Dummy<NavigationAction>(),
+                        A.Dummy<IReadOnlyList<MetadataLineItem>>());
 
                     return result;
                 });

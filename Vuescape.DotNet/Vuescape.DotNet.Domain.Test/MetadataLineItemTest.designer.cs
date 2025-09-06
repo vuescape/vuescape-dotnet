@@ -21,7 +21,6 @@ namespace Vuescape.DotNet.Domain.Test
     using global::OBeautifulCode.Assertion.Recipes;
     using global::OBeautifulCode.AutoFakeItEasy;
     using global::OBeautifulCode.CodeGen.ModelObject.Recipes;
-    using global::OBeautifulCode.DataStructure;
     using global::OBeautifulCode.DateTime.Recipes;
     using global::OBeautifulCode.Equality.Recipes;
     using global::OBeautifulCode.Math.Recipes;
@@ -35,380 +34,537 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class DisplayReportOpTest
+    public static partial class MetadataLineItemTest
     {
-        private static readonly StringRepresentationTestScenarios<DisplayReportOp> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<DisplayReportOp>()
+        private static readonly StringRepresentationTestScenarios<MetadataLineItem> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<MetadataLineItem>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<DisplayReportOp>
+                new StringRepresentationTestScenario<MetadataLineItem>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<DisplayReportOp>();
+                        var systemUnderTest = A.Dummy<MetadataLineItem>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<DisplayReportOp>
+                        var result = new SystemUnderTestExpectedStringRepresentation<MetadataLineItem>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.DisplayReportOp: LinkedResource = {systemUnderTest.LinkedResource?.ToString() ?? "<null>"}, TargetedPaneKind = {systemUnderTest.TargetedPaneKind.ToString() ?? "<null>"}, InitialWidth = {systemUnderTest.InitialWidth?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MinimumWidth = {systemUnderTest.MinimumWidth?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaximumWidth = {systemUnderTest.MaximumWidth?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, ReportPaneTitleBarButtons = {systemUnderTest.ReportPaneTitleBarButtons?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.MetadataLineItem: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Icons = {systemUnderTest.Icons?.ToString() ?? "<null>"}, IconClass = {systemUnderTest.IconClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {systemUnderTest.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, TextClass = {systemUnderTest.TextClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<DisplayReportOp> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<DisplayReportOp>()
+        private static readonly ConstructorArgumentValidationTestScenarios<MetadataLineItem> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<MetadataLineItem>()
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<DisplayReportOp>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'linkedResource' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'id' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var referenceObject = A.Dummy<DisplayReportOp>();
+                        var referenceObject = A.Dummy<MetadataLineItem>();
 
-                        var result = new DisplayReportOp(
+                        var result = new MetadataLineItem(
                                              null,
-                                             referenceObject.TargetedPaneKind,
-                                             referenceObject.InitialWidth,
-                                             referenceObject.MinimumWidth,
-                                             referenceObject.MaximumWidth,
-                                             referenceObject.ReportPaneTitleBarButtons);
+                                             referenceObject.Icons,
+                                             referenceObject.IconClass,
+                                             referenceObject.Text,
+                                             referenceObject.TextClass);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "linkedResource", },
+                    ExpectedExceptionMessageContains = new[] { "id", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'id' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MetadataLineItem>();
+
+                        var result = new MetadataLineItem(
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.Icons,
+                                             referenceObject.IconClass,
+                                             referenceObject.Text,
+                                             referenceObject.TextClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "id", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'icons' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MetadataLineItem>();
+
+                        var result = new MetadataLineItem(
+                                             referenceObject.Id,
+                                             null,
+                                             referenceObject.IconClass,
+                                             referenceObject.Text,
+                                             referenceObject.TextClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "icons", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'icons' is an empty enumerable scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MetadataLineItem>();
+
+                        var result = new MetadataLineItem(
+                                             referenceObject.Id,
+                                             new List<string>(),
+                                             referenceObject.IconClass,
+                                             referenceObject.Text,
+                                             referenceObject.TextClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "icons", "is an empty enumerable", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'icons' contains a null element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MetadataLineItem>();
+
+                        var result = new MetadataLineItem(
+                                             referenceObject.Id,
+                                             new string[0].Concat(referenceObject.Icons).Concat(new string[] { null }).Concat(referenceObject.Icons).ToList(),
+                                             referenceObject.IconClass,
+                                             referenceObject.Text,
+                                             referenceObject.TextClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "icons", "contains at least one null element", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'icons' contains a white space element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MetadataLineItem>();
+
+                        var result = new MetadataLineItem(
+                                             referenceObject.Id,
+                                             new string[0].Concat(referenceObject.Icons).Concat(new string[] { "  \r\n  " }).Concat(referenceObject.Icons).ToList(),
+                                             referenceObject.IconClass,
+                                             referenceObject.Text,
+                                             referenceObject.TextClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "icons", "contains an element that is white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'iconClass' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MetadataLineItem>();
+
+                        var result = new MetadataLineItem(
+                                             referenceObject.Id,
+                                             referenceObject.Icons,
+                                             null,
+                                             referenceObject.Text,
+                                             referenceObject.TextClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "iconClass", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'iconClass' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MetadataLineItem>();
+
+                        var result = new MetadataLineItem(
+                                             referenceObject.Id,
+                                             referenceObject.Icons,
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.Text,
+                                             referenceObject.TextClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "iconClass", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'text' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MetadataLineItem>();
+
+                        var result = new MetadataLineItem(
+                                             referenceObject.Id,
+                                             referenceObject.Icons,
+                                             referenceObject.IconClass,
+                                             null,
+                                             referenceObject.TextClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "text", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'text' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MetadataLineItem>();
+
+                        var result = new MetadataLineItem(
+                                             referenceObject.Id,
+                                             referenceObject.Icons,
+                                             referenceObject.IconClass,
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.TextClass);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "text", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'textClass' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MetadataLineItem>();
+
+                        var result = new MetadataLineItem(
+                                             referenceObject.Id,
+                                             referenceObject.Icons,
+                                             referenceObject.IconClass,
+                                             referenceObject.Text,
+                                             null);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "textClass", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<MetadataLineItem>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'textClass' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<MetadataLineItem>();
+
+                        var result = new MetadataLineItem(
+                                             referenceObject.Id,
+                                             referenceObject.Icons,
+                                             referenceObject.IconClass,
+                                             referenceObject.Text,
+                                             Invariant($"  {Environment.NewLine}  "));
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "textClass", "white space", },
                 });
 
-        private static readonly ConstructorPropertyAssignmentTestScenarios<DisplayReportOp> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<DisplayReportOp>()
+        private static readonly ConstructorPropertyAssignmentTestScenarios<MetadataLineItem> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<MetadataLineItem>()
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<DisplayReportOp>
+                new ConstructorPropertyAssignmentTestScenario<MetadataLineItem>
                 {
-                    Name = "LinkedResource should return same 'linkedResource' parameter passed to constructor when getting",
+                    Name = "Id should return same 'id' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<DisplayReportOp>();
+                        var referenceObject = A.Dummy<MetadataLineItem>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<DisplayReportOp>
+                        var result = new SystemUnderTestExpectedPropertyValue<MetadataLineItem>
                         {
-                            SystemUnderTest = new DisplayReportOp(
-                                                      referenceObject.LinkedResource,
-                                                      referenceObject.TargetedPaneKind,
-                                                      referenceObject.InitialWidth,
-                                                      referenceObject.MinimumWidth,
-                                                      referenceObject.MaximumWidth,
-                                                      referenceObject.ReportPaneTitleBarButtons),
-                            ExpectedPropertyValue = referenceObject.LinkedResource,
+                            SystemUnderTest = new MetadataLineItem(
+                                                      referenceObject.Id,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconClass,
+                                                      referenceObject.Text,
+                                                      referenceObject.TextClass),
+                            ExpectedPropertyValue = referenceObject.Id,
                         };
 
                         return result;
                     },
-                    PropertyName = "LinkedResource",
+                    PropertyName = "Id",
                 })
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<DisplayReportOp>
+                new ConstructorPropertyAssignmentTestScenario<MetadataLineItem>
                 {
-                    Name = "TargetedPaneKind should return same 'targetedPaneKind' parameter passed to constructor when getting",
+                    Name = "Icons should return same 'icons' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<DisplayReportOp>();
+                        var referenceObject = A.Dummy<MetadataLineItem>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<DisplayReportOp>
+                        var result = new SystemUnderTestExpectedPropertyValue<MetadataLineItem>
                         {
-                            SystemUnderTest = new DisplayReportOp(
-                                                      referenceObject.LinkedResource,
-                                                      referenceObject.TargetedPaneKind,
-                                                      referenceObject.InitialWidth,
-                                                      referenceObject.MinimumWidth,
-                                                      referenceObject.MaximumWidth,
-                                                      referenceObject.ReportPaneTitleBarButtons),
-                            ExpectedPropertyValue = referenceObject.TargetedPaneKind,
+                            SystemUnderTest = new MetadataLineItem(
+                                                      referenceObject.Id,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconClass,
+                                                      referenceObject.Text,
+                                                      referenceObject.TextClass),
+                            ExpectedPropertyValue = referenceObject.Icons,
                         };
 
                         return result;
                     },
-                    PropertyName = "TargetedPaneKind",
+                    PropertyName = "Icons",
                 })
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<DisplayReportOp>
+                new ConstructorPropertyAssignmentTestScenario<MetadataLineItem>
                 {
-                    Name = "InitialWidth should return same 'initialWidth' parameter passed to constructor when getting",
+                    Name = "IconClass should return same 'iconClass' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<DisplayReportOp>();
+                        var referenceObject = A.Dummy<MetadataLineItem>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<DisplayReportOp>
+                        var result = new SystemUnderTestExpectedPropertyValue<MetadataLineItem>
                         {
-                            SystemUnderTest = new DisplayReportOp(
-                                                      referenceObject.LinkedResource,
-                                                      referenceObject.TargetedPaneKind,
-                                                      referenceObject.InitialWidth,
-                                                      referenceObject.MinimumWidth,
-                                                      referenceObject.MaximumWidth,
-                                                      referenceObject.ReportPaneTitleBarButtons),
-                            ExpectedPropertyValue = referenceObject.InitialWidth,
+                            SystemUnderTest = new MetadataLineItem(
+                                                      referenceObject.Id,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconClass,
+                                                      referenceObject.Text,
+                                                      referenceObject.TextClass),
+                            ExpectedPropertyValue = referenceObject.IconClass,
                         };
 
                         return result;
                     },
-                    PropertyName = "InitialWidth",
+                    PropertyName = "IconClass",
                 })
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<DisplayReportOp>
+                new ConstructorPropertyAssignmentTestScenario<MetadataLineItem>
                 {
-                    Name = "MinimumWidth should return same 'minimumWidth' parameter passed to constructor when getting",
+                    Name = "Text should return same 'text' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<DisplayReportOp>();
+                        var referenceObject = A.Dummy<MetadataLineItem>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<DisplayReportOp>
+                        var result = new SystemUnderTestExpectedPropertyValue<MetadataLineItem>
                         {
-                            SystemUnderTest = new DisplayReportOp(
-                                                      referenceObject.LinkedResource,
-                                                      referenceObject.TargetedPaneKind,
-                                                      referenceObject.InitialWidth,
-                                                      referenceObject.MinimumWidth,
-                                                      referenceObject.MaximumWidth,
-                                                      referenceObject.ReportPaneTitleBarButtons),
-                            ExpectedPropertyValue = referenceObject.MinimumWidth,
+                            SystemUnderTest = new MetadataLineItem(
+                                                      referenceObject.Id,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconClass,
+                                                      referenceObject.Text,
+                                                      referenceObject.TextClass),
+                            ExpectedPropertyValue = referenceObject.Text,
                         };
 
                         return result;
                     },
-                    PropertyName = "MinimumWidth",
+                    PropertyName = "Text",
                 })
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<DisplayReportOp>
+                new ConstructorPropertyAssignmentTestScenario<MetadataLineItem>
                 {
-                    Name = "MaximumWidth should return same 'maximumWidth' parameter passed to constructor when getting",
+                    Name = "TextClass should return same 'textClass' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<DisplayReportOp>();
+                        var referenceObject = A.Dummy<MetadataLineItem>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<DisplayReportOp>
+                        var result = new SystemUnderTestExpectedPropertyValue<MetadataLineItem>
                         {
-                            SystemUnderTest = new DisplayReportOp(
-                                                      referenceObject.LinkedResource,
-                                                      referenceObject.TargetedPaneKind,
-                                                      referenceObject.InitialWidth,
-                                                      referenceObject.MinimumWidth,
-                                                      referenceObject.MaximumWidth,
-                                                      referenceObject.ReportPaneTitleBarButtons),
-                            ExpectedPropertyValue = referenceObject.MaximumWidth,
+                            SystemUnderTest = new MetadataLineItem(
+                                                      referenceObject.Id,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconClass,
+                                                      referenceObject.Text,
+                                                      referenceObject.TextClass),
+                            ExpectedPropertyValue = referenceObject.TextClass,
                         };
 
                         return result;
                     },
-                    PropertyName = "MaximumWidth",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<DisplayReportOp>
-                {
-                    Name = "ReportPaneTitleBarButtons should return same 'reportPaneTitleBarButtons' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<DisplayReportOp>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<DisplayReportOp>
-                        {
-                            SystemUnderTest = new DisplayReportOp(
-                                                      referenceObject.LinkedResource,
-                                                      referenceObject.TargetedPaneKind,
-                                                      referenceObject.InitialWidth,
-                                                      referenceObject.MinimumWidth,
-                                                      referenceObject.MaximumWidth,
-                                                      referenceObject.ReportPaneTitleBarButtons),
-                            ExpectedPropertyValue = referenceObject.ReportPaneTitleBarButtons,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "ReportPaneTitleBarButtons",
+                    PropertyName = "TextClass",
                 });
 
-        private static readonly DeepCloneWithTestScenarios<DisplayReportOp> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<DisplayReportOp>()
+        private static readonly DeepCloneWithTestScenarios<MetadataLineItem> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<MetadataLineItem>()
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<DisplayReportOp>
+                new DeepCloneWithTestScenario<MetadataLineItem>
                 {
-                    Name = "DeepCloneWithLinkedResource should deep clone object and replace LinkedResource with the provided linkedResource",
-                    WithPropertyName = "LinkedResource",
+                    Name = "DeepCloneWithId should deep clone object and replace Id with the provided id",
+                    WithPropertyName = "Id",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<DisplayReportOp>();
+                        var systemUnderTest = A.Dummy<MetadataLineItem>();
 
-                        var referenceObject = A.Dummy<DisplayReportOp>().ThatIs(_ => !systemUnderTest.LinkedResource.IsEqualTo(_.LinkedResource));
+                        var referenceObject = A.Dummy<MetadataLineItem>().ThatIs(_ => !systemUnderTest.Id.IsEqualTo(_.Id));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<DisplayReportOp>
+                        var result = new SystemUnderTestDeepCloneWithValue<MetadataLineItem>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.LinkedResource,
+                            DeepCloneWithValue = referenceObject.Id,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<DisplayReportOp>
+                new DeepCloneWithTestScenario<MetadataLineItem>
                 {
-                    Name = "DeepCloneWithTargetedPaneKind should deep clone object and replace TargetedPaneKind with the provided targetedPaneKind",
-                    WithPropertyName = "TargetedPaneKind",
+                    Name = "DeepCloneWithIcons should deep clone object and replace Icons with the provided icons",
+                    WithPropertyName = "Icons",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<DisplayReportOp>();
+                        var systemUnderTest = A.Dummy<MetadataLineItem>();
 
-                        var referenceObject = A.Dummy<DisplayReportOp>().ThatIs(_ => !systemUnderTest.TargetedPaneKind.IsEqualTo(_.TargetedPaneKind));
+                        var referenceObject = A.Dummy<MetadataLineItem>().ThatIs(_ => !systemUnderTest.Icons.IsEqualTo(_.Icons));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<DisplayReportOp>
+                        var result = new SystemUnderTestDeepCloneWithValue<MetadataLineItem>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.TargetedPaneKind,
+                            DeepCloneWithValue = referenceObject.Icons,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<DisplayReportOp>
+                new DeepCloneWithTestScenario<MetadataLineItem>
                 {
-                    Name = "DeepCloneWithInitialWidth should deep clone object and replace InitialWidth with the provided initialWidth",
-                    WithPropertyName = "InitialWidth",
+                    Name = "DeepCloneWithIconClass should deep clone object and replace IconClass with the provided iconClass",
+                    WithPropertyName = "IconClass",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<DisplayReportOp>();
+                        var systemUnderTest = A.Dummy<MetadataLineItem>();
 
-                        var referenceObject = A.Dummy<DisplayReportOp>().ThatIs(_ => !systemUnderTest.InitialWidth.IsEqualTo(_.InitialWidth));
+                        var referenceObject = A.Dummy<MetadataLineItem>().ThatIs(_ => !systemUnderTest.IconClass.IsEqualTo(_.IconClass));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<DisplayReportOp>
+                        var result = new SystemUnderTestDeepCloneWithValue<MetadataLineItem>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.InitialWidth,
+                            DeepCloneWithValue = referenceObject.IconClass,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<DisplayReportOp>
+                new DeepCloneWithTestScenario<MetadataLineItem>
                 {
-                    Name = "DeepCloneWithMinimumWidth should deep clone object and replace MinimumWidth with the provided minimumWidth",
-                    WithPropertyName = "MinimumWidth",
+                    Name = "DeepCloneWithText should deep clone object and replace Text with the provided text",
+                    WithPropertyName = "Text",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<DisplayReportOp>();
+                        var systemUnderTest = A.Dummy<MetadataLineItem>();
 
-                        var referenceObject = A.Dummy<DisplayReportOp>().ThatIs(_ => !systemUnderTest.MinimumWidth.IsEqualTo(_.MinimumWidth));
+                        var referenceObject = A.Dummy<MetadataLineItem>().ThatIs(_ => !systemUnderTest.Text.IsEqualTo(_.Text));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<DisplayReportOp>
+                        var result = new SystemUnderTestDeepCloneWithValue<MetadataLineItem>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.MinimumWidth,
+                            DeepCloneWithValue = referenceObject.Text,
                         };
 
                         return result;
                     },
                 })
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<DisplayReportOp>
+                new DeepCloneWithTestScenario<MetadataLineItem>
                 {
-                    Name = "DeepCloneWithMaximumWidth should deep clone object and replace MaximumWidth with the provided maximumWidth",
-                    WithPropertyName = "MaximumWidth",
+                    Name = "DeepCloneWithTextClass should deep clone object and replace TextClass with the provided textClass",
+                    WithPropertyName = "TextClass",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<DisplayReportOp>();
+                        var systemUnderTest = A.Dummy<MetadataLineItem>();
 
-                        var referenceObject = A.Dummy<DisplayReportOp>().ThatIs(_ => !systemUnderTest.MaximumWidth.IsEqualTo(_.MaximumWidth));
+                        var referenceObject = A.Dummy<MetadataLineItem>().ThatIs(_ => !systemUnderTest.TextClass.IsEqualTo(_.TextClass));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<DisplayReportOp>
+                        var result = new SystemUnderTestDeepCloneWithValue<MetadataLineItem>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.MaximumWidth,
-                        };
-
-                        return result;
-                    },
-                })
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<DisplayReportOp>
-                {
-                    Name = "DeepCloneWithReportPaneTitleBarButtons should deep clone object and replace ReportPaneTitleBarButtons with the provided reportPaneTitleBarButtons",
-                    WithPropertyName = "ReportPaneTitleBarButtons",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<DisplayReportOp>();
-
-                        var referenceObject = A.Dummy<DisplayReportOp>().ThatIs(_ => !systemUnderTest.ReportPaneTitleBarButtons.IsEqualTo(_.ReportPaneTitleBarButtons));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<DisplayReportOp>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.ReportPaneTitleBarButtons,
+                            DeepCloneWithValue = referenceObject.TextClass,
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly DisplayReportOp ReferenceObjectForEquatableTestScenarios = A.Dummy<DisplayReportOp>();
+        private static readonly MetadataLineItem ReferenceObjectForEquatableTestScenarios = A.Dummy<MetadataLineItem>();
 
-        private static readonly EquatableTestScenarios<DisplayReportOp> EquatableTestScenarios = new EquatableTestScenarios<DisplayReportOp>()
+        private static readonly EquatableTestScenarios<MetadataLineItem> EquatableTestScenarios = new EquatableTestScenarios<MetadataLineItem>()
             .AddScenario(() =>
-                new EquatableTestScenario<DisplayReportOp>
+                new EquatableTestScenario<MetadataLineItem>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new DisplayReportOp[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new MetadataLineItem[]
                     {
-                        new DisplayReportOp(
-                                ReferenceObjectForEquatableTestScenarios.LinkedResource,
-                                ReferenceObjectForEquatableTestScenarios.TargetedPaneKind,
-                                ReferenceObjectForEquatableTestScenarios.InitialWidth,
-                                ReferenceObjectForEquatableTestScenarios.MinimumWidth,
-                                ReferenceObjectForEquatableTestScenarios.MaximumWidth,
-                                ReferenceObjectForEquatableTestScenarios.ReportPaneTitleBarButtons),
+                        new MetadataLineItem(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconClass,
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                ReferenceObjectForEquatableTestScenarios.TextClass),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new DisplayReportOp[]
+                    ObjectsThatAreNotEqualToReferenceObject = new MetadataLineItem[]
                     {
-                        new DisplayReportOp(
-                                A.Dummy<DisplayReportOp>().Whose(_ => !_.LinkedResource.IsEqualTo(ReferenceObjectForEquatableTestScenarios.LinkedResource)).LinkedResource,
-                                ReferenceObjectForEquatableTestScenarios.TargetedPaneKind,
-                                ReferenceObjectForEquatableTestScenarios.InitialWidth,
-                                ReferenceObjectForEquatableTestScenarios.MinimumWidth,
-                                ReferenceObjectForEquatableTestScenarios.MaximumWidth,
-                                ReferenceObjectForEquatableTestScenarios.ReportPaneTitleBarButtons),
-                        new DisplayReportOp(
-                                ReferenceObjectForEquatableTestScenarios.LinkedResource,
-                                A.Dummy<DisplayReportOp>().Whose(_ => !_.TargetedPaneKind.IsEqualTo(ReferenceObjectForEquatableTestScenarios.TargetedPaneKind)).TargetedPaneKind,
-                                ReferenceObjectForEquatableTestScenarios.InitialWidth,
-                                ReferenceObjectForEquatableTestScenarios.MinimumWidth,
-                                ReferenceObjectForEquatableTestScenarios.MaximumWidth,
-                                ReferenceObjectForEquatableTestScenarios.ReportPaneTitleBarButtons),
-                        new DisplayReportOp(
-                                ReferenceObjectForEquatableTestScenarios.LinkedResource,
-                                ReferenceObjectForEquatableTestScenarios.TargetedPaneKind,
-                                A.Dummy<DisplayReportOp>().Whose(_ => !_.InitialWidth.IsEqualTo(ReferenceObjectForEquatableTestScenarios.InitialWidth)).InitialWidth,
-                                ReferenceObjectForEquatableTestScenarios.MinimumWidth,
-                                ReferenceObjectForEquatableTestScenarios.MaximumWidth,
-                                ReferenceObjectForEquatableTestScenarios.ReportPaneTitleBarButtons),
-                        new DisplayReportOp(
-                                ReferenceObjectForEquatableTestScenarios.LinkedResource,
-                                ReferenceObjectForEquatableTestScenarios.TargetedPaneKind,
-                                ReferenceObjectForEquatableTestScenarios.InitialWidth,
-                                A.Dummy<DisplayReportOp>().Whose(_ => !_.MinimumWidth.IsEqualTo(ReferenceObjectForEquatableTestScenarios.MinimumWidth)).MinimumWidth,
-                                ReferenceObjectForEquatableTestScenarios.MaximumWidth,
-                                ReferenceObjectForEquatableTestScenarios.ReportPaneTitleBarButtons),
-                        new DisplayReportOp(
-                                ReferenceObjectForEquatableTestScenarios.LinkedResource,
-                                ReferenceObjectForEquatableTestScenarios.TargetedPaneKind,
-                                ReferenceObjectForEquatableTestScenarios.InitialWidth,
-                                ReferenceObjectForEquatableTestScenarios.MinimumWidth,
-                                A.Dummy<DisplayReportOp>().Whose(_ => !_.MaximumWidth.IsEqualTo(ReferenceObjectForEquatableTestScenarios.MaximumWidth)).MaximumWidth,
-                                ReferenceObjectForEquatableTestScenarios.ReportPaneTitleBarButtons),
-                        new DisplayReportOp(
-                                ReferenceObjectForEquatableTestScenarios.LinkedResource,
-                                ReferenceObjectForEquatableTestScenarios.TargetedPaneKind,
-                                ReferenceObjectForEquatableTestScenarios.InitialWidth,
-                                ReferenceObjectForEquatableTestScenarios.MinimumWidth,
-                                ReferenceObjectForEquatableTestScenarios.MaximumWidth,
-                                A.Dummy<DisplayReportOp>().Whose(_ => !_.ReportPaneTitleBarButtons.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ReportPaneTitleBarButtons)).ReportPaneTitleBarButtons),
+                        new MetadataLineItem(
+                                A.Dummy<MetadataLineItem>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconClass,
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                ReferenceObjectForEquatableTestScenarios.TextClass),
+                        new MetadataLineItem(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                A.Dummy<MetadataLineItem>().Whose(_ => !_.Icons.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Icons)).Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconClass,
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                ReferenceObjectForEquatableTestScenarios.TextClass),
+                        new MetadataLineItem(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                A.Dummy<MetadataLineItem>().Whose(_ => !_.IconClass.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IconClass)).IconClass,
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                ReferenceObjectForEquatableTestScenarios.TextClass),
+                        new MetadataLineItem(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconClass,
+                                A.Dummy<MetadataLineItem>().Whose(_ => !_.Text.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Text)).Text,
+                                ReferenceObjectForEquatableTestScenarios.TextClass),
+                        new MetadataLineItem(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconClass,
+                                ReferenceObjectForEquatableTestScenarios.Text,
+                                A.Dummy<MetadataLineItem>().Whose(_ => !_.TextClass.IsEqualTo(ReferenceObjectForEquatableTestScenarios.TextClass)).TextClass),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -417,7 +573,6 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<int>(),
                         A.Dummy<int?>(),
                         A.Dummy<Guid>(),
-                        A.Dummy<DownloadFileOp>(),
                     },
                 });
 
@@ -439,12 +594,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void DisplayReportOp___Should_implement_IModel_of_DisplayReportOp___When_reflecting()
+            public static void MetadataLineItem___Should_implement_IModel_of_MetadataLineItem___When_reflecting()
             {
                 // Arrange
-                var type = typeof(DisplayReportOp);
+                var type = typeof(MetadataLineItem);
 
-                var expectedModelMethods = typeof(IModel<DisplayReportOp>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<MetadataLineItem>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -454,7 +609,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<DisplayReportOp>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<MetadataLineItem>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -472,10 +627,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void DisplayReportOp___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void MetadataLineItem___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(DisplayReportOp);
+                var type = typeof(MetadataLineItem);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -655,10 +810,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<DisplayReportOp>();
+                var systemUnderTest = A.Dummy<MetadataLineItem>();
 
                 // Act
-                var actual = (DisplayReportOp)systemUnderTest.Clone();
+                var actual = (MetadataLineItem)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -682,7 +837,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<DisplayReportOp>();
+                var systemUnderTest = A.Dummy<MetadataLineItem>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -691,16 +846,16 @@ namespace Vuescape.DotNet.Domain.Test
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
 
-                if (systemUnderTest.LinkedResource == null)
+                if (systemUnderTest.Icons == null)
                 {
-                    actual.LinkedResource.AsTest().Must().BeNull();
+                    actual.Icons.AsTest().Must().BeNull();
                 }
-                else if (!actual.LinkedResource.GetType().IsValueType)
+                else if (!actual.Icons.GetType().IsValueType)
                 {
                     // When the declared type is a reference type, we still have to check the runtime type.
                     // The object could be a boxed value type, which will fail this asseration because
                     // a deep clone of a value type object is the same object.
-                    actual.LinkedResource.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.LinkedResource);
+                    actual.Icons.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Icons);
                 }
             }
 
@@ -720,7 +875,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "LinkedResource", "TargetedPaneKind", "InitialWidth", "MinimumWidth", "MaximumWidth", "ReportPaneTitleBarButtons" };
+                var propertyNames = new string[] { "Id", "Icons", "IconClass", "Text", "TextClass" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 
@@ -733,12 +888,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (DisplayReportOp)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (MetadataLineItem)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(DisplayReportOp).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(MetadataLineItem).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var actualPropertyValue = propertyInfo.GetValue(actual);
 
@@ -800,7 +955,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<DisplayReportOp>();
+                var expected = A.Dummy<MetadataLineItem>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -829,7 +984,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<DisplayReportOp>();
+                var expected = A.Dummy<MetadataLineItem>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -858,7 +1013,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<DisplayReportOp>();
+                var expected = A.Dummy<MetadataLineItem>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -887,7 +1042,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<DisplayReportOp>();
+                var expected = A.Dummy<MetadataLineItem>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -921,8 +1076,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                DisplayReportOp systemUnderTest1 = null;
-                DisplayReportOp systemUnderTest2 = null;
+                MetadataLineItem systemUnderTest1 = null;
+                MetadataLineItem systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -952,7 +1107,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    DisplayReportOp systemUnderTest = null;
+                    MetadataLineItem systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -1101,8 +1256,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                DisplayReportOp systemUnderTest1 = null;
-                DisplayReportOp systemUnderTest2 = null;
+                MetadataLineItem systemUnderTest1 = null;
+                MetadataLineItem systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -1132,7 +1287,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    DisplayReportOp systemUnderTest = null;
+                    MetadataLineItem systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -1278,157 +1433,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_LinkedResourceOpBase___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_MetadataLineItem___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    LinkedResourceOpBase systemUnderTest = null;
-
-                    // Act
-                    var actual = scenario.ReferenceObject.Equals((LinkedResourceOpBase)systemUnderTest);
-
-                    // Assert
-                    actual.AsTest().Must().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_LinkedResourceOpBase___Should_return_true___When_parameter_other_is_same_object()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actual = scenario.ReferenceObject.Equals((LinkedResourceOpBase)scenario.ReferenceObject);
-
-                    // Assert
-                    actual.AsTest().Must().BeTrue(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_LinkedResourceOpBase___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((LinkedResourceOpBase)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_LinkedResourceOpBase___Should_return_false___When_objects_being_compared_have_different_property_values()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((LinkedResourceOpBase)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_LinkedResourceOpBase___Should_return_true___When_objects_being_compared_have_same_property_values()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((LinkedResourceOpBase)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeTrue(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_DisplayReportOp___Should_return_false___When_parameter_other_is_null()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange
-                    DisplayReportOp systemUnderTest = null;
+                    MetadataLineItem systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1452,7 +1464,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_DisplayReportOp___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_MetadataLineItem___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1480,7 +1492,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_DisplayReportOp___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_MetadataLineItem___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1508,7 +1520,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_DisplayReportOp___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_MetadataLineItem___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1536,7 +1548,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_DisplayReportOp___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_MetadataLineItem___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 

@@ -269,6 +269,10 @@
     <Compile Include="Logic\IanaTimeZoneConverterTest.designer.cs">
       <DependentUpon>IanaTimeZoneConverterTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="MetadataLineItemTest.cs" />
+    <Compile Include="MetadataLineItemTest.designer.cs">
+      <DependentUpon>MetadataLineItemTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReadOnlyFileUploadComponentPayloadTest.designer.cs">
       <DependentUpon>ReadOnlyFileUploadComponentPayloadTest.cs</DependentUpon>
     </Compile>

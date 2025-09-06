@@ -23,15 +23,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class FileUploadComponentPayload : IModel<FileUploadComponentPayload>
+    public partial class MetadataLineItem : IModel<MetadataLineItem>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="FileUploadComponentPayload"/> are equal.
+        /// Determines whether two objects of type <see cref="MetadataLineItem"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(FileUploadComponentPayload left, FileUploadComponentPayload right)
+        public static bool operator ==(MetadataLineItem left, MetadataLineItem right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -49,15 +49,15 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="FileUploadComponentPayload"/> are not equal.
+        /// Determines whether two objects of type <see cref="MetadataLineItem"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(FileUploadComponentPayload left, FileUploadComponentPayload right) => !(left == right);
+        public static bool operator !=(MetadataLineItem left, MetadataLineItem right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(FileUploadComponentPayload other)
+        public bool Equals(MetadataLineItem other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -70,38 +70,38 @@ namespace Vuescape.DotNet.Domain
             }
 
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
-                      && this.IsRequired.IsEqualTo(other.IsRequired)
-                      && this.UploadInstructionText.IsEqualTo(other.UploadInstructionText, StringComparer.Ordinal)
-                      && this.MaxFileSizeInBytes.IsEqualTo(other.MaxFileSizeInBytes)
-                      && this.AcceptFileTypeExtensions.IsEqualTo(other.AcceptFileTypeExtensions);
+                      && this.Icons.IsEqualTo(other.Icons)
+                      && this.IconClass.IsEqualTo(other.IconClass, StringComparer.Ordinal)
+                      && this.Text.IsEqualTo(other.Text, StringComparer.Ordinal)
+                      && this.TextClass.IsEqualTo(other.TextClass, StringComparer.Ordinal);
 
             return result;
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as FileUploadComponentPayload);
+        public override bool Equals(object obj) => this == (obj as MetadataLineItem);
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.Id)
-            .Hash(this.IsRequired)
-            .Hash(this.UploadInstructionText)
-            .Hash(this.MaxFileSizeInBytes)
-            .Hash(this.AcceptFileTypeExtensions)
+            .Hash(this.Icons)
+            .Hash(this.IconClass)
+            .Hash(this.Text)
+            .Hash(this.TextClass)
             .Value;
 
         /// <inheritdoc />
         public object Clone() => this.DeepClone();
 
         /// <inheritdoc />
-        public FileUploadComponentPayload DeepClone()
+        public MetadataLineItem DeepClone()
         {
-            var result = new FileUploadComponentPayload(
+            var result = new MetadataLineItem(
                                  this.Id?.DeepClone(),
-                                 this.IsRequired.DeepClone(),
-                                 this.UploadInstructionText?.DeepClone(),
-                                 this.MaxFileSizeInBytes?.DeepClone(),
-                                 this.AcceptFileTypeExtensions?.DeepClone());
+                                 this.Icons?.DeepClone(),
+                                 this.IconClass?.DeepClone(),
+                                 this.Text?.DeepClone(),
+                                 this.TextClass?.DeepClone());
 
             return result;
         }
@@ -110,7 +110,7 @@ namespace Vuescape.DotNet.Domain
         /// Deep clones this object with a new <see cref="Id" />.
         /// </summary>
         /// <param name="id">The new <see cref="Id" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="FileUploadComponentPayload" /> using the specified <paramref name="id" /> for <see cref="Id" /> and a deep clone of every other property.</returns>
+        /// <returns>New <see cref="MetadataLineItem" /> using the specified <paramref name="id" /> for <see cref="Id" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -128,23 +128,23 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public FileUploadComponentPayload DeepCloneWithId(string id)
+        public MetadataLineItem DeepCloneWithId(string id)
         {
-            var result = new FileUploadComponentPayload(
+            var result = new MetadataLineItem(
                                  id,
-                                 this.IsRequired.DeepClone(),
-                                 this.UploadInstructionText?.DeepClone(),
-                                 this.MaxFileSizeInBytes?.DeepClone(),
-                                 this.AcceptFileTypeExtensions?.DeepClone());
+                                 this.Icons?.DeepClone(),
+                                 this.IconClass?.DeepClone(),
+                                 this.Text?.DeepClone(),
+                                 this.TextClass?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="IsRequired" />.
+        /// Deep clones this object with a new <see cref="Icons" />.
         /// </summary>
-        /// <param name="isRequired">The new <see cref="IsRequired" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="FileUploadComponentPayload" /> using the specified <paramref name="isRequired" /> for <see cref="IsRequired" /> and a deep clone of every other property.</returns>
+        /// <param name="icons">The new <see cref="Icons" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="MetadataLineItem" /> using the specified <paramref name="icons" /> for <see cref="Icons" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -162,23 +162,23 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public FileUploadComponentPayload DeepCloneWithIsRequired(bool isRequired)
+        public MetadataLineItem DeepCloneWithIcons(IReadOnlyList<string> icons)
         {
-            var result = new FileUploadComponentPayload(
+            var result = new MetadataLineItem(
                                  this.Id?.DeepClone(),
-                                 isRequired,
-                                 this.UploadInstructionText?.DeepClone(),
-                                 this.MaxFileSizeInBytes?.DeepClone(),
-                                 this.AcceptFileTypeExtensions?.DeepClone());
+                                 icons,
+                                 this.IconClass?.DeepClone(),
+                                 this.Text?.DeepClone(),
+                                 this.TextClass?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="UploadInstructionText" />.
+        /// Deep clones this object with a new <see cref="IconClass" />.
         /// </summary>
-        /// <param name="uploadInstructionText">The new <see cref="UploadInstructionText" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="FileUploadComponentPayload" /> using the specified <paramref name="uploadInstructionText" /> for <see cref="UploadInstructionText" /> and a deep clone of every other property.</returns>
+        /// <param name="iconClass">The new <see cref="IconClass" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="MetadataLineItem" /> using the specified <paramref name="iconClass" /> for <see cref="IconClass" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -196,23 +196,23 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public FileUploadComponentPayload DeepCloneWithUploadInstructionText(string uploadInstructionText)
+        public MetadataLineItem DeepCloneWithIconClass(string iconClass)
         {
-            var result = new FileUploadComponentPayload(
+            var result = new MetadataLineItem(
                                  this.Id?.DeepClone(),
-                                 this.IsRequired.DeepClone(),
-                                 uploadInstructionText,
-                                 this.MaxFileSizeInBytes?.DeepClone(),
-                                 this.AcceptFileTypeExtensions?.DeepClone());
+                                 this.Icons?.DeepClone(),
+                                 iconClass,
+                                 this.Text?.DeepClone(),
+                                 this.TextClass?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="MaxFileSizeInBytes" />.
+        /// Deep clones this object with a new <see cref="Text" />.
         /// </summary>
-        /// <param name="maxFileSizeInBytes">The new <see cref="MaxFileSizeInBytes" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="FileUploadComponentPayload" /> using the specified <paramref name="maxFileSizeInBytes" /> for <see cref="MaxFileSizeInBytes" /> and a deep clone of every other property.</returns>
+        /// <param name="text">The new <see cref="Text" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="MetadataLineItem" /> using the specified <paramref name="text" /> for <see cref="Text" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -230,23 +230,23 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public FileUploadComponentPayload DeepCloneWithMaxFileSizeInBytes(long? maxFileSizeInBytes)
+        public MetadataLineItem DeepCloneWithText(string text)
         {
-            var result = new FileUploadComponentPayload(
+            var result = new MetadataLineItem(
                                  this.Id?.DeepClone(),
-                                 this.IsRequired.DeepClone(),
-                                 this.UploadInstructionText?.DeepClone(),
-                                 maxFileSizeInBytes,
-                                 this.AcceptFileTypeExtensions?.DeepClone());
+                                 this.Icons?.DeepClone(),
+                                 this.IconClass?.DeepClone(),
+                                 text,
+                                 this.TextClass?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="AcceptFileTypeExtensions" />.
+        /// Deep clones this object with a new <see cref="TextClass" />.
         /// </summary>
-        /// <param name="acceptFileTypeExtensions">The new <see cref="AcceptFileTypeExtensions" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="FileUploadComponentPayload" /> using the specified <paramref name="acceptFileTypeExtensions" /> for <see cref="AcceptFileTypeExtensions" /> and a deep clone of every other property.</returns>
+        /// <param name="textClass">The new <see cref="TextClass" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="MetadataLineItem" /> using the specified <paramref name="textClass" /> for <see cref="TextClass" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -264,14 +264,14 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public FileUploadComponentPayload DeepCloneWithAcceptFileTypeExtensions(IReadOnlyList<string> acceptFileTypeExtensions)
+        public MetadataLineItem DeepCloneWithTextClass(string textClass)
         {
-            var result = new FileUploadComponentPayload(
+            var result = new MetadataLineItem(
                                  this.Id?.DeepClone(),
-                                 this.IsRequired.DeepClone(),
-                                 this.UploadInstructionText?.DeepClone(),
-                                 this.MaxFileSizeInBytes?.DeepClone(),
-                                 acceptFileTypeExtensions);
+                                 this.Icons?.DeepClone(),
+                                 this.IconClass?.DeepClone(),
+                                 this.Text?.DeepClone(),
+                                 textClass);
 
             return result;
         }
@@ -280,7 +280,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.FileUploadComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsRequired = {this.IsRequired.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, UploadInstructionText = {this.UploadInstructionText?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MaxFileSizeInBytes = {this.MaxFileSizeInBytes?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, AcceptFileTypeExtensions = {this.AcceptFileTypeExtensions?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.MetadataLineItem: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Icons = {this.Icons?.ToString() ?? "<null>"}, IconClass = {this.IconClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {this.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, TextClass = {this.TextClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

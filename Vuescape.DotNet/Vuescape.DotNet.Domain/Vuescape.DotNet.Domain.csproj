@@ -160,6 +160,10 @@
     <Compile Include="Models\DynamicUI\Badge.designer.cs">
       <DependentUpon>Badge.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\MetadataLineItem.cs" />
+    <Compile Include="Models\DynamicUI\MetadataLineItem.designer.cs">
+      <DependentUpon>MetadataLineItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ReadOnlyFileUploadComponentPayload.designer.cs">
       <DependentUpon>ReadOnlyFileUploadComponentPayload.cs</DependentUpon>
     </Compile>

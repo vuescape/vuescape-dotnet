@@ -30,7 +30,7 @@ namespace Vuescape.DotNet.Domain
             string label,
             ActionBase action = null,
             IReadOnlyList<string> icons = null,
-            IconPosition iconPosition = IconPosition.Right,
+            IconPosition iconPosition = IconPosition.Left,
             bool isDisabled = false,
             string tooltip = null,
             IDiscriminatedType payload = null)

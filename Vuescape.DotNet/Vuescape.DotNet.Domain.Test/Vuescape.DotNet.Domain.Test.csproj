@@ -255,8 +255,24 @@
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeDummyFactory.designer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
+    <Compile Include="ActionButtonComponentPayloadTest.cs" />
+    <Compile Include="ActionButtonComponentPayloadTest.designer.cs">
+      <DependentUpon>ActionButtonComponentPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActionButtonComponentTest.cs" />
+    <Compile Include="ActionButtonComponentTest.designer.cs">
+      <DependentUpon>ActionButtonComponentTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActionMenuItemTest.cs" />
+    <Compile Include="ActionMenuItemTest.designer.cs">
+      <DependentUpon>ActionMenuItemTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="ButtonComponentPayloadTest.designer.cs">
       <DependentUpon>ButtonComponentPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DiscriminatedTypeBaseTest.cs" />
+    <Compile Include="DiscriminatedTypeBaseTest.designer.cs">
+      <DependentUpon>DiscriminatedTypeBaseTest.cs</DependentUpon>
     </Compile>
     <Compile Include="DotNetDummyFactory.designer.cs">
       <DependentUpon>DotNetDummyFactory.cs</DependentUpon>

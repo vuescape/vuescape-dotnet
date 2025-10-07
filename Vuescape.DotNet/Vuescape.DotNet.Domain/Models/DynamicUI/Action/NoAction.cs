@@ -13,11 +13,18 @@ namespace Vuescape.DotNet.Domain
     public partial class NoAction : ActionBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NoAction"/> class.
+        /// Initializes a new instance of the <see cref="NoAction"/> class with a reason.
         /// </summary>
-        public NoAction()
+        /// <param name="reason">OPTIONAL reason associated with the no-op action. Default is null.</param>
+        public NoAction(string reason = null)
             : base(DiscriminatedTypeNames.NoAction)
         {
+            this.Reason = reason;
         }
+
+        /// <summary>
+        /// Gets the reason associated with the no-op action, if any.
+        /// </summary>
+        public string Reason { get; private set; }
     }
 }

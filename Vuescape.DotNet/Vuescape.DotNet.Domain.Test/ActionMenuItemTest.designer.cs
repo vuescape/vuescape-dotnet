@@ -34,55 +34,285 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class ReadOnlyFileUploadComponentTest
+    public static partial class ActionMenuItemTest
     {
-        private static readonly StringRepresentationTestScenarios<ReadOnlyFileUploadComponent> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<ReadOnlyFileUploadComponent>()
+        private static readonly StringRepresentationTestScenarios<ActionMenuItem> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<ActionMenuItem>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<ReadOnlyFileUploadComponent>
+                new StringRepresentationTestScenario<ActionMenuItem>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponent>();
+                        var systemUnderTest = A.Dummy<ActionMenuItem>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<ReadOnlyFileUploadComponent>
+                        var result = new SystemUnderTestExpectedStringRepresentation<ActionMenuItem>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReadOnlyFileUploadComponent: TypeName = {systemUnderTest.TypeName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Payload = {systemUnderTest.Payload?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ActionMenuItem: Label = {systemUnderTest.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Action = {systemUnderTest.Action?.ToString() ?? "<null>"}, Icons = {systemUnderTest.Icons?.ToString() ?? "<null>"}, IconPosition = {systemUnderTest.IconPosition.ToString() ?? "<null>"}, IsDisabled = {systemUnderTest.IsDisabled.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Tooltip = {systemUnderTest.Tooltip?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Payload = {systemUnderTest.Payload?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<ReadOnlyFileUploadComponent> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<ReadOnlyFileUploadComponent>()
+        private static readonly ConstructorArgumentValidationTestScenarios<ActionMenuItem> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<ActionMenuItem>()
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<ReadOnlyFileUploadComponent>
+                new ConstructorArgumentValidationTestScenario<ActionMenuItem>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'payload' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'label' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var result = new ReadOnlyFileUploadComponent(
-                                             null);
+                        var referenceObject = A.Dummy<ActionMenuItem>();
+
+                        var result = new ActionMenuItem(
+                                             null,
+                                             referenceObject.Action,
+                                             referenceObject.Icons,
+                                             referenceObject.IconPosition,
+                                             referenceObject.IsDisabled,
+                                             referenceObject.Tooltip,
+                                             referenceObject.Payload);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "payload", },
+                    ExpectedExceptionMessageContains = new[] { "label", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ActionMenuItem>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'label' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionMenuItem>();
+
+                        var result = new ActionMenuItem(
+                                             Invariant($"  {Environment.NewLine}  "),
+                                             referenceObject.Action,
+                                             referenceObject.Icons,
+                                             referenceObject.IconPosition,
+                                             referenceObject.IsDisabled,
+                                             referenceObject.Tooltip,
+                                             referenceObject.Payload);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "label", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ActionMenuItem>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'icons' contains a null element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionMenuItem>();
+
+                        var result = new ActionMenuItem(
+                                             referenceObject.Label,
+                                             referenceObject.Action,
+                                             new string[0].Concat(referenceObject.Icons).Concat(new string[] { null }).Concat(referenceObject.Icons).ToList(),
+                                             referenceObject.IconPosition,
+                                             referenceObject.IsDisabled,
+                                             referenceObject.Tooltip,
+                                             referenceObject.Payload);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "icons", "contains at least one null element", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ActionMenuItem>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'icons' contains a white space element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionMenuItem>();
+
+                        var result = new ActionMenuItem(
+                                             referenceObject.Label,
+                                             referenceObject.Action,
+                                             new string[0].Concat(referenceObject.Icons).Concat(new string[] { "  \r\n  " }).Concat(referenceObject.Icons).ToList(),
+                                             referenceObject.IconPosition,
+                                             referenceObject.IsDisabled,
+                                             referenceObject.Tooltip,
+                                             referenceObject.Payload);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "icons", "contains an element that is white space", },
                 });
 
-        private static readonly ConstructorPropertyAssignmentTestScenarios<ReadOnlyFileUploadComponent> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ReadOnlyFileUploadComponent>()
+        private static readonly ConstructorPropertyAssignmentTestScenarios<ActionMenuItem> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ActionMenuItem>()
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<ReadOnlyFileUploadComponent>
+                new ConstructorPropertyAssignmentTestScenario<ActionMenuItem>
+                {
+                    Name = "Label should return same 'label' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionMenuItem>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = new ActionMenuItem(
+                                                      referenceObject.Label,
+                                                      referenceObject.Action,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconPosition,
+                                                      referenceObject.IsDisabled,
+                                                      referenceObject.Tooltip,
+                                                      referenceObject.Payload),
+                            ExpectedPropertyValue = referenceObject.Label,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "Label",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ActionMenuItem>
+                {
+                    Name = "Action should return same 'action' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionMenuItem>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = new ActionMenuItem(
+                                                      referenceObject.Label,
+                                                      referenceObject.Action,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconPosition,
+                                                      referenceObject.IsDisabled,
+                                                      referenceObject.Tooltip,
+                                                      referenceObject.Payload),
+                            ExpectedPropertyValue = referenceObject.Action,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "Action",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ActionMenuItem>
+                {
+                    Name = "Icons should return same 'icons' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionMenuItem>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = new ActionMenuItem(
+                                                      referenceObject.Label,
+                                                      referenceObject.Action,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconPosition,
+                                                      referenceObject.IsDisabled,
+                                                      referenceObject.Tooltip,
+                                                      referenceObject.Payload),
+                            ExpectedPropertyValue = referenceObject.Icons,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "Icons",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ActionMenuItem>
+                {
+                    Name = "IconPosition should return same 'iconPosition' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionMenuItem>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = new ActionMenuItem(
+                                                      referenceObject.Label,
+                                                      referenceObject.Action,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconPosition,
+                                                      referenceObject.IsDisabled,
+                                                      referenceObject.Tooltip,
+                                                      referenceObject.Payload),
+                            ExpectedPropertyValue = referenceObject.IconPosition,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "IconPosition",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ActionMenuItem>
+                {
+                    Name = "IsDisabled should return same 'isDisabled' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionMenuItem>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = new ActionMenuItem(
+                                                      referenceObject.Label,
+                                                      referenceObject.Action,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconPosition,
+                                                      referenceObject.IsDisabled,
+                                                      referenceObject.Tooltip,
+                                                      referenceObject.Payload),
+                            ExpectedPropertyValue = referenceObject.IsDisabled,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "IsDisabled",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ActionMenuItem>
+                {
+                    Name = "Tooltip should return same 'tooltip' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionMenuItem>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = new ActionMenuItem(
+                                                      referenceObject.Label,
+                                                      referenceObject.Action,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconPosition,
+                                                      referenceObject.IsDisabled,
+                                                      referenceObject.Tooltip,
+                                                      referenceObject.Payload),
+                            ExpectedPropertyValue = referenceObject.Tooltip,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "Tooltip",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<ActionMenuItem>
                 {
                     Name = "Payload should return same 'payload' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponent>();
+                        var referenceObject = A.Dummy<ActionMenuItem>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<ReadOnlyFileUploadComponent>
+                        var result = new SystemUnderTestExpectedPropertyValue<ActionMenuItem>
                         {
-                            SystemUnderTest = new ReadOnlyFileUploadComponent(
+                            SystemUnderTest = new ActionMenuItem(
+                                                      referenceObject.Label,
+                                                      referenceObject.Action,
+                                                      referenceObject.Icons,
+                                                      referenceObject.IconPosition,
+                                                      referenceObject.IsDisabled,
+                                                      referenceObject.Tooltip,
                                                       referenceObject.Payload),
                             ExpectedPropertyValue = referenceObject.Payload,
                         };
@@ -92,19 +322,139 @@ namespace Vuescape.DotNet.Domain.Test
                     PropertyName = "Payload",
                 });
 
-        private static readonly DeepCloneWithTestScenarios<ReadOnlyFileUploadComponent> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ReadOnlyFileUploadComponent>()
+        private static readonly DeepCloneWithTestScenarios<ActionMenuItem> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ActionMenuItem>()
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<ReadOnlyFileUploadComponent>
+                new DeepCloneWithTestScenario<ActionMenuItem>
+                {
+                    Name = "DeepCloneWithLabel should deep clone object and replace Label with the provided label",
+                    WithPropertyName = "Label",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ActionMenuItem>();
+
+                        var referenceObject = A.Dummy<ActionMenuItem>().ThatIs(_ => !systemUnderTest.Label.IsEqualTo(_.Label));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.Label,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ActionMenuItem>
+                {
+                    Name = "DeepCloneWithAction should deep clone object and replace Action with the provided action",
+                    WithPropertyName = "Action",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ActionMenuItem>();
+
+                        var referenceObject = A.Dummy<ActionMenuItem>().ThatIs(_ => !systemUnderTest.Action.IsEqualTo(_.Action));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.Action,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ActionMenuItem>
+                {
+                    Name = "DeepCloneWithIcons should deep clone object and replace Icons with the provided icons",
+                    WithPropertyName = "Icons",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ActionMenuItem>();
+
+                        var referenceObject = A.Dummy<ActionMenuItem>().ThatIs(_ => !systemUnderTest.Icons.IsEqualTo(_.Icons));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.Icons,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ActionMenuItem>
+                {
+                    Name = "DeepCloneWithIconPosition should deep clone object and replace IconPosition with the provided iconPosition",
+                    WithPropertyName = "IconPosition",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ActionMenuItem>();
+
+                        var referenceObject = A.Dummy<ActionMenuItem>().ThatIs(_ => !systemUnderTest.IconPosition.IsEqualTo(_.IconPosition));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.IconPosition,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ActionMenuItem>
+                {
+                    Name = "DeepCloneWithIsDisabled should deep clone object and replace IsDisabled with the provided isDisabled",
+                    WithPropertyName = "IsDisabled",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ActionMenuItem>();
+
+                        var referenceObject = A.Dummy<ActionMenuItem>().ThatIs(_ => !systemUnderTest.IsDisabled.IsEqualTo(_.IsDisabled));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.IsDisabled,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ActionMenuItem>
+                {
+                    Name = "DeepCloneWithTooltip should deep clone object and replace Tooltip with the provided tooltip",
+                    WithPropertyName = "Tooltip",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<ActionMenuItem>();
+
+                        var referenceObject = A.Dummy<ActionMenuItem>().ThatIs(_ => !systemUnderTest.Tooltip.IsEqualTo(_.Tooltip));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<ActionMenuItem>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.Tooltip,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<ActionMenuItem>
                 {
                     Name = "DeepCloneWithPayload should deep clone object and replace Payload with the provided payload",
                     WithPropertyName = "Payload",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponent>();
+                        var systemUnderTest = A.Dummy<ActionMenuItem>();
 
-                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponent>().ThatIs(_ => !systemUnderTest.Payload.IsEqualTo(_.Payload));
+                        var referenceObject = A.Dummy<ActionMenuItem>().ThatIs(_ => !systemUnderTest.Payload.IsEqualTo(_.Payload));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<ReadOnlyFileUploadComponent>
+                        var result = new SystemUnderTestDeepCloneWithValue<ActionMenuItem>
                         {
                             SystemUnderTest = systemUnderTest,
                             DeepCloneWithValue = referenceObject.Payload,
@@ -114,23 +464,83 @@ namespace Vuescape.DotNet.Domain.Test
                     },
                 });
 
-        private static readonly ReadOnlyFileUploadComponent ReferenceObjectForEquatableTestScenarios = A.Dummy<ReadOnlyFileUploadComponent>();
+        private static readonly ActionMenuItem ReferenceObjectForEquatableTestScenarios = A.Dummy<ActionMenuItem>();
 
-        private static readonly EquatableTestScenarios<ReadOnlyFileUploadComponent> EquatableTestScenarios = new EquatableTestScenarios<ReadOnlyFileUploadComponent>()
+        private static readonly EquatableTestScenarios<ActionMenuItem> EquatableTestScenarios = new EquatableTestScenarios<ActionMenuItem>()
             .AddScenario(() =>
-                new EquatableTestScenario<ReadOnlyFileUploadComponent>
+                new EquatableTestScenario<ActionMenuItem>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new ReadOnlyFileUploadComponent[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new ActionMenuItem[]
                     {
-                        new ReadOnlyFileUploadComponent(
+                        new ActionMenuItem(
+                                ReferenceObjectForEquatableTestScenarios.Label,
+                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconPosition,
+                                ReferenceObjectForEquatableTestScenarios.IsDisabled,
+                                ReferenceObjectForEquatableTestScenarios.Tooltip,
                                 ReferenceObjectForEquatableTestScenarios.Payload),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new ReadOnlyFileUploadComponent[]
+                    ObjectsThatAreNotEqualToReferenceObject = new ActionMenuItem[]
                     {
-                        new ReadOnlyFileUploadComponent(
-                                A.Dummy<ReadOnlyFileUploadComponent>().Whose(_ => !_.Payload.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Payload)).Payload),
+                        new ActionMenuItem(
+                                A.Dummy<ActionMenuItem>().Whose(_ => !_.Label.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Label)).Label,
+                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconPosition,
+                                ReferenceObjectForEquatableTestScenarios.IsDisabled,
+                                ReferenceObjectForEquatableTestScenarios.Tooltip,
+                                ReferenceObjectForEquatableTestScenarios.Payload),
+                        new ActionMenuItem(
+                                ReferenceObjectForEquatableTestScenarios.Label,
+                                A.Dummy<ActionMenuItem>().Whose(_ => !_.Action.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Action)).Action,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconPosition,
+                                ReferenceObjectForEquatableTestScenarios.IsDisabled,
+                                ReferenceObjectForEquatableTestScenarios.Tooltip,
+                                ReferenceObjectForEquatableTestScenarios.Payload),
+                        new ActionMenuItem(
+                                ReferenceObjectForEquatableTestScenarios.Label,
+                                ReferenceObjectForEquatableTestScenarios.Action,
+                                A.Dummy<ActionMenuItem>().Whose(_ => !_.Icons.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Icons)).Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconPosition,
+                                ReferenceObjectForEquatableTestScenarios.IsDisabled,
+                                ReferenceObjectForEquatableTestScenarios.Tooltip,
+                                ReferenceObjectForEquatableTestScenarios.Payload),
+                        new ActionMenuItem(
+                                ReferenceObjectForEquatableTestScenarios.Label,
+                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                A.Dummy<ActionMenuItem>().Whose(_ => !_.IconPosition.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IconPosition)).IconPosition,
+                                ReferenceObjectForEquatableTestScenarios.IsDisabled,
+                                ReferenceObjectForEquatableTestScenarios.Tooltip,
+                                ReferenceObjectForEquatableTestScenarios.Payload),
+                        new ActionMenuItem(
+                                ReferenceObjectForEquatableTestScenarios.Label,
+                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconPosition,
+                                A.Dummy<ActionMenuItem>().Whose(_ => !_.IsDisabled.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsDisabled)).IsDisabled,
+                                ReferenceObjectForEquatableTestScenarios.Tooltip,
+                                ReferenceObjectForEquatableTestScenarios.Payload),
+                        new ActionMenuItem(
+                                ReferenceObjectForEquatableTestScenarios.Label,
+                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconPosition,
+                                ReferenceObjectForEquatableTestScenarios.IsDisabled,
+                                A.Dummy<ActionMenuItem>().Whose(_ => !_.Tooltip.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Tooltip)).Tooltip,
+                                ReferenceObjectForEquatableTestScenarios.Payload),
+                        new ActionMenuItem(
+                                ReferenceObjectForEquatableTestScenarios.Label,
+                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.Icons,
+                                ReferenceObjectForEquatableTestScenarios.IconPosition,
+                                ReferenceObjectForEquatableTestScenarios.IsDisabled,
+                                ReferenceObjectForEquatableTestScenarios.Tooltip,
+                                A.Dummy<ActionMenuItem>().Whose(_ => !_.Payload.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Payload)).Payload),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -139,18 +549,6 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<int>(),
                         A.Dummy<int?>(),
                         A.Dummy<Guid>(),
-                        A.Dummy<ActionButtonComponent>(),
-                        A.Dummy<ButtonComponent>(),
-                        A.Dummy<ChicletGridComponent>(),
-                        A.Dummy<FileUploadComponent>(),
-                        A.Dummy<NavigationAction>(),
-                        A.Dummy<NoAction>(),
-                        A.Dummy<SelectComponent>(),
-                        A.Dummy<SelectNavigationAction>(),
-                        A.Dummy<TableComponent>(),
-                        A.Dummy<TableTabsComponent>(),
-                        A.Dummy<TextComponent>(),
-                        A.Dummy<TextLinkComponent>(),
                     },
                 });
 
@@ -172,12 +570,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void ReadOnlyFileUploadComponent___Should_implement_IModel_of_ReadOnlyFileUploadComponent___When_reflecting()
+            public static void ActionMenuItem___Should_implement_IModel_of_ActionMenuItem___When_reflecting()
             {
                 // Arrange
-                var type = typeof(ReadOnlyFileUploadComponent);
+                var type = typeof(ActionMenuItem);
 
-                var expectedModelMethods = typeof(IModel<ReadOnlyFileUploadComponent>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<ActionMenuItem>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -187,7 +585,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<ReadOnlyFileUploadComponent>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<ActionMenuItem>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -205,10 +603,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void ReadOnlyFileUploadComponent___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void ActionMenuItem___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(ReadOnlyFileUploadComponent);
+                var type = typeof(ActionMenuItem);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -388,10 +786,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponent>();
+                var systemUnderTest = A.Dummy<ActionMenuItem>();
 
                 // Act
-                var actual = (ReadOnlyFileUploadComponent)systemUnderTest.Clone();
+                var actual = (ActionMenuItem)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -415,7 +813,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponent>();
+                var systemUnderTest = A.Dummy<ActionMenuItem>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -423,6 +821,30 @@ namespace Vuescape.DotNet.Domain.Test
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
+
+                if (systemUnderTest.Action == null)
+                {
+                    actual.Action.AsTest().Must().BeNull();
+                }
+                else if (!actual.Action.GetType().IsValueType)
+                {
+                    // When the declared type is a reference type, we still have to check the runtime type.
+                    // The object could be a boxed value type, which will fail this asseration because
+                    // a deep clone of a value type object is the same object.
+                    actual.Action.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Action);
+                }
+
+                if (systemUnderTest.Icons == null)
+                {
+                    actual.Icons.AsTest().Must().BeNull();
+                }
+                else if (!actual.Icons.GetType().IsValueType)
+                {
+                    // When the declared type is a reference type, we still have to check the runtime type.
+                    // The object could be a boxed value type, which will fail this asseration because
+                    // a deep clone of a value type object is the same object.
+                    actual.Icons.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Icons);
+                }
 
                 if (systemUnderTest.Payload == null)
                 {
@@ -453,7 +875,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "TypeName", "Payload" };
+                var propertyNames = new string[] { "Label", "Action", "Icons", "IconPosition", "IsDisabled", "Tooltip", "Payload" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 
@@ -466,12 +888,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (ReadOnlyFileUploadComponent)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (ActionMenuItem)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(ReadOnlyFileUploadComponent).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(ActionMenuItem).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var actualPropertyValue = propertyInfo.GetValue(actual);
 
@@ -510,35 +932,6 @@ namespace Vuescape.DotNet.Domain.Test
                     }
                 }
             }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void DeepCloneWithTypeName___Should_throw_NotSupportedException___When_called()
-            {
-                // Arrange
-                var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponent>();
-
-                var typeName = A.Dummy<string>();
-
-                // Act
-                var actual = Record.Exception(()=> systemUnderTest.DeepCloneWithTypeName(typeName));
-
-                // Assert
-                actual.AsTest().Must().BeOfType<NotSupportedException>();
-                actual.Message.AsTest().Must().BeEqualTo("The constructor in-use (by code gen) for ReadOnlyFileUploadComponent does not have a parameter that corresponds with the 'TypeName' property.  As such, this method, DeepCloneWithTypeName(string typeName), cannot utilize the specified 'typeName' value for that property.");
-            }
         }
 
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
@@ -562,7 +955,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ReadOnlyFileUploadComponent>();
+                var expected = A.Dummy<ActionMenuItem>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -591,7 +984,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ReadOnlyFileUploadComponent>();
+                var expected = A.Dummy<ActionMenuItem>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -620,7 +1013,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ReadOnlyFileUploadComponent>();
+                var expected = A.Dummy<ActionMenuItem>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -649,7 +1042,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ReadOnlyFileUploadComponent>();
+                var expected = A.Dummy<ActionMenuItem>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -683,8 +1076,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                ReadOnlyFileUploadComponent systemUnderTest1 = null;
-                ReadOnlyFileUploadComponent systemUnderTest2 = null;
+                ActionMenuItem systemUnderTest1 = null;
+                ActionMenuItem systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -714,7 +1107,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    ReadOnlyFileUploadComponent systemUnderTest = null;
+                    ActionMenuItem systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -863,8 +1256,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                ReadOnlyFileUploadComponent systemUnderTest1 = null;
-                ReadOnlyFileUploadComponent systemUnderTest2 = null;
+                ActionMenuItem systemUnderTest1 = null;
+                ActionMenuItem systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -894,7 +1287,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    ReadOnlyFileUploadComponent systemUnderTest = null;
+                    ActionMenuItem systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -1040,443 +1433,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_DiscriminatedTypeBase___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_ActionMenuItem___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    DiscriminatedTypeBase systemUnderTest = null;
-
-                    // Act
-                    var actual = scenario.ReferenceObject.Equals((DiscriminatedTypeBase)systemUnderTest);
-
-                    // Assert
-                    actual.AsTest().Must().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_DiscriminatedTypeBase___Should_return_true___When_parameter_other_is_same_object()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actual = scenario.ReferenceObject.Equals((DiscriminatedTypeBase)scenario.ReferenceObject);
-
-                    // Assert
-                    actual.AsTest().Must().BeTrue(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_DiscriminatedTypeBase___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((DiscriminatedTypeBase)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_DiscriminatedTypeBase___Should_return_false___When_objects_being_compared_have_different_property_values()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((DiscriminatedTypeBase)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_DiscriminatedTypeBase___Should_return_true___When_objects_being_compared_have_same_property_values()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((DiscriminatedTypeBase)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeTrue(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponentBase___Should_return_false___When_parameter_other_is_null()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange
-                    PaneComponentBase systemUnderTest = null;
-
-                    // Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponentBase)systemUnderTest);
-
-                    // Assert
-                    actual.AsTest().Must().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponentBase___Should_return_true___When_parameter_other_is_same_object()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponentBase)scenario.ReferenceObject);
-
-                    // Assert
-                    actual.AsTest().Must().BeTrue(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponentBase___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponentBase)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponentBase___Should_return_false___When_objects_being_compared_have_different_property_values()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponentBase)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponentBase___Should_return_true___When_objects_being_compared_have_same_property_values()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponentBase)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeTrue(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_ReadOnlyFileUploadComponentPayload___Should_return_false___When_parameter_other_is_null()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange
-                    PaneComponent<ReadOnlyFileUploadComponentPayload> systemUnderTest = null;
-
-                    // Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponent<ReadOnlyFileUploadComponentPayload>)systemUnderTest);
-
-                    // Assert
-                    actual.AsTest().Must().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_ReadOnlyFileUploadComponentPayload___Should_return_true___When_parameter_other_is_same_object()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponent<ReadOnlyFileUploadComponentPayload>)scenario.ReferenceObject);
-
-                    // Assert
-                    actual.AsTest().Must().BeTrue(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_ReadOnlyFileUploadComponentPayload___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<ReadOnlyFileUploadComponentPayload>)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_ReadOnlyFileUploadComponentPayload___Should_return_false___When_objects_being_compared_have_different_property_values()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<ReadOnlyFileUploadComponentPayload>)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_ReadOnlyFileUploadComponentPayload___Should_return_true___When_objects_being_compared_have_same_property_values()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<ReadOnlyFileUploadComponentPayload>)_)).ToList();
-
-                    // Assert
-                    actuals.AsTest().Must().Each().BeTrue(because: scenario.Id);
-                }
-            }
-
-            [Fact]
-            [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-            [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-            [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-            [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-            [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-            [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-            [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-            [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ReadOnlyFileUploadComponent___Should_return_false___When_parameter_other_is_null()
-            {
-                var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
-
-                foreach (var scenario in scenarios)
-                {
-                    // Arrange
-                    ReadOnlyFileUploadComponent systemUnderTest = null;
+                    ActionMenuItem systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1500,7 +1464,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ReadOnlyFileUploadComponent___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_ActionMenuItem___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1528,7 +1492,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ReadOnlyFileUploadComponent___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_ActionMenuItem___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1556,7 +1520,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ReadOnlyFileUploadComponent___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_ActionMenuItem___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1584,7 +1548,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ReadOnlyFileUploadComponent___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_ActionMenuItem___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 

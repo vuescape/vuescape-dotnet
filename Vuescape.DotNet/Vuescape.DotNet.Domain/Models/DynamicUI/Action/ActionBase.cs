@@ -23,11 +23,5 @@ namespace Vuescape.DotNet.Domain
             : base(typeName)
         {
         }
-
-        /// <summary>
-        /// Gets the type of the action. Used to discriminate actions in JavaScript.
-        /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "Needs to align with Type property in TypeScript")]
-        public string Type => this.TypeName;
     }
 }

@@ -8,12 +8,13 @@
 namespace Vuescape.DotNet.Domain
 {
     using OBeautifulCode.Assertion.Recipes;
+    using OBeautifulCode.Type;
 
     /// <summary>
     /// Provides a base implementation of <see cref="IDiscriminatedType"/> for models that
     /// participate in discriminated (tagged) polymorphism.
     /// </summary>
-    public abstract class DiscriminatedTypeBase : IDiscriminatedType
+    public abstract partial class DiscriminatedTypeBase : IDiscriminatedType, IModelViaCodeGen
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DiscriminatedTypeBase"/> class.

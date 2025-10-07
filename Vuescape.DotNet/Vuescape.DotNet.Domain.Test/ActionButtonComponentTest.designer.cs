@@ -34,35 +34,35 @@ namespace Vuescape.DotNet.Domain.Test
 
     using static global::System.FormattableString;
 
-    public static partial class ReadOnlyFileUploadComponentTest
+    public static partial class ActionButtonComponentTest
     {
-        private static readonly StringRepresentationTestScenarios<ReadOnlyFileUploadComponent> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<ReadOnlyFileUploadComponent>()
+        private static readonly StringRepresentationTestScenarios<ActionButtonComponent> StringRepresentationTestScenarios = new StringRepresentationTestScenarios<ActionButtonComponent>()
             .AddScenario(() =>
-                new StringRepresentationTestScenario<ReadOnlyFileUploadComponent>
+                new StringRepresentationTestScenario<ActionButtonComponent>
                 {
                     Name = "Default Code Generated Scenario",
                     SystemUnderTestExpectedStringRepresentationFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponent>();
+                        var systemUnderTest = A.Dummy<ActionButtonComponent>();
 
-                        var result = new SystemUnderTestExpectedStringRepresentation<ReadOnlyFileUploadComponent>
+                        var result = new SystemUnderTestExpectedStringRepresentation<ActionButtonComponent>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReadOnlyFileUploadComponent: TypeName = {systemUnderTest.TypeName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Payload = {systemUnderTest.Payload?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ActionButtonComponent: TypeName = {systemUnderTest.TypeName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Payload = {systemUnderTest.Payload?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<ReadOnlyFileUploadComponent> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<ReadOnlyFileUploadComponent>()
+        private static readonly ConstructorArgumentValidationTestScenarios<ActionButtonComponent> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<ActionButtonComponent>()
             .AddScenario(() =>
-                new ConstructorArgumentValidationTestScenario<ReadOnlyFileUploadComponent>
+                new ConstructorArgumentValidationTestScenario<ActionButtonComponent>
                 {
                     Name = "constructor should throw ArgumentNullException when parameter 'payload' is null scenario",
                     ConstructionFunc = () =>
                     {
-                        var result = new ReadOnlyFileUploadComponent(
+                        var result = new ActionButtonComponent(
                                              null);
 
                         return result;
@@ -71,18 +71,18 @@ namespace Vuescape.DotNet.Domain.Test
                     ExpectedExceptionMessageContains = new[] { "payload", },
                 });
 
-        private static readonly ConstructorPropertyAssignmentTestScenarios<ReadOnlyFileUploadComponent> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ReadOnlyFileUploadComponent>()
+        private static readonly ConstructorPropertyAssignmentTestScenarios<ActionButtonComponent> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<ActionButtonComponent>()
             .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<ReadOnlyFileUploadComponent>
+                new ConstructorPropertyAssignmentTestScenario<ActionButtonComponent>
                 {
                     Name = "Payload should return same 'payload' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
-                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponent>();
+                        var referenceObject = A.Dummy<ActionButtonComponent>();
 
-                        var result = new SystemUnderTestExpectedPropertyValue<ReadOnlyFileUploadComponent>
+                        var result = new SystemUnderTestExpectedPropertyValue<ActionButtonComponent>
                         {
-                            SystemUnderTest = new ReadOnlyFileUploadComponent(
+                            SystemUnderTest = new ActionButtonComponent(
                                                       referenceObject.Payload),
                             ExpectedPropertyValue = referenceObject.Payload,
                         };
@@ -92,19 +92,19 @@ namespace Vuescape.DotNet.Domain.Test
                     PropertyName = "Payload",
                 });
 
-        private static readonly DeepCloneWithTestScenarios<ReadOnlyFileUploadComponent> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ReadOnlyFileUploadComponent>()
+        private static readonly DeepCloneWithTestScenarios<ActionButtonComponent> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ActionButtonComponent>()
             .AddScenario(() =>
-                new DeepCloneWithTestScenario<ReadOnlyFileUploadComponent>
+                new DeepCloneWithTestScenario<ActionButtonComponent>
                 {
                     Name = "DeepCloneWithPayload should deep clone object and replace Payload with the provided payload",
                     WithPropertyName = "Payload",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
-                        var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponent>();
+                        var systemUnderTest = A.Dummy<ActionButtonComponent>();
 
-                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponent>().ThatIs(_ => !systemUnderTest.Payload.IsEqualTo(_.Payload));
+                        var referenceObject = A.Dummy<ActionButtonComponent>().ThatIs(_ => !systemUnderTest.Payload.IsEqualTo(_.Payload));
 
-                        var result = new SystemUnderTestDeepCloneWithValue<ReadOnlyFileUploadComponent>
+                        var result = new SystemUnderTestDeepCloneWithValue<ActionButtonComponent>
                         {
                             SystemUnderTest = systemUnderTest,
                             DeepCloneWithValue = referenceObject.Payload,
@@ -114,23 +114,23 @@ namespace Vuescape.DotNet.Domain.Test
                     },
                 });
 
-        private static readonly ReadOnlyFileUploadComponent ReferenceObjectForEquatableTestScenarios = A.Dummy<ReadOnlyFileUploadComponent>();
+        private static readonly ActionButtonComponent ReferenceObjectForEquatableTestScenarios = A.Dummy<ActionButtonComponent>();
 
-        private static readonly EquatableTestScenarios<ReadOnlyFileUploadComponent> EquatableTestScenarios = new EquatableTestScenarios<ReadOnlyFileUploadComponent>()
+        private static readonly EquatableTestScenarios<ActionButtonComponent> EquatableTestScenarios = new EquatableTestScenarios<ActionButtonComponent>()
             .AddScenario(() =>
-                new EquatableTestScenario<ReadOnlyFileUploadComponent>
+                new EquatableTestScenario<ActionButtonComponent>
                 {
                     Name = "Default Code Generated Scenario",
                     ReferenceObject = ReferenceObjectForEquatableTestScenarios,
-                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new ReadOnlyFileUploadComponent[]
+                    ObjectsThatAreEqualToButNotTheSameAsReferenceObject = new ActionButtonComponent[]
                     {
-                        new ReadOnlyFileUploadComponent(
+                        new ActionButtonComponent(
                                 ReferenceObjectForEquatableTestScenarios.Payload),
                     },
-                    ObjectsThatAreNotEqualToReferenceObject = new ReadOnlyFileUploadComponent[]
+                    ObjectsThatAreNotEqualToReferenceObject = new ActionButtonComponent[]
                     {
-                        new ReadOnlyFileUploadComponent(
-                                A.Dummy<ReadOnlyFileUploadComponent>().Whose(_ => !_.Payload.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Payload)).Payload),
+                        new ActionButtonComponent(
+                                A.Dummy<ActionButtonComponent>().Whose(_ => !_.Payload.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Payload)).Payload),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -139,12 +139,12 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<int>(),
                         A.Dummy<int?>(),
                         A.Dummy<Guid>(),
-                        A.Dummy<ActionButtonComponent>(),
                         A.Dummy<ButtonComponent>(),
                         A.Dummy<ChicletGridComponent>(),
                         A.Dummy<FileUploadComponent>(),
                         A.Dummy<NavigationAction>(),
                         A.Dummy<NoAction>(),
+                        A.Dummy<ReadOnlyFileUploadComponent>(),
                         A.Dummy<SelectComponent>(),
                         A.Dummy<SelectNavigationAction>(),
                         A.Dummy<TableComponent>(),
@@ -172,12 +172,12 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void ReadOnlyFileUploadComponent___Should_implement_IModel_of_ReadOnlyFileUploadComponent___When_reflecting()
+            public static void ActionButtonComponent___Should_implement_IModel_of_ActionButtonComponent___When_reflecting()
             {
                 // Arrange
-                var type = typeof(ReadOnlyFileUploadComponent);
+                var type = typeof(ActionButtonComponent);
 
-                var expectedModelMethods = typeof(IModel<ReadOnlyFileUploadComponent>).GetInterfaceDeclaredAndImplementedMethods();
+                var expectedModelMethods = typeof(IModel<ActionButtonComponent>).GetInterfaceDeclaredAndImplementedMethods();
 
                 var expectedModelMethodHashes = expectedModelMethods.Select(_ => _.GetSignatureHash());
 
@@ -187,7 +187,7 @@ namespace Vuescape.DotNet.Domain.Test
                 var actualModelMethodHashes = actualModelMethods.Select(_ => _.GetSignatureHash());
 
                 // Assert
-                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<ReadOnlyFileUploadComponent>));
+                actualInterfaces.AsTest().Must().ContainElement(typeof(IModel<ActionButtonComponent>));
                 expectedModelMethodHashes.Except(actualModelMethodHashes).AsTest().Must().BeEmptyEnumerable();
             }
 
@@ -205,10 +205,10 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void ReadOnlyFileUploadComponent___Should_be_attributed_with_Serializable____When_reflecting()
+            public static void ActionButtonComponent___Should_be_attributed_with_Serializable____When_reflecting()
             {
                 // Arrange
-                var type = typeof(ReadOnlyFileUploadComponent);
+                var type = typeof(ActionButtonComponent);
 
                 // Act
                 var actualAttributes = type.GetCustomAttributes(typeof(SerializableAttribute), false);
@@ -388,10 +388,10 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Clone___Should_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponent>();
+                var systemUnderTest = A.Dummy<ActionButtonComponent>();
 
                 // Act
-                var actual = (ReadOnlyFileUploadComponent)systemUnderTest.Clone();
+                var actual = (ActionButtonComponent)systemUnderTest.Clone();
 
                 // Assert
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
@@ -415,7 +415,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepClone___Should_deep_clone_object___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponent>();
+                var systemUnderTest = A.Dummy<ActionButtonComponent>();
 
                 // Act
                 var actual = systemUnderTest.DeepClone();
@@ -466,12 +466,12 @@ namespace Vuescape.DotNet.Domain.Test
                     }
 
                     // Act
-                    var actual = (ReadOnlyFileUploadComponent)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
+                    var actual = (ActionButtonComponent)scenario.DeepCloneWithMethod.Invoke(scenario.SystemUnderTest, new[] { scenario.WithValue });
 
                     // Assert
                     foreach(var propertyName in propertyNames)
                     {
-                        var propertyInfo = typeof(ReadOnlyFileUploadComponent).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
+                        var propertyInfo = typeof(ActionButtonComponent).GetPropertyFiltered(propertyName, MemberRelationships.DeclaredOrInherited, MemberOwners.Instance, MemberAccessModifiers.Public);
 
                         var actualPropertyValue = propertyInfo.GetValue(actual);
 
@@ -528,7 +528,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void DeepCloneWithTypeName___Should_throw_NotSupportedException___When_called()
             {
                 // Arrange
-                var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponent>();
+                var systemUnderTest = A.Dummy<ActionButtonComponent>();
 
                 var typeName = A.Dummy<string>();
 
@@ -537,7 +537,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                 // Assert
                 actual.AsTest().Must().BeOfType<NotSupportedException>();
-                actual.Message.AsTest().Must().BeEqualTo("The constructor in-use (by code gen) for ReadOnlyFileUploadComponent does not have a parameter that corresponds with the 'TypeName' property.  As such, this method, DeepCloneWithTypeName(string typeName), cannot utilize the specified 'typeName' value for that property.");
+                actual.Message.AsTest().Must().BeEqualTo("The constructor in-use (by code gen) for ActionButtonComponent does not have a parameter that corresponds with the 'TypeName' property.  As such, this method, DeepCloneWithTypeName(string typeName), cannot utilize the specified 'typeName' value for that property.");
             }
         }
 
@@ -562,7 +562,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ReadOnlyFileUploadComponent>();
+                var expected = A.Dummy<ActionButtonComponent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -591,7 +591,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcBsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ReadOnlyFileUploadComponent>();
+                var expected = A.Dummy<ActionButtonComponent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.BsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -620,7 +620,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_string_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ReadOnlyFileUploadComponent>();
+                var expected = A.Dummy<ActionButtonComponent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -649,7 +649,7 @@ namespace Vuescape.DotNet.Domain.Test
             public static void Deserialize___Should_roundtrip_object___When_serializing_to_and_deserializing_from_bytes_using_ObcJsonSerializer()
             {
                 // Arrange
-                var expected = A.Dummy<ReadOnlyFileUploadComponent>();
+                var expected = A.Dummy<ActionButtonComponent>();
 
                 var serializationConfigurationType = SerializationConfigurationTypes.JsonSerializationConfigurationType.ConcreteSerializationConfigurationDerivativeType;
 
@@ -683,8 +683,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void EqualsOperator___Should_return_true___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                ReadOnlyFileUploadComponent systemUnderTest1 = null;
-                ReadOnlyFileUploadComponent systemUnderTest2 = null;
+                ActionButtonComponent systemUnderTest1 = null;
+                ActionButtonComponent systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 == systemUnderTest2;
@@ -714,7 +714,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    ReadOnlyFileUploadComponent systemUnderTest = null;
+                    ActionButtonComponent systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest == scenario.ReferenceObject;
@@ -863,8 +863,8 @@ namespace Vuescape.DotNet.Domain.Test
             public static void NotEqualsOperator___Should_return_false___When_both_sides_of_operator_are_null()
             {
                 // Arrange
-                ReadOnlyFileUploadComponent systemUnderTest1 = null;
-                ReadOnlyFileUploadComponent systemUnderTest2 = null;
+                ActionButtonComponent systemUnderTest1 = null;
+                ActionButtonComponent systemUnderTest2 = null;
 
                 // Act
                 var actual = systemUnderTest1 != systemUnderTest2;
@@ -894,7 +894,7 @@ namespace Vuescape.DotNet.Domain.Test
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    ReadOnlyFileUploadComponent systemUnderTest = null;
+                    ActionButtonComponent systemUnderTest = null;
 
                     // Act
                     var actual1 = systemUnderTest != scenario.ReferenceObject;
@@ -1326,17 +1326,17 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_ReadOnlyFileUploadComponentPayload___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_PaneComponent_of_ButtonComponentPayload___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    PaneComponent<ReadOnlyFileUploadComponentPayload> systemUnderTest = null;
+                    PaneComponent<ButtonComponentPayload> systemUnderTest = null;
 
                     // Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponent<ReadOnlyFileUploadComponentPayload>)systemUnderTest);
+                    var actual = scenario.ReferenceObject.Equals((PaneComponent<ButtonComponentPayload>)systemUnderTest);
 
                     // Assert
                     actual.AsTest().Must().BeFalse(because: scenario.Id);
@@ -1357,14 +1357,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_ReadOnlyFileUploadComponentPayload___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_PaneComponent_of_ButtonComponentPayload___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actual = scenario.ReferenceObject.Equals((PaneComponent<ReadOnlyFileUploadComponentPayload>)scenario.ReferenceObject);
+                    var actual = scenario.ReferenceObject.Equals((PaneComponent<ButtonComponentPayload>)scenario.ReferenceObject);
 
                     // Assert
                     actual.AsTest().Must().BeTrue(because: scenario.Id);
@@ -1385,14 +1385,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_ReadOnlyFileUploadComponentPayload___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_PaneComponent_of_ButtonComponentPayload___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<ReadOnlyFileUploadComponentPayload>)_)).ToList();
+                    var actuals = scenario.ObjectsThatDeriveFromScenarioTypeButAreNotOfTheSameTypeAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<ButtonComponentPayload>)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
@@ -1413,14 +1413,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_ReadOnlyFileUploadComponentPayload___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_PaneComponent_of_ButtonComponentPayload___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<ReadOnlyFileUploadComponentPayload>)_)).ToList();
+                    var actuals = scenario.ObjectsThatAreNotEqualToReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<ButtonComponentPayload>)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeFalse(because: scenario.Id);
@@ -1441,14 +1441,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_PaneComponent_of_ReadOnlyFileUploadComponentPayload___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_PaneComponent_of_ButtonComponentPayload___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange, Act
-                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<ReadOnlyFileUploadComponentPayload>)_)).ToList();
+                    var actuals = scenario.ObjectsThatAreEqualToButNotTheSameAsReferenceObject.Select(_ => scenario.ReferenceObject.Equals((PaneComponent<ButtonComponentPayload>)_)).ToList();
 
                     // Assert
                     actuals.AsTest().Must().Each().BeTrue(because: scenario.Id);
@@ -1469,14 +1469,14 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ReadOnlyFileUploadComponent___Should_return_false___When_parameter_other_is_null()
+            public static void Equals_with_ActionButtonComponent___Should_return_false___When_parameter_other_is_null()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
                 foreach (var scenario in scenarios)
                 {
                     // Arrange
-                    ReadOnlyFileUploadComponent systemUnderTest = null;
+                    ActionButtonComponent systemUnderTest = null;
 
                     // Act
                     var actual = scenario.ReferenceObject.Equals(systemUnderTest);
@@ -1500,7 +1500,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ReadOnlyFileUploadComponent___Should_return_true___When_parameter_other_is_same_object()
+            public static void Equals_with_ActionButtonComponent___Should_return_true___When_parameter_other_is_same_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1528,7 +1528,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ReadOnlyFileUploadComponent___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
+            public static void Equals_with_ActionButtonComponent___Should_return_false___When_parameter_other_is_derived_from_the_same_type_but_is_not_of_the_same_type_as_this_object()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1556,7 +1556,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ReadOnlyFileUploadComponent___Should_return_false___When_objects_being_compared_have_different_property_values()
+            public static void Equals_with_ActionButtonComponent___Should_return_false___When_objects_being_compared_have_different_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 
@@ -1584,7 +1584,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
             [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-            public static void Equals_with_ReadOnlyFileUploadComponent___Should_return_true___When_objects_being_compared_have_same_property_values()
+            public static void Equals_with_ActionButtonComponent___Should_return_true___When_objects_being_compared_have_same_property_values()
             {
                 var scenarios = EquatableTestScenarios.ValidateAndPrepareForTesting();
 

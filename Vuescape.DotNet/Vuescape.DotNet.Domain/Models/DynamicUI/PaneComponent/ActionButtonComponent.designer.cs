@@ -23,15 +23,15 @@ namespace Vuescape.DotNet.Domain
     using static global::System.FormattableString;
 
     [Serializable]
-    public partial class SelectNavigationAction : IModel<SelectNavigationAction>
+    public partial class ActionButtonComponent : IModel<ActionButtonComponent>
     {
         /// <summary>
-        /// Determines whether two objects of type <see cref="SelectNavigationAction"/> are equal.
+        /// Determines whether two objects of type <see cref="ActionButtonComponent"/> are equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are equal; otherwise false.</returns>
-        public static bool operator ==(SelectNavigationAction left, SelectNavigationAction right)
+        public static bool operator ==(ActionButtonComponent left, ActionButtonComponent right)
         {
             if (ReferenceEquals(left, right))
             {
@@ -49,15 +49,15 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Determines whether two objects of type <see cref="SelectNavigationAction"/> are not equal.
+        /// Determines whether two objects of type <see cref="ActionButtonComponent"/> are not equal.
         /// </summary>
         /// <param name="left">The object to the left of the equality operator.</param>
         /// <param name="right">The object to the right of the equality operator.</param>
         /// <returns>true if the two items are not equal; otherwise false.</returns>
-        public static bool operator !=(SelectNavigationAction left, SelectNavigationAction right) => !(left == right);
+        public static bool operator !=(ActionButtonComponent left, ActionButtonComponent right) => !(left == right);
 
         /// <inheritdoc />
-        public bool Equals(SelectNavigationAction other)
+        public bool Equals(ActionButtonComponent other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -76,7 +76,7 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => this == (obj as SelectNavigationAction);
+        public override bool Equals(object obj) => this == (obj as ActionButtonComponent);
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
@@ -85,7 +85,7 @@ namespace Vuescape.DotNet.Domain
             .Value;
 
         /// <inheritdoc />
-        public new SelectNavigationAction DeepClone() => (SelectNavigationAction)this.DeepCloneInternal();
+        public new ActionButtonComponent DeepClone() => (ActionButtonComponent)this.DeepCloneInternal();
 
         /// <inheritdoc />
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
@@ -107,14 +107,10 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public override DiscriminatedTypeBase DeepCloneWithTypeName(string typeName)
         {
-            throw new NotSupportedException("The constructor in-use (by code gen) for SelectNavigationAction does not have a parameter that corresponds with the 'TypeName' property.  As such, this method, DeepCloneWithTypeName(string typeName), cannot utilize the specified 'typeName' value for that property.");
+            throw new NotSupportedException("The constructor in-use (by code gen) for ActionButtonComponent does not have a parameter that corresponds with the 'TypeName' property.  As such, this method, DeepCloneWithTypeName(string typeName), cannot utilize the specified 'typeName' value for that property.");
         }
 
-        /// <summary>
-        /// Deep clones this object with a new <see cref="Payload" />.
-        /// </summary>
-        /// <param name="payload">The new <see cref="Payload" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="SelectNavigationAction" /> using the specified <paramref name="payload" /> for <see cref="Payload" /> and a deep clone of every other property.</returns>
+        /// <inheritdoc />
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -132,9 +128,9 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public SelectNavigationAction DeepCloneWithPayload(NavigationActionPayload payload)
+        public override PaneComponent<ButtonComponentPayload> DeepCloneWithPayload(ButtonComponentPayload payload)
         {
-            var result = new SelectNavigationAction(
+            var result = new ActionButtonComponent(
                                  payload);
 
             return result;
@@ -144,7 +140,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         protected override DiscriminatedTypeBase DeepCloneInternal()
         {
-            var result = new SelectNavigationAction(
+            var result = new ActionButtonComponent(
                                  this.Payload?.DeepClone());
 
             return result;
@@ -154,7 +150,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.SelectNavigationAction: TypeName = {this.TypeName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Payload = {this.Payload?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ActionButtonComponent: TypeName = {this.TypeName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Payload = {this.Payload?.ToString() ?? "<null>"}.");
 
             return result;
         }

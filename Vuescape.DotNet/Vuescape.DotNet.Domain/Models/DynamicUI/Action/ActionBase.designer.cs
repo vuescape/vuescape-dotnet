@@ -74,21 +74,7 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <inheritdoc />
-        public object Clone() => this.DeepClone();
-
-        /// <inheritdoc />
-        public ActionBase DeepClone() => this.DeepCloneInternal();
-
-        /// <summary>
-        /// Creates a new object that is a deep clone of this instance.
-        /// </summary>
-        /// <returns>
-        /// A new object that is a deep clone of this instance.
-        /// </returns>
-        protected virtual ActionBase DeepCloneInternal()
-        {
-            throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
-        }
+        public new ActionBase DeepClone() => (ActionBase)this.DeepCloneInternal();
 
         /// <inheritdoc />
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]

@@ -137,6 +137,9 @@
       <DependentUpon>Content.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Content\PayloadEncodingKind.cs" />
+    <Compile Include="Models\DynamicUI\ActionMenuItem.designer.cs">
+      <DependentUpon>ActionMenuItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\Action\ActionBase.cs" />
     <Compile Include="Models\DynamicUI\Action\ActionBase.designer.cs">
       <DependentUpon>ActionBase.cs</DependentUpon>
@@ -145,17 +148,20 @@
     <Compile Include="Models\DynamicUI\Action\NavigationAction.designer.cs">
       <DependentUpon>NavigationAction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\DynamicUI\Action\SelectNavigationAction.cs" />
-    <Compile Include="Models\DynamicUI\Action\SelectNavigationAction.designer.cs">
-      <DependentUpon>SelectNavigationAction.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\DynamicUI\Action\NoAction.designer.cs">
       <DependentUpon>NoAction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\Action\SelectNavigationAction.cs" />
     <Compile Include="Models\DynamicUI\Action\Payload\NavigationActionPayload.cs" />
     <Compile Include="Models\DynamicUI\Action\NoAction.cs" />
     <Compile Include="Models\DynamicUI\Action\Payload\NavigationActionPayload.designer.cs">
       <DependentUpon>NavigationActionPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\Action\SelectNavigationAction.designer.cs">
+      <DependentUpon>SelectNavigationAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\DiscriminatedType\DiscriminatedTypeBase.designer.cs">
+      <DependentUpon>DiscriminatedTypeBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\DiscriminatedType\DiscriminatedTypeNames.cs" />
     <Compile Include="Models\DynamicUI\DiscriminatedType\IDiscriminatedType.cs" />
@@ -168,7 +174,13 @@
       <DependentUpon>MetadataLineItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\ActionButtonComponent.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\ActionButtonComponent.designer.cs">
+      <DependentUpon>ActionButtonComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ActionButtonComponentPayload.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\ActionButtonComponentPayload.designer.cs">
+      <DependentUpon>ActionButtonComponentPayload.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ReadOnlyFileUploadComponentPayload.designer.cs">
       <DependentUpon>ReadOnlyFileUploadComponentPayload.cs</DependentUpon>
     </Compile>
@@ -179,9 +191,6 @@
       <DependentUpon>TextComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\ActionMenuItem.cs" />
-    <Compile Include="Models\DynamicUI\ActionMenuItem.designer.cs">
-      <DependentUpon>ActionMenuItem.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\DynamicUI\DiscriminatedType\DiscriminatedTypeBase.cs" />
     <Compile Include="Models\DynamicUI\RenderTextAs.cs" />
     <Compile Include="Models\DynamicUI\BadgeSeverity.cs" />

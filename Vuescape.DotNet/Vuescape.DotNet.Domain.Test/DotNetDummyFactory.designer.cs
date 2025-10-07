@@ -57,6 +57,28 @@ namespace Vuescape.DotNet.Domain.Test
                 });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new ActionButtonComponent(
+                                 A.Dummy<ButtonComponentPayload>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new ActionButtonComponentPayload(
+                                 A.Dummy<string>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<ActionBase>(),
+                                 A.Dummy<IReadOnlyList<string>>(),
+                                 A.Dummy<IconPosition>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new ActionMenuItem(
+                                 A.Dummy<string>(),
+                                 A.Dummy<ActionBase>(),
+                                 A.Dummy<IReadOnlyList<string>>(),
+                                 A.Dummy<IconPosition>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<string>(),
+                                 A.Dummy<IDiscriminatedType>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Badge(
                                  A.Dummy<string>(),
                                  A.Dummy<BadgeSeverity?>()));
@@ -171,6 +193,35 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new CssStyleWrapper(
                                  A.Dummy<string>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var availableTypes = new[]
+                    {
+                        typeof(ActionButtonComponent),
+                        typeof(ButtonComponent),
+                        typeof(ChicletGridComponent),
+                        typeof(FileUploadComponent),
+                        typeof(NavigationAction),
+                        typeof(NoAction),
+                        typeof(ReadOnlyFileUploadComponent),
+                        typeof(SelectComponent),
+                        typeof(SelectNavigationAction),
+                        typeof(TableComponent),
+                        typeof(TableTabsComponent),
+                        typeof(TextComponent),
+                        typeof(TextLinkComponent)
+                    };
+
+                    var randomIndex = ThreadSafeRandom.Next(0, availableTypes.Length);
+
+                    var randomType = availableTypes[randomIndex];
+
+                    var result = (DiscriminatedTypeBase)AD.ummy(randomType);
+
+                    return result;
+                });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new DisplayReportOp(

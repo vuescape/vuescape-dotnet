@@ -55,7 +55,35 @@ namespace Vuescape.DotNet.Domain.Test
                     },
                 });
 
-        private static readonly ConstructorArgumentValidationTestScenarios<NoAction> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<NoAction>();
+        private static readonly ConstructorArgumentValidationTestScenarios<NoAction> ConstructorArgumentValidationTestScenarios = new ConstructorArgumentValidationTestScenarios<NoAction>()
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<NoAction>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'reason' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var result = new NoAction(
+                                             null);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "reason", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<NoAction>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'reason' is white space scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var result = new NoAction(
+                                             Invariant($"  {Environment.NewLine}  "));
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "reason", "white space", },
+                });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<NoAction> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<NoAction>()
             .AddScenario(() =>

@@ -128,7 +128,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public override PaneComponent<ButtonComponentPayload> DeepCloneWithPayload(ButtonComponentPayload payload)
+        public override PaneComponent<ActionButtonComponentPayload> DeepCloneWithPayload(ActionButtonComponentPayload payload)
         {
             var result = new ActionButtonComponent(
                                  payload);

@@ -25,6 +25,52 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static ActionMenuItemTest()
         {
+            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios()
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<ActionMenuItem>
+                    {
+                        Name = "constructor should throw ArgumentNullException when parameter 'label' is null scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<ActionMenuItem>();
+
+                            var result = new ActionMenuItem(
+                                null,
+                                referenceObject.Action,
+                                referenceObject.Icons,
+                                referenceObject.IconPosition,
+                                referenceObject.IsDisabled,
+                                referenceObject.Tooltip,
+                                referenceObject.Payload);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentNullException),
+                        ExpectedExceptionMessageContains = new[] { "label", },
+                    })
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<ActionMenuItem>
+                    {
+                        Name =
+                            "constructor should throw ArgumentException when parameter 'label' is white space scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<ActionMenuItem>();
+
+                            var result = new ActionMenuItem(
+                                Invariant($"  {Environment.NewLine}  "),
+                                referenceObject.Action,
+                                referenceObject.Icons,
+                                referenceObject.IconPosition,
+                                referenceObject.IsDisabled,
+                                referenceObject.Tooltip,
+                                referenceObject.Payload);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentException),
+                        ExpectedExceptionMessageContains = new[] { "label", "white space", },
+                    });
         }
     }
 }

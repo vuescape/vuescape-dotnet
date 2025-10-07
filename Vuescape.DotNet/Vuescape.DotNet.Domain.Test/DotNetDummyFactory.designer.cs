@@ -58,7 +58,7 @@ namespace Vuescape.DotNet.Domain.Test
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ActionButtonComponent(
-                                 A.Dummy<ButtonComponentPayload>()));
+                                 A.Dummy<ActionButtonComponentPayload>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ActionButtonComponentPayload(
@@ -364,7 +364,8 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
-                () => new NoAction());
+                () => new NoAction(
+                                 A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ObcToVuescapeConversionContext(

@@ -81,6 +81,9 @@ namespace Vuescape.DotNet.Domain.Test
         [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "Not Hungarian notation.")]
         public DotNetDummyFactory()
         {
+            AutoFixtureBackedDummyFactory.AddDummyCreator<IDiscriminatedType>(
+                () => new NoAction(A.Dummy<string>()));
+
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () =>
                 {

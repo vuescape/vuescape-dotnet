@@ -25,6 +25,88 @@ namespace Vuescape.DotNet.Domain.Test
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = ObcSuppressBecause.CA1810_InitializeReferenceTypeStaticFieldsInline_FieldsDeclaredInCodeGeneratedPartialTestClass)]
         static ActionButtonComponentPayloadTest()
         {
+            ConstructorArgumentValidationTestScenarios.RemoveAllScenarios()
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<ActionButtonComponentPayload>
+                    {
+                        Name = "constructor should throw ArgumentNullException when parameter 'id' is null scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<ActionButtonComponentPayload>();
+
+                            var result = new ActionButtonComponentPayload(
+                                null,
+                                referenceObject.Label,
+                                referenceObject.Action,
+                                referenceObject.Icons,
+                                referenceObject.IconPosition);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentNullException),
+                        ExpectedExceptionMessageContains = new[] { "id", },
+                    })
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<ActionButtonComponentPayload>
+                    {
+                        Name = "constructor should throw ArgumentException when parameter 'id' is white space scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<ActionButtonComponentPayload>();
+
+                            var result = new ActionButtonComponentPayload(
+                                Invariant($"  {Environment.NewLine}  "),
+                                referenceObject.Label,
+                                referenceObject.Action,
+                                referenceObject.Icons,
+                                referenceObject.IconPosition);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentException),
+                        ExpectedExceptionMessageContains = new[] { "id", "white space", },
+                    })
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<ActionButtonComponentPayload>
+                    {
+                        Name = "constructor should throw ArgumentNullException when parameter 'label' is null scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<ActionButtonComponentPayload>();
+
+                            var result = new ActionButtonComponentPayload(
+                                referenceObject.Id,
+                                null,
+                                referenceObject.Action,
+                                referenceObject.Icons,
+                                referenceObject.IconPosition);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentNullException),
+                        ExpectedExceptionMessageContains = new[] { "label", },
+                    })
+                .AddScenario(() =>
+                    new ConstructorArgumentValidationTestScenario<ActionButtonComponentPayload>
+                    {
+                        Name =
+                            "constructor should throw ArgumentException when parameter 'label' is white space scenario",
+                        ConstructionFunc = () =>
+                        {
+                            var referenceObject = A.Dummy<ActionButtonComponentPayload>();
+
+                            var result = new ActionButtonComponentPayload(
+                                referenceObject.Id,
+                                Invariant($"  {Environment.NewLine}  "),
+                                referenceObject.Action,
+                                referenceObject.Icons,
+                                referenceObject.IconPosition);
+
+                            return result;
+                        },
+                        ExpectedExceptionType = typeof(ArgumentException),
+                        ExpectedExceptionMessageContains = new[] { "label", "white space", },
+                    });
         }
     }
 }

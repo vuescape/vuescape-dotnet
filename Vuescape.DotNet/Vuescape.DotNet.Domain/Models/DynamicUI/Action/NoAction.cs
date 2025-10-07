@@ -7,6 +7,8 @@
 // ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
+    using OBeautifulCode.Assertion.Recipes;
+
     /// <summary>
     /// Represents an unknown action type.
     /// </summary>
@@ -15,10 +17,12 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="NoAction"/> class with a reason.
         /// </summary>
-        /// <param name="reason">OPTIONAL reason associated with the no-op action. Default is null.</param>
-        public NoAction(string reason = null)
+        /// <param name="reason">The reason associated with the no-op action. Default is null.</param>
+        public NoAction(string reason)
             : base(DiscriminatedTypeNames.NoAction)
         {
+            new { reason }.AsArg().Must().NotBeNullNorWhiteSpace();
+
             this.Reason = reason;
         }
 

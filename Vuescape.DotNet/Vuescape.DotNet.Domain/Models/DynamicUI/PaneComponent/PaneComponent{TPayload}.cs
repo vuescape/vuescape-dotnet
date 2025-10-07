@@ -20,7 +20,11 @@ namespace Vuescape.DotNet.Domain
         /// Initializes a new instance of the <see cref="PaneComponent{TPayload}"/> class.
         /// </summary>
         /// <param name="payload">The payload containing details of the component.</param>
-        protected PaneComponent(TPayload payload)
+        /// <param name="typeName">The discrimated type name.</param>
+        protected PaneComponent(
+            TPayload payload,
+            string typeName)
+            : base(typeName)
         {
             new { payload }.AsArg().Must().NotBeNull();
 

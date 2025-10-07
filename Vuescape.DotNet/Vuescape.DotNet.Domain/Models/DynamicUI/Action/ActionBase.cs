@@ -13,12 +13,21 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents an action, which can be a navigation action or an unknown action.
     /// </summary>
-    public abstract partial class ActionBase : IModelViaCodeGen
+    public abstract partial class ActionBase : DiscriminatedTypeBase, IModelViaCodeGen
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ActionBase"/> class.
+        /// </summary>
+        /// <param name="typeName">The globally unique discriminator for this action.</param>
+        protected ActionBase(string typeName)
+            : base(typeName)
+        {
+        }
+
         /// <summary>
         /// Gets the type of the action. Used to discriminate actions in JavaScript.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "Needs to align with Type property in TypeScript")]
-        public abstract string Type { get; }
+        public string Type => this.TypeName;
     }
 }

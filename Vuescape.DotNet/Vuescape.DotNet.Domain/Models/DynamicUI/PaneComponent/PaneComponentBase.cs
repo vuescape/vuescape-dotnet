@@ -13,12 +13,15 @@ namespace Vuescape.DotNet.Domain
     /// <summary>
     /// Represents a component within a pane, which can be a button, chiclet grid, table, or title component.
     /// </summary>
-    public abstract partial class PaneComponentBase : IModelViaCodeGen
+    public abstract partial class PaneComponentBase : DiscriminatedTypeBase, IModelViaCodeGen
     {
         /// <summary>
-        /// Gets the type of the pane component.
+        /// Initializes a new instance of the <see cref="PaneComponentBase"/> class.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "Needs to align with Type property in TypeScript")]
-        public abstract string Type { get; }
+        /// <param name="typeName">The globally unique discriminator for this pane component.</param>
+        protected PaneComponentBase(string typeName)
+            : base(typeName)
+        {
+        }
     }
 }

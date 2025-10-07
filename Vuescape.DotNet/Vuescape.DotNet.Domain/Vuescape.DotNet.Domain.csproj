@@ -157,6 +157,8 @@
     <Compile Include="Models\DynamicUI\Action\Payload\NavigationActionPayload.designer.cs">
       <DependentUpon>NavigationActionPayload.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\DiscriminatedType\DiscriminatedTypeNames.cs" />
+    <Compile Include="Models\DynamicUI\DiscriminatedType\IDiscriminatedType.cs" />
     <Compile Include="Models\DynamicUI\Badge.designer.cs">
       <DependentUpon>Badge.cs</DependentUpon>
     </Compile>
@@ -173,6 +175,7 @@
     <Compile Include="Models\DynamicUI\PaneComponent\TextComponent.designer.cs">
       <DependentUpon>TextComponent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\DiscriminatedType\DiscriminatedTypeBase.cs" />
     <Compile Include="Models\DynamicUI\RenderTextAs.cs" />
     <Compile Include="Models\DynamicUI\BadgeSeverity.cs" />
     <Compile Include="Models\DynamicUI\Chiclet.cs" />

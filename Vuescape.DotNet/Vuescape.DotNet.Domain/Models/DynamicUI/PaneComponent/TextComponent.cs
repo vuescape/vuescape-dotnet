@@ -19,13 +19,8 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="payload">The payload containing details of the title component.</param>
         public TextComponent(TextComponentPayload payload)
-            : base(payload)
+            : base(payload, DiscriminatedTypeNames.TextComponent)
         {
         }
-
-        /// <summary>
-        /// Gets the type of the pane component.
-        /// </summary>
-        public override string Type => "text";
     }
 }

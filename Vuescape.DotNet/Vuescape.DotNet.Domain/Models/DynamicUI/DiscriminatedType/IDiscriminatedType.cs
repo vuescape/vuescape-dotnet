@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NoAction.cs" company="Vuescape">
+// <copyright file="IDiscriminatedType.cs" company="Vuescape">
 //    Copyright (c) Vuescape 2021. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -8,16 +8,13 @@
 namespace Vuescape.DotNet.Domain
 {
     /// <summary>
-    /// Represents an unknown action type.
+    /// Represents a model that participates in a discriminated (tagged) type hierarchy.
     /// </summary>
-    public partial class NoAction : ActionBase
+    public interface IDiscriminatedType
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NoAction"/> class.
+        /// Gets the unique string identifier for this discriminated type.
         /// </summary>
-        public NoAction()
-            : base(DiscriminatedTypeNames.NoAction)
-        {
-        }
+        string TypeName { get; }
     }
 }

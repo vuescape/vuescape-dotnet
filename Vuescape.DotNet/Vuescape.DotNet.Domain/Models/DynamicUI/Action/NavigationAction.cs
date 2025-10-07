@@ -19,14 +19,12 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="payload">The payload containing navigation details.</param>
         public NavigationAction(NavigationActionPayload payload)
+            : base(DiscriminatedTypeNames.NavigationAction)
         {
             new { payload }.AsArg().Must().NotBeNull();
 
             this.Payload = payload;
         }
-
-        /// <inheritdoc />
-        public override string Type => "navigate";
 
         /// <summary>
         /// Gets the payload containing navigation details.

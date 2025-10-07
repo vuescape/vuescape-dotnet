@@ -19,13 +19,8 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="payload">The payload containing details of the chiclet grid component.</param>
         public ChicletGridComponent(ChicletGridComponentPayload payload)
-            : base(payload)
+            : base(payload, DiscriminatedTypeNames.ChicletGridComponent)
         {
         }
-
-        /// <summary>
-        /// Gets the type of the pane component.
-        /// </summary>
-        public override string Type => "chicletGrid";
     }
 }

@@ -19,11 +19,8 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="payload">The payload.</param>
         public TextLinkComponent(TextLinkPayload payload)
-            : base(payload)
+            : base(payload, DiscriminatedTypeNames.TextLinkComponent)
         {
         }
-
-        /// <inheritdoc />
-        public override string Type => "textLink";
     }
 }

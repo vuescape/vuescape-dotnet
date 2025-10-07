@@ -19,13 +19,8 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="payload">The payload containing details of the table component.</param>
         public TableTabsComponent(TableTabsComponentPayload payload)
-            : base(payload)
+            : base(payload, DiscriminatedTypeNames.TableTabsComponent)
         {
         }
-
-        /// <summary>
-        /// Gets the type of the pane component.
-        /// </summary>
-        public override string Type => "tableTabs";
     }
 }

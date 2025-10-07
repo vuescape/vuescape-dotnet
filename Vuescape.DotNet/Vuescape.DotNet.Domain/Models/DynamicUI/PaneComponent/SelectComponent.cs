@@ -19,13 +19,8 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="payload">The payload containing details of the button component.</param>
         public SelectComponent(SelectComponentPayload payload)
-            : base(payload)
+            : base(payload, DiscriminatedTypeNames.SelectComponent)
         {
         }
-
-        /// <summary>
-        /// Gets the type of the pane component.
-        /// </summary>
-        public override string Type => "select";
     }
 }

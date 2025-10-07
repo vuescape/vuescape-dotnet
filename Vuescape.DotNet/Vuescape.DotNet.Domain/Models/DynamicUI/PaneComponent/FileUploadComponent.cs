@@ -19,13 +19,8 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="payload">The payload containing details of the title component.</param>
         public FileUploadComponent(FileUploadComponentPayload payload)
-            : base(payload)
+            : base(payload, DiscriminatedTypeNames.FileUploadComponent)
         {
         }
-
-        /// <summary>
-        /// Gets the type of the pane component.
-        /// </summary>
-        public override string Type => "fileUpload";
     }
 }

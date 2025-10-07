@@ -162,10 +162,13 @@
     <Compile Include="Models\DynamicUI\Badge.designer.cs">
       <DependentUpon>Badge.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\IconPosition.cs" />
     <Compile Include="Models\DynamicUI\MetadataLineItem.cs" />
     <Compile Include="Models\DynamicUI\MetadataLineItem.designer.cs">
       <DependentUpon>MetadataLineItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\ActionButtonComponent.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\ActionButtonComponentPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ReadOnlyFileUploadComponentPayload.designer.cs">
       <DependentUpon>ReadOnlyFileUploadComponentPayload.cs</DependentUpon>
     </Compile>
@@ -174,6 +177,10 @@
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\TextComponent.designer.cs">
       <DependentUpon>TextComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\ActionMenuItem.cs" />
+    <Compile Include="Models\DynamicUI\ActionMenuItem.designer.cs">
+      <DependentUpon>ActionMenuItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\DiscriminatedType\DiscriminatedTypeBase.cs" />
     <Compile Include="Models\DynamicUI\RenderTextAs.cs" />

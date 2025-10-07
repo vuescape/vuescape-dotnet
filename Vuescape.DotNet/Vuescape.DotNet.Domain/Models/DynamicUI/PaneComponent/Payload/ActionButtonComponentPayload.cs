@@ -1,0 +1,67 @@
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ActionButtonComponentPayload.cs" company="Vuescape">
+//    Copyright (c) Vuescape 2021. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+// ReSharper disable once CheckNamespace
+namespace Vuescape.DotNet.Domain
+{
+    using System.Collections.Generic;
+    using OBeautifulCode.Assertion.Recipes;
+    using OBeautifulCode.Type;
+
+    /// <summary>
+    /// Represents the payload for a button component, including label, action, and optional icons.
+    /// </summary>
+    public partial class ActionButtonComponentPayload : IHaveId<string>, IModelViaCodeGen
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ActionButtonComponentPayload"/> class.
+        /// </summary>
+        /// <param name="id">The unique identifier for this component.</param>
+        /// <param name="label">The label to display on the button.</param>
+        /// <param name="action">OPTIONAL action associated with the button. Default is null.</param>
+        /// <param name="icons">OPTIONAL icons to display on the button. Default is null.</param>
+        /// <param name="iconPosition">OPTIONAL icon position. Default is <see cref="IconPosition.Right"/>.</param>
+        public ActionButtonComponentPayload(
+            string id,
+            string label,
+            ActionBase action = null,
+            IReadOnlyList<string> icons = null,
+            IconPosition iconPosition = IconPosition.Right)
+        {
+            new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
+            new { label }.AsArg().Must().NotBeNullNorWhiteSpace();
+
+            this.Id = id;
+            this.Label = label;
+            this.Action = action;
+            this.Icons = icons;
+            this.IconPosition = iconPosition;
+        }
+
+        /// <inheritdoc />
+        public string Id { get; private set; }
+
+        /// <summary>
+        /// Gets the label to display on the button.
+        /// </summary>
+        public string Label { get; private set; }
+
+        /// <summary>
+        /// Gets the action associated with the button.
+        /// </summary>
+        public ActionBase Action { get; private set; }
+
+        /// <summary>
+        /// Gets the optional icons to display on the button.
+        /// </summary>
+        public IReadOnlyList<string> Icons { get; private set; }
+
+        /// <summary>
+        /// Gets the optional icon position.
+        /// </summary>
+        public IconPosition IconPosition { get; private set; }
+    }
+}

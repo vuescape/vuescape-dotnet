@@ -38,6 +38,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 null,
                                 referenceObject.Label,
                                 referenceObject.MenuItems,
+                                referenceObject.IsDisabled,
                                 referenceObject.Icons,
                                 referenceObject.IconPosition);
 
@@ -58,6 +59,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 Invariant($"  {Environment.NewLine}  "),
                                 referenceObject.Label,
                                 referenceObject.MenuItems,
+                                referenceObject.IsDisabled,
                                 referenceObject.Icons,
                                 referenceObject.IconPosition);
 
@@ -78,6 +80,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Id,
                                 null,
                                 referenceObject.MenuItems,
+                                referenceObject.IsDisabled,
                                 referenceObject.Icons,
                                 referenceObject.IconPosition);
 
@@ -99,6 +102,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Id,
                                 Invariant($"  {Environment.NewLine}  "),
                                 referenceObject.MenuItems,
+                                referenceObject.IsDisabled,
                                 referenceObject.Icons,
                                 referenceObject.IconPosition);
 
@@ -120,6 +124,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Id,
                                 referenceObject.Label,
                                 null,
+                                referenceObject.IsDisabled,
                                 referenceObject.Icons,
                                 referenceObject.IconPosition);
 
@@ -141,6 +146,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Id,
                                 referenceObject.Label,
                                 new List<ActionMenuItem>(),
+                                referenceObject.IsDisabled,
                                 referenceObject.Icons,
                                 referenceObject.IconPosition);
 
@@ -163,6 +169,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Label,
                                 new ActionMenuItem[0].Concat(referenceObject.MenuItems)
                                     .Concat(new ActionMenuItem[] { null }).Concat(referenceObject.MenuItems).ToList(),
+                                referenceObject.IsDisabled,
                                 referenceObject.Icons,
                                 referenceObject.IconPosition);
 

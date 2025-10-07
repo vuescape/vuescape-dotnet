@@ -72,6 +72,7 @@ namespace Vuescape.DotNet.Domain
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
                       && this.Label.IsEqualTo(other.Label, StringComparer.Ordinal)
                       && this.MenuItems.IsEqualTo(other.MenuItems)
+                      && this.IsDisabled.IsEqualTo(other.IsDisabled)
                       && this.Icons.IsEqualTo(other.Icons)
                       && this.IconPosition.IsEqualTo(other.IconPosition);
 
@@ -86,6 +87,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.Id)
             .Hash(this.Label)
             .Hash(this.MenuItems)
+            .Hash(this.IsDisabled)
             .Hash(this.Icons)
             .Hash(this.IconPosition)
             .Value;
@@ -100,6 +102,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
                                  this.MenuItems?.DeepClone(),
+                                 this.IsDisabled.DeepClone(),
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone());
 
@@ -134,6 +137,7 @@ namespace Vuescape.DotNet.Domain
                                  id,
                                  this.Label?.DeepClone(),
                                  this.MenuItems?.DeepClone(),
+                                 this.IsDisabled.DeepClone(),
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone());
 
@@ -168,6 +172,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  label,
                                  this.MenuItems?.DeepClone(),
+                                 this.IsDisabled.DeepClone(),
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone());
 
@@ -202,6 +207,42 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
                                  menuItems,
+                                 this.IsDisabled.DeepClone(),
+                                 this.Icons?.DeepClone(),
+                                 this.IconPosition.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="IsDisabled" />.
+        /// </summary>
+        /// <param name="isDisabled">The new <see cref="IsDisabled" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ActionButtonComponentPayload" /> using the specified <paramref name="isDisabled" /> for <see cref="IsDisabled" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public ActionButtonComponentPayload DeepCloneWithIsDisabled(bool isDisabled)
+        {
+            var result = new ActionButtonComponentPayload(
+                                 this.Id?.DeepClone(),
+                                 this.Label?.DeepClone(),
+                                 this.MenuItems?.DeepClone(),
+                                 isDisabled,
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone());
 
@@ -236,6 +277,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
                                  this.MenuItems?.DeepClone(),
+                                 this.IsDisabled.DeepClone(),
                                  icons,
                                  this.IconPosition.DeepClone());
 
@@ -270,6 +312,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
                                  this.MenuItems?.DeepClone(),
+                                 this.IsDisabled.DeepClone(),
                                  this.Icons?.DeepClone(),
                                  iconPosition);
 
@@ -280,7 +323,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.ActionButtonComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {this.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MenuItems = {this.MenuItems?.ToString() ?? "<null>"}, Icons = {this.Icons?.ToString() ?? "<null>"}, IconPosition = {this.IconPosition.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ActionButtonComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {this.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MenuItems = {this.MenuItems?.ToString() ?? "<null>"}, IsDisabled = {this.IsDisabled.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Icons = {this.Icons?.ToString() ?? "<null>"}, IconPosition = {this.IconPosition.ToString() ?? "<null>"}.");
 
             return result;
         }

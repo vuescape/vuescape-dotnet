@@ -22,12 +22,14 @@ namespace Vuescape.DotNet.Domain
         /// <param name="id">The unique identifier for this component.</param>
         /// <param name="label">The label to display on the button.</param>
         /// <param name="menuItems">The menu items associated with the button.</param>
+        /// <param name="isDisabled">A value indicating whether the component is disabled. Default is false.</param>
         /// <param name="icons">OPTIONAL icons to display on the button. Default is null.</param>
         /// <param name="iconPosition">OPTIONAL icon position. Default is <see cref="IconPosition.Right"/>.</param>
         public ActionButtonComponentPayload(
             string id,
             string label,
             IReadOnlyList<ActionMenuItem> menuItems,
+            bool isDisabled = false,
             IReadOnlyList<string> icons = null,
             IconPosition iconPosition = IconPosition.Right)
         {
@@ -38,6 +40,7 @@ namespace Vuescape.DotNet.Domain
             this.Id = id;
             this.Label = label;
             this.MenuItems = menuItems;
+            this.IsDisabled = isDisabled;
             this.Icons = icons;
             this.IconPosition = iconPosition;
         }
@@ -54,6 +57,11 @@ namespace Vuescape.DotNet.Domain
         /// Gets the menu items associated with the button.
         /// </summary>
         public IReadOnlyList<ActionMenuItem> MenuItems { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the component is disabled.
+        /// </summary>
+        public bool IsDisabled { get; private set; }
 
         /// <summary>
         /// Gets the optional icons to display on the button.

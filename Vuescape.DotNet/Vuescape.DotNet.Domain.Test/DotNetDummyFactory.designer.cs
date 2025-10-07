@@ -64,7 +64,7 @@ namespace Vuescape.DotNet.Domain.Test
                 () => new ActionButtonComponentPayload(
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<ActionBase>(),
+                                 A.Dummy<IReadOnlyList<ActionMenuItem>>(),
                                  A.Dummy<IReadOnlyList<string>>(),
                                  A.Dummy<IconPosition>()));
 

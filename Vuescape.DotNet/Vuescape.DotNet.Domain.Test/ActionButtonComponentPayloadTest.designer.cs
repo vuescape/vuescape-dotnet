@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ActionButtonComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ActionButtonComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {systemUnderTest.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Action = {systemUnderTest.Action?.ToString() ?? "<null>"}, Icons = {systemUnderTest.Icons?.ToString() ?? "<null>"}, IconPosition = {systemUnderTest.IconPosition.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ActionButtonComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {systemUnderTest.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MenuItems = {systemUnderTest.MenuItems?.ToString() ?? "<null>"}, Icons = {systemUnderTest.Icons?.ToString() ?? "<null>"}, IconPosition = {systemUnderTest.IconPosition.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -67,7 +67,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ActionButtonComponentPayload(
                                              null,
                                              referenceObject.Label,
-                                             referenceObject.Action,
+                                             referenceObject.MenuItems,
                                              referenceObject.Icons,
                                              referenceObject.IconPosition);
 
@@ -87,7 +87,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ActionButtonComponentPayload(
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Label,
-                                             referenceObject.Action,
+                                             referenceObject.MenuItems,
                                              referenceObject.Icons,
                                              referenceObject.IconPosition);
 
@@ -107,7 +107,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ActionButtonComponentPayload(
                                              referenceObject.Id,
                                              null,
-                                             referenceObject.Action,
+                                             referenceObject.MenuItems,
                                              referenceObject.Icons,
                                              referenceObject.IconPosition);
 
@@ -127,7 +127,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ActionButtonComponentPayload(
                                              referenceObject.Id,
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.Action,
+                                             referenceObject.MenuItems,
                                              referenceObject.Icons,
                                              referenceObject.IconPosition);
 
@@ -135,6 +135,66 @@ namespace Vuescape.DotNet.Domain.Test
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "label", "white space", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ActionButtonComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentNullException when parameter 'menuItems' is null scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionButtonComponentPayload>();
+
+                        var result = new ActionButtonComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Label,
+                                             null,
+                                             referenceObject.Icons,
+                                             referenceObject.IconPosition);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentNullException),
+                    ExpectedExceptionMessageContains = new[] { "menuItems", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ActionButtonComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'menuItems' is an empty enumerable scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionButtonComponentPayload>();
+
+                        var result = new ActionButtonComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Label,
+                                             new List<ActionMenuItem>(),
+                                             referenceObject.Icons,
+                                             referenceObject.IconPosition);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "menuItems", "is an empty enumerable", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<ActionButtonComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'menuItems' contains a null element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<ActionButtonComponentPayload>();
+
+                        var result = new ActionButtonComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Label,
+                                             new ActionMenuItem[0].Concat(referenceObject.MenuItems).Concat(new ActionMenuItem[] { null }).Concat(referenceObject.MenuItems).ToList(),
+                                             referenceObject.Icons,
+                                             referenceObject.IconPosition);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "menuItems", "contains at least one null element", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<ActionButtonComponentPayload>
@@ -147,7 +207,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ActionButtonComponentPayload(
                                              referenceObject.Id,
                                              referenceObject.Label,
-                                             referenceObject.Action,
+                                             referenceObject.MenuItems,
                                              new string[0].Concat(referenceObject.Icons).Concat(new string[] { null }).Concat(referenceObject.Icons).ToList(),
                                              referenceObject.IconPosition);
 
@@ -167,7 +227,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new ActionButtonComponentPayload(
                                              referenceObject.Id,
                                              referenceObject.Label,
-                                             referenceObject.Action,
+                                             referenceObject.MenuItems,
                                              new string[0].Concat(referenceObject.Icons).Concat(new string[] { "  \r\n  " }).Concat(referenceObject.Icons).ToList(),
                                              referenceObject.IconPosition);
 
@@ -191,7 +251,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ActionButtonComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Label,
-                                                      referenceObject.Action,
+                                                      referenceObject.MenuItems,
                                                       referenceObject.Icons,
                                                       referenceObject.IconPosition),
                             ExpectedPropertyValue = referenceObject.Id,
@@ -214,7 +274,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ActionButtonComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Label,
-                                                      referenceObject.Action,
+                                                      referenceObject.MenuItems,
                                                       referenceObject.Icons,
                                                       referenceObject.IconPosition),
                             ExpectedPropertyValue = referenceObject.Label,
@@ -227,7 +287,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<ActionButtonComponentPayload>
                 {
-                    Name = "Action should return same 'action' parameter passed to constructor when getting",
+                    Name = "MenuItems should return same 'menuItems' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
                         var referenceObject = A.Dummy<ActionButtonComponentPayload>();
@@ -237,15 +297,15 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ActionButtonComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Label,
-                                                      referenceObject.Action,
+                                                      referenceObject.MenuItems,
                                                       referenceObject.Icons,
                                                       referenceObject.IconPosition),
-                            ExpectedPropertyValue = referenceObject.Action,
+                            ExpectedPropertyValue = referenceObject.MenuItems,
                         };
 
                         return result;
                     },
-                    PropertyName = "Action",
+                    PropertyName = "MenuItems",
                 })
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<ActionButtonComponentPayload>
@@ -260,7 +320,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ActionButtonComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Label,
-                                                      referenceObject.Action,
+                                                      referenceObject.MenuItems,
                                                       referenceObject.Icons,
                                                       referenceObject.IconPosition),
                             ExpectedPropertyValue = referenceObject.Icons,
@@ -283,7 +343,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new ActionButtonComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Label,
-                                                      referenceObject.Action,
+                                                      referenceObject.MenuItems,
                                                       referenceObject.Icons,
                                                       referenceObject.IconPosition),
                             ExpectedPropertyValue = referenceObject.IconPosition,
@@ -338,18 +398,18 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<ActionButtonComponentPayload>
                 {
-                    Name = "DeepCloneWithAction should deep clone object and replace Action with the provided action",
-                    WithPropertyName = "Action",
+                    Name = "DeepCloneWithMenuItems should deep clone object and replace MenuItems with the provided menuItems",
+                    WithPropertyName = "MenuItems",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
                         var systemUnderTest = A.Dummy<ActionButtonComponentPayload>();
 
-                        var referenceObject = A.Dummy<ActionButtonComponentPayload>().ThatIs(_ => !systemUnderTest.Action.IsEqualTo(_.Action));
+                        var referenceObject = A.Dummy<ActionButtonComponentPayload>().ThatIs(_ => !systemUnderTest.MenuItems.IsEqualTo(_.MenuItems));
 
                         var result = new SystemUnderTestDeepCloneWithValue<ActionButtonComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Action,
+                            DeepCloneWithValue = referenceObject.MenuItems,
                         };
 
                         return result;
@@ -409,7 +469,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new ActionButtonComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
-                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.MenuItems,
                                 ReferenceObjectForEquatableTestScenarios.Icons,
                                 ReferenceObjectForEquatableTestScenarios.IconPosition),
                     },
@@ -418,31 +478,31 @@ namespace Vuescape.DotNet.Domain.Test
                         new ActionButtonComponentPayload(
                                 A.Dummy<ActionButtonComponentPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
-                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.MenuItems,
                                 ReferenceObjectForEquatableTestScenarios.Icons,
                                 ReferenceObjectForEquatableTestScenarios.IconPosition),
                         new ActionButtonComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<ActionButtonComponentPayload>().Whose(_ => !_.Label.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Label)).Label,
-                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.MenuItems,
                                 ReferenceObjectForEquatableTestScenarios.Icons,
                                 ReferenceObjectForEquatableTestScenarios.IconPosition),
                         new ActionButtonComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
-                                A.Dummy<ActionButtonComponentPayload>().Whose(_ => !_.Action.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Action)).Action,
+                                A.Dummy<ActionButtonComponentPayload>().Whose(_ => !_.MenuItems.IsEqualTo(ReferenceObjectForEquatableTestScenarios.MenuItems)).MenuItems,
                                 ReferenceObjectForEquatableTestScenarios.Icons,
                                 ReferenceObjectForEquatableTestScenarios.IconPosition),
                         new ActionButtonComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
-                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.MenuItems,
                                 A.Dummy<ActionButtonComponentPayload>().Whose(_ => !_.Icons.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Icons)).Icons,
                                 ReferenceObjectForEquatableTestScenarios.IconPosition),
                         new ActionButtonComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
-                                ReferenceObjectForEquatableTestScenarios.Action,
+                                ReferenceObjectForEquatableTestScenarios.MenuItems,
                                 ReferenceObjectForEquatableTestScenarios.Icons,
                                 A.Dummy<ActionButtonComponentPayload>().Whose(_ => !_.IconPosition.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IconPosition)).IconPosition),
                     },
@@ -726,16 +786,16 @@ namespace Vuescape.DotNet.Domain.Test
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
 
-                if (systemUnderTest.Action == null)
+                if (systemUnderTest.MenuItems == null)
                 {
-                    actual.Action.AsTest().Must().BeNull();
+                    actual.MenuItems.AsTest().Must().BeNull();
                 }
-                else if (!actual.Action.GetType().IsValueType)
+                else if (!actual.MenuItems.GetType().IsValueType)
                 {
                     // When the declared type is a reference type, we still have to check the runtime type.
                     // The object could be a boxed value type, which will fail this asseration because
                     // a deep clone of a value type object is the same object.
-                    actual.Action.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Action);
+                    actual.MenuItems.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.MenuItems);
                 }
 
                 if (systemUnderTest.Icons == null)
@@ -767,7 +827,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Label", "Action", "Icons", "IconPosition" };
+                var propertyNames = new string[] { "Id", "Label", "MenuItems", "Icons", "IconPosition" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

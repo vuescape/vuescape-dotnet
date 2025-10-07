@@ -21,22 +21,23 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="id">The unique identifier for this component.</param>
         /// <param name="label">The label to display on the button.</param>
-        /// <param name="action">OPTIONAL action associated with the button. Default is null.</param>
+        /// <param name="menuItems">The menu items associated with the button.</param>
         /// <param name="icons">OPTIONAL icons to display on the button. Default is null.</param>
         /// <param name="iconPosition">OPTIONAL icon position. Default is <see cref="IconPosition.Right"/>.</param>
         public ActionButtonComponentPayload(
             string id,
             string label,
-            ActionBase action = null,
+            IReadOnlyList<ActionMenuItem> menuItems,
             IReadOnlyList<string> icons = null,
             IconPosition iconPosition = IconPosition.Right)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { label }.AsArg().Must().NotBeNullNorWhiteSpace();
+            new { menuItems }.AsArg().Must().NotBeNullNorEmptyEnumerable().And().NotContainAnyNullElementsWhenNotNull();
 
             this.Id = id;
             this.Label = label;
-            this.Action = action;
+            this.MenuItems = menuItems;
             this.Icons = icons;
             this.IconPosition = iconPosition;
         }
@@ -50,9 +51,9 @@ namespace Vuescape.DotNet.Domain
         public string Label { get; private set; }
 
         /// <summary>
-        /// Gets the action associated with the button.
+        /// Gets the menu items associated with the button.
         /// </summary>
-        public ActionBase Action { get; private set; }
+        public IReadOnlyList<ActionMenuItem> MenuItems { get; private set; }
 
         /// <summary>
         /// Gets the optional icons to display on the button.

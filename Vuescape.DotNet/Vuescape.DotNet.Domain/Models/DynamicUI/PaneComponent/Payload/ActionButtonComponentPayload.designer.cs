@@ -71,7 +71,7 @@ namespace Vuescape.DotNet.Domain
 
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
                       && this.Label.IsEqualTo(other.Label, StringComparer.Ordinal)
-                      && this.Action.IsEqualTo(other.Action)
+                      && this.MenuItems.IsEqualTo(other.MenuItems)
                       && this.Icons.IsEqualTo(other.Icons)
                       && this.IconPosition.IsEqualTo(other.IconPosition);
 
@@ -85,7 +85,7 @@ namespace Vuescape.DotNet.Domain
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.Id)
             .Hash(this.Label)
-            .Hash(this.Action)
+            .Hash(this.MenuItems)
             .Hash(this.Icons)
             .Hash(this.IconPosition)
             .Value;
@@ -99,7 +99,7 @@ namespace Vuescape.DotNet.Domain
             var result = new ActionButtonComponentPayload(
                                  this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
-                                 this.Action?.DeepClone(),
+                                 this.MenuItems?.DeepClone(),
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone());
 
@@ -133,7 +133,7 @@ namespace Vuescape.DotNet.Domain
             var result = new ActionButtonComponentPayload(
                                  id,
                                  this.Label?.DeepClone(),
-                                 this.Action?.DeepClone(),
+                                 this.MenuItems?.DeepClone(),
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone());
 
@@ -167,7 +167,7 @@ namespace Vuescape.DotNet.Domain
             var result = new ActionButtonComponentPayload(
                                  this.Id?.DeepClone(),
                                  label,
-                                 this.Action?.DeepClone(),
+                                 this.MenuItems?.DeepClone(),
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone());
 
@@ -175,10 +175,10 @@ namespace Vuescape.DotNet.Domain
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="Action" />.
+        /// Deep clones this object with a new <see cref="MenuItems" />.
         /// </summary>
-        /// <param name="action">The new <see cref="Action" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="ActionButtonComponentPayload" /> using the specified <paramref name="action" /> for <see cref="Action" /> and a deep clone of every other property.</returns>
+        /// <param name="menuItems">The new <see cref="MenuItems" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ActionButtonComponentPayload" /> using the specified <paramref name="menuItems" /> for <see cref="MenuItems" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -196,12 +196,12 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public ActionButtonComponentPayload DeepCloneWithAction(ActionBase action)
+        public ActionButtonComponentPayload DeepCloneWithMenuItems(IReadOnlyList<ActionMenuItem> menuItems)
         {
             var result = new ActionButtonComponentPayload(
                                  this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
-                                 action,
+                                 menuItems,
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone());
 
@@ -235,7 +235,7 @@ namespace Vuescape.DotNet.Domain
             var result = new ActionButtonComponentPayload(
                                  this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
-                                 this.Action?.DeepClone(),
+                                 this.MenuItems?.DeepClone(),
                                  icons,
                                  this.IconPosition.DeepClone());
 
@@ -269,7 +269,7 @@ namespace Vuescape.DotNet.Domain
             var result = new ActionButtonComponentPayload(
                                  this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
-                                 this.Action?.DeepClone(),
+                                 this.MenuItems?.DeepClone(),
                                  this.Icons?.DeepClone(),
                                  iconPosition);
 
@@ -280,7 +280,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.ActionButtonComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {this.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Action = {this.Action?.ToString() ?? "<null>"}, Icons = {this.Icons?.ToString() ?? "<null>"}, IconPosition = {this.IconPosition.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ActionButtonComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {this.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, MenuItems = {this.MenuItems?.ToString() ?? "<null>"}, Icons = {this.Icons?.ToString() ?? "<null>"}, IconPosition = {this.IconPosition.ToString() ?? "<null>"}.");
 
             return result;
         }

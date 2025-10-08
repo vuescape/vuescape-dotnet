@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ActionMenuItem>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ActionMenuItem: Label = {systemUnderTest.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Action = {systemUnderTest.Action?.ToString() ?? "<null>"}, Icons = {systemUnderTest.Icons?.ToString() ?? "<null>"}, IconPosition = {systemUnderTest.IconPosition.ToString() ?? "<null>"}, IsDisabled = {systemUnderTest.IsDisabled.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Tooltip = {systemUnderTest.Tooltip?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Payload = {systemUnderTest.Payload?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ActionMenuItem: Label = {systemUnderTest.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Action = {systemUnderTest.Action?.ToString() ?? "<null>"}, Icons = {systemUnderTest.Icons?.ToString() ?? "<null>"}, IconPosition = {systemUnderTest.IconPosition.ToString() ?? "<null>"}, IsDisabled = {systemUnderTest.IsDisabled.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Tooltip = {systemUnderTest.Tooltip?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -70,8 +70,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Icons,
                                              referenceObject.IconPosition,
                                              referenceObject.IsDisabled,
-                                             referenceObject.Tooltip,
-                                             referenceObject.Payload);
+                                             referenceObject.Tooltip);
 
                         return result;
                     },
@@ -92,8 +91,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Icons,
                                              referenceObject.IconPosition,
                                              referenceObject.IsDisabled,
-                                             referenceObject.Tooltip,
-                                             referenceObject.Payload);
+                                             referenceObject.Tooltip);
 
                         return result;
                     },
@@ -114,8 +112,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              new string[0].Concat(referenceObject.Icons).Concat(new string[] { null }).Concat(referenceObject.Icons).ToList(),
                                              referenceObject.IconPosition,
                                              referenceObject.IsDisabled,
-                                             referenceObject.Tooltip,
-                                             referenceObject.Payload);
+                                             referenceObject.Tooltip);
 
                         return result;
                     },
@@ -136,8 +133,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              new string[0].Concat(referenceObject.Icons).Concat(new string[] { "  \r\n  " }).Concat(referenceObject.Icons).ToList(),
                                              referenceObject.IconPosition,
                                              referenceObject.IsDisabled,
-                                             referenceObject.Tooltip,
-                                             referenceObject.Payload);
+                                             referenceObject.Tooltip);
 
                         return result;
                     },
@@ -162,8 +158,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Icons,
                                                       referenceObject.IconPosition,
                                                       referenceObject.IsDisabled,
-                                                      referenceObject.Tooltip,
-                                                      referenceObject.Payload),
+                                                      referenceObject.Tooltip),
                             ExpectedPropertyValue = referenceObject.Label,
                         };
 
@@ -187,8 +182,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Icons,
                                                       referenceObject.IconPosition,
                                                       referenceObject.IsDisabled,
-                                                      referenceObject.Tooltip,
-                                                      referenceObject.Payload),
+                                                      referenceObject.Tooltip),
                             ExpectedPropertyValue = referenceObject.Action,
                         };
 
@@ -212,8 +206,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Icons,
                                                       referenceObject.IconPosition,
                                                       referenceObject.IsDisabled,
-                                                      referenceObject.Tooltip,
-                                                      referenceObject.Payload),
+                                                      referenceObject.Tooltip),
                             ExpectedPropertyValue = referenceObject.Icons,
                         };
 
@@ -237,8 +230,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Icons,
                                                       referenceObject.IconPosition,
                                                       referenceObject.IsDisabled,
-                                                      referenceObject.Tooltip,
-                                                      referenceObject.Payload),
+                                                      referenceObject.Tooltip),
                             ExpectedPropertyValue = referenceObject.IconPosition,
                         };
 
@@ -262,8 +254,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Icons,
                                                       referenceObject.IconPosition,
                                                       referenceObject.IsDisabled,
-                                                      referenceObject.Tooltip,
-                                                      referenceObject.Payload),
+                                                      referenceObject.Tooltip),
                             ExpectedPropertyValue = referenceObject.IsDisabled,
                         };
 
@@ -287,39 +278,13 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Icons,
                                                       referenceObject.IconPosition,
                                                       referenceObject.IsDisabled,
-                                                      referenceObject.Tooltip,
-                                                      referenceObject.Payload),
+                                                      referenceObject.Tooltip),
                             ExpectedPropertyValue = referenceObject.Tooltip,
                         };
 
                         return result;
                     },
                     PropertyName = "Tooltip",
-                })
-            .AddScenario(() =>
-                new ConstructorPropertyAssignmentTestScenario<ActionMenuItem>
-                {
-                    Name = "Payload should return same 'payload' parameter passed to constructor when getting",
-                    SystemUnderTestExpectedPropertyValueFunc = () =>
-                    {
-                        var referenceObject = A.Dummy<ActionMenuItem>();
-
-                        var result = new SystemUnderTestExpectedPropertyValue<ActionMenuItem>
-                        {
-                            SystemUnderTest = new ActionMenuItem(
-                                                      referenceObject.Label,
-                                                      referenceObject.Action,
-                                                      referenceObject.Icons,
-                                                      referenceObject.IconPosition,
-                                                      referenceObject.IsDisabled,
-                                                      referenceObject.Tooltip,
-                                                      referenceObject.Payload),
-                            ExpectedPropertyValue = referenceObject.Payload,
-                        };
-
-                        return result;
-                    },
-                    PropertyName = "Payload",
                 });
 
         private static readonly DeepCloneWithTestScenarios<ActionMenuItem> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<ActionMenuItem>()
@@ -442,26 +407,6 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
-                })
-            .AddScenario(() =>
-                new DeepCloneWithTestScenario<ActionMenuItem>
-                {
-                    Name = "DeepCloneWithPayload should deep clone object and replace Payload with the provided payload",
-                    WithPropertyName = "Payload",
-                    SystemUnderTestDeepCloneWithValueFunc = () =>
-                    {
-                        var systemUnderTest = A.Dummy<ActionMenuItem>();
-
-                        var referenceObject = A.Dummy<ActionMenuItem>().ThatIs(_ => !systemUnderTest.Payload.IsEqualTo(_.Payload));
-
-                        var result = new SystemUnderTestDeepCloneWithValue<ActionMenuItem>
-                        {
-                            SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.Payload,
-                        };
-
-                        return result;
-                    },
                 });
 
         private static readonly ActionMenuItem ReferenceObjectForEquatableTestScenarios = A.Dummy<ActionMenuItem>();
@@ -480,8 +425,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Icons,
                                 ReferenceObjectForEquatableTestScenarios.IconPosition,
                                 ReferenceObjectForEquatableTestScenarios.IsDisabled,
-                                ReferenceObjectForEquatableTestScenarios.Tooltip,
-                                ReferenceObjectForEquatableTestScenarios.Payload),
+                                ReferenceObjectForEquatableTestScenarios.Tooltip),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new ActionMenuItem[]
                     {
@@ -491,56 +435,42 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Icons,
                                 ReferenceObjectForEquatableTestScenarios.IconPosition,
                                 ReferenceObjectForEquatableTestScenarios.IsDisabled,
-                                ReferenceObjectForEquatableTestScenarios.Tooltip,
-                                ReferenceObjectForEquatableTestScenarios.Payload),
+                                ReferenceObjectForEquatableTestScenarios.Tooltip),
                         new ActionMenuItem(
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 A.Dummy<ActionMenuItem>().Whose(_ => !_.Action.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Action)).Action,
                                 ReferenceObjectForEquatableTestScenarios.Icons,
                                 ReferenceObjectForEquatableTestScenarios.IconPosition,
                                 ReferenceObjectForEquatableTestScenarios.IsDisabled,
-                                ReferenceObjectForEquatableTestScenarios.Tooltip,
-                                ReferenceObjectForEquatableTestScenarios.Payload),
+                                ReferenceObjectForEquatableTestScenarios.Tooltip),
                         new ActionMenuItem(
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 ReferenceObjectForEquatableTestScenarios.Action,
                                 A.Dummy<ActionMenuItem>().Whose(_ => !_.Icons.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Icons)).Icons,
                                 ReferenceObjectForEquatableTestScenarios.IconPosition,
                                 ReferenceObjectForEquatableTestScenarios.IsDisabled,
-                                ReferenceObjectForEquatableTestScenarios.Tooltip,
-                                ReferenceObjectForEquatableTestScenarios.Payload),
+                                ReferenceObjectForEquatableTestScenarios.Tooltip),
                         new ActionMenuItem(
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 ReferenceObjectForEquatableTestScenarios.Action,
                                 ReferenceObjectForEquatableTestScenarios.Icons,
                                 A.Dummy<ActionMenuItem>().Whose(_ => !_.IconPosition.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IconPosition)).IconPosition,
                                 ReferenceObjectForEquatableTestScenarios.IsDisabled,
-                                ReferenceObjectForEquatableTestScenarios.Tooltip,
-                                ReferenceObjectForEquatableTestScenarios.Payload),
+                                ReferenceObjectForEquatableTestScenarios.Tooltip),
                         new ActionMenuItem(
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 ReferenceObjectForEquatableTestScenarios.Action,
                                 ReferenceObjectForEquatableTestScenarios.Icons,
                                 ReferenceObjectForEquatableTestScenarios.IconPosition,
                                 A.Dummy<ActionMenuItem>().Whose(_ => !_.IsDisabled.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsDisabled)).IsDisabled,
-                                ReferenceObjectForEquatableTestScenarios.Tooltip,
-                                ReferenceObjectForEquatableTestScenarios.Payload),
+                                ReferenceObjectForEquatableTestScenarios.Tooltip),
                         new ActionMenuItem(
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 ReferenceObjectForEquatableTestScenarios.Action,
                                 ReferenceObjectForEquatableTestScenarios.Icons,
                                 ReferenceObjectForEquatableTestScenarios.IconPosition,
                                 ReferenceObjectForEquatableTestScenarios.IsDisabled,
-                                A.Dummy<ActionMenuItem>().Whose(_ => !_.Tooltip.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Tooltip)).Tooltip,
-                                ReferenceObjectForEquatableTestScenarios.Payload),
-                        new ActionMenuItem(
-                                ReferenceObjectForEquatableTestScenarios.Label,
-                                ReferenceObjectForEquatableTestScenarios.Action,
-                                ReferenceObjectForEquatableTestScenarios.Icons,
-                                ReferenceObjectForEquatableTestScenarios.IconPosition,
-                                ReferenceObjectForEquatableTestScenarios.IsDisabled,
-                                ReferenceObjectForEquatableTestScenarios.Tooltip,
-                                A.Dummy<ActionMenuItem>().Whose(_ => !_.Payload.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Payload)).Payload),
+                                A.Dummy<ActionMenuItem>().Whose(_ => !_.Tooltip.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Tooltip)).Tooltip),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -845,18 +775,6 @@ namespace Vuescape.DotNet.Domain.Test
                     // a deep clone of a value type object is the same object.
                     actual.Icons.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Icons);
                 }
-
-                if (systemUnderTest.Payload == null)
-                {
-                    actual.Payload.AsTest().Must().BeNull();
-                }
-                else if (!actual.Payload.GetType().IsValueType)
-                {
-                    // When the declared type is a reference type, we still have to check the runtime type.
-                    // The object could be a boxed value type, which will fail this asseration because
-                    // a deep clone of a value type object is the same object.
-                    actual.Payload.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Payload);
-                }
             }
 
             [Fact]
@@ -875,7 +793,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Label", "Action", "Icons", "IconPosition", "IsDisabled", "Tooltip", "Payload" };
+                var propertyNames = new string[] { "Label", "Action", "Icons", "IconPosition", "IsDisabled", "Tooltip" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

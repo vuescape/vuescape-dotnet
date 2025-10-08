@@ -25,15 +25,13 @@ namespace Vuescape.DotNet.Domain
         /// <param name="iconPosition">OPTIONAL value indicating where icons are rendered relative to the label. Default is <see cref="IconPosition.Right"/>.</param>
         /// <param name="isDisabled">OPTIONAL value indicating whether the menu item is disabled. Default is false.</param>
         /// <param name="tooltip">OPTIONAL tooltip shown on hover/focus. Default is null.</param>
-        /// <param name="payload">OPTIONAL discriminated payload associated with the item. Default is null.</param>
         public ActionMenuItem(
             string label,
             ActionBase action = null,
             IReadOnlyList<string> icons = null,
             IconPosition iconPosition = IconPosition.Left,
             bool isDisabled = false,
-            string tooltip = null,
-            IDiscriminatedType payload = null)
+            string tooltip = null)
         {
             new { label }.AsArg().Must().NotBeNullNorWhiteSpace();
 
@@ -43,7 +41,6 @@ namespace Vuescape.DotNet.Domain
             this.IconPosition = iconPosition;
             this.IsDisabled = isDisabled;
             this.Tooltip = tooltip;
-            this.Payload = payload;
         }
 
         /// <summary>
@@ -75,10 +72,5 @@ namespace Vuescape.DotNet.Domain
         /// Gets the tooltip text shown on hover/focus, if any.
         /// </summary>
         public string Tooltip { get; private set; }
-
-        /// <summary>
-        /// Gets the optional discriminated payload carried by the item.
-        /// </summary>
-        public IDiscriminatedType Payload { get; private set; }
     }
 }

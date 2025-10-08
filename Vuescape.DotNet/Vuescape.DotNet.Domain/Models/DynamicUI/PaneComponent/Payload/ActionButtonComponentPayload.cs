@@ -25,13 +25,15 @@ namespace Vuescape.DotNet.Domain
         /// <param name="isDisabled">A value indicating whether the component is disabled. Default is false.</param>
         /// <param name="icons">OPTIONAL icons to display on the button. Default is null.</param>
         /// <param name="iconPosition">OPTIONAL icon position. Default is <see cref="IconPosition.Right"/>.</param>
+        /// <param name="tooltip">OPTIONAL tooltip. Default is null.</param>
         public ActionButtonComponentPayload(
             string id,
             string label,
             IReadOnlyList<ActionMenuItem> menuItems,
             bool isDisabled = false,
             IReadOnlyList<string> icons = null,
-            IconPosition iconPosition = IconPosition.Right)
+            IconPosition iconPosition = IconPosition.Right,
+            string tooltip = null)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { label }.AsArg().Must().NotBeNullNorWhiteSpace();
@@ -43,6 +45,7 @@ namespace Vuescape.DotNet.Domain
             this.IsDisabled = isDisabled;
             this.Icons = icons;
             this.IconPosition = iconPosition;
+            this.Tooltip = tooltip;
         }
 
         /// <inheritdoc />
@@ -72,5 +75,10 @@ namespace Vuescape.DotNet.Domain
         /// Gets the optional icon position.
         /// </summary>
         public IconPosition IconPosition { get; private set; }
+
+        /// <summary>
+        /// Gets the optional tooltip.
+        /// </summary>
+        public string Tooltip { get; private set; }
     }
 }

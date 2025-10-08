@@ -67,7 +67,8 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<IReadOnlyList<ActionMenuItem>>(),
                                  A.Dummy<bool>(),
                                  A.Dummy<IReadOnlyList<string>>(),
-                                 A.Dummy<IconPosition>()));
+                                 A.Dummy<IconPosition>(),
+                                 A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new ActionMenuItem(
@@ -76,8 +77,7 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<IReadOnlyList<string>>(),
                                  A.Dummy<IconPosition>(),
                                  A.Dummy<bool>(),
-                                 A.Dummy<string>(),
-                                 A.Dummy<IDiscriminatedType>()));
+                                 A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Badge(

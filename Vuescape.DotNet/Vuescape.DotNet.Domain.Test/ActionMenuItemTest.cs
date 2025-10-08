@@ -40,8 +40,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Icons,
                                 referenceObject.IconPosition,
                                 referenceObject.IsDisabled,
-                                referenceObject.Tooltip,
-                                referenceObject.Payload);
+                                referenceObject.Tooltip);
 
                             return result;
                         },
@@ -63,8 +62,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Icons,
                                 referenceObject.IconPosition,
                                 referenceObject.IsDisabled,
-                                referenceObject.Tooltip,
-                                referenceObject.Payload);
+                                referenceObject.Tooltip);
 
                             return result;
                         },

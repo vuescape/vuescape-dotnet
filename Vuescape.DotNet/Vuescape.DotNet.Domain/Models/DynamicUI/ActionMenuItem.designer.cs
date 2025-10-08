@@ -74,8 +74,7 @@ namespace Vuescape.DotNet.Domain
                       && this.Icons.IsEqualTo(other.Icons)
                       && this.IconPosition.IsEqualTo(other.IconPosition)
                       && this.IsDisabled.IsEqualTo(other.IsDisabled)
-                      && this.Tooltip.IsEqualTo(other.Tooltip, StringComparer.Ordinal)
-                      && this.Payload.IsEqualTo(other.Payload);
+                      && this.Tooltip.IsEqualTo(other.Tooltip, StringComparer.Ordinal);
 
             return result;
         }
@@ -91,7 +90,6 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.IconPosition)
             .Hash(this.IsDisabled)
             .Hash(this.Tooltip)
-            .Hash(this.Payload)
             .Value;
 
         /// <inheritdoc />
@@ -106,8 +104,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone(),
                                  this.IsDisabled.DeepClone(),
-                                 this.Tooltip?.DeepClone(),
-                                 this.Payload?.DeepClone());
+                                 this.Tooltip?.DeepClone());
 
             return result;
         }
@@ -142,8 +139,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone(),
                                  this.IsDisabled.DeepClone(),
-                                 this.Tooltip?.DeepClone(),
-                                 this.Payload?.DeepClone());
+                                 this.Tooltip?.DeepClone());
 
             return result;
         }
@@ -178,8 +174,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone(),
                                  this.IsDisabled.DeepClone(),
-                                 this.Tooltip?.DeepClone(),
-                                 this.Payload?.DeepClone());
+                                 this.Tooltip?.DeepClone());
 
             return result;
         }
@@ -214,8 +209,7 @@ namespace Vuescape.DotNet.Domain
                                  icons,
                                  this.IconPosition.DeepClone(),
                                  this.IsDisabled.DeepClone(),
-                                 this.Tooltip?.DeepClone(),
-                                 this.Payload?.DeepClone());
+                                 this.Tooltip?.DeepClone());
 
             return result;
         }
@@ -250,8 +244,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Icons?.DeepClone(),
                                  iconPosition,
                                  this.IsDisabled.DeepClone(),
-                                 this.Tooltip?.DeepClone(),
-                                 this.Payload?.DeepClone());
+                                 this.Tooltip?.DeepClone());
 
             return result;
         }
@@ -286,8 +279,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone(),
                                  isDisabled,
-                                 this.Tooltip?.DeepClone(),
-                                 this.Payload?.DeepClone());
+                                 this.Tooltip?.DeepClone());
 
             return result;
         }
@@ -322,44 +314,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Icons?.DeepClone(),
                                  this.IconPosition.DeepClone(),
                                  this.IsDisabled.DeepClone(),
-                                 tooltip,
-                                 this.Payload?.DeepClone());
-
-            return result;
-        }
-
-        /// <summary>
-        /// Deep clones this object with a new <see cref="Payload" />.
-        /// </summary>
-        /// <param name="payload">The new <see cref="Payload" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="ActionMenuItem" /> using the specified <paramref name="payload" /> for <see cref="Payload" /> and a deep clone of every other property.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
-        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
-        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
-        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public ActionMenuItem DeepCloneWithPayload(IDiscriminatedType payload)
-        {
-            var result = new ActionMenuItem(
-                                 this.Label?.DeepClone(),
-                                 this.Action?.DeepClone(),
-                                 this.Icons?.DeepClone(),
-                                 this.IconPosition.DeepClone(),
-                                 this.IsDisabled.DeepClone(),
-                                 this.Tooltip?.DeepClone(),
-                                 payload);
+                                 tooltip);
 
             return result;
         }
@@ -368,7 +323,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.ActionMenuItem: Label = {this.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Action = {this.Action?.ToString() ?? "<null>"}, Icons = {this.Icons?.ToString() ?? "<null>"}, IconPosition = {this.IconPosition.ToString() ?? "<null>"}, IsDisabled = {this.IsDisabled.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Tooltip = {this.Tooltip?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Payload = {this.Payload?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ActionMenuItem: Label = {this.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Action = {this.Action?.ToString() ?? "<null>"}, Icons = {this.Icons?.ToString() ?? "<null>"}, IconPosition = {this.IconPosition.ToString() ?? "<null>"}, IsDisabled = {this.IsDisabled.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Tooltip = {this.Tooltip?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

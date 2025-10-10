@@ -43,11 +43,11 @@
     <Reference Include="OBeautifulCode.Compression, Version=1.0.27.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OBeautifulCode.Compression.1.0.27\lib\net462\OBeautifulCode.Compression.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.DataStructure, Version=1.0.112.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.112\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
+    <Reference Include="OBeautifulCode.DataStructure, Version=1.0.115.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.115\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.DataStructure.Serialization.Bson, Version=1.0.112.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.DataStructure.Serialization.Bson.1.0.112\lib\net462\OBeautifulCode.DataStructure.Serialization.Bson.dll</HintPath>
+    <Reference Include="OBeautifulCode.DataStructure.Serialization.Bson, Version=1.0.115.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.DataStructure.Serialization.Bson.1.0.115\lib\net462\OBeautifulCode.DataStructure.Serialization.Bson.dll</HintPath>
     </Reference>
     <Reference Include="OBeautifulCode.Representation.System, Version=1.0.67.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OBeautifulCode.Representation.System.1.0.67\lib\net462\OBeautifulCode.Representation.System.dll</HintPath>

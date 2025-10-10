@@ -37,8 +37,8 @@
     <DocumentationFile>bin\Release\Vuescape.DotNet.Domain.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OBeautifulCode.DataStructure, Version=1.0.112.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.112\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
+    <Reference Include="OBeautifulCode.DataStructure, Version=1.0.115.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.115\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
     </Reference>
     <Reference Include="OBeautifulCode.Representation.System, Version=1.0.67.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OBeautifulCode.Representation.System.1.0.67\lib\net462\OBeautifulCode.Representation.System.dll</HintPath>

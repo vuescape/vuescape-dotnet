@@ -277,6 +277,14 @@
     <Compile Include="DotNetDummyFactory.designer.cs">
       <DependentUpon>DotNetDummyFactory.cs</DependentUpon>
     </Compile>
+    <Compile Include="DownloadActionPayloadTest.cs" />
+    <Compile Include="DownloadActionPayloadTest.designer.cs">
+      <DependentUpon>DownloadActionPayloadTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DownloadActionTest.cs" />
+    <Compile Include="DownloadActionTest.designer.cs">
+      <DependentUpon>DownloadActionTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="FileUploadComponentPayloadTest.designer.cs">
       <DependentUpon>FileUploadComponentPayloadTest.cs</DependentUpon>
     </Compile>

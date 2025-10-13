@@ -144,12 +144,20 @@
     <Compile Include="Models\DynamicUI\Action\ActionBase.designer.cs">
       <DependentUpon>ActionBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\Action\DownloadAction.cs" />
+    <Compile Include="Models\DynamicUI\Action\DownloadAction.designer.cs">
+      <DependentUpon>DownloadAction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\Action\NavigationAction.cs" />
     <Compile Include="Models\DynamicUI\Action\NavigationAction.designer.cs">
       <DependentUpon>NavigationAction.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\Action\NoAction.designer.cs">
       <DependentUpon>NoAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\Action\Payload\DownloadActionPayload.cs" />
+    <Compile Include="Models\DynamicUI\Action\Payload\DownloadActionPayload.designer.cs">
+      <DependentUpon>DownloadActionPayload.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\Action\SelectNavigationAction.cs" />
     <Compile Include="Models\DynamicUI\Action\Payload\NavigationActionPayload.cs" />

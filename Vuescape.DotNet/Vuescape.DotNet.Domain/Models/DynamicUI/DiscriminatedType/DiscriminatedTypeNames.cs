@@ -28,6 +28,11 @@ namespace Vuescape.DotNet.Domain
         public static readonly string NavigationAction = "action.navigate";
 
         /// <summary>
+        /// Identifies a discriminated type representing a download action.
+        /// </summary>
+        public static readonly string DownloadAction = "action.download";
+
+        /// <summary>
         /// Identifies a discriminated type representing a selection-based navigation action.
         /// </summary>
         public static readonly string SelectNavigationAction = "action.selectNavigate";

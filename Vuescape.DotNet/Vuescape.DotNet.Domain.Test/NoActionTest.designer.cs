@@ -156,6 +156,7 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<ActionButtonComponent>(),
                         A.Dummy<ButtonComponent>(),
                         A.Dummy<ChicletGridComponent>(),
+                        A.Dummy<DownloadAction>(),
                         A.Dummy<FileUploadComponent>(),
                         A.Dummy<NavigationAction>(),
                         A.Dummy<ReadOnlyFileUploadComponent>(),

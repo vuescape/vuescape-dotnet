@@ -141,6 +141,7 @@ namespace Vuescape.DotNet.Domain.Test
                         A.Dummy<Guid>(),
                         A.Dummy<ActionButtonComponent>(),
                         A.Dummy<ButtonComponent>(),
+                        A.Dummy<DownloadAction>(),
                         A.Dummy<FileUploadComponent>(),
                         A.Dummy<NavigationAction>(),
                         A.Dummy<NoAction>(),

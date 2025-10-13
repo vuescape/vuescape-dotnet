@@ -42,6 +42,7 @@ namespace Vuescape.DotNet.Domain.Test
                 {
                     var availableTypes = new[]
                     {
+                        typeof(DownloadAction),
                         typeof(NavigationAction),
                         typeof(NoAction),
                         typeof(SelectNavigationAction)
@@ -203,6 +204,7 @@ namespace Vuescape.DotNet.Domain.Test
                         typeof(ActionButtonComponent),
                         typeof(ButtonComponent),
                         typeof(ChicletGridComponent),
+                        typeof(DownloadAction),
                         typeof(FileUploadComponent),
                         typeof(NavigationAction),
                         typeof(NoAction),
@@ -232,6 +234,15 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<int?>(),
                                  A.Dummy<int?>(),
                                  A.Dummy<ReportPaneTitleBarButtons?>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new DownloadAction(
+                                 A.Dummy<DownloadActionPayload>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new DownloadActionPayload(
+                                 A.Dummy<string>(),
+                                 A.Dummy<bool>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new DownloadFileOp(

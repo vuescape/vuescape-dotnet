@@ -440,7 +440,7 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
                                  A.Dummy<long>(),
-                                 A.Dummy<NavigationAction>(),
+                                 A.Dummy<DownloadAction>(),
                                  A.Dummy<IReadOnlyList<MetadataLineItem>>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(

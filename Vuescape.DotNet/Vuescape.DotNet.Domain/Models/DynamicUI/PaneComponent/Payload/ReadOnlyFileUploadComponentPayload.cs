@@ -22,13 +22,13 @@ namespace Vuescape.DotNet.Domain
         /// <param name="id">The unique identifier for this component.</param>
         /// <param name="fileName">The file name to display.</param>
         /// <param name="fileSizeInBytes">The file size in bytes.</param>
-        /// <param name="downloadNavigationAction">OPTIONAL A navigation action to perform in order to download the file.</param>
+        /// <param name="downloadAction">OPTIONAL A download action to perform in order to download the file.</param>
         /// <param name="metadataLineItems">OPTIONAL list of <see cref="MetadataLineItem"/>.</param>
         public ReadOnlyFileUploadComponentPayload(
             string id,
             string fileName,
             long fileSizeInBytes,
-            NavigationAction downloadNavigationAction,
+            DownloadAction downloadAction,
             IReadOnlyList<MetadataLineItem> metadataLineItems)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
@@ -37,7 +37,7 @@ namespace Vuescape.DotNet.Domain
             this.Id = id;
             this.FileName = fileName;
             this.FileSizeInBytes = fileSizeInBytes;
-            this.DownloadNavigationAction = downloadNavigationAction;
+            this.DownloadAction = downloadAction;
             this.MetadataLineItems = metadataLineItems;
         }
 
@@ -59,7 +59,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the download navigation action.
         /// </summary>
-        public NavigationAction DownloadNavigationAction { get; private set; }
+        public DownloadAction DownloadAction { get; private set; }
 
         /// <summary>
         /// Gets the metadata line items.

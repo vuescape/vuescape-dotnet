@@ -38,7 +38,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 null,
                                 referenceObject.FileName,
                                 referenceObject.FileSizeInBytes,
-                                referenceObject.DownloadNavigationAction,
+                                referenceObject.DownloadAction,
                                 referenceObject.MetadataLineItems);
 
                             return result;
@@ -58,7 +58,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 Invariant($"  {Environment.NewLine}  "),
                                 referenceObject.FileName,
                                 referenceObject.FileSizeInBytes,
-                                referenceObject.DownloadNavigationAction,
+                                referenceObject.DownloadAction,
                                 referenceObject.MetadataLineItems);
 
                             return result;
@@ -79,7 +79,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 referenceObject.Id,
                                 referenceObject.FileName,
                                 A.Dummy<long>().ThatIs(_ => _ < 0L),
-                                referenceObject.DownloadNavigationAction,
+                                referenceObject.DownloadAction,
                                 referenceObject.MetadataLineItems);
 
                             return result;

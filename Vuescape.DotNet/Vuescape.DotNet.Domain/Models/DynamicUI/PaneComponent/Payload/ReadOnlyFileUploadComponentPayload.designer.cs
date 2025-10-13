@@ -72,7 +72,7 @@ namespace Vuescape.DotNet.Domain
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
                       && this.FileName.IsEqualTo(other.FileName, StringComparer.Ordinal)
                       && this.FileSizeInBytes.IsEqualTo(other.FileSizeInBytes)
-                      && this.DownloadNavigationAction.IsEqualTo(other.DownloadNavigationAction)
+                      && this.DownloadAction.IsEqualTo(other.DownloadAction)
                       && this.MetadataLineItems.IsEqualTo(other.MetadataLineItems);
 
             return result;
@@ -86,7 +86,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.Id)
             .Hash(this.FileName)
             .Hash(this.FileSizeInBytes)
-            .Hash(this.DownloadNavigationAction)
+            .Hash(this.DownloadAction)
             .Hash(this.MetadataLineItems)
             .Value;
 
@@ -100,7 +100,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.FileName?.DeepClone(),
                                  this.FileSizeInBytes.DeepClone(),
-                                 this.DownloadNavigationAction?.DeepClone(),
+                                 this.DownloadAction?.DeepClone(),
                                  this.MetadataLineItems?.DeepClone());
 
             return result;
@@ -134,7 +134,7 @@ namespace Vuescape.DotNet.Domain
                                  id,
                                  this.FileName?.DeepClone(),
                                  this.FileSizeInBytes.DeepClone(),
-                                 this.DownloadNavigationAction?.DeepClone(),
+                                 this.DownloadAction?.DeepClone(),
                                  this.MetadataLineItems?.DeepClone());
 
             return result;
@@ -168,7 +168,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  fileName,
                                  this.FileSizeInBytes.DeepClone(),
-                                 this.DownloadNavigationAction?.DeepClone(),
+                                 this.DownloadAction?.DeepClone(),
                                  this.MetadataLineItems?.DeepClone());
 
             return result;
@@ -202,17 +202,17 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.FileName?.DeepClone(),
                                  fileSizeInBytes,
-                                 this.DownloadNavigationAction?.DeepClone(),
+                                 this.DownloadAction?.DeepClone(),
                                  this.MetadataLineItems?.DeepClone());
 
             return result;
         }
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="DownloadNavigationAction" />.
+        /// Deep clones this object with a new <see cref="DownloadAction" />.
         /// </summary>
-        /// <param name="downloadNavigationAction">The new <see cref="DownloadNavigationAction" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="ReadOnlyFileUploadComponentPayload" /> using the specified <paramref name="downloadNavigationAction" /> for <see cref="DownloadNavigationAction" /> and a deep clone of every other property.</returns>
+        /// <param name="downloadAction">The new <see cref="DownloadAction" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="ReadOnlyFileUploadComponentPayload" /> using the specified <paramref name="downloadAction" /> for <see cref="DownloadAction" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -230,13 +230,13 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public ReadOnlyFileUploadComponentPayload DeepCloneWithDownloadNavigationAction(NavigationAction downloadNavigationAction)
+        public ReadOnlyFileUploadComponentPayload DeepCloneWithDownloadAction(DownloadAction downloadAction)
         {
             var result = new ReadOnlyFileUploadComponentPayload(
                                  this.Id?.DeepClone(),
                                  this.FileName?.DeepClone(),
                                  this.FileSizeInBytes.DeepClone(),
-                                 downloadNavigationAction,
+                                 downloadAction,
                                  this.MetadataLineItems?.DeepClone());
 
             return result;
@@ -270,7 +270,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.FileName?.DeepClone(),
                                  this.FileSizeInBytes.DeepClone(),
-                                 this.DownloadNavigationAction?.DeepClone(),
+                                 this.DownloadAction?.DeepClone(),
                                  metadataLineItems);
 
             return result;
@@ -280,7 +280,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.ReadOnlyFileUploadComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileName = {this.FileName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileSizeInBytes = {this.FileSizeInBytes.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DownloadNavigationAction = {this.DownloadNavigationAction?.ToString() ?? "<null>"}, MetadataLineItems = {this.MetadataLineItems?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.ReadOnlyFileUploadComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileName = {this.FileName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileSizeInBytes = {this.FileSizeInBytes.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DownloadAction = {this.DownloadAction?.ToString() ?? "<null>"}, MetadataLineItems = {this.MetadataLineItems?.ToString() ?? "<null>"}.");
 
             return result;
         }

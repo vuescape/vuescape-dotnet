@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<ReadOnlyFileUploadComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReadOnlyFileUploadComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileName = {systemUnderTest.FileName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileSizeInBytes = {systemUnderTest.FileSizeInBytes.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DownloadNavigationAction = {systemUnderTest.DownloadNavigationAction?.ToString() ?? "<null>"}, MetadataLineItems = {systemUnderTest.MetadataLineItems?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.ReadOnlyFileUploadComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileName = {systemUnderTest.FileName?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FileSizeInBytes = {systemUnderTest.FileSizeInBytes.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, DownloadAction = {systemUnderTest.DownloadAction?.ToString() ?? "<null>"}, MetadataLineItems = {systemUnderTest.MetadataLineItems?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -68,7 +68,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              null,
                                              referenceObject.FileName,
                                              referenceObject.FileSizeInBytes,
-                                             referenceObject.DownloadNavigationAction,
+                                             referenceObject.DownloadAction,
                                              referenceObject.MetadataLineItems);
 
                         return result;
@@ -88,7 +88,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.FileName,
                                              referenceObject.FileSizeInBytes,
-                                             referenceObject.DownloadNavigationAction,
+                                             referenceObject.DownloadAction,
                                              referenceObject.MetadataLineItems);
 
                         return result;
@@ -108,7 +108,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              null,
                                              referenceObject.FileSizeInBytes,
-                                             referenceObject.DownloadNavigationAction,
+                                             referenceObject.DownloadAction,
                                              referenceObject.MetadataLineItems);
 
                         return result;
@@ -128,7 +128,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.FileSizeInBytes,
-                                             referenceObject.DownloadNavigationAction,
+                                             referenceObject.DownloadAction,
                                              referenceObject.MetadataLineItems);
 
                         return result;
@@ -139,7 +139,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<ReadOnlyFileUploadComponentPayload>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'downloadNavigationAction' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'downloadAction' is null scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>();
@@ -154,7 +154,7 @@ namespace Vuescape.DotNet.Domain.Test
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "downloadNavigationAction", },
+                    ExpectedExceptionMessageContains = new[] { "downloadAction", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<ReadOnlyFileUploadComponentPayload>
@@ -168,7 +168,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              referenceObject.FileName,
                                              referenceObject.FileSizeInBytes,
-                                             referenceObject.DownloadNavigationAction,
+                                             referenceObject.DownloadAction,
                                              null);
 
                         return result;
@@ -188,7 +188,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              referenceObject.FileName,
                                              referenceObject.FileSizeInBytes,
-                                             referenceObject.DownloadNavigationAction,
+                                             referenceObject.DownloadAction,
                                              new List<MetadataLineItem>());
 
                         return result;
@@ -208,7 +208,7 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              referenceObject.FileName,
                                              referenceObject.FileSizeInBytes,
-                                             referenceObject.DownloadNavigationAction,
+                                             referenceObject.DownloadAction,
                                              new MetadataLineItem[0].Concat(referenceObject.MetadataLineItems).Concat(new MetadataLineItem[] { null }).Concat(referenceObject.MetadataLineItems).ToList());
 
                         return result;
@@ -232,7 +232,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.FileName,
                                                       referenceObject.FileSizeInBytes,
-                                                      referenceObject.DownloadNavigationAction,
+                                                      referenceObject.DownloadAction,
                                                       referenceObject.MetadataLineItems),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
@@ -255,7 +255,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.FileName,
                                                       referenceObject.FileSizeInBytes,
-                                                      referenceObject.DownloadNavigationAction,
+                                                      referenceObject.DownloadAction,
                                                       referenceObject.MetadataLineItems),
                             ExpectedPropertyValue = referenceObject.FileName,
                         };
@@ -278,7 +278,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.FileName,
                                                       referenceObject.FileSizeInBytes,
-                                                      referenceObject.DownloadNavigationAction,
+                                                      referenceObject.DownloadAction,
                                                       referenceObject.MetadataLineItems),
                             ExpectedPropertyValue = referenceObject.FileSizeInBytes,
                         };
@@ -290,7 +290,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<ReadOnlyFileUploadComponentPayload>
                 {
-                    Name = "DownloadNavigationAction should return same 'downloadNavigationAction' parameter passed to constructor when getting",
+                    Name = "DownloadAction should return same 'downloadAction' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
                         var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>();
@@ -301,14 +301,14 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.FileName,
                                                       referenceObject.FileSizeInBytes,
-                                                      referenceObject.DownloadNavigationAction,
+                                                      referenceObject.DownloadAction,
                                                       referenceObject.MetadataLineItems),
-                            ExpectedPropertyValue = referenceObject.DownloadNavigationAction,
+                            ExpectedPropertyValue = referenceObject.DownloadAction,
                         };
 
                         return result;
                     },
-                    PropertyName = "DownloadNavigationAction",
+                    PropertyName = "DownloadAction",
                 })
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<ReadOnlyFileUploadComponentPayload>
@@ -324,7 +324,7 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.FileName,
                                                       referenceObject.FileSizeInBytes,
-                                                      referenceObject.DownloadNavigationAction,
+                                                      referenceObject.DownloadAction,
                                                       referenceObject.MetadataLineItems),
                             ExpectedPropertyValue = referenceObject.MetadataLineItems,
                         };
@@ -398,18 +398,18 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<ReadOnlyFileUploadComponentPayload>
                 {
-                    Name = "DeepCloneWithDownloadNavigationAction should deep clone object and replace DownloadNavigationAction with the provided downloadNavigationAction",
-                    WithPropertyName = "DownloadNavigationAction",
+                    Name = "DeepCloneWithDownloadAction should deep clone object and replace DownloadAction with the provided downloadAction",
+                    WithPropertyName = "DownloadAction",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
                         var systemUnderTest = A.Dummy<ReadOnlyFileUploadComponentPayload>();
 
-                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>().ThatIs(_ => !systemUnderTest.DownloadNavigationAction.IsEqualTo(_.DownloadNavigationAction));
+                        var referenceObject = A.Dummy<ReadOnlyFileUploadComponentPayload>().ThatIs(_ => !systemUnderTest.DownloadAction.IsEqualTo(_.DownloadAction));
 
                         var result = new SystemUnderTestDeepCloneWithValue<ReadOnlyFileUploadComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.DownloadNavigationAction,
+                            DeepCloneWithValue = referenceObject.DownloadAction,
                         };
 
                         return result;
@@ -450,7 +450,7 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
                                 ReferenceObjectForEquatableTestScenarios.FileSizeInBytes,
-                                ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.DownloadAction,
                                 ReferenceObjectForEquatableTestScenarios.MetadataLineItems),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new ReadOnlyFileUploadComponentPayload[]
@@ -459,31 +459,31 @@ namespace Vuescape.DotNet.Domain.Test
                                 A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
                                 ReferenceObjectForEquatableTestScenarios.FileSizeInBytes,
-                                ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.DownloadAction,
                                 ReferenceObjectForEquatableTestScenarios.MetadataLineItems),
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.FileName.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FileName)).FileName,
                                 ReferenceObjectForEquatableTestScenarios.FileSizeInBytes,
-                                ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.DownloadAction,
                                 ReferenceObjectForEquatableTestScenarios.MetadataLineItems),
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
                                 A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.FileSizeInBytes.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FileSizeInBytes)).FileSizeInBytes,
-                                ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.DownloadAction,
                                 ReferenceObjectForEquatableTestScenarios.MetadataLineItems),
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
                                 ReferenceObjectForEquatableTestScenarios.FileSizeInBytes,
-                                A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.DownloadNavigationAction.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction)).DownloadNavigationAction,
+                                A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.DownloadAction.IsEqualTo(ReferenceObjectForEquatableTestScenarios.DownloadAction)).DownloadAction,
                                 ReferenceObjectForEquatableTestScenarios.MetadataLineItems),
                         new ReadOnlyFileUploadComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.FileName,
                                 ReferenceObjectForEquatableTestScenarios.FileSizeInBytes,
-                                ReferenceObjectForEquatableTestScenarios.DownloadNavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.DownloadAction,
                                 A.Dummy<ReadOnlyFileUploadComponentPayload>().Whose(_ => !_.MetadataLineItems.IsEqualTo(ReferenceObjectForEquatableTestScenarios.MetadataLineItems)).MetadataLineItems),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
@@ -766,16 +766,16 @@ namespace Vuescape.DotNet.Domain.Test
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
 
-                if (systemUnderTest.DownloadNavigationAction == null)
+                if (systemUnderTest.DownloadAction == null)
                 {
-                    actual.DownloadNavigationAction.AsTest().Must().BeNull();
+                    actual.DownloadAction.AsTest().Must().BeNull();
                 }
-                else if (!actual.DownloadNavigationAction.GetType().IsValueType)
+                else if (!actual.DownloadAction.GetType().IsValueType)
                 {
                     // When the declared type is a reference type, we still have to check the runtime type.
                     // The object could be a boxed value type, which will fail this asseration because
                     // a deep clone of a value type object is the same object.
-                    actual.DownloadNavigationAction.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.DownloadNavigationAction);
+                    actual.DownloadAction.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.DownloadAction);
                 }
 
                 if (systemUnderTest.MetadataLineItems == null)
@@ -807,7 +807,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "FileName", "FileSizeInBytes", "DownloadNavigationAction", "MetadataLineItems" };
+                var propertyNames = new string[] { "Id", "FileName", "FileSizeInBytes", "DownloadAction", "MetadataLineItems" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

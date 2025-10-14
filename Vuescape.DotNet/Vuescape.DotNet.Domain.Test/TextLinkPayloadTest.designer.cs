@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TextLinkPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TextLinkPayload: NavigationAction = {systemUnderTest.NavigationAction?.ToString() ?? "<null>"}, Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {systemUnderTest.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyles = {systemUnderTest.CssStyles?.ToString() ?? "<null>"}, CssClass = {systemUnderTest.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TextLinkPayload: Action = {systemUnderTest.Action?.ToString() ?? "<null>"}, Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {systemUnderTest.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyles = {systemUnderTest.CssStyles?.ToString() ?? "<null>"}, CssClass = {systemUnderTest.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -67,7 +67,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TextLinkPayload(
                                              null,
                                              referenceObject.Text,
-                                             referenceObject.NavigationAction,
+                                             referenceObject.Action,
                                              referenceObject.CssStyles,
                                              referenceObject.CssClass);
 
@@ -87,7 +87,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TextLinkPayload(
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Text,
-                                             referenceObject.NavigationAction,
+                                             referenceObject.Action,
                                              referenceObject.CssStyles,
                                              referenceObject.CssClass);
 
@@ -107,7 +107,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TextLinkPayload(
                                              referenceObject.Id,
                                              null,
-                                             referenceObject.NavigationAction,
+                                             referenceObject.Action,
                                              referenceObject.CssStyles,
                                              referenceObject.CssClass);
 
@@ -127,7 +127,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TextLinkPayload(
                                              referenceObject.Id,
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.NavigationAction,
+                                             referenceObject.Action,
                                              referenceObject.CssStyles,
                                              referenceObject.CssClass);
 
@@ -139,7 +139,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TextLinkPayload>
                 {
-                    Name = "constructor should throw ArgumentNullException when parameter 'navigationAction' is null scenario",
+                    Name = "constructor should throw ArgumentNullException when parameter 'action' is null scenario",
                     ConstructionFunc = () =>
                     {
                         var referenceObject = A.Dummy<TextLinkPayload>();
@@ -154,7 +154,7 @@ namespace Vuescape.DotNet.Domain.Test
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentNullException),
-                    ExpectedExceptionMessageContains = new[] { "navigationAction", },
+                    ExpectedExceptionMessageContains = new[] { "action", },
                 })
             .AddScenario(() =>
                 new ConstructorArgumentValidationTestScenario<TextLinkPayload>
@@ -173,7 +173,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TextLinkPayload(
                                              referenceObject.Id,
                                              referenceObject.Text,
-                                             referenceObject.NavigationAction,
+                                             referenceObject.Action,
                                              dictionaryWithNullValue,
                                              referenceObject.CssClass);
 
@@ -197,7 +197,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TextLinkPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Text,
-                                                      referenceObject.NavigationAction,
+                                                      referenceObject.Action,
                                                       referenceObject.CssStyles,
                                                       referenceObject.CssClass),
                             ExpectedPropertyValue = referenceObject.Id,
@@ -220,7 +220,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TextLinkPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Text,
-                                                      referenceObject.NavigationAction,
+                                                      referenceObject.Action,
                                                       referenceObject.CssStyles,
                                                       referenceObject.CssClass),
                             ExpectedPropertyValue = referenceObject.Text,
@@ -233,7 +233,7 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<TextLinkPayload>
                 {
-                    Name = "NavigationAction should return same 'navigationAction' parameter passed to constructor when getting",
+                    Name = "Action should return same 'action' parameter passed to constructor when getting",
                     SystemUnderTestExpectedPropertyValueFunc = () =>
                     {
                         var referenceObject = A.Dummy<TextLinkPayload>();
@@ -243,15 +243,15 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TextLinkPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Text,
-                                                      referenceObject.NavigationAction,
+                                                      referenceObject.Action,
                                                       referenceObject.CssStyles,
                                                       referenceObject.CssClass),
-                            ExpectedPropertyValue = referenceObject.NavigationAction,
+                            ExpectedPropertyValue = referenceObject.Action,
                         };
 
                         return result;
                     },
-                    PropertyName = "NavigationAction",
+                    PropertyName = "Action",
                 })
             .AddScenario(() =>
                 new ConstructorPropertyAssignmentTestScenario<TextLinkPayload>
@@ -266,7 +266,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TextLinkPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Text,
-                                                      referenceObject.NavigationAction,
+                                                      referenceObject.Action,
                                                       referenceObject.CssStyles,
                                                       referenceObject.CssClass),
                             ExpectedPropertyValue = referenceObject.CssStyles,
@@ -289,7 +289,7 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TextLinkPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Text,
-                                                      referenceObject.NavigationAction,
+                                                      referenceObject.Action,
                                                       referenceObject.CssStyles,
                                                       referenceObject.CssClass),
                             ExpectedPropertyValue = referenceObject.CssClass,
@@ -304,18 +304,18 @@ namespace Vuescape.DotNet.Domain.Test
             .AddScenario(() =>
                 new DeepCloneWithTestScenario<TextLinkPayload>
                 {
-                    Name = "DeepCloneWithNavigationAction should deep clone object and replace NavigationAction with the provided navigationAction",
-                    WithPropertyName = "NavigationAction",
+                    Name = "DeepCloneWithAction should deep clone object and replace Action with the provided action",
+                    WithPropertyName = "Action",
                     SystemUnderTestDeepCloneWithValueFunc = () =>
                     {
                         var systemUnderTest = A.Dummy<TextLinkPayload>();
 
-                        var referenceObject = A.Dummy<TextLinkPayload>().ThatIs(_ => !systemUnderTest.NavigationAction.IsEqualTo(_.NavigationAction));
+                        var referenceObject = A.Dummy<TextLinkPayload>().ThatIs(_ => !systemUnderTest.Action.IsEqualTo(_.Action));
 
                         var result = new SystemUnderTestDeepCloneWithValue<TextLinkPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            DeepCloneWithValue = referenceObject.NavigationAction,
+                            DeepCloneWithValue = referenceObject.Action,
                         };
 
                         return result;
@@ -415,7 +415,7 @@ namespace Vuescape.DotNet.Domain.Test
                         new TextLinkPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Text,
-                                ReferenceObjectForEquatableTestScenarios.NavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.Action,
                                 ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                     },
@@ -424,31 +424,31 @@ namespace Vuescape.DotNet.Domain.Test
                         new TextLinkPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Text,
-                                A.Dummy<TextLinkPayload>().Whose(_ => !_.NavigationAction.IsEqualTo(ReferenceObjectForEquatableTestScenarios.NavigationAction)).NavigationAction,
+                                A.Dummy<TextLinkPayload>().Whose(_ => !_.Action.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Action)).Action,
                                 ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                         new TextLinkPayload(
                                 A.Dummy<TextLinkPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
                                 ReferenceObjectForEquatableTestScenarios.Text,
-                                ReferenceObjectForEquatableTestScenarios.NavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.Action,
                                 ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                         new TextLinkPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<TextLinkPayload>().Whose(_ => !_.Text.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Text)).Text,
-                                ReferenceObjectForEquatableTestScenarios.NavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.Action,
                                 ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                         new TextLinkPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Text,
-                                ReferenceObjectForEquatableTestScenarios.NavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.Action,
                                 A.Dummy<TextLinkPayload>().Whose(_ => !_.CssStyles.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyles)).CssStyles,
                                 ReferenceObjectForEquatableTestScenarios.CssClass),
                         new TextLinkPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Text,
-                                ReferenceObjectForEquatableTestScenarios.NavigationAction,
+                                ReferenceObjectForEquatableTestScenarios.Action,
                                 ReferenceObjectForEquatableTestScenarios.CssStyles,
                                 A.Dummy<TextLinkPayload>().Whose(_ => !_.CssClass.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssClass)).CssClass),
                     },
@@ -732,16 +732,16 @@ namespace Vuescape.DotNet.Domain.Test
                 actual.AsTest().Must().BeEqualTo(systemUnderTest);
                 actual.AsTest().Must().NotBeSameReferenceAs(systemUnderTest);
 
-                if (systemUnderTest.NavigationAction == null)
+                if (systemUnderTest.Action == null)
                 {
-                    actual.NavigationAction.AsTest().Must().BeNull();
+                    actual.Action.AsTest().Must().BeNull();
                 }
-                else if (!actual.NavigationAction.GetType().IsValueType)
+                else if (!actual.Action.GetType().IsValueType)
                 {
                     // When the declared type is a reference type, we still have to check the runtime type.
                     // The object could be a boxed value type, which will fail this asseration because
                     // a deep clone of a value type object is the same object.
-                    actual.NavigationAction.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.NavigationAction);
+                    actual.Action.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Action);
                 }
 
                 if (systemUnderTest.CssStyles == null)
@@ -773,7 +773,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "NavigationAction", "Id", "Text", "CssStyles", "CssClass" };
+                var propertyNames = new string[] { "Action", "Id", "Text", "CssStyles", "CssClass" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

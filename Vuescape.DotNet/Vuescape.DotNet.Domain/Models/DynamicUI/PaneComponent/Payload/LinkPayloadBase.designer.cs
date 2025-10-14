@@ -80,10 +80,10 @@ namespace Vuescape.DotNet.Domain
         public LinkPayloadBase DeepClone() => this.DeepCloneInternal();
 
         /// <summary>
-        /// Deep clones this object with a new <see cref="NavigationAction" />.
+        /// Deep clones this object with a new <see cref="Action" />.
         /// </summary>
-        /// <param name="navigationAction">The new <see cref="NavigationAction" />.  This object will NOT be deep cloned; it is used as-is.</param>
-        /// <returns>New <see cref="LinkPayloadBase" /> using the specified <paramref name="navigationAction" /> for <see cref="NavigationAction" /> and a deep clone of every other property.</returns>
+        /// <param name="action">The new <see cref="Action" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="LinkPayloadBase" /> using the specified <paramref name="action" /> for <see cref="Action" /> and a deep clone of every other property.</returns>
         [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
@@ -101,7 +101,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public virtual LinkPayloadBase DeepCloneWithNavigationAction(NavigationAction navigationAction)
+        public virtual LinkPayloadBase DeepCloneWithAction(ActionBase action)
         {
             throw new NotImplementedException("This method should be abstract.  It was generated as virtual so that you aren't forced to override it when you create a new model that derives from this model.  It will be overridden in the generated designer file.");
         }

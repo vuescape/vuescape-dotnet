@@ -602,7 +602,7 @@ namespace Vuescape.DotNet.Domain.Test
                 () => new TextLinkPayload(
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<NavigationAction>(),
+                                 A.Dummy<ActionBase>(),
                                  A.Dummy<IReadOnlyDictionary<string, string>>(),
                                  A.Dummy<string>()));
 

@@ -69,7 +69,7 @@ namespace Vuescape.DotNet.Domain
                 return false;
             }
 
-            var result = this.NavigationAction.IsEqualTo(other.NavigationAction)
+            var result = this.Action.IsEqualTo(other.Action)
                       && this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
                       && this.Text.IsEqualTo(other.Text, StringComparer.Ordinal)
                       && this.CssStyles.IsEqualTo(other.CssStyles)
@@ -83,7 +83,7 @@ namespace Vuescape.DotNet.Domain
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCodeHelper.Initialize()
-            .Hash(this.NavigationAction)
+            .Hash(this.Action)
             .Hash(this.Id)
             .Hash(this.Text)
             .Hash(this.CssStyles)
@@ -111,12 +111,12 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        public override LinkPayloadBase DeepCloneWithNavigationAction(NavigationAction navigationAction)
+        public override LinkPayloadBase DeepCloneWithAction(ActionBase action)
         {
             var result = new TextLinkPayload(
                                  this.Id?.DeepClone(),
                                  this.Text?.DeepClone(),
-                                 navigationAction,
+                                 action,
                                  this.CssStyles?.DeepClone(),
                                  this.CssClass?.DeepClone());
 
@@ -150,7 +150,7 @@ namespace Vuescape.DotNet.Domain
             var result = new TextLinkPayload(
                                  id,
                                  this.Text?.DeepClone(),
-                                 this.NavigationAction?.DeepClone(),
+                                 this.Action?.DeepClone(),
                                  this.CssStyles?.DeepClone(),
                                  this.CssClass?.DeepClone());
 
@@ -184,7 +184,7 @@ namespace Vuescape.DotNet.Domain
             var result = new TextLinkPayload(
                                  this.Id?.DeepClone(),
                                  text,
-                                 this.NavigationAction?.DeepClone(),
+                                 this.Action?.DeepClone(),
                                  this.CssStyles?.DeepClone(),
                                  this.CssClass?.DeepClone());
 
@@ -218,7 +218,7 @@ namespace Vuescape.DotNet.Domain
             var result = new TextLinkPayload(
                                  this.Id?.DeepClone(),
                                  this.Text?.DeepClone(),
-                                 this.NavigationAction?.DeepClone(),
+                                 this.Action?.DeepClone(),
                                  cssStyles,
                                  this.CssClass?.DeepClone());
 
@@ -252,7 +252,7 @@ namespace Vuescape.DotNet.Domain
             var result = new TextLinkPayload(
                                  this.Id?.DeepClone(),
                                  this.Text?.DeepClone(),
-                                 this.NavigationAction?.DeepClone(),
+                                 this.Action?.DeepClone(),
                                  this.CssStyles?.DeepClone(),
                                  cssClass);
 
@@ -266,7 +266,7 @@ namespace Vuescape.DotNet.Domain
             var result = new TextLinkPayload(
                                  this.Id?.DeepClone(),
                                  this.Text?.DeepClone(),
-                                 this.NavigationAction?.DeepClone(),
+                                 this.Action?.DeepClone(),
                                  this.CssStyles?.DeepClone(),
                                  this.CssClass?.DeepClone());
 
@@ -277,7 +277,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TextLinkPayload: NavigationAction = {this.NavigationAction?.ToString() ?? "<null>"}, Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {this.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyles = {this.CssStyles?.ToString() ?? "<null>"}, CssClass = {this.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TextLinkPayload: Action = {this.Action?.ToString() ?? "<null>"}, Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Text = {this.Text?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, CssStyles = {this.CssStyles?.ToString() ?? "<null>"}, CssClass = {this.CssClass?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }

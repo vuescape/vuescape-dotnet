@@ -21,16 +21,16 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="id">The unique identifier for this component.</param>
         /// <param name="text">The text to display.</param>
-        /// <param name="navigationAction">The navigation action.</param>
+        /// <param name="action">The action.</param>
         /// <param name="cssStyles">OPTIONAL CSS Styles to apply.</param>
         /// <param name="cssClass">OPTIONAL CSS class or space delimited classes to apply.</param>
         public TextLinkPayload(
             string id,
             string text,
-            NavigationAction navigationAction,
+            ActionBase action,
             IReadOnlyDictionary<string, string> cssStyles = null,
             string cssClass = null)
-            : base(navigationAction)
+            : base(action)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { text }.AsArg().Must().NotBeNullNorWhiteSpace();

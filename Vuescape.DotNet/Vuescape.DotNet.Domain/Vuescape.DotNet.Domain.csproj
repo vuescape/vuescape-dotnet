@@ -189,11 +189,17 @@
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ActionButtonComponentPayload.designer.cs">
       <DependentUpon>ActionButtonComponentPayload.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\LinkPayloadBase.designer.cs">
+      <DependentUpon>LinkPayloadBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ReadOnlyFileUploadComponentPayload.designer.cs">
       <DependentUpon>ReadOnlyFileUploadComponentPayload.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\TextComponentPayload.designer.cs">
       <DependentUpon>TextComponentPayload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TextLinkPayload.designer.cs">
+      <DependentUpon>TextLinkPayload.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\TextComponent.designer.cs">
       <DependentUpon>TextComponent.cs</DependentUpon>
@@ -227,9 +233,6 @@
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\TableTabsComponentPayload.designer.cs">
       <DependentUpon>TableTabsComponentPayload.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\TextLinkPayload.designer.cs">
-      <DependentUpon>TextLinkPayload.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\ReadOnlyFileUploadComponent.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\FileUploadComponent.designer.cs">
       <DependentUpon>FileUploadComponent.cs</DependentUpon>
@@ -242,9 +245,6 @@
       <DependentUpon>PaneComponent{TPayload}.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\ReadOnlyFileUploadComponentPayload.cs" />
-    <Compile Include="Models\DynamicUI\PaneComponent\Payload\LinkPayloadBase.designer.cs">
-      <DependentUpon>LinkPayloadBase.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\FileUploadComponentPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\TextLinkPayload.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\LinkPayloadBase.cs" />

@@ -18,17 +18,17 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="LinkPayloadBase"/> class.
         /// </summary>
-        /// <param name="navigationAction">The navigation action.</param>
-        protected LinkPayloadBase(NavigationAction navigationAction)
+        /// <param name="action">The action.</param>
+        protected LinkPayloadBase(ActionBase action)
         {
-            new { navigationAction }.AsArg().Must().NotBeNull();
+            new { action }.AsArg().Must().NotBeNull();
 
-            this.NavigationAction = navigationAction;
+            this.Action = action;
         }
 
         /// <summary>
-        /// Gets the navigation action.
+        /// Gets the action.
         /// </summary>
-        public NavigationAction NavigationAction { get; private set; }
+        public ActionBase Action { get; private set; }
     }
 }

@@ -84,8 +84,11 @@
     <Reference Include="OBeautifulCode.Compression, Version=1.0.30.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OBeautifulCode.Compression.1.0.30\lib\net462\OBeautifulCode.Compression.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.DataStructure, Version=1.0.116.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.116\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
+    <Reference Include="OBeautifulCode.CoreOperation, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.CoreOperation.1.0.5\lib\net462\OBeautifulCode.CoreOperation.dll</HintPath>
+    </Reference>
+    <Reference Include="OBeautifulCode.DataStructure, Version=1.0.119.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.119\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
     </Reference>
     <Reference Include="OBeautifulCode.Representation.System, Version=1.0.70.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OBeautifulCode.Representation.System.1.0.70\lib\net462\OBeautifulCode.Representation.System.dll</HintPath>
@@ -102,8 +105,8 @@
     <Reference Include="OBeautifulCode.Serialization.PropertyBag, Version=1.0.151.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OBeautifulCode.Serialization.PropertyBag.1.0.151\lib\net462\OBeautifulCode.Serialization.PropertyBag.dll</HintPath>
     </Reference>
-    <Reference Include="OBeautifulCode.Type, Version=1.0.153.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\OBeautifulCode.Type.1.0.153\lib\net462\OBeautifulCode.Type.dll</HintPath>
+    <Reference Include="OBeautifulCode.Type, Version=1.0.154.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.Type.1.0.154\lib\net462\OBeautifulCode.Type.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
@@ -201,6 +204,8 @@
     <Compile Include=".recipes\OBeautifulCode.Compression\CompressorFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.Compression\DotNetZipCompressor.cs" />
     <Compile Include=".recipes\OBeautifulCode.Compression\NullCompressor.cs" />
+    <Compile Include=".recipes\OBeautifulCode.CoreOperation\CoreOperationDummyFactory.cs" />
+    <Compile Include=".recipes\OBeautifulCode.CoreOperation\CoreOperationDummyFactory.designer.cs" />
     <Compile Include=".recipes\OBeautifulCode.DataStructure\DataStructureDummyFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.DataStructure\DataStructureDummyFactory.designer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Enum\EnumExtensions.cs" />

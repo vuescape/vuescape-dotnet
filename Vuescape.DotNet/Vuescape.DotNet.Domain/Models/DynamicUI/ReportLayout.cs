@@ -7,6 +7,8 @@
 // ReSharper disable once CheckNamespace
 namespace Vuescape.DotNet.Domain
 {
+    using System;
+    using System.Collections.Generic;
     using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Type;
 
@@ -20,15 +22,19 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="id">The unique identifier for the report layout.</param>
         /// <param name="content">The report content.</param>
-        /// <param name="title">The title of the report layout. OPTIONAL.</param>
-        /// <param name="targetPane">The pane to target when rendering the report. OPTIONAL.</param>
-        /// <param name="paneWidthPercent">The default paneWidth in percent. OPTIONAL.</param>
+        /// <param name="title">OPTIONAL title of the report layout. Default is no title.</param>
+        /// <param name="targetPane">OPTIONAL pane to target when rendering the report. Default is no PaneKind.</param>
+        /// <param name="paneWidthPercent">OPTIONAL default paneWidth in percent. Default is no percentage.</param>
+        /// <param name="actionButton">OPTIONAL action button typically used for downloading.  DEFAULT is no action button.</param>
+        /// <param name="reportDetail">OPTIONAL report detail.  DEFAULT no report detail.</param>
         public ReportLayout(
             string id,
             PaneLayout content,
             string title = null,
             PaneKind? targetPane = null,
-            decimal? paneWidthPercent = null)
+            decimal? paneWidthPercent = null,
+            ActionButtonComponent actionButton = null,
+            string reportDetail = null)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { content }.AsArg().Must().NotBeNull();
@@ -38,6 +44,8 @@ namespace Vuescape.DotNet.Domain
             this.Title = title;
             this.TargetPane = targetPane;
             this.PaneWidthPercent = paneWidthPercent;
+            this.ActionButton = actionButton;
+            this.ReportDetail = reportDetail;
         }
 
         /// <summary>
@@ -64,5 +72,15 @@ namespace Vuescape.DotNet.Domain
         /// Gets the pane width in percent.
         /// </summary>
         public decimal? PaneWidthPercent { get; private set; }
+
+        /// <summary>
+        /// Gets the action button.
+        /// </summary>
+        public ActionButtonComponent ActionButton { get; private set; }
+
+        /// <summary>
+        /// Gets the report detail.
+        /// </summary>
+        public string ReportDetail { get; private set; }
     }
 }

@@ -87,6 +87,12 @@
     <Reference Include="OBeautifulCode.CoreOperation, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OBeautifulCode.CoreOperation.1.0.5\lib\net462\OBeautifulCode.CoreOperation.dll</HintPath>
     </Reference>
+    <Reference Include="OBeautifulCode.CoreOperation.Serialization.Bson, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.CoreOperation.Serialization.Bson.1.0.5\lib\net462\OBeautifulCode.CoreOperation.Serialization.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="OBeautifulCode.CoreOperation.Serialization.Json, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OBeautifulCode.CoreOperation.Serialization.Json.1.0.5\lib\net462\OBeautifulCode.CoreOperation.Serialization.Json.dll</HintPath>
+    </Reference>
     <Reference Include="OBeautifulCode.DataStructure, Version=1.0.119.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OBeautifulCode.DataStructure.1.0.119\lib\net462\OBeautifulCode.DataStructure.dll</HintPath>
     </Reference>
@@ -208,6 +214,7 @@
     <Compile Include=".recipes\OBeautifulCode.CoreOperation\CoreOperationDummyFactory.designer.cs" />
     <Compile Include=".recipes\OBeautifulCode.DataStructure\DataStructureDummyFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.DataStructure\DataStructureDummyFactory.designer.cs" />
+    <Compile Include=".recipes\OBeautifulCode.DateTime\DateTimeExtensions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Enum\EnumExtensions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\ByteArrayEqualityComparer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\ColorEqualityComparer.cs" />

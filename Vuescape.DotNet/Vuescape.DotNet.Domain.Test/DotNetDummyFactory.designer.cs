@@ -458,7 +458,9 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<PaneLayout>(),
                                  A.Dummy<string>(),
                                  A.Dummy<PaneKind?>(),
-                                 A.Dummy<decimal?>()));
+                                 A.Dummy<decimal?>(),
+                                 A.Dummy<ActionButtonComponent>(),
+                                 A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Vuescape.DotNet.Domain.Section(

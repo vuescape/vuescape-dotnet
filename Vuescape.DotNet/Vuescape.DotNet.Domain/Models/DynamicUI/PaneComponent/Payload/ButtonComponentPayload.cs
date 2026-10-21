@@ -36,7 +36,7 @@ namespace Vuescape.DotNet.Domain
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { label }.AsArg().Must().NotBeNull();
             new { action }.AsArg().Must().NotBeNull();
-            new { icons }.AsArg().Must().NotContainAnyNullElements();
+            new { icons }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
 
             this.Id = id;
             this.Label = label;

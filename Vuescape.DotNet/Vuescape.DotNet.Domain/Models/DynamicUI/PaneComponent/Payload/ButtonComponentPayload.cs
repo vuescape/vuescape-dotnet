@@ -12,7 +12,7 @@ namespace Vuescape.DotNet.Domain
     using OBeautifulCode.Type;
 
     /// <summary>
-    /// Represents the payload for a button component, including label, action, and optional icons.
+    /// Represents the payload for a button component, including label, action, and optional icons, disabled state, and tooltip.
     /// </summary>
     public partial class ButtonComponentPayload : IHaveId<string>, IModelViaCodeGen
     {
@@ -23,11 +23,15 @@ namespace Vuescape.DotNet.Domain
         /// <param name="label">The label to display on the button.</param>
         /// <param name="action">The action associated with the button.</param>
         /// <param name="icons">Optional icons to display on the button.</param>
+        /// <param name="isDisabled">OPTIONAL value indicating whether the component is disabled. Default is false.</param>
+        /// <param name="tooltip">OPTIONAL tooltip. Default is null.</param>
         public ButtonComponentPayload(
             string id,
             string label,
             ActionBase action,
-            IReadOnlyList<string> icons = null)
+            IReadOnlyList<string> icons = null,
+            bool isDisabled = false,
+            string tooltip = null)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { label }.AsArg().Must().NotBeNull();
@@ -38,6 +42,8 @@ namespace Vuescape.DotNet.Domain
             this.Label = label;
             this.Action = action;
             this.Icons = icons;
+            this.IsDisabled = isDisabled;
+            this.Tooltip = tooltip;
         }
 
         /// <inheritdoc />
@@ -57,5 +63,15 @@ namespace Vuescape.DotNet.Domain
         /// Gets the optional icons to display on the button.
         /// </summary>
         public IReadOnlyList<string> Icons { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the component is disabled.
+        /// </summary>
+        public bool IsDisabled { get; private set; }
+
+        /// <summary>
+        /// Gets the optional tooltip.
+        /// </summary>
+        public string Tooltip { get; private set; }
     }
 }

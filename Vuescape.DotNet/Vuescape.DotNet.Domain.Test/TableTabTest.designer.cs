@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TableTab>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TableTab: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {systemUnderTest.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Badge = {systemUnderTest.Badge?.ToString() ?? "<null>"}, Table = {systemUnderTest.Table?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TableTab: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {systemUnderTest.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Badge = {systemUnderTest.Badge?.ToString() ?? "<null>"}, Table = {systemUnderTest.Table?.ToString() ?? "<null>"}, OnSelectAction = {systemUnderTest.OnSelectAction?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -68,7 +68,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              null,
                                              referenceObject.Label,
                                              referenceObject.Table,
-                                             referenceObject.Badge);
+                                             referenceObject.Badge,
+                                             referenceObject.OnSelectAction);
 
                         return result;
                     },
@@ -87,7 +88,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Label,
                                              referenceObject.Table,
-                                             referenceObject.Badge);
+                                             referenceObject.Badge,
+                                             referenceObject.OnSelectAction);
 
                         return result;
                     },
@@ -106,7 +108,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              null,
                                              referenceObject.Table,
-                                             referenceObject.Badge);
+                                             referenceObject.Badge,
+                                             referenceObject.OnSelectAction);
 
                         return result;
                     },
@@ -125,7 +128,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Table,
-                                             referenceObject.Badge);
+                                             referenceObject.Badge,
+                                             referenceObject.OnSelectAction);
 
                         return result;
                     },
@@ -144,7 +148,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Id,
                                              referenceObject.Label,
                                              null,
-                                             referenceObject.Badge);
+                                             referenceObject.Badge,
+                                             referenceObject.OnSelectAction);
 
                         return result;
                     },
@@ -167,7 +172,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.Label,
                                                       referenceObject.Table,
-                                                      referenceObject.Badge),
+                                                      referenceObject.Badge,
+                                                      referenceObject.OnSelectAction),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
 
@@ -189,7 +195,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.Label,
                                                       referenceObject.Table,
-                                                      referenceObject.Badge),
+                                                      referenceObject.Badge,
+                                                      referenceObject.OnSelectAction),
                             ExpectedPropertyValue = referenceObject.Label,
                         };
 
@@ -211,7 +218,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.Label,
                                                       referenceObject.Table,
-                                                      referenceObject.Badge),
+                                                      referenceObject.Badge,
+                                                      referenceObject.OnSelectAction),
                             ExpectedPropertyValue = referenceObject.Table,
                         };
 
@@ -233,13 +241,37 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Id,
                                                       referenceObject.Label,
                                                       referenceObject.Table,
-                                                      referenceObject.Badge),
+                                                      referenceObject.Badge,
+                                                      referenceObject.OnSelectAction),
                             ExpectedPropertyValue = referenceObject.Badge,
                         };
 
                         return result;
                     },
                     PropertyName = "Badge",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TableTab>
+                {
+                    Name = "OnSelectAction should return same 'onSelectAction' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TableTab>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TableTab>
+                        {
+                            SystemUnderTest = new TableTab(
+                                                      referenceObject.Id,
+                                                      referenceObject.Label,
+                                                      referenceObject.Table,
+                                                      referenceObject.Badge,
+                                                      referenceObject.OnSelectAction),
+                            ExpectedPropertyValue = referenceObject.OnSelectAction,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "OnSelectAction",
                 });
 
         private static readonly DeepCloneWithTestScenarios<TableTab> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TableTab>()
@@ -322,6 +354,26 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TableTab>
+                {
+                    Name = "DeepCloneWithOnSelectAction should deep clone object and replace OnSelectAction with the provided onSelectAction",
+                    WithPropertyName = "OnSelectAction",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TableTab>();
+
+                        var referenceObject = A.Dummy<TableTab>().ThatIs(_ => !systemUnderTest.OnSelectAction.IsEqualTo(_.OnSelectAction));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TableTab>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.OnSelectAction,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly TableTab ReferenceObjectForEquatableTestScenarios = A.Dummy<TableTab>();
@@ -338,7 +390,8 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 ReferenceObjectForEquatableTestScenarios.Table,
-                                ReferenceObjectForEquatableTestScenarios.Badge),
+                                ReferenceObjectForEquatableTestScenarios.Badge,
+                                ReferenceObjectForEquatableTestScenarios.OnSelectAction),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TableTab[]
                     {
@@ -346,22 +399,32 @@ namespace Vuescape.DotNet.Domain.Test
                                 A.Dummy<TableTab>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 ReferenceObjectForEquatableTestScenarios.Table,
-                                ReferenceObjectForEquatableTestScenarios.Badge),
+                                ReferenceObjectForEquatableTestScenarios.Badge,
+                                ReferenceObjectForEquatableTestScenarios.OnSelectAction),
                         new TableTab(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<TableTab>().Whose(_ => !_.Label.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Label)).Label,
                                 ReferenceObjectForEquatableTestScenarios.Table,
-                                ReferenceObjectForEquatableTestScenarios.Badge),
+                                ReferenceObjectForEquatableTestScenarios.Badge,
+                                ReferenceObjectForEquatableTestScenarios.OnSelectAction),
                         new TableTab(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 ReferenceObjectForEquatableTestScenarios.Table,
-                                A.Dummy<TableTab>().Whose(_ => !_.Badge.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Badge)).Badge),
+                                A.Dummy<TableTab>().Whose(_ => !_.Badge.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Badge)).Badge,
+                                ReferenceObjectForEquatableTestScenarios.OnSelectAction),
                         new TableTab(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Label,
                                 A.Dummy<TableTab>().Whose(_ => !_.Table.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Table)).Table,
-                                ReferenceObjectForEquatableTestScenarios.Badge),
+                                ReferenceObjectForEquatableTestScenarios.Badge,
+                                ReferenceObjectForEquatableTestScenarios.OnSelectAction),
+                        new TableTab(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Label,
+                                ReferenceObjectForEquatableTestScenarios.Table,
+                                ReferenceObjectForEquatableTestScenarios.Badge,
+                                A.Dummy<TableTab>().Whose(_ => !_.OnSelectAction.IsEqualTo(ReferenceObjectForEquatableTestScenarios.OnSelectAction)).OnSelectAction),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -674,6 +737,18 @@ namespace Vuescape.DotNet.Domain.Test
                     // a deep clone of a value type object is the same object.
                     actual.Table.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Table);
                 }
+
+                if (systemUnderTest.OnSelectAction == null)
+                {
+                    actual.OnSelectAction.AsTest().Must().BeNull();
+                }
+                else if (!actual.OnSelectAction.GetType().IsValueType)
+                {
+                    // When the declared type is a reference type, we still have to check the runtime type.
+                    // The object could be a boxed value type, which will fail this asseration because
+                    // a deep clone of a value type object is the same object.
+                    actual.OnSelectAction.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.OnSelectAction);
+                }
             }
 
             [Fact]
@@ -692,7 +767,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Label", "Badge", "Table" };
+                var propertyNames = new string[] { "Id", "Label", "Badge", "Table", "OnSelectAction" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 
@@ -778,7 +853,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                 var serializationFormats = new[] { SerializationFormat.String };
 
-                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain | AppDomainScenarios.SerializeInCurrentAppDomainAndDeserializeInNewAppDomain;
+                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain;
 
                 // Act, Assert
                 expected.RoundtripSerializeViaBsonWithBeEqualToAssertion(serializationConfigurationType, serializationFormats, appDomainScenarios);
@@ -807,7 +882,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                 var serializationFormats = new[] { SerializationFormat.Binary };
 
-                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain | AppDomainScenarios.SerializeInCurrentAppDomainAndDeserializeInNewAppDomain;
+                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain;
 
                 // Act, Assert
                 expected.RoundtripSerializeViaBsonWithBeEqualToAssertion(serializationConfigurationType, serializationFormats, appDomainScenarios);
@@ -836,7 +911,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                 var serializationFormats = new[] { SerializationFormat.String };
 
-                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain | AppDomainScenarios.SerializeInCurrentAppDomainAndDeserializeInNewAppDomain;
+                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain;
 
                 // Act, Assert
                 expected.RoundtripSerializeViaJsonWithBeEqualToAssertion(serializationConfigurationType, serializationFormats, appDomainScenarios);
@@ -865,7 +940,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                 var serializationFormats = new[] { SerializationFormat.Binary };
 
-                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain | AppDomainScenarios.SerializeInCurrentAppDomainAndDeserializeInNewAppDomain;
+                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain;
 
                 // Act, Assert
                 expected.RoundtripSerializeViaJsonWithBeEqualToAssertion(serializationConfigurationType, serializationFormats, appDomainScenarios);

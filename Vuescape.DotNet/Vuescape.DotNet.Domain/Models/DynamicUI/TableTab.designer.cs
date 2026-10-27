@@ -72,7 +72,8 @@ namespace Vuescape.DotNet.Domain
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
                       && this.Label.IsEqualTo(other.Label, StringComparer.Ordinal)
                       && this.Badge.IsEqualTo(other.Badge)
-                      && this.Table.IsEqualTo(other.Table);
+                      && this.Table.IsEqualTo(other.Table)
+                      && this.OnSelectAction.IsEqualTo(other.OnSelectAction);
 
             return result;
         }
@@ -86,6 +87,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.Label)
             .Hash(this.Badge)
             .Hash(this.Table)
+            .Hash(this.OnSelectAction)
             .Value;
 
         /// <inheritdoc />
@@ -115,7 +117,8 @@ namespace Vuescape.DotNet.Domain
                                  id,
                                  this.Label?.DeepClone(),
                                  this.Table?.DeepClone(),
-                                 this.Badge?.DeepClone());
+                                 this.Badge?.DeepClone(),
+                                 this.OnSelectAction?.DeepClone());
 
             return result;
         }
@@ -144,7 +147,8 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  label,
                                  this.Table?.DeepClone(),
-                                 this.Badge?.DeepClone());
+                                 this.Badge?.DeepClone(),
+                                 this.OnSelectAction?.DeepClone());
 
             return result;
         }
@@ -173,7 +177,8 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
                                  this.Table?.DeepClone(),
-                                 badge);
+                                 badge,
+                                 this.OnSelectAction?.DeepClone());
 
             return result;
         }
@@ -206,7 +211,42 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
                                  table,
-                                 this.Badge?.DeepClone());
+                                 this.Badge?.DeepClone(),
+                                 this.OnSelectAction?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="OnSelectAction" />.
+        /// </summary>
+        /// <param name="onSelectAction">The new <see cref="OnSelectAction" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TableTab" /> using the specified <paramref name="onSelectAction" /> for <see cref="OnSelectAction" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public TableTab DeepCloneWithOnSelectAction(ActionBase onSelectAction)
+        {
+            var result = new TableTab(
+                                 this.Id?.DeepClone(),
+                                 this.Label?.DeepClone(),
+                                 this.Table?.DeepClone(),
+                                 this.Badge?.DeepClone(),
+                                 onSelectAction);
 
             return result;
         }
@@ -219,7 +259,8 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Label?.DeepClone(),
                                  this.Table?.DeepClone(),
-                                 this.Badge?.DeepClone());
+                                 this.Badge?.DeepClone(),
+                                 this.OnSelectAction?.DeepClone());
 
             return result;
         }
@@ -228,7 +269,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TableTab: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {this.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Badge = {this.Badge?.ToString() ?? "<null>"}, Table = {this.Table?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TableTab: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Label = {this.Label?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Badge = {this.Badge?.ToString() ?? "<null>"}, Table = {this.Table?.ToString() ?? "<null>"}, OnSelectAction = {this.OnSelectAction?.ToString() ?? "<null>"}.");
 
             return result;
         }
@@ -296,6 +337,13 @@ namespace Vuescape.DotNet.Domain
                 }
 
                 localValidationFailures = ValidatableExtensions.GetValidationFailures(this.Table, options, propertyPathTracker, nameof(this.Table));
+                result.AddRange(localValidationFailures);
+                if (stopOnFirstObjectWithFailures && result.Any())
+                {
+                    return;
+                }
+
+                localValidationFailures = ValidatableExtensions.GetValidationFailures(this.OnSelectAction, options, propertyPathTracker, nameof(this.OnSelectAction));
                 result.AddRange(localValidationFailures);
                 if (stopOnFirstObjectWithFailures && result.Any())
                 {

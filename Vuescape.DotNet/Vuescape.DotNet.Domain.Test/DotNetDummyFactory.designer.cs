@@ -577,7 +577,8 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
                                  A.Dummy<TableComponent>(),
-                                 A.Dummy<Badge>()));
+                                 A.Dummy<Badge>(),
+                                 A.Dummy<ActionBase>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TableTabsComponent(

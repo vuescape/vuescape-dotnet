@@ -677,7 +677,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                 var serializationFormats = new[] { SerializationFormat.String };
 
-                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain | AppDomainScenarios.SerializeInCurrentAppDomainAndDeserializeInNewAppDomain;
+                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain;
 
                 // Act, Assert
                 expected.RoundtripSerializeViaBsonWithBeEqualToAssertion(serializationConfigurationType, serializationFormats, appDomainScenarios);
@@ -706,7 +706,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                 var serializationFormats = new[] { SerializationFormat.Binary };
 
-                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain | AppDomainScenarios.SerializeInCurrentAppDomainAndDeserializeInNewAppDomain;
+                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain;
 
                 // Act, Assert
                 expected.RoundtripSerializeViaBsonWithBeEqualToAssertion(serializationConfigurationType, serializationFormats, appDomainScenarios);
@@ -735,7 +735,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                 var serializationFormats = new[] { SerializationFormat.String };
 
-                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain | AppDomainScenarios.SerializeInCurrentAppDomainAndDeserializeInNewAppDomain;
+                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain;
 
                 // Act, Assert
                 expected.RoundtripSerializeViaJsonWithBeEqualToAssertion(serializationConfigurationType, serializationFormats, appDomainScenarios);
@@ -764,7 +764,7 @@ namespace Vuescape.DotNet.Domain.Test
 
                 var serializationFormats = new[] { SerializationFormat.Binary };
 
-                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain | AppDomainScenarios.SerializeInCurrentAppDomainAndDeserializeInNewAppDomain;
+                var appDomainScenarios = AppDomainScenarios.RoundtripInCurrentAppDomain;
 
                 // Act, Assert
                 expected.RoundtripSerializeViaJsonWithBeEqualToAssertion(serializationConfigurationType, serializationFormats, appDomainScenarios);

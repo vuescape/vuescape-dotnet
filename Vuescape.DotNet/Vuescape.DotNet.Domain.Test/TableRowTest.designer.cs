@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TableRow>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TableRow: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {systemUnderTest.Cells?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TableRow: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {systemUnderTest.Cells?.ToString() ?? "<null>"}, ChildRows = {systemUnderTest.ChildRows?.ToString() ?? "<null>"}, IsExpanded = {systemUnderTest.IsExpanded?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -66,7 +66,9 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TableRow(
                                              null,
-                                             referenceObject.Cells);
+                                             referenceObject.Cells,
+                                             referenceObject.ChildRows,
+                                             referenceObject.IsExpanded);
 
                         return result;
                     },
@@ -83,7 +85,9 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TableRow(
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.Cells);
+                                             referenceObject.Cells,
+                                             referenceObject.ChildRows,
+                                             referenceObject.IsExpanded);
 
                         return result;
                     },
@@ -100,7 +104,9 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TableRow(
                                              referenceObject.Id,
-                                             null);
+                                             null,
+                                             referenceObject.ChildRows,
+                                             referenceObject.IsExpanded);
 
                         return result;
                     },
@@ -117,7 +123,9 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TableRow(
                                              referenceObject.Id,
-                                             new Dictionary<string, TableCell>());
+                                             new Dictionary<string, TableCell>(),
+                                             referenceObject.ChildRows,
+                                             referenceObject.IsExpanded);
 
                         return result;
                     },
@@ -140,12 +148,33 @@ namespace Vuescape.DotNet.Domain.Test
 
                         var result = new TableRow(
                                              referenceObject.Id,
-                                             dictionaryWithNullValue);
+                                             dictionaryWithNullValue,
+                                             referenceObject.ChildRows,
+                                             referenceObject.IsExpanded);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "cells", "contains at least one key-value pair with a null value", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TableRow>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'childRows' contains a null element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TableRow>();
+
+                        var result = new TableRow(
+                                             referenceObject.Id,
+                                             referenceObject.Cells,
+                                             new TableRow[0].Concat(referenceObject.ChildRows).Concat(new TableRow[] { null }).Concat(referenceObject.ChildRows).ToList(),
+                                             referenceObject.IsExpanded);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "childRows", "contains at least one null element", },
                 });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<TableRow> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TableRow>()
@@ -161,7 +190,9 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Cells),
+                                                      referenceObject.Cells,
+                                                      referenceObject.ChildRows,
+                                                      referenceObject.IsExpanded),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
 
@@ -181,13 +212,59 @@ namespace Vuescape.DotNet.Domain.Test
                         {
                             SystemUnderTest = new TableRow(
                                                       referenceObject.Id,
-                                                      referenceObject.Cells),
+                                                      referenceObject.Cells,
+                                                      referenceObject.ChildRows,
+                                                      referenceObject.IsExpanded),
                             ExpectedPropertyValue = referenceObject.Cells,
                         };
 
                         return result;
                     },
                     PropertyName = "Cells",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TableRow>
+                {
+                    Name = "ChildRows should return same 'childRows' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TableRow>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TableRow>
+                        {
+                            SystemUnderTest = new TableRow(
+                                                      referenceObject.Id,
+                                                      referenceObject.Cells,
+                                                      referenceObject.ChildRows,
+                                                      referenceObject.IsExpanded),
+                            ExpectedPropertyValue = referenceObject.ChildRows,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "ChildRows",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TableRow>
+                {
+                    Name = "IsExpanded should return same 'isExpanded' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TableRow>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TableRow>
+                        {
+                            SystemUnderTest = new TableRow(
+                                                      referenceObject.Id,
+                                                      referenceObject.Cells,
+                                                      referenceObject.ChildRows,
+                                                      referenceObject.IsExpanded),
+                            ExpectedPropertyValue = referenceObject.IsExpanded,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "IsExpanded",
                 });
 
         private static readonly DeepCloneWithTestScenarios<TableRow> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TableRow>()
@@ -230,6 +307,46 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TableRow>
+                {
+                    Name = "DeepCloneWithChildRows should deep clone object and replace ChildRows with the provided childRows",
+                    WithPropertyName = "ChildRows",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TableRow>();
+
+                        var referenceObject = A.Dummy<TableRow>().ThatIs(_ => !systemUnderTest.ChildRows.IsEqualTo(_.ChildRows));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TableRow>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.ChildRows,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TableRow>
+                {
+                    Name = "DeepCloneWithIsExpanded should deep clone object and replace IsExpanded with the provided isExpanded",
+                    WithPropertyName = "IsExpanded",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TableRow>();
+
+                        var referenceObject = A.Dummy<TableRow>().ThatIs(_ => !systemUnderTest.IsExpanded.IsEqualTo(_.IsExpanded));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TableRow>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.IsExpanded,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly TableRow ReferenceObjectForEquatableTestScenarios = A.Dummy<TableRow>();
@@ -244,16 +361,32 @@ namespace Vuescape.DotNet.Domain.Test
                     {
                         new TableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                ReferenceObjectForEquatableTestScenarios.Cells),
+                                ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.ChildRows,
+                                ReferenceObjectForEquatableTestScenarios.IsExpanded),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TableRow[]
                     {
                         new TableRow(
                                 A.Dummy<TableRow>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
-                                ReferenceObjectForEquatableTestScenarios.Cells),
+                                ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.ChildRows,
+                                ReferenceObjectForEquatableTestScenarios.IsExpanded),
                         new TableRow(
                                 ReferenceObjectForEquatableTestScenarios.Id,
-                                A.Dummy<TableRow>().Whose(_ => !_.Cells.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Cells)).Cells),
+                                A.Dummy<TableRow>().Whose(_ => !_.Cells.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Cells)).Cells,
+                                ReferenceObjectForEquatableTestScenarios.ChildRows,
+                                ReferenceObjectForEquatableTestScenarios.IsExpanded),
+                        new TableRow(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
+                                A.Dummy<TableRow>().Whose(_ => !_.ChildRows.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ChildRows)).ChildRows,
+                                ReferenceObjectForEquatableTestScenarios.IsExpanded),
+                        new TableRow(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Cells,
+                                ReferenceObjectForEquatableTestScenarios.ChildRows,
+                                A.Dummy<TableRow>().Whose(_ => !_.IsExpanded.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsExpanded)).IsExpanded),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -554,6 +687,18 @@ namespace Vuescape.DotNet.Domain.Test
                     // a deep clone of a value type object is the same object.
                     actual.Cells.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Cells);
                 }
+
+                if (systemUnderTest.ChildRows == null)
+                {
+                    actual.ChildRows.AsTest().Must().BeNull();
+                }
+                else if (!actual.ChildRows.GetType().IsValueType)
+                {
+                    // When the declared type is a reference type, we still have to check the runtime type.
+                    // The object could be a boxed value type, which will fail this asseration because
+                    // a deep clone of a value type object is the same object.
+                    actual.ChildRows.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.ChildRows);
+                }
             }
 
             [Fact]
@@ -572,7 +717,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Cells" };
+                var propertyNames = new string[] { "Id", "Cells", "ChildRows", "IsExpanded" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

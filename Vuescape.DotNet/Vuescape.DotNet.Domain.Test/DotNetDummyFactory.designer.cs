@@ -570,7 +570,9 @@ namespace Vuescape.DotNet.Domain.Test
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TableRow(
                                  A.Dummy<string>(),
-                                 A.Dummy<IReadOnlyDictionary<string, TableCell>>()));
+                                 A.Dummy<IReadOnlyDictionary<string, TableCell>>(),
+                                 A.Dummy<IReadOnlyList<TableRow>>(),
+                                 A.Dummy<bool?>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TableTab(

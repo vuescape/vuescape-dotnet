@@ -70,7 +70,9 @@ namespace Vuescape.DotNet.Domain
             }
 
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
-                      && this.Cells.IsEqualTo(other.Cells);
+                      && this.Cells.IsEqualTo(other.Cells)
+                      && this.ChildRows.IsEqualTo(other.ChildRows)
+                      && this.IsExpanded.IsEqualTo(other.IsExpanded);
 
             return result;
         }
@@ -82,6 +84,8 @@ namespace Vuescape.DotNet.Domain
         public override int GetHashCode() => HashCodeHelper.Initialize()
             .Hash(this.Id)
             .Hash(this.Cells)
+            .Hash(this.ChildRows)
+            .Hash(this.IsExpanded)
             .Value;
 
         /// <inheritdoc />
@@ -92,7 +96,9 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TableRow(
                                  this.Id?.DeepClone(),
-                                 this.Cells?.DeepClone());
+                                 this.Cells?.DeepClone(),
+                                 this.ChildRows?.DeepClone(),
+                                 this.IsExpanded?.DeepClone());
 
             return result;
         }
@@ -123,7 +129,9 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TableRow(
                                  id,
-                                 this.Cells?.DeepClone());
+                                 this.Cells?.DeepClone(),
+                                 this.ChildRows?.DeepClone(),
+                                 this.IsExpanded?.DeepClone());
 
             return result;
         }
@@ -154,7 +162,75 @@ namespace Vuescape.DotNet.Domain
         {
             var result = new TableRow(
                                  this.Id?.DeepClone(),
-                                 cells);
+                                 cells,
+                                 this.ChildRows?.DeepClone(),
+                                 this.IsExpanded?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="ChildRows" />.
+        /// </summary>
+        /// <param name="childRows">The new <see cref="ChildRows" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TableRow" /> using the specified <paramref name="childRows" /> for <see cref="ChildRows" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public TableRow DeepCloneWithChildRows(IReadOnlyList<TableRow> childRows)
+        {
+            var result = new TableRow(
+                                 this.Id?.DeepClone(),
+                                 this.Cells?.DeepClone(),
+                                 childRows,
+                                 this.IsExpanded?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="IsExpanded" />.
+        /// </summary>
+        /// <param name="isExpanded">The new <see cref="IsExpanded" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TableRow" /> using the specified <paramref name="isExpanded" /> for <see cref="IsExpanded" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public TableRow DeepCloneWithIsExpanded(bool? isExpanded)
+        {
+            var result = new TableRow(
+                                 this.Id?.DeepClone(),
+                                 this.Cells?.DeepClone(),
+                                 this.ChildRows?.DeepClone(),
+                                 isExpanded);
 
             return result;
         }
@@ -163,7 +239,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TableRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {this.Cells?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TableRow: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Cells = {this.Cells?.ToString() ?? "<null>"}, ChildRows = {this.ChildRows?.ToString() ?? "<null>"}, IsExpanded = {this.IsExpanded?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }
@@ -217,6 +293,20 @@ namespace Vuescape.DotNet.Domain
                 }
 
                 localValidationFailures = ValidatableExtensions.GetValidationFailures(this.Cells, options, propertyPathTracker, nameof(this.Cells));
+                result.AddRange(localValidationFailures);
+                if (stopOnFirstObjectWithFailures && result.Any())
+                {
+                    return;
+                }
+
+                localValidationFailures = ValidatableExtensions.GetValidationFailures(this.ChildRows, options, propertyPathTracker, nameof(this.ChildRows));
+                result.AddRange(localValidationFailures);
+                if (stopOnFirstObjectWithFailures && result.Any())
+                {
+                    return;
+                }
+
+                localValidationFailures = ValidatableExtensions.GetValidationFailures(this.IsExpanded, options, propertyPathTracker, nameof(this.IsExpanded));
                 result.AddRange(localValidationFailures);
                 if (stopOnFirstObjectWithFailures && result.Any())
                 {

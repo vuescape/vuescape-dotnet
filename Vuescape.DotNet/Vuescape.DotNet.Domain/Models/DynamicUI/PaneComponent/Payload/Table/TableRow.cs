@@ -21,15 +21,22 @@ namespace Vuescape.DotNet.Domain
         /// </summary>
         /// <param name="id">The identifier of the row.</param>
         /// <param name="cells">The cells in the row.</param>
+        /// <param name="childRows">OPTIONAL rows nested under this row, keyed by the same column ids, shown while this row is expanded.  A table with any child rows is shown as a tree.  DEFAULT is no child rows.</param>
+        /// <param name="isExpanded">OPTIONAL value indicating whether the row starts expanded.  The user can still collapse it.  DEFAULT is collapsed.</param>
         public TableRow(
             string id,
-            IReadOnlyDictionary<string, TableCell> cells)
+            IReadOnlyDictionary<string, TableCell> cells,
+            IReadOnlyList<TableRow> childRows = null,
+            bool? isExpanded = null)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { cells }.AsArg().Must().NotBeNullNorEmptyDictionaryNorContainAnyNullValues();
+            new { childRows }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
 
             this.Id = id;
             this.Cells = cells;
+            this.ChildRows = childRows;
+            this.IsExpanded = isExpanded;
         }
 
         /// <summary>
@@ -42,5 +49,17 @@ namespace Vuescape.DotNet.Domain
         /// Optional.
         /// </summary>
         public IReadOnlyDictionary<string, TableCell> Cells { get; private set; }
+
+        /// <summary>
+        /// Gets the rows nested under this row, shown while this row is expanded.
+        /// Optional.
+        /// </summary>
+        public IReadOnlyList<TableRow> ChildRows { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the row starts expanded.
+        /// Optional.  Null means collapsed.
+        /// </summary>
+        public bool? IsExpanded { get; private set; }
     }
 }

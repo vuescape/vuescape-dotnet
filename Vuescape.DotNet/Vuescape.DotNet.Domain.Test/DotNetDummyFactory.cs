@@ -11,6 +11,7 @@ namespace Vuescape.DotNet.Domain.Test
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using FakeItEasy;
 
@@ -76,6 +77,26 @@ namespace Vuescape.DotNet.Domain.Test
                 default:
                     throw new ArgumentOutOfRangeException(nameof(uiObjectType), uiObjectType, null);
             }
+        }
+
+        // A TableRow's child rows are TableRows, so the generated creator would nest them forever. Rows above the deepest
+        // level always have child rows, so tests that change an element of ChildRows have one to change.
+        private static TableRow BuildTableRow(
+            int depth)
+        {
+            const int maxDepth = 2;
+
+            var childRows = depth < maxDepth
+                ? Enumerable.Range(0, ThreadSafeRandom.Next(1, 3)).Select(_ => BuildTableRow(depth + 1)).ToList()
+                : null;
+
+            var result = new TableRow(
+                A.Dummy<string>(),
+                A.Dummy<IReadOnlyDictionary<string, TableCell>>(),
+                childRows,
+                A.Dummy<bool?>());
+
+            return result;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:Field names should not use Hungarian notation", Justification = "Not Hungarian notation.")]
@@ -366,6 +387,9 @@ namespace Vuescape.DotNet.Domain.Test
 
                     return result;
                 });
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => BuildTableRow(depth: 0));
 
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(LinkTarget.None);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(UiObjectType.None);

@@ -590,7 +590,8 @@ namespace Vuescape.DotNet.Domain.Test
                 () => new TableTabsComponentPayload(
                                  A.Dummy<string>(),
                                  A.Dummy<IReadOnlyList<TableTab>>(),
-                                 A.Dummy<SelectComponent>()));
+                                 A.Dummy<SelectComponent>(),
+                                 A.Dummy<string>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TextComponent(

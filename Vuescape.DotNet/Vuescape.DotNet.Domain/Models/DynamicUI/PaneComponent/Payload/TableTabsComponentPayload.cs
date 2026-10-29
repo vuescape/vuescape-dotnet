@@ -22,10 +22,12 @@ namespace Vuescape.DotNet.Domain
         /// <param name="id">The identifier for this component.</param>
         /// <param name="tabs">The tabs to display.</param>
         /// <param name="selectComponent">OPTIONAL SelectComponent to display at the top of the tabs.</param>
+        /// <param name="activeTabId">OPTIONAL identifier of the tab to show first.  DEFAULT is the first tab with a table, or the first tab when none has one.  An identifier that matches no tab also gets the default.</param>
         public TableTabsComponentPayload(
             string id,
             IReadOnlyList<TableTab> tabs,
-            SelectComponent selectComponent = null)
+            SelectComponent selectComponent = null,
+            string activeTabId = null)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { tabs }.AsArg().Must().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
@@ -33,6 +35,7 @@ namespace Vuescape.DotNet.Domain
             this.Id = id;
             this.Tabs = tabs;
             this.SelectComponent = selectComponent;
+            this.ActiveTabId = activeTabId;
         }
 
         /// <summary>
@@ -49,5 +52,11 @@ namespace Vuescape.DotNet.Domain
         /// Gets the select component for the table tabs.
         /// </summary>
         public SelectComponent SelectComponent { get; private set; }
+
+        /// <summary>
+        /// Gets the identifier of the tab to show first.
+        /// Optional.  Null means the first tab with a table, or the first tab when none has one.
+        /// </summary>
+        public string ActiveTabId { get; private set; }
     }
 }

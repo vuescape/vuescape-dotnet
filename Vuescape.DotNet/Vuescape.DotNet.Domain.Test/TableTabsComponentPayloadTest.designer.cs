@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TableTabsComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TableTabsComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Tabs = {systemUnderTest.Tabs?.ToString() ?? "<null>"}, SelectComponent = {systemUnderTest.SelectComponent?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TableTabsComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Tabs = {systemUnderTest.Tabs?.ToString() ?? "<null>"}, SelectComponent = {systemUnderTest.SelectComponent?.ToString() ?? "<null>"}, ActiveTabId = {systemUnderTest.ActiveTabId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -67,7 +67,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableTabsComponentPayload(
                                              null,
                                              referenceObject.Tabs,
-                                             referenceObject.SelectComponent);
+                                             referenceObject.SelectComponent,
+                                             referenceObject.ActiveTabId);
 
                         return result;
                     },
@@ -85,7 +86,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableTabsComponentPayload(
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Tabs,
-                                             referenceObject.SelectComponent);
+                                             referenceObject.SelectComponent,
+                                             referenceObject.ActiveTabId);
 
                         return result;
                     },
@@ -103,7 +105,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableTabsComponentPayload(
                                              referenceObject.Id,
                                              null,
-                                             referenceObject.SelectComponent);
+                                             referenceObject.SelectComponent,
+                                             referenceObject.ActiveTabId);
 
                         return result;
                     },
@@ -121,7 +124,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableTabsComponentPayload(
                                              referenceObject.Id,
                                              new List<TableTab>(),
-                                             referenceObject.SelectComponent);
+                                             referenceObject.SelectComponent,
+                                             referenceObject.ActiveTabId);
 
                         return result;
                     },
@@ -139,7 +143,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableTabsComponentPayload(
                                              referenceObject.Id,
                                              new TableTab[0].Concat(referenceObject.Tabs).Concat(new TableTab[] { null }).Concat(referenceObject.Tabs).ToList(),
-                                             referenceObject.SelectComponent);
+                                             referenceObject.SelectComponent,
+                                             referenceObject.ActiveTabId);
 
                         return result;
                     },
@@ -161,7 +166,8 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TableTabsComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Tabs,
-                                                      referenceObject.SelectComponent),
+                                                      referenceObject.SelectComponent,
+                                                      referenceObject.ActiveTabId),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
 
@@ -182,7 +188,8 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TableTabsComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Tabs,
-                                                      referenceObject.SelectComponent),
+                                                      referenceObject.SelectComponent,
+                                                      referenceObject.ActiveTabId),
                             ExpectedPropertyValue = referenceObject.Tabs,
                         };
 
@@ -203,13 +210,36 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TableTabsComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Tabs,
-                                                      referenceObject.SelectComponent),
+                                                      referenceObject.SelectComponent,
+                                                      referenceObject.ActiveTabId),
                             ExpectedPropertyValue = referenceObject.SelectComponent,
                         };
 
                         return result;
                     },
                     PropertyName = "SelectComponent",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TableTabsComponentPayload>
+                {
+                    Name = "ActiveTabId should return same 'activeTabId' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TableTabsComponentPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TableTabsComponentPayload>
+                        {
+                            SystemUnderTest = new TableTabsComponentPayload(
+                                                      referenceObject.Id,
+                                                      referenceObject.Tabs,
+                                                      referenceObject.SelectComponent,
+                                                      referenceObject.ActiveTabId),
+                            ExpectedPropertyValue = referenceObject.ActiveTabId,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "ActiveTabId",
                 });
 
         private static readonly DeepCloneWithTestScenarios<TableTabsComponentPayload> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TableTabsComponentPayload>()
@@ -272,6 +302,26 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TableTabsComponentPayload>
+                {
+                    Name = "DeepCloneWithActiveTabId should deep clone object and replace ActiveTabId with the provided activeTabId",
+                    WithPropertyName = "ActiveTabId",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TableTabsComponentPayload>();
+
+                        var referenceObject = A.Dummy<TableTabsComponentPayload>().ThatIs(_ => !systemUnderTest.ActiveTabId.IsEqualTo(_.ActiveTabId));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TableTabsComponentPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.ActiveTabId,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly TableTabsComponentPayload ReferenceObjectForEquatableTestScenarios = A.Dummy<TableTabsComponentPayload>();
@@ -287,22 +337,31 @@ namespace Vuescape.DotNet.Domain.Test
                         new TableTabsComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Tabs,
-                                ReferenceObjectForEquatableTestScenarios.SelectComponent),
+                                ReferenceObjectForEquatableTestScenarios.SelectComponent,
+                                ReferenceObjectForEquatableTestScenarios.ActiveTabId),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TableTabsComponentPayload[]
                     {
                         new TableTabsComponentPayload(
                                 A.Dummy<TableTabsComponentPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
                                 ReferenceObjectForEquatableTestScenarios.Tabs,
-                                ReferenceObjectForEquatableTestScenarios.SelectComponent),
+                                ReferenceObjectForEquatableTestScenarios.SelectComponent,
+                                ReferenceObjectForEquatableTestScenarios.ActiveTabId),
                         new TableTabsComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<TableTabsComponentPayload>().Whose(_ => !_.Tabs.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Tabs)).Tabs,
-                                ReferenceObjectForEquatableTestScenarios.SelectComponent),
+                                ReferenceObjectForEquatableTestScenarios.SelectComponent,
+                                ReferenceObjectForEquatableTestScenarios.ActiveTabId),
                         new TableTabsComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Tabs,
-                                A.Dummy<TableTabsComponentPayload>().Whose(_ => !_.SelectComponent.IsEqualTo(ReferenceObjectForEquatableTestScenarios.SelectComponent)).SelectComponent),
+                                A.Dummy<TableTabsComponentPayload>().Whose(_ => !_.SelectComponent.IsEqualTo(ReferenceObjectForEquatableTestScenarios.SelectComponent)).SelectComponent,
+                                ReferenceObjectForEquatableTestScenarios.ActiveTabId),
+                        new TableTabsComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Tabs,
+                                ReferenceObjectForEquatableTestScenarios.SelectComponent,
+                                A.Dummy<TableTabsComponentPayload>().Whose(_ => !_.ActiveTabId.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ActiveTabId)).ActiveTabId),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -633,7 +692,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Tabs", "SelectComponent" };
+                var propertyNames = new string[] { "Id", "Tabs", "SelectComponent", "ActiveTabId" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

@@ -71,7 +71,8 @@ namespace Vuescape.DotNet.Domain
 
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
                       && this.Tabs.IsEqualTo(other.Tabs)
-                      && this.SelectComponent.IsEqualTo(other.SelectComponent);
+                      && this.SelectComponent.IsEqualTo(other.SelectComponent)
+                      && this.ActiveTabId.IsEqualTo(other.ActiveTabId, StringComparer.Ordinal);
 
             return result;
         }
@@ -84,6 +85,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.Id)
             .Hash(this.Tabs)
             .Hash(this.SelectComponent)
+            .Hash(this.ActiveTabId)
             .Value;
 
         /// <inheritdoc />
@@ -95,7 +97,8 @@ namespace Vuescape.DotNet.Domain
             var result = new TableTabsComponentPayload(
                                  this.Id?.DeepClone(),
                                  this.Tabs?.DeepClone(),
-                                 this.SelectComponent?.DeepClone());
+                                 this.SelectComponent?.DeepClone(),
+                                 this.ActiveTabId?.DeepClone());
 
             return result;
         }
@@ -127,7 +130,8 @@ namespace Vuescape.DotNet.Domain
             var result = new TableTabsComponentPayload(
                                  id,
                                  this.Tabs?.DeepClone(),
-                                 this.SelectComponent?.DeepClone());
+                                 this.SelectComponent?.DeepClone(),
+                                 this.ActiveTabId?.DeepClone());
 
             return result;
         }
@@ -159,7 +163,8 @@ namespace Vuescape.DotNet.Domain
             var result = new TableTabsComponentPayload(
                                  this.Id?.DeepClone(),
                                  tabs,
-                                 this.SelectComponent?.DeepClone());
+                                 this.SelectComponent?.DeepClone(),
+                                 this.ActiveTabId?.DeepClone());
 
             return result;
         }
@@ -191,7 +196,41 @@ namespace Vuescape.DotNet.Domain
             var result = new TableTabsComponentPayload(
                                  this.Id?.DeepClone(),
                                  this.Tabs?.DeepClone(),
-                                 selectComponent);
+                                 selectComponent,
+                                 this.ActiveTabId?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="ActiveTabId" />.
+        /// </summary>
+        /// <param name="activeTabId">The new <see cref="ActiveTabId" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TableTabsComponentPayload" /> using the specified <paramref name="activeTabId" /> for <see cref="ActiveTabId" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public TableTabsComponentPayload DeepCloneWithActiveTabId(string activeTabId)
+        {
+            var result = new TableTabsComponentPayload(
+                                 this.Id?.DeepClone(),
+                                 this.Tabs?.DeepClone(),
+                                 this.SelectComponent?.DeepClone(),
+                                 activeTabId);
 
             return result;
         }
@@ -200,7 +239,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TableTabsComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Tabs = {this.Tabs?.ToString() ?? "<null>"}, SelectComponent = {this.SelectComponent?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TableTabsComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Tabs = {this.Tabs?.ToString() ?? "<null>"}, SelectComponent = {this.SelectComponent?.ToString() ?? "<null>"}, ActiveTabId = {this.ActiveTabId?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }
@@ -261,6 +300,13 @@ namespace Vuescape.DotNet.Domain
                 }
 
                 localValidationFailures = ValidatableExtensions.GetValidationFailures(this.SelectComponent, options, propertyPathTracker, nameof(this.SelectComponent));
+                result.AddRange(localValidationFailures);
+                if (stopOnFirstObjectWithFailures && result.Any())
+                {
+                    return;
+                }
+
+                localValidationFailures = ValidatableExtensions.GetValidationFailures(this.ActiveTabId, options, propertyPathTracker, nameof(this.ActiveTabId));
                 result.AddRange(localValidationFailures);
                 if (stopOnFirstObjectWithFailures && result.Any())
                 {

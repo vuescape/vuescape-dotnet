@@ -565,6 +565,7 @@ namespace Vuescape.DotNet.Domain.Test
                 () => new TableComponentPayload(
                                  A.Dummy<string>(),
                                  A.Dummy<IReadOnlyList<TableColumn>>(),
+                                 A.Dummy<IReadOnlyList<TableRow>>(),
                                  A.Dummy<IReadOnlyList<TableRow>>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(

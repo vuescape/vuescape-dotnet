@@ -22,19 +22,23 @@ namespace Vuescape.DotNet.Domain
         /// <param name="id">The identifier of the table.</param>
         /// <param name="columns">The headers of the table.</param>
         /// <param name="rows">The rows of the table, where each row is a collection of cell values.</param>
+        /// <param name="footerRows">OPTIONAL rows shown below the rows, e.g. totals, which stay in place when the rows scroll or are sorted.  Their cells are keyed by column identifier, like a row's.  Child rows are not shown.  DEFAULT is no footer rows.</param>
         public TableComponentPayload(
             string id,
             IReadOnlyList<TableColumn> columns,
-            IReadOnlyList<TableRow> rows)
+            IReadOnlyList<TableRow> rows,
+            IReadOnlyList<TableRow> footerRows = null)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { columns }.AsArg().Must().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
             new { rows }.AsArg().Must().NotBeNull();
             new { rows }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
+            new { footerRows }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
 
             this.Id = id;
             this.Columns = columns;
             this.Rows = rows;
+            this.FooterRows = footerRows;
         }
 
         /// <summary>
@@ -51,5 +55,11 @@ namespace Vuescape.DotNet.Domain
         /// Gets the rows of the table.
         /// </summary>
         public IReadOnlyList<TableRow> Rows { get; private set; }
+
+        /// <summary>
+        /// Gets the rows shown below the rows, e.g. totals.
+        /// Optional.  Null means no footer rows.
+        /// </summary>
+        public IReadOnlyList<TableRow> FooterRows { get; private set; }
     }
 }

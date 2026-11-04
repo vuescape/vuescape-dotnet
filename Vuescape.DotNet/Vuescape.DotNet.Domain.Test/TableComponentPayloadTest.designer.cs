@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TableComponentPayload>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TableComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Columns = {systemUnderTest.Columns?.ToString() ?? "<null>"}, Rows = {systemUnderTest.Rows?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TableComponentPayload: Id = {systemUnderTest.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Columns = {systemUnderTest.Columns?.ToString() ?? "<null>"}, Rows = {systemUnderTest.Rows?.ToString() ?? "<null>"}, FooterRows = {systemUnderTest.FooterRows?.ToString() ?? "<null>"}."),
                         };
 
                         return result;
@@ -67,7 +67,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableComponentPayload(
                                              null,
                                              referenceObject.Columns,
-                                             referenceObject.Rows);
+                                             referenceObject.Rows,
+                                             referenceObject.FooterRows);
 
                         return result;
                     },
@@ -85,7 +86,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableComponentPayload(
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.Columns,
-                                             referenceObject.Rows);
+                                             referenceObject.Rows,
+                                             referenceObject.FooterRows);
 
                         return result;
                     },
@@ -103,7 +105,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableComponentPayload(
                                              referenceObject.Id,
                                              null,
-                                             referenceObject.Rows);
+                                             referenceObject.Rows,
+                                             referenceObject.FooterRows);
 
                         return result;
                     },
@@ -121,7 +124,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableComponentPayload(
                                              referenceObject.Id,
                                              new List<TableColumn>(),
-                                             referenceObject.Rows);
+                                             referenceObject.Rows,
+                                             referenceObject.FooterRows);
 
                         return result;
                     },
@@ -139,7 +143,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableComponentPayload(
                                              referenceObject.Id,
                                              new TableColumn[0].Concat(referenceObject.Columns).Concat(new TableColumn[] { null }).Concat(referenceObject.Columns).ToList(),
-                                             referenceObject.Rows);
+                                             referenceObject.Rows,
+                                             referenceObject.FooterRows);
 
                         return result;
                     },
@@ -157,7 +162,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableComponentPayload(
                                              referenceObject.Id,
                                              referenceObject.Columns,
-                                             null);
+                                             null,
+                                             referenceObject.FooterRows);
 
                         return result;
                     },
@@ -175,7 +181,8 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableComponentPayload(
                                              referenceObject.Id,
                                              referenceObject.Columns,
-                                             new List<TableRow>());
+                                             new List<TableRow>(),
+                                             referenceObject.FooterRows);
 
                         return result;
                     },
@@ -193,12 +200,32 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new TableComponentPayload(
                                              referenceObject.Id,
                                              referenceObject.Columns,
-                                             new TableRow[0].Concat(referenceObject.Rows).Concat(new TableRow[] { null }).Concat(referenceObject.Rows).ToList());
+                                             new TableRow[0].Concat(referenceObject.Rows).Concat(new TableRow[] { null }).Concat(referenceObject.Rows).ToList(),
+                                             referenceObject.FooterRows);
 
                         return result;
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "rows", "contains at least one null element", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TableComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'footerRows' contains a null element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TableComponentPayload>();
+
+                        var result = new TableComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Columns,
+                                             referenceObject.Rows,
+                                             new TableRow[0].Concat(referenceObject.FooterRows).Concat(new TableRow[] { null }).Concat(referenceObject.FooterRows).ToList());
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "footerRows", "contains at least one null element", },
                 });
 
         private static readonly ConstructorPropertyAssignmentTestScenarios<TableComponentPayload> ConstructorPropertyAssignmentTestScenarios = new ConstructorPropertyAssignmentTestScenarios<TableComponentPayload>()
@@ -215,7 +242,8 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TableComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Columns,
-                                                      referenceObject.Rows),
+                                                      referenceObject.Rows,
+                                                      referenceObject.FooterRows),
                             ExpectedPropertyValue = referenceObject.Id,
                         };
 
@@ -236,7 +264,8 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TableComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Columns,
-                                                      referenceObject.Rows),
+                                                      referenceObject.Rows,
+                                                      referenceObject.FooterRows),
                             ExpectedPropertyValue = referenceObject.Columns,
                         };
 
@@ -257,13 +286,36 @@ namespace Vuescape.DotNet.Domain.Test
                             SystemUnderTest = new TableComponentPayload(
                                                       referenceObject.Id,
                                                       referenceObject.Columns,
-                                                      referenceObject.Rows),
+                                                      referenceObject.Rows,
+                                                      referenceObject.FooterRows),
                             ExpectedPropertyValue = referenceObject.Rows,
                         };
 
                         return result;
                     },
                     PropertyName = "Rows",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TableComponentPayload>
+                {
+                    Name = "FooterRows should return same 'footerRows' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TableComponentPayload>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TableComponentPayload>
+                        {
+                            SystemUnderTest = new TableComponentPayload(
+                                                      referenceObject.Id,
+                                                      referenceObject.Columns,
+                                                      referenceObject.Rows,
+                                                      referenceObject.FooterRows),
+                            ExpectedPropertyValue = referenceObject.FooterRows,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "FooterRows",
                 });
 
         private static readonly DeepCloneWithTestScenarios<TableComponentPayload> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TableComponentPayload>()
@@ -326,6 +378,26 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TableComponentPayload>
+                {
+                    Name = "DeepCloneWithFooterRows should deep clone object and replace FooterRows with the provided footerRows",
+                    WithPropertyName = "FooterRows",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TableComponentPayload>();
+
+                        var referenceObject = A.Dummy<TableComponentPayload>().ThatIs(_ => !systemUnderTest.FooterRows.IsEqualTo(_.FooterRows));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TableComponentPayload>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.FooterRows,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly TableComponentPayload ReferenceObjectForEquatableTestScenarios = A.Dummy<TableComponentPayload>();
@@ -341,22 +413,31 @@ namespace Vuescape.DotNet.Domain.Test
                         new TableComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Columns,
-                                ReferenceObjectForEquatableTestScenarios.Rows),
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.FooterRows),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TableComponentPayload[]
                     {
                         new TableComponentPayload(
                                 A.Dummy<TableComponentPayload>().Whose(_ => !_.Id.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Id)).Id,
                                 ReferenceObjectForEquatableTestScenarios.Columns,
-                                ReferenceObjectForEquatableTestScenarios.Rows),
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.FooterRows),
                         new TableComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 A.Dummy<TableComponentPayload>().Whose(_ => !_.Columns.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Columns)).Columns,
-                                ReferenceObjectForEquatableTestScenarios.Rows),
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                ReferenceObjectForEquatableTestScenarios.FooterRows),
                         new TableComponentPayload(
                                 ReferenceObjectForEquatableTestScenarios.Id,
                                 ReferenceObjectForEquatableTestScenarios.Columns,
-                                A.Dummy<TableComponentPayload>().Whose(_ => !_.Rows.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Rows)).Rows),
+                                A.Dummy<TableComponentPayload>().Whose(_ => !_.Rows.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Rows)).Rows,
+                                ReferenceObjectForEquatableTestScenarios.FooterRows),
+                        new TableComponentPayload(
+                                ReferenceObjectForEquatableTestScenarios.Id,
+                                ReferenceObjectForEquatableTestScenarios.Columns,
+                                ReferenceObjectForEquatableTestScenarios.Rows,
+                                A.Dummy<TableComponentPayload>().Whose(_ => !_.FooterRows.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FooterRows)).FooterRows),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -669,6 +750,18 @@ namespace Vuescape.DotNet.Domain.Test
                     // a deep clone of a value type object is the same object.
                     actual.Rows.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.Rows);
                 }
+
+                if (systemUnderTest.FooterRows == null)
+                {
+                    actual.FooterRows.AsTest().Must().BeNull();
+                }
+                else if (!actual.FooterRows.GetType().IsValueType)
+                {
+                    // When the declared type is a reference type, we still have to check the runtime type.
+                    // The object could be a boxed value type, which will fail this asseration because
+                    // a deep clone of a value type object is the same object.
+                    actual.FooterRows.AsTest().Must().NotBeSameReferenceAs(systemUnderTest.FooterRows);
+                }
             }
 
             [Fact]
@@ -687,7 +780,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "Id", "Columns", "Rows" };
+                var propertyNames = new string[] { "Id", "Columns", "Rows", "FooterRows" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

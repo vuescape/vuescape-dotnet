@@ -27,8 +27,8 @@ namespace Vuescape.DotNet.Domain
         /// <param name="sortMode">The sort mode for the column.</param>
         /// <param name="isFilterable">Whether the column is filterable.</param>
         /// <param name="filterMode">The filter mode for the column.</param>
-        /// <param name="headerText">The header text of the column.</param>
-        /// <param name="footerText">The footer text of the column.</param>
+        /// <param name="headerText">DEPRECATED: use <see cref="TableComponentPayload.HeaderRows"/>.  The header text of the column, which the table makes its header row from only when it has no header rows.</param>
+        /// <param name="footerText">DEPRECATED: use <see cref="TableComponentPayload.FooterRows"/>.  The footer text of the column.</param>
         /// <param name="style">The inline styles for the column cells.</param>
         /// <param name="cssClass">The CSS classes for the column cells.</param>
         /// <param name="headerStyle">The inline styles for the column header.</param>
@@ -37,8 +37,8 @@ namespace Vuescape.DotNet.Domain
         /// <param name="cssBodyClass">The CSS classes for the column body.</param>
         /// <param name="footerStyle">The inline styles for the column footer.</param>
         /// <param name="cssFooterClass">The CSS classes for the column footer.</param>
-        /// <param name="colspan">The number of columns to span for grouping.</param>
-        /// <param name="rowspan">The number of rows to span for grouping.</param>
+        /// <param name="colspan">DEPRECATED: use <see cref="TableComponentPayload.HeaderRows"/>, whose cells span columns (<see cref="TableCell.Colspan"/>).  The number of columns to span for grouping.</param>
+        /// <param name="rowspan">DEPRECATED: use <see cref="TableComponentPayload.HeaderRows"/>.  The number of rows to span for grouping.</param>
         /// <param name="isFrozen">Whether the column is fixed in horizontal scrolling.</param>
         /// <param name="alignFrozen">The position of the frozen column.</param>
         /// <param name="isHidden">Whether the column is rendered.</param>
@@ -134,12 +134,14 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the header text of the column.
         /// Optional.
+        /// DEPRECATED: use <see cref="TableComponentPayload.HeaderRows"/>.  The table makes its header row from these only when it has no header rows.
         /// </summary>
         public string HeaderText { get; private set; }
 
         /// <summary>
         /// Gets the footer text of the column.
         /// Optional.
+        /// DEPRECATED: use <see cref="TableComponentPayload.FooterRows"/>.
         /// </summary>
         public string FooterText { get; private set; }
 
@@ -194,6 +196,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the number of columns to span for grouping.
         /// Optional.
+        /// DEPRECATED: use <see cref="TableComponentPayload.HeaderRows"/>, whose cells span columns (<see cref="TableCell.Colspan"/>).
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Colspan", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
         public int? Colspan { get; private set; }
@@ -201,6 +204,7 @@ namespace Vuescape.DotNet.Domain
         /// <summary>
         /// Gets the number of rows to span for grouping.
         /// Optional.
+        /// DEPRECATED: use <see cref="TableComponentPayload.HeaderRows"/>.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rowspan", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
         public int? Rowspan { get; private set; }

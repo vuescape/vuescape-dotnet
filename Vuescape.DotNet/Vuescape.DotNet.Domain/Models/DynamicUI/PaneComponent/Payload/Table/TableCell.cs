@@ -8,7 +8,9 @@
 namespace Vuescape.DotNet.Domain
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using OBeautifulCode.Assertion.Recipes;
+    using OBeautifulCode.CodeAnalysis.Recipes;
     using OBeautifulCode.Type;
 
     /// <summary>
@@ -24,12 +26,15 @@ namespace Vuescape.DotNet.Domain
         /// <param name="rawValue">OPTIONAL The raw value of the cell.</param>
         /// <param name="comparableValue">OPTIONAL The value used for comparisons such as filtering or sorting as a string.</param>
         /// <param name="cssStyles">OPTIONAL The inline styles of the cell.</param>
+        /// <param name="colspan">OPTIONAL How many columns a header or footer row's cell spans, from its own column.  The row leaves out the cells of the columns it covers.  A span stays on one side of the frozen columns' edge.  Body rows' cells don't span.  DEFAULT is 1.</param>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "colspan", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
         public TableCell(
             string displayValue = null,
             PaneComponentBase component = null,
             UiObject rawValue = null,
             ComparableValue comparableValue = null,
-            IReadOnlyDictionary<string, string> cssStyles = null)
+            IReadOnlyDictionary<string, string> cssStyles = null,
+            int? colspan = null)
         {
             new { cssStyles }.AsArg().Must().NotContainAnyKeyValuePairsWithNullValueWhenNotNull();
 
@@ -38,6 +43,7 @@ namespace Vuescape.DotNet.Domain
             this.RawValue = rawValue;
             this.ComparableValue = comparableValue;
             this.CssStyles = cssStyles;
+            this.Colspan = colspan;
         }
 
         /// <summary>
@@ -71,5 +77,13 @@ namespace Vuescape.DotNet.Domain
         /// Optional.
         /// </summary>
         public IReadOnlyDictionary<string, string> CssStyles { get; private set; }
+
+        /// <summary>
+        /// Gets how many columns a header or footer row's cell spans, from its own column.
+        /// The row leaves out the cells of the columns it covers.  Body rows' cells don't span.
+        /// Optional.  Null means 1.
+        /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Colspan", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
+        public int? Colspan { get; private set; }
     }
 }

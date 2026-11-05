@@ -139,7 +139,8 @@ namespace Vuescape.DotNet.Domain.Test
                     );
 
                     var comparableValue = A.Dummy<ComparableValue>();
-                    return new TableCell(displayValue, component, rawValue, comparableValue, cssStyles);
+                    var colspan = A.Dummy<int?>();
+                    return new TableCell(displayValue, component, rawValue, comparableValue, cssStyles, colspan);
                 });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(

@@ -22,22 +22,26 @@ namespace Vuescape.DotNet.Domain
         /// <param name="id">The identifier of the table.</param>
         /// <param name="columns">The headers of the table.</param>
         /// <param name="rows">The rows of the table, where each row is a collection of cell values.</param>
-        /// <param name="footerRows">OPTIONAL rows shown below the rows, e.g. totals, which stay in place when the rows scroll or are sorted.  Their cells are keyed by column identifier, like a row's.  Child rows are not shown.  DEFAULT is no footer rows.</param>
+        /// <param name="headerRows">OPTIONAL rows of the table's header, top to bottom, e.g. a row of group headings above the columns' headings.  Their cells are keyed by column identifier, like a row's, and can span columns (<see cref="TableCell.Colspan"/>).  The bottom row's cells hold the columns' sort controls.  Child rows are not shown.  An empty list means no header.  DEFAULT is one row of the columns' (deprecated) <see cref="TableColumn.HeaderText"/>, or no header when no column has any.</param>
+        /// <param name="footerRows">OPTIONAL rows shown below the rows, e.g. totals, which stay in place when the rows scroll or are sorted.  Their cells are keyed by column identifier, like a row's, and can span columns (<see cref="TableCell.Colspan"/>).  Child rows are not shown.  DEFAULT is no footer rows.</param>
         public TableComponentPayload(
             string id,
             IReadOnlyList<TableColumn> columns,
             IReadOnlyList<TableRow> rows,
+            IReadOnlyList<TableRow> headerRows = null,
             IReadOnlyList<TableRow> footerRows = null)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { columns }.AsArg().Must().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
             new { rows }.AsArg().Must().NotBeNull();
             new { rows }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
+            new { headerRows }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
             new { footerRows }.AsArg().Must().NotContainAnyNullElementsWhenNotNull();
 
             this.Id = id;
             this.Columns = columns;
             this.Rows = rows;
+            this.HeaderRows = headerRows;
             this.FooterRows = footerRows;
         }
 
@@ -55,6 +59,12 @@ namespace Vuescape.DotNet.Domain
         /// Gets the rows of the table.
         /// </summary>
         public IReadOnlyList<TableRow> Rows { get; private set; }
+
+        /// <summary>
+        /// Gets the rows of the table's header, top to bottom.
+        /// Optional.  Null means one row of the columns' (deprecated) <see cref="TableColumn.HeaderText"/>; empty means no header.
+        /// </summary>
+        public IReadOnlyList<TableRow> HeaderRows { get; private set; }
 
         /// <summary>
         /// Gets the rows shown below the rows, e.g. totals.

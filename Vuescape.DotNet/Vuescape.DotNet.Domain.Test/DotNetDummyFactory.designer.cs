@@ -531,7 +531,8 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<PaneComponentBase>(),
                                  A.Dummy<UiObject>(),
                                  A.Dummy<ComparableValue>(),
-                                 A.Dummy<IReadOnlyDictionary<string, string>>()));
+                                 A.Dummy<IReadOnlyDictionary<string, string>>(),
+                                 A.Dummy<int?>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TableColumn(
@@ -565,6 +566,7 @@ namespace Vuescape.DotNet.Domain.Test
                 () => new TableComponentPayload(
                                  A.Dummy<string>(),
                                  A.Dummy<IReadOnlyList<TableColumn>>(),
+                                 A.Dummy<IReadOnlyList<TableRow>>(),
                                  A.Dummy<IReadOnlyList<TableRow>>(),
                                  A.Dummy<IReadOnlyList<TableRow>>()));
 

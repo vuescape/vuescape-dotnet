@@ -151,6 +151,46 @@ namespace Vuescape.DotNet.Domain.Test
                     },
                     ExpectedExceptionType = typeof(ArgumentException),
                     ExpectedExceptionMessageContains = new[] { "rows", "contains at least one null element", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TableComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'footerRows' contains a null element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TableComponentPayload>();
+
+                        var result = new TableComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Columns,
+                                             referenceObject.Rows,
+                                             headerRows: referenceObject.HeaderRows,
+                                             footerRows: new TableRow[] { A.Dummy<TableRow>(), null });
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "footerRows", "contains at least one null element", },
+                })
+            .AddScenario(() =>
+                new ConstructorArgumentValidationTestScenario<TableComponentPayload>
+                {
+                    Name = "constructor should throw ArgumentException when parameter 'headerRows' contains a null element scenario",
+                    ConstructionFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TableComponentPayload>();
+
+                        var result = new TableComponentPayload(
+                                             referenceObject.Id,
+                                             referenceObject.Columns,
+                                             referenceObject.Rows,
+                                             headerRows: new TableRow[] { A.Dummy<TableRow>(), null },
+                                             footerRows: referenceObject.FooterRows);
+
+                        return result;
+                    },
+                    ExpectedExceptionType = typeof(ArgumentException),
+                    ExpectedExceptionMessageContains = new[] { "headerRows", "contains at least one null element", },
                 });
         }
     }

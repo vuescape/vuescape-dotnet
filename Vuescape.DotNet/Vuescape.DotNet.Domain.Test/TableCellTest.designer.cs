@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<TableCell>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TableCell: DisplayValue = {systemUnderTest.DisplayValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Component = {systemUnderTest.Component?.ToString() ?? "<null>"}, RawValue = {systemUnderTest.RawValue?.ToString() ?? "<null>"}, ComparableValue = {systemUnderTest.ComparableValue?.ToString() ?? "<null>"}, CssStyles = {systemUnderTest.CssStyles?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.TableCell: DisplayValue = {systemUnderTest.DisplayValue?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Component = {systemUnderTest.Component?.ToString() ?? "<null>"}, RawValue = {systemUnderTest.RawValue?.ToString() ?? "<null>"}, ComparableValue = {systemUnderTest.ComparableValue?.ToString() ?? "<null>"}, CssStyles = {systemUnderTest.CssStyles?.ToString() ?? "<null>"}, Colspan = {systemUnderTest.Colspan?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -75,7 +75,8 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.Component,
                                              referenceObject.RawValue,
                                              referenceObject.ComparableValue,
-                                             dictionaryWithNullValue);
+                                             dictionaryWithNullValue,
+                                             referenceObject.Colspan);
 
                         return result;
                     },
@@ -99,7 +100,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Component,
                                                       referenceObject.RawValue,
                                                       referenceObject.ComparableValue,
-                                                      referenceObject.CssStyles),
+                                                      referenceObject.CssStyles,
+                                                      referenceObject.Colspan),
                             ExpectedPropertyValue = referenceObject.DisplayValue,
                         };
 
@@ -122,7 +124,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Component,
                                                       referenceObject.RawValue,
                                                       referenceObject.ComparableValue,
-                                                      referenceObject.CssStyles),
+                                                      referenceObject.CssStyles,
+                                                      referenceObject.Colspan),
                             ExpectedPropertyValue = referenceObject.Component,
                         };
 
@@ -145,7 +148,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Component,
                                                       referenceObject.RawValue,
                                                       referenceObject.ComparableValue,
-                                                      referenceObject.CssStyles),
+                                                      referenceObject.CssStyles,
+                                                      referenceObject.Colspan),
                             ExpectedPropertyValue = referenceObject.RawValue,
                         };
 
@@ -168,7 +172,8 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Component,
                                                       referenceObject.RawValue,
                                                       referenceObject.ComparableValue,
-                                                      referenceObject.CssStyles),
+                                                      referenceObject.CssStyles,
+                                                      referenceObject.Colspan),
                             ExpectedPropertyValue = referenceObject.ComparableValue,
                         };
 
@@ -191,13 +196,38 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.Component,
                                                       referenceObject.RawValue,
                                                       referenceObject.ComparableValue,
-                                                      referenceObject.CssStyles),
+                                                      referenceObject.CssStyles,
+                                                      referenceObject.Colspan),
                             ExpectedPropertyValue = referenceObject.CssStyles,
                         };
 
                         return result;
                     },
                     PropertyName = "CssStyles",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<TableCell>
+                {
+                    Name = "Colspan should return same 'colspan' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<TableCell>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<TableCell>
+                        {
+                            SystemUnderTest = new TableCell(
+                                                      referenceObject.DisplayValue,
+                                                      referenceObject.Component,
+                                                      referenceObject.RawValue,
+                                                      referenceObject.ComparableValue,
+                                                      referenceObject.CssStyles,
+                                                      referenceObject.Colspan),
+                            ExpectedPropertyValue = referenceObject.Colspan,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "Colspan",
                 });
 
         private static readonly DeepCloneWithTestScenarios<TableCell> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<TableCell>()
@@ -300,6 +330,26 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<TableCell>
+                {
+                    Name = "DeepCloneWithColspan should deep clone object and replace Colspan with the provided colspan",
+                    WithPropertyName = "Colspan",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<TableCell>();
+
+                        var referenceObject = A.Dummy<TableCell>().ThatIs(_ => !systemUnderTest.Colspan.IsEqualTo(_.Colspan));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<TableCell>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.Colspan,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly TableCell ReferenceObjectForEquatableTestScenarios = A.Dummy<TableCell>();
@@ -317,7 +367,8 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Component,
                                 ReferenceObjectForEquatableTestScenarios.RawValue,
                                 ReferenceObjectForEquatableTestScenarios.ComparableValue,
-                                ReferenceObjectForEquatableTestScenarios.CssStyles),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
+                                ReferenceObjectForEquatableTestScenarios.Colspan),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new TableCell[]
                     {
@@ -326,31 +377,43 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.Component,
                                 ReferenceObjectForEquatableTestScenarios.RawValue,
                                 ReferenceObjectForEquatableTestScenarios.ComparableValue,
-                                ReferenceObjectForEquatableTestScenarios.CssStyles),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
+                                ReferenceObjectForEquatableTestScenarios.Colspan),
                         new TableCell(
                                 ReferenceObjectForEquatableTestScenarios.DisplayValue,
                                 A.Dummy<TableCell>().Whose(_ => !_.Component.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Component)).Component,
                                 ReferenceObjectForEquatableTestScenarios.RawValue,
                                 ReferenceObjectForEquatableTestScenarios.ComparableValue,
-                                ReferenceObjectForEquatableTestScenarios.CssStyles),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
+                                ReferenceObjectForEquatableTestScenarios.Colspan),
                         new TableCell(
                                 ReferenceObjectForEquatableTestScenarios.DisplayValue,
                                 ReferenceObjectForEquatableTestScenarios.Component,
                                 A.Dummy<TableCell>().Whose(_ => !_.RawValue.IsEqualTo(ReferenceObjectForEquatableTestScenarios.RawValue)).RawValue,
                                 ReferenceObjectForEquatableTestScenarios.ComparableValue,
-                                ReferenceObjectForEquatableTestScenarios.CssStyles),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
+                                ReferenceObjectForEquatableTestScenarios.Colspan),
                         new TableCell(
                                 ReferenceObjectForEquatableTestScenarios.DisplayValue,
                                 ReferenceObjectForEquatableTestScenarios.Component,
                                 ReferenceObjectForEquatableTestScenarios.RawValue,
                                 A.Dummy<TableCell>().Whose(_ => !_.ComparableValue.IsEqualTo(ReferenceObjectForEquatableTestScenarios.ComparableValue)).ComparableValue,
-                                ReferenceObjectForEquatableTestScenarios.CssStyles),
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
+                                ReferenceObjectForEquatableTestScenarios.Colspan),
                         new TableCell(
                                 ReferenceObjectForEquatableTestScenarios.DisplayValue,
                                 ReferenceObjectForEquatableTestScenarios.Component,
                                 ReferenceObjectForEquatableTestScenarios.RawValue,
                                 ReferenceObjectForEquatableTestScenarios.ComparableValue,
-                                A.Dummy<TableCell>().Whose(_ => !_.CssStyles.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyles)).CssStyles),
+                                A.Dummy<TableCell>().Whose(_ => !_.CssStyles.IsEqualTo(ReferenceObjectForEquatableTestScenarios.CssStyles)).CssStyles,
+                                ReferenceObjectForEquatableTestScenarios.Colspan),
+                        new TableCell(
+                                ReferenceObjectForEquatableTestScenarios.DisplayValue,
+                                ReferenceObjectForEquatableTestScenarios.Component,
+                                ReferenceObjectForEquatableTestScenarios.RawValue,
+                                ReferenceObjectForEquatableTestScenarios.ComparableValue,
+                                ReferenceObjectForEquatableTestScenarios.CssStyles,
+                                A.Dummy<TableCell>().Whose(_ => !_.Colspan.IsEqualTo(ReferenceObjectForEquatableTestScenarios.Colspan)).Colspan),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -705,7 +768,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "DisplayValue", "Component", "RawValue", "ComparableValue", "CssStyles" };
+                var propertyNames = new string[] { "DisplayValue", "Component", "RawValue", "ComparableValue", "CssStyles", "Colspan" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

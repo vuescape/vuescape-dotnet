@@ -72,6 +72,7 @@ namespace Vuescape.DotNet.Domain
             var result = this.Id.IsEqualTo(other.Id, StringComparer.Ordinal)
                       && this.Columns.IsEqualTo(other.Columns)
                       && this.Rows.IsEqualTo(other.Rows)
+                      && this.HeaderRows.IsEqualTo(other.HeaderRows)
                       && this.FooterRows.IsEqualTo(other.FooterRows);
 
             return result;
@@ -85,6 +86,7 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.Id)
             .Hash(this.Columns)
             .Hash(this.Rows)
+            .Hash(this.HeaderRows)
             .Hash(this.FooterRows)
             .Value;
 
@@ -98,6 +100,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Columns?.DeepClone(),
                                  this.Rows?.DeepClone(),
+                                 this.HeaderRows?.DeepClone(),
                                  this.FooterRows?.DeepClone());
 
             return result;
@@ -131,6 +134,7 @@ namespace Vuescape.DotNet.Domain
                                  id,
                                  this.Columns?.DeepClone(),
                                  this.Rows?.DeepClone(),
+                                 this.HeaderRows?.DeepClone(),
                                  this.FooterRows?.DeepClone());
 
             return result;
@@ -164,6 +168,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  columns,
                                  this.Rows?.DeepClone(),
+                                 this.HeaderRows?.DeepClone(),
                                  this.FooterRows?.DeepClone());
 
             return result;
@@ -197,6 +202,41 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Columns?.DeepClone(),
                                  rows,
+                                 this.HeaderRows?.DeepClone(),
+                                 this.FooterRows?.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="HeaderRows" />.
+        /// </summary>
+        /// <param name="headerRows">The new <see cref="HeaderRows" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="TableComponentPayload" /> using the specified <paramref name="headerRows" /> for <see cref="HeaderRows" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public TableComponentPayload DeepCloneWithHeaderRows(IReadOnlyList<TableRow> headerRows)
+        {
+            var result = new TableComponentPayload(
+                                 this.Id?.DeepClone(),
+                                 this.Columns?.DeepClone(),
+                                 this.Rows?.DeepClone(),
+                                 headerRows,
                                  this.FooterRows?.DeepClone());
 
             return result;
@@ -230,6 +270,7 @@ namespace Vuescape.DotNet.Domain
                                  this.Id?.DeepClone(),
                                  this.Columns?.DeepClone(),
                                  this.Rows?.DeepClone(),
+                                 this.HeaderRows?.DeepClone(),
                                  footerRows);
 
             return result;
@@ -239,7 +280,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.TableComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Columns = {this.Columns?.ToString() ?? "<null>"}, Rows = {this.Rows?.ToString() ?? "<null>"}, FooterRows = {this.FooterRows?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.TableComponentPayload: Id = {this.Id?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, Columns = {this.Columns?.ToString() ?? "<null>"}, Rows = {this.Rows?.ToString() ?? "<null>"}, HeaderRows = {this.HeaderRows?.ToString() ?? "<null>"}, FooterRows = {this.FooterRows?.ToString() ?? "<null>"}.");
 
             return result;
         }
@@ -300,6 +341,13 @@ namespace Vuescape.DotNet.Domain
                 }
 
                 localValidationFailures = ValidatableExtensions.GetValidationFailures(this.Rows, options, propertyPathTracker, nameof(this.Rows));
+                result.AddRange(localValidationFailures);
+                if (stopOnFirstObjectWithFailures && result.Any())
+                {
+                    return;
+                }
+
+                localValidationFailures = ValidatableExtensions.GetValidationFailures(this.HeaderRows, options, propertyPathTracker, nameof(this.HeaderRows));
                 result.AddRange(localValidationFailures);
                 if (stopOnFirstObjectWithFailures && result.Any())
                 {

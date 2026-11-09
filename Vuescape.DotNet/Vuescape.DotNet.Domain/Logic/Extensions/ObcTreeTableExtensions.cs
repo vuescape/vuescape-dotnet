@@ -193,13 +193,12 @@ namespace Vuescape.DotNet.Domain
                 var rowBase = obcTreeTable.TableRows.DataRows.Rows.Single();
                 if (rowBase is Row row)
                 {
+                    // The row is left as it is: ConvertToVuescapeTreeTableRows leaves out the summary rows of a table
+                    // with only one row when they display in the footer.
+                    // TODO: Also move collapsed rows to the footer
                     if (row.ExpandedSummaryRows?.Count > 0)
                     {
                         summaryRowsForFooter = row.ExpandedSummaryRows;
-                        row.ExpandedSummaryRows.ToList().Clear();
-
-                        // TODO: Also move collapsed rows to the footer
-                        row.CollapsedSummaryRows?.ToList().Clear();
                     }
                 }
             }

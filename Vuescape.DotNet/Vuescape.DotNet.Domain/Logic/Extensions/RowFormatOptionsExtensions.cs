@@ -20,7 +20,7 @@ namespace Vuescape.DotNet.Domain
         internal static bool ShouldAlignChildRowsWithParent(
             this RowFormatOptions? obcRowFormatOptions)
         {
-            var result = (obcRowFormatOptions ?? RowFormatOptions.None & RowFormatOptions.AlignChildRowsWithParent) != 0;
+            var result = ((obcRowFormatOptions ?? RowFormatOptions.None) & RowFormatOptions.AlignChildRowsWithParent) != 0;
             return result;
         }
 
@@ -32,7 +32,7 @@ namespace Vuescape.DotNet.Domain
         public static bool IsVisible(
             this RowFormatOptions? obcRowFormatOptions)
         {
-            var result = (obcRowFormatOptions ?? RowFormatOptions.None & RowFormatOptions.Hide) == 0;
+            var result = ((obcRowFormatOptions ?? RowFormatOptions.None) & RowFormatOptions.Hide) == 0;
             return result;
         }
 
@@ -44,7 +44,7 @@ namespace Vuescape.DotNet.Domain
         public static bool IsNotExpandable(
             this RowFormatOptions? obcRowFormatOptions)
         {
-            var result = (obcRowFormatOptions ?? RowFormatOptions.None & RowFormatOptions.DisableCollapsing) != 0;
+            var result = ((obcRowFormatOptions ?? RowFormatOptions.None) & RowFormatOptions.DisableCollapsing) != 0;
             return result;
         }
 
@@ -56,7 +56,7 @@ namespace Vuescape.DotNet.Domain
         public static bool IsFrozen(
             this RowFormatOptions? obcRowFormatOptions)
         {
-            var result = (obcRowFormatOptions ?? RowFormatOptions.None & RowFormatOptions.Freeze) != 0;
+            var result = ((obcRowFormatOptions ?? RowFormatOptions.None) & RowFormatOptions.Freeze) != 0;
             return result;
         }
     }

@@ -320,6 +320,7 @@
       <DependentUpon>ReadOnlyFileUploadComponentPayloadTest.cs</DependentUpon>
     </Compile>
     <Compile Include="RowBaseExtensionsTests.cs" />
+    <Compile Include="RowFormatOptionsExtensionsTests.cs" />
     <Compile Include="ActionBaseTest.cs" />
     <Compile Include="ActionBaseTest.designer.cs">
       <DependentUpon>ActionBaseTest.cs</DependentUpon>

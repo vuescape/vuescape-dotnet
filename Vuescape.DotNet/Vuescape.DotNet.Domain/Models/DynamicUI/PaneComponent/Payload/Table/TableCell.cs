@@ -26,7 +26,7 @@ namespace Vuescape.DotNet.Domain
         /// <param name="rawValue">OPTIONAL The raw value of the cell.</param>
         /// <param name="comparableValue">OPTIONAL The value used for comparisons such as filtering or sorting as a string.</param>
         /// <param name="cssStyles">OPTIONAL The inline styles of the cell.</param>
-        /// <param name="colspan">OPTIONAL How many columns a header or footer row's cell spans, from its own column.  The row leaves out the cells of the columns it covers.  A span stays on one side of the frozen columns' edge.  Body rows' cells don't span.  DEFAULT is 1.</param>
+        /// <param name="colspan">OPTIONAL How many columns the cell spans, from its own column.  A header or footer row leaves out the cells of the columns it covers; a body row's cells in those columns, if it has them, aren't shown.  A span stays on one side of the frozen columns' edge.  DEFAULT is 1.</param>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "colspan", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
         public TableCell(
             string displayValue = null,
@@ -79,8 +79,9 @@ namespace Vuescape.DotNet.Domain
         public IReadOnlyDictionary<string, string> CssStyles { get; private set; }
 
         /// <summary>
-        /// Gets how many columns a header or footer row's cell spans, from its own column.
-        /// The row leaves out the cells of the columns it covers.  Body rows' cells don't span.
+        /// Gets how many columns the cell spans, from its own column.
+        /// A header or footer row leaves out the cells of the columns it covers; a body row's cells in those columns, if it
+        /// has them, aren't shown.
         /// Optional.  Null means 1.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Colspan", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]

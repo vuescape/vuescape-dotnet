@@ -6,13 +6,18 @@
 namespace Vuescape.DotNet.Domain
 {
     using System;
-    using System.Threading;
 
     /// <summary>
     /// Generates ephemeral IDs suitable for HTML element IDs.
     /// </summary>
     public static class HtmlIdGenerator
     {
+        // The length of the largest 63-bit value in base-36, ceil(log₃₆(2⁶³)), to which every Id is padded.
+        private const int IdLength = 13;
+
+        // Seeds each thread's generator. Random isn't thread-safe, so it's only used under its own lock.
+        private static readonly Random SeedGenerator = new Random();
+
         // ReSharper disable once InconsistentNaming
         [ThreadStatic]
         private static Random rng;
@@ -26,8 +31,13 @@ namespace Vuescape.DotNet.Domain
                     return rng;
                 }
 
-                // combine tick count & thread ID for a better per-thread seed.
-                var seed = (Environment.TickCount * 31) + Thread.CurrentThread.ManagedThreadId;
+                // A seed made from the time and thread could repeat on two threads, which would then make the same Ids.
+                int seed;
+                lock (SeedGenerator)
+                {
+                    seed = SeedGenerator.Next();
+                }
+
                 rng = new Random(seed);
 
                 return rng;
@@ -36,7 +46,7 @@ namespace Vuescape.DotNet.Domain
 
         /// <summary>
         /// Generates a new pseudo-random Id suitable for ephemeral use.
-        /// The Id will be all lowercase + digits and between 11-13 characters long.
+        /// The Id will be all lowercase + digits and 13 characters long.
         /// </summary>
         /// <returns>The new Id.</returns>
         public static string NewId()
@@ -47,8 +57,9 @@ namespace Vuescape.DotNet.Domain
 
             // Read 64 bits, mask off the high (sign) bit to yield a non-negative 63-bit value,
             // then encode in base-36.
+            // Padded, since a small value has fewer digits.
             var raw = BitConverter.ToUInt64(buffer, 0) & long.MaxValue;
-            var result = ToBase36(raw);
+            var result = ToBase36(raw).PadLeft(IdLength, '0');
 
             return result;
         }
@@ -71,8 +82,7 @@ namespace Vuescape.DotNet.Domain
             }
             else
             {
-                // max length for 63 bits in base-36 is ceil(log₃₆(2⁶³)) ≈ 13 chars
-                var buffer = new char[13];
+                var buffer = new char[IdLength];
                 var pos = buffer.Length;
 
                 while (value > 0)

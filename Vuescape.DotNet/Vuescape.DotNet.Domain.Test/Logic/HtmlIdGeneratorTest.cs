@@ -93,14 +93,14 @@ namespace Vuescape.DotNet.Domain.Test
         }
 
         [Fact]
-        public static void NewId_ProducesOnlyLowercaseLettersAndDigits_AndLengthBetween11And13()
+        public static void NewId_ProducesOnlyLowercaseLettersAndDigits_AndLength13()
         {
-            var regex = new Regex("^[0-9a-z]{11,13}$", RegexOptions.Compiled);
-            for (int i = 0; i < 100; i++)
+            // Enough Ids that some are small values, which have fewer digits: about 1 in 2,500 has 10 or fewer.
+            var regex = new Regex("^[0-9a-z]{13}$", RegexOptions.Compiled);
+            for (int i = 0; i < 100000; i++)
             {
                 var id = HtmlIdGenerator.NewId();
                 Assert.Matches(regex, id);
-                Assert.InRange(id.Length, 11, 13);
             }
         }
 

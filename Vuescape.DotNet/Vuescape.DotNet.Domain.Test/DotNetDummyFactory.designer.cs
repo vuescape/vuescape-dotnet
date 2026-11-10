@@ -103,7 +103,10 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
                                  A.Dummy<string>(),
-                                 A.Dummy<Vuescape.DotNet.Domain.HorizontalAlignment?>()));
+                                 A.Dummy<Vuescape.DotNet.Domain.HorizontalAlignment?>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<bool>(),
+                                 A.Dummy<bool>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new Chiclet(

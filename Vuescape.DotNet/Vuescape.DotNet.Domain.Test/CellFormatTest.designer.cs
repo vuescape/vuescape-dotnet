@@ -48,7 +48,7 @@ namespace Vuescape.DotNet.Domain.Test
                         var result = new SystemUnderTestExpectedStringRepresentation<CellFormat>
                         {
                             SystemUnderTest = systemUnderTest,
-                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {systemUnderTest.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSizeInPixels = {systemUnderTest.FontSizeInPixels?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BackgroundHexColor = {systemUnderTest.BackgroundHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, HorizontalAlignment = {systemUnderTest.HorizontalAlignment?.ToString() ?? "<null>"}."),
+                            ExpectedStringRepresentation = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {systemUnderTest.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSizeInPixels = {systemUnderTest.FontSizeInPixels?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BackgroundHexColor = {systemUnderTest.BackgroundHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, HorizontalAlignment = {systemUnderTest.HorizontalAlignment?.ToString() ?? "<null>"}, IsBold = {systemUnderTest.IsBold.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsItalic = {systemUnderTest.IsItalic.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsUnderlined = {systemUnderTest.IsUnderlined.ToString(CultureInfo.InvariantCulture) ?? "<null>"}."),
                         };
 
                         return result;
@@ -68,7 +68,10 @@ namespace Vuescape.DotNet.Domain.Test
                                              null,
                                              referenceObject.FontSizeInPixels,
                                              referenceObject.BackgroundHexColor,
-                                             referenceObject.HorizontalAlignment);
+                                             referenceObject.HorizontalAlignment,
+                                             referenceObject.IsBold,
+                                             referenceObject.IsItalic,
+                                             referenceObject.IsUnderlined);
 
                         return result;
                     },
@@ -87,7 +90,10 @@ namespace Vuescape.DotNet.Domain.Test
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.FontSizeInPixels,
                                              referenceObject.BackgroundHexColor,
-                                             referenceObject.HorizontalAlignment);
+                                             referenceObject.HorizontalAlignment,
+                                             referenceObject.IsBold,
+                                             referenceObject.IsItalic,
+                                             referenceObject.IsUnderlined);
 
                         return result;
                     },
@@ -106,7 +112,10 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.FontHexColor,
                                              null,
                                              referenceObject.BackgroundHexColor,
-                                             referenceObject.HorizontalAlignment);
+                                             referenceObject.HorizontalAlignment,
+                                             referenceObject.IsBold,
+                                             referenceObject.IsItalic,
+                                             referenceObject.IsUnderlined);
 
                         return result;
                     },
@@ -125,7 +134,10 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.FontHexColor,
                                              Invariant($"  {Environment.NewLine}  "),
                                              referenceObject.BackgroundHexColor,
-                                             referenceObject.HorizontalAlignment);
+                                             referenceObject.HorizontalAlignment,
+                                             referenceObject.IsBold,
+                                             referenceObject.IsItalic,
+                                             referenceObject.IsUnderlined);
 
                         return result;
                     },
@@ -144,7 +156,10 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.FontHexColor,
                                              referenceObject.FontSizeInPixels,
                                              null,
-                                             referenceObject.HorizontalAlignment);
+                                             referenceObject.HorizontalAlignment,
+                                             referenceObject.IsBold,
+                                             referenceObject.IsItalic,
+                                             referenceObject.IsUnderlined);
 
                         return result;
                     },
@@ -163,7 +178,10 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.FontHexColor,
                                              referenceObject.FontSizeInPixels,
                                              Invariant($"  {Environment.NewLine}  "),
-                                             referenceObject.HorizontalAlignment);
+                                             referenceObject.HorizontalAlignment,
+                                             referenceObject.IsBold,
+                                             referenceObject.IsItalic,
+                                             referenceObject.IsUnderlined);
 
                         return result;
                     },
@@ -182,7 +200,10 @@ namespace Vuescape.DotNet.Domain.Test
                                              referenceObject.FontHexColor,
                                              referenceObject.FontSizeInPixels,
                                              referenceObject.BackgroundHexColor,
-                                             HorizontalAlignment.Unknown);
+                                             HorizontalAlignment.Unknown,
+                                             referenceObject.IsBold,
+                                             referenceObject.IsItalic,
+                                             referenceObject.IsUnderlined);
 
                         return result;
                     },
@@ -205,7 +226,10 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.FontHexColor,
                                                       referenceObject.FontSizeInPixels,
                                                       referenceObject.BackgroundHexColor,
-                                                      referenceObject.HorizontalAlignment),
+                                                      referenceObject.HorizontalAlignment,
+                                                      referenceObject.IsBold,
+                                                      referenceObject.IsItalic,
+                                                      referenceObject.IsUnderlined),
                             ExpectedPropertyValue = referenceObject.FontHexColor,
                         };
 
@@ -227,7 +251,10 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.FontHexColor,
                                                       referenceObject.FontSizeInPixels,
                                                       referenceObject.BackgroundHexColor,
-                                                      referenceObject.HorizontalAlignment),
+                                                      referenceObject.HorizontalAlignment,
+                                                      referenceObject.IsBold,
+                                                      referenceObject.IsItalic,
+                                                      referenceObject.IsUnderlined),
                             ExpectedPropertyValue = referenceObject.FontSizeInPixels,
                         };
 
@@ -249,7 +276,10 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.FontHexColor,
                                                       referenceObject.FontSizeInPixels,
                                                       referenceObject.BackgroundHexColor,
-                                                      referenceObject.HorizontalAlignment),
+                                                      referenceObject.HorizontalAlignment,
+                                                      referenceObject.IsBold,
+                                                      referenceObject.IsItalic,
+                                                      referenceObject.IsUnderlined),
                             ExpectedPropertyValue = referenceObject.BackgroundHexColor,
                         };
 
@@ -271,13 +301,91 @@ namespace Vuescape.DotNet.Domain.Test
                                                       referenceObject.FontHexColor,
                                                       referenceObject.FontSizeInPixels,
                                                       referenceObject.BackgroundHexColor,
-                                                      referenceObject.HorizontalAlignment),
+                                                      referenceObject.HorizontalAlignment,
+                                                      referenceObject.IsBold,
+                                                      referenceObject.IsItalic,
+                                                      referenceObject.IsUnderlined),
                             ExpectedPropertyValue = referenceObject.HorizontalAlignment,
                         };
 
                         return result;
                     },
                     PropertyName = "HorizontalAlignment",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<CellFormat>
+                {
+                    Name = "IsBold should return same 'isBold' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<CellFormat>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<CellFormat>
+                        {
+                            SystemUnderTest = new CellFormat(
+                                                      referenceObject.FontHexColor,
+                                                      referenceObject.FontSizeInPixels,
+                                                      referenceObject.BackgroundHexColor,
+                                                      referenceObject.HorizontalAlignment,
+                                                      referenceObject.IsBold,
+                                                      referenceObject.IsItalic,
+                                                      referenceObject.IsUnderlined),
+                            ExpectedPropertyValue = referenceObject.IsBold,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "IsBold",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<CellFormat>
+                {
+                    Name = "IsItalic should return same 'isItalic' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<CellFormat>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<CellFormat>
+                        {
+                            SystemUnderTest = new CellFormat(
+                                                      referenceObject.FontHexColor,
+                                                      referenceObject.FontSizeInPixels,
+                                                      referenceObject.BackgroundHexColor,
+                                                      referenceObject.HorizontalAlignment,
+                                                      referenceObject.IsBold,
+                                                      referenceObject.IsItalic,
+                                                      referenceObject.IsUnderlined),
+                            ExpectedPropertyValue = referenceObject.IsItalic,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "IsItalic",
+                })
+            .AddScenario(() =>
+                new ConstructorPropertyAssignmentTestScenario<CellFormat>
+                {
+                    Name = "IsUnderlined should return same 'isUnderlined' parameter passed to constructor when getting",
+                    SystemUnderTestExpectedPropertyValueFunc = () =>
+                    {
+                        var referenceObject = A.Dummy<CellFormat>();
+
+                        var result = new SystemUnderTestExpectedPropertyValue<CellFormat>
+                        {
+                            SystemUnderTest = new CellFormat(
+                                                      referenceObject.FontHexColor,
+                                                      referenceObject.FontSizeInPixels,
+                                                      referenceObject.BackgroundHexColor,
+                                                      referenceObject.HorizontalAlignment,
+                                                      referenceObject.IsBold,
+                                                      referenceObject.IsItalic,
+                                                      referenceObject.IsUnderlined),
+                            ExpectedPropertyValue = referenceObject.IsUnderlined,
+                        };
+
+                        return result;
+                    },
+                    PropertyName = "IsUnderlined",
                 });
 
         private static readonly DeepCloneWithTestScenarios<CellFormat> DeepCloneWithTestScenarios = new DeepCloneWithTestScenarios<CellFormat>()
@@ -360,6 +468,66 @@ namespace Vuescape.DotNet.Domain.Test
 
                         return result;
                     },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<CellFormat>
+                {
+                    Name = "DeepCloneWithIsBold should deep clone object and replace IsBold with the provided isBold",
+                    WithPropertyName = "IsBold",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<CellFormat>();
+
+                        var referenceObject = A.Dummy<CellFormat>().ThatIs(_ => !systemUnderTest.IsBold.IsEqualTo(_.IsBold));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<CellFormat>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.IsBold,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<CellFormat>
+                {
+                    Name = "DeepCloneWithIsItalic should deep clone object and replace IsItalic with the provided isItalic",
+                    WithPropertyName = "IsItalic",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<CellFormat>();
+
+                        var referenceObject = A.Dummy<CellFormat>().ThatIs(_ => !systemUnderTest.IsItalic.IsEqualTo(_.IsItalic));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<CellFormat>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.IsItalic,
+                        };
+
+                        return result;
+                    },
+                })
+            .AddScenario(() =>
+                new DeepCloneWithTestScenario<CellFormat>
+                {
+                    Name = "DeepCloneWithIsUnderlined should deep clone object and replace IsUnderlined with the provided isUnderlined",
+                    WithPropertyName = "IsUnderlined",
+                    SystemUnderTestDeepCloneWithValueFunc = () =>
+                    {
+                        var systemUnderTest = A.Dummy<CellFormat>();
+
+                        var referenceObject = A.Dummy<CellFormat>().ThatIs(_ => !systemUnderTest.IsUnderlined.IsEqualTo(_.IsUnderlined));
+
+                        var result = new SystemUnderTestDeepCloneWithValue<CellFormat>
+                        {
+                            SystemUnderTest = systemUnderTest,
+                            DeepCloneWithValue = referenceObject.IsUnderlined,
+                        };
+
+                        return result;
+                    },
                 });
 
         private static readonly CellFormat ReferenceObjectForEquatableTestScenarios = A.Dummy<CellFormat>();
@@ -376,7 +544,10 @@ namespace Vuescape.DotNet.Domain.Test
                                 ReferenceObjectForEquatableTestScenarios.FontHexColor,
                                 ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
                                 ReferenceObjectForEquatableTestScenarios.BackgroundHexColor,
-                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment),
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment,
+                                ReferenceObjectForEquatableTestScenarios.IsBold,
+                                ReferenceObjectForEquatableTestScenarios.IsItalic,
+                                ReferenceObjectForEquatableTestScenarios.IsUnderlined),
                     },
                     ObjectsThatAreNotEqualToReferenceObject = new CellFormat[]
                     {
@@ -384,22 +555,58 @@ namespace Vuescape.DotNet.Domain.Test
                                 A.Dummy<CellFormat>().Whose(_ => !_.FontHexColor.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FontHexColor)).FontHexColor,
                                 ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
                                 ReferenceObjectForEquatableTestScenarios.BackgroundHexColor,
-                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment),
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment,
+                                ReferenceObjectForEquatableTestScenarios.IsBold,
+                                ReferenceObjectForEquatableTestScenarios.IsItalic,
+                                ReferenceObjectForEquatableTestScenarios.IsUnderlined),
                         new CellFormat(
                                 ReferenceObjectForEquatableTestScenarios.FontHexColor,
                                 A.Dummy<CellFormat>().Whose(_ => !_.FontSizeInPixels.IsEqualTo(ReferenceObjectForEquatableTestScenarios.FontSizeInPixels)).FontSizeInPixels,
                                 ReferenceObjectForEquatableTestScenarios.BackgroundHexColor,
-                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment),
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment,
+                                ReferenceObjectForEquatableTestScenarios.IsBold,
+                                ReferenceObjectForEquatableTestScenarios.IsItalic,
+                                ReferenceObjectForEquatableTestScenarios.IsUnderlined),
                         new CellFormat(
                                 ReferenceObjectForEquatableTestScenarios.FontHexColor,
                                 ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
                                 A.Dummy<CellFormat>().Whose(_ => !_.BackgroundHexColor.IsEqualTo(ReferenceObjectForEquatableTestScenarios.BackgroundHexColor)).BackgroundHexColor,
-                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment),
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment,
+                                ReferenceObjectForEquatableTestScenarios.IsBold,
+                                ReferenceObjectForEquatableTestScenarios.IsItalic,
+                                ReferenceObjectForEquatableTestScenarios.IsUnderlined),
                         new CellFormat(
                                 ReferenceObjectForEquatableTestScenarios.FontHexColor,
                                 ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
                                 ReferenceObjectForEquatableTestScenarios.BackgroundHexColor,
-                                A.Dummy<CellFormat>().Whose(_ => !_.HorizontalAlignment.IsEqualTo(ReferenceObjectForEquatableTestScenarios.HorizontalAlignment)).HorizontalAlignment),
+                                A.Dummy<CellFormat>().Whose(_ => !_.HorizontalAlignment.IsEqualTo(ReferenceObjectForEquatableTestScenarios.HorizontalAlignment)).HorizontalAlignment,
+                                ReferenceObjectForEquatableTestScenarios.IsBold,
+                                ReferenceObjectForEquatableTestScenarios.IsItalic,
+                                ReferenceObjectForEquatableTestScenarios.IsUnderlined),
+                        new CellFormat(
+                                ReferenceObjectForEquatableTestScenarios.FontHexColor,
+                                ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
+                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor,
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment,
+                                A.Dummy<CellFormat>().Whose(_ => !_.IsBold.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsBold)).IsBold,
+                                ReferenceObjectForEquatableTestScenarios.IsItalic,
+                                ReferenceObjectForEquatableTestScenarios.IsUnderlined),
+                        new CellFormat(
+                                ReferenceObjectForEquatableTestScenarios.FontHexColor,
+                                ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
+                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor,
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment,
+                                ReferenceObjectForEquatableTestScenarios.IsBold,
+                                A.Dummy<CellFormat>().Whose(_ => !_.IsItalic.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsItalic)).IsItalic,
+                                ReferenceObjectForEquatableTestScenarios.IsUnderlined),
+                        new CellFormat(
+                                ReferenceObjectForEquatableTestScenarios.FontHexColor,
+                                ReferenceObjectForEquatableTestScenarios.FontSizeInPixels,
+                                ReferenceObjectForEquatableTestScenarios.BackgroundHexColor,
+                                ReferenceObjectForEquatableTestScenarios.HorizontalAlignment,
+                                ReferenceObjectForEquatableTestScenarios.IsBold,
+                                ReferenceObjectForEquatableTestScenarios.IsItalic,
+                                A.Dummy<CellFormat>().Whose(_ => !_.IsUnderlined.IsEqualTo(ReferenceObjectForEquatableTestScenarios.IsUnderlined)).IsUnderlined),
                     },
                     ObjectsThatAreNotOfTheSameTypeAsReferenceObject = new object[]
                     {
@@ -706,7 +913,7 @@ namespace Vuescape.DotNet.Domain.Test
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
             public static void DeepCloneWith___Should_deep_clone_object_and_replace_the_associated_property_with_the_provided_value___When_called()
             {
-                var propertyNames = new string[] { "FontHexColor", "FontSizeInPixels", "BackgroundHexColor", "HorizontalAlignment" };
+                var propertyNames = new string[] { "FontHexColor", "FontSizeInPixels", "BackgroundHexColor", "HorizontalAlignment", "IsBold", "IsItalic", "IsUnderlined" };
 
                 var scenarios = DeepCloneWithTestScenarios.ValidateAndPrepareForTesting();
 

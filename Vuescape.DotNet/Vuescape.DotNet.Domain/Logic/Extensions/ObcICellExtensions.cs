@@ -108,7 +108,7 @@ namespace Vuescape.DotNet.Domain
                 slottedUiObject = new SlottedUiObject(slots, defaultSlot);
             }
 
-            // TODO: instead of fontCssClasses add FontFormat (e.g. bold, italic, underline) to CellFormat?
+            // The font CSS classes are for the original tree table; the cell format carries the same options.
             var cellFormat = GetCellFormat(
                 obcRowCell,
                 obcRowFormat,
@@ -484,7 +484,6 @@ namespace Vuescape.DotNet.Domain
         /// <param name="additionalCssClasses">Additional CSS classes to include.</param>
         /// <param name="obcToVuescapeConversionContext">The context for conversion to Vuescape objects.</param>
         /// <returns>A string of CSS classes.</returns>
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
         public static string GetFontFormatOptionsCssClasses(
             this ICell cell,
             RowFormat obcRowFormat,
@@ -496,38 +495,16 @@ namespace Vuescape.DotNet.Domain
             string additionalCssClasses,
             ObcToVuescapeConversionContext obcToVuescapeConversionContext)
         {
-            OBeautifulCode.DataStructure.FontFormatOptions? applicableFontFormatOptions = null;
+            var applicableFontFormatOptions = GetFontFormatOptions(
+                cell,
+                obcRowFormat,
+                obcDataOrHeaderRowsFormat,
+                obcRowsFormat,
+                obcSpecificColumnFormat,
+                obcColumnFormat,
+                obcTableFormat);
 
-            // ReSharper disable once IdentifierTypo
-            if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.FontFormat?.Options != null)
-            {
-                applicableFontFormatOptions = formattableCell.Format.FontFormat.Options;
-            }
-            else if (obcRowFormat?.CellsFormat?.FontFormat?.Options != null)
-            {
-                applicableFontFormatOptions = obcRowFormat.CellsFormat.FontFormat.Options;
-            }
-            else if (obcDataOrHeaderRowsFormat?.CellsFormat?.FontFormat?.Options != null)
-            {
-                applicableFontFormatOptions = obcDataOrHeaderRowsFormat.CellsFormat.FontFormat.Options;
-            }
-            else if (obcRowsFormat?.CellsFormat?.FontFormat?.Options != null)
-            {
-                applicableFontFormatOptions = obcRowsFormat.CellsFormat.FontFormat.Options;
-            }
-            else if (obcSpecificColumnFormat?.CellsFormat?.FontFormat?.Options != null)
-            {
-                applicableFontFormatOptions = obcSpecificColumnFormat.CellsFormat.FontFormat.Options;
-            }
-            else if (obcColumnFormat?.CellsFormat?.FontFormat?.Options != null)
-            {
-                applicableFontFormatOptions = obcColumnFormat.CellsFormat.FontFormat.Options;
-            }
-            else if (obcTableFormat?.CellsFormat?.FontFormat?.Options != null)
-            {
-                applicableFontFormatOptions = obcTableFormat.CellsFormat.FontFormat.Options;
-            }
-            else if (obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
+            if (applicableFontFormatOptions == null && obcToVuescapeConversionContext?.ReportConversionMode == ReportConversionMode.Strict)
             {
                 throw new InvalidOperationException(Invariant(
                    $"One of the CellFormats must be non-null. Either change the CellFormat to not be null or set ReportConversionMode to Relaxed."));
@@ -542,6 +519,42 @@ namespace Vuescape.DotNet.Domain
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Gets the font formatting options (e.g. bold) that apply to a cell: those of the most specific format that
+        /// gives them, from the cell's own format to the table's.
+        /// </summary>
+        /// <param name="cell">The cell to retrieve font formatting options for.</param>
+        /// <param name="obcRowFormat">The format of the row containing the cell.</param>
+        /// <param name="obcDataOrHeaderRowsFormat">The format of the data or header rows in the table.</param>
+        /// <param name="obcRowsFormat">The format of the rows in the table.</param>
+        /// <param name="obcSpecificColumnFormat">The specific format of the column containing the cell.</param>
+        /// <param name="obcColumnFormat">The format of the columns in the table.</param>
+        /// <param name="obcTableFormat">The format of the table.</param>
+        /// <returns>The font formatting options, or null when no format gives them.</returns>
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Handling all conditions.")]
+        public static OBeautifulCode.DataStructure.FontFormatOptions? GetFontFormatOptions(
+            this ICell cell,
+            RowFormat obcRowFormat,
+            RowFormat obcDataOrHeaderRowsFormat,
+            RowFormat obcRowsFormat,
+            ColumnFormat obcSpecificColumnFormat,
+            ColumnFormat obcColumnFormat,
+            TableFormat obcTableFormat)
+        {
+            // ReSharper disable once IdentifierTypo
+            if (cell is IHaveCellFormat formattableCell && formattableCell.Format?.FontFormat?.Options != null)
+            {
+                return formattableCell.Format.FontFormat.Options;
+            }
+
+            return obcRowFormat?.CellsFormat?.FontFormat?.Options
+                ?? obcDataOrHeaderRowsFormat?.CellsFormat?.FontFormat?.Options
+                ?? obcRowsFormat?.CellsFormat?.FontFormat?.Options
+                ?? obcSpecificColumnFormat?.CellsFormat?.FontFormat?.Options
+                ?? obcColumnFormat?.CellsFormat?.FontFormat?.Options
+                ?? obcTableFormat?.CellsFormat?.FontFormat?.Options;
         }
 
         /// <summary>
@@ -606,12 +619,25 @@ namespace Vuescape.DotNet.Domain
                     obcTableFormat,
                     obcToVuescapeConversionContext);
 
-            if (color == null && fontSize == null && backgroundColor == null && horizontalAlignment == null)
+            var fontFormatOptions = GetFontFormatOptions(
+                cell,
+                obcRowFormat,
+                obcDataOrHeaderRowsFormat,
+                obcRowsFormat,
+                obcSpecificColumnFormat,
+                obcColumnFormat,
+                obcTableFormat) ?? OBeautifulCode.DataStructure.FontFormatOptions.None;
+
+            var isBold = fontFormatOptions.HasFlag(OBeautifulCode.DataStructure.FontFormatOptions.Bold);
+            var isItalic = fontFormatOptions.HasFlag(OBeautifulCode.DataStructure.FontFormatOptions.Italics);
+            var isUnderlined = fontFormatOptions.HasFlag(OBeautifulCode.DataStructure.FontFormatOptions.Underline);
+
+            if (color == null && fontSize == null && backgroundColor == null && horizontalAlignment == null && !isBold && !isItalic && !isUnderlined)
             {
                 return null;
             }
 
-            var result = new CellFormat(color?.ToHex(), fontSize, backgroundColor?.ToHex(), horizontalAlignment);
+            var result = new CellFormat(color?.ToHex(), fontSize, backgroundColor?.ToHex(), horizontalAlignment, isBold, isItalic, isUnderlined);
             return result;
         }
 

@@ -21,16 +21,25 @@ namespace Vuescape.DotNet.Domain
         /// <param name="fontSizeInPixels">The font size.</param>
         /// <param name="backgroundHexColor">The background color in hexadecimal.</param>
         /// <param name="horizontalAlignment">OPTIONAL. The horizontal alignment.</param>
+        /// <param name="isBold">OPTIONAL. A value indicating whether the text is bold. DEFAULT is false.</param>
+        /// <param name="isItalic">OPTIONAL. A value indicating whether the text is italic. DEFAULT is false.</param>
+        /// <param name="isUnderlined">OPTIONAL. A value indicating whether the text is underlined. DEFAULT is false.</param>
         public CellFormat(
             string fontHexColor,
             string fontSizeInPixels,
             string backgroundHexColor,
-            HorizontalAlignment? horizontalAlignment)
+            HorizontalAlignment? horizontalAlignment,
+            bool isBold = false,
+            bool isItalic = false,
+            bool isUnderlined = false)
         {
             this.FontHexColor = fontHexColor;
             this.FontSizeInPixels = fontSizeInPixels;
             this.BackgroundHexColor = backgroundHexColor;
             this.HorizontalAlignment = horizontalAlignment;
+            this.IsBold = isBold;
+            this.IsItalic = isItalic;
+            this.IsUnderlined = isUnderlined;
         }
 
         /// <summary>
@@ -52,5 +61,20 @@ namespace Vuescape.DotNet.Domain
         /// Gets the horizontal alignment.
         /// </summary>
         public HorizontalAlignment? HorizontalAlignment { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the text is bold.
+        /// </summary>
+        public bool IsBold { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the text is italic.
+        /// </summary>
+        public bool IsItalic { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the text is underlined.
+        /// </summary>
+        public bool IsUnderlined { get; private set; }
     }
 }

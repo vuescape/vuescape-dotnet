@@ -72,7 +72,10 @@ namespace Vuescape.DotNet.Domain
             var result = this.FontHexColor.IsEqualTo(other.FontHexColor, StringComparer.Ordinal)
                       && this.FontSizeInPixels.IsEqualTo(other.FontSizeInPixels, StringComparer.Ordinal)
                       && this.BackgroundHexColor.IsEqualTo(other.BackgroundHexColor, StringComparer.Ordinal)
-                      && this.HorizontalAlignment.IsEqualTo(other.HorizontalAlignment);
+                      && this.HorizontalAlignment.IsEqualTo(other.HorizontalAlignment)
+                      && this.IsBold.IsEqualTo(other.IsBold)
+                      && this.IsItalic.IsEqualTo(other.IsItalic)
+                      && this.IsUnderlined.IsEqualTo(other.IsUnderlined);
 
             return result;
         }
@@ -86,6 +89,9 @@ namespace Vuescape.DotNet.Domain
             .Hash(this.FontSizeInPixels)
             .Hash(this.BackgroundHexColor)
             .Hash(this.HorizontalAlignment)
+            .Hash(this.IsBold)
+            .Hash(this.IsItalic)
+            .Hash(this.IsUnderlined)
             .Value;
 
         /// <inheritdoc />
@@ -98,7 +104,10 @@ namespace Vuescape.DotNet.Domain
                                  this.FontHexColor?.DeepClone(),
                                  this.FontSizeInPixels?.DeepClone(),
                                  this.BackgroundHexColor?.DeepClone(),
-                                 this.HorizontalAlignment?.DeepClone());
+                                 this.HorizontalAlignment?.DeepClone(),
+                                 this.IsBold.DeepClone(),
+                                 this.IsItalic.DeepClone(),
+                                 this.IsUnderlined.DeepClone());
 
             return result;
         }
@@ -131,7 +140,10 @@ namespace Vuescape.DotNet.Domain
                                  fontHexColor,
                                  this.FontSizeInPixels?.DeepClone(),
                                  this.BackgroundHexColor?.DeepClone(),
-                                 this.HorizontalAlignment?.DeepClone());
+                                 this.HorizontalAlignment?.DeepClone(),
+                                 this.IsBold.DeepClone(),
+                                 this.IsItalic.DeepClone(),
+                                 this.IsUnderlined.DeepClone());
 
             return result;
         }
@@ -164,7 +176,10 @@ namespace Vuescape.DotNet.Domain
                                  this.FontHexColor?.DeepClone(),
                                  fontSizeInPixels,
                                  this.BackgroundHexColor?.DeepClone(),
-                                 this.HorizontalAlignment?.DeepClone());
+                                 this.HorizontalAlignment?.DeepClone(),
+                                 this.IsBold.DeepClone(),
+                                 this.IsItalic.DeepClone(),
+                                 this.IsUnderlined.DeepClone());
 
             return result;
         }
@@ -197,7 +212,10 @@ namespace Vuescape.DotNet.Domain
                                  this.FontHexColor?.DeepClone(),
                                  this.FontSizeInPixels?.DeepClone(),
                                  backgroundHexColor,
-                                 this.HorizontalAlignment?.DeepClone());
+                                 this.HorizontalAlignment?.DeepClone(),
+                                 this.IsBold.DeepClone(),
+                                 this.IsItalic.DeepClone(),
+                                 this.IsUnderlined.DeepClone());
 
             return result;
         }
@@ -230,7 +248,118 @@ namespace Vuescape.DotNet.Domain
                                  this.FontHexColor?.DeepClone(),
                                  this.FontSizeInPixels?.DeepClone(),
                                  this.BackgroundHexColor?.DeepClone(),
-                                 horizontalAlignment);
+                                 horizontalAlignment,
+                                 this.IsBold.DeepClone(),
+                                 this.IsItalic.DeepClone(),
+                                 this.IsUnderlined.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="IsBold" />.
+        /// </summary>
+        /// <param name="isBold">The new <see cref="IsBold" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="CellFormat" /> using the specified <paramref name="isBold" /> for <see cref="IsBold" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public CellFormat DeepCloneWithIsBold(bool isBold)
+        {
+            var result = new CellFormat(
+                                 this.FontHexColor?.DeepClone(),
+                                 this.FontSizeInPixels?.DeepClone(),
+                                 this.BackgroundHexColor?.DeepClone(),
+                                 this.HorizontalAlignment?.DeepClone(),
+                                 isBold,
+                                 this.IsItalic.DeepClone(),
+                                 this.IsUnderlined.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="IsItalic" />.
+        /// </summary>
+        /// <param name="isItalic">The new <see cref="IsItalic" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="CellFormat" /> using the specified <paramref name="isItalic" /> for <see cref="IsItalic" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public CellFormat DeepCloneWithIsItalic(bool isItalic)
+        {
+            var result = new CellFormat(
+                                 this.FontHexColor?.DeepClone(),
+                                 this.FontSizeInPixels?.DeepClone(),
+                                 this.BackgroundHexColor?.DeepClone(),
+                                 this.HorizontalAlignment?.DeepClone(),
+                                 this.IsBold.DeepClone(),
+                                 isItalic,
+                                 this.IsUnderlined.DeepClone());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deep clones this object with a new <see cref="IsUnderlined" />.
+        /// </summary>
+        /// <param name="isUnderlined">The new <see cref="IsUnderlined" />.  This object will NOT be deep cloned; it is used as-is.</param>
+        /// <returns>New <see cref="CellFormat" /> using the specified <paramref name="isUnderlined" /> for <see cref="IsUnderlined" /> and a deep clone of every other property.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings")]
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly")]
+        [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+        [SuppressMessage("Microsoft.Naming", "CA1715:IdentifiersShouldHaveCorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords")]
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames")]
+        [SuppressMessage("Microsoft.Naming", "CA1722:IdentifiersShouldNotHaveIncorrectPrefix")]
+        [SuppressMessage("Microsoft.Naming", "CA1725:ParameterNamesShouldMatchBaseDeclaration")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms")]
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        public CellFormat DeepCloneWithIsUnderlined(bool isUnderlined)
+        {
+            var result = new CellFormat(
+                                 this.FontHexColor?.DeepClone(),
+                                 this.FontSizeInPixels?.DeepClone(),
+                                 this.BackgroundHexColor?.DeepClone(),
+                                 this.HorizontalAlignment?.DeepClone(),
+                                 this.IsBold.DeepClone(),
+                                 this.IsItalic.DeepClone(),
+                                 isUnderlined);
 
             return result;
         }
@@ -239,7 +368,7 @@ namespace Vuescape.DotNet.Domain
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public override string ToString()
         {
-            var result = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {this.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSizeInPixels = {this.FontSizeInPixels?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BackgroundHexColor = {this.BackgroundHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, HorizontalAlignment = {this.HorizontalAlignment?.ToString() ?? "<null>"}.");
+            var result = Invariant($"Vuescape.DotNet.Domain.CellFormat: FontHexColor = {this.FontHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, FontSizeInPixels = {this.FontSizeInPixels?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, BackgroundHexColor = {this.BackgroundHexColor?.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, HorizontalAlignment = {this.HorizontalAlignment?.ToString() ?? "<null>"}, IsBold = {this.IsBold.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsItalic = {this.IsItalic.ToString(CultureInfo.InvariantCulture) ?? "<null>"}, IsUnderlined = {this.IsUnderlined.ToString(CultureInfo.InvariantCulture) ?? "<null>"}.");
 
             return result;
         }
@@ -307,6 +436,27 @@ namespace Vuescape.DotNet.Domain
                 }
 
                 localValidationFailures = ValidatableExtensions.GetValidationFailures(this.HorizontalAlignment, options, propertyPathTracker, nameof(this.HorizontalAlignment));
+                result.AddRange(localValidationFailures);
+                if (stopOnFirstObjectWithFailures && result.Any())
+                {
+                    return;
+                }
+
+                localValidationFailures = ValidatableExtensions.GetValidationFailures(this.IsBold, options, propertyPathTracker, nameof(this.IsBold));
+                result.AddRange(localValidationFailures);
+                if (stopOnFirstObjectWithFailures && result.Any())
+                {
+                    return;
+                }
+
+                localValidationFailures = ValidatableExtensions.GetValidationFailures(this.IsItalic, options, propertyPathTracker, nameof(this.IsItalic));
+                result.AddRange(localValidationFailures);
+                if (stopOnFirstObjectWithFailures && result.Any())
+                {
+                    return;
+                }
+
+                localValidationFailures = ValidatableExtensions.GetValidationFailures(this.IsUnderlined, options, propertyPathTracker, nameof(this.IsUnderlined));
                 result.AddRange(localValidationFailures);
                 if (stopOnFirstObjectWithFailures && result.Any())
                 {

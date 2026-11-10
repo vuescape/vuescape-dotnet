@@ -321,6 +321,7 @@
     </Compile>
     <Compile Include="RowBaseExtensionsTests.cs" />
     <Compile Include="RowFormatOptionsExtensionsTests.cs" />
+    <Compile Include="ObcICellExtensionsTests.cs" />
     <Compile Include="ObcTableFormatExtensionsTests.cs" />
     <Compile Include="ActionBaseTest.cs" />
     <Compile Include="ActionBaseTest.designer.cs">

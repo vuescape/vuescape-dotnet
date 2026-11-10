@@ -25,13 +25,15 @@ namespace Vuescape.DotNet.Domain
         /// <param name="headerRows">OPTIONAL rows of the table's header, top to bottom, e.g. a row of group headings above the columns' headings.  Their cells are keyed by column identifier, like a row's, and can span columns (<see cref="TableCell.Colspan"/>).  The bottom row's cells hold the columns' sort controls.  Child rows are not shown.  An empty list means no header.  DEFAULT is one row of the columns' (deprecated) <see cref="TableColumn.HeaderText"/>, or no header when no column has any.</param>
         /// <param name="footerRows">OPTIONAL rows shown below the rows, e.g. totals, which stay in place when the rows scroll or are sorted.  Their cells are keyed by column identifier, like a row's, and can span columns (<see cref="TableCell.Colspan"/>).  Child rows are not shown.  DEFAULT is no footer rows.</param>
         /// <param name="footnotes">OPTIONAL notes shown as text below the table, top to bottom, e.g. how to read its numbers.  They are not part of the table: they don't stay in place when the rows scroll.  DEFAULT is no footnotes.</param>
+        /// <param name="appearance">OPTIONAL how the table looks as a whole, e.g. its borders.  DEFAULT is striped rows with a line around every cell.</param>
         public TableComponentPayload(
             string id,
             IReadOnlyList<TableColumn> columns,
             IReadOnlyList<TableRow> rows,
             IReadOnlyList<TableRow> headerRows = null,
             IReadOnlyList<TableRow> footerRows = null,
-            IReadOnlyList<string> footnotes = null)
+            IReadOnlyList<string> footnotes = null,
+            TableAppearance appearance = null)
         {
             new { id }.AsArg().Must().NotBeNullNorWhiteSpace();
             new { columns }.AsArg().Must().NotBeNullNorEmptyEnumerableNorContainAnyNulls();
@@ -47,6 +49,7 @@ namespace Vuescape.DotNet.Domain
             this.HeaderRows = headerRows;
             this.FooterRows = footerRows;
             this.Footnotes = footnotes;
+            this.Appearance = appearance;
         }
 
         /// <summary>
@@ -81,5 +84,11 @@ namespace Vuescape.DotNet.Domain
         /// Optional.  Null means no footnotes.
         /// </summary>
         public IReadOnlyList<string> Footnotes { get; private set; }
+
+        /// <summary>
+        /// Gets how the table looks as a whole.
+        /// Optional.  Null means striped rows with a line around every cell.
+        /// </summary>
+        public TableAppearance Appearance { get; private set; }
     }
 }

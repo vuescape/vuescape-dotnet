@@ -526,6 +526,11 @@ namespace Vuescape.DotNet.Domain.Test
                 });
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () => new TableAppearance(
+                                 A.Dummy<bool>(),
+                                 A.Dummy<TableBorderKind>()));
+
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TableCell(
                                  A.Dummy<string>(),
                                  A.Dummy<PaneComponentBase>(),
@@ -569,7 +574,8 @@ namespace Vuescape.DotNet.Domain.Test
                                  A.Dummy<IReadOnlyList<TableRow>>(),
                                  A.Dummy<IReadOnlyList<TableRow>>(),
                                  A.Dummy<IReadOnlyList<TableRow>>(),
-                                 A.Dummy<IReadOnlyList<string>>()));
+                                 A.Dummy<IReadOnlyList<string>>(),
+                                 A.Dummy<TableAppearance>()));
 
             AutoFixtureBackedDummyFactory.AddDummyCreator(
                 () => new TableRow(

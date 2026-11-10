@@ -60,7 +60,7 @@ namespace Vuescape.DotNet.Domain
             var shouldIncludeFooter = treeTableFooters != null && treeTableFooters.Any();
 
             // TODO: cssStyle
-            // TODO: cssClass
+            var cssClass = obcTreeTable.Format.ToVuescapeTableBorderKind().ToVuescapeTreeTableCssClass();
             var areAnyChildren = treeTableRows.Any(_ => _.Children != null && _.Children.Any());
             var sortLevel = areAnyChildren ? SortLevel.Children : SortLevel.Parent;
 
@@ -75,7 +75,7 @@ namespace Vuescape.DotNet.Domain
                 shouldIncludeFooter,
                 null,
                 null,
-                "cell-border",
+                cssClass,
                 null,
                 sortLevel);
 

@@ -4,10 +4,11 @@
 
 namespace Vuescape.DotNet.Domain.Test
 {
+    using System;
     using OBeautifulCode.DataStructure;
-
     using Xunit;
 
+    [CLSCompliant(false)]
     public static class RowFormatOptionsExtensionsTests
     {
         [Theory]

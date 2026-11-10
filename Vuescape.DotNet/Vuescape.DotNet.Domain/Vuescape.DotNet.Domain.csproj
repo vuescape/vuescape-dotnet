@@ -118,6 +118,7 @@
     <Compile Include="Logic\Extensions\ObcSectionExtensions.cs" />
     <Compile Include="Logic\Extensions\ObcReportExtensions.cs" />
     <Compile Include="Logic\Extensions\ObcTreeTableExtensions.cs" />
+    <Compile Include="Logic\Extensions\ObcTableFormatExtensions.cs" />
     <Compile Include="Models\ClientBehaviors\ClientBehaviorBase.designer.cs">
       <DependentUpon>ClientBehaviorBase.cs</DependentUpon>
     </Compile>
@@ -274,6 +275,11 @@
       <DependentUpon>SelectOption.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\AlignFrozenKind.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableAppearance.cs" />
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableAppearance.designer.cs">
+      <DependentUpon>TableAppearance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\TableBorderKind.cs" />
     <Compile Include="Models\DynamicUI\PaneComponent\Payload\Table\ComparableValue.designer.cs">
       <DependentUpon>ComparableValue.cs</DependentUpon>
     </Compile>
